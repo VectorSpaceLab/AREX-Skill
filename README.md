@@ -72,7 +72,7 @@ flowchart LR
 
 ## 📣 News <a id="news"></a>
 
-- **2026-08**: The library scales to **1,000 repositories and 5,000+ skills**,
+- **2026-08-27**: The library scales to **1,000 repositories and 5,000+ skills**,
   with a rebuilt router covering every repo. Technical report coming soon,
   with full benchmark results on MLE-bench, PaperBench, Frontier-CS, and
   PassNet.

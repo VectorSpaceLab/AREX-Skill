@@ -72,7 +72,7 @@ flowchart LR
 
 ## 📣 动态 <a id="news"></a>
 
-- **2026-08**：技能库扩展到 **1,000 个仓库、5,000+ 技能**，路由器重建后
+- **2026-08-27**：技能库扩展到 **1,000 个仓库、5,000+ 技能**，路由器重建后
   覆盖全部仓库。技术报告即将发布，包含 MLE-bench、PaperBench、
   Frontier-CS、PassNet 的完整评测结果。
 - **2026-08-03**：AREX-Skill 首发，包含 DisCo 的 Creator / Researcher
