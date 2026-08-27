@@ -1,0 +1,862 @@
+{
+  "schema": "disco.repo-skill.source-bundle.v1",
+  "source": "unrealcv packaged snapshot for self-contained plugin-build and maintenance routes",
+  "file_count": 171,
+  "files": [
+    {
+      "path": "Config/FilterPlugin.ini",
+      "size": 353,
+      "sha256": "fabf9e4b42770820c931b02582745caa1b585de10d4138c26122c1e2458698bd"
+    },
+    {
+      "path": "Content/AnnotationColor.uasset",
+      "size": 84385,
+      "sha256": "ad5ebbaf97d0cce77b89181130ee9a4554c1e149691b4953be9a2611a63a7ae4"
+    },
+    {
+      "path": "Content/OpaqueMaterial.uasset",
+      "size": 102232,
+      "sha256": "61fcd5f336c7d1fd85fdb97862417ae01777099ff339f237f03ee96bb1b55c63"
+    },
+    {
+      "path": "Content/OpticalFlowMaterial.license.txt",
+      "size": 245,
+      "sha256": "4c1c3967f7cc33ffe8f7872397c42e0025e82c2e82e9940f13ae778aea2b15b7"
+    },
+    {
+      "path": "Content/OpticalFlowMaterial.uasset",
+      "size": 24760,
+      "sha256": "38255fdb3adee805794f6f8ae2e53510252e46fd81e702a283c6effe800b9a19"
+    },
+    {
+      "path": "Content/SceneDepth.uasset",
+      "size": 55535,
+      "sha256": "999c2c8a8014d903415928e0a2828ca4dcec0329e416f03e2d0462477070a906"
+    },
+    {
+      "path": "Content/SceneDepthWorldUnits.uasset",
+      "size": 72512,
+      "sha256": "16b029ae6749e147f097c452dda711f9f67a604743f145f6194e54e21486d524"
+    },
+    {
+      "path": "Content/ScenePlaneDepthWorldUnits.uasset",
+      "size": 58784,
+      "sha256": "9bafced82d9c718110054286257bbec7cddfb760572dc91caf4fd50b970a2331"
+    },
+    {
+      "path": "Content/StencilPPM.uasset",
+      "size": 84031,
+      "sha256": "571940751a7d37e9d26f3c456fedff93dde70f319b26f40c4b56fc185792bc48"
+    },
+    {
+      "path": "Content/VertexColorMaterial.uasset",
+      "size": 66301,
+      "sha256": "b1a2feff2a4a2964000afba2a99cec56a4649e2cdd8f21a917f315dffad7b5ba"
+    },
+    {
+      "path": "Content/WorldNormal.uasset",
+      "size": 74746,
+      "sha256": "6732e7bceaa27541b676fa398b3a37ab0cd184dc8d4bb43223d61be4d7d3df4a"
+    },
+    {
+      "path": "Content/debug.uasset",
+      "size": 90208,
+      "sha256": "819d42f0ccc52c63c1b7e1b2d77989e1feeb08ca31f980899b8bc2603a2ed899"
+    },
+    {
+      "path": "README.md",
+      "size": 4035,
+      "sha256": "7bbcdf57553f9d5bfb5f32a563f9fcb4d9f2aad9b4afe58933849bd0a462be03"
+    },
+    {
+      "path": "Resources/Icon128.png",
+      "size": 15543,
+      "sha256": "9eb6f69963ee569b0a8a4446e21f69d0a93205caf07b30cc37b1fddb62599602"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Actor/CamSensorActor.cpp",
+      "size": 477,
+      "sha256": "3279f69769bdaa6588e3cfbad5f1b98c2436d74f8c88ea17cee2af4a54f95606"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Actor/CubeActor.cpp",
+      "size": 464,
+      "sha256": "95bfe72f4f8e808d13115d2abe40059a0162c84b88213fdbe4137b141ce5fea4"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Actor/DataCaptureActor.cpp",
+      "size": 16136,
+      "sha256": "9cead13a241a1a834c04bc605b79ee84df4eddf8f60de7be7d16c14764325c92"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Actor/FusionCameraActor.cpp",
+      "size": 459,
+      "sha256": "09ca6c08f9fb36831691febb706015ccc670b130126e9413f64f2a2524780ea0"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Actor/Puppeteer.cpp",
+      "size": 1096,
+      "sha256": "a3c6b03bc1896688469745c35a759a58a6876d0c4d43f5c538d4abf92d430ebd"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Actor/StereoCameraActor.cpp",
+      "size": 1628,
+      "sha256": "43238b212e642cc32667af99fc408304b7f7fb482ab82d85ab9b2d9701537d02"
+    },
+    {
+      "path": "Source/UnrealCV/Private/BPFunctionLib/AnimationBPLib.cpp",
+      "size": 1666,
+      "sha256": "e129e3c0db2af917cf26fa1803ee516ff091820bee7b29a3a9e4c908c3ca0b1b"
+    },
+    {
+      "path": "Source/UnrealCV/Private/BPFunctionLib/JsonObjectBP.cpp",
+      "size": 5436,
+      "sha256": "ea546988db9debdd1b16fe38b7702135433bddbe9332eab758c145fdcd27537f"
+    },
+    {
+      "path": "Source/UnrealCV/Private/BPFunctionLib/SensorBPLib.cpp",
+      "size": 2119,
+      "sha256": "277ab0283389a44eeecc4308eb578760a1508d010a314a3491aba62f229f8f78"
+    },
+    {
+      "path": "Source/UnrealCV/Private/BPFunctionLib/SerializeBPLib.cpp",
+      "size": 2012,
+      "sha256": "dcd3a8d5a88ec19c7999030621c8e3dd60172600c227d0a7f9f7f5cbdbf959a0"
+    },
+    {
+      "path": "Source/UnrealCV/Private/BPFunctionLib/VisionBPLib.cpp",
+      "size": 13227,
+      "sha256": "1843f00c10866aaddbe687ace6fe524bba3be6c2187257943a84feb208f1f1b3"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Commands/ActionHandler.cpp",
+      "size": 6486,
+      "sha256": "6141131cdc6d08a17dd27402b1e815b9d308eadafc5f67b17ab039d11047b375"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Commands/ActionHandler.h",
+      "size": 1061,
+      "sha256": "eef81c4bf12252bbcbe5a7383f69e697c7575c5a05400756efe8c2cc99f02821"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "size": 23048,
+      "sha256": "4f28f865e69200b344318d97dc6626346034be13fe4fd39498e4cc9d673475f7"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Commands/AliasHandler.h",
+      "size": 781,
+      "sha256": "6357349f2dd7ebb2291b98ebf5fd13abeedf9ff0f812c1e25adc59dae5dc520f"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "size": 59381,
+      "sha256": "15b187a546d9ddaec22edb1fba9811a4274cecdc6e979bd5a299d5f082f82e94"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Commands/CameraHandler.h",
+      "size": 4088,
+      "sha256": "657cc1261af8b4ddd7c5df790a0a376e876ff8029b08e5eb477b43bb1c521a9d"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "size": 30346,
+      "sha256": "99cc56e0c4019ee8d2ae1b58a400063cda40d9f89c5b348441b6b2808d7be478"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Commands/ObjectHandler.h",
+      "size": 2046,
+      "sha256": "3b74af29dd74232850eb5bb66b5464fc62eebb76e31e81373e705f3eae752755"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Commands/PluginHandler.cpp",
+      "size": 4705,
+      "sha256": "2c884c7d1b11f3cd4bb9d2d5158040f7a5ed590e1c567384faeda9123ebdb07a"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Commands/PluginHandler.h",
+      "size": 814,
+      "sha256": "5ff2c737baa67aa313e6cdb02e73b341bd6de76e741d653c0f3c7b3e626c2071"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Component/AnnotationComponent.cpp",
+      "size": 16563,
+      "sha256": "1fcd7dd3a76452e6727b2c8131238a30150fd70aa4bdbcd5aef91eff5fc289d2"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Component/KeypointComponent.cpp",
+      "size": 8471,
+      "sha256": "60376897f87cf072cc1fee46820b6edf133c721a18a866d70ea69a82d9070e75"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Controller/ActorController.cpp",
+      "size": 2353,
+      "sha256": "e8c99ed2fbb989516355318173a2785557e01b1adfebc9cf32fdd0658047d91f"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Controller/ObjectAnnotator.cpp",
+      "size": 10732,
+      "sha256": "52fe3394f27909f39211b5951412a4108abd3ccbfe2474e75eed23f7f67ad650"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Controller/PlayerViewMode.cpp",
+      "size": 13284,
+      "sha256": "01006a698c54d4a02949bb9bfcfc8027b75a6fbc6545db54d1227ab17af052e2"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Controller/WorldController.cpp",
+      "size": 3167,
+      "sha256": "5d3ddc661497768d0b49b13e17916dcff38333ca27b92b5dd5d27840c687667d"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Sensor/BoneSensor.cpp",
+      "size": 2295,
+      "sha256": "ecca30d799d7e5526c420afc05717f98fef212ff764653835f4763f88fa6d499"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Sensor/CameraSensor/AnnotationCamSensor.cpp",
+      "size": 5168,
+      "sha256": "c58548957c93c8a404d6f53c3f8c7c16c208e122d6daf9823e5e439d881f2d2d"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Sensor/CameraSensor/BaseCameraSensor.cpp",
+      "size": 8779,
+      "sha256": "b8f25649c6f5e45b67013954ae0d2ba755d1733b93b6214d0ee04055980068d9"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Sensor/CameraSensor/DepthCamSensor.cpp",
+      "size": 1924,
+      "sha256": "a0f16eccfd03d72391f9c6483d6f05614387e1b85be19fe6098fa0c31392eb58"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Sensor/CameraSensor/FlowCamSensor.cpp",
+      "size": 3526,
+      "sha256": "21f09789d87323be66c7ba681c70ff9bcd7e0f6f2b8ba323c2917243f8dbbd26"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Sensor/CameraSensor/FusionCamSensor.cpp",
+      "size": 21966,
+      "sha256": "a8995390e5886d0dce60eedeca7c3a9123ebcfaa1226591ed472afffc6a0abd6"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Sensor/CameraSensor/LitCamSensor.cpp",
+      "size": 1905,
+      "sha256": "4f718c85a0c8d67f22ea1d681a3eb7972a58ccf45f00ab177ab32afb105fabba"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Sensor/CameraSensor/NormalCamSensor.cpp",
+      "size": 1763,
+      "sha256": "4b677054e60d3d768737143034ca404f6d4d31d18c248ed4d40c3d01dddf8076"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Sensor/CameraSensor/PawnCamSensor.cpp",
+      "size": 3954,
+      "sha256": "fd88354f3a06d0bd40b1e3f07c77caf29504a930218870b2a7d91b9f38c7dc1a"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Sensor/CameraSensor/PawnCamSensor.h",
+      "size": 660,
+      "sha256": "ffaae3b8f736f7868b0c94416f8a640ed95d14cee3cabbc38cd2eee335efe65c"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Sensor/ImageWorker.cpp",
+      "size": 1652,
+      "sha256": "995aa418f6da3cca8239b105a6c35fab685db99d67ab4d058e7e818466625774"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Sensor/TextureReader.cpp",
+      "size": 5862,
+      "sha256": "d90051f793671260fa6f87c523c6edc45b1aff84d79b7f8a4fa827d9ddca49a4"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Sensor/VertexSensor.cpp",
+      "size": 1246,
+      "sha256": "4e7816fcff3287f29aac5a516a5785888bbe74f9125c7d69f72b0eff340f6b32"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Sensor/ViewMode.cpp",
+      "size": 4519,
+      "sha256": "b97e46ad7d261143da4bbfefc3e9be571ee530ba8df17862952f9136eb224150"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Server/CommandDispatcher.cpp",
+      "size": 6777,
+      "sha256": "c6a22342ec1acec598a6cd05eb42c99ac5ec91318759d6a38f0f4ae570afc536"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Server/CommandHandler.cpp",
+      "size": 218,
+      "sha256": "604bab60109faffa84f0131ae03337397740f81b23506f9d5245bd8ec64fdaad"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Server/ConsoleHelper.cpp",
+      "size": 7830,
+      "sha256": "4db4cacc6ca1a94bef3433b7a8c38e632dc5cdf968ed23895e00ef1c56a33d34"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Server/ExecStatus.cpp",
+      "size": 4296,
+      "sha256": "5abdcf735fe5b6a54d8e585b4c9f4f71e9fa34729ca46aa56805bcb0511359a4"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Server/ServerConfig.cpp",
+      "size": 3734,
+      "sha256": "f9bd5c47dccdd84828d411d9006800cc69021a3d479bc682e711cbdbaa00ff32"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Server/SocketUtils.cpp",
+      "size": 2745,
+      "sha256": "815a2e4de18ad1be7f31a11bf80fd75c47b09688834874ae4ecaad0c7012a3cd"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Server/SocketUtils.h",
+      "size": 1159,
+      "sha256": "131901c85df30f5c8c40b6362bb0d6ff6cfc4e5845ec30abeab25fd7133b5d18"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Server/TcpServer.cpp",
+      "size": 8199,
+      "sha256": "483932efd6c7d1c894a17d7b7441e980bd8a10fb6ed81d0bd24d4161576f87bb"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Server/UnixTcpServer.cpp",
+      "size": 14922,
+      "sha256": "7536e252c9a67bb2d8842dbca4bc3b04a5283e1ae87a5bcf094685c32c253d1c"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Server/UnrealcvServer.cpp",
+      "size": 7919,
+      "sha256": "d341698556821f83ffa9ec33da8755c60d9b62677c55b283175e4650b9d0f453"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Tests/AliasMultiCommandTest.cpp",
+      "size": 4047,
+      "sha256": "ea75e3c7c6b57836fb1253962651d1db417c5f905fe3e0f2fe30088829ffc457"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Tests/CommandDispatcherRound3Test.cpp",
+      "size": 2860,
+      "sha256": "b655bf239b87377a8a96aecaebaa91366ff1d5a0800b541b4236937cd9f558a8"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Tests/CommandDispatcherTest.cpp",
+      "size": 5250,
+      "sha256": "c667ecf76ff052401bbf4d0b99e3e49a01ab378eea48f7167af134a843e9025e"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Tests/ConsoleHelperTest.cpp",
+      "size": 2008,
+      "sha256": "3c2fd8bbe283af82659a69789bcce6c14b6db678b713b8ab656c5b5793fe7394"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Tests/ExecStatusRound3Test.cpp",
+      "size": 2707,
+      "sha256": "08a7ebaa498469239d34cc929081e9771d6a4a912db8a3f750bbcf8fbf0e10ae"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Tests/ExecStatusTest.cpp",
+      "size": 4024,
+      "sha256": "7a4f2193d48d387f6b99629a406b3437795d14f3847e019b0020a07c5c502743"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Tests/LoggerTest.cpp",
+      "size": 915,
+      "sha256": "0769df01e7d0fb1e34ed03dc404f45de76be0a9f388d4a5a2739dbc63d9c5edb"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Tests/ServerConfigTest.cpp",
+      "size": 1543,
+      "sha256": "bda3bb1fdfedb5fbe729d20945ee7a55d08ecdbc2408581e83202cbf9fbe863b"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Tests/SocketUtilsTest.cpp",
+      "size": 2074,
+      "sha256": "a7d0e3204018ad299187ad93790c8a26acf982d1790ad3df61efb17983f81de5"
+    },
+    {
+      "path": "Source/UnrealCV/Private/UnrealcvGameMode.cpp",
+      "size": 2696,
+      "sha256": "ec68f48ba057944b7dc8fcb6026b0297b35503f14f539e5a6690a0fe5e131196"
+    },
+    {
+      "path": "Source/UnrealCV/Private/UnrealcvLog.cpp",
+      "size": 846,
+      "sha256": "3360d94ab43ba223b4c030df1d60b90f2d1c1cff860227dac8cb1c6d0b9311cf"
+    },
+    {
+      "path": "Source/UnrealCV/Private/UnrealcvLog.h",
+      "size": 1192,
+      "sha256": "b588869f17b394f91651b126af00dbccf2a67c5ae0a4116c155ae58cf00e0b71"
+    },
+    {
+      "path": "Source/UnrealCV/Private/UnrealcvModule.cpp",
+      "size": 3034,
+      "sha256": "7672fd05639c0a97a58ae8f956bf1e821c513e42ef182d705984b55f7dfd9b20"
+    },
+    {
+      "path": "Source/UnrealCV/Private/UnrealcvShim.h",
+      "size": 360,
+      "sha256": "56e794b830b2f2d8ed44eff9a1b9fef94753bd9025cf98a00c951a38d71c1519"
+    },
+    {
+      "path": "Source/UnrealCV/Private/UnrealcvStats.h",
+      "size": 209,
+      "sha256": "53a1df839bff60fb12569e5606f69a58d58014ad123044f9280dbd9c3ca81d47"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Utils/ImageUtil.cpp",
+      "size": 4156,
+      "sha256": "b0750f1361a64b0ed89854315018f523ccdbcf7f7c4ada5a7e6b7fac6a820093"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Utils/ReflectionUtils.cpp",
+      "size": 28017,
+      "sha256": "428b1e7bdce005f774546e27190c31b4625359b93179357581e65d99db07aa83"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Utils/ReflectionUtils.h",
+      "size": 1101,
+      "sha256": "988aee4e213b88869ff50aa60d511b03b8d28c906ef720a322458b5940ad45e2"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Utils/RuntimeConstants.h",
+      "size": 100,
+      "sha256": "27a8dd0c81e38784f832071caa1d154a646617fde8df2e574a7904851eb8b0e6"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Utils/Serialization.cpp",
+      "size": 5128,
+      "sha256": "5c2226670c3fc4ac3c71b6c857c7aa09ecad2bda3643b91f9ea884d9fde353f8"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Utils/SharedMemoryManager.cpp",
+      "size": 5372,
+      "sha256": "9a1c8040ac87ff5d9a8312acd177b517b7e8184035e73c5d7eecdebab28eff98"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Utils/SharedMemoryManager.h",
+      "size": 1010,
+      "sha256": "2c4c33de60ca787bce6d1c0e36967ec1837612f0c3efe0411dc26552f6f8424a"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Utils/StrFormatter.h",
+      "size": 576,
+      "sha256": "2b32a756d1623b3acc8006e43bc3393584d1830b5d1a08e54cfc083a5f451ea3"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Utils/UObjectUtils.cpp",
+      "size": 1402,
+      "sha256": "40647ca029d606399c0af44e2402f254767d3d9016151135e8d9a7b83cd703fb"
+    },
+    {
+      "path": "Source/UnrealCV/Private/Utils/UObjectUtils.h",
+      "size": 306,
+      "sha256": "7642ce13bea88a1f139807c6579fc0e05c90299eda519de1f0d8d3d8128ba945"
+    },
+    {
+      "path": "Source/UnrealCV/Private/libs/cnpy.cpp",
+      "size": 4153,
+      "sha256": "6c1e2afb29d8af837130233fdaa803fa44c121c0edb8fbec8d1b048ea6cef180"
+    },
+    {
+      "path": "Source/UnrealCV/Private/libs/cnpy.h",
+      "size": 769,
+      "sha256": "791ba9cb21078f3dc2c23b17c74f1d917501cde828386b1b8f131cd8f17d7cbd"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Actor/CamSensorActor.h",
+      "size": 665,
+      "sha256": "cfdb5d8e3b7cc5cd0203f76803a2f9db95f80b70b4074bd5230a70ed51432e3d"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Actor/CubeActor.h",
+      "size": 343,
+      "sha256": "0fa0adeb255d49c02d282271b2a05dfd7a733ef689c4540d77c1bbc910b53d93"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Actor/DataCaptureActor.h",
+      "size": 4790,
+      "sha256": "aacb99ef89ffc1c1ba207f68e890547e94b223daec6da60acab6f9426632d48f"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Actor/FusionCameraActor.h",
+      "size": 684,
+      "sha256": "aa6319bde021e1f01bfa73f8567326d62372b337e1edb26d42f971b7f7236f71"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Actor/Puppeteer.h",
+      "size": 832,
+      "sha256": "7d414a2609b7d08d640b7c63a0594e5f4652e7404cb535ec054df3ff975545af"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Actor/StereoCameraActor.h",
+      "size": 1205,
+      "sha256": "acbfac3c7ea60b49625ac85ce5373c8f7e700793718bd04da8702469b689a18a"
+    },
+    {
+      "path": "Source/UnrealCV/Public/BPFunctionLib/AnimationBPLib.h",
+      "size": 896,
+      "sha256": "5ea44fcdede5bc0a8d1666ae5ed3d26f64d6a21be427579557ebed1347694fa0"
+    },
+    {
+      "path": "Source/UnrealCV/Public/BPFunctionLib/JsonObjectBP.h",
+      "size": 1238,
+      "sha256": "b224154616bbb95657557a132191ce10d90318187c2664bb5ff6060a811f5708"
+    },
+    {
+      "path": "Source/UnrealCV/Public/BPFunctionLib/SensorBPLib.h",
+      "size": 497,
+      "sha256": "506130acf36f0716154d08f763b15c1a87d1a829ef6089839da8b7276654291e"
+    },
+    {
+      "path": "Source/UnrealCV/Public/BPFunctionLib/SerializeBPLib.h",
+      "size": 2223,
+      "sha256": "3bff67f6100e16b58001a492bf9a1cbe272137bd9a408f97fec0033388a04c93"
+    },
+    {
+      "path": "Source/UnrealCV/Public/BPFunctionLib/VisionBPLib.h",
+      "size": 4434,
+      "sha256": "ac90245819c8becdbcfcba89d4efed9a26c3682855712dd632f0e4eba5d848ea"
+    },
+    {
+      "path": "Source/UnrealCV/Public/CommandInterface.h",
+      "size": 398,
+      "sha256": "b5952bde46f1e8750d4041cbafa57ede7608ddf93b9b868a14417262d2252df9"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Component/AnnotationComponent.h",
+      "size": 1839,
+      "sha256": "b34abe692aa5ad94b7bce4ca34f5aafb1e805bdb88448ee2d677cfe8459b7984"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Component/KeypointComponent.h",
+      "size": 2223,
+      "sha256": "810baaed42ca987d11c83b0ce266c634f4ac6d55539e418acd134cb7c1132f18"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Controller/ActorController.h",
+      "size": 542,
+      "sha256": "c77a97a7801793e53bee23800640919f51554a823408a0c1ed0d34cdd1b01a52"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Controller/ObjectAnnotator.h",
+      "size": 2333,
+      "sha256": "f20183c2f55932671812a7854bfe031f3a18cae00ad685893cf50550c7c06940"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Controller/PlayerViewMode.h",
+      "size": 1875,
+      "sha256": "4b756eabf6ad52bd969e05bb929ff25524e9dd13d5f914984754683b23d9aee4"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Sensor/BoneSensor.h",
+      "size": 966,
+      "sha256": "dc4d3c71deb02dcc074956ba022466f36267586a90b20b13d7aa7993380f61fb"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Sensor/CameraSensor/AnnotationCamSensor.h",
+      "size": 731,
+      "sha256": "ca703a03c6353d86c6f66b02a40cb400fa4c1e7d2e7f302bf38faa81aa4ac898"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Sensor/CameraSensor/BaseCameraSensor.h",
+      "size": 2851,
+      "sha256": "0c27dbe52d251df0c177443b93900dd3e390781f2982c4ac2cb880a6382b415c"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Sensor/CameraSensor/DepthCamSensor.h",
+      "size": 559,
+      "sha256": "21b22adefd23ef557cb91ae7142b2feac2b531f31dcb957dc45a3d4ff014139b"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Sensor/CameraSensor/FlowCamSensor.h",
+      "size": 1667,
+      "sha256": "fdde7a71b0d521a779d47e9481ba62177dd27d23aefa50a99278ee40dc208c95"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Sensor/CameraSensor/FusionCamSensor.h",
+      "size": 9065,
+      "sha256": "022f0d74269a07b29f077b8b152c15afaf87a14ebc5eca1a1cd95232f3e9dd4d"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Sensor/CameraSensor/LitCamSensor.h",
+      "size": 620,
+      "sha256": "6caaa55d08838add50fc5579c3a9bcb66380fd5661f96e29f366eeb6bbc0df54"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Sensor/CameraSensor/NormalCamSensor.h",
+      "size": 572,
+      "sha256": "0c6c46dde4d0337506ce37abfcfc1beab6f882fdc2ca77c66c702b60790fad1e"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Sensor/ImageWorker.h",
+      "size": 851,
+      "sha256": "fa72a9480fb92cf05851f3eb7dc08e886dc23f99e79c1db4d967d2a588d47fac"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Sensor/ScreenCapture.h",
+      "size": 753,
+      "sha256": "3ce893a02b7d1c6206b5145346921a90528118130ee7eaa61969f712ddd7ef49"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Sensor/TextureReader.h",
+      "size": 1013,
+      "sha256": "2fd3cbf50399d5aecd2721322aaaba827fa6a656d48e8b2fd7b5191a8d9a4a79"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Sensor/VertexSensor.h",
+      "size": 251,
+      "sha256": "5ac354c7f6c08c261012c067e781e05c9875178dc09ad07ae07a43c1f5125197"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Sensor/ViewMode.h",
+      "size": 916,
+      "sha256": "db3f6f08acb0a79b1129a45d210f0e3029751bc93c7264dcad6e2ada337bb9a9"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Server/CommandDispatcher.h",
+      "size": 2059,
+      "sha256": "6942a6d1de357020aefd8733171f58438ee86ea65987ebc7be8105502a600f7a"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Server/CommandHandler.h",
+      "size": 633,
+      "sha256": "2f60733fd50b754844d4443c94fa5be2964e7449039b1814330ceddec4769815"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Server/ConsoleHelper.h",
+      "size": 1680,
+      "sha256": "22bd4523ca38bd83d19be42997908a64253e43f5f2747e9509cf12089578248a"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Server/ExecStatus.h",
+      "size": 2822,
+      "sha256": "d225c115d882e5ea0ba6bb0c05402ba4ec9af6e863625e86b414c6ebf440a0c4"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Server/ServerConfig.h",
+      "size": 1410,
+      "sha256": "dc0ec71dd412715ed3daa3b6ba59813eb6184b03ec6a55059f878fc0d75c723d"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Server/TcpServer.h",
+      "size": 2334,
+      "sha256": "e26bbc8a82c377331f8787df4bc5adc1c57e0035d2562f83c5b433c4cacf27a3"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Server/UnixTcpServer.h",
+      "size": 3029,
+      "sha256": "c77ac4b3f7e69d544893e777aba919626d0df0e5c44dac1409949d020a1a65e2"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Server/UnrealcvServer.h",
+      "size": 3431,
+      "sha256": "a0d9e58efb5595b12c775f3c6d2d6ed79a71a66c08da3f56da97a9be2d0357b8"
+    },
+    {
+      "path": "Source/UnrealCV/Public/UnrealcvGameMode.h",
+      "size": 1211,
+      "sha256": "33e509c09169eba267f6efca7af03dc19845135be9f75936f723975cae3f6f59"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Utils/BenchmarkMeter.h",
+      "size": 872,
+      "sha256": "57076d5a5ef760750f5ed68720461137f766a4c74b7e0d0906c58d4a15f35570"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Utils/ImageUtil.h",
+      "size": 1849,
+      "sha256": "d4de0a95cb64d2554e4015221f2f9eee750ba297afbff37024650911cbb0228b"
+    },
+    {
+      "path": "Source/UnrealCV/Public/Utils/Serialization.h",
+      "size": 701,
+      "sha256": "ac06f2c1426b5b6935546a1ed6346f7478ec97fdd60f39b1ae0ddce0fd10e797"
+    },
+    {
+      "path": "Source/UnrealCV/Public/WorldController.h",
+      "size": 692,
+      "sha256": "21e31cdff93ac988fc03dbccfd1f7facad02f47d0439cb74ffcfae96386f3244"
+    },
+    {
+      "path": "Source/UnrealCV/UnrealCV.Build.cs",
+      "size": 2231,
+      "sha256": "b5b6b28b6c740258a61b75278d4280e8d04ce742f7666e8994e6e179edad6c00"
+    },
+    {
+      "path": "UnrealCV.uplugin",
+      "size": 690,
+      "sha256": "241282a2f52811b584531381561c548bcd4c718ca01b84bf0083205c030b34aa"
+    },
+    {
+      "path": "build.py",
+      "size": 2223,
+      "sha256": "f7b0be7f0ffe2952f61247b153900baa2dbc787f4db7cffdbc48feb80e8a5026"
+    },
+    {
+      "path": "client/python/README.md",
+      "size": 2103,
+      "sha256": "5f76ee97fbb4cf8b98fc44302137002813bc601d0f2dc8314ab63170af8f7518"
+    },
+    {
+      "path": "client/python/demo.py",
+      "size": 698,
+      "sha256": "ffd7a3505bef01bcd06435b801fdb59825e9d1dcda66bfb7398773c775bf5027"
+    },
+    {
+      "path": "client/python/pyproject.toml",
+      "size": 1475,
+      "sha256": "a7efc62e458b6aa8b603344770dea3b53bf9050d7d18957c0caf3920dd89c0a2"
+    },
+    {
+      "path": "client/python/tools/update_public_api_snapshot.py",
+      "size": 3155,
+      "sha256": "5a6344ed6232eca6915f1bafdb13e6054cb9a588bdb1343a5c629c8679a08725"
+    },
+    {
+      "path": "client/python/unrealcv/__init__.py",
+      "size": 20942,
+      "sha256": "7e0e31e670a4608dd485d428dba56de72736743537e5991456e356b9f49c37c1"
+    },
+    {
+      "path": "client/python/unrealcv/api.py",
+      "size": 75722,
+      "sha256": "5088651a620282d8d975b41139d9926aa785ceb1f79afa0acde8ad7af6f1b9f4"
+    },
+    {
+      "path": "client/python/unrealcv/api_version.py",
+      "size": 6679,
+      "sha256": "4936200e5316f6a6b07e1f79b6f655674a9672487e62f39c99816db2dcd75134"
+    },
+    {
+      "path": "client/python/unrealcv/automation.py",
+      "size": 10498,
+      "sha256": "cae7945704a89171efbd81012d13e3b1e38b6ab40f67fba5eee61fb2049c4fd6"
+    },
+    {
+      "path": "client/python/unrealcv/exceptions.py",
+      "size": 875,
+      "sha256": "d77457246817b66fff9186d1e1ad15b309558c050ebb5e14700faaddb3190df3"
+    },
+    {
+      "path": "client/python/unrealcv/launcher.py",
+      "size": 17573,
+      "sha256": "599b4d4b59f951adcd90620d08260de86ab0d82cd43e098cba02bd17a7eccfa0"
+    },
+    {
+      "path": "client/python/unrealcv/models.py",
+      "size": 4440,
+      "sha256": "050930b446fd990b7b6a85615845b92f2a109e45800084a735a32b940db04335"
+    },
+    {
+      "path": "client/python/unrealcv/public_api_snapshot.json",
+      "size": 6931,
+      "sha256": "1eff98b34ea49b11afa2261c0202a53aaf08ff194deef99d785a131405384ca3"
+    },
+    {
+      "path": "client/python/unrealcv/util.py",
+      "size": 5056,
+      "sha256": "eca4fce44dc48003404c87b61cd41c8afe87fe64e492116a29cb0daf6574d0e7"
+    },
+    {
+      "path": "docs/conf.py",
+      "size": 4440,
+      "sha256": "a573198a1ef0fb6ece423819f4246ead5dbcee51a9bd9e36fa4025144deb90a5"
+    },
+    {
+      "path": "docs/plugin/config.rst",
+      "size": 738,
+      "sha256": "fd5138ea002213b77cca89191bcd85bbe7315a5f81f6d0b54f7473667950b3d7"
+    },
+    {
+      "path": "docs/plugin/custom_scene.rst",
+      "size": 2044,
+      "sha256": "66eca8972370a2706780a81cd18489672f3e31cb64fdc858b39d3200d73581c1"
+    },
+    {
+      "path": "docs/plugin/develop.rst",
+      "size": 5023,
+      "sha256": "ea005568606d787ffc708345d9bfea4b9b62cbfa43050cb96e56c3e00d2293e6"
+    },
+    {
+      "path": "docs/plugin/editor.rst",
+      "size": 1611,
+      "sha256": "ece01ff0630e34b0552d4471598cf150d068b3fe6af7f2d358e1367b596236c1"
+    },
+    {
+      "path": "docs/plugin/install.rst",
+      "size": 3037,
+      "sha256": "11e8bdf4d194cbb7ef2a916669964d5564e86b2fbf570bd47dd8913665b6b2b9"
+    },
+    {
+      "path": "docs/plugin/package.rst",
+      "size": 3208,
+      "sha256": "e1b9252f3b0519593f0b8f2d47368e281c93c5bb4c240a4d020224b84d5839f7"
+    },
+    {
+      "path": "docs/reference/architecture.rst",
+      "size": 1815,
+      "sha256": "2b8ed66b638b649243983f0fe605c09507f074c8c82eda3053c2f24ec5d537c8"
+    },
+    {
+      "path": "docs/reference/cine_camera.rst",
+      "size": 5057,
+      "sha256": "643e41888ad3666ad78d4e4166212f128c9bee7c666ba8b74bd98f3190a67210"
+    },
+    {
+      "path": "docs/reference/command_schema.json",
+      "size": 38018,
+      "sha256": "76f1db9a4679921b574753a30c326f730aa85e4ecd8575036176a17fc8247ee1"
+    },
+    {
+      "path": "docs/reference/commands.rst",
+      "size": 15745,
+      "sha256": "0877c3e0671ab29e3f6f059065d17ea130aa8f58f88b84f139d383c75c6782d3"
+    },
+    {
+      "path": "docs/reference/commands_generated.rst.txt",
+      "size": 22456,
+      "sha256": "4782626649c388212d4dc4b4d59beb0aa96291008982a8aeacbb0e012fb2bdc9"
+    },
+    {
+      "path": "docs/reference/contact.rst",
+      "size": 1611,
+      "sha256": "105c331e5904d3f1e81f748a757e30f047720fb17bcacbadcac95bf781ec1a30"
+    },
+    {
+      "path": "docs/reference/issues.rst",
+      "size": 4257,
+      "sha256": "6aa47bce52d81b77a43f29a144a030c4da137a7a90f4801008b876a5a89195c3"
+    },
+    {
+      "path": "docs/reference/model_zoo.rst",
+      "size": 600,
+      "sha256": "08f29de46a64bb88e1e3936cd00fca9eb55c9e78046149444a3337b086390a96"
+    },
+    {
+      "path": "docs/reference/python_api.rst",
+      "size": 1916,
+      "sha256": "c54639c4f4fa9e2451faaa53d84ddebeb3afb7a2a1c42aad2b46de7a4bfff872"
+    },
+    {
+      "path": "docs/reference/runtime_reflection.rst",
+      "size": 2186,
+      "sha256": "25beaf0a60bae7a578450221ec689c974b0f25758e5f7b2871f77d7e8d308cca"
+    },
+    {
+      "path": "docs/reference/shared_memory.rst",
+      "size": 2129,
+      "sha256": "8e839764ce1e2244de4015c673b2caf927567083ea2cee8b28ad93f012f335bb"
+    },
+    {
+      "path": "docs/reference/ue4_resources.rst",
+      "size": 1614,
+      "sha256": "666b81bb0c63073d56dab952329536a7c4afcd36f0fdfb283cd6692519d9478e"
+    },
+    {
+      "path": "docs/reference/unrealzoo_capture_transport.rst",
+      "size": 6441,
+      "sha256": "ae32811cc24b7249f91eb22f37eda6026dddb624d7517a44c9896736dad47917"
+    }
+  ]
+}

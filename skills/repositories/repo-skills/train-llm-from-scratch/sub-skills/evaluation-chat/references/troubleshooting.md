@@ -1,0 +1,28 @@
+# Evaluation and chat troubleshooting
+
+Use this when GSM8K evaluation, stage table rendering, checkpoint loading, chat, or answer parsing fails.
+
+| Symptom | Likely cause | Fix or diagnostic |
+|---|---|---|
+| Base checkpoint replies with role markers, empty text, or nonsensical assistant format. | Chat mode was used for a base/pretrained checkpoint. | Rebuild the command with `--raw`; base models are next-token continuers, not instruction-chat models. |
+| Instruction checkpoint behaves like a raw continuation and ignores the question. | `--raw` was used for SFT/DPO/PPO/GRPO. | Use default chat mode and include `--system` only if a system instruction is useful. |
+| `--table` works but checkpoint evaluation fails. | Table rendering only reads JSONL; evaluation loads a checkpoint and GSM8K. | Separate command planning from execution. First verify checkpoint path/device, then dataset/cache availability. |
+| Error about missing checkpoint key, missing `cfg`, or tensor size mismatch. | The checkpoint is incomplete, saved in an unexpected format, or its stored config does not match tensor shapes. | Inspect whether the checkpoint contains `cfg` and `model_state_dict`. If `cfg` is absent, recover exact model dimensions before loading; do not guess for production evaluation. |
+| Reward checkpoint has extra keys such as reward/value heads. | Reward model wrappers store parameters outside the Transformer backbone. | This is normally OK for generation: the loader strips `transformer.` and filters to backbone keys. Extra keys are a problem only if backbone keys or shapes do not match. |
+| DDP checkpoint fails because keys start with `module.`. | DistributedDataParallel prefix is present. | The inference loader strips `module.`. If failure persists, inspect for nested prefixes or mismatched saved object structure. |
+| GSM8K evaluation fails while importing or loading data. | `datasets` extra is missing, GSM8K is not cached, or network access is blocked. | Install/enable the evaluation dependencies in the user's environment, or skip real GSM8K and keep only dry-run command construction. Do not assume network access. |
+| Evaluation is very slow or runs out of memory. | Large checkpoint, high `--limit`, high `--max_new_tokens`, or CUDA memory pressure. | Start with a small `--limit`, `--samples 0`, lower `--max_new_tokens`, or switch to a suitable device. Use the same settings for all table rows once chosen. |
+| Accuracy changes between repeated stage-table runs. | Evaluation should be greedy; sampled settings are being used elsewhere or checkpoint changed. | Use `eval_post_training.py` for table rows; it calls greedy GSM8K scoring. Do not compare sampled chat outputs as accuracy. |
+| Chat output changes between runs. | Sampling mode is active. | Add `--greedy` for deterministic chat, or record `--temperature`, `--top_p`, and `--top_k` with the sample. |
+| CUDA device error or `torch.cuda.is_available()` false. | CUDA wheel/driver/device mismatch or running on a CPU-only host. | Pass `--device cpu` for CPU fallback when feasible. For a CUDA claim, verify the torch build and CUDA allocation before loading a large checkpoint. |
+| Checkpoint loads on CPU but fails on CUDA. | GPU memory or dtype/backend incompatibility. | Try CPU for command correctness; for real GPU evaluation, free memory, choose the intended CUDA device, or use a smaller checkpoint/limit. |
+| Empty decoded generations. | Prompt consumed context budget, model immediately emitted end-of-text, or generated only padded vocabulary ids. | Reduce prompt length, raise/lower generation budget appropriately, and remember decoding drops EOT and ids at or above 50256. |
+| Tokenizer decode crashes in custom code. | The model vocabulary is padded beyond the tokenizer's decodable ids. | Use the repo's defensive decode behavior: drop EOT and token ids `>= 50256` before tiktoken decoding. |
+| Correct reasoning but wrong GSM8K score. | The final parsed number does not match the gold, or the parser picked a different number than expected. | Run `scripts/check_answer_format.py --text '...' --gold GOLD` and inspect which extraction rule won. Put the final number in a single `<answer>...</answer>` block. |
+| Well-formed answer tag gets a nonzero reward despite a wrong answer. | The verifier gives a small bounded format bonus. | Explain that accuracy is still false; reward is correctness-dominant but not format-free. |
+| Multiple `<answer>` blocks produce surprising results. | Format bonus requires exactly one well-formed block; extraction prefers the first parseable answer tag. | Emit exactly one final `<answer>number</answer>` block. Avoid draft numbers inside answer tags. |
+| `####` answer is ignored. | A parseable `<answer>...</answer>` appears earlier and has priority. | Remove bad answer tags or ensure the tagged final answer is correct. |
+| Last-number fallback selects an intermediate calculation. | No parseable answer tag or `####` line exists. | Use a final `<answer>` tag for model outputs or `#### N` for GSM8K-style gold/fixtures. |
+| Stage table has duplicate or stale rows. | Reusing an existing append file without clearing it. | Start a new JSONL file for a new experiment, or intentionally append and label rows with unique stage/checkpoint names. The evaluator appends; it does not deduplicate. |
+| `--system` appears to do nothing. | Raw mode was used, or the checkpoint has not learned system-role behavior. | Use chat mode for system messages. For weak/small models, system adherence may still be limited. |
+| `top_p=1` does not behave like nucleus filtering. | The chat CLI treats `top_p >= 1` as no top-p filter. | Use a value below 1, such as `0.95`, when you want nucleus sampling. |

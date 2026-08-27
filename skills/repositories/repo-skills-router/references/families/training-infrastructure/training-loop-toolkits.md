@@ -1,0 +1,29 @@
+# Training Infrastructure -> Training Loop Toolkits
+
+Trainer orchestration utilities: high-level trainer APIs, callback hooks, metric logging, and lightweight boilerplate reducers for custom training loops.
+
+Choose a repository below only when its description, package/repository identity, task surface, and runtime intent match the request. If several candidates overlap, prefer the one whose root skill directly covers the requested workflow; then inspect its internal navigation rather than loading all candidates.
+
+| Repo skill | Repository | Skill description |
+| --- | --- | --- |
+| [`lightning-hydra-template`](../../../../repo-skills/lightning-hydra-template/SKILL.md) | `ashleve/lightning-hydra-template` | Operate Lightning-Hydra-Template projects: Hydra configs, Lightning training/evaluation, data/model customization, tests, CI, and template maintenance. |
+| [`schnetpack`](../../../../repo-skills/schnetpack/SKILL.md) | `atomistic-machine-learning/schnetpack` | Use SchNetPack for atomistic machine-learning datasets, Hydra training/prediction configs, neural network potential components, ASE/MD interfaces, and LAMMPS deployment guidance. |
+| [`basic-ts`](../../../../repo-skills/basic-ts/SKILL.md) | `GestaltCogTeam/BasicTS` | Routes BasicTS time-series training, dataset, model, and pipeline workflows through focused sub-skills. |
+| [`scenic`](../../../../repo-skills/scenic/SKILL.md) | `google-research/scenic` | Use Scenic, Google Research's JAX/Flax computer-vision research codebase, for configs, training, datasets, models, layers, baselines, and project-specific workflows. |
+| [`accelerate`](../../../../repo-skills/accelerate/SKILL.md) | `huggingface/accelerate` | Use Hugging Face Accelerate for PyTorch training-loop migration, distributed launch/configuration, DeepSpeed/FSDP/TPU backend setup, big-model inference/offload, checkpointing, tracking, and troubleshooting. |
+| [`transformers`](../../../../repo-skills/transformers/SKILL.md) | `huggingface/transformers` | Use and extend Hugging Face Transformers for inference, generation, training, tokenizers/processors, serving CLI, quantization/integrations, and contributor workflows. |
+| [`pytorch-metric-learning`](../../../../repo-skills/pytorch-metric-learning/SKILL.md) | `KevinMusgrave/pytorch-metric-learning` | Routes PyTorch Metric Learning tasks across metric-learning components, training workflows, embedding evaluation, dataset loading, and sampling. |
+| [`labml`](../../../../repo-skills/labml/SKILL.md) | `labmlai/labml` | Guides labml experiment tracking, helper training, remote execution, and app-server workflows. |
+| [`lightly`](../../../../repo-skills/lightly/SKILL.md) | `lightly-ai/lightly` | Use LightlySSL for self-supervised computer-vision training, model components, CLIs, embeddings, data layout, evaluation, and repository maintenance. |
+| [`lightning`](../../../../repo-skills/lightning/SKILL.md) | `Lightning-AI/pytorch-lightning` | Build, configure, debug, distribute, and deploy PyTorch Lightning and Lightning Fabric workflows using Trainer, LightningModule, LightningCLI, Fabric, accelerators, strategies, and serving utilities. |
+| [`alphafold3-pytorch`](../../../../repo-skills/alphafold3-pytorch/SKILL.md) | `lucidrains/alphafold3-pytorch` | Use AlphaFold 3 PyTorch for protein and biomolecular structure-prediction workflows, heterogeneous molecule inputs, PDB/mmCIF/MSA/template preparation, bounded model inference, training configuration, and local CLI or Gradio operation. |
+| [`tensorflow-project-template`](../../../../repo-skills/tensorflow-project-template/SKILL.md) | `mgsalem/Tensorflow-Project-Template` | Guides agents in adapting TensorFlow Project Template training-project structure, configs, models, trainers, data loaders, TensorBoard logging, checkpoints, and safe smoke checks. |
+| [`modelscope`](../../../../repo-skills/modelscope/SKILL.md) | `modelscope/modelscope` | Use ModelScope SDK workflows for Hub access, pipelines, datasets, training, serving, export, customization, and repository contribution without relying on a source checkout. |
+| [`composer`](../../../../repo-skills/composer/SKILL.md) | `mosaicml/composer` | Use MosaicML Composer for PyTorch training loops, speedup methods, loggers, checkpoints, distributed launch, profiling, and model export. |
+| [`mmengine`](../../../../repo-skills/mmengine/SKILL.md) | `open-mmlab/mmengine` | Use MMEngine to configure, train, evaluate, inspect, visualize, and troubleshoot PyTorch/OpenMMLab workflows. |
+| [`monai`](../../../../repo-skills/monai/SKILL.md) | `Project-MONAI/MONAI` | Use MONAI, the PyTorch-based medical imaging AI toolkit, for data/transforms, modeling/inference, training/evaluation, Bundle configs, and Auto3DSeg/app workflows. |
+| [`ignite`](../../../../repo-skills/ignite/SKILL.md) | `pytorch/ignite` | Routes PyTorch Ignite training, handlers, metrics, distributed, and legacy contrib workflows. |
+| [`maestro`](../../../../repo-skills/maestro/SKILL.md) | `roboflow/maestro` | Use Maestro for vision-language model fine-tuning, dataset validation, model-specific CLI/API workflows, checkpoints, inference, and troubleshooting. |
+| [`tensorpack`](../../../../repo-skills/tensorpack/SKILL.md) | `tensorpack/tensorpack` | Use Tensorpack, a TF1-compatible TensorFlow training interface with DataFlow, trainers, callbacks, prediction, checkpoints, export, and example workflow guidance. |
+| [`tflearn`](../../../../repo-skills/tflearn/SKILL.md) | `tflearn/tflearn` | Use and troubleshoot TFLearn, a TensorFlow-v1-style high-level deep learning API for layers, data feeds, DNN training, checkpoints, and model recipes. |
+| [`pytracking`](../../../../repo-skills/pytracking/SKILL.md) | `visionml/pytracking` | Use PyTracking and LTR for visual object tracking, video object segmentation, tracker evaluation, result analysis, custom tracker development, and PyTorch training workflows. |

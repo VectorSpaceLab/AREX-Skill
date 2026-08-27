@@ -1,0 +1,34 @@
+# Diversity and Table Troubleshooting
+
+| Symptom | Likely cause | Fix |
+| --- | --- | --- |
+| `ValueError` about negative values | Counts contain one or more negative entries. | Clean or filter the matrix before diversity calls. Diversity count workflows expect non-negative numeric values when `validate=True`. |
+| `ValueError` about count dimensions | A scalar, 3-D array, ragged object array, or incorrectly shaped table was passed. | Provide a vector `(n_taxa,)` for one sample or a matrix `(n_samples, n_taxa)` for multiple samples. |
+| Sample ID length mismatch | `ids=` length does not equal the number of sample rows after ingestion. | Count rows, not columns. For a BIOM `Table`, sample IDs are `list(table.ids())`. |
+| Feature/taxon length mismatch | `taxa=` length does not equal the number of feature columns. | Count columns after conversion. For a BIOM `Table`, taxa/features are `list(table.ids(axis="observation"))`. |
+| Diversity results have integer IDs instead of sample names | Input format did not carry row labels and `ids=` was omitted. | Pass `ids=` explicitly or use a pandas DataFrame with sample IDs in the index. |
+| Unknown metric string | The metric is not listed by `get_alpha_diversity_metrics()` or `get_beta_diversity_metrics()`. | Discover valid strings first; for beta diversity, remember SciPy metric spellings such as `braycurtis` and `cityblock`. |
+| UniFrac callable is slow or warns | `weighted_unifrac` or `unweighted_unifrac` was passed as a callable. | Prefer `metric="weighted_unifrac"` or `metric="unweighted_unifrac"` in `beta_diversity`. |
+| Callable metric ignores taxa | The callable does not declare a `taxa` parameter. | Add a `taxa` parameter if the metric needs feature IDs, or close over taxa explicitly in the callable. |
+| Extra kwargs cause `TypeError` | Metric-specific kwargs were sent to a metric that does not accept them. | Check the selected metric's signature; only pass kwargs used by that metric, such as `tree`, `taxa`, or `normalized` for phylogenetic paths. |
+| Faith PD or UniFrac says `taxa` is required | The input did not expose feature IDs and `taxa=` was omitted. | Pass `taxa` aligned to feature columns, or use a `Table`/DataFrame with feature IDs. |
+| Faith PD or UniFrac says `tree` is required | Phylogenetic metric was requested without a tree. | Provide a `skbio.TreeNode`; route tree reading/building to `../io-metadata/SKILL.md` or `../trees-phylogeny/SKILL.md` as appropriate. |
+| Missing taxa in tree | At least one `taxa` entry is not present as a tree tip name. | Compare `set(taxa)` with tree tip names. Fix spelling, strip prefixes, or prune/rebuild the tree in the tree sub-skill. |
+| Duplicate taxa or duplicate tree tips | Feature IDs or tree tip names are not unique. | Deduplicate or aggregate features before diversity. For tree duplicate repairs, route to `../trees-phylogeny/SKILL.md`. |
+| Branch-length error | Tree has no branch lengths or missing branch lengths on relevant nodes. | Use a branch-length-bearing tree; route tree repair/validation to `../trees-phylogeny/SKILL.md`. |
+| Rooting error for Faith PD | Faith PD requires rooted phylogenetic context. | Root the tree before the diversity call; route root selection and validation to `../trees-phylogeny/SKILL.md`. |
+| Table results look transposed | BIOM `Table` construction used observations by samples, while diversity driver arrays need samples by features. | For direct arrays use rows as samples. For `Table`, either pass the `Table` directly or use `table.matrix_data.T.toarray()` for dense sample-by-feature counts. |
+| `example_table` gives unexpected feature axis names | BIOM calls features observations. | Treat `ids(axis="observation")` as diversity features/taxa and `ids()` as samples. |
+| Optional backend import error | AnnData, Polars, GPU arrays, sparse arrays, or other table-like backends are not installed. | Use NumPy arrays, pandas DataFrames, or `skbio.table.Table` as stable fallbacks. Do not require optional backends unless the user environment provides them. |
+| Optional backend loses labels | Some non-pandas table-like inputs do not expose sample IDs or feature IDs to scikit-bio ingestion. | Pass `ids=` and `taxa=` explicitly, or convert to pandas with index/columns. |
+| `mahalanobis` beta metric fails | This metric needs more samples than features. | Choose another metric or provide enough samples relative to feature count. |
+| Qualitative metric differs from abundance metric | Metrics such as Jaccard treat counts as presence/absence. | Confirm whether the biological question needs qualitative presence/absence or abundance-weighted distances. |
+| `partial_beta_diversity` has many zeros | Only requested ID pairs were computed; unrequested pairs are zero-filled. | Do not use partial output as a full distance matrix unless every needed pair was requested. Prefer `beta_diversity` for full downstream statistics. |
+| `partial_beta_diversity` rejects pairs | Duplicate, reversed duplicate, self-self, or unknown IDs were provided. | Build unique unordered non-self pairs from the `ids` list only. |
+| `block_beta_diversity` is slower than expected | Dataset is small or block overhead dominates. | Use `beta_diversity` for ordinary matrices; reserve block decomposition for large sample/feature counts or parallel map/reduce. |
+| `map_f` fails in block beta | The provided mapper cannot pass keyword arguments to the block function. | Use a mapper compatible with `f(**kwargs)`; not all async map APIs satisfy this requirement. |
+| Augmentation says labels are invalid | Labels are not 1-D/2-D, sample count differs, 1-D labels are not zero-indexed consecutive integers, or one-hot rows do not sum to one. | Rebuild labels to match samples exactly. For 1-D labels, use `0..n_classes-1`; for one-hot labels, ensure each row has exactly one class. |
+| Augmentation cannot find a pair | There are fewer than two samples, or `intra_class=True` leaves no class with at least two samples. | Add samples, disable `intra_class`, or combine classes before augmentation. |
+| Aitchison/cutmix output has unexpected scale | Compositional augmentation normalizes rows to sum to one by default. | Use `normalize=False` only when inputs are already valid compositions and you intentionally want to skip normalization. |
+| `phylomix` says taxa are unavailable | No `taxa=` was passed and the table-like input did not expose feature IDs. | Pass `taxa=` explicitly or use a DataFrame/Table with feature IDs aligned to columns. |
+| `validate=False` hides bad data | Validation skips shape/count/tree checks that would normally catch negative counts, mismatched taxa, or malformed phylogenetic inputs. | Use `validate=False` only after an upstream check has already validated the exact matrix, IDs, taxa, and tree being analyzed. Re-enable validation when transforming data. |

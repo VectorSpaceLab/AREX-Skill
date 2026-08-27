@@ -1,0 +1,28 @@
+# Repository Provenance
+
+- repository: `ssd_keras`
+- source_commit: `3ac9adaf3889f1020d74b0eeefea281d5e82f353`
+- branch: `master`
+- tag: none
+- dirty_state: clean
+- package_version: source-tree only; no packaging metadata found
+- evidence_paths:
+  - `README.md`
+  - `CONTRIBUTING.md`
+  - `bounding_box_utils/`
+  - `data_generator/`
+  - `eval_utils/`
+  - `keras_layers/`
+  - `keras_loss_function/`
+  - `misc_utils/`
+  - `models/`
+  - `ssd_encoder_decoder/`
+  - `ssd300_training.ipynb`
+  - `ssd7_training.ipynb`
+  - `ssd300_inference.ipynb`
+  - `ssd512_inference.ipynb`
+  - `ssd300_evaluation.ipynb`
+  - `ssd300_evaluation_COCO.ipynb`
+  - `weight_sampling_tutorial.ipynb`
+  - `training_summaries/ssd300_pascal_07+12_training_summary.md`
+- notes: The generated skill was distilled from the repository checkout and the verified inspection environment only. It does not depend on absolute local paths.

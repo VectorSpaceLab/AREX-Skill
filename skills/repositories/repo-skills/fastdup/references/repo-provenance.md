@@ -1,0 +1,34 @@
+# Repo provenance
+
+- schema: `disco.repo-provenance.v1`
+- source_repo: `fastdup`
+- source_url: `https://github.com/visual-layer/fastdup.git`
+- source_commit: `2beaa4951902b8b646f997cce8ee724cfdadece4`
+- source_branch: `main`
+- source_tag: none
+- dirty_state: clean
+- source_version_marker: `fastdup.__version__ = 2.53` in the inspected runtime package; source checkout also contains legacy version markers (`__init__.py = 1.100`, `definitions.py VERSION__ = 2.52`) and should be treated as version-mixed evidence.
+- evidence_paths:
+  - `README.md`
+  - `INSTALL.md`
+  - `RUN.md`
+  - `EXAMPLES.md`
+  - `CLOUD.md`
+  - `RELEASE_NOTES.md`
+  - `fastdup/__init__.py`
+  - `fastdup/engine.py`
+  - `fastdup/fastdup_controller.py`
+  - `fastdup/fastdup_visualizer.py`
+  - `fastdup/galleries.py`
+  - `fastdup/image.py`
+  - `fastdup/datasets.py`
+  - `fastdup/synthetic_image_data.py`
+  - `fastdup/synthetic_bbox_data.py`
+  - `fastdup/cvat.py`
+  - `fastdup/label_img.py`
+  - `fastdup/webdataset.py`
+  - `examples/*.ipynb`
+  - `tests/unit/test_datasets.py`
+  - `tests/examples/test_datasets_example.py`
+  - `.github/workflows/tests/*.py`
+- note: the generated repo skill must not depend on this checkout remaining present at runtime.

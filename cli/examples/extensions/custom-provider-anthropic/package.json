@@ -1,0 +1,19 @@
+{
+  "name": "disco-extension-custom-provider-anthropic",
+  "private": true,
+  "version": "0.83.0",
+  "type": "module",
+  "scripts": {
+    "clean": "echo 'nothing to clean'",
+    "build": "echo 'nothing to build'",
+    "check": "echo 'nothing to check'"
+  },
+  "disco": {
+    "extensions": [
+      "./index.ts"
+    ]
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "0.52.0"
+  }
+}

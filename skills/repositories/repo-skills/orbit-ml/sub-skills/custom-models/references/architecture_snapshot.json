@@ -1,0 +1,1229 @@
+{
+  "source_root": null,
+  "notebook": "docs/tutorials/build_your_own_model.ipynb",
+  "config": {
+    "CMDSTAN_VERSION": "2.34.1",
+    "ORBIT_MODELS": [
+      [
+        "dlt",
+        "ets",
+        "ktrlite",
+        "lgt"
+      ]
+    ]
+  },
+  "files": {
+    "orbit/template/model_template.py": {
+      "ModelTemplate": {
+        "bases": [
+          "object"
+        ],
+        "class_attrs": {
+          "_data_input_mapper": "None",
+          "_model_name": "None",
+          "_fitter": "None",
+          "_supported_estimator_types": "None"
+        },
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, **kwargs)"
+          },
+          {
+            "name": "predict",
+            "signature": "(self, posterior_estimates, df, training_meta, prediction_meta, include_error=False, **kwargs)"
+          },
+          {
+            "name": "set_dynamic_attributes",
+            "signature": "(self, df, training_meta)"
+          },
+          {
+            "name": "set_init_values",
+            "signature": "(self)"
+          },
+          {
+            "name": "get_init_values",
+            "signature": "(self)"
+          },
+          {
+            "name": "get_model_param_names",
+            "signature": "(self)"
+          },
+          {
+            "name": "get_data_input_mapper",
+            "signature": "(self)"
+          },
+          {
+            "name": "get_model_name",
+            "signature": "(self)"
+          },
+          {
+            "name": "get_fitter",
+            "signature": "(self)"
+          },
+          {
+            "name": "get_supported_estimator_types",
+            "signature": "(self)"
+          }
+        ]
+      }
+    },
+    "orbit/template/ets.py": {
+      "DataInputMapper": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "_SEASONALITY": "'SEASONALITY'",
+          "SEASONALITY_SD": "'SEASONALITY_SD'",
+          "_SEASONALITY_SM_INPUT": "'SEA_SM_INPUT'",
+          "_LEVEL_SM_INPUT": "'LEV_SM_INPUT'",
+          "IS_VALID_RESPONSE": "'IS_VALID_RES'"
+        },
+        "methods": []
+      },
+      "BaseSamplingParameters": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "LOCAL_TREND_LEVELS": "'l'",
+          "LEVEL_SMOOTHING_FACTOR": "'lev_sm'",
+          "RESIDUAL_SIGMA": "'obs_sigma'"
+        },
+        "methods": []
+      },
+      "SeasonalitySamplingParameters": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "SEASONALITY_LEVELS": "'s'",
+          "SEASONALITY_SMOOTHING_FACTOR": "'sea_sm'"
+        },
+        "methods": []
+      },
+      "LatentSamplingParameters": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "INITIAL_SEASONALITY": "'init_sea'"
+        },
+        "methods": []
+      },
+      "ETSModel": {
+        "bases": [
+          "ModelTemplate"
+        ],
+        "class_attrs": {
+          "_data_input_mapper": "DataInputMapper",
+          "_model_name": "'ets'",
+          "_supported_estimator_types": "[StanEstimatorMAP, StanEstimatorMCMC]"
+        },
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, seasonality=None, seasonality_sm_input=None, level_sm_input=None, **kwargs)"
+          },
+          {
+            "name": "_set_static_attributes",
+            "signature": "(self)"
+          },
+          {
+            "name": "set_dynamic_attributes",
+            "signature": "(self, df, training_meta)"
+          },
+          {
+            "name": "_set_valid_response",
+            "signature": "(self, training_meta)"
+          },
+          {
+            "name": "set_init_values",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_model_param_names",
+            "signature": "(self)"
+          },
+          {
+            "name": "predict",
+            "signature": "(self, posterior_estimates, df, training_meta, prediction_meta, include_error=False, **kwargs)"
+          }
+        ]
+      }
+    },
+    "orbit/template/lgt.py": {
+      "DataInputMapper": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "_SEASONALITY": "'SEASONALITY'",
+          "SEASONALITY_SD": "'SEASONALITY_SD'",
+          "_SEASONALITY_SM_INPUT": "'SEA_SM_INPUT'",
+          "_LEVEL_SM_INPUT": "'LEV_SM_INPUT'",
+          "_SLOPE_SM_INPUT": "'SLP_SM_INPUT'",
+          "MIN_NU": "'MIN_NU'",
+          "MAX_NU": "'MAX_NU'",
+          "CAUCHY_SD": "'CAUCHY_SD'",
+          "NUM_OF_POSITIVE_REGRESSORS": "'NUM_OF_PR'",
+          "POSITIVE_REGRESSOR_MATRIX": "'PR_MAT'",
+          "POSITIVE_REGRESSOR_BETA_PRIOR": "'PR_BETA_PRIOR'",
+          "POSITIVE_REGRESSOR_SIGMA_PRIOR": "'PR_SIGMA_PRIOR'",
+          "NUM_OF_NEGATIVE_REGRESSORS": "'NUM_OF_NR'",
+          "NEGATIVE_REGRESSOR_MATRIX": "'NR_MAT'",
+          "NEGATIVE_REGRESSOR_BETA_PRIOR": "'NR_BETA_PRIOR'",
+          "NEGATIVE_REGRESSOR_SIGMA_PRIOR": "'NR_SIGMA_PRIOR'",
+          "NUM_OF_REGULAR_REGRESSORS": "'NUM_OF_RR'",
+          "REGULAR_REGRESSOR_MATRIX": "'RR_MAT'",
+          "REGULAR_REGRESSOR_BETA_PRIOR": "'RR_BETA_PRIOR'",
+          "REGULAR_REGRESSOR_SIGMA_PRIOR": "'RR_SIGMA_PRIOR'",
+          "_REGRESSION_PENALTY": "'REG_PENALTY_TYPE'",
+          "AUTO_RIDGE_SCALE": "'AUTO_RIDGE_SCALE'",
+          "LASSO_SCALE": "'LASSO_SCALE'",
+          "IS_VALID_RESPONSE": "'IS_VALID_RES'"
+        },
+        "methods": []
+      },
+      "BaseSamplingParameters": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "LOCAL_TREND_LEVELS": "'l'",
+          "LOCAL_TREND_SLOPES": "'b'",
+          "LEVEL_SMOOTHING_FACTOR": "'lev_sm'",
+          "SLOPE_SMOOTHING_FACTOR": "'slp_sm'",
+          "RESIDUAL_SIGMA": "'obs_sigma'",
+          "RESIDUAL_DEGREE_OF_FREEDOM": "'nu'",
+          "LOCAL_GLOBAL_TREND_SUMS": "'lgt_sum'",
+          "GLOBAL_TREND_POWER": "'gt_pow'",
+          "LOCAL_TREND_COEF": "'lt_coef'",
+          "GLOBAL_TREND_COEF": "'gt_coef'"
+        },
+        "methods": []
+      },
+      "SeasonalitySamplingParameters": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "SEASONALITY_LEVELS": "'s'",
+          "SEASONALITY_SMOOTHING_FACTOR": "'sea_sm'"
+        },
+        "methods": []
+      },
+      "RegressionSamplingParameters": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "REGRESSION_COEFFICIENTS": "'beta'"
+        },
+        "methods": []
+      },
+      "LatentSamplingParameters": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "REGRESSION_POSITIVE_COEFFICIENTS": "'pr_beta'",
+          "REGRESSION_NEGATIVE_COEFFICIENTS": "'nr_beta'",
+          "REGRESSION_REGULAR_COEFFICIENTS": "'rr_beta'",
+          "INITIAL_SEASONALITY": "'init_sea'"
+        },
+        "methods": []
+      },
+      "RegressionPenalty": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "fixed_ridge": "0",
+          "lasso": "1",
+          "auto_ridge": "2"
+        },
+        "methods": []
+      },
+      "LGTModel": {
+        "bases": [
+          "ETSModel"
+        ],
+        "class_attrs": {
+          "_data_input_mapper": "DataInputMapper",
+          "_model_name": "'lgt'",
+          "_supported_estimator_types": "[StanEstimatorMAP, StanEstimatorMCMC, PyroEstimatorSVI]"
+        },
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, regressor_col=None, regressor_sign=None, regressor_beta_prior=None, regressor_sigma_prior=None, regression_penalty='fixed_ridge', lasso_scale=0.5, auto_ridge_scale=0.5, slope_sm_input=None, **kwargs)"
+          },
+          {
+            "name": "set_init_values",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_additional_trend_attributes",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_regression_default_attributes",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_regression_penalty",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_static_regression_attributes",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_static_attributes",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_model_param_names",
+            "signature": "(self)"
+          },
+          {
+            "name": "_validate_training_df_with_regression",
+            "signature": "(self, df)"
+          },
+          {
+            "name": "_set_regressor_matrix",
+            "signature": "(self, df, num_of_observations)"
+          },
+          {
+            "name": "set_dynamic_attributes",
+            "signature": "(self, df, training_meta)"
+          },
+          {
+            "name": "predict",
+            "signature": "(self, posterior_estimates, df, training_meta, prediction_meta, include_error=False, **kwargs)"
+          },
+          {
+            "name": "get_regression_coefs",
+            "signature": "(self, training_meta, point_method, point_posteriors, posterior_samples, lower=0.05, upper=0.95)"
+          }
+        ]
+      }
+    },
+    "orbit/template/dlt.py": {
+      "DataInputMapper": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "_SEASONALITY": "'SEASONALITY'",
+          "SEASONALITY_SD": "'SEASONALITY_SD'",
+          "_SEASONALITY_SM_INPUT": "'SEA_SM_INPUT'",
+          "_LEVEL_SM_INPUT": "'LEV_SM_INPUT'",
+          "_SLOPE_SM_INPUT": "'SLP_SM_INPUT'",
+          "_GLOBAL_TREND_OPTION": "'GLOBAL_TREND_OPTION'",
+          "GLOBAL_TREND_SIGMA_PRIOR": "'GB_SIGMA_PRIOR'",
+          "GLOBAL_CAP": "'G_CAP'",
+          "GLOBAL_FLOOR": "'G_FLOOR'",
+          "_TIME_DELTA": "'TIME_DELTA'",
+          "DAMPED_FACTOR": "'DAMPED_FACTOR'",
+          "MIN_NU": "'MIN_NU'",
+          "MAX_NU": "'MAX_NU'",
+          "CAUCHY_SD": "'CAUCHY_SD'",
+          "NUM_OF_POSITIVE_REGRESSORS": "'NUM_OF_PR'",
+          "POSITIVE_REGRESSOR_MATRIX": "'PR_MAT'",
+          "POSITIVE_REGRESSOR_BETA_PRIOR": "'PR_BETA_PRIOR'",
+          "POSITIVE_REGRESSOR_SIGMA_PRIOR": "'PR_SIGMA_PRIOR'",
+          "NUM_OF_NEGATIVE_REGRESSORS": "'NUM_OF_NR'",
+          "NEGATIVE_REGRESSOR_MATRIX": "'NR_MAT'",
+          "NEGATIVE_REGRESSOR_BETA_PRIOR": "'NR_BETA_PRIOR'",
+          "NEGATIVE_REGRESSOR_SIGMA_PRIOR": "'NR_SIGMA_PRIOR'",
+          "NUM_OF_REGULAR_REGRESSORS": "'NUM_OF_RR'",
+          "REGULAR_REGRESSOR_MATRIX": "'RR_MAT'",
+          "REGULAR_REGRESSOR_BETA_PRIOR": "'RR_BETA_PRIOR'",
+          "REGULAR_REGRESSOR_SIGMA_PRIOR": "'RR_SIGMA_PRIOR'",
+          "_REGRESSION_PENALTY": "'REG_PENALTY_TYPE'",
+          "AUTO_RIDGE_SCALE": "'AUTO_RIDGE_SCALE'",
+          "LASSO_SCALE": "'LASSO_SCALE'",
+          "IS_VALID_RESPONSE": "'IS_VALID_RES'",
+          "FORECAST_HORIZON": "'FORECAST_HORIZON'"
+        },
+        "methods": []
+      },
+      "GlobalTrendOption": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "linear": "0",
+          "loglinear": "1",
+          "logistic": "2",
+          "flat": "3"
+        },
+        "methods": []
+      },
+      "BaseSamplingParameters": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "LOCAL_TREND_LEVELS": "'l'",
+          "LOCAL_TREND_SLOPES": "'b'",
+          "LEVEL_SMOOTHING_FACTOR": "'lev_sm'",
+          "SLOPE_SMOOTHING_FACTOR": "'slp_sm'",
+          "RESIDUAL_SIGMA": "'obs_sigma'",
+          "RESIDUAL_DEGREE_OF_FREEDOM": "'nu'",
+          "LOCAL_TREND": "'lt_sum'"
+        },
+        "methods": []
+      },
+      "GlobalTrendSamplingParameters": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "GLOBAL_TREND": "'gt_sum'",
+          "GLOBAL_TREND_SLOPE": "'gb'",
+          "GLOBAL_TREND_LEVEL": "'gl'"
+        },
+        "methods": []
+      },
+      "SeasonalitySamplingParameters": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "SEASONALITY_LEVELS": "'s'",
+          "SEASONALITY_SMOOTHING_FACTOR": "'sea_sm'"
+        },
+        "methods": []
+      },
+      "RegressionSamplingParameters": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "REGRESSION_COEFFICIENTS": "'beta'"
+        },
+        "methods": []
+      },
+      "LatentSamplingParameters": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "REGRESSION_POSITIVE_COEFFICIENTS": "'pr_beta'",
+          "REGRESSION_NEGATIVE_COEFFICIENTS": "'nr_beta'",
+          "REGRESSION_REGULAR_COEFFICIENTS": "'rr_beta'",
+          "INITIAL_SEASONALITY": "'init_sea'"
+        },
+        "methods": []
+      },
+      "RegressionPenalty": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "fixed_ridge": "0",
+          "lasso": "1",
+          "auto_ridge": "2"
+        },
+        "methods": []
+      },
+      "DLTModel": {
+        "bases": [
+          "ETSModel"
+        ],
+        "class_attrs": {
+          "_data_input_mapper": "DataInputMapper",
+          "_model_name": "'dlt'",
+          "_supported_estimator_types": "[StanEstimatorMAP, StanEstimatorMCMC]"
+        },
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, regressor_col=None, regressor_sign=None, regressor_beta_prior=None, regressor_sigma_prior=None, regression_penalty='fixed_ridge', lasso_scale=0.5, auto_ridge_scale=0.5, slope_sm_input=None, period=1, damped_factor=0.8, global_trend_option='linear', global_cap=1.0, global_floor=0.0, global_trend_sigma_prior=None, forecast_horizon=1, **kwargs)"
+          },
+          {
+            "name": "set_init_values",
+            "signature": "(self)"
+          },
+          {
+            "name": "_validate_global_options",
+            "signature": "(self)"
+          },
+          {
+            "name": "_validate_regression_penalties",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_additional_trend_attributes",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_regression_default_attributes",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_regression_penalty",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_static_regression_attributes",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_static_attributes",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_model_param_names",
+            "signature": "(self)"
+          },
+          {
+            "name": "_validate_training_df_with_regression",
+            "signature": "(self, df)"
+          },
+          {
+            "name": "_set_regressor_matrix",
+            "signature": "(self, df, num_of_observations)"
+          },
+          {
+            "name": "set_dynamic_attributes",
+            "signature": "(self, df, training_meta)"
+          },
+          {
+            "name": "predict",
+            "signature": "(self, posterior_estimates, df, training_meta, prediction_meta, include_error=False, **kwargs)"
+          },
+          {
+            "name": "get_regression_coefs",
+            "signature": "(self, training_meta, point_method, point_posteriors, posterior_samples, lower=0.05, upper=0.95)"
+          }
+        ]
+      }
+    },
+    "orbit/template/ktrlite.py": {
+      "DataInputMapper": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "NUM_OF_VALID_RESPONSE": "'N_VALID_RES'",
+          "WHICH_VALID_RESPONSE": "'WHICH_VALID_RES'",
+          "RESPONSE_OFFSET": "'MEAN_Y'",
+          "_DEGREE_OF_FREEDOM": "'DOF'",
+          "NUM_KNOTS_LEVEL": "'N_KNOTS_LEV'",
+          "LEVEL_KNOT_SCALE": "'LEV_KNOT_SCALE'",
+          "KERNEL_LEVEL": "'K_LEV'",
+          "NUM_KNOTS_COEFFICIENTS": "'N_KNOTS_COEF'",
+          "KERNEL_COEFFICIENTS": "'K_COEF'",
+          "NUM_OF_REGRESSORS": "'P'",
+          "REGRESSOR_MATRIX": "'REGRESSORS'",
+          "COEFFICIENTS_INITIAL_KNOT_SCALE": "'COEF_INIT_KNOT_SCALE'",
+          "COEFFICIENTS_KNOT_SCALE": "'COEF_KNOT_SCALE'"
+        },
+        "methods": []
+      },
+      "BaseSamplingParameters": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "LEVEL_KNOT": "'lev_knot'",
+          "LEVEL": "'lev'",
+          "YHAT": "'yhat'",
+          "OBS_SCALE": "'obs_scale'"
+        },
+        "methods": []
+      },
+      "RegressionSamplingParameters": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "COEFFICIENTS_KNOT": "'coef_knot'",
+          "COEFFICIENTS": "'coef'"
+        },
+        "methods": []
+      },
+      "KTRLiteModel": {
+        "bases": [
+          "ModelTemplate"
+        ],
+        "class_attrs": {
+          "_data_input_mapper": "DataInputMapper",
+          "_model_name": "'ktrlite'",
+          "_supported_estimator_types": "[StanEstimatorMAP]"
+        },
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, level_knot_scale=0.1, level_segments=10, level_knot_distance=None, level_knot_dates=None, seasonality=None, seasonality_fs_order=None, seasonality_segments=0, seasonal_initial_knot_scale=1.0, seasonal_knot_scale=0.1, degree_of_freedom=30, date_freq=None, **kwargs)"
+          },
+          {
+            "name": "set_init_values",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_default_args",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_seasonality_attributes",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_validate_ktr_params",
+            "signature": "(self, training_meta)"
+          },
+          {
+            "name": "_make_seasonal_regressors",
+            "signature": "(self, df, shift)"
+          },
+          {
+            "name": "_set_regressor_matrix",
+            "signature": "(self, df, training_meta)"
+          },
+          {
+            "name": "_set_kernel_matrix",
+            "signature": "(self, df, training_meta)"
+          },
+          {
+            "name": "set_dynamic_attributes",
+            "signature": "(self, df, training_meta)"
+          },
+          {
+            "name": "_set_model_param_names",
+            "signature": "(self)"
+          },
+          {
+            "name": "predict",
+            "signature": "(self, posterior_estimates, df, training_meta, prediction_meta, include_error=False, **kwargs)"
+          },
+          {
+            "name": "get_level_knots",
+            "signature": "(self, training_meta, point_method, point_posteriors, posterior_samples)"
+          },
+          {
+            "name": "get_levels",
+            "signature": "(self, training_meta, point_method, point_posteriors, posterior_samples)"
+          },
+          {
+            "name": "plot_lev_knots",
+            "signature": "(self, training_meta, point_method, point_posteriors, posterior_samples, path=None, is_visible=True, title='', fontsize=16, markersize=250, figsize=(16, 8))"
+          }
+        ]
+      }
+    },
+    "orbit/template/ktr.py": {
+      "DataInputMapper": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "NUM_OF_VALID_RESPONSE": "'N_VALID_RES'",
+          "WHICH_VALID_RESPONSE": "'WHICH_VALID_RES'",
+          "RESPONSE_OFFSET": "'MEAN_Y'",
+          "DEGREE_OF_FREEDOM": "'DOF'",
+          "_RESIDUALS_SCALE_UPPER": "'RESID_SCALE_UB'",
+          "_NUM_KNOTS_LEVEL": "'N_KNOTS_LEV'",
+          "LEVEL_KNOT_SCALE": "'LEV_KNOT_SCALE'",
+          "_KERNEL_LEVEL": "'K_LEV'",
+          "_NUM_KNOTS_COEFFICIENTS": "'N_KNOTS_COEF'",
+          "_KERNEL_COEFFICIENTS": "'K_COEF'",
+          "_NUM_OF_REGULAR_REGRESSORS": "'N_RR'",
+          "_NUM_OF_POSITIVE_REGRESSORS": "'N_PR'",
+          "_NUM_OF_NEGATIVE_REGRESSORS": "'N_NR'",
+          "_REGULAR_REGRESSOR_MATRIX": "'RR'",
+          "_POSITIVE_REGRESSOR_MATRIX": "'PR'",
+          "_NEGATIVE_REGRESSOR_MATRIX": "'NR'",
+          "_REGULAR_REGRESSOR_INIT_KNOT_LOC": "'RR_INIT_KNOT_LOC'",
+          "_REGULAR_REGRESSOR_INIT_KNOT_SCALE": "'RR_INIT_KNOT_SCALE'",
+          "_REGULAR_REGRESSOR_KNOT_SCALE": "'RR_KNOT_SCALE'",
+          "_POSITIVE_REGRESSOR_INIT_KNOT_LOC": "'PR_INIT_KNOT_LOC'",
+          "_POSITIVE_REGRESSOR_INIT_KNOT_SCALE": "'PR_INIT_KNOT_SCALE'",
+          "_POSITIVE_REGRESSOR_KNOT_SCALE": "'PR_KNOT_SCALE'",
+          "_NEGATIVE_REGRESSOR_INIT_KNOT_LOC": "'NR_INIT_KNOT_LOC'",
+          "_NEGATIVE_REGRESSOR_INIT_KNOT_SCALE": "'NR_INIT_KNOT_SCALE'",
+          "_NEGATIVE_REGRESSOR_KNOT_SCALE": "'NR_KNOT_SCALE'",
+          "_COEF_PRIOR_LIST": "'COEF_PRIOR_LIST'",
+          "_LEVEL_KNOTS": "'LEV_KNOT_LOC'",
+          "_SEAS_TERM": "'SEAS_TERM'"
+        },
+        "methods": []
+      },
+      "BaseSamplingParameters": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "LEVEL_KNOT": "'lev_knot'",
+          "LEVEL": "'lev'",
+          "YHAT": "'yhat'",
+          "OBS_SCALE": "'obs_scale'"
+        },
+        "methods": []
+      },
+      "RegressionSamplingParameters": {
+        "bases": [
+          "Enum"
+        ],
+        "class_attrs": {
+          "COEFFICIENTS_KNOT": "'coef_knot'",
+          "COEFFICIENTS_INIT_KNOT": "'coef_init_knot'",
+          "COEFFICIENTS": "'coef'"
+        },
+        "methods": []
+      },
+      "KTRModel": {
+        "bases": [
+          "ModelTemplate"
+        ],
+        "class_attrs": {
+          "_data_input_mapper": "DataInputMapper",
+          "_model_name": "'ktr'",
+          "_supported_estimator_types": "[PyroEstimatorSVI]"
+        },
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, level_knot_scale=0.1, level_segments=10, level_knot_distance=None, level_knot_dates=None, seasonality=None, seasonality_fs_order=None, seasonality_segments=2, seasonal_initial_knot_scale=1.0, seasonal_knot_scale=0.1, regressor_col=None, regressor_sign=None, regressor_init_knot_loc=None, regressor_init_knot_scale=None, regressor_knot_scale=None, regression_segments=5, regression_knot_distance=None, regression_knot_dates=None, regression_rho=0.15, degree_of_freedom=30, date_freq=None, coef_prior_list=None, flat_multiplier=True, residuals_scale_upper=None, ktrlite_optim_args=dict(), **kwargs)"
+          },
+          {
+            "name": "_set_model_param_names",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_default_args",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_static_regression_attributes",
+            "signature": "(self)"
+          },
+          {
+            "name": "_validate_coef_prior",
+            "signature": "(coef_prior_list)"
+          },
+          {
+            "name": "_set_coef_prior_idx",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_static_attributes",
+            "signature": "(self)"
+          },
+          {
+            "name": "_set_valid_response_attributes",
+            "signature": "(self, training_meta)"
+          },
+          {
+            "name": "_set_regressor_matrix",
+            "signature": "(self, df, training_meta)"
+          },
+          {
+            "name": "_set_coefficients_kernel_matrix",
+            "signature": "(self, df, training_meta)"
+          },
+          {
+            "name": "_set_knots_scale_matrix",
+            "signature": "(self, df, training_meta)"
+          },
+          {
+            "name": "_generate_tp",
+            "signature": "(self, training_meta, prediction_date_array)"
+          },
+          {
+            "name": "_generate_insample_tp",
+            "signature": "(self, training_meta, date_array)"
+          },
+          {
+            "name": "_generate_seas",
+            "signature": "(self, df, training_meta, coef_knot_dates, coef_knots, seasonality, seasonality_fs_order, seasonality_labels)"
+          },
+          {
+            "name": "_set_levs_and_seas",
+            "signature": "(self, df, training_meta)"
+          },
+          {
+            "name": "_filter_coef_prior",
+            "signature": "(self, df)"
+          },
+          {
+            "name": "set_dynamic_attributes",
+            "signature": "(self, df, training_meta)"
+          },
+          {
+            "name": "_concat_regression_coefs",
+            "signature": "(pr_beta=None, rr_beta=None)"
+          },
+          {
+            "name": "predict",
+            "signature": "(self, posterior_estimates, df, training_meta, prediction_meta, coefficient_method='smooth', include_error=False, store_prediction_array=False, **kwargs)"
+          },
+          {
+            "name": "_get_regression_coefs_matrix",
+            "signature": "(self, training_meta, posteriors, coefficient_method='smooth', date_array=None)"
+          },
+          {
+            "name": "get_regression_coefs",
+            "signature": "(self, training_meta, point_method, point_posteriors, posterior_samples, coefficient_method='smooth', date_array=None, include_ci=False, lower=0.05, upper=0.95)"
+          },
+          {
+            "name": "get_regression_coef_knots",
+            "signature": "(self, training_meta, point_method, point_posteriors, posterior_samples)"
+          },
+          {
+            "name": "plot_regression_coefs",
+            "signature": "(self, training_meta, point_method, point_posteriors, posterior_samples, coefficient_method='smooth', date_array=None, include_ci=False, lower=0.05, upper=0.95, with_knot=False, is_visible=True, ncol=2, ylim=None, markersize=200, figsize=(16, 8))"
+          },
+          {
+            "name": "get_level_knots",
+            "signature": "(self, training_meta, point_method, point_posteriors, posterior_samples)"
+          },
+          {
+            "name": "get_levels",
+            "signature": "(self, training_meta, point_method, point_posteriors, posterior_samples)"
+          },
+          {
+            "name": "plot_lev_knots",
+            "signature": "(self, training_meta, point_method, point_posteriors, posterior_samples, path=None, is_visible=True, title='', fontsize=16, markersize=250, figsize=(16, 8))"
+          }
+        ]
+      }
+    },
+    "orbit/forecaster/forecaster.py": {
+      "Forecaster": {
+        "bases": [
+          "object"
+        ],
+        "class_attrs": {},
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, model, estimator_type, response_col='y', date_col='ds', n_bootstrap_draws=-1, prediction_percentiles=None, **kwargs)"
+          },
+          {
+            "name": "_validate_supported_estimator_type",
+            "signature": "(self, estimator_type)"
+          },
+          {
+            "name": "fit",
+            "signature": "(self, df, **kwargs)"
+          },
+          {
+            "name": "_set_training_meta",
+            "signature": "(self, df)"
+          },
+          {
+            "name": "get_training_meta",
+            "signature": "(self)"
+          },
+          {
+            "name": "set_forecaster_training_meta",
+            "signature": "(self, data_input)"
+          },
+          {
+            "name": "set_training_data_input",
+            "signature": "(self)"
+          },
+          {
+            "name": "get_training_data_input",
+            "signature": "(self)"
+          },
+          {
+            "name": "_validate_training_df",
+            "signature": "(self, df)"
+          },
+          {
+            "name": "is_fitted",
+            "signature": "(self)"
+          },
+          {
+            "name": "predict",
+            "signature": "(self, df, **kwargs)"
+          },
+          {
+            "name": "_set_prediction_meta",
+            "signature": "(self, df)"
+          },
+          {
+            "name": "get_prediction_meta",
+            "signature": "(self)"
+          },
+          {
+            "name": "get_training_metrics",
+            "signature": "(self)"
+          },
+          {
+            "name": "get_posterior_samples",
+            "signature": "(self, relabel=False, permute=True)"
+          },
+          {
+            "name": "get_point_posteriors",
+            "signature": "(self)"
+          },
+          {
+            "name": "load_extra_methods",
+            "signature": "(self)"
+          },
+          {
+            "name": "get_regressors",
+            "signature": "(self)"
+          },
+          {
+            "name": "make_future_df",
+            "signature": "(self, periods=1)"
+          }
+        ]
+      }
+    },
+    "orbit/forecaster/map.py": {
+      "MAPForecaster": {
+        "bases": [
+          "Forecaster"
+        ],
+        "class_attrs": {},
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, **kwargs)"
+          },
+          {
+            "name": "set_forecaster_training_meta",
+            "signature": "(self, data_input)"
+          },
+          {
+            "name": "fit",
+            "signature": "(self, df, **kwargs)"
+          },
+          {
+            "name": "predict",
+            "signature": "(self, df, decompose=False, store_prediction_array=False, seed=None, **kwargs)"
+          },
+          {
+            "name": "load_extra_methods",
+            "signature": "(self)"
+          },
+          {
+            "name": "get_bic",
+            "signature": "(self)"
+          }
+        ]
+      }
+    },
+    "orbit/forecaster/full_bayes.py": {
+      "FullBayesianForecaster": {
+        "bases": [
+          "Forecaster"
+        ],
+        "class_attrs": {},
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, **kwargs)"
+          },
+          {
+            "name": "set_forecaster_training_meta",
+            "signature": "(self, data_input)"
+          },
+          {
+            "name": "fit",
+            "signature": "(self, df, point_method=None, keep_samples=True, sampling_temperature=1.0, **kwargs)"
+          },
+          {
+            "name": "_bootstrap",
+            "signature": "(num_samples, posterior_samples, n)"
+          },
+          {
+            "name": "predict",
+            "signature": "(self, df, decompose=False, store_prediction_array=False, seed=None, **kwargs)"
+          },
+          {
+            "name": "load_extra_methods",
+            "signature": "(self)"
+          },
+          {
+            "name": "get_wbic",
+            "signature": "(self)"
+          },
+          {
+            "name": "fit_wbic",
+            "signature": "(self, df)"
+          }
+        ]
+      }
+    },
+    "orbit/forecaster/svi.py": {
+      "SVIForecaster": {
+        "bases": [
+          "Forecaster"
+        ],
+        "class_attrs": {},
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, **kwargs)"
+          },
+          {
+            "name": "set_forecaster_training_meta",
+            "signature": "(self, data_input)"
+          },
+          {
+            "name": "fit",
+            "signature": "(self, df, point_method=None, keep_samples=True, sampling_temperature=1.0, **kwargs)"
+          },
+          {
+            "name": "_bootstrap",
+            "signature": "(num_samples, posterior_samples, n)"
+          },
+          {
+            "name": "predict",
+            "signature": "(self, df, decompose=False, store_prediction_array=False, seed=None, **kwargs)"
+          },
+          {
+            "name": "load_extra_methods",
+            "signature": "(self)"
+          },
+          {
+            "name": "get_wbic",
+            "signature": "(self)"
+          },
+          {
+            "name": "fit_wbic",
+            "signature": "(self, df)"
+          }
+        ]
+      }
+    },
+    "orbit/estimators/base_estimator.py": {
+      "BaseEstimator": {
+        "bases": [],
+        "class_attrs": {},
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, seed=8888, verbose=True)"
+          },
+          {
+            "name": "fit",
+            "signature": "(self, model_name, model_param_names, data_input, fitter=None, init_values=None)"
+          }
+        ]
+      }
+    },
+    "orbit/estimators/stan_estimator.py": {
+      "StanEstimator": {
+        "bases": [
+          "BaseEstimator"
+        ],
+        "class_attrs": {},
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, num_warmup=900, num_sample=100, chains=4, cores=8, algorithm=None, suppress_stan_log=True, **kwargs)"
+          },
+          {
+            "name": "_set_computed_stan_configs",
+            "signature": "(self)"
+          },
+          {
+            "name": "fit",
+            "signature": "(self, model_name, model_param_names, data_input, fitter=None, init_values=None)"
+          }
+        ]
+      },
+      "StanEstimatorMCMC": {
+        "bases": [
+          "StanEstimator"
+        ],
+        "class_attrs": {},
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, stan_mcmc_args=None, **kwargs)"
+          },
+          {
+            "name": "_set_computed_stan_mcmc_configs",
+            "signature": "(self)"
+          },
+          {
+            "name": "fit",
+            "signature": "(self, model_name, model_param_names, sampling_temperature, data_input, fitter=None, init_values=None)"
+          }
+        ]
+      },
+      "StanEstimatorMAP": {
+        "bases": [
+          "StanEstimator"
+        ],
+        "class_attrs": {},
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, stan_map_args=None, **kwargs)"
+          },
+          {
+            "name": "_set_computed_stan_map_configs",
+            "signature": "(self)"
+          },
+          {
+            "name": "fit",
+            "signature": "(self, model_name, model_param_names, data_input, fitter=None, init_values=None)"
+          }
+        ]
+      }
+    },
+    "orbit/estimators/pyro_estimator.py": {
+      "PyroEstimator": {
+        "bases": [
+          "BaseEstimator"
+        ],
+        "class_attrs": {},
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, num_steps=301, learning_rate=0.1, learning_rate_total_decay=1.0, message=100, **kwargs)"
+          },
+          {
+            "name": "fit",
+            "signature": "(self, model_name, model_param_names, data_input, fitter=None, init_values=None)"
+          }
+        ]
+      },
+      "PyroEstimatorSVI": {
+        "bases": [
+          "PyroEstimator"
+        ],
+        "class_attrs": {},
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, num_sample=100, num_particles=100, init_scale=0.1, **kwargs)"
+          },
+          {
+            "name": "fit",
+            "signature": "(self, model_name, model_param_names, data_input, sampling_temperature, fitter=None, init_values=None)"
+          }
+        ]
+      }
+    },
+    "orbit/pyro/lgt.py": {
+      "Model": {
+        "bases": [],
+        "class_attrs": {
+          "max_plate_nesting": "1"
+        },
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, data)"
+          },
+          {
+            "name": "__call__",
+            "signature": "(self)"
+          }
+        ]
+      }
+    },
+    "orbit/pyro/ktr.py": {
+      "Model": {
+        "bases": [],
+        "class_attrs": {
+          "max_plate_nesting": "1"
+        },
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self, data)"
+          },
+          {
+            "name": "__call__",
+            "signature": "(self)"
+          }
+        ]
+      }
+    },
+    "orbit/utils/stan.py": {
+      "get_compiled_stan_model": {
+        "signature": "(stan_model_name='', stan_file_path=None, exe_file_path=None, force_compile=False)"
+      },
+      "suppress_stdout_stderr": {
+        "bases": [],
+        "class_attrs": {},
+        "methods": [
+          {
+            "name": "__init__",
+            "signature": "(self)"
+          },
+          {
+            "name": "__enter__",
+            "signature": "(self)"
+          },
+          {
+            "name": "__exit__",
+            "signature": "(self, *_)"
+          }
+        ]
+      }
+    },
+    "orbit/utils/set_cmdstan_path.py": {
+      "set_cmdstan_path": {
+        "signature": "()"
+      }
+    },
+    "orbit/models/lgt.py": {
+      "LGT": {
+        "signature": "(seasonality=None, seasonality_sm_input=None, level_sm_input=None, regressor_col=None, regressor_sign=None, regressor_beta_prior=None, regressor_sigma_prior=None, regression_penalty='fixed_ridge', lasso_scale=0.5, auto_ridge_scale=0.5, slope_sm_input=None, estimator='stan-mcmc', suppress_stan_log=True, **kwargs)"
+      }
+    },
+    "orbit/models/dlt.py": {
+      "DLT": {
+        "signature": "(seasonality=None, seasonality_sm_input=None, level_sm_input=None, regressor_col=None, regressor_sign=None, regressor_beta_prior=None, regressor_sigma_prior=None, regression_penalty='fixed_ridge', lasso_scale=0.5, auto_ridge_scale=0.5, slope_sm_input=None, period=1, damped_factor=0.8, global_trend_option='linear', global_cap=1.0, global_floor=0.0, global_trend_sigma_prior=None, forecast_horizon=1, estimator='stan-mcmc', suppress_stan_log=True, **kwargs)"
+      }
+    },
+    "orbit/models/ktrlite.py": {
+      "KTRLite": {
+        "signature": "(level_knot_scale=0.1, level_segments=10, level_knot_distance=None, level_knot_dates=None, seasonality=None, seasonality_fs_order=None, seasonality_segments=2, seasonal_initial_knot_scale=1.0, seasonal_knot_scale=0.1, degree_of_freedom=30, date_freq=None, estimator='stan-map', suppress_stan_log=True, **kwargs)"
+      }
+    },
+    "orbit/models/ktr.py": {
+      "KTR": {
+        "signature": "(level_knot_scale=0.1, level_segments=10, level_knot_distance=None, level_knot_dates=None, seasonality=None, seasonality_fs_order=None, seasonality_segments=3, seasonal_initial_knot_scale=1.0, seasonal_knot_scale=0.1, regressor_col=None, regressor_sign=None, regressor_init_knot_loc=None, regressor_init_knot_scale=None, regressor_knot_scale=None, regression_segments=5, regression_knot_distance=None, regression_knot_dates=None, regression_rho=0.15, degree_of_freedom=30, date_freq=None, coef_prior_list=None, flat_multiplier=True, residuals_scale_upper=None, ktrlite_optim_args=dict(), estimator='pyro-svi', **kwargs)"
+      }
+    }
+  },
+  "compatibility_matrix": {
+    "ETSModel": [
+      "StanEstimatorMAP",
+      "StanEstimatorMCMC"
+    ],
+    "LGTModel": [
+      "StanEstimatorMAP",
+      "StanEstimatorMCMC",
+      "PyroEstimatorSVI"
+    ],
+    "DLTModel": [
+      "StanEstimatorMAP",
+      "StanEstimatorMCMC"
+    ],
+    "KTRLiteModel": [
+      "StanEstimatorMAP"
+    ],
+    "KTRModel": [
+      "PyroEstimatorSVI"
+    ]
+  },
+  "notebook_takeaways": [
+    "A custom model needs a callable fitter plus predict().",
+    "The tutorial uses ModelTemplate with _fitter = MyFitter, _data_input_mapper = [\"regressor\"], and _supported_estimator_types = [PyroEstimatorSVI].",
+    "Forecaster is instantiated with model=custom_model and estimator_type=PyroEstimatorSVI."
+  ],
+  "runtime_notes": [
+    "Direct import of orbit.template.ktr reproduces a circular ImportError because template/ktr.py imports ..models.KTRLite and orbit.models.__init__ imports orbit.models.ktr back again.",
+    "orbit/utils/stan.py has a path-override branch bug: when stan_file_path or exe_file_path is supplied, it references stan_file before assignment.",
+    "Current source tree does not ship orbit/stan_compiled/cmdstan-<version>; set_cmdstan_path() therefore falls back to the default ~/.cmdstan path when cmdstanpy is available."
+  ]
+}

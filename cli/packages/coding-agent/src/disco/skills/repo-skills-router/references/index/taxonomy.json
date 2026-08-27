@@ -1,0 +1,1035 @@
+{
+  "areas": [
+    {
+      "families": [
+        {
+          "id": "computer-vision.image-classification",
+          "name": "Image Classification",
+          "scope": "Models and training methods for assigning image labels and learning image representations for classification, similarity, and metric-learning tasks."
+        },
+        {
+          "id": "computer-vision.object-detection-models",
+          "name": "Object Detection Models",
+          "scope": "Implementations of individual closed-set object-detection architectures for localizing and classifying objects in images or video."
+        },
+        {
+          "id": "computer-vision.open-vocabulary-and-grounded-detection",
+          "name": "Open-Vocabulary Detection",
+          "scope": "Language-conditioned, referring, grounded, and open-vocabulary models that localize objects from free-form text or visual prompts."
+        },
+        {
+          "id": "computer-vision.object-detection-frameworks",
+          "name": "Object Detection Toolkits",
+          "scope": "Configurable multi-architecture libraries with reusable training, evaluation, model-zoo, and deployment components for object detection."
+        },
+        {
+          "id": "computer-vision.image-segmentation",
+          "name": "Image Segmentation",
+          "scope": "Semantic, instance, panoptic, salient-object, matting, and interactive segmentation of images or video, including segmentation-centered toolkits."
+        },
+        {
+          "id": "computer-vision.face-and-biometrics",
+          "name": "Visual Identity Analysis",
+          "scope": "Face detection, alignment, recognition, verification, attribute analysis, and visual re-identification of people or vehicles."
+        },
+        {
+          "id": "computer-vision.pose-estimation",
+          "name": "Pose Estimation",
+          "scope": "Detection and estimation of 2D or 3D human, animal, face, hand, and object landmarks, keypoints, and articulated skeletons in images or video."
+        },
+        {
+          "id": "computer-vision.object-tracking",
+          "name": "Object Tracking",
+          "scope": "Single-object and multi-object tracking, data association, trajectory estimation, and tracking evaluation across video or point-cloud sequences."
+        },
+        {
+          "id": "computer-vision.video-understanding",
+          "name": "Video Understanding",
+          "scope": "Recognition, retrieval, and temporal localization of actions, activities, and events in video or skeleton sequences."
+        },
+        {
+          "id": "computer-vision.document-and-ocr",
+          "name": "Document Vision",
+          "scope": "Visual extraction from document and scene images, including text detection, OCR, layout analysis, formula recognition, and table-structure recognition."
+        },
+        {
+          "id": "computer-vision.image-restoration",
+          "name": "Image Restoration",
+          "scope": "Denoising, deblurring, super-resolution, colorization, and quality enhancement for images and video frames, including learned and generative restoration methods."
+        },
+        {
+          "id": "computer-vision.detection-tools-and-evaluation",
+          "name": "Detection Utilities",
+          "scope": "Metrics, post-processing, inference slicing, box fusion, visualization, and workflow utilities for object-detection systems."
+        },
+        {
+          "id": "computer-vision.backbone-model-libraries",
+          "name": "Backbone Model Libraries",
+          "scope": "Vision-only collections of pretrained encoders, backbone architectures, model zoos, and reusable training implementations across image-perception tasks."
+        },
+        {
+          "id": "computer-vision.point-cloud-understanding",
+          "name": "3D Scene Understanding",
+          "scope": "Detection, segmentation, classification, representation learning, and scene completion over point clouds, meshes, voxels, and sparse 3D data."
+        },
+        {
+          "id": "computer-vision.vision-language-understanding",
+          "name": "Vision-Language Understanding",
+          "scope": "Models for visual question answering, image captioning, visual grounding, chart reasoning, and document reasoning over combined visual and language inputs."
+        },
+        {
+          "id": "computer-vision.image-processing-and-augmentation",
+          "name": "Image Processing",
+          "scope": "Image loading, pixel operations, filtering, morphology, color conversion, geometric transforms, and annotation-aware data augmentation."
+        },
+        {
+          "id": "computer-vision.3d-reconstruction-and-photogrammetry",
+          "name": "3D Reconstruction",
+          "scope": "Metric scene and surface reconstruction from captured imagery using structure-from-motion, multi-view stereo, neural surfaces, and photogrammetry."
+        },
+        {
+          "id": "computer-vision.image-stitching-and-panorama",
+          "name": "Panorama Stitching",
+          "scope": "Alignment, blending, mosaicking, and panorama construction from overlapping photographs."
+        },
+        {
+          "id": "computer-vision.image-matching-and-visual-localization",
+          "name": "Visual Correspondence and Localization",
+          "scope": "Local features, dense correspondence, image matching, geometric verification, image retrieval, and camera localization from reference imagery."
+        },
+        {
+          "id": "computer-vision.synthetic-data-and-simulation",
+          "name": "Synthetic Vision Data",
+          "scope": "Rendered scenes, virtual cameras, domain randomization, and synthetic image or video datasets for training and evaluating perception systems."
+        },
+        {
+          "id": "computer-vision.visual-anomaly-detection",
+          "name": "Visual Anomaly Detection",
+          "scope": "Detection and localization of visual defects or unusual regions in images and video, with associated benchmarks and deployment tools."
+        }
+      ],
+      "id": "computer-vision",
+      "name": "Computer Vision",
+      "scope": "Image and video perception and analysis, including classification, detection, segmentation, document vision, identity analysis, pose estimation, tracking, restoration, 3D understanding, visual localization, and video understanding."
+    },
+    {
+      "families": [
+        {
+          "id": "biomedical-imaging.medical-segmentation",
+          "name": "Medical Segmentation",
+          "scope": "Segmentation of organs, lesions, tumors, and anatomical structures across radiological and clinical imaging modalities."
+        },
+        {
+          "id": "biomedical-imaging.medical-image-classification",
+          "name": "Medical Image Classification",
+          "scope": "Disease classification, diagnostic scoring, and computer-aided diagnosis from radiological and clinical scans."
+        },
+        {
+          "id": "biomedical-imaging.medical-object-detection",
+          "name": "Medical Object Detection",
+          "scope": "Localization and detection of lesions, abnormalities, anatomical structures, and clinical findings in 2D or 3D medical images."
+        },
+        {
+          "id": "biomedical-imaging.medical-image-registration",
+          "name": "Medical Image Registration",
+          "scope": "Rigid, affine, deformable, multimodal, and learning-based alignment of clinical and biomedical images, including atlas construction and deformation modeling."
+        },
+        {
+          "id": "biomedical-imaging.medical-image-reconstruction",
+          "name": "Medical Image Reconstruction",
+          "scope": "Reconstruction of MRI, CT, ultrasound, and additional medical imaging modalities from incomplete or indirect measurements using optimization and learned inverse methods."
+        },
+        {
+          "id": "biomedical-imaging.digital-pathology",
+          "name": "Digital Pathology",
+          "scope": "Whole-slide image processing, tissue segmentation, weakly supervised slide classification, biomarker analysis, and computational pathology workflows."
+        },
+        {
+          "id": "biomedical-imaging.microscopy-image-analysis",
+          "name": "Microscopy Image Analysis",
+          "scope": "Detection, segmentation, tracking, and quantitative analysis of cells, nuclei, organelles, and biological structures in light, fluorescence, or electron microscopy."
+        },
+        {
+          "id": "biomedical-imaging.neuroimaging",
+          "name": "Neuroimaging",
+          "scope": "Analysis of EEG, MEG, fMRI, diffusion, and structural brain data, including decoding, connectivity, and source reconstruction."
+        },
+        {
+          "id": "biomedical-imaging.frameworks-and-preprocessing",
+          "name": "Medical Imaging Toolkits",
+          "scope": "Task-spanning medical-imaging libraries for data loading, transforms, augmentation, preprocessing, model development, evaluation, and reusable model components."
+        },
+        {
+          "id": "biomedical-imaging.clinical-ehr-predictive-modeling",
+          "name": "Clinical Prediction from Health Records",
+          "scope": "Predictive modeling over electronic health records, clinical codes, and claims for diagnosis, risk, readmission, treatment, and outcome prediction."
+        },
+        {
+          "id": "biomedical-imaging.physiological-signal-sensing",
+          "name": "Physiological Signal Analysis",
+          "scope": "Estimation and analysis of pulse, respiration, and related physiological signals from cameras, contact sensors, and wearable biosignals."
+        }
+      ],
+      "id": "biomedical-imaging",
+      "name": "Biomedical AI",
+      "scope": "Machine learning and computational methods for clinical imaging, digital pathology, microscopy, neuroimaging, health records, physiological signals, and biomedical data analysis."
+    },
+    {
+      "families": [
+        {
+          "id": "generative-media.image-generation",
+          "name": "Image Synthesis",
+          "scope": "Individual diffusion, autoregressive, flow, GAN, and VAE architectures for unconditional, text-conditioned, and image-conditioned image synthesis."
+        },
+        {
+          "id": "generative-media.image-generation-toolkits",
+          "name": "Image Synthesis Toolkits",
+          "scope": "Multi-architecture libraries, training frameworks, and model zoos for building and comparing image-synthesis systems."
+        },
+        {
+          "id": "generative-media.image-generation-applications",
+          "name": "Media Generation Applications",
+          "scope": "User-facing interfaces, plugins, node editors, and automated workflows for generating images or video from prompts and generative models."
+        },
+        {
+          "id": "generative-media.vae-libraries",
+          "name": "VAE Libraries",
+          "scope": "Reusable libraries that collect variational-autoencoder architectures, latent-variable objectives, and comparable training implementations across VAE variants."
+        },
+        {
+          "id": "generative-media.image-editing",
+          "name": "Image Editing",
+          "scope": "Methods and applications for modifying provided images through inpainting, outpainting, style transfer, instruction-based edits, identity customization, and reference conditioning."
+        },
+        {
+          "id": "generative-media.character-motion-editing",
+          "name": "Character Motion Editing",
+          "scope": "Editing, retargeting, stylizing, synthesizing, and manipulating 3D character animation and motion-capture sequences for media production."
+        },
+        {
+          "id": "generative-media.video-generation",
+          "name": "Video Synthesis",
+          "scope": "Models and toolkits for text-, image-, video-, or audio-conditioned video synthesis, interpolation, extension, and real-time generative video."
+        },
+        {
+          "id": "generative-media.3d-generation",
+          "name": "3D Asset Generation",
+          "scope": "Generative creation of meshes, textures, point-based assets, and explorable 3D scenes from text, images, or compact conditioning inputs."
+        },
+        {
+          "id": "generative-media.neural-rendering",
+          "name": "Neural Rendering",
+          "scope": "Neural radiance fields, Gaussian splatting, and learned scene representations for novel-view synthesis, editable view rendering, and real-time scene visualization."
+        },
+        {
+          "id": "generative-media.audio-and-music-generation",
+          "name": "Audio Generation",
+          "scope": "Generation of music, sound effects, singing voice, and non-speech audio from text, scores, audio, video, or structured controls."
+        },
+        {
+          "id": "generative-media.generative-components-and-workflows",
+          "name": "Generative Model Components",
+          "scope": "Reusable samplers, schedulers, conditioning modules, control components, latent codebooks, and vector-quantization modules for generative models."
+        },
+        {
+          "id": "generative-media.generative-model-training",
+          "name": "Generative Model Adaptation",
+          "scope": "Fine-tuning, parameter-efficient adaptation, control training, distillation, training losses, and data pipelines for image, video, 3D, or audio generative models."
+        },
+        {
+          "id": "generative-media.evaluation-metrics",
+          "name": "Generative Media Evaluation",
+          "scope": "Perceptual, distributional, and task-specific metrics and benchmark harnesses for generated images, video, 3D content, and audio."
+        }
+      ],
+      "id": "generative-media",
+      "name": "Generative Media",
+      "scope": "Generation, neural rendering, editing, adaptation, and evaluation of images, video, 3D assets, character motion, music, and non-speech audio."
+    },
+    {
+      "families": [
+        {
+          "id": "speech-audio.speech-recognition",
+          "name": "Speech Recognition",
+          "scope": "Automatic speech recognition, transcription, alignment, voice-activity detection, keyword spotting, and streaming speech-to-text."
+        },
+        {
+          "id": "speech-audio.speech-synthesis",
+          "name": "Speech Synthesis",
+          "scope": "Text-to-speech, expressive synthesis, voice cloning, acoustic modeling, neural vocoders, and spoken-voice generation."
+        },
+        {
+          "id": "speech-audio.audio-enhancement-and-separation",
+          "name": "Audio Enhancement",
+          "scope": "Denoising, dereverberation, source separation, target-speaker extraction, and quality restoration for speech and audio."
+        },
+        {
+          "id": "speech-audio.audio-classification-and-analysis",
+          "name": "Audio Understanding",
+          "scope": "Sound-event detection, speaker analysis, emotion recognition, acoustic embeddings, feature extraction, music information retrieval, and audio classification."
+        },
+        {
+          "id": "speech-audio.speech-toolkits",
+          "name": "Speech and Audio Toolkits",
+          "scope": "Integrated speech and audio suites that expose multiple capabilities such as recognition, synthesis, enhancement, separation, diarization, verification, and translation."
+        }
+      ],
+      "id": "speech-audio",
+      "name": "Speech and Audio",
+      "scope": "Speech and audio recognition, synthesis, enhancement, separation, acoustic understanding, and multi-capability speech processing."
+    },
+    {
+      "families": [
+        {
+          "id": "nlp.text-classification",
+          "name": "Text Classification",
+          "scope": "Document and sentence classification, sentiment analysis, topic labeling, intent classification, and supervised or weakly supervised text categorization."
+        },
+        {
+          "id": "nlp.text-embeddings",
+          "name": "Text Embeddings",
+          "scope": "Word, sentence, and document representations for semantic similarity, clustering, retrieval features, and reusable text encodings."
+        },
+        {
+          "id": "nlp.topic-modeling",
+          "name": "Topic Modeling",
+          "scope": "Discovery, representation, interpretation, and visualization of latent topics in document collections using probabilistic, embedding-based, or neural methods."
+        },
+        {
+          "id": "nlp.toolkit-suites",
+          "name": "NLP Toolkit Suites",
+          "scope": "Integrated libraries that provide tokenization, tagging, morphological analysis, syntactic parsing, named-entity recognition, classification, and core NLP tasks through shared pipelines."
+        },
+        {
+          "id": "nlp.information-extraction",
+          "name": "Information Extraction",
+          "scope": "Named-entity recognition, relation and event extraction, slot filling, entity linking, and dictionary-based keyword extraction from text."
+        },
+        {
+          "id": "nlp.machine-translation",
+          "name": "Machine Translation",
+          "scope": "Statistical and neural systems for translating text between languages, including multilingual and sequence-to-sequence translation toolkits."
+        },
+        {
+          "id": "nlp.chinese-and-multilingual",
+          "name": "Language-Specific NLP",
+          "scope": "Language-specific models, lexicons, tokenizers, transliteration utilities, and preprocessing resources for Chinese and additional individual languages."
+        },
+        {
+          "id": "nlp.dialogue-and-chatbots",
+          "name": "Dialogue Systems",
+          "scope": "Non-LLM conversational engines for dialogue management, intent handling, response selection, and retrieval-based or generative chat."
+        },
+        {
+          "id": "nlp.text-generation-and-language-modeling",
+          "name": "Text Generation",
+          "scope": "Character-, word-, and token-level language modeling and sequence generation with non-LLM or general sequence-to-sequence methods."
+        }
+      ],
+      "id": "nlp",
+      "name": "Natural Language Processing",
+      "scope": "Language understanding and text processing, including linguistic analysis, classification, semantic representation, information extraction, translation, dialogue, and text generation."
+    },
+    {
+      "families": [
+        {
+          "id": "llm-apps.multi-agent-orchestration",
+          "name": "Multi-Agent Orchestration",
+          "scope": "Runtimes for coordinating teams or swarms of agents through delegation, handoffs, shared state, task decomposition, and event-driven execution."
+        },
+        {
+          "id": "llm-apps.agent-construction-sdks",
+          "name": "Agent SDKs",
+          "scope": "Developer frameworks that implement individual agent loops, tool calling, action execution, state management, and reusable agent abstractions."
+        },
+        {
+          "id": "llm-apps.agent-platforms",
+          "name": "Agent Platforms",
+          "scope": "Integrated visual, low-code, self-hosted, or managed environments for building, administering, deploying, and governing agent applications."
+        },
+        {
+          "id": "llm-apps.llm-orchestration-frameworks",
+          "name": "LLM Workflow Frameworks",
+          "scope": "Graph and pipeline frameworks for composing model calls, prompts, tools, retrieval steps, memory, and structured processing into executable LLM workflows."
+        },
+        {
+          "id": "llm-apps.rag-frameworks",
+          "name": "RAG Frameworks",
+          "scope": "Developer libraries that combine retrieval with language-model generation for grounded answers, citation, document question answering, GraphRAG, and hybrid retrieval."
+        },
+        {
+          "id": "llm-apps.memory-and-context",
+          "name": "Memory and Context",
+          "scope": "Persistent agent memory, conversation state, context graphs, session continuity, retrieval of prior interactions, and context compression."
+        },
+        {
+          "id": "llm-apps.agent-tools-and-skills",
+          "name": "Agent Tools and Skills",
+          "scope": "Reusable tool integrations, skills, MCP servers, action primitives, registries, and protocol components that extend an external agent runtime."
+        },
+        {
+          "id": "llm-apps.document-intelligence",
+          "name": "Document Intelligence",
+          "scope": "Pipelines that parse, chunk, normalize, and extract structured content from documents into machine-consumable text, Markdown, JSON, or schemas."
+        },
+        {
+          "id": "llm-apps.guardrails-and-safety",
+          "name": "LLM Safety Guardrails",
+          "scope": "Runtime controls for content moderation, policy enforcement, jailbreak resistance, hallucination mitigation, fact checking, and safe LLM behavior."
+        },
+        {
+          "id": "llm-apps.chat-and-knowledge-applications",
+          "name": "Chat and Knowledge Applications",
+          "scope": "Ready-to-use chat, document-question-answering, knowledge-base, and retrieval-backed research applications for end users."
+        },
+        {
+          "id": "llm-apps.autonomous-agent-applications",
+          "name": "Autonomous Agent Applications",
+          "scope": "Deployable end-user agents that independently execute open-ended research, computer-use, coding, data-analysis, or domain workflows."
+        },
+        {
+          "id": "llm-apps.code-and-program-synthesis",
+          "name": "Code Generation",
+          "scope": "Language and multimodal models that generate, reconstruct, translate, or synthesize source code, markup, programs, and executable representations."
+        },
+        {
+          "id": "llm-apps.structured-output-and-constrained-decoding",
+          "name": "Constrained Generation",
+          "scope": "Schema-, grammar-, type-, and regular-expression-constrained generation with validation of structured model responses."
+        },
+        {
+          "id": "llm-apps.reasoning-and-prompting-methods",
+          "name": "Prompting and Reasoning Methods",
+          "scope": "Inference-time prompting, prompt optimization, self-consistency, search, decomposition, and planning methods for improving model reasoning."
+        },
+        {
+          "id": "llm-apps.observability-and-tracing",
+          "name": "LLM Observability",
+          "scope": "Runtime tracing, telemetry, token and cost monitoring, OpenTelemetry instrumentation, and production diagnostics for LLM applications."
+        },
+        {
+          "id": "llm-apps.llm-application-evaluation",
+          "name": "LLM Application Evaluation",
+          "scope": "Offline testing of LLM applications through scenarios, regression suites, red teaming, model judges, groundedness metrics, and RAG or prompt comparisons."
+        }
+      ],
+      "id": "llm-apps",
+      "name": "LLM Applications",
+      "scope": "Developer frameworks, runtime components, and end-user applications built around large language models, including agents, retrieval-augmented generation, memory, document pipelines, safety controls, and evaluation."
+    },
+    {
+      "families": [
+        {
+          "id": "llm-training.sft-and-peft-libraries",
+          "name": "LLM Fine-Tuning",
+          "scope": "Libraries for supervised and parameter-efficient fine-tuning of language and vision-language models, including full SFT, LoRA, and QLoRA."
+        },
+        {
+          "id": "llm-training.post-training-alignment",
+          "name": "Preference and Reinforcement Alignment",
+          "scope": "Methods and focused systems for preference optimization, reward modeling, RLHF, DPO, PPO, GRPO, and reinforcement learning with verifiable rewards."
+        },
+        {
+          "id": "llm-training.post-training-frameworks",
+          "name": "Multi-Stage LLM Training",
+          "scope": "Integrated systems that combine multiple stages such as pretraining, supervised fine-tuning, preference optimization, reinforcement learning, distillation, or quantization-aware training."
+        },
+        {
+          "id": "llm-training.pretraining",
+          "name": "Pretraining",
+          "scope": "Systems and recipes for training language or multimodal foundation models from scratch or through continued pretraining, including pretraining data pipelines."
+        },
+        {
+          "id": "llm-training.evaluation-benchmarks",
+          "name": "Model Evaluation Benchmarks",
+          "scope": "Model-centric benchmark suites, evaluation harnesses, datasets, and reproducible metrics for language and vision-language models."
+        },
+        {
+          "id": "llm-training.open-weight-model-releases",
+          "name": "Open-Weight Model Releases",
+          "scope": "Repositories centered on particular open model checkpoints, with model definitions, loading code, inference examples, and release-specific adaptation or deployment utilities."
+        }
+      ],
+      "id": "llm-training",
+      "name": "LLM Models, Training, and Alignment",
+      "scope": "Open model releases and systems for pretraining, fine-tuning, preference alignment, multimodal training, and model-centric evaluation of large language and vision-language models."
+    },
+    {
+      "families": [
+        {
+          "id": "search-retrieval.dense-and-sparse-retrieval",
+          "name": "First-Stage Retrieval",
+          "scope": "Lexical, dense, sparse, late-interaction, and hybrid retrieval models and systems that produce first-stage candidates for a query."
+        },
+        {
+          "id": "search-retrieval.reranking",
+          "name": "Reranking",
+          "scope": "Cross-encoder, listwise, and multi-stage models that rescore retrieved candidates to improve ranking quality."
+        },
+        {
+          "id": "search-retrieval.vector-search",
+          "name": "Vector Search",
+          "scope": "Vector indexes, approximate-nearest-neighbor engines, hybrid vector search, and clients for vector databases."
+        },
+        {
+          "id": "search-retrieval.retrieval-evaluation",
+          "name": "Retrieval Evaluation",
+          "scope": "Metrics, datasets, benchmark suites, and reproducible evaluation tools for information-retrieval and embedding systems."
+        }
+      ],
+      "id": "search-retrieval",
+      "name": "Information Retrieval",
+      "scope": "Information-retrieval models and infrastructure for first-stage retrieval, reranking, vector indexing, semantic search, and retrieval evaluation."
+    },
+    {
+      "families": [
+        {
+          "id": "mlops.experiment-tracking",
+          "name": "Experiment Tracking",
+          "scope": "Run tracking, metric and parameter logging, artifact storage, experiment comparison, and reproducibility."
+        },
+        {
+          "id": "mlops.pipeline-orchestration",
+          "name": "Pipeline Orchestration",
+          "scope": "DAG and workflow orchestration, scheduling, pipeline composition, and execution for ML and data pipelines, including batch scheduling semantics."
+        },
+        {
+          "id": "mlops.compute-orchestration-and-scheduling",
+          "name": "Compute Scheduling",
+          "scope": "Multi-cloud and heterogeneous GPU, TPU, and CPU compute orchestration, including job queuing, fleet scheduling, failover, autostop, and resource sharing for ML workloads."
+        },
+        {
+          "id": "mlops.dataset-management-and-lineage",
+          "name": "Dataset Management",
+          "scope": "Versioned dataset management, dataset lineage, typed dataset versioning, and dataset transformation, cataloging, or file-pointer management for ML pipelines."
+        },
+        {
+          "id": "mlops.data-validation",
+          "name": "Data Validation",
+          "scope": "Schema checks, dataset-quality tests, label-error diagnosis, leakage detection, and validation suites for training and evaluation data."
+        },
+        {
+          "id": "mlops.model-monitoring",
+          "name": "Model Monitoring",
+          "scope": "Production monitoring of predictive performance, calibration, feature and prediction drift, data distribution shifts, and alerting for deployed machine-learning models."
+        },
+        {
+          "id": "mlops.automl",
+          "name": "AutoML",
+          "scope": "Automated model selection, hyperparameter optimization, neural architecture search, and low-code model building for non-LLM tasks."
+        },
+        {
+          "id": "mlops.feature-platforms",
+          "name": "Feature Platforms",
+          "scope": "Feature engineering APIs, feature stores, point-in-time correctness, and offline or online feature serving."
+        },
+        {
+          "id": "mlops.synthetic-data",
+          "name": "Structured Synthetic Data",
+          "scope": "Generation and evaluation of synthetic tabular, relational, and structured datasets for testing, modeling, privacy, and data sharing."
+        },
+        {
+          "id": "mlops.data-annotation-and-labeling",
+          "name": "Data Annotation",
+          "scope": "Interactive and model-assisted platforms for creating, reviewing, converting, and managing labels for text, image, video, audio, and 3D data."
+        },
+        {
+          "id": "mlops.weak-supervision-and-programmatic-labeling",
+          "name": "Programmatic Labeling",
+          "scope": "Labeling functions, noisy-label aggregation, programmatic training-set construction, and weak-supervision benchmarks."
+        },
+        {
+          "id": "mlops.model-hub-and-registry",
+          "name": "Model Hubs and Registries",
+          "scope": "Model discovery, versioning, caching, registry clients, and hub APIs for pretrained models and datasets."
+        },
+        {
+          "id": "mlops.active-learning",
+          "name": "Active Learning",
+          "scope": "Active-learning query strategies, uncertainty sampling, label-efficiency methods, and loops that select data for annotation."
+        },
+        {
+          "id": "mlops.project-scaffolding",
+          "name": "ML Project Scaffolding",
+          "scope": "Reproducible data-science and ML project templates, cookiecutter-style scaffolding, and standard directory or workflow generators."
+        },
+        {
+          "id": "mlops.ml-platform-suites",
+          "name": "ML Platform Suites",
+          "scope": "Integrated platforms that manage multiple stages of the ML lifecycle, such as data preparation, training, experiment management, deployment, and operational administration."
+        }
+      ],
+      "id": "mlops",
+      "name": "MLOps",
+      "scope": "Operational systems for developing and managing machine-learning workflows, data, experiments, features, labels, models, compute, monitoring, and integrated ML platforms."
+    },
+    {
+      "families": [
+        {
+          "id": "model-serving.inference-serving",
+          "name": "Inference Serving",
+          "scope": "Servers, APIs, gateways, and distributed execution engines that expose trained models with batching, streaming, scaling, routing, or multi-model operation."
+        },
+        {
+          "id": "model-serving.model-compilation",
+          "name": "Model Compilation",
+          "scope": "Compilers, intermediate representations, graph optimizers, exporters, converters, and model-to-code toolchains that produce deployable runtimes."
+        },
+        {
+          "id": "model-serving.quantization-and-compression",
+          "name": "Model Compression",
+          "scope": "Quantization, pruning, low-rank approximation, distillation, and memory-reduction techniques for smaller or faster model inference."
+        },
+        {
+          "id": "model-serving.edge-and-mobile",
+          "name": "Edge Deployment",
+          "scope": "Target-specific conversion, optimization, and execution for phones, browsers, microcontrollers, FPGAs, Jetson devices, and constrained hardware."
+        }
+      ],
+      "id": "model-serving",
+      "name": "Model Deployment and Optimization",
+      "scope": "Systems and techniques for deploying and optimizing trained models, including inference services, compilation, compression, interchange, and target-specific runtimes."
+    },
+    {
+      "families": [
+        {
+          "id": "training-infrastructure.training-loop-toolkits",
+          "name": "Training Loop Toolkits",
+          "scope": "Trainer orchestration utilities: high-level trainer APIs, callback hooks, metric logging, and lightweight boilerplate reducers for custom training loops."
+        },
+        {
+          "id": "training-infrastructure.tensor-and-autodiff",
+          "name": "Tensor Computation and Autodiff",
+          "scope": "Tensor operations, automatic differentiation, array transformations, sparse tensor primitives, composable optimizers, and gradient transformations used to build ML systems."
+        },
+        {
+          "id": "training-infrastructure.data-loading",
+          "name": "Training Data Pipelines",
+          "scope": "High-throughput loading, streaming, sharding, filtering, curation, caching, and preprocessing of training datasets."
+        },
+        {
+          "id": "training-infrastructure.deep-learning-frameworks",
+          "name": "Deep Learning Frameworks",
+          "scope": "Full-stack model-building and training frameworks that provide layers, optimizers, autograd, and high-level training APIs as integrated systems."
+        },
+        {
+          "id": "training-infrastructure.distributed-training-systems",
+          "name": "Distributed Training Systems",
+          "scope": "Multi-device and multi-node training systems for data, tensor, and pipeline parallelism, sharding, federated learning, decentralized learning, and large-model memory optimization."
+        },
+        {
+          "id": "training-infrastructure.model-component-libraries",
+          "name": "Neural Network Components",
+          "scope": "Reusable layers, attention modules, transformer blocks, architecture wrappers, and efficient kernels for constructing neural networks."
+        },
+        {
+          "id": "training-infrastructure.cross-domain-model-libraries",
+          "name": "Cross-Domain Model Libraries",
+          "scope": "Model collections and loading APIs spanning several modalities or task domains, with reusable reference implementations and pipelines."
+        },
+        {
+          "id": "training-infrastructure.transfer-learning-and-domain-adaptation",
+          "name": "Domain Adaptation and Transfer Learning",
+          "scope": "Methods and libraries for domain adaptation, transfer learning, semi-supervised transfer, and out-of-distribution generalization."
+        },
+        {
+          "id": "training-infrastructure.multi-task-learning-frameworks",
+          "name": "Multi-Task Learning",
+          "scope": "Frameworks for shared-representation learning, task balancing, gradient-based multi-task optimization, and comparable multi-task evaluation."
+        },
+        {
+          "id": "training-infrastructure.meta-learning-and-learned-optimizers",
+          "name": "Meta-Learning",
+          "scope": "Methods and libraries for learning to adapt across tasks, few-shot meta-learning, and learned optimization procedures."
+        },
+        {
+          "id": "training-infrastructure.model-architecture-inspection",
+          "name": "Model Inspection",
+          "scope": "Utilities for summarizing neural architectures, layer shapes, parameter counts, computation, and memory usage."
+        },
+        {
+          "id": "training-infrastructure.pedagogical-ml-implementations",
+          "name": "Pedagogical ML Implementations",
+          "scope": "Readable, runnable implementations of machine-learning algorithms and research papers designed for study, teaching, and reproduction."
+        }
+      ],
+      "id": "training-infrastructure",
+      "name": "Training Infrastructure",
+      "scope": "Frameworks, reusable components, data pipelines, and distributed systems for constructing, training, and inspecting machine-learning models."
+    },
+    {
+      "families": [
+        {
+          "id": "reinforcement-learning.rl-training",
+          "name": "RL Training Frameworks",
+          "scope": "Reusable reinforcement-learning trainers, runners, policy abstractions, replay systems, baselines, and experiment tools across multiple environments."
+        },
+        {
+          "id": "reinforcement-learning.rl-algorithms",
+          "name": "RL Algorithm Implementations",
+          "scope": "Focused, readable implementations of reinforcement-learning algorithms such as DQN, PPO, SAC, DDPG, and MuZero."
+        },
+        {
+          "id": "reinforcement-learning.rl-environments",
+          "name": "RL Environments",
+          "scope": "Standardized environment APIs, wrappers, and benchmark suites for games, control tasks, and cooperative or competitive decision problems."
+        },
+        {
+          "id": "reinforcement-learning.model-based-and-planning",
+          "name": "Model-Based RL and Planning",
+          "scope": "World models, learned dynamics, model-predictive control, tree search, and planning algorithms used for sequential decision making."
+        },
+        {
+          "id": "reinforcement-learning.multi-agent-rl",
+          "name": "Multi-Agent RL",
+          "scope": "Training methods, policy-learning algorithms, and evaluation tools specialized for cooperative or competitive multi-agent learning."
+        }
+      ],
+      "id": "reinforcement-learning",
+      "name": "Reinforcement Learning",
+      "scope": "Algorithms, training systems, planning methods, and benchmark environments for sequential decision making in single-agent and multi-agent settings."
+    },
+    {
+      "families": [
+        {
+          "id": "robotics.robot-simulation",
+          "name": "Robot Simulation",
+          "scope": "Physics simulators, robot assets, sensor models, environment composition, embodied benchmark suites, and sim-to-real tooling."
+        },
+        {
+          "id": "robotics.manipulation",
+          "name": "Manipulation",
+          "scope": "Grasping, pick-and-place, assembly, dexterous control, motion generation, and imitation policies for robotic manipulators."
+        },
+        {
+          "id": "robotics.locomotion-and-motion",
+          "name": "Robot Locomotion",
+          "scope": "Controllers and task-specific learning systems for legged or humanoid locomotion, whole-body motion, gait control, and movement imitation."
+        },
+        {
+          "id": "robotics.navigation",
+          "name": "Robot Navigation",
+          "scope": "Goal-directed mobile-robot navigation, obstacle avoidance, path following, and learned navigation policies using onboard perception and control."
+        },
+        {
+          "id": "robotics.robot-learning-frameworks",
+          "name": "Robot Learning Frameworks",
+          "scope": "Reusable systems for training robot policies across tasks or embodiments through imitation learning, reinforcement learning, world models, video prediction, or vision-language-action modeling."
+        },
+        {
+          "id": "robotics.slam-and-localization",
+          "name": "SLAM and Localization",
+          "scope": "Real-time visual or 3D SLAM, odometry, online mapping, localization, loop closure, and trajectory evaluation."
+        },
+        {
+          "id": "robotics.state-estimation-and-optimization",
+          "name": "State Estimation",
+          "scope": "Lie-group geometry, filtering, manifold optimization, sensor fusion, and differentiable estimation methods for robot state and control."
+        }
+      ],
+      "id": "robotics",
+      "name": "Robotics and Embodied AI",
+      "scope": "Simulation, learning, perception, manipulation, locomotion, navigation, localization, and state estimation for physical robots and embodied agents."
+    },
+    {
+      "families": [
+        {
+          "id": "autonomous-driving.perception",
+          "name": "Driving Perception",
+          "scope": "Autonomous-driving perception for object detection, lanes, drivable space, bird's-eye-view representations, occupancy, and online HD-map construction from vehicle sensors."
+        },
+        {
+          "id": "autonomous-driving.planning-and-control",
+          "name": "Motion Planning and Control",
+          "scope": "Driving policies, trajectory prediction and generation, motion planning, behavior planning, imitation learning, and vehicle control."
+        },
+        {
+          "id": "autonomous-driving.simulation-and-benchmarks",
+          "name": "Driving Simulation and Evaluation",
+          "scope": "Driving simulators, scenario systems, dataset toolkits, closed-loop evaluators, and benchmark suites for autonomous vehicles."
+        }
+      ],
+      "id": "autonomous-driving",
+      "name": "Autonomous Driving",
+      "scope": "Perception, prediction, planning, control, simulation, datasets, and evaluation for autonomous road vehicles."
+    },
+    {
+      "families": [
+        {
+          "id": "graph-learning.gnn-architectures",
+          "name": "GNN Frameworks",
+          "scope": "Frameworks and component libraries for message passing, graph attention, pooling, sparse graph computation, and node, edge, or graph prediction."
+        },
+        {
+          "id": "graph-learning.graph-tasks-and-benchmarks",
+          "name": "Graph Datasets and Benchmarks",
+          "scope": "Graph datasets, loaders, evaluation metrics, leaderboards, and reproducibility suites for node, link, and graph tasks."
+        },
+        {
+          "id": "graph-learning.knowledge-graphs",
+          "name": "Knowledge Graphs",
+          "scope": "Storage, construction, embedding, completion, reasoning, and querying over structured entities, relations, triples, and ontologies."
+        },
+        {
+          "id": "graph-learning.spatio-temporal-graphs",
+          "name": "Spatio-Temporal Graphs",
+          "scope": "Graph neural networks for dynamic and spatiotemporal relational data such as traffic, weather, mobility, and physical systems."
+        }
+      ],
+      "id": "graph-learning",
+      "name": "Graph Learning",
+      "scope": "Machine learning over graph and relational structures, including GNN frameworks, graph benchmarks, knowledge graphs, and spatiotemporal graph models."
+    },
+    {
+      "families": [
+        {
+          "id": "scientific-computing.protein-structure",
+          "name": "Protein Modeling",
+          "scope": "Protein and biomolecular-complex structure prediction, folding, inverse folding, sequence-to-structure modeling, and computational protein design."
+        },
+        {
+          "id": "scientific-computing.molecular-informatics",
+          "name": "Molecular Informatics",
+          "scope": "Molecular representations, property prediction, generative chemistry, docking, synthesis planning, cheminformatics, fingerprints, and substructure analysis for small molecules and drugs."
+        },
+        {
+          "id": "scientific-computing.materials-informatics",
+          "name": "Materials Informatics",
+          "scope": "Data structures, property prediction, atomistic learning, generative design, simulation preparation, and analysis for crystals, inorganic compounds, and engineered materials."
+        },
+        {
+          "id": "scientific-computing.molecular-simulation-and-dynamics",
+          "name": "Molecular Simulation",
+          "scope": "Molecular dynamics, force fields, enhanced sampling, free-energy calculation, and simulation engines for biomolecules, small molecules, and atomistic systems."
+        },
+        {
+          "id": "scientific-computing.genomics-and-bioinformatics",
+          "name": "Genomics and Bioinformatics",
+          "scope": "Genomic sequence analysis, variant calling, single-cell and spatial omics, differential expression, biological data structures, and bioinformatics workflows."
+        },
+        {
+          "id": "scientific-computing.physics-simulation",
+          "name": "Physics Simulation",
+          "scope": "Physics-informed learning, PDE solvers and surrogates, differentiable simulators, symbolic physical modeling, and computational-physics tools."
+        },
+        {
+          "id": "scientific-computing.weather-and-climate",
+          "name": "Weather and Climate Modeling",
+          "scope": "Earth-system, weather, and climate simulation or prediction, including learned forecast models, physical-model integration, data assimilation, and climate workflow frameworks."
+        },
+        {
+          "id": "scientific-computing.earth-observation",
+          "name": "Earth Observation",
+          "scope": "End-to-end machine-learning toolkits for satellite, aerial, and remote-sensing imagery, including geospatial datasets, tiling, training, inference, and domain-specific evaluation."
+        },
+        {
+          "id": "scientific-computing.energy-systems",
+          "name": "Energy System Optimization",
+          "scope": "Power-system simulation, economic dispatch, optimal power flow, capacity expansion, grid planning, and energy-network optimization."
+        },
+        {
+          "id": "scientific-computing.geophysics-and-seismology",
+          "name": "Geophysics and Seismology",
+          "scope": "Structural geological modeling, seismic waveform processing, seismological data access, and computational geophysics."
+        },
+        {
+          "id": "scientific-computing.quantum-computing",
+          "name": "Quantum Computing",
+          "scope": "Quantum circuits, simulators, execution frameworks, algorithms, hybrid quantum-classical learning, and quantum chemistry."
+        },
+        {
+          "id": "scientific-computing.mathematical-optimization",
+          "name": "Mathematical Optimization",
+          "scope": "Mathematical programming, solver interfaces, optimal transport, Bayesian optimization, symbolic regression, and single- or multi-objective metaheuristics."
+        },
+        {
+          "id": "scientific-computing.neural-simulation-and-spiking-networks",
+          "name": "Neural Simulation and Spiking Networks",
+          "scope": "Neural-dynamics simulators, spiking neural networks, neuromorphic computation, and training methods for event-driven neural systems."
+        },
+        {
+          "id": "scientific-computing.astronomy-and-astrophysics",
+          "name": "Astronomy and Astrophysics",
+          "scope": "Astronomy and solar-physics data access, coordinates, FITS processing, observational analysis, time-series analysis, and domain visualization."
+        },
+        {
+          "id": "scientific-computing.structure-visualization",
+          "name": "Biomolecular Visualization",
+          "scope": "Interactive 3D visualization and rendering of proteins, nucleic acids, molecular trajectories, and electron-microscopy density maps."
+        },
+        {
+          "id": "scientific-computing.agent-based-modeling",
+          "name": "Agent-Based Simulation",
+          "scope": "Frameworks for simulating interacting populations, social systems, spatial agents, schedules, and rule-based emergent behavior."
+        }
+      ],
+      "id": "scientific-computing",
+      "name": "Scientific Computing",
+      "scope": "Scientific software, simulation, optimization, and machine learning for proteins, molecules, materials, genomics, physics, Earth systems, energy, geoscience, quantum systems, neuroscience, astronomy, and population models."
+    },
+    {
+      "families": [
+        {
+          "id": "data-science.eda-and-profiling",
+          "name": "Data Profiling",
+          "scope": "Automated exploratory analysis, missing-data diagnosis, distribution summaries, relationship analysis, and report generation for understanding datasets."
+        },
+        {
+          "id": "data-science.visualization",
+          "name": "Data Visualization",
+          "scope": "Statistical plotting, interactive charts, dashboards, and visual diagnostics for data analysis and model evaluation."
+        },
+        {
+          "id": "data-science.tabular-modeling",
+          "name": "Tabular Modeling",
+          "scope": "Classical and neural classifiers and regressors for tabular or structured data, including gradient boosting and tabular deep learning."
+        },
+        {
+          "id": "data-science.feature-engineering",
+          "name": "Feature Engineering",
+          "scope": "Feature extraction, transformation, synthesis, selection, resampling, and structured-data preparation for predictive modeling."
+        },
+        {
+          "id": "data-science.scalable-dataframes",
+          "name": "Scalable Data Processing",
+          "scope": "Out-of-core, distributed, lazy, and parallel processing for dataframes, arrays, and analytical workloads."
+        },
+        {
+          "id": "data-science.recommender-systems",
+          "name": "Recommender Systems",
+          "scope": "Collaborative, content-based, sequential, ranking, CTR, and knowledge-aware recommendation with personalization and evaluation tools."
+        },
+        {
+          "id": "data-science.geospatial-data-processing",
+          "name": "Geospatial Computing",
+          "scope": "Spatial data I/O, coordinate systems, geometry, raster and vector processing, indexing, network analysis, GIS integration, and interactive mapping libraries."
+        },
+        {
+          "id": "data-science.statistical-modeling",
+          "name": "Statistical Inference",
+          "scope": "Classical estimation and inference for linear, generalized linear, mixed, survival, cross-sectional, and panel-data models."
+        },
+        {
+          "id": "data-science.data-access-and-etl",
+          "name": "Data Integration",
+          "scope": "Connectors and transformation libraries that acquire, parse, query, and prepare data from documents, object stores, databases, warehouses, and services."
+        },
+        {
+          "id": "data-science.dataset-catalogs",
+          "name": "Dataset Discovery",
+          "scope": "Searchable catalogs and registries that organize datasets by task, domain, language, license, size, provenance, and access location."
+        },
+        {
+          "id": "data-science.manifold-learning-and-dimensionality-reduction",
+          "name": "Dimensionality Reduction",
+          "scope": "Projection, manifold learning, neighbor-graph embedding, and dimensionality-reduction methods for exploration and visualization."
+        },
+        {
+          "id": "data-science.streaming-online-ml",
+          "name": "Online Machine Learning",
+          "scope": "Incremental learning libraries for continuously arriving data, including online classification, regression, clustering, drift handling, bandits, and forecasting."
+        }
+      ],
+      "id": "data-science",
+      "name": "Data Science",
+      "scope": "Data exploration, visualization, statistical and tabular modeling, feature preparation, scalable processing, recommendation, geospatial computing, data integration, and online learning."
+    },
+    {
+      "families": [
+        {
+          "id": "time-series.forecasting",
+          "name": "Forecasting",
+          "scope": "Statistical, probabilistic, machine-learning, and neural models for univariate or multivariate prediction of future temporal values."
+        },
+        {
+          "id": "time-series.anomaly-detection",
+          "name": "Anomaly Detection",
+          "scope": "Temporal anomaly and changepoint detection, matrix profiles, motif and discord discovery, drift analysis, and subsequence pattern mining."
+        },
+        {
+          "id": "time-series.classification",
+          "name": "Time-Series Classification",
+          "scope": "Supervised labeling of temporal sequences using distance-based, shapelet, statistical, kernel, and neural classification methods."
+        },
+        {
+          "id": "time-series.clustering",
+          "name": "Time-Series Clustering",
+          "scope": "Unsupervised grouping, prototype discovery, barycenter estimation, and similarity analysis for temporal sequences."
+        },
+        {
+          "id": "time-series.imputation-and-preprocessing",
+          "name": "Time-Series Imputation",
+          "scope": "Missing-value imputation, decomposition, normalization, transformation, and feature extraction for temporal data."
+        },
+        {
+          "id": "time-series.signal-processing-and-time-frequency",
+          "name": "Time-Frequency Analysis",
+          "scope": "Wavelets, spectral estimation, time-frequency transforms, and related signal-processing methods for temporal data."
+        },
+        {
+          "id": "time-series.frameworks-and-toolkits",
+          "name": "Time-Series Toolkits",
+          "scope": "Unified toolkits spanning several time-series tasks such as forecasting, classification, clustering, anomaly detection, imputation, and representation learning."
+        }
+      ],
+      "id": "time-series",
+      "name": "Time Series Analysis",
+      "scope": "Statistical, machine-learning, signal-processing, and hybrid methods for forecasting, anomaly detection, classification, clustering, imputation, and temporal representation."
+    },
+    {
+      "families": [
+        {
+          "id": "probabilistic-causal.bayesian-inference",
+          "name": "Bayesian Inference",
+          "scope": "Probabilistic programming, Bayesian model construction, Markov chain Monte Carlo, variational inference, and posterior diagnostics."
+        },
+        {
+          "id": "probabilistic-causal.graphical-models",
+          "name": "Graphical Models",
+          "scope": "Bayesian networks, Markov networks, hidden Markov models, structural equation models, and associated learning and inference."
+        },
+        {
+          "id": "probabilistic-causal.causal-discovery",
+          "name": "Causal Discovery",
+          "scope": "Learning causal graphs, directions, and structural relationships from observational or interventional data."
+        },
+        {
+          "id": "probabilistic-causal.causal-effect-estimation",
+          "name": "Causal Effect Estimation",
+          "scope": "Treatment and uplift effects, counterfactual outcomes, mediation, sensitivity analysis, and causal identification."
+        }
+      ],
+      "id": "probabilistic-causal",
+      "name": "Probabilistic and Causal Modeling",
+      "scope": "Probabilistic programming, Bayesian inference, graphical models, causal structure learning, and causal effect estimation."
+    },
+    {
+      "families": [
+        {
+          "id": "responsible-ai.explainability",
+          "name": "Explainability",
+          "scope": "Local and global model interpretation, feature attribution, saliency, concept analysis, and explanation visualization."
+        },
+        {
+          "id": "responsible-ai.fairness",
+          "name": "Fairness",
+          "scope": "Bias measurement, group and individual fairness metrics, mitigation algorithms, auditing, and fairness-aware model assessment."
+        },
+        {
+          "id": "responsible-ai.privacy-and-security",
+          "name": "Privacy-Preserving ML",
+          "scope": "Differential privacy, de-identification, privacy-preserving analytics, secure aggregation, confidential computation, and privacy protection for data and models."
+        },
+        {
+          "id": "responsible-ai.adversarial-robustness",
+          "name": "Adversarial Robustness",
+          "scope": "Adversarial attacks, defenses, poisoning resistance, security testing, and robustness benchmarks for machine-learning models."
+        }
+      ],
+      "id": "responsible-ai",
+      "name": "Responsible AI",
+      "scope": "Methods and tools for explainability, fairness, privacy, security, and adversarial robustness of machine-learning systems."
+    }
+  ],
+  "title": "Router Taxonomy Tree"
+}

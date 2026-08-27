@@ -1,0 +1,34 @@
+# Generative Media -> Image Editing
+
+Methods and applications for modifying provided images through inpainting, outpainting, style transfer, instruction-based edits, identity customization, and reference conditioning.
+
+Choose a repository below only when its description, package/repository identity, task surface, and runtime intent match the request. If several candidates overlap, prefer the one whose root skill directly covers the requested workflow; then inspect its internal navigation rather than loading all candidates.
+
+| Repo skill | Repository | Skill description |
+| --- | --- | --- |
+| [`krita-ai-diffusion`](../../../../repo-skills/krita-ai-diffusion/SKILL.md) | `Acly/krita-ai-diffusion` | Routes Krita AI Diffusion plugin tasks across inference workflows, ComfyUI and cloud resources, Qt workspaces, custom graphs, and Krita document image state. |
+| [`any-door`](../../../../repo-skills/any-door/SKILL.md) | `ali-vilab/AnyDoor` | Routes AnyDoor zero-shot object-level image customization workflows. |
+| [`repaint`](../../../../repo-skills/repaint/SKILL.md) | `andreas128/RePaint` | Routes RePaint inpainting, config, output-layout, and jump-schedule workflows. |
+| [`stable-diffusion-webui`](../../../../repo-skills/stable-diffusion-webui/SKILL.md) | `AUTOMATIC1111/stable-diffusion-webui` | Use and maintain AUTOMATIC1111 Stable Diffusion WebUI workflows, including launch/configuration, REST API automation, extensions, model assets, LoRA, textual inversion, training, extras, and postprocessing. |
+| [`infinite-you`](../../../../repo-skills/infinite-you/SKILL.md) | `bytedance/InfiniteYou` | Routes InfiniteYou-FLUX identity-preserving photo recrafting tasks across self-contained local inference, model/demo setup, and pipeline-internal debugging. |
+| [`dream-textures`](../../../../repo-skills/dream-textures/SKILL.md) | `carson-katri/dream-textures` | Use and troubleshoot the Dream Textures Blender add-on for Stable Diffusion image generation, texture projection, render passes, model setup, and backend APIs. |
+| [`neural-style-tf`](../../../../repo-skills/neural-style-tf/SKILL.md) | `cysmith/neural-style-tf` | Use the legacy TensorFlow neural-style-tf script for artistic image and video style transfer, command planning, runtime checks, and troubleshooting. |
+| [`keras-gan`](../../../../repo-skills/keras-gan/SKILL.md) | `eriklindernoren/Keras-GAN` | Use Keras-GAN legacy Keras/TensorFlow GAN scripts for image generation, image-to-image translation, inpainting, PixelDA, and SRGAN workflows with safe inspection and troubleshooting. |
+| [`img2img-turbo`](../../../../repo-skills/img2img-turbo/SKILL.md) | `GaParmar/img2img-turbo` | Route img2img-turbo paired and unpaired image-to-image translation, training, dataset validation, and CUDA troubleshooting. |
+| [`invokeai`](../../../../repo-skills/invokeai/SKILL.md) | `invoke-ai/InvokeAI` | Route InvokeAI server operations, node workflow authoring, workflow queue records, and model-management diagnostics for future coding agents. |
+| [`dreamomni2`](../../../../repo-skills/dreamomni2/SKILL.md) | `JIA-Lab-research/DreamOmni2` | Routes DreamOmni2 image generation, image editing, and Gradio demo workflows. |
+| [`edge-connect`](../../../../repo-skills/edge-connect/SKILL.md) | `knazeri/edge-connect` | Route EdgeConnect requests for image inpainting setup, data preparation, training, checkpoint-backed testing, and evaluation. |
+| [`sd-scripts`](../../../../repo-skills/sd-scripts/SKILL.md) | `kohya-ss/sd-scripts` | Use sd-scripts for Stable Diffusion and image-model training, dataset preparation, image generation, LoRA/model utilities, and troubleshooting across SD1/2, SDXL, SD3, FLUX, Lumina, HunyuanImage, and Anima workflows. |
+| [`gimp-ml`](../../../../repo-skills/gimp-ml/SKILL.md) | `kritiksoman/GIMP-ML` | Route GIMP-ML computer-vision plug-in, GIMP layer, local FastAPI image-generation, and legacy-host troubleshooting tasks with explicit model, runtime, credential, and verification boundaries. |
+| [`fast-style-transfer`](../../../../repo-skills/fast-style-transfer/SKILL.md) | `lengstrom/fast-style-transfer` | Guides TensorFlow Fast Style Transfer training, image stylization, and video stylization workflows from checkpoints, VGG/COCO assets, and script-oriented CLIs. |
+| [`photo2cartoon`](../../../../repo-skills/photo2cartoon/SKILL.md) | `minivision-ai/photo2cartoon` | Guide Photo2Cartoon portrait cartoonization workflows: assets, preprocessing, PyTorch or ONNX inference, dataset preparation, GAN training, model internals, and troubleshooting. |
+| [`pix2pix-hd`](../../../../repo-skills/pix2pix-hd/SKILL.md) | `NVIDIA/pix2pixHD` | Route pix2pixHD setup, training, inference, and feature-conditioned workflows. |
+| [`munit`](../../../../repo-skills/munit/SKILL.md) | `NVlabs/MUNIT` | Route NVlabs MUNIT legacy multimodal image-to-image translation setup, data, training, inference, evaluation, and model-internals tasks. |
+| [`opengvlab-draggan`](../../../../repo-skills/opengvlab-draggan/SKILL.md) | `OpenGVLab/DragGAN` | Routes DragGAN users to the browser demo and Python API workflows for point-based image editing, checkpoint loading, and CUDA troubleshooting. |
+| [`intern-gpt`](../../../../repo-skills/intern-gpt/SKILL.md) | `OpenGVLab/InternGPT` | Operate InternGPT/InternChat multimodal agent deployments, visual-dialogue tools, cross-modal generation, DragGAN, and video workflows. |
+| [`alae`](../../../../repo-skills/alae/SKILL.md) | `podgorskiy/ALAE` | Use the ALAE repository for Adversarial Latent Autoencoder data preparation, CUDA training, checkpoint-backed generation, latent editing, and legacy metrics. |
+| [`ic-edit`](../../../../repo-skills/ic-edit/SKILL.md) | `River-Zhang/ICEdit` | Route ICEdit image-editing, Gradio demo, and LoRA training workflows. |
+| [`contrastive-unpaired-translation`](../../../../repo-skills/contrastive-unpaired-translation/SKILL.md) | `taesungp/contrastive-unpaired-translation` | Routes CUT/FastCUT/SinCUT workflows, dataset preparation, and launcher presets for the contrastive-unpaired-translation repository. |
+| [`hunyuan-image-3-0`](../../../../repo-skills/hunyuan-image-3-0/SKILL.md) | `Tencent-Hunyuan/HunyuanImage-3.0` | Route HunyuanImage-3.0 local generation, prompt conditioning, package APIs, Gradio UI, and vLLM serving workflows. |
+| [`gpt-image-cli`](../../../../repo-skills/gpt-image-cli/SKILL.md) | `wuyoscar/GPT-Image2-Skill` | Use GPT-Image2-Skill and the gpt-image-cli package for OpenAI GPT Image 2 CLI/API workflows, prompt-gallery guidance, and repository maintenance. |
+| [`xingangpan-draggan`](../../../../repo-skills/xingangpan-draggan/SKILL.md) | `XingangPan/DragGAN` | Guides DragGAN and StyleGAN-Human workflows for interactive point-based GAN editing, pretrained StyleGAN generation, human-image manipulation, and SHHQ training setup. |

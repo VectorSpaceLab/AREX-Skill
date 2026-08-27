@@ -1,0 +1,14 @@
+# Troubleshooting
+
+| Symptom | Likely cause | Recovery |
+| --- | --- | --- |
+| Dataset file not found, or the columns do not match the run you expected | The selected dataset preset rewrote `data_path`, `target`, or tensor widths, or the CSV is not under the chosen data root | Recheck the `--data` family and the root / file pair, and route custom CSV schema work to [`../../custom-data-and-prediction/SKILL.md`](../../custom-data-and-prediction/SKILL.md). |
+| The run still uses CUDA after I tried to force CPU | `--use_gpu` is parsed as a bool, so `--use_gpu False` is not a safe switch, and the launcher may also reset visible devices | Hide CUDA before launch or use the smoke helper's CPU backend option. |
+| Multi-GPU seems ignored | GPU mode is off, `devices` does not list the visible ids, or the first listed id is not the one you meant to use | Turn GPU mode on, pass the intended visible ids, and remember the first id becomes the primary GPU. |
+| CUDA out of memory or the run is far too slow | Long horizons, large `batch_size`, wide `d_model`, more `n_heads`, `attn=full`, stacked encoders, or too many repeats | Reduce the sequence lengths first, then batch size and width, keep `prob` unless you need the baseline, and lower `itr` for smoke. |
+| Tensor size mismatch around Conv1d or circular padding | Torch version changes can alter the circular-padding behavior used by the token and convolution embeddings | Compare the runtime torch build with the repo's expected behavior; align the version or patch the padding logic if the mismatch is reproducible. |
+| `np.Inf` attribute error before training starts | NumPy 2.x removed the legacy alias used by the early-stopping helper | Use NumPy `<2` for this snapshot or patch the helper to use `np.inf`; rerun the tiny smoke before long jobs. |
+| Checkpoint or results folder is missing | The run did not reach a save point, the fingerprinted `setting` changed, or you looked in the wrong repeat folder | Reconstruct the exact `setting` string, then check `checkpoints/<setting>/checkpoint.pth` and `results/<setting>/`. Each `itr` adds a suffix, and `do_predict` adds `real_prediction.npy`. |
+| `--loss` or `--freq` seems ignored | `--loss` does not change the criterion in this code path; `freq` is normalized for the trainer's encoding path | Do not rely on `--loss` for a different objective, and use the custom-data sub-skill for nonstandard time handling. |
+| Metrics look unstable or inconsistent | MAPE / MSPE can blow up near zero, and scale mode may differ across runs | Compare MAE and MSE alongside MAPE / MSPE, and make sure the same scaling and `inverse` mode is used when you compare runs. |
+| I only want evaluation of an existing checkpoint | The shipped entry point does not expose a standalone eval-only branch | Use the normal train / test path for the same setting, or load the checkpoint before testing in a helper workflow. |

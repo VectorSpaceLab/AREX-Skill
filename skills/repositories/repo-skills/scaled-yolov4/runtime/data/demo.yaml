@@ -1,0 +1,4 @@
+train: demo/images/train
+val: demo/images/val
+nc: 1
+names: ['obj']

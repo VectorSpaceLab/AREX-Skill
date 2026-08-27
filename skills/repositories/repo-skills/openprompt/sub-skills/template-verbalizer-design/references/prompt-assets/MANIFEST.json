@@ -1,0 +1,397 @@
+{
+  "source": "OpenPrompt scripts/**/*.txt|json|jsonl",
+  "source_commit": "f6fb080ef755c37c01b7959e7560d007049510e8",
+  "asset_count": 78,
+  "assets": [
+    {
+      "path": "CoT/csqa.txt",
+      "bytes": 2152,
+      "sha256": "4a9a02adda6fd3684aa8c26032472f16599d8b3bc918d79326ebc67f99989ebd"
+    },
+    {
+      "path": "CondGen/webnlg_2017/manual_template.txt",
+      "bytes": 50,
+      "sha256": "b1d638cecf074dd10af0709ddb72434d5b74fea91b0942ba3688d9cd6ec8b252"
+    },
+    {
+      "path": "FewGLUE/BoolQ/manual_template.txt",
+      "bytes": 86,
+      "sha256": "ca7f5b25c55c63aa0b0471760b31398adabf44e1c48ef3a37d6d720da15ff92c"
+    },
+    {
+      "path": "FewGLUE/BoolQ/manual_verbalizer.txt",
+      "bytes": 7,
+      "sha256": "c0ad16096fbde1a1d8a06dc33088e1430035c91a772a6e275093bf9d98909dc9"
+    },
+    {
+      "path": "FewGLUE/BoolQ/ptuning_template.txt",
+      "bytes": 100,
+      "sha256": "984a47325d2f4b58dbc03aa43beaca99c04b329069e0d09e6cd4564a71e17000"
+    },
+    {
+      "path": "FewGLUE/BoolQ/soft_manual_template.txt",
+      "bytes": 104,
+      "sha256": "b451993705626cb658d22e520c5b236e5c8576dbe923bfd038036c8320498b46"
+    },
+    {
+      "path": "FewGLUE/CB/manual_template.txt",
+      "bytes": 76,
+      "sha256": "1d8a55ea3c3771275729e9fd71bd6c6d8155be56fa349a8b2d6dc7c983d65f5d"
+    },
+    {
+      "path": "FewGLUE/CB/manual_verbalizer.txt",
+      "bytes": 13,
+      "sha256": "e22a2d9a5c0cca95efbdfc8832ceec93668b1e5c9a8253ce19441be204a6decc"
+    },
+    {
+      "path": "FewGLUE/CB/ptuning_template.txt",
+      "bytes": 80,
+      "sha256": "338ec8cde8aee40b55db04c5cf3e99695d8106e05eef83c60b47d10852792fdb"
+    },
+    {
+      "path": "FewGLUE/RTE/manual_template.txt",
+      "bytes": 86,
+      "sha256": "ca7f5b25c55c63aa0b0471760b31398adabf44e1c48ef3a37d6d720da15ff92c"
+    },
+    {
+      "path": "FewGLUE/RTE/manual_verbalizer.txt",
+      "bytes": 7,
+      "sha256": "c0ad16096fbde1a1d8a06dc33088e1430035c91a772a6e275093bf9d98909dc9"
+    },
+    {
+      "path": "FewGLUE/RTE/ptuning_template.txt",
+      "bytes": 91,
+      "sha256": "c11ef67d3ca0efc244500033fa12f9f11c61e90697604b06b640307274d175be"
+    },
+    {
+      "path": "FewGLUE/RTE/soft_manual_template.txt",
+      "bytes": 104,
+      "sha256": "ef927d23b9d7b9d688fc776e164ad5867404d08396823cf4193bf11bd4b95ac6"
+    },
+    {
+      "path": "FewGLUE/WiC/manual_template.txt",
+      "bytes": 87,
+      "sha256": "a34f18d13cde1988a454c328bee1447c0d0bd8725e11c38682019666cda31f21"
+    },
+    {
+      "path": "FewGLUE/WiC/manual_verbalizer.txt",
+      "bytes": 7,
+      "sha256": "c0ad16096fbde1a1d8a06dc33088e1430035c91a772a6e275093bf9d98909dc9"
+    },
+    {
+      "path": "FewGLUE/WiC/ptuning_template.txt",
+      "bytes": 97,
+      "sha256": "6f39958e48e653384a2d0ea28555b2db02e9c82b3d532079bec4dc449342d346"
+    },
+    {
+      "path": "LMBFF/SNLI/initial_verbalizer.json",
+      "bytes": 61,
+      "sha256": "cddc5600b90ebddbf0bb72458c0c8077ca3e56735926dcd9d75234f1526962a5"
+    },
+    {
+      "path": "LMBFF/SNLI/manual_template.txt",
+      "bytes": 149,
+      "sha256": "f201e1e5cd76062e2d8dbbc92f1fc5b5f32ce408c24d2837e1bf0a84e6f896a6"
+    },
+    {
+      "path": "LMBFF/SNLI/template_for_auto_t.txt",
+      "bytes": 180,
+      "sha256": "bc4cebf3762535e23569765ee3f2195ffcc9efbcc59fd8386c62f9640a8b5088"
+    },
+    {
+      "path": "LMBFF/SST-2/manual_template.txt",
+      "bytes": 37,
+      "sha256": "02dfa941bb8f84625d69b4da517d8f27b9f1fd5d3214c0ded16936b15566f166"
+    },
+    {
+      "path": "LMBFF/SST-2/manual_verbalizer.txt",
+      "bytes": 14,
+      "sha256": "ad2eeec2c08f061eb03184a5332e5cbdf504027f57891ee8ba154442c2959326"
+    },
+    {
+      "path": "LMBFF/SST-2/template_for_auto_t.txt",
+      "bytes": 65,
+      "sha256": "4de7d00a57290232ce1c466d32106c5054549332af91bb6ea3b96f3f5fff53b2"
+    },
+    {
+      "path": "RelationClassification/ReTACRED/ptr_template.txt",
+      "bytes": 112,
+      "sha256": "f9c866b1af9b7b0b4b8a87fe3ec205e61015aa69e291b75457d8abc3568e7a65"
+    },
+    {
+      "path": "RelationClassification/ReTACRED/ptr_verbalizer.jsonl",
+      "bytes": 2970,
+      "sha256": "9d13eb14f8d09ee9a5467c22fc455bfd283400b9158509429c2edb529cc7ac69"
+    },
+    {
+      "path": "RelationClassification/SemEval/temp.txt",
+      "bytes": 984,
+      "sha256": "00ce1a670474baf516087eb0e0bef2f5daac643bce0691debbe5968742ad6f53"
+    },
+    {
+      "path": "RelationClassification/TACRED/ptr_template.txt",
+      "bytes": 112,
+      "sha256": "f9c866b1af9b7b0b4b8a87fe3ec205e61015aa69e291b75457d8abc3568e7a65"
+    },
+    {
+      "path": "RelationClassification/TACRED/ptr_verbalizer.jsonl",
+      "bytes": 3162,
+      "sha256": "02f52ca65507c79db240c7f1e258afdd6b3c0f2fe949b5f3dffab3e4f9a661df"
+    },
+    {
+      "path": "RelationClassification/TACREV/ptr_template.txt",
+      "bytes": 112,
+      "sha256": "f9c866b1af9b7b0b4b8a87fe3ec205e61015aa69e291b75457d8abc3568e7a65"
+    },
+    {
+      "path": "RelationClassification/TACREV/ptr_verbalizer.jsonl",
+      "bytes": 3162,
+      "sha256": "02f52ca65507c79db240c7f1e258afdd6b3c0f2fe949b5f3dffab3e4f9a661df"
+    },
+    {
+      "path": "SuperGLUE/BoolQ/generation_verbalizer.txt",
+      "bytes": 30,
+      "sha256": "bc95a16e132790079f8c2b764e006d20e21603a1575455899e487d1d2f5caed8"
+    },
+    {
+      "path": "SuperGLUE/BoolQ/manual_verbalizer.txt",
+      "bytes": 6,
+      "sha256": "8daa3c979ada0d18f00bb45d8edefd64f9f50d868f03c055266cba9ba2e90d26"
+    },
+    {
+      "path": "SuperGLUE/BoolQ/soft_template.txt",
+      "bytes": 493,
+      "sha256": "ef233a475aab595b663c3df68b20c88eadd798621bd5a75445e3e6a53719c84e"
+    },
+    {
+      "path": "SuperGLUE/CB/generation_verbalizer.txt",
+      "bytes": 68,
+      "sha256": "6d58ee0344094c7997820a1d8bdbf0e7e7e2dedd1ef48e0ae7feee3def61fd30"
+    },
+    {
+      "path": "SuperGLUE/CB/manual_verbalizer.txt",
+      "bytes": 12,
+      "sha256": "e922ec36a6b1cd1e6c78ab962af84aca7e9538c56ebf9c66b751eb9e2bee545a"
+    },
+    {
+      "path": "SuperGLUE/CB/soft_template.txt",
+      "bytes": 524,
+      "sha256": "207517dafe9b6f713b30f92deaababab6c1be9ab69845c43df00433ba6572874"
+    },
+    {
+      "path": "SuperGLUE/COPA/generation_verbalizer.txt",
+      "bytes": 41,
+      "sha256": "67761ec654ab574afe30625dab7c2d2744c35624dba7b89d3c8a1154e417e6c3"
+    },
+    {
+      "path": "SuperGLUE/COPA/manual_verbalizer.txt",
+      "bytes": 3,
+      "sha256": "23519a43c66b4c342f25b32e09797ec5f3fc0be388cd8243fb3449afbdce4013"
+    },
+    {
+      "path": "SuperGLUE/COPA/soft_template.txt",
+      "bytes": 268,
+      "sha256": "1d7a4b70a4c3110c78015f608aa2aa22df693cdfbe05724623a9216412d564e1"
+    },
+    {
+      "path": "SuperGLUE/MultiRC/generation_verbalizer.txt",
+      "bytes": 31,
+      "sha256": "97d84e7cce83c6e9b9f7e8352b15b985368bfeb2ebb0924edd3f5642fdd9f1c9"
+    },
+    {
+      "path": "SuperGLUE/MultiRC/manual_verbalizer.txt",
+      "bytes": 6,
+      "sha256": "8daa3c979ada0d18f00bb45d8edefd64f9f50d868f03c055266cba9ba2e90d26"
+    },
+    {
+      "path": "SuperGLUE/MultiRC/soft_template.txt",
+      "bytes": 537,
+      "sha256": "3c22d4dd620a75a1d9de997e295803fa8976afd0422b1e25ba9ee2496f979004"
+    },
+    {
+      "path": "SuperGLUE/RECORD/generation_verbalizer.txt",
+      "bytes": 19,
+      "sha256": "29ddd0bb6c2c80081a6f4aea15ad4a3d2732057b5c2630d4435bd32e7df607d4"
+    },
+    {
+      "path": "SuperGLUE/RECORD/soft_template.txt",
+      "bytes": 132,
+      "sha256": "6a039addca11a7109af394c013678b3e9801dd8cc771b07f01a3580551eb0dea"
+    },
+    {
+      "path": "SuperGLUE/RTE/generation_verbalizer.txt",
+      "bytes": 50,
+      "sha256": "063d3e5b5961af4cbbf66f4bdfe855e7714a05d13bf0a129b33b636b2eaf8739"
+    },
+    {
+      "path": "SuperGLUE/RTE/manual_verbalizer.txt",
+      "bytes": 6,
+      "sha256": "d1bc17d6f2effe97545e86e45222573cf80ee7ac58531c8830961a863d1bae3f"
+    },
+    {
+      "path": "SuperGLUE/RTE/soft_template.txt",
+      "bytes": 330,
+      "sha256": "709a4a9f8072efe1666b8b29f3845f89b9e12537246c1ecc2858d4ddbf153102"
+    },
+    {
+      "path": "SuperGLUE/WSC/generation_verbalizer.txt",
+      "bytes": 50,
+      "sha256": "f604cebbbf11b2b50edafc75dabd74ee9c491d739043fcc873df49072ac599d3"
+    },
+    {
+      "path": "SuperGLUE/WSC/manual_verbalizer.txt",
+      "bytes": 7,
+      "sha256": "c0ad16096fbde1a1d8a06dc33088e1430035c91a772a6e275093bf9d98909dc9"
+    },
+    {
+      "path": "SuperGLUE/WSC/soft_template.txt",
+      "bytes": 110,
+      "sha256": "c05cdf34a61b3dacb918d06b6411344b83097482af10d5b820b77343d5d6523a"
+    },
+    {
+      "path": "SuperGLUE/WiC/generation_verbalizer.txt",
+      "bytes": 32,
+      "sha256": "c9cf20ec0eedad1fb887a324384fb87dff14078896c059d58172590988873581"
+    },
+    {
+      "path": "SuperGLUE/WiC/manual_verbalizer.txt",
+      "bytes": 6,
+      "sha256": "8daa3c979ada0d18f00bb45d8edefd64f9f50d868f03c055266cba9ba2e90d26"
+    },
+    {
+      "path": "SuperGLUE/WiC/soft_template.txt",
+      "bytes": 466,
+      "sha256": "57aae11385b9abcad43d92bafe61cf1c38896943063fb661b371d85ed35217ba"
+    },
+    {
+      "path": "TextClassification/agnews/knowledgeable_verbalizer.txt",
+      "bytes": 13028,
+      "sha256": "fc512665e4d4ffb3523190870e267c045993b17be4319449e1c175cc262c2898"
+    },
+    {
+      "path": "TextClassification/agnews/manual_template.txt",
+      "bytes": 411,
+      "sha256": "9223b761bac9b2e4f880105fe95b4925af223b8fa629e6c934863cbae7b2e78a"
+    },
+    {
+      "path": "TextClassification/agnews/manual_verbalizer.txt",
+      "bytes": 37,
+      "sha256": "fc12675e3346ccd3703e0f61236e1b4e35cc16e2ddda3e198ac91b4094cd116c"
+    },
+    {
+      "path": "TextClassification/agnews/mixed_template.txt",
+      "bytes": 103,
+      "sha256": "0827004addcafde708a6447ba22aa5dd7238c1e81cd07ae9e3c31115df06f1dc"
+    },
+    {
+      "path": "TextClassification/agnews/multiwords_verbalizer.jsonl",
+      "bytes": 332,
+      "sha256": "353caf8196dcfe865040a994f93a98f9472c89e2cfc393b8dfe922a3c12b61f9"
+    },
+    {
+      "path": "TextClassification/agnews/ptuning_template.txt",
+      "bytes": 378,
+      "sha256": "f08f2dea4fe094aef4ee52c1d93e8889d8ec31c3285527167ef26f4cf51f7ee2"
+    },
+    {
+      "path": "TextClassification/agnews/soft_template.txt",
+      "bytes": 63,
+      "sha256": "96d52903e30aa5c4440ce99e2f483340dabfda81296aad85280a43d2a47b4d2f"
+    },
+    {
+      "path": "TextClassification/amazon/knowledgeable_verbalizer.txt",
+      "bytes": 4051,
+      "sha256": "5416ed728c5b7014647ce82888224d5d37154753e7b076757a3d94622da00464"
+    },
+    {
+      "path": "TextClassification/amazon/manual_template.txt",
+      "bytes": 203,
+      "sha256": "c18ff2cfcf976c236435043e1ccf3ba9e10ccbe88ea6502186eaa682e2825323"
+    },
+    {
+      "path": "TextClassification/amazon/manual_verbalizer.txt",
+      "bytes": 8,
+      "sha256": "08afc809e68a04675acf9d994aec4b0a58bbbce10aebaf9967ca39267f1de14a"
+    },
+    {
+      "path": "TextClassification/dbpedia/knowledgeable_verbalizer.txt",
+      "bytes": 62530,
+      "sha256": "ca3c9f0f4b921a422c60d4a7f37901ec90de955a7788a82f6f582ad99a7aa55e"
+    },
+    {
+      "path": "TextClassification/dbpedia/manual_template.txt",
+      "bytes": 508,
+      "sha256": "56b83fbb4503b442f504eaf24a2ccea01eef0f20aa4175a1a9252d25079bbc9d"
+    },
+    {
+      "path": "TextClassification/dbpedia/manual_verbalizer.txt",
+      "bytes": 106,
+      "sha256": "38cbe6fb8148baa901a0d94d762b4adf50d0e03a3e6bda78aeedaa36979a95de"
+    },
+    {
+      "path": "TextClassification/imdb/knowledgeable_verbalizer.txt",
+      "bytes": 4051,
+      "sha256": "5416ed728c5b7014647ce82888224d5d37154753e7b076757a3d94622da00464"
+    },
+    {
+      "path": "TextClassification/imdb/manual_template.txt",
+      "bytes": 209,
+      "sha256": "ce50ad6ba9241f80cff18c484dcb13e11ca95327d07b576885668728d7012e86"
+    },
+    {
+      "path": "TextClassification/imdb/manual_verbalizer.txt",
+      "bytes": 8,
+      "sha256": "08afc809e68a04675acf9d994aec4b0a58bbbce10aebaf9967ca39267f1de14a"
+    },
+    {
+      "path": "TextClassification/mnli/mixed_template.txt",
+      "bytes": 260,
+      "sha256": "a3b3e352110b2894f452cacad4b98497505e0d4b060ce9362398bd5aecb42a42"
+    },
+    {
+      "path": "TextClassification/mnli/multiwords_verbalizer.jsonl",
+      "bytes": 117,
+      "sha256": "b2a0b437d15584d1f0a86ce16e74f31c1b083cc62aa9f6fcb226499a8c211358"
+    },
+    {
+      "path": "TextClassification/yahoo_answers_topics/knowledgeable_verbalizer.json",
+      "bytes": 66198,
+      "sha256": "a0543ff0dfa431d52628e1ca0767baae41a4ca706e72e580424f79e8d619f2d5"
+    },
+    {
+      "path": "TextClassification/yahoo_answers_topics/manual_template.txt",
+      "bytes": 309,
+      "sha256": "35b7e4f7103bf3a6ab63df995d352add3cdb92a8723ba149a16b1a8091a10942"
+    },
+    {
+      "path": "TextClassification/yahoo_answers_topics/manual_verbalizer.json",
+      "bytes": 401,
+      "sha256": "f0269f383cfc70b973878e7e3f33219d6f9a2824aad1d34b15ae8d9478c704ff"
+    },
+    {
+      "path": "Typing/FewNERD/fewnerd_verbalizer.json",
+      "bytes": 2698,
+      "sha256": "c47bc21b5f0487795558224898f57360e25ed50791b2f1db92f067dca3e05bd6"
+    },
+    {
+      "path": "Typing/FewNERD/knowledeable_verbalizer.json",
+      "bytes": 25546,
+      "sha256": "eb6c0f37c96714093bf04307ac8c5009ecbe8f18eeefa6d2771ffcc7a9fe2784"
+    },
+    {
+      "path": "Typing/FewNERD/manual_template.txt",
+      "bytes": 195,
+      "sha256": "8ee894e49ff4d9e2c7f3bf576bcb3910acbf14f96ea7610adddcf969e3345c52"
+    },
+    {
+      "path": "Typing/FewNERD/mixed_template.txt",
+      "bytes": 79,
+      "sha256": "c5eb1d75f50b907b4ad0acb051724e82f3dabb7c4496a002dde4512709f5db16"
+    },
+    {
+      "path": "UltraChat/template.txt",
+      "bytes": 119,
+      "sha256": "7e37d15cea206193cec90312e4d8441e88ad2b94fbca0b4073649eaa2a7550eb"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "MaximeVandegar/Papers-in-100-Lines-of-Code",
+  "skill_id": "papers-in-100-lines-of-code",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "Generative Media",
+      "family": "Image Synthesis"
+    },
+    {
+      "area": "Generative Media",
+      "family": "Neural Rendering"
+    },
+    {
+      "area": "Training Infrastructure",
+      "family": "Pedagogical ML Implementations"
+    }
+  ]
+}

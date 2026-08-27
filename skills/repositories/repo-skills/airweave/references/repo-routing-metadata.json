@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "airweave-ai/airweave",
+  "skill_id": "airweave",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "LLM Applications",
+      "family": "Agent Tools and Skills"
+    },
+    {
+      "area": "Information Retrieval",
+      "family": "Vector Search"
+    },
+    {
+      "area": "Data Science",
+      "family": "Data Integration"
+    }
+  ]
+}

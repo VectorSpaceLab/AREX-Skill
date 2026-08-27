@@ -1,0 +1,36 @@
+# Repo provenance
+
+- Skill id: `chinese-llama-alpaca-2`
+- Generated skill root: `skills/disco/chinese-llama-alpaca-2/`
+- Source repository: `Chinese-LLaMA-Alpaca-2`
+- Git branch: `main`
+- Git commit: `838651efea75843f50ff0b989253fd96577b6507`
+- Exact tag at source commit: none
+- Working tree state at generation: dirty
+  - untracked: `skills/`
+  - generated caches present under several `scripts/**/__pycache__/` paths
+- Installable package version: n/a; this checkout is a script-and-assets repository rather than a single installable Python distribution
+- Primary evidence paths used for distillation:
+  - `README.md`
+  - `README_EN.md`
+  - `requirements.txt`
+  - `scripts/README.md`
+  - `examples/README.md`
+  - `prompts/README.md`
+  - `scripts/training/`
+  - `scripts/inference/`
+  - `scripts/openai_server_demo/`
+  - `scripts/ceval/`
+  - `scripts/cmmlu/`
+  - `scripts/longbench/`
+  - `scripts/llama-cpp/`
+  - `scripts/tokenizer/`
+  - `notebooks/gradio_web_demo.ipynb`
+- Excluded from runtime generation:
+  - `.git/`
+  - `.github/workflows/stale.yml`
+  - `pics/`
+  - source-repo wiki links and checkout-path assumptions
+  - source-only `scripts/privategpt/` and `scripts/langchain/` integrations, which are captured as reference notes rather than bundled runtime scripts
+- Refresh baseline:
+  - Rebuild this skill if the repo commit changes, the bundled scripts drift from the current training/inference/evaluation APIs, or tokenizer/prompt assets change.

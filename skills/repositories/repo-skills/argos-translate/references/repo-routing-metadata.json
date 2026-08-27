@@ -1,0 +1,13 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "argosopentech/argos-translate",
+  "skill_id": "argos-translate",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "Natural Language Processing",
+      "family": "Machine Translation"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+# Portable Presidio CLI config template.
+# Copy this file and edit the fields you need.
+# Use with: presidio -c sample_presidiocli.yaml path/to/files
+
+language: en
+
+# Omit this block to scan every supported entity for the chosen language.
+entities:
+  - PERSON
+  - EMAIL_ADDRESS
+  - CREDIT_CARD
+
+# Gitwildmatch patterns, one per line.
+ignore: |
+  .git
+  .pytest_cache
+  build/**
+  dist/**
+
+# Exact tokens that should not be flagged.
+allow:
+  - "example@example.com"
+  - "allowed token 1"
+
+# Findings are kept when score >= threshold.
+threshold: 0.8
+
+# Uncomment only if the locale exists on the host.
+# locale: en_US.UTF-8
+
+# Uncomment to start from a bundled template or custom base file.
+# extends: default

@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "rootDir": ".",
+    "paths": {
+      "@auto-ml-skills/disco": ["./packages/coding-agent/src/index.ts"]
+    }
+  },
+  "include": ["examples/**/*.ts", "packages/coding-agent/src/**/*.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}

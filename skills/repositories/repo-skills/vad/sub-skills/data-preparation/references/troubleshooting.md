@@ -1,0 +1,11 @@
+# Data-preparation troubleshooting
+
+| Symptom | Likely cause | Recovery |
+|---|---|---|
+| `FileNotFoundError` for `vad_nuscenes_infos_temporal_train.pkl` or `_val.pkl` | Conversion was not run, output directory differs from `data_root`, or a stock info filename was used | Run the bundled layout checker; set the config's `data_root` and `ann_file` together; generate the VAD temporal files rather than renaming stock PKLs. |
+| Converter cannot initialize `NuScenes` or reports missing tables/sensor files | `--root-path` points at the wrong directory, often one level above or below the directory containing `maps`, `samples`, `sweeps`, and the version metadata | Point `--root-path` at the nuScenes root and re-run the preflight. Do not create placeholder metadata. |
+| CAN-bus messages are absent or `NuScenesCanBus` fails | `--canbus` is not the parent containing `can_bus/`, the expansion was not unpacked, or permissions block reads | Check the directory with `--canbus-root`; use the expansion parent, not an arbitrary archive path. Server/test scenes may legitimately have no CAN-bus records, but training configs still require the fields expected by the dataset. |
+| Training imports an info file but fails on missing temporal/ego keys | A stock MMDetection3D annotation or incompatible converter version was used | Regenerate with the VAD converter at the matching framework version; inspect PKL keys before training and retain the temporal filename convention. |
+| Validation starts but map evaluation cannot find `nuscenes_map_anns_val.json` | Map annotation was not generated/provided or `map_ann_file` points to a different root | Place the map file under the configured data root or change `map_ann_file` consistently in val/test sections. |
+| Permission or disk-space errors | Output is not writable or conversion needs more space | Choose a writable output directory, check free space, and avoid partial PKLs. Validate file sizes before launching a long job. |
+| Converter CLI imports fail before help appears | The legacy MMDetection3D native extensions or compatible dependency set is missing | Treat this as an environment/import gate, not a data error. Use the documented dependency family and [root troubleshooting](../../../references/troubleshooting.md); do not bypass by claiming conversion succeeded. |

@@ -1,0 +1,18 @@
+# Utilities Troubleshooting
+
+| Symptom | Likely cause | Recovery |
+| --- | --- | --- |
+| Network timeout, 404, or SSL error from a sample loader | Every `orbit.utils.dataset` loader reads a remote CSV URL | Do not use the loader in offline smoke checks. Use `scripts/smoke_utilities.py` or a synthetic dataframe instead. |
+| `IllegalArgument: Invalid argument of freq.` from `make_seasonal_dummies` | `freq` is not one of the source-supported values | Use `weekday` or `month` for current smoke checks. Treat the weekly branch as version-sensitive on pandas 3.x. |
+| `AttributeError: 'DatetimeProperties' object has no attribute 'week'` | The `week` branch of `make_seasonal_dummies` uses `Series.dt.week`, which pandas 3.x removed | Avoid `freq="week"` in this runtime. If you need a weekly indicator, build one from `date.dt.isocalendar().week` outside the helper. |
+| `ValueError: Invalid frequency: M` | Older notebooks used the deprecated monthly alias `M` | Use `ME` for month-end date ranges in new smoke data. |
+| Knot dates look off by one index, or a knot list unexpectedly shrinks | `get_knot_idx(date_array=..., knot_dates=...)` filters out-of-range dates and then rounds date differences to the inferred frequency | Sort the datetime array, keep even gaps, and ensure knot dates lie on the same cadence as the observed series. Validate with `is_ordered_datetime` and `is_even_gap_datetime` first. |
+| `regenerate_base_df` does not recreate an entire missing series/date bucket | The helper only expands the unique keys and times that remain in the input frame | Keep a representative row for each key and each date, or build the full base panel with `expand_grid` first. |
+| `TypeError: Parameter grid is not a dict or a list` from `generate_param_args_list` | The grid is not a dict or list-of-dicts | Wrap the search space in a dictionary of lists or a list of such dictionaries. |
+| `IllegalArgument: Invalid input of eval_method. Argument not in ['backtest', 'bic']` | `grid_search_orbit` only supports the two documented evaluation modes | Use `backtest` for normal tuning or `bic` when you have a MAP-backed model. |
+| `IllegalArgument: Invalid input of criteria. Argument not in ['min', 'max']` | The tuning criterion is invalid | Use `min` or `max`. Note that `bic` forces `min` even if a different criterion is passed. |
+| `eval_method 'bic' only supports 'stan-map' estimator for now.` | The model is not a MAP-backed forecaster | Reserve `bic` for MAP workflows. Use `backtest` for other estimators. |
+| `ValueError: value_name (value) cannot match an element in the DataFrame columns.` from `wrap_plot_ts` | The dataframe already has a `value` column | Rename or drop that column before plotting, or call the helper on a dataframe copy without `value`. |
+| `KeyError: The following id_vars or value_vars are not present in the DataFrame` from `wrap_plot_ts` | The date column was not included in `var_list` before the helper subsetted the dataframe | Include the date column in `var_list` and pass a copy if you need to preserve the original frame. |
+| Synthetic outputs vary across repeated runs | `make_trend(method="arma")` does not seed the ARMA sampler, and `make_regression` has an unseeded relevance branch when `0 < relevance < 1` | For deterministic smoke data, use `make_trend(..., method="rw")`, `make_seasonality(...)`, and `make_regression(..., relevance=1.0, sparsity=0.0)`. |
+| EDA plots emit font warnings | Orbit style is active and the environment lacks the expected fonts | Pass `use_orbit_style=False` to the plotting helper and keep the matplotlib backend on `Agg` for smoke runs. |

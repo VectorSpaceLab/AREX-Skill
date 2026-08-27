@@ -1,35 +1,49 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SRC_DIR="$ROOT_DIR/src"
-CLI_PACKAGE_DIR="$SRC_DIR/packages/coding-agent"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PACKAGE_DIR="$REPO_ROOT/cli"
 
-if [[ ! -f "$SRC_DIR/package.json" ]]; then
-	echo "error: expected source workspace at $SRC_DIR" >&2
-	echo "run this script from a checkout that contains src/package.json" >&2
+if [[ ! -f "$PACKAGE_DIR/package.json" ]]; then
+	echo "error: expected DisCo package at $PACKAGE_DIR" >&2
 	exit 1
 fi
 
-if [[ ! -f "$CLI_PACKAGE_DIR/package.json" ]]; then
-	echo "error: expected CLI package at $CLI_PACKAGE_DIR" >&2
+if ! command -v node >/dev/null 2>&1 || ! command -v npm >/dev/null 2>&1; then
+	echo "error: Node.js and npm must be available on PATH" >&2
 	exit 1
 fi
 
-cd "$SRC_DIR"
+# Honor HTTP_PROXY/HTTPS_PROXY during dependency installation when supported by Node.
+export NODE_USE_ENV_PROXY="${NODE_USE_ENV_PROXY:-1}"
 
-echo "==> Removing local install and build artifacts"
-rm -rf node_modules packages/*/node_modules packages/*/dist
+echo "==> Installing DisCo source dependencies"
+npm --prefix "$PACKAGE_DIR" ci --include=dev --ignore-scripts
 
-echo "==> Installing workspace dependencies"
-npm install --ignore-scripts
+echo "==> Building DisCo from cli"
+npm --prefix "$PACKAGE_DIR" run build
 
-echo "==> Building TypeScript packages"
-npm run build
+if [[ ! -x "$PACKAGE_DIR/dist/cli.js" ]]; then
+	echo "error: build did not create executable $PACKAGE_DIR/dist/cli.js" >&2
+	exit 1
+fi
 
-echo "==> Linking disco CLI"
-cd "$CLI_PACKAGE_DIR"
-npm link
+echo "==> Linking disco globally"
+(
+	cd "$PACKAGE_DIR"
+	npm link --ignore-scripts
+)
+
+if ! command -v disco >/dev/null 2>&1; then
+	global_prefix="$(npm prefix --global)"
+	echo "error: npm linked DisCo, but disco is not on PATH" >&2
+	echo "error: add $global_prefix/bin to PATH and rerun this script" >&2
+	exit 1
+fi
+
+echo "==> Verifying linked CLI"
+disco --version
+disco --help >/dev/null
 
 echo "==> Done"
-echo "disco is linked globally. Try: disco --help"
+echo "disco is built from source and linked globally. Try: disco --help"

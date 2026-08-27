@@ -1,0 +1,79 @@
+{
+  "prior": {
+    "clip": {
+      "make": "openai",
+      "model": "ViT-L/14"
+    },
+    "net": {
+      "dim": 768,
+      "depth": 1,
+      "num_timesteps": 8,
+      "max_text_len": 77,
+      "num_time_embeds": 1,
+      "num_image_embeds": 1,
+      "num_text_embeds": 1,
+      "dim_head": 64,
+      "heads": 8,
+      "ff_mult": 4,
+      "norm_out": true,
+      "attn_dropout": 0.0,
+      "ff_dropout": 0.0,
+      "final_proj": true,
+      "normformer": false,
+      "rotary_emb": true
+    },
+    "image_embed_dim": 768,
+    "image_size": 224,
+    "image_channels": 3,
+    "timesteps": 8,
+    "sample_timesteps": 4,
+    "cond_drop_prob": 0.1,
+    "loss_type": "l2",
+    "predict_x_start": true,
+    "beta_schedule": "cosine",
+    "condition_on_text_encodings": true
+  },
+  "data": {
+    "image_url": "file:///ABSOLUTE/PATH/TO/embedding-reader/image-embeddings/",
+    "meta_url": "file:///ABSOLUTE/PATH/TO/embedding-reader/metadata/",
+    "splits": {
+      "train": 0.8,
+      "val": 0.1,
+      "test": 0.1
+    },
+    "batch_size": 1,
+    "num_data_points": 16,
+    "eval_every_seconds": 60
+  },
+  "train": {
+    "epochs": 1,
+    "lr": 1.1e-4,
+    "wd": 6.02e-2,
+    "max_grad_norm": 0.5,
+    "use_ema": true,
+    "ema_beta": 0.999,
+    "warmup_steps": null,
+    "amp": false,
+    "save_every_seconds": 300,
+    "eval_timesteps": [4, 8],
+    "best_validation_loss": 1000000000.0,
+    "current_epoch": 0,
+    "num_samples_seen": 0,
+    "random_seed": 0
+  },
+  "tracker": {
+    "data_path": "./runs/dalle2-prior-tracker",
+    "overwrite_data_path": true,
+    "log": {
+      "log_type": "console",
+      "verbose": true
+    },
+    "load": null,
+    "save": {
+      "save_to": "local",
+      "save_type": "checkpoint",
+      "save_latest_to": "./runs/dalle2-prior/latest.pth",
+      "save_best_to": "./runs/dalle2-prior/best.pth"
+    }
+  }
+}

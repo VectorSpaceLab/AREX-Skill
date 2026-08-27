@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "eriklindernoren/ML-From-Scratch",
+  "skill_id": "ml-from-scratch",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "Generative Media",
+      "family": "Image Synthesis"
+    },
+    {
+      "area": "Training Infrastructure",
+      "family": "Pedagogical ML Implementations"
+    },
+    {
+      "area": "Reinforcement Learning",
+      "family": "RL Algorithm Implementations"
+    }
+  ]
+}

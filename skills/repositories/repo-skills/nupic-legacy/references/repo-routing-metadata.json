@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "numenta/nupic-legacy",
+  "skill_id": "nupic-legacy",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "Data Science",
+      "family": "Online Machine Learning"
+    },
+    {
+      "area": "Time Series Analysis",
+      "family": "Forecasting"
+    },
+    {
+      "area": "Time Series Analysis",
+      "family": "Anomaly Detection"
+    }
+  ]
+}

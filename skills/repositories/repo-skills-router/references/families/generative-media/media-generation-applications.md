@@ -1,0 +1,32 @@
+# Generative Media -> Media Generation Applications
+
+User-facing interfaces, plugins, node editors, and automated workflows for generating images or video from prompts and generative models.
+
+Choose a repository below only when its description, package/repository identity, task surface, and runtime intent match the request. If several candidates overlap, prefer the one whose root skill directly covers the requested workflow; then inspect its internal navigation rather than loading all candidates.
+
+| Repo skill | Repository | Skill description |
+| --- | --- | --- |
+| [`krita-ai-diffusion`](../../../../repo-skills/krita-ai-diffusion/SKILL.md) | `Acly/krita-ai-diffusion` | Routes Krita AI Diffusion plugin tasks across inference workflows, ComfyUI and cloud resources, Qt workspaces, custom graphs, and Krita document image state. |
+| [`stable-diffusion-webui`](../../../../repo-skills/stable-diffusion-webui/SKILL.md) | `AUTOMATIC1111/stable-diffusion-webui` | Use and maintain AUTOMATIC1111 Stable Diffusion WebUI workflows, including launch/configuration, REST API automation, extensions, model assets, LoRA, textual inversion, training, extras, and postprocessing. |
+| [`infinite-you`](../../../../repo-skills/infinite-you/SKILL.md) | `bytedance/InfiniteYou` | Routes InfiniteYou-FLUX identity-preserving photo recrafting tasks across self-contained local inference, model/demo setup, and pipeline-internal debugging. |
+| [`dream-textures`](../../../../repo-skills/dream-textures/SKILL.md) | `carson-katri/dream-textures` | Use and troubleshoot the Dream Textures Blender add-on for Stable Diffusion image generation, texture projection, render passes, model setup, and backend APIs. |
+| [`comfy-ui`](../../../../repo-skills/comfy-ui/SKILL.md) | `comfyanonymous/ComfyUI` | Use ComfyUI as a modular AI content-creation engine: launch and automate the server, submit API workflows, validate graph JSON, author custom nodes, and configure model paths/backends. |
+| [`invokeai`](../../../../repo-skills/invokeai/SKILL.md) | `invoke-ai/InvokeAI` | Route InvokeAI server operations, node workflow authoring, workflow queue records, and model-management diagnostics for future coding agents. |
+| [`dreamomni2`](../../../../repo-skills/dreamomni2/SKILL.md) | `JIA-Lab-research/DreamOmni2` | Routes DreamOmni2 image generation, image editing, and Gradio demo workflows. |
+| [`discoart`](../../../../repo-skills/discoart/SKILL.md) | `jina-ai/discoart` | Use this repo skill for DiscoArt image generation, configuration/prompt scheduling, CLI, Jina serving, Docker runtime planning, and troubleshooting. |
+| [`i-gan`](../../../../repo-skills/i-gan/SKILL.md) | `junyanz/iGAN` | Operate the legacy iGAN repository for interactive GAN image generation, constrained synthesis, image projection, model artifacts, and DCGAN training workflows. |
+| [`comfyui-ltxvideo`](../../../../repo-skills/comfyui-ltxvideo/SKILL.md) | `Lightricks/ComfyUI-LTXVideo` | Operate ComfyUI-LTXVideo custom nodes for LTX-2 video, audio, IC-LoRA, prompt-conditioning, and advanced ComfyUI workflows. |
+| [`control-net`](../../../../repo-skills/control-net/SKILL.md) | `lllyasviel/ControlNet` | Route ControlNet 1.0 source-checkout tasks for annotators, Gradio inference apps, training datasets, and model/weight utilities. |
+| [`big-sleep`](../../../../repo-skills/big-sleep/SKILL.md) | `lucidrains/big-sleep` | Routes Big Sleep text-to-image workflows, CUDA setup checks, prompt controls, and Python API usage for the `dream` CLI and `Imagine` API. |
+| [`deep-daze`](../../../../repo-skills/deep-daze/SKILL.md) | `lucidrains/deep-daze` | Use deep-daze for CLIP-guided Siren image generation through the imagine CLI and Python APIs, with runtime inspection and troubleshooting. |
+| [`light-x2v`](../../../../repo-skills/light-x2v/SKILL.md) | `ModelTC/LightX2V` | Routes LightX2V generation, serving, disaggregation, and weight-preparation workflows. |
+| [`stable-diffusion-videos`](../../../../repo-skills/stable-diffusion-videos/SKILL.md) | `nateraw/stable-diffusion-videos` | Routes Stable Diffusion video, image, audio-synced interpolation, optional upsampling, and Gradio UI workflows for the stable_diffusion_videos package. |
+| [`intern-gpt`](../../../../repo-skills/intern-gpt/SKILL.md) | `OpenGVLab/InternGPT` | Operate InternGPT/InternChat multimodal agent deployments, visual-dialogue tools, cross-modal generation, DragGAN, and video workflows. |
+| [`multidiffusion-upscaler-for-automatic1111`](../../../../repo-skills/multidiffusion-upscaler-for-automatic1111/SKILL.md) | `pkuliyi2015/multidiffusion-upscaler-for-automatic1111` | Use the Tiled Diffusion & VAE AUTOMATIC1111 WebUI extension for large-image txt2img/img2img, tiled VAE, regional prompts, noise inversion, ControlNet/StableSR interop, and DemoFusion workflows. |
+| [`comfyui-to-python-extension`](../../../../repo-skills/comfyui-to-python-extension/SKILL.md) | `pydn/ComfyUI-to-Python-Extension` | Route ComfyUI Save As Script and workflow export tasks into the CLI and Web UI sub-skills. |
+| [`magi-1`](../../../../repo-skills/magi-1/SKILL.md) | `SandAI-org/MAGI-1` | Operate MAGI-1 autoregressive video generation inference, ComfyUI nodes, configs, and prompt enhancement assets. |
+| [`zero123plus`](../../../../repo-skills/zero123plus/SKILL.md) | `SUDO-AI-3D/zero123plus` | Guides Zero123Plus generation, ControlNet variants, demo launch, and Cog deployment workflows for single-image-to-multiview inference. |
+| [`hunyuan-video`](../../../../repo-skills/hunyuan-video/SKILL.md) | `Tencent-Hunyuan/HunyuanVideo` | Use this operating skill for Tencent-Hunyuan/HunyuanVideo text-to-video setup, checkpoint layout, inference commands, Gradio launch, and CUDA/FP8/xDiT troubleshooting. |
+| [`turbo-diffusion`](../../../../repo-skills/turbo-diffusion/SKILL.md) | `thu-ml/TurboDiffusion` | Use TurboDiffusion for accelerated Wan video generation, interactive serving, checkpoint conversion, CUDA acceleration backends, and TurboT2AV extension planning. |
+| [`transformerlab-app`](../../../../repo-skills/transformerlab-app/SKILL.md) | `transformerlab/transformerlab-app` | Operate on the Transformer Lab application monorepo: React web UI, FastAPI backend, task/job compute providers, Typer CLI, and Python SDK workflows. |
+| [`gpt-image-cli`](../../../../repo-skills/gpt-image-cli/SKILL.md) | `wuyoscar/GPT-Image2-Skill` | Use GPT-Image2-Skill and the gpt-image-cli package for OpenAI GPT Image 2 CLI/API workflows, prompt-gallery guidance, and repository maintenance. |

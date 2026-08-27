@@ -1,0 +1,130 @@
+{
+  "excluded": "Large result checkpoints, images, generated caches, git metadata, and review/test artifacts are intentionally excluded.",
+  "files": [
+    {
+      "bytes": 1568,
+      "path": ".github/workflows/ci-testing.yaml",
+      "sha256": "bf5c44c2635da1aa357ae4f9f182615fe97d62e064a5d48445811d886a9248c8"
+    },
+    {
+      "bytes": 7312,
+      "path": "README.md",
+      "sha256": "5d1f962cb51f8287ab2eb20f0841a99861dce659e9b8ee1a7bf4d895b712cf72"
+    },
+    {
+      "bytes": 13660,
+      "path": "diagnose_model.py",
+      "sha256": "2185d8ca5d708eab10a56fa1b3e83d7f7c23d1f2ac11cbbdc92ccf75cdccfe2e"
+    },
+    {
+      "bytes": 173,
+      "path": "docs/README.md",
+      "sha256": "a87215731dbac916424aa8df2295553ca60396bb7c0a714c5e1865f0b2f6dd00"
+    },
+    {
+      "bytes": 2732,
+      "path": "games/abstract_game.py",
+      "sha256": "b33830eacf6b6e91646e6b72d9ba79abc2daaf58f61e18fae849ef7e380456bd"
+    },
+    {
+      "bytes": 9281,
+      "path": "games/atari.py",
+      "sha256": "90de182b38d23eaabff114fc5f90255b0fc94622899c78d19ab2870111d63e1b"
+    },
+    {
+      "bytes": 9242,
+      "path": "games/breakout.py",
+      "sha256": "8adf99cf6f51ea244e1bdcd3960c6dde034affcf5ae550047bcf3dfce302ab62"
+    },
+    {
+      "bytes": 9175,
+      "path": "games/cartpole.py",
+      "sha256": "63a5e5181c93e09268aed07601bbe39bcf0a8a688fc80ca5531dc26825a02358"
+    },
+    {
+      "bytes": 14244,
+      "path": "games/connect4.py",
+      "sha256": "874f7d9155e26c23442da0e4d821907f4097cd3a134132766efab3fd2346109b"
+    },
+    {
+      "bytes": 13433,
+      "path": "games/gomoku.py",
+      "sha256": "9392d9f7f3da0e399c9d97f4a7959adf73a14bc2b9fbca5749a65755c4d92379"
+    },
+    {
+      "bytes": 9532,
+      "path": "games/gridworld.py",
+      "sha256": "8d4a3dd8a22ff090cee4adc4db0730aea13ddc831cc1ad29187ca7c155ab7979"
+    },
+    {
+      "bytes": 25665,
+      "path": "games/lunarlander.py",
+      "sha256": "5ce3a640afef27922a969ead1254807595a1765abd1034b973fa76ad0896807c"
+    },
+    {
+      "bytes": 9933,
+      "path": "games/simple_grid.py",
+      "sha256": "ee4a4cf01cb98a6303533b996696205e0f5da228ec947831706029c766ab800f"
+    },
+    {
+      "bytes": 11728,
+      "path": "games/spiel.py",
+      "sha256": "07a0cda02e96b0118c3f0fff67df0d732071121199ff2a991bb10464e4573f19"
+    },
+    {
+      "bytes": 13847,
+      "path": "games/tictactoe.py",
+      "sha256": "4069f9e9a2d168ba7ea6e9fa05fba8b6e529f7e625d930d5a4ab77398ff1835c"
+    },
+    {
+      "bytes": 12031,
+      "path": "games/twentyone.py",
+      "sha256": "4355c5326fae818be0873d5327792fc1b992c87def041f20e7e162d188886502"
+    },
+    {
+      "bytes": 22899,
+      "path": "models.py",
+      "sha256": "649188948d72b9b0a83016cc3048992cfd614482a53f0737619e0bfbaed2d0d4"
+    },
+    {
+      "bytes": 26493,
+      "path": "muzero.py",
+      "sha256": "aaaee5adb66eb69562c3cf3267695af0f22ae12502b9f1a9f21feabc7a98223f"
+    },
+    {
+      "bytes": 14754,
+      "path": "replay_buffer.py",
+      "sha256": "0f5d297e3f23f8d1c93961c565f4bced2ae68ebf22e605f9fb4c7ae729db2e24"
+    },
+    {
+      "bytes": 4432,
+      "path": "requirements.lock",
+      "sha256": "b48f0a8b345291a07311e2148a3b6c783caa600a94797f4f1387b908fac7d430"
+    },
+    {
+      "bytes": 67,
+      "path": "requirements.txt",
+      "sha256": "1231b058c160d1c0cf9ccae4f84e672acc10d3dd07e57490970e39ddba03a769"
+    },
+    {
+      "bytes": 21137,
+      "path": "self_play.py",
+      "sha256": "7b8779c94cba140ebcbc9101f1ad45ae9249842f0d540e43153c42abd6750c3b"
+    },
+    {
+      "bytes": 1124,
+      "path": "shared_storage.py",
+      "sha256": "423ac4277a18f9d7be97e57529edc24a62ea66270380dffc62f2d4706455a4e7"
+    },
+    {
+      "bytes": 11315,
+      "path": "trainer.py",
+      "sha256": "df7836c663d87fd84c2c19c166bc5e8a1edef171bc716d6101355d4dc110f9ba"
+    }
+  ],
+  "generated_at_utc": "2026-08-19T05:30:57Z",
+  "purpose": "Self-contained source snapshot used by the generated muzero-general skill helpers and entry points when --repo-root is omitted.",
+  "schema": "disco.repo-skill.bundled-source.v1",
+  "source_commit": "0825bd544fc172a2e2dcc96d43711123222c4a2f",
+  "source_repo": "muzero-general"
+}

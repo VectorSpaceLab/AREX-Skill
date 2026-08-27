@@ -1,0 +1,116 @@
+# Self-contained local Argilla Compose template for deliberate user-run deployments.
+# Safe default: every service is behind the `local-argilla` profile, so a future
+# agent can validate with `docker compose -f docker-compose.argilla.local.yaml config`
+# without starting containers. To start intentionally after reviewing credentials:
+#   docker compose --profile local-argilla -f docker-compose.argilla.local.yaml up -d
+# Replace all sample credentials before shared or production use.
+
+x-common-variables: &common-variables
+  ARGILLA_HOME_PATH: /var/lib/argilla
+  ARGILLA_SEARCH_ENGINE: elasticsearch
+  ARGILLA_ELASTICSEARCH: http://elasticsearch:9200
+  ARGILLA_DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgres:5432/argilla
+  ARGILLA_REDIS_URL: redis://redis:6379/0
+  ARGILLA_AUTH_SECRET_KEY: replace-this-local-only-secret
+  UVICORN_APP: argilla_server:app
+  # If serving under a proxy prefix, set for both server and worker context.
+  # ARGILLA_BASE_URL: /argilla
+  # Restrict CORS for shared deployments; JSON-list syntax is accepted by pydantic settings.
+  # ARGILLA_CORS_ORIGINS: '["https://argilla.example.org"]'
+
+services:
+  argilla:
+    profiles: ["local-argilla"]
+    image: argilla/argilla-server:latest
+    restart: unless-stopped
+    ports:
+      - "6900:6900"
+    environment:
+      <<: *common-variables
+      # Local sample credentials only; replace before exposing the service.
+      USERNAME: argilla
+      PASSWORD: argilla-local-password
+      API_KEY: argilla.local.apikey
+      WORKSPACE: default
+      # Set to 1 for exactly one intentional startup when rebuilding search indexes.
+      REINDEX_DATASETS: "0"
+      # Telemetry opt-out examples. Keep one or both set to "1" for offline/privacy-sensitive runs.
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      HF_HUB_OFFLINE: "0"
+      # Advertised docs hardening toggle; confirm the deployed image honors it before relying on it.
+      # ARGILLA_DOCS_ENABLED: "false"
+    volumes:
+      - argilladata:/var/lib/argilla
+    depends_on:
+      - postgres
+      - elasticsearch
+      - redis
+    networks:
+      - argilla
+
+  worker:
+    profiles: ["local-argilla"]
+    image: argilla/argilla-server:latest
+    restart: unless-stopped
+    environment:
+      <<: *common-variables
+      BACKGROUND_NUM_WORKERS: "2"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      HF_HUB_OFFLINE: "0"
+    command: sh -c 'python -m argilla_server worker --num-workers $${BACKGROUND_NUM_WORKERS}'
+    depends_on:
+      - postgres
+      - elasticsearch
+      - redis
+    networks:
+      - argilla
+
+  postgres:
+    profiles: ["local-argilla"]
+    image: postgres:14
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: argilla
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+    networks:
+      - argilla
+
+  elasticsearch:
+    profiles: ["local-argilla"]
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.0
+    restart: unless-stopped
+    environment:
+      ES_JAVA_OPTS: -Xms512m -Xmx512m -XX:UseSVE=0
+      CLI_JAVA_OPTS: -XX:UseSVE=0
+      node.name: elasticsearch
+      cluster.name: es-argilla-local
+      discovery.type: single-node
+      cluster.routing.allocation.disk.threshold_enabled: "false"
+      xpack.security.enabled: "false"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elasticdata:/usr/share/elasticsearch/data/
+    networks:
+      - argilla
+
+  redis:
+    profiles: ["local-argilla"]
+    image: redis:7
+    restart: unless-stopped
+    networks:
+      - argilla
+
+networks:
+  argilla:
+    driver: bridge
+
+volumes:
+  argilladata:
+  elasticdata:
+  postgresdata:

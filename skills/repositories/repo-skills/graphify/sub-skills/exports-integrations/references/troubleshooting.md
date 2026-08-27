@@ -1,0 +1,37 @@
+# Export and integration troubleshooting
+
+Use this table when an export, merge, database integration, or helper command fails. Keep local artifact generation separate from live pushes while debugging.
+
+| Symptom | Likely cause | Recovery |
+|---|---|---|
+| `error: graph not found: ... Run /graphify <path> first.` | `graphify-out/graph.json` is missing, command is running from the wrong directory, or a merged graph path was not passed. | Confirm `pwd` and `ls graphify-out/graph.json`; otherwise route to [graph-building](../../graph-building/SKILL.md). For non-default graphs, pass `--graph /path/to/graph.json`. |
+| `graphify export wiki` refuses because `.graphify_analysis.json` is missing or empty | Wiki generation needs community data and refuses to risk a lossy export. | Run `graphify cluster-only .` or rebuild/update through [graph-building](../../graph-building/SKILL.md), then retry. If using a custom graph path, keep analysis/labels sidecars beside it or pass labels explicitly. |
+| `graph.html` skipped or graph is too large | HTML visualization defaults to a 5000-node visualization cap; oversized files may fall back to community aggregation for `export html`, while API use can raise. | Use `graphify export html --node-limit 5000` for aggregated view, raise `GRAPHIFY_VIZ_NODE_LIMIT` only when the browser can handle it, or use `graphify tree`, `graphify export wiki`, `graphify export graphml`, or query workflows instead. |
+| `graphify tree --root ...` exits with `matched 0 of ... source files` | Explicit `--root` does not match stored repo-relative `source_file` paths. | Use a repo-relative root such as `src` rather than an absolute checkout path, or omit `--root` so Graphify computes the common root. |
+| `graphify export svg` fails with missing matplotlib | Optional `svg` extra is not installed. | Install only the needed extra, for example `uv tool install "graphifyy[svg]"`, or choose HTML/GraphML/Cypher if SVG is not required. |
+| GraphML export errors or leaves a `.tmp` sibling | Old package version or filesystem/write issue. Current Graphify coerces `None` to empty strings, JSON-serializes dict/list attrs, strips internal `_` markers, and writes atomically. | Retry in a writable directory and check package version. Remove only stale `.tmp` files after confirming the final `.graphml` did not update. |
+| Obsidian export skips expected notes in an existing vault | Graphify refuses to overwrite files it does not own according to `.graphify_obsidian_manifest.json`. | Export to a fresh directory, or review conflicting note filenames manually. Do not delete user notes or `.obsidian/` config. |
+| `cypher.txt` exists but Neo4j/FalkorDB is not updated | The command generated a local file only; no live push was requested. | This is the safe default. Ask whether the user wants to import the file manually or provide explicit service details for `--push`. |
+| Neo4j push says password required | `graphify export neo4j --push URI` requires a password. | Prefer `NEO4J_PASSWORD` over `--password`, then run `graphify export neo4j --push bolt://host:7687 --user neo4j`. Confirm the target DB before pushing. |
+| Neo4j push says driver not installed | Optional `neo4j` dependency is missing. | Install `graphifyy[neo4j]` or the `neo4j` Python driver in the active environment. Do not install broad extras unless requested. |
+| FalkorDB push says SDK not installed or service unreachable | Optional `falkordb` dependency or live service is missing. | Install `graphifyy[falkordb]` only when the user wants live push. Otherwise generate portable `cypher.txt`. For live push, confirm `falkordb://host:6379`, auth needs, and service health. |
+| User wants FalkorDB import but has only `cypher.txt` | FalkorDB uses OpenCypher but does not have the same bulk script import flow as Neo4j `cypher-shell`. | Prefer `graphify export falkordb --push falkordb://localhost:6379` after service confirmation; otherwise hand off the Cypher as a portable artifact and explain that import is service-specific. |
+| Secret appeared in shell command | `--password` puts the secret on argv and may leak through history/process listings. | Rotate the secret if needed. Prefer `NEO4J_PASSWORD`/`FALKORDB_PASSWORD` environment variables and redact logs. |
+| `merge-graphs` says a file is missing or graph exceeds a cap | Input path typo, stale graph location, or oversized/corrupt graph. | Validate each input with `python -m json.tool path/to/graph.json >/dev/null` and confirm size. Rebuild corrupt or missing per-repo graphs through [graph-building](../../graph-building/SKILL.md). |
+| Merged graph has unexpected collapsed nodes | Inputs came from same-named repo directories or older merge behavior. | Current `merge-graphs` widens colliding repo tags. Validate prefixed ids and `repo` attrs; if ambiguous, choose clearer output locations or persistent `global add --as TAG` labels. |
+| Merged graph direction looks wrong in downstream analysis | Older graph files may rely on `_src`/`_tgt` markers or may have been produced by a pre-fix writer. | Re-merge with current Graphify. Validate a known directional edge in the merged JSON before relying on `affected`/callflow. |
+| `merge-driver` exits non-zero during Git merge | Input is corrupt, too large, or merged node cap would be exceeded; the driver fails closed. | Treat as a real conflict. Inspect the three graph files, regenerate if needed, or accept a manual resolution after validating the graph. |
+| `graphify clone` rejects a URL | URL is not recognized as a GitHub owner/repo URL. | Use `https://github.com/<owner>/<repo>` or specify a normal Git clone outside Graphify. Use `--out DIR` for a custom destination. |
+| `graphify prs` errors about `gh` | GitHub CLI missing, unauthenticated, or network unavailable. | Run `gh auth login` if the user permits network/auth. Otherwise do not run PR commands; offer local `affected`/`god-nodes` analysis against an existing graph. |
+| `graphify prs --triage` cannot rank | No LLM backend is configured or allowed. | Set a supported backend through environment/config only with user approval, or run `graphify prs`/`--conflicts` without triage. |
+| `graphify affected` prints `No unique node match` | Query matches zero nodes or several ambiguous labels/source paths. | Ask for a more specific node label, source path, or exact node id. Use [query-navigation](../../query-navigation/SKILL.md) to locate candidates if needed. |
+| `graphify god-nodes` missing graph error | Wrong graph path. | Pass `--graph PATH`; if graph is missing, route to [graph-building](../../graph-building/SKILL.md). |
+
+## Safe debugging order
+
+1. Reproduce with the smallest local command that does not contact services.
+2. Check `graph.json` parseability and size before blaming the exporter.
+3. Regenerate missing analysis/labels sidecars when wiki/Obsidian/callflow needs community context.
+4. Prefer `cypher.txt` over live DB push until service details are explicit.
+5. After a merge, inspect node prefixes and repo tags before querying.
+6. If the failure is an extractor/source-format problem rather than an export problem, route to [extractor-troubleshooting](../../extractor-troubleshooting/SKILL.md).

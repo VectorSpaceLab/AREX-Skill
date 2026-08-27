@@ -1,0 +1,25 @@
+# Repo provenance
+
+- source_commit: `1b6c67601abffc1e9f248b291708aef0e43b55ae`
+- branch: `master`
+- exact_tag: none
+- dirty_state: dirty
+  - untracked: `skills/`
+- remote_url: `https://github.com/cleardusk/3DDFA_V2.git`
+- package_version: not declared in repository metadata
+- evidence_paths:
+  - `readme.md`
+  - `requirements.txt`
+  - `build.sh`
+  - `configs/`
+  - `FaceBoxes/`
+  - `Sim3DR/`
+  - `bfm/`
+  - `models/`
+  - `utils/`
+  - `demo.py`
+  - `demo_video.py`
+  - `demo_video_smooth.py`
+  - `demo_webcam_smooth.py`
+  - `latency.py`
+  - `speed_cpu.py`

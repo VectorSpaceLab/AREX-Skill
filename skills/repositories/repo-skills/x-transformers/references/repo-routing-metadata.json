@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "lucidrains/x-transformers",
+  "skill_id": "x-transformers",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "Computer Vision",
+      "family": "Image Classification"
+    },
+    {
+      "area": "Natural Language Processing",
+      "family": "Text Generation"
+    },
+    {
+      "area": "Training Infrastructure",
+      "family": "Neural Network Components"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "includedFields": [
+    {
+      "fieldName": "timestamp",
+      "fieldType": "datetime"
+    },
+    {
+      "fieldName": "value",
+      "fieldType": "float"
+    }
+  ],
+  "streamDef": {
+    "info": "minimal numeric prediction swarm",
+    "version": 1,
+    "streams": [
+      {
+        "info": "input.csv",
+        "source": "file://data/input.csv",
+        "columns": [
+          "*"
+        ],
+        "last_record": 200
+      }
+    ],
+    "aggregation": {
+      "hours": 1,
+      "microseconds": 0,
+      "seconds": 0,
+      "fields": [
+        [
+          "value",
+          "sum"
+        ],
+        [
+          "timestamp",
+          "first"
+        ]
+      ],
+      "weeks": 0,
+      "months": 0,
+      "minutes": 0,
+      "days": 0,
+      "milliseconds": 0,
+      "years": 0
+    }
+  },
+  "inferenceType": "MultiStep",
+  "inferenceArgs": {
+    "predictionSteps": [
+      1
+    ],
+    "predictedField": "value"
+  },
+  "iterationCount": 200,
+  "swarmSize": "small"
+}

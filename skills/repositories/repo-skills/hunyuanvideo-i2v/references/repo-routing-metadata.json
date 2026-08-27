@@ -1,0 +1,17 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "Tencent-Hunyuan/HunyuanVideo-I2V",
+  "skill_id": "hunyuanvideo-i2v",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "Generative Media",
+      "family": "Video Synthesis"
+    },
+    {
+      "area": "Generative Media",
+      "family": "Generative Model Adaptation"
+    }
+  ]
+}

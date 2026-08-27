@@ -1,0 +1,33 @@
+# Generative Media -> Generative Model Adaptation
+
+Fine-tuning, parameter-efficient adaptation, control training, distillation, training losses, and data pipelines for image, video, 3D, or audio generative models.
+
+Choose a repository below only when its description, package/repository identity, task surface, and runtime intent match the request. If several candidates overlap, prefer the one whose root skill directly covers the requested workflow; then inspect its internal navigation rather than loading all candidates.
+
+| Repo skill | Repository | Skill description |
+| --- | --- | --- |
+| [`custom-diffusion`](../../../../repo-skills/custom-diffusion/SKILL.md) | `adobe-research/custom-diffusion` | Route Custom Diffusion workflows for concept data prep, diffusers training and SDXL, sample generation, delta tools, and CustomConcept101 evaluation. |
+| [`biggan-pytorch`](../../../../repo-skills/biggan-pytorch/SKILL.md) | `ajbrock/BigGAN-PyTorch` | Guides CUDA-based BigGAN-PyTorch training, checkpoint sampling, dataset preparation, metric preparation, model customization, and optional TensorFlow Hub weight conversion. |
+| [`any-door`](../../../../repo-skills/any-door/SKILL.md) | `ali-vilab/AnyDoor` | Routes AnyDoor zero-shot object-level image customization workflows. |
+| [`vgen`](../../../../repo-skills/vgen/SKILL.md) | `ali-vilab/VGen` | Route VGen video-generation workflows for text-to-video, image-to-video, DreamVideo customization, and InstructVideo reward fine-tuning. |
+| [`lumina-t2x`](../../../../repo-skills/lumina-t2x/SKILL.md) | `Alpha-VLLM/Lumina-T2X` | Routes Lumina-T2X tasks across text-to-image generation, image training, audio/music demos, visual anagrams, and ImageNet benchmark training. |
+| [`stable-diffusion-webui`](../../../../repo-skills/stable-diffusion-webui/SKILL.md) | `AUTOMATIC1111/stable-diffusion-webui` | Use and maintain AUTOMATIC1111 Stable Diffusion WebUI workflows, including launch/configuration, REST API automation, extensions, model assets, LoRA, textual inversion, training, extras, and postprocessing. |
+| [`simple-tuner`](../../../../repo-skills/simple-tuner/SKILL.md) | `bghira/SimpleTuner` | Use SimpleTuner for diffusion model training, dataloaders, model/adaptor tooling, WebUI/API operations, and repository maintenance. |
+| [`latent-sync`](../../../../repo-skills/latent-sync/SKILL.md) | `bytedance/LatentSync` | Route LatentSync video generation, raw-video preprocessing, training, and evaluation workflows to the right sub-skill. |
+| [`img2img-turbo`](../../../../repo-skills/img2img-turbo/SKILL.md) | `GaParmar/img2img-turbo` | Route img2img-turbo paired and unpaired image-to-image translation, training, dataset validation, and CUDA troubleshooting. |
+| [`fastvideo`](../../../../repo-skills/fastvideo/SKILL.md) | `hao-ai-lab/FastVideo` | Use this repo-specific skill when the current task touches FastVideo source, examples, tests, docs, scripts, or the Dreamverse app. It routes work to the right FastVideo subsystem, preserves the repo's two training stacks and per-directory AGENTS rules, and chooses bounded CUDA/test verification instead of running heavyweight model jobs by default. |
+| [`mmaudio`](../../../../repo-skills/mmaudio/SKILL.md) | `hkchengrex/MMAudio` | Route MMAudio video-to-audio, text-to-audio, data preparation, CUDA training, and evaluation workflows. |
+| [`diffusers`](../../../../repo-skills/diffusers/SKILL.md) | `huggingface/diffusers` | Use this skill for Hugging Face Diffusers tasks: pipeline inference, schedulers, adapters/loaders, training recipes, modular pipelines, conversion helpers, CLI checks, and repo maintenance. |
+| [`pyramid-flow`](../../../../repo-skills/pyramid-flow/SKILL.md) | `jy0205/Pyramid-Flow` | Use Pyramid-Flow for video generation, data precomputation, Causal Video VAE, distributed training, and reusable model-component inspection. |
+| [`sd-scripts`](../../../../repo-skills/sd-scripts/SKILL.md) | `kohya-ss/sd-scripts` | Use sd-scripts for Stable Diffusion and image-model training, dataset preparation, image generation, LoRA/model utilities, and troubleshooting across SD1/2, SDXL, SD3, FLUX, Lumina, HunyuanImage, and Anima workflows. |
+| [`fast-style-transfer`](../../../../repo-skills/fast-style-transfer/SKILL.md) | `lengstrom/fast-style-transfer` | Guides TensorFlow Fast Style Transfer training, image stylization, and video stylization workflows from checkpoints, VGG/COCO assets, and script-oriented CLIs. |
+| [`ltx-2`](../../../../repo-skills/ltx-2/SKILL.md) | `Lightricks/LTX-2` | Routes LTX-2 audio-video generation, training, data preparation, core APIs, and performance-backend tasks across the ltx-core, ltx-pipelines, ltx-trainer, and ltx-kernels packages. |
+| [`control-net`](../../../../repo-skills/control-net/SKILL.md) | `lllyasviel/ControlNet` | Route ControlNet 1.0 source-checkout tasks for annotators, Gradio inference apps, training datasets, and model/weight utilities. |
+| [`photo2cartoon`](../../../../repo-skills/photo2cartoon/SKILL.md) | `minivision-ai/photo2cartoon` | Guide Photo2Cartoon portrait cartoonization workflows: assets, preprocessing, PyTorch or ONNX inference, dataset preparation, GAN training, model internals, and troubleshooting. |
+| [`nunchaku`](../../../../repo-skills/nunchaku/SKILL.md) | `nunchaku-ai/nunchaku` | Route and operate the Nunchaku repo skill for CUDA-accelerated 4-bit Diffusers image-generation workflows, quantized transformers, LoRA/adapters, and performance controls. |
+| [`sana`](../../../../repo-skills/sana/SKILL.md) | `NVlabs/Sana` | Use and maintain Sana image, video, training, evaluation, and deployment workflows. |
+| [`moss-tts`](../../../../repo-skills/moss-tts/SKILL.md) | `OpenMOSS/MOSS-TTS` | Route MOSS-TTS family speech, voice-agent, sound-effect, llama.cpp, streaming, and fine-tuning workflows. |
+| [`helios`](../../../../repo-skills/helios/SKILL.md) | `PKU-YuanGroup/Helios` | Route Helios video-generation, data-preparation, and training workflows. |
+| [`ic-edit`](../../../../repo-skills/ic-edit/SKILL.md) | `River-Zhang/ICEdit` | Route ICEdit image-editing, Gradio demo, and LoRA training workflows. |
+| [`hunyuanvideo-i2v`](../../../../repo-skills/hunyuanvideo-i2v/SKILL.md) | `Tencent-Hunyuan/HunyuanVideo-I2V` | Guides HunyuanVideo-I2V image-to-video inference, LoRA training, and latent-extraction workflows, including checkpoint setup, CUDA/flash-attn requirements, and the safe bundled checks for this repository. |
+| [`turbo-diffusion`](../../../../repo-skills/turbo-diffusion/SKILL.md) | `thu-ml/TurboDiffusion` | Use TurboDiffusion for accelerated Wan video generation, interactive serving, checkpoint conversion, CUDA acceleration backends, and TurboT2AV extension planning. |

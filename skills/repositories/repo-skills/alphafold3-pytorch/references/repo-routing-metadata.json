@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "lucidrains/alphafold3-pytorch",
+  "skill_id": "alphafold3-pytorch",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "Training Infrastructure",
+      "family": "Training Loop Toolkits"
+    },
+    {
+      "area": "Training Infrastructure",
+      "family": "Training Data Pipelines"
+    },
+    {
+      "area": "Scientific Computing",
+      "family": "Protein Modeling"
+    }
+  ]
+}

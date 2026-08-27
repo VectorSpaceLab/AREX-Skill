@@ -1,0 +1,132 @@
+# Data formats and array axes
+
+[Back to the data-and-preprocessing skill](../SKILL.md) · Related: [loader contracts](data-loader-contracts.md), [preprocessing](preprocessing-workflows.md), [utilities](data-utilities.md), [troubleshooting](troubleshooting.md)
+
+This reference is a contract extracted from the checked-out README and the
+three supplied experiment families. It describes what the loaders do, not a
+universal medical-imaging standard. Preserve physical-space metadata outside
+arrays when resampling and document any deliberate axis conversion.
+
+## Manifest and file naming
+
+The usual config fields are `input_df_name='info_df.pickle'`, `pp_data_path`,
+`pp_test_data_path`, and an experiment-specific `pp_name`. The dataframe is
+loaded with `pandas.read_pickle` and is therefore a trusted local manifest, not
+a portable interchange format.
+
+| Family | Manifest fields used by loader | Image path | Segmentation path | Label meaning |
+|---|---|---|---|---|
+| toy | `pid`, `class_id` | `<pid>.npy` | same `<pid>.npy`, plane 1 | packed plane 0=image, plane 1=segmentation |
+| LIDC | `pid`, `class_target`, `fg_slices` | `<pid>_img.npy` | `<pid>_rois.npy` | instance ids; `class_target` is binarized malignancy (0/1) |
+| PET-CT | `pid`, `class_target`, `fg_slices` | `<pid>_img.npy` | `<pid>_rois.npy` | binary foreground; clinical class names are retained in preprocessing metadata |
+
+The toy source uses `class_id` from each dataframe row to create a one-element
+`class_target`. LIDC's `load_dataset` transforms each malignancy score to
+`1 if score >= 3 else 0`. PET-CT's training loader derives the patch target from
+whether the sampled segmentation is empty (`0` for foreground-bearing patches,
+`-1` for empty patches), while its patient iterator is inference-only and has no
+segmentation in the raw patient input. Do not assume those are interchangeable
+patient-level labels.
+
+## Source preprocessing shapes
+
+### Toy
+
+The toy `BatchGenerator` loads one `.npy` object as `all_data`, then takes
+`all_data[0]` for image and `all_data[1]` for segmentation. The intended data
+and segmentation are 2D arrays of the same `(x, y)` shape. It appends a data
+channel and a segmentation channel, then batching produces approximately:
+
+```text
+input file: all_data[0] -> image (x, y)
+            all_data[1] -> seg   (x, y)
+batch data: (B, 1, x, y)
+batch seg:  (B, 1, x, y)
+```
+
+Do not use the packed toy representation as a generic multi-channel medical
+format: split it into explicit image and segmentation arrays before reusing a
+loader.
+
+### LIDC
+
+`experiments/lidc_exp/preprocessing.py` reads SimpleITK CT/ROI volumes,
+resamples to `cf.target_spacing=(0.7, 0.7, 1.25)`, clips CT intensities to
+`[-1200, 600]`, and z-score normalizes. SimpleITK's array is saved as
+`(z, y, x)` for both image and ROI. The ROI is `uint8`, has background `0`, and
+assigns each surviving majority-voted lesion a new integer id (`rix`). The
+metadata pickle records `pid`, class-target vector, source spacing, and
+foreground slices; `aggregate_meta_info` collects these into the manifest.
+
+The loader converts arrays as follows:
+
+```text
+np.load(image): (z, y, x)
+transpose axes=(1, 2, 0): (y, x, z)
+2D sample:     (y, x) or (context_channels, y, x)
+3D sample:     (1, y, x, z)
+seg sample:    (1, y, x) or (1, y, x, z) after batch/channel insertion
+```
+
+The names `x` and `y` here mean network spatial axes after the source's
+transposition; do not use them to infer world left/right without direction and
+spacing metadata.
+
+### PET-CT
+
+`experiments/pet_ct_tnm_classification/preprocessing.py` resamples PET to the
+CT reference, crops z around detected anatomy, normalizes CT and PET separately,
+and saves a two-channel image plus a binary segmentation:
+
+```text
+saved image: (c=2, z, y, x)
+saved seg:   (z, y, x), uint8, 0/1
+loader data transpose axes=(0, 2, 3, 1): (c, y, x, z)
+```
+
+The patient iterator can also read raw `lsa_ct.nii.gz`, `lsa_pet.nii.gz`, and an
+NRRD segmentation for external test-time preprocessing. Those files are not
+bundled and must be considered private/external. The source code's patient
+preprocessing is evidence for shape and normalization only; do not invoke it
+as a portable validator.
+
+## Batch shape contract
+
+The common network-facing convention is channels-first:
+
+```text
+2D data: (batch, channels, x, y)
+3D data: (batch, channels, x, y, z)
+2D seg:  (batch, 1, x, y)
+3D seg:  (batch, 1, x, y, z)
+```
+
+The `PatientBatchIterator` may temporarily represent 2D inference as one batch
+entry per z-slice (`(z, channels, x, y)`) or as a 3D batch. A tiled patient batch
+adds `patch_crop_coords` in `[ymin, ymax, xmin, xmax, zmin, zmax]` order and
+retains the patient target/shape fields. Read the returned `original_img_shape`
+before mapping local boxes back to patient coordinates.
+
+## Metadata invariants
+
+- Every manifest `pid` must map to the exact image/ROI filenames generated by
+  that family; never silently fall back to a differently named array.
+- `class_target` is a list when it describes multiple lesion ids. In LIDC, its
+  order is the order of nonzero ROI ids assigned during preprocessing. A
+  length mismatch with the nonzero instance ids is an error for that pipeline.
+- `fg_slices` is a list of z indices in the saved array's source z convention;
+  validate its bounds before transposing or cropping. It is a sampling hint,
+  not a segmentation substitute.
+- `spacing` is physical metadata and may reflect the source or target grid.
+  Retain the preprocessing target spacing separately if exact physical
+  reconstruction matters.
+
+## Safe format checks
+
+Use the standalone validator with explicit image and segmentation paths. It
+accepts `.npy` and `.npz` without pickle support and can validate optional JSON
+metadata. It deliberately does not load pandas manifests because that would
+couple a portable check to the checkout and permit arbitrary pickle execution.
+For a toy packed array, first create a reviewed explicit image/segmentation pair
+(or validate it in a small caller-owned adapter); do not make the validator
+interpret arbitrary object arrays.

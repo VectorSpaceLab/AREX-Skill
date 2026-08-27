@@ -1,0 +1,37 @@
+# Otter MIMIC-IT training data YAML template.
+# Keep all four groups. Use {} for intentionally empty groups.
+# Relative paths are resolved by the process that runs validation/training.
+
+IMAGE_TEXT:
+  EXAMPLE_IMAGE_QA:
+    mimicit_path: /path/to/example_image_qa_instructions.json
+    images_path: /path/to/example_images.parquet
+    # Optional: only include train_config_path when it points to an existing JSON file.
+    # train_config_path: /path/to/example_train_config.json
+    num_samples: -1
+    task_description:
+      - "Answer the user's question using the image."
+
+TEXT_ONLY:
+  EXAMPLE_TEXT_ONLY:
+    mimicit_path: /path/to/example_text_only_instructions.json
+    num_samples: -1
+    task_description:
+      - "Answer the user's text-only instruction."
+
+VIDEO_TEXT:
+  EXAMPLE_VIDEO_QA:
+    mimicit_path: /path/to/example_video_instructions.json
+    images_path: /path/to/example_video_frames.parquet
+    num_samples: -1
+    task_description:
+      - "Answer the user's question using the sampled video frames."
+
+IMAGE_TEXT_IN_CONTEXT:
+  EXAMPLE_IN_CONTEXT:
+    mimicit_path: /path/to/example_in_context_instructions.json
+    images_path: /path/to/example_in_context_images.parquet
+    train_config_path: /path/to/example_in_context_train_config.json
+    num_samples: -1
+    task_description:
+      - "Use the image and in-context examples to answer the user's question."

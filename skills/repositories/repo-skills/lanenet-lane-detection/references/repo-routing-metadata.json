@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "MaybeShewill-CV/lanenet-lane-detection",
+  "skill_id": "lanenet-lane-detection",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "Computer Vision",
+      "family": "Image Segmentation"
+    },
+    {
+      "area": "Model Deployment and Optimization",
+      "family": "Edge Deployment"
+    },
+    {
+      "area": "Autonomous Driving",
+      "family": "Driving Perception"
+    }
+  ]
+}

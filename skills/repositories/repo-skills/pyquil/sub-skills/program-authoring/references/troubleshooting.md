@@ -1,0 +1,44 @@
+# Program authoring troubleshooting
+
+Use this matrix after a local construction, parsing, inspection, or
+serialization failure. First reduce the input to a minimal `Program` and
+capture `type(error).__name__`, the first error line, and `program.out()` if it
+is safe to call. Do not repair service, credential, compiler, or QPU failures
+here; route them as shown below.
+
+| Symptom | Likely cause | Recovery and validation |
+|---|---|---|
+| `PyProgramError` mentioning failed command arguments, expected a command, or a parse column | Malformed Quil string, missing operand/parenthesis, invalid scalar type, or invalid designator | Parse the smallest line with `Program(text)`. Check instruction spelling and arity. Construct the same instruction with a typed `pyquil.gates`/`pyquil.quilbase` object, then round-trip `out()`. Do not treat a string that parses into unintended instructions as semantically correct. |
+| `ValueError: Invalid instruction ...` from `Program.inst` | An unsupported Python object or malformed legacy tuple was passed as an instruction | Replace it with a typed gate/instruction. Legacy tuples are accepted only for compatibility and are deprecated; inspect the resulting `out()` after conversion. |
+| `ValueError: Qubit has not yet been resolved` or `get_qubit_indices` complains about fixed qubits | A `QubitPlaceholder` remains in the program | Keep the template unchanged and call `address_qubits(template, complete_mapping)` for a concrete copy, or resolve via the explicit resolver API. Assert all placeholders are mapped before `out()`. |
+| `ValueError` after a partial placeholder map | The mapping intentionally or accidentally omitted a placeholder | Map every placeholder used by gates, measurements, frames, calibrations, and control-flow bodies. A resolver returning `None` is documented to leave it unresolved. |
+| `ValueError: Label has not yet been resolved` after `if_then`/`while_do` | Generated `LabelPlaceholder`s were not instantiated | Call `program.resolve_label_placeholders()` after adding control flow, or call `address_qubits` on the program copy. Then assert `LABEL @...` and `JUMP...` are present in `out()`. |
+| `IndexError: MemoryReference index out of range` while indexing a declaration | A base reference has known `declared_size` and the offset is outside it | Use offsets `0 <= i < memory_size`; remember `ref[i]` only indexes the base (`offset == 0`). For parsed/manual references, perform your own declaration audit because no size may be attached. |
+| Quil serializes `missing[3]` or `ro[3]` despite no declaration/bounds error | `MemoryReference` validation is not a full program schema validator; parsed references may have no declared size | Inspect `program.declarations`, call `get_classical_addresses_from_program`, and compare every reference to its declaration/type/size. Add `DECLARE` and correct offsets; do not infer runtime acceptance from serialization. |
+| Condition branch is always wrong or backend rejects it | Condition memory was never declared/initialized, uses the wrong region or type, or the backend has dynamic-control restrictions | Use `BIT` for flags where appropriate, initialize with `MOVE`, ensure `MEASURE` writes the tested address, resolve labels, and inspect generated `JUMP-WHEN`/`JUMP-UNLESS`. Backend support is a [`compile-execute`](../../compile-execute/SKILL.md) concern. |
+| `Program.declare(...).inst(...)` raises an attribute error | `declare` returns `MemoryReference`, not `Program` | Split the calls: `ref = program.declare(...)`; then `program.inst(...)`. Use `.measure`, `.if_then`, and `.while_do` on the program object. |
+| `DefGate` says `Matrix must be square`, `Matrix must be unitary`, or dimension must be a prime power | Wrong matrix shape, non-unitary static matrix, or unsupported dimension | Check NumPy shape and `M @ M.conj().T`; use a dimension such as 2, 3, 4, 5, 8, ...; pass `Parameter`s only when the definition is intentionally symbolic. |
+| A custom gate definition serializes but application has wrong parameter/qubit arity | `get_constructor()` is generic and the `Gate` object is not a full semantic checker | Track the definition's `parameters` and `num_args()`. For parameterized definitions use the staged `CONSTRUCTOR(*params)(*qubits)` form. Assert the serialized application has exactly the intended arguments. |
+| A custom gate appears duplicated or changes after adding another definition | Definitions with the same identifying key are normalized/replaced; adding a different body emits a redefinition warning | Inspect `program.defined_gates`, use unique identifiers or intentionally replace and verify the final `out()`. |
+| `Program.copy()`/`+` unexpectedly changes a source | Mutation happened through `.inst`, `+=`, `.declare`, `.measure`, control-flow methods, or a mutable instruction object was reused | Use `.copy()` before variant construction; compare source output before/after. Use `+` for a new composition. Check calibration/global collections separately from body instructions. |
+| `out()` and `str(program)` disagree | `str` is debug-oriented and may display unresolved placeholders; `out` is strict serialization | Use `str` only to diagnose unresolved objects. Resolve placeholders and use `out()` plus a `Program(out).out()` round-trip for valid Quil text. |
+| `wrap_in_numshots_loop(n)` did not add loop text | It only sets `program.num_shots` metadata | Inspect `program.num_shots`. If the loop must be represented in Quil, use `with_loop` with a declared `INTEGER` counter and labels, then validate its `MOVE/SUB/JUMP` output. Neither method executes shots. |
+| Calibrations are present in default output when they were not wanted | `Program.out()` defaults to `calibrations=True` | Use `program.out(calibrations=False)` and assert `DEFCAL`/`DEFCAL MEASURE` are absent. Remember frame/waveform definitions can remain. |
+| `out(calibrations=False)` still contains `DEFFRAME`, `DEFWAVEFORM`, or `DELAY` | The flag removes calibration definitions only; it is not “remove all Quil-T” | Use `remove_quil_t_instructions()` for the explicit stripped copy, then inspect its output. Do not claim it has passed a compiler or QVM. |
+| `to_latex` raises on a forked gate or classical jump | Diagram support is intentionally narrower than Quil authoring | Generate Quil normally; use `to_latex` only on the supported circuit subset, or remove/replace unsupported instructions for a diagram-only copy. This is not an indication that the Quil parser failed. |
+| `to_latex` raises on `LATEX_GATE_GROUP` | Missing end marker, missing start marker, or nested groups | Pair one `PRAGMA LATEX_GATE_GROUP [name]` with one `PRAGMA END_LATEX_GATE_GROUP`; do not nest. Retry source generation and inspect the warning/error. |
+| `display` raises `FileNotFoundError` for `pdflatex`/`convert` | Optional IPython/LaTeX/ImageMagick rendering dependencies are absent | Use `to_latex` to obtain source text without external binaries. Install/validate the optional toolchain only when the user requests rendered images. |
+| `display` raises a TeX conversion `RuntimeError` | External LaTeX package/style or ImageMagick conversion failure | Preserve the LaTeX source from `to_latex`; inspect the external transcript separately. Do not turn a rendering failure into a claim about program validity or device execution. |
+| A Quil-T program is rejected by a QVM/quilc | Quil-T instructions are outside this authoring route's service-free proof | Use `remove_quil_t_instructions()` only to create a deliberate non-Quil-T variant, or route compiler/QAM/QVM/QPU handling to [`compile-execute`](../../compile-execute/SKILL.md). |
+| A request asks for numerical state, probabilities, or expectations | It has crossed from syntax into simulation | Hand the already validated `Program` to [`simulation`](../../simulation/SKILL.md); do not infer state from `out()`. |
+| A request asks for `NoiseModel`, Pauli terms, experiments, or estimates | It has crossed from authoring pragmas into noise/experiment workflows | Route to [`noise-experiments`](../../noise-experiments/SKILL.md); authoring `PRAGMA ADD-KRAUS` is not an experiment result. |
+| A request asks whether a gate fits a chip topology/ISA | Program syntax alone cannot answer processor compatibility | Route to [`processor-isa`](../../processor-isa/SKILL.md), then to [`compile-execute`](../../compile-execute/SKILL.md) for compilation/execution. |
+
+## Service boundary stop rule
+
+Stop this sub-skill once the requested observation requires any of the
+following: a compiler service, QVM/QPU endpoint, QCS credentials, reservation,
+backend topology, numerical state evolution, or experiment statistics. Record
+the local artifact (`Program`, serialized Quil, definitions, or LaTeX source)
+and route it to the owning sibling. A successful import and successful
+`out()` are not execution evidence.

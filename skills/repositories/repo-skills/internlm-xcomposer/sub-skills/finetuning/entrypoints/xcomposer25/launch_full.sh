@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+CALLER_DIR="$PWD"
+cd "$SCRIPT_DIR"
+export CUDA_DEVICE_MAX_CONNECTIONS="${CUDA_DEVICE_MAX_CONNECTIONS:-1}"
+MODEL="${MODEL:-internlm/internlm-xcomposer2d5-7b}"
+DATA="${DATA:-data.txt}"
+OUTPUT_DIR="${OUTPUT_DIR:-$CALLER_DIR/output/finetune}"
+GPUS_PER_NODE="${GPUS_PER_NODE:-8}"
+NNODES="${NNODES:-1}"
+NODE_RANK="${NODE_RANK:-0}"
+MASTER_ADDR="${MASTER_ADDR:-localhost}"
+MASTER_PORT="${MASTER_PORT:-6001}"
+exec torchrun   --nproc_per_node "$GPUS_PER_NODE"   --nnodes "$NNODES"   --node_rank "$NODE_RANK"   --master_addr "$MASTER_ADDR"   --master_port "$MASTER_PORT"   "$SCRIPT_DIR/finetune.py"   --model_name_or_path "$MODEL"   --data_path "$DATA"   --given_num True   --bf16 True   --fix_vit False   --fix_sampler False   --use_lora False   --hd_num "${HD_NUM:-18}"   --output_dir "$OUTPUT_DIR"   --num_train_epochs "${NUM_TRAIN_EPOCHS:-1}"   --batch_size "${MIX_BATCH_SIZE:-2}"   --per_device_train_batch_size "${PER_DEVICE_TRAIN_BATCH_SIZE:-1}"   --per_device_eval_batch_size "${PER_DEVICE_EVAL_BATCH_SIZE:-1}"   --gradient_accumulation_steps "${GRADIENT_ACCUMULATION_STEPS:-8}"   --evaluation_strategy "${EVALUATION_STRATEGY:-no}"   --save_strategy "${SAVE_STRATEGY:-epoch}"   --save_total_limit "${SAVE_TOTAL_LIMIT:-1}"   --learning_rate "${LEARNING_RATE:-1e-5}"   --weight_decay "${WEIGHT_DECAY:-0.1}"   --adam_beta2 "${ADAM_BETA2:-0.95}"   --warmup_ratio "${WARMUP_RATIO:-0.01}"   --lr_scheduler_type "${LR_SCHEDULER_TYPE:-cosine}"   --logging_steps "${LOGGING_STEPS:-1}"   --report_to "${REPORT_TO:-none}"   --max_length "${MAX_LENGTH:-16384}"   --deepspeed "$SCRIPT_DIR/ds_config_zero2.json"   --gradient_checkpointing "${GRADIENT_CHECKPOINTING:-True}"   "$@"

@@ -1,0 +1,584 @@
+import ctypes
+import logging
+import re
+import socket
+import struct
+import sys
+import threading
+import time
+import os
+import warnings
+from .api import *
+from .api_version import *
+from .automation import *
+from .launcher import *
+from queue import Empty, SimpleQueue
+
+__all__ = [
+    "Client",
+    "SocketMessage",
+    "__version__",
+    "ApiVersionManager",
+]
+
+
+_L = logging.getLogger(__name__)
+# _L.addHandler(logging.NullHandler()) # Let client to decide how to do logging
+_L.handlers = []
+h = logging.StreamHandler()
+h.setFormatter(logging.Formatter('%(levelname)s:%(module)s:%(lineno)d:%(message)s'))
+_L.addHandler(h)
+_L.propagate = False
+_L.setLevel(logging.INFO)
+
+__version__ = '1.2.0'  # release current client changes under a distinct version
+
+class SocketMessage:
+    """
+    Define the format of a message. This class is defined similar to the class FNFSMessageHeader in UnrealEngine4, but without CRC check.
+    The magic number is from Unreal implementation
+    See https://github.com/EpicGames/UnrealEngine/blob/dff3c48be101bb9f84633a733ef79c91c38d9542/Engine/Source/Runtime/Sockets/Public/NetworkMessage.h
+    """
+
+    magic = ctypes.c_uint32(0x9E2B83C1).value
+    fmt = 'I'
+
+    def __init__(self, payload):
+        self.payload_size = ctypes.c_uint32(len(payload)).value
+
+    @classmethod
+    def _recv_exact(cls, sock, nbytes):
+        chunks = []
+        remaining = nbytes
+        while remaining:
+            chunk = sock.recv(remaining)
+            if not chunk:
+                return None
+            chunks.append(chunk)
+            remaining -= len(chunk)
+        return b''.join(chunks)
+
+    @classmethod
+    def ReceivePayload(cls, sock):
+        """
+        Return only payload, not the raw message, None if failed.
+        sock: a blocking socket for read data.
+        """
+        try:
+            raw_magic = cls._recv_exact(sock, 4)
+        except Exception as e:
+            _L.debug('Fail to read raw_magic, exception: "%s"', e)
+            raw_magic = None
+
+        if not raw_magic:
+            # _L.debug('socket disconnect by server')
+            return None
+
+        magic = struct.unpack(cls.fmt, raw_magic)[0]  # 'I' means unsigned int
+        if magic != cls.magic:
+            print(
+                'Error: receive a malformat message, the message should start from a four bytes uint32 magic number'
+            )
+            _L.error(
+                'Error: receive a malformat message, the message should start from a four bytes uint32 magic number'
+            )
+            print('Actually received magic message: %s', repr(magic))
+            return None
+            # The next time it will read four bytes again
+
+        raw_payload_size = cls._recv_exact(sock, 4)
+        if not raw_payload_size:
+            return None
+        payload_size = struct.unpack('I', raw_payload_size)[0]
+        return cls._recv_exact(sock, payload_size)
+
+    @classmethod
+    def WrapAndSendPayload(cls, sock, payload):
+        """
+        Send payload, true if success, false if failed
+        """
+        try:
+            socket_message = SocketMessage(payload)
+            message = (
+                struct.pack(cls.fmt, socket_message.magic)
+                + struct.pack(cls.fmt, socket_message.payload_size)
+                + payload
+            )
+            sock.sendall(message)
+            return True
+        except Exception as e:
+            print(f'Fail to send message {e}')
+            _L.error('Fail to send message %s', e)
+            return False
+
+
+"""
+BaseClient send message out and receiving message in a seperate thread.
+After calling the `send` function, only True or False will be returned
+to indicate whether the operation was successful.
+If you are trying to send a request and get a response, consider using `Client` instead.
+This class adds message framing on top of TCP
+"""
+
+
+class Client:
+    """
+    Client can be used to send request to a game and get response
+    Currently only one client is allowed at a time
+    More clients will be rejected
+    """
+
+    SOCKET_TIMEOUT = 60
+    RECONNECT_ATTEMPTS = 5
+    RECONNECT_BASE_DELAY = 0.5
+    RECONNECT_MAX_DELAY = 8.0
+
+    def __init__(self, endpoint, type='inet'):
+        """
+        Parameters:
+        endpoint: a tuple (ip, port)
+        type: unix or inet
+        """
+        self.endpoint = endpoint
+        self.sock = None  # if socket == None, means client is not connected
+        self.raw_message_regexp = re.compile(rb'(\d{1,}):(.*)')  # A binary regexp
+        # self.message_id = 0
+        self.wait_response = threading.Event()
+        self.send_message_id = 0
+        self.recv_message_id = 0
+        self.recv_num_q = SimpleQueue()  # inf
+        self.recv_data_q = SimpleQueue()  # inf
+        self.type = type
+        self._supported_command_templates = None
+        self._command_capabilities_available = False
+        self._command_capabilities_checked = False
+        self._capability_warning_emitted = False
+
+    @staticmethod
+    def _normalize_command_whitespace(command):
+        if isinstance(command, bytes):
+            command = command.decode('utf-8', errors='replace')
+        return ' '.join(str(command).split())
+
+    @classmethod
+    def _matches_command_template(cls, command, template):
+        command = cls._normalize_command_whitespace(command)
+        template = cls._normalize_command_whitespace(template)
+        if not command or not template:
+            return False
+
+        pattern_parts = []
+        position = 0
+        for placeholder in re.finditer(r'\[[^\[\]]+\]', template):
+            literal = template[position : placeholder.start()]
+            pattern_parts.append(re.escape(literal).replace(r'\ ', r'\s+'))
+            pattern_parts.append(r'\S*')
+            position = placeholder.end()
+        literal = template[position:]
+        pattern_parts.append(re.escape(literal).replace(r'\ ', r'\s+'))
+        return re.fullmatch(''.join(pattern_parts), command) is not None
+
+    def _warn_if_command_maybe_unsupported(self, message):
+        if not self._command_capabilities_available:
+            return
+        if any(
+            self._matches_command_template(message, template)
+            for template in self._supported_command_templates
+        ):
+            return
+
+        normalized = self._normalize_command_whitespace(message)
+        warnings.warn(
+            f"The connected UnrealCV server may not support command '{normalized}'. "
+            'The request will still be sent.',
+            UserWarning,
+            stacklevel=3,
+        )
+
+    def _warn_command_capabilities_unavailable(self):
+        if self._capability_warning_emitted:
+            return
+        warnings.warn(
+            'The connected UnrealCV server is too old to report its supported commands. '
+            'Command capability detection requires UnrealCV server 1.1.0 or newer; '
+            'requests will continue without capability checks.',
+            UserWarning,
+            stacklevel=3,
+        )
+        self._capability_warning_emitted = True
+
+    def _load_command_capabilities(self):
+        self._command_capabilities_checked = True
+        try:
+            response = self._request_without_capability_check(
+                'vget /unrealcv/commands', timeout=5
+            )
+        except (ConnectionError, TimeoutError):
+            self._warn_command_capabilities_unavailable()
+            return
+
+        if isinstance(response, bytes):
+            response = response.decode('utf-8', errors='replace')
+        if not isinstance(response, str) or response.lstrip().lower().startswith('error'):
+            self._warn_command_capabilities_unavailable()
+            return
+
+        templates = tuple(
+            self._normalize_command_whitespace(line)
+            for line in response.splitlines()
+            if self._normalize_command_whitespace(line)
+        )
+        if not templates or 'vget /unrealcv/commands' not in templates:
+            self._warn_command_capabilities_unavailable()
+            return
+
+        self._supported_command_templates = templates
+        self._command_capabilities_available = True
+
+    def _request_without_capability_check(self, message, timeout=5):
+        if not isinstance(message, bytes):
+            message = message.encode('utf-8')
+
+        raw_message = b'%d:%s' % (self.send_message_id, message)
+        if not self.send(raw_message):
+            raise ConnectionError('Failed to send: socket is closed')
+
+        self.send_message_id += 1
+        self.recv_num_q.put(-1)
+        try:
+            response = self.recv_data_q.get(timeout=timeout)
+        except Empty as exception:
+            raise TimeoutError(f'Request timed out after {timeout} seconds') from exception
+        if isinstance(response, Exception):
+            raise response
+        return response
+
+    def send(self, message):
+        """Send message out, return whether the message was successfully sent"""
+        if self.isconnected():
+            _L.debug('BaseClient: Send message %s', message)
+            return SocketMessage.WrapAndSendPayload(self.sock, message)
+        else:
+            _L.error('Fail to send message, client is not connected')
+            return False
+
+    def raw_message_handler(self, raw_message):
+        match = self.raw_message_regexp.match(raw_message)
+
+        if match:
+            [message_id, message_body] = (
+                int(match.group(1)),
+                match.group(2),
+            )
+            message_body = raw_message[len(match.group(1)) + 1 :]
+            # Convert to utf-8 if it's not a byte array (as is the case for images)
+            try:
+                message_body = message_body.decode('utf-8')
+            except UnicodeDecodeError:
+                pass
+            if message_id == self.recv_message_id:
+                return message_body
+            else:
+                raise AssertionError(
+                    f'Message ID mismatch: got {message_id}, expected {self.recv_message_id}'
+                )
+        else:
+            # Instead of just dropping this message, give a verbose notice
+            _L.error('No message handler to handle message with length %d', len(raw_message))
+
+    def connect(self, timeout=1, start_receive_thread=True):
+        """
+        Try to connect to server, return whether connection successful
+        """
+        if self.isconnected():
+            return True
+
+        s = None
+        try:
+            if self.type == 'unix':
+                print('=>Info: using uds socket')
+                s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+            elif self.type == 'inet':
+                print('=>Info: using ip-port socket')
+                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+            else:
+                raise NotImplementedError
+            # Make the socket working in the blocking mode
+            s.connect(self.endpoint)
+            self.sock = s
+            _L.debug('BaseClient: wait for connection confirm')
+
+            message = SocketMessage.ReceivePayload(self.sock)
+            if message is not None:
+                if message.startswith(b'connected'):
+                    _L.info('Got connection confirm: %s', repr(message))
+
+                    if start_receive_thread and (
+                        getattr(self, 't', None) is None or not self.t.is_alive()
+                    ):
+                        self.t = threading.Thread(target=self.receive_loop_queue, daemon=True)
+                        self.t.start()
+
+                    if start_receive_thread and not self._command_capabilities_checked:
+                        self._load_command_capabilities()
+
+                    return True
+
+            # self.sock = None
+            self.disconnect()
+            _L.error(
+                'Socket is created, but can not get connection confirm from %s. Disconnect!',
+                self.endpoint,
+            )
+            return False
+
+            # only assign self.socket to connected socket
+            # so it is safe to use self.socket != None to check connection status
+            # This does not neccessarily mean connection successful, might be closed by server
+            # Unless explicitly to tell the server to accept new socket
+
+        except Exception as e:
+            _L.error('Can not connect to %s', str(self.endpoint))
+            _L.error('Error %s', e)
+            if s is not None:
+                try:
+                    s.close()
+                except OSError:
+                    pass
+            self.disconnect()
+            # self.sock = None
+            return False
+
+    def isconnected(self):
+        """Check whether client is connected to server"""
+        return self.sock is not None
+
+    def disconnect(self):
+        """Disconnect from server"""
+        if self.isconnected():
+            _L.debug(
+                'BaseClient, request disconnect from server in %s',
+                threading.current_thread().name,
+            )
+
+            try:
+                self.sock.shutdown(socket.SHUT_RD)
+            except OSError:
+                pass
+
+            if self.sock:
+                try:
+                    self.sock.close()
+                except OSError:
+                    pass
+                self.sock = None
+
+        if getattr(self, 't', None):
+            if self.t.is_alive():
+                self.recv_num_q.put(None)
+                if threading.current_thread() != self.t:
+                    self.t.join(timeout=2.0)
+
+    def receive(self):
+        """
+        Receive packages, Extract message from packages
+        Call self.message_handler if got a message
+        Also check whether client is still connected
+        """
+        if self.isconnected():
+            # Only this thread is allowed to read from socket, otherwise need lock to avoid competing
+            message = SocketMessage.ReceivePayload(self.sock)
+
+            # message may be None here
+            # _L.debug('Got server raw message with length %d', len(message))
+
+            if not message:
+                print('BaseClient: remote disconnected, no more message')
+                _L.debug('BaseClient: remote disconnected, no more message')
+                self.disconnect()
+
+                delay = self.RECONNECT_BASE_DELAY
+                for _attempt in range(self.RECONNECT_ATTEMPTS):
+                    if self.connect(timeout=self.SOCKET_TIMEOUT, start_receive_thread=False):
+                        return self.receive()
+                    time.sleep(delay)
+                    delay = min(delay * 2, self.RECONNECT_MAX_DELAY)
+                error = ConnectionError(
+                    f'Failed to reconnect to {self.endpoint} after {self.RECONNECT_ATTEMPTS} attempts'
+                )
+                self.recv_data_q.put(error)
+                raise error
+
+            return message
+
+    def receive_loop_queue(self):
+        while True:
+            num = self.recv_num_q.get()
+
+            # quit signal
+            if num is None:
+                break
+
+            if num < 0:
+                # need results
+                for _ in range(-num):
+                    raw_message = self.receive()
+                    if raw_message is None:
+                        print('Connection lost during receive, exiting receive loop')
+                        self.recv_data_q.put(None)
+                        return
+                    message = self.raw_message_handler(raw_message)
+                    self.recv_message_id += (
+                        1  # Increment it only after the request/response cycle finished
+                    )
+                    self.recv_data_q.put(message)
+            else:
+                # do not need results
+                for _ in range(num):
+                    raw_message = self.receive()
+                    if raw_message is None:
+                        print('Connection lost during receive, exiting receive loop')
+                        return
+                    self.recv_message_id += 1
+
+    def request_async(self, message):
+        """
+        Send request without waiting for any reply
+        """
+        if isinstance(message, list):
+            return self.request_batch_async(message)
+
+        self._warn_if_command_maybe_unsupported(message)
+
+        if not isinstance(message, bytes):
+            message = message.encode('utf-8')
+
+        raw_message = b'%d:%s' % (self.send_message_id, message)
+        if not self.send(raw_message):
+            raise ConnectionError('Failed to send: socket is closed')
+
+        self.send_message_id += 1
+
+        self.recv_num_q.put(1)
+        # self.message_id += 1
+        return None
+
+    def request_batch_async(self, batch):
+        """
+        Send a batch of requests to server without waiting for any reply.
+
+        batch : list
+            a list of requests, each request is a string, such as ['command1', 'command2', ...]
+
+        Returns
+        -------
+        None
+        """
+        for message in batch:
+            self._warn_if_command_maybe_unsupported(message)
+            if not isinstance(message, bytes):
+                message = message.encode('utf-8')
+
+            raw_message = b'%d:%s' % (self.send_message_id, message)
+            if not self.send(raw_message):
+                raise ConnectionError('Failed to send: socket is closed')
+            # self.send(raw_message)
+            self.send_message_id += 1
+
+        self.recv_num_q.put(len(batch))
+        return None
+
+    def request_batch(self, batch):
+        """
+        Send a batch of requests to server and wait util get all responses from server.
+        Parameters
+        ----------
+        batch : list
+            a list of requests, each request is a string, such as ['command1', 'command2', ...]
+        Returns
+        -------
+        list
+            a list of responses, such as ['response1', 'response2', ...]
+
+        Examples
+        --------
+        >>> client.request_batch(['vget /camera/0/location', 'vget /camera/0/rotation'])
+        ['100.0 -100.0 100.0', '0.0 0.0 0.0']
+        """
+        for message in batch:
+            self._warn_if_command_maybe_unsupported(message)
+            if not isinstance(message, bytes):
+                message = message.encode('utf-8')
+
+            raw_message = b'%d:%s' % (self.send_message_id, message)
+            if not self.send(raw_message):
+                raise ConnectionError('Failed to send: socket is closed')
+                # return None
+            self.send_message_id += 1
+
+        self.recv_num_q.put(-len(batch))  # negative number indicates need results
+
+        batch_res = []
+        for i in range(len(batch)):
+            message = self.recv_data_q.get()
+            if isinstance(message, Exception):
+                raise message
+            batch_res.append(message)
+
+        return batch_res
+
+    def request(self, message, timeout=5):
+        """
+        Send a request to server and wait util get a response from server or timeout.
+
+        Parameters
+        ----------
+        message : str or list
+            UnrealCV command to interact with the game. 
+            When message is a list of commands, the commands will be sent in batch.
+            More info can be seen from http://docs.unrealcv.org/en/latest/reference/commands.html
+
+        timeout : int
+            when timeout is larger than 0, the request will be sent synchronously, and the response will be returned
+            when timeout is -1, the request will be sent asynchronously, and no response will be returned
+        Returns
+        -------
+        str
+            plain text message from server
+
+        Examples
+        --------
+        >>> client = Client('localhost', 9000)
+        >>> client.connect()
+        >>> client.request('vget /camera/0/location')
+        '100.0 -100.0 100.0'
+        >>> # timeout -1 means async request, no response will be returned
+        >>> client.request('vset /camera/0/location 100 100 100', -1)
+        """
+
+        if timeout < 0 : # async
+            if isinstance(message, list):
+                self.request_batch_async(message)
+            else:
+                self.request_async(message)
+            return True
+
+        if isinstance(message, list):
+            return self.request_batch(message)
+
+        self._warn_if_command_maybe_unsupported(message)
+        return self._request_without_capability_check(message, timeout=timeout)
+
+# To use IPC on Unix, set this path to: /tmp/unrealcv_{portnum}.socket
+# Your executable will create this file on startup.
+
+# print('=> Info: Use inet client...')
+# (HOST, PORT) = ('localhost', 9000)
+# client = Client((HOST, PORT), 'inet')
+
+# unix_socket_path = '/tmp/unrealcv_9000.socket' # for example
+# if 'linux' in sys.platform and unix_socket_path is not None and os.path.exists(unix_socket_path):
+#     print('=> Info: Use UDS client...')
+#     client = Client(unix_socket_path, 'unix')
+

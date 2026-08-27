@@ -1,0 +1,249 @@
+{
+  "apify-tool": [
+    "apify-client>=1.8.1"
+  ],
+  "asqav": [
+    "asqav>=0.2.21"
+  ],
+  "chroma": [
+    "chromadb>=1.0.20; python_version < '3.14'"
+  ],
+  "crawlee-browser": [
+    "crawlee[playwright]>=1.4.0"
+  ],
+  "csv-loader": [
+    "aiofiles>=24.1.0"
+  ],
+  "custom-tools": [
+    "apify-client>=1.8.1",
+    "firecrawl-py>=4.14.1",
+    "slack-sdk>=3.38.0",
+    "crawlee[beautifulsoup]>=1.4.0"
+  ],
+  "discord-interface": [
+    "fastapi>=0.128.0",
+    "websockets>=12.0"
+  ],
+  "docling-loader": [
+    "docling>=2.55.1"
+  ],
+  "docx-loader": [
+    "python-docx>=1.2.0"
+  ],
+  "embeddings": [
+    "aiohttp>=3.13.3",
+    "anthropic>=0.69.0",
+    "azure-core>=1.35.1",
+    "azure-identity>=1.25.0",
+    "boto3>=1.40.45",
+    "botocore>=1.40.45",
+    "fastembed>=0.7.3; python_version < '3.14'",
+    "google-auth>=2.40.3",
+    "google-genai>=1.41.0",
+    "huggingface-hub>=0.34.4",
+    "numpy>=2.2.6",
+    "onnxruntime>=1.22.1; python_version < '3.14'",
+    "openai>=2.1.0",
+    "requests>=2.32.5",
+    "torch>=2.8.0",
+    "transformers>=4.57.0"
+  ],
+  "faiss": [
+    "faiss-cpu>=1.12.0",
+    "numpy>=2.2.6"
+  ],
+  "gmail-interface": [
+    "fastapi",
+    "google-api-python-client",
+    "google-auth-httplib2",
+    "google-auth-oauthlib"
+  ],
+  "gmail-tool": [
+    "google-api-python-client>=2.188.0",
+    "google-auth-httplib2>=0.3.0",
+    "google-auth-oauthlib>=1.2.4"
+  ],
+  "html-loader": [
+    "aiohttp>=3.13.3",
+    "beautifulsoup4>=4.14.2",
+    "requests>=2.32.5"
+  ],
+  "json-loader": [
+    "jq>=1.10.0"
+  ],
+  "langfuse": [
+    "opentelemetry-api>=1.39.1",
+    "opentelemetry-exporter-otlp-proto-http>=1.39.1",
+    "opentelemetry-sdk>=1.39.1"
+  ],
+  "loaders": [
+    "aiofiles>=24.1.0",
+    "aiohttp>=3.13.3",
+    "beautifulsoup4>=4.14.2",
+    "docling>=2.55.1",
+    "jq>=1.10.0",
+    "lxml>=4.9.1",
+    "markdown-it-py>=4.0.0",
+    "pdfplumber>=0.11.7",
+    "pillow>=11.3.0",
+    "pymupdf>=1.26.4",
+    "pypdf>=6.1.1",
+    "python-docx>=1.2.0",
+    "python-frontmatter>=1.1.0",
+    "pyyaml>=6.0.2",
+    "rapidocr-onnxruntime>=1.4.4; python_version < '3.13'",
+    "requests>=2.32.5"
+  ],
+  "mail-interface": [
+    "fastapi>=0.128.0"
+  ],
+  "markdown-loader": [
+    "markdown-it-py>=4.0.0",
+    "python-frontmatter>=1.1.0"
+  ],
+  "mcp": [
+    "mcp[cli]>=1.26.0",
+    "fastmcp>=2.14.5"
+  ],
+  "mem0-storage": [
+    "mem0ai>=0.1.116"
+  ],
+  "milvus": [
+    "pymilvus>=2.6.1"
+  ],
+  "models": [
+    "anthropic>=0.69.0",
+    "anyio>=4.10.0",
+    "azure-core>=1.35.1",
+    "azure-identity>=1.25.0",
+    "boto3>=1.40.45",
+    "botocore>=1.40.45",
+    "cohere>=5.18.0",
+    "google-auth>=2.40.3",
+    "google-genai>=1.41.0",
+    "groq>=0.32.0",
+    "httpx>=0.28.1",
+    "mistralai>=1.9.11",
+    "mypy-boto3-bedrock-runtime>=1.40.41",
+    "openai>=2.1.0",
+    "outlines>=1.2.9",
+    "xai-sdk>=1.4.0"
+  ],
+  "mongo-storage": [
+    "pymongo>=4.9.0",
+    "motor>=3.7.1"
+  ],
+  "ocr": [
+    "easyocr>=1.7.2",
+    "paddleocr>=2.10.0",
+    "pymupdf>=1.26.4",
+    "pillow>=11.3.0",
+    "pytesseract>=0.3.13",
+    "rapidocr-onnxruntime>=1.4.4; python_version < '3.13'"
+  ],
+  "otel": [
+    "opentelemetry-api>=1.39.1",
+    "opentelemetry-exporter-otlp-proto-grpc>=1.39.1",
+    "opentelemetry-exporter-otlp-proto-http>=1.39.1",
+    "opentelemetry-sdk>=1.39.1"
+  ],
+  "pdf-loader": [
+    "pypdf>=6.1.1",
+    "rapidocr-onnxruntime>=1.4.4; python_version < '3.13'"
+  ],
+  "pdfplumber-loader": [
+    "pdfplumber>=0.11.7",
+    "rapidocr-onnxruntime>=1.4.4; python_version < '3.13'"
+  ],
+  "pgvector": [
+    "psycopg>=3.2.9",
+    "pgvector>=0.4.1",
+    "sqlalchemy>=2.0.44"
+  ],
+  "pinecone": [
+    "pinecone>=7.3.0",
+    "pinecone-text>=0.11.0; python_version < '3.14'"
+  ],
+  "postgres-storage": [
+    "sqlalchemy>=2.0.42",
+    "psycopg2-binary>=2.9.10",
+    "psycopg[binary]>=3.2.9",
+    "asyncpg>=0.30.0",
+    "greenlet>=3.2.3"
+  ],
+  "pymupdf-loader": [
+    "pymupdf>=1.26.4",
+    "rapidocr-onnxruntime>=1.4.4; python_version < '3.13'"
+  ],
+  "qdrant": [
+    "qdrant-client>=1.12.1"
+  ],
+  "redis-storage": [
+    "redis>=5.2.1"
+  ],
+  "safety-engine": [
+    "detoxify>=0.5.2"
+  ],
+  "slack-interface": [
+    "fastapi>=0.128.0",
+    "slack-sdk>=3.39.0"
+  ],
+  "sqlite-storage": [
+    "sqlalchemy>=2.0.42",
+    "aiosqlite>=0.21.0",
+    "greenlet>=3.2.3"
+  ],
+  "storage": [
+    "upsonic[sqlite-storage]",
+    "upsonic[redis-storage]",
+    "upsonic[postgres-storage]",
+    "upsonic[mongo-storage]",
+    "upsonic[mem0-storage]"
+  ],
+  "supermemory": [
+    "supermemory>=3.25.0"
+  ],
+  "text-loader": [
+    "aiofiles>=24.1.0"
+  ],
+  "tools": [
+    "beautifulsoup4>=4.14.2",
+    "ddgs>=9.10.0",
+    "genai-prices>=0.0.29",
+    "pandas>=2.3.2",
+    "tavily-python>=0.7.12",
+    "yfinance>=0.2.66"
+  ],
+  "vectordb": [
+    "chromadb>=1.0.20; python_version < '3.14'",
+    "faiss-cpu>=1.12.0",
+    "pinecone>=7.3.0",
+    "psycopg>=3.2.9",
+    "pymilvus[milvus-lite]>=2.6.1",
+    "qdrant-client>=1.12.1",
+    "weaviate-client>=4.16.9",
+    "scipy>=1.13.0",
+    "scikit-learn>=1.4.0",
+    "reportlab>=4.1.0",
+    "pgvector>=0.4.1",
+    "sqlalchemy>=2.0.44",
+    "pinecone-text>=0.11.0; python_version < '3.14'",
+    "supermemory>=3.25.0"
+  ],
+  "weaviate": [
+    "weaviate-client>=4.16.9"
+  ],
+  "web": [
+    "celery>=5.5.3",
+    "fastapi",
+    "python-multipart>=0.0.20",
+    "uvicorn>=0.35.0"
+  ],
+  "xml-loader": [
+    "lxml>=4.9.1"
+  ],
+  "yaml-loader": [
+    "jq>=1.10.0",
+    "pyyaml>=6.0.2"
+  ]
+}

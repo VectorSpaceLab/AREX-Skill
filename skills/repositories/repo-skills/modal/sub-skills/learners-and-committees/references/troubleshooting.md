@@ -1,0 +1,14 @@
+# Troubleshooting
+
+| Symptom | Likely cause | Recovery |
+| --- | --- | --- |
+| `ValueError` about the dimensions of new training data and labels | The new `X` and `y` batch do not line up, or the feature count changed. | Keep the same feature count, and teach one row as `X[idx].reshape(1, -1)` with a matching one-label target such as `y[idx].reshape(1,)`. For pandas, use `.iloc[[idx]]`. |
+| `NotFittedError` during `query`, `vote`, or `predict_proba` | The learner or at least one committee member has not been fitted yet. | Provide initial `X_training` and `y_training`, or call `fit()` before querying. Every learner in a committee must be fitted. |
+| `AttributeError: predict_proba` or a probability-based strategy fails early | The wrapped estimator does not implement `predict_proba`. | Use a classifier that exposes probabilities, or choose a strategy that only depends on `predict`. Probability-based committee workflows also need learner-level `predict_proba`. |
+| Committee probabilities look misaligned, or class labels appear to “change” between learners | Different learners saw different class subsets. | Inspect `committee.classes_` and each learner's `estimator.classes_`. The committee zero-pads missing classes automatically; refit learners on a common label space if the mismatch is unintended. |
+| `on_transformed=True` behaves oddly with a pipeline | The pipeline is not transformable in the expected way, or the strategy was written for raw features only. | Put preprocessing steps before the final estimator, keep the final estimator as the prediction head, and use `on_transformed=True` only with strategies that consume transformed features. If the strategy should see raw `X`, turn it off. |
+| `return_metrics=True` emits a warning | The query strategy returns only indices and not `(indices, metrics)`. | Treat the metrics slot as optional, or update the strategy to return a metrics array alongside the indices. |
+| `only_new=True` seems to ignore earlier data | That is intentional. The learner refits only on the new batch and does not append the batch to stored history. | Use the default `teach()` path if you want the stored training set to grow. |
+| `bootstrap=True` or `rebag()` is confusing | There is no separate `bag()` method in this release. | Use `bootstrap_init`, `teach(..., bootstrap=True)`, or `rebag()` instead. |
+| `CommitteeRegressor` has no `predict_proba` | Regression does not provide class probabilities in this API. | Use `predict(return_std=True)` and a std-based query strategy such as `max_std_sampling`. |
+| `Committee.score()` looks like a classifier metric only | This committee scores with accuracy, not with an arbitrary regressor-style metric. | For regression, use `predict(return_std=True)` and your own metric outside the committee. |

@@ -1,0 +1,5 @@
+# Runtime packages required by the generated Asteroid skill output.
+# Keep this file self-contained; do not point it at the source checkout or repo-owned requirements files.
+asteroid
+requests
+librosa

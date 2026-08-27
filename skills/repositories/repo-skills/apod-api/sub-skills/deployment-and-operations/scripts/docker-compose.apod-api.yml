@@ -1,0 +1,11 @@
+# Adapted DisCo skill asset for the APOD API repository.
+# Always set APOD_API_BUILD_CONTEXT to the real APOD checkout; this prevents
+# accidentally using this skill directory as a Docker build context.
+services:
+  apod-api:
+    build:
+      context: ${APOD_API_BUILD_CONTEXT:?Set APOD_API_BUILD_CONTEXT to the APOD checkout}
+    ports:
+      - "${APOD_API_HOST_PORT:-5000}:5000"
+    environment:
+      FLASK_ENV: ${FLASK_ENV:-production}

@@ -1,0 +1,2 @@
+ choice1： {"meta":"choice1"} choice2: {"meta":"choice2"} premise: {"placeholder":"text_a"} question: {"meta":"question"} {"mask"}
+ choice1： {"meta":"choice1"} choice2: {"meta":"choice2"} premise: {"placeholder":"text_a"} The {"meta":"question"} is that {"mask"} .

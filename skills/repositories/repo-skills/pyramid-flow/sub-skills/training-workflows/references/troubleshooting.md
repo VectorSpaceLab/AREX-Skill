@@ -1,0 +1,69 @@
+# Training Troubleshooting
+
+Start with the bundled preflight helper. It catches the most common Pyramid-Flow training launch failures before an expensive `torchrun` job starts.
+
+```bash
+python PATH_TO_SKILL/sub-skills/training-workflows/scripts/check_training_prereqs.py --help
+```
+
+## Fast failure table
+
+| Symptom or message | Likely cause | Recovery |
+| --- | --- | --- |
+| `NUM_FRAMES % VIDEO_SYNC_GROUP must be 0` or source assert says `video_sync_group` should divide `num_frames` | AR DiT synchronized video input cannot split the temporal layout evenly. | Pick `VIDEO_SYNC_GROUP` from `4`, `8`, or `16` and set `NUM_FRAMES` to a multiple. For source defaults, `16 % 8 == 0`. |
+| `GPUS % VIDEO_SYNC_GROUP must be 0` | AR DiT rank groups do not divide evenly. | Use a GPU/process count divisible by `VIDEO_SYNC_GROUP`, or reduce the sync group. For the published 8-GPU run, use `VIDEO_SYNC_GROUP=4` or `8`. |
+| `The batchsize should be diivided by sum(sample_ratios)` | `train/train_pyramid_flow.py` builds DiT sample ratios `[1, 2, 1]`, whose sum is `4`. | Set DiT per-device `BATCH_SIZE` to a positive multiple of 4. The source launchers use `4`. |
+| `Sequence Parallel needs group size > 1` | `--use_sequence_parallel` was enabled with `--sp_group_size 1`. | Either remove `--use_sequence_parallel` or set `sp_group_size > 1` and make `sp_proc_num` divisible by it. |
+| Sequence-parallel group assertion or hang | DDP is not initialized, `sp_proc_num` does not divide by `sp_group_size`, or some ranks did not enter the same group setup. | Launch with `torchrun`, keep `RANK`, `WORLD_SIZE`, and `LOCAL_RANK` consistent, and validate `sp_proc_num % sp_group_size == 0`. Avoid optional sequence parallel unless a custom run needs it. |
+| `GPUS % CONTEXT_SIZE must be 0` | VAE stage-2 context-parallel groups cannot divide the process count. | Choose a `CONTEXT_SIZE` that divides the `torchrun --nproc_per_node` value. With 8 GPUs, common choices are `2`, `4`, or `8`. |
+| `stage-2 NUM_FRAMES must be (17 - 1) * CONTEXT_SIZE + 1` | VAE stage-2 frame count does not match the executable source launcher pattern. | Set `NUM_FRAMES` to `(17 - 1) * CONTEXT_SIZE + 1`; for `CONTEXT_SIZE=2`, use `33`. |
+| Missing LPIPS checkpoint or loss-wrapper construction failure | VAE training needs a real VGG LPIPS checkpoint, and the source parser default is not portable. | Download/provide the LPIPS VGG checkpoint described in `docs/VAE.md`; pass the local file through `--lpips-ckpt`. The preflight helper emits a dedicated recovery message for this case. |
+| Full training cannot start on available hardware | Public docs require at least 8 A100-class GPUs for full DiT and VAE training. | Use a host with the required CUDA/NCCL GPUs for full training. Use only command building, syntax checks, and small validation on weaker machines. |
+| FSDP startup fails before the first training step | Wrong `torchrun` launch, incompatible `fsdp_shard_strategy`, stale Accelerate/FSDP behavior, or insufficient memory. | Use the source `torchrun --nproc_per_node GPUS train/train_pyramid_flow.py` shape, keep `--use_fsdp`, start with `--fsdp_shard_strategy zero2`, and switch to `zero3` only deliberately. The entry point sets the FSDP original-params environment internally. |
+| OOM or unstable 768p DiT training | 768p path consumes substantially more memory; docs recommend gradient checkpointing. | Add `--gradient_checkpointing`, reduce batch size only while preserving `BATCH_SIZE % 4 == 0`, and verify model variant/resolution match. |
+| Resolution or latent-shape assertion | `resolution` and latent files do not match. 384p video latents should have spatial shape `48x80`; 768p video latents should have `96x160`. | Regenerate VAE latents with the data-preparation sub-skill for the selected resolution, or change `--resolution`/`--model_variant` to match the existing artifacts. |
+| `Now only support loading vae latents` | Current video DiT dataset path requires precomputed VAE latents. | For video DiT training, provide `latent` paths in the JSONL and do not rely on raw-video loading. The published non-AR launcher is the image `t2i` path. |
+| Annotation loader repeatedly logs `Load Image Error` or `Load Video Error` | JSONL rows refer to missing/unreadable files, or required fields are absent. Dataset loaders retry random rows, which can hide the first bad record. | Run preflight with `--validate-annotations --check-referenced-paths` on a bounded sample. Use the data-preparation sub-skill for full schema and fixture checks. |
+| Text-feature key errors | A row points at a malformed `text_fea` artifact. | Ensure optional precomputed text features are dicts with `prompt_embed`, `prompt_attention_mask`, and `pooled_prompt_embed`. If using `--load_text_encoder`, the DiT training path uses raw `text` instead. |
+| Stage-2 VAE does not resume from stage-1 | `--pretrained_vae_weight` is missing, points at a directory instead of the intended checkpoint file, or was generated by a different wrapper. | Wait for stage-1 to finish, select the saved checkpoint file, then regenerate the stage-2 command with `--stage stage2 --pretrained-vae-weight CHECKPOINT_FILE`. |
+
+## Dependency and backend checks
+
+Run the preflight helper with backend checks enabled before launch:
+
+```bash
+python PATH_TO_SKILL/sub-skills/training-workflows/scripts/check_training_prereqs.py \
+  pyramid-flow-ar \
+  --model-path "$MODEL_PATH" \
+  --output-dir "$OUTPUT_DIR" \
+  --anno-file "$ANNO_FILE" \
+  --gpus 8
+```
+
+Expected backend signals:
+
+- `torch` imports successfully.
+- `torch.cuda.is_available()` is true.
+- visible CUDA device count is at least the requested `--gpus`.
+- `torch.distributed.is_available()` is true.
+
+If you only need command previews or syntax checks on a non-training machine, pass `--skip-backend`; do not treat that as a full training prerequisite pass.
+
+## Source syntax checks
+
+The native, safe checks for the repo-owned training launchers are:
+
+```bash
+bash -n scripts/train_pyramid_flow.sh
+bash -n scripts/train_pyramid_flow_without_ar.sh
+bash -n scripts/train_causal_video_vae.sh
+```
+
+For Python entry points, use the bundled preflight helper with `--check-source-syntax`. It runs `py_compile` into a temporary bytecode cache under the helper directory and deletes the cache immediately, so it does not write bytecode into the source checkout.
+
+The bundled preflight helper can run both shell and Python syntax checks with `--check-source-syntax` when the Pyramid-Flow source tree is available.
+
+## Synthetic difficult cases to keep in regression tests
+
+1. **Invalid AR sync invariant**: `pyramid-flow-ar --num-frames 17 --video-sync-group 8` must fail before `torchrun` with a clear `NUM_FRAMES % VIDEO_SYNC_GROUP` message.
+2. **Missing LPIPS checkpoint**: `causal-video-vae --stage stage1 --lpips-ckpt missing-file` must produce a dedicated LPIPS recovery message before a VAE training launch.

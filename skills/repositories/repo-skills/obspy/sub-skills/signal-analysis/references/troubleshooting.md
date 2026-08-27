@@ -1,0 +1,12 @@
+# Signal-analysis troubleshooting
+
+- **Filter or trigger raises on window sizes:** direct array algorithms take integer sample counts, while convenience trigger options often take seconds. Convert using the trace's actual `sampling_rate`, check `nsta < nlta`, and reject non-positive or too-short windows.
+- **Filter warns about Nyquist or produces edge artifacts:** choose corners below Nyquist, detrend and taper before filtering, and use a sufficiently long trace. For offline phase-sensitive work, record whether `zerophase=True` was selected; for real-time use, prefer causal/stateful processing.
+- **Raw waveform changed unexpectedly:** `Trace.filter`, `trigger`, `simulate`, `remove_response`, and related convenience methods mutate data. Start from `.copy()` and retain the raw trace for comparison.
+- **Response removal reports missing response:** attach or load a real `Inventory`/RESP response or provide a complete, justified PAZ. Do not guess response poles/zeros from a channel name. Use a four-corner `pre_filt` and record water-level choices when deconvolving.
+- **Correlation results are implausible:** verify equal sampling rates, aligned IDs/units, consistent preprocessing, lag sign convention, normalization, and finite samples before interpreting the peak.
+- **STA/LTA detects nothing or everything:** inspect characteristic-function scale, threshold hysteresis, onset/off indices, and the relationship between STA/LTA durations and sample rate. Preserve the original data because `Trace.trigger` overwrites samples.
+- **Array processing fails:** every trace needs compatible timing/rate and coordinates in the declared coordinate system. Fix gaps, unequal lengths, missing coordinates, or inconsistent IDs before calling array routines.
+- **PPSD or spectral work fails:** use a stable trace ID/sample rate and supply response metadata where required. Ensure the time window fits the data and save figures with a headless backend when no display exists.
+- **Realtime state drifts:** packets must have matching IDs, dtype, calibration, sample rate, and contiguous timing. Decide whether a gap resets state or is rejected; do not silently bridge it.
+- **Optional backend confusion:** signal routines in the selected scope are CPU/native-extension workflows. Missing Cartopy, network services, or credentials is not a signal-processing failure; route those needs to the owning skill.

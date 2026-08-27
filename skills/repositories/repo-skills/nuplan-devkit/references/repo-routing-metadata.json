@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "motional/nuplan-devkit",
+  "skill_id": "nuplan-devkit",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "Training Infrastructure",
+      "family": "Training Data Pipelines"
+    },
+    {
+      "area": "Autonomous Driving",
+      "family": "Motion Planning and Control"
+    },
+    {
+      "area": "Autonomous Driving",
+      "family": "Driving Simulation and Evaluation"
+    }
+  ]
+}

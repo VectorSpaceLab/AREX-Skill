@@ -1,0 +1,32 @@
+# Information Retrieval -> Vector Search
+
+Vector indexes, approximate-nearest-neighbor engines, hybrid vector search, and clients for vector databases.
+
+Choose a repository below only when its description, package/repository identity, task surface, and runtime intent match the request. If several candidates overlap, prefer the one whose root skill directly covers the requested workflow; then inspect its internal navigation rather than loading all candidates.
+
+| Repo skill | Repository | Skill description |
+| --- | --- | --- |
+| [`airweave`](../../../../repo-skills/airweave/SKILL.md) | `airweave-ai/airweave` | Route Airweave tasks to the most specific sub-skill: local-development, backend-api, source-connectors, frontend-dashboard, connect-widget, mcp-search, or monke-e2e. |
+| [`ragatouille`](../../../../repo-skills/ragatouille/SKILL.md) | `AnswerDotAI/RAGatouille` | Use RAGatouille to train, index, search, rerank, integrate, and export ColBERT-style late-interaction retrieval models in RAG pipelines. |
+| [`pyserini`](../../../../repo-skills/pyserini/SKILL.md) | `castorini/pyserini` | Use Pyserini for reproducible information retrieval: install/runtime setup, Lucene indexing/search/fetch, dense encoding/Faiss, evaluation/fusion, REST/MCP serving, and source checkout maintenance. |
+| [`docarray`](../../../../repo-skills/docarray/SKILL.md) | `docarray/docarray` | Use DocArray for multimodal Pydantic-style documents, typed DocList and DocVec batches, serialization and local storage, FastAPI payloads, and vector retrieval indexes. |
+| [`elasticsearch-py`](../../../../repo-skills/elasticsearch-py/SKILL.md) | `elastic/elasticsearch-py` | Guide the official Elasticsearch Python client for cluster connections, generated APIs, async code, bulk ingestion, query DSL, ES\|QL, optional integrations, and runtime troubleshooting. |
+| [`db-gpt`](../../../../repo-skills/db-gpt/SKILL.md) | `eosphoros-ai/DB-GPT` | Use DB-GPT 0.8.1 as an agentic AI data platform: install and configure provider profiles, operate its CLI and services, build agents and AWEL flows, ingest and retrieve data with RAG, call client/API surfaces, and execute code through explicitly bounded sandbox runtimes. |
+| [`everos`](../../../../repo-skills/everos/SKILL.md) | `EverMind-AI/EverOS` | Use this skill for EverOS local-first Markdown memory service setup, HTTP memory and knowledge APIs, cascade/OME operations, and observability integration. |
+| [`faiss`](../../../../repo-skills/faiss/SKILL.md) | `facebookresearch/faiss` | Guides Researchers through Faiss installation, dense and binary similarity search, index training and composition, persistence and evaluation, and explicitly gated CPU/GPU interoperability workflows. |
+| [`feast`](../../../../repo-skills/feast/SKILL.md) | `feast-dev/feast` | Use for Feast feature store tasks: feature repositories, definitions, CLI, retrieval, materialization, serving, RAG/vector search, integrations, and Feast contributor workflows. |
+| [`chonkie`](../../../../repo-skills/chonkie/SKILL.md) | `feyninc/chonkie` | Use Chonkie for text/document chunking, pipelines, embeddings, CLI/API serving, and storage integrations. |
+| [`semantra`](../../../../repo-skills/semantra/SKILL.md) | `freedmand/semantra-python` | Guides Semantra semantic-search CLI, local document indexing, embedding model selection, and interactive web search workflows. |
+| [`gerev`](../../../../repo-skills/gerev/SKILL.md) | `GerevAI/gerev` | Route Gerev tasks across connector setup, search/indexing, and source or Docker runtime workflows. |
+| [`clip-as-service`](../../../../repo-skills/clip-as-service/SKILL.md) | `jina-ai/clip-as-service` | Guides CLIP-as-service client, server, and CLIP search workflows for text/image embeddings, cross-modal ranking, and retrieval services. |
+| [`marqo`](../../../../repo-skills/marqo/SKILL.md) | `marqo-ai/marqo` | Marqo AI-native search service workflows for HTTP APIs, indexes, Vespa schemas, search/ranking, inference/model services, and local repository development. |
+| [`memori`](../../../../repo-skills/memori/SKILL.md) | `MemoriLabs/Memori` | Routes Memori Python and TypeScript memory SDK workflows across cloud, BYODB, LLM registration, recall/search, CLI, and integrations. |
+| [`paperai`](../../../../repo-skills/paperai/SKILL.md) | `neuml/paperai` | Guides paperai workflows for indexing paper corpora, querying scientific articles, and generating RAG-backed Markdown, CSV, or PDF-annotation reports. |
+| [`txtai`](../../../../repo-skills/txtai/SKILL.md) | `neuml/txtai` | Use txtai for semantic search, embeddings databases, RAG, LLM orchestration, agents, deterministic workflows, and API deployment. |
+| [`hnswlib`](../../../../repo-skills/hnswlib/SKILL.md) | `nmslib/hnswlib` | Use hnswlib 0.9.0 for CPU approximate nearest-neighbor search through its Python bindings or C++11 header-only API, including indexing, filtering, persistence, mutation, and recall checks. |
+| [`honcho`](../../../../repo-skills/honcho/SKILL.md) | `plastic-labs/honcho` | Router for Honcho self-hosting, integrations, CLI usage, and maintenance workflows. |
+| [`qdrant-client`](../../../../repo-skills/qdrant-client/SKILL.md) | `qdrant/qdrant-client` | Use the Python qdrant-client package for Qdrant vector database connections, local mode, sync and async operations, inference inputs, uploads, migrations, and REST/gRPC model conversion workflows. |
+| [`leann`](../../../../repo-skills/leann/SKILL.md) | `StarTrail-org/LEANN` | Use LEANN to build, search, update, chat over, serve, integrate, debug, and maintain compact local vector indexes and RAG applications across Python APIs, CLI workflows, backends, data sources, MCP, and HTTP. |
+| [`pixelrag`](../../../../repo-skills/pixelrag/SKILL.md) | `StarTrail-org/PixelRAG` | Use PixelRAG for visual document RAG: screenshot capture, visual index building, FAISS/Qdrant serving, evaluation reproduction, and LoRA training/data workflows. |
+| [`superduper`](../../../../repo-skills/superduper/SKILL.md) | `superduper-io/superduper` | Use Superduper to build database-integrated AI applications, component workflows, listeners, vector indexes, and first-party plugin integrations. |
+| [`deep-searcher`](../../../../repo-skills/deep-searcher/SKILL.md) | `zilliztech/deep-searcher` | Route DeepSearcher workflows for provider setup, data ingestion, RAG querying, CLI and service operation, and evaluation. |

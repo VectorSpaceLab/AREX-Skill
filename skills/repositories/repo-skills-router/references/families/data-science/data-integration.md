@@ -1,0 +1,29 @@
+# Data Science -> Data Integration
+
+Connectors and transformation libraries that acquire, parse, query, and prepare data from documents, object stores, databases, warehouses, and services.
+
+Choose a repository below only when its description, package/repository identity, task surface, and runtime intent match the request. If several candidates overlap, prefer the one whose root skill directly covers the requested workflow; then inspect its internal navigation rather than loading all candidates.
+
+| Repo skill | Repository | Skill description |
+| --- | --- | --- |
+| [`trafilatura`](../../../../repo-skills/trafilatura/SKILL.md) | `adbar/trafilatura` | Use Trafilatura for web text discovery, downloading, extraction, metadata, CLI batch processing, deduplication, and structured corpus outputs. |
+| [`airweave`](../../../../repo-skills/airweave/SKILL.md) | `airweave-ai/airweave` | Route Airweave tasks to the most specific sub-skill: local-development, backend-api, source-connectors, frontend-dashboard, connect-widget, mcp-search, or monke-e2e. |
+| [`aws-sdk-pandas`](../../../../repo-skills/aws-sdk-pandas/SKILL.md) | `aws/aws-sdk-pandas` | Routes AWS SDK for pandas (awswrangler) workflows across S3 lakehouse data, Athena/Glue catalogs, SQL connectors, runtime configuration, and AWS service integrations. |
+| [`biopython`](../../../../repo-skills/biopython/SKILL.md) | `biopython/biopython` | Route Biopython computational biology workflows across sequence objects, file formats, alignments, structures, web databases, BioSQL, motifs, restriction enzymes, and specialized modules. |
+| [`city2graph`](../../../../repo-skills/city2graph/SKILL.md) | `c2g-dev/city2graph` | Use the city2graph 1.0.0 Python package to construct, validate, transform, and troubleshoot geospatial, spatial-topology, morphology, mobility, transportation, heterogeneous, and GNN-ready graphs. |
+| [`wren-ai`](../../../../repo-skills/wren-ai/SKILL.md) | `Canner/WrenAI` | Use WrenAI and Wren Engine for governed semantic SQL, MDL projects, data-context memory, agent workflow guides, GenBI dashboards, MCP tools, browser WASM queries, framework SDKs, and repository development. |
+| [`koalas`](../../../../repo-skills/koalas/SKILL.md) | `databricks/koalas` | Use Koalas, the legacy pandas API on Apache Spark, for DataFrame, Spark I/O, SQL, options, plotting, and migration workflows. |
+| [`datachain`](../../../../repo-skills/datachain/SKILL.md) | `datachain-ai/datachain` | Routes DataChain operating guidance for Python SDK pipelines, query expressions, CLI and Studio commands, agent-harness knowledge workflows, and repository maintenance. |
+| [`docarray`](../../../../repo-skills/docarray/SKILL.md) | `docarray/docarray` | Use DocArray for multimodal Pydantic-style documents, typed DocList and DocVec batches, serialization and local storage, FastAPI payloads, and vector retrieval indexes. |
+| [`electricitymaps-contrib`](../../../../repo-skills/electricitymaps-contrib/SKILL.md) | `electricitymaps/electricitymaps-contrib` | Use for Electricity Maps contrib parser development, capacity updates, zone/exchange configuration maintenance, and focused repo validation workflows. |
+| [`db-gpt`](../../../../repo-skills/db-gpt/SKILL.md) | `eosphoros-ai/DB-GPT` | Use DB-GPT 0.8.1 as an agentic AI data platform: install and configure provider profiles, operate its CLI and services, build agents and AWEL flows, ingest and retrieve data with RAG, call client/API surfaces, and execute code through explicitly bounded sandbox runtimes. |
+| [`galaxy`](../../../../repo-skills/galaxy/SKILL.md) | `galaxyproject/galaxy` | Use Galaxy repository guidance for server configuration, APIs, tool and workflow development, data/storage, Tool Shed operations, and web-client development. |
+| [`datasets`](../../../../repo-skills/datasets/SKILL.md) | `huggingface/datasets` | Use this skill when working with Hugging Face Datasets: loading local or Hub datasets, defining Features schemas, processing/streaming datasets, converting formats, sharing to the Hub, managing cache/offline behavior, or using datasets-cli. |
+| [`alpha-gpt`](../../../../repo-skills/alpha-gpt/SKILL.md) | `imbue-bit/AlphaGPT` | Route AlphaGPT data ingestion, factor mining, live strategy, and dashboard workflows. |
+| [`prediction-market-analysis`](../../../../repo-skills/prediction-market-analysis/SKILL.md) | `Jon-Becker/prediction-market-analysis` | Route analysis, indexing, and data-ops guidance for the prediction-market-analysis repo. |
+| [`mage-ai`](../../../../repo-skills/mage-ai/SKILL.md) | `mage-ai/mage-ai` | Mage AI repo skill for platform operations, pipeline authoring, integrations, dbt, streaming, and AI workflows. |
+| [`modin`](../../../../repo-skills/modin/SKILL.md) | `modin-project/modin` | Guide Modin pandas-compatible, distributed dataframe, I/O, engine configuration, interoperability, and experimental extension workflows. |
+| [`earth2studio`](../../../../repo-skills/earth2studio/SKILL.md) | `NVIDIA/earth2studio` | Guides Earth2Studio weather and climate inference workflows, data access, model and component selection, output/checkpoint handling, extension, and optional REST serving with backend-aware validation. |
+| [`img2dataset`](../../../../repo-skills/img2dataset/SKILL.md) | `rom1504/img2dataset` | Create, restart, audit, and scale img2dataset runs for turning URL tables into image datasets. |
+| [`open-wearables`](../../../../repo-skills/open-wearables/SKILL.md) | `the-momentum/open-wearables` | Operating router for the Open Wearables FastAPI backend, wearable provider integrations, React portal, and FastMCP server. |
+| [`unstract`](../../../../repo-skills/unstract/SKILL.md) | `Zipstack/unstract` | Use Unstract to operate its document-extraction APIs, hosted MCP servers, workers, shared SDK/tool packages, frontend, and test rig. |

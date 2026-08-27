@@ -1,0 +1,12 @@
+{
+  "area_count": 20,
+  "assignment_count": 2204,
+  "assignment_index_sha256": "sha256:333af980e58415b58c39921d9880378a9bd956e77264946e19a1e5bb83ca11fa",
+  "family_count": 178,
+  "non_empty_family_count": 178,
+  "repository_count": 1000,
+  "repository_index_sha256": "sha256:f322035b6a98120d5a37585d7a0c6c842de286976b101f9a469c535668977753",
+  "schema_version": 1,
+  "source_router_run_id": "router-expanded-20260822T172331Z",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431"
+}

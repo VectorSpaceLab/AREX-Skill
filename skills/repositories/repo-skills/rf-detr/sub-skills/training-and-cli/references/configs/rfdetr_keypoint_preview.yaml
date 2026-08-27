@@ -1,0 +1,19 @@
+# Bundled public example. Replace dataset_dir/output_dir and schema for your data.
+model:
+  model_config:
+    class_path: rfdetr.config.RFDETRKeypointPreviewConfig
+    init_args:
+      num_classes: 1
+      num_keypoints_per_class: [17]
+  train_config:
+    class_path: rfdetr.config.KeypointTrainConfig
+    init_args:
+      dataset_file: roboflow
+      dataset_dir: data/my_keypoint_dataset
+      output_dir: outputs/rfdetr-keypoint
+      epochs: 50
+      batch_size: 2
+      grad_accum_steps: 8
+      keypoint_oks_sigmas: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+      keypoint_flip_pairs: [1, 2, 3, 4]
+      run_test: false

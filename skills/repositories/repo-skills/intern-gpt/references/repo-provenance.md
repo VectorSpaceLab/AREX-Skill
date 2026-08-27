@@ -1,0 +1,25 @@
+# Repo Provenance
+
+- schema: `disco.repo-provenance.v1`
+- source repository: OpenGVLab/InternGPT
+- source commit: `a04d6dd6d5971e710cf55eae0a8ea1ce70ba1a81`
+- branch: `main`
+- exact tag: omitted (no exact tag at generation time)
+- working tree state: dirty checkout with generated production artifacts under `skills/`
+- dirty paths summary: `skills/` added during repo-skill production
+- public remote: `https://github.com/OpenGVLab/InternGPT.git`
+- package version: unavailable; the checkout is service-oriented and was inspected from source rather than as a published Python distribution
+- evidence paths used:
+  - `README.md`
+  - `README_CN.md`
+  - `INSTALL.md`
+  - `app.py`
+  - `requirements.txt`
+  - `iGPT/`
+  - `configs/`
+  - `docker/`
+  - `tests/`
+  - `third-party/llama_download.sh`
+  - selected `third-party/lama/` docs and configs
+- generated-skill scope: `skills/disco/intern-gpt/`
+- refresh note: regenerate or refresh this skill if the repository commit, checkpoints, CLI flags, tab names, or tool class names change materially

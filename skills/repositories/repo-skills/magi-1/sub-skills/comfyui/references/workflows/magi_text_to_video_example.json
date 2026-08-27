@@ -1,0 +1,230 @@
+{
+  "id": "e50b6e81-33c9-4507-b999-abd7e7486517",
+  "revision": 0,
+  "last_node_id": 4,
+  "last_link_id": 4,
+  "nodes": [
+    {
+      "id": 4,
+      "type": "MagiSaveVideo",
+      "pos": [
+        1292.05859375,
+        257.34765625
+      ],
+      "size": [
+        270,
+        82
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "video",
+          "type": "IMAGE",
+          "link": 3
+        },
+        {
+          "name": "fps",
+          "type": "INT",
+          "widget": {
+            "name": "fps"
+          },
+          "link": 4
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "aux_id": "SandAI-org/MAGI-1",
+        "ver": "a80ef963c9f3cd3cec677cbfb97f341f228426fa",
+        "Node name for S&R": "MagiSaveVideo"
+      },
+      "widgets_values": [
+        "/path/to/your/output",
+        24
+      ]
+    },
+    {
+      "id": 2,
+      "type": "MagiTextEncoder",
+      "pos": [
+        606.72265625,
+        406.90234375
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "widget": {
+            "name": "prompt"
+          },
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "text_embeddings",
+          "type": "CONDITIONING",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "SandAI-org/MAGI-1",
+        "ver": "a80ef963c9f3cd3cec677cbfb97f341f228426fa",
+        "Node name for S&R": "MagiTextEncoder"
+      },
+      "widgets_values": [
+        "The text to be encoded.",
+        "/path/to/your/ckpt/magi/ckpt/t5",
+        "cpu"
+      ]
+    },
+    {
+      "id": 1,
+      "type": "MagiPromptLoader",
+      "pos": [
+        166.45703125,
+        399.74609375
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "SandAI-org/MAGI-1",
+        "ver": "a80ef963c9f3cd3cec677cbfb97f341f228426fa",
+        "Node name for S&R": "MagiPromptLoader"
+      },
+      "widgets_values": [
+        ""
+      ]
+    },
+    {
+      "id": 3,
+      "type": "MagiProcess",
+      "pos": [
+        969.10546875,
+        251.12890625
+      ],
+      "size": [
+        270,
+        270
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_embeddings",
+          "type": "CONDITIONING",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "video",
+          "type": "IMAGE",
+          "links": [
+            3
+          ]
+        },
+        {
+          "name": "fps",
+          "type": "INT",
+          "links": [
+            4
+          ]
+        }
+      ],
+      "properties": {
+        "aux_id": "SandAI-org/MAGI-1",
+        "ver": "a80ef963c9f3cd3cec677cbfb97f341f228426fa",
+        "Node name for S&R": "MagiProcess"
+      },
+      "widgets_values": [
+        "text to video",
+        "/path/to/your/config",
+        "/path/to/your/image",
+        1234,
+        720,
+        720,
+        96,
+        64,
+        24
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      3,
+      0,
+      "CONDITIONING"
+    ],
+    [
+      2,
+      1,
+      0,
+      2,
+      0,
+      "STRING"
+    ],
+    [
+      3,
+      3,
+      0,
+      4,
+      0,
+      "IMAGE"
+    ],
+    [
+      4,
+      3,
+      1,
+      4,
+      1,
+      "INT"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 1,
+      "offset": [
+        -0.12890625,
+        0.125
+      ]
+    },
+    "frontendVersion": "1.19.9",
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}

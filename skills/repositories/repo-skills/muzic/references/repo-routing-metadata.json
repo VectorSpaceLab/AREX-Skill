@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "microsoft/muzic",
+  "skill_id": "muzic",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "Generative Media",
+      "family": "Audio Generation"
+    },
+    {
+      "area": "Speech and Audio",
+      "family": "Audio Understanding"
+    },
+    {
+      "area": "LLM Applications",
+      "family": "Autonomous Agent Applications"
+    }
+  ]
+}

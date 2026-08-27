@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "ymcui/Chinese-LLaMA-Alpaca-2",
+  "skill_id": "chinese-llama-alpaca-2",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "LLM Models, Training, and Alignment",
+      "family": "LLM Fine-Tuning"
+    },
+    {
+      "area": "LLM Models, Training, and Alignment",
+      "family": "Pretraining"
+    },
+    {
+      "area": "LLM Models, Training, and Alignment",
+      "family": "Open-Weight Model Releases"
+    }
+  ]
+}

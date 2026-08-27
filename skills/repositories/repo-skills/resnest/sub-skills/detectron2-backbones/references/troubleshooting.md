@@ -1,0 +1,31 @@
+# Detectron2 ResNeSt Troubleshooting
+
+Detectron2 support in ResNeSt is optional and was not part of the minimum verified runtime. Treat these checks as conditional on the user's installed Detectron2/PyTorch/CUDA stack.
+
+| Symptom | Likely cause | Fix |
+|---|---|---|
+| `ModuleNotFoundError: No module named 'detectron2'` | Detectron2 is not installed. | Install a Detectron2 build matching the user's Python, PyTorch, torchvision, and CUDA/CPU environment. Until then, only static references and the probe's missing-dependency status are usable. |
+| `import resnest.d2` fails after installing Detectron2 | Detectron2 import works partially, but compiled ops or transitive dependencies are incompatible. | Import `detectron2`, then `detectron2.layers`, then `resnest.d2` in isolation. Reinstall Detectron2 for the exact torch/CUDA ABI if compiled ops fail. |
+| `KeyError` or registry error for `build_resnest_fpn_backbone` | ResNeSt Detectron2 builders were not imported before model construction. | Add `from resnest.d2 import add_resnest_config` before building; this imports the registered builders. Set `MODEL.BACKBONE.NAME: "build_resnest_fpn_backbone"`. |
+| Config merge complains about `RADIX`, `AVD`, `AVG_DOWN`, `DEEP_STEM`, or `BOTTLENECK_WIDTH` | ResNeSt config keys were not added before merging YAML/opts. | Call `add_resnest_config(cfg)` immediately after `get_cfg()` and before `merge_from_file` or `merge_from_list`. |
+| Model behaves like a standard ResNet or has mismatched stride | `STRIDE_IN_1X1` stayed `True`, `RADIX` stayed `1`, or the standard ResNet backbone name is still selected. | Set `MODEL.BACKBONE.NAME: "build_resnest_fpn_backbone"`, `STRIDE_IN_1X1: False`, `RADIX: 2`, `DEEP_STEM: True`, `AVD: True`, `AVG_DOWN: True`, and `BOTTLENECK_WIDTH: 64`. |
+| SyncBN errors on CPU, one GPU, or custom launcher | SyncBN expects distributed/GPU-capable behavior and compatible Detectron2 support. | For config probing, no model build is needed. For debugging train/eval, switch all relevant `NORM: "SyncBN"` fields to a supported norm such as `"BN"` or `"FrozenBN"`; do not claim released metric reproduction after changing norm. |
+| DCN recipe fails with deformable conv operator errors | Detectron2 deformable convolution ops are unavailable or incompatible with the selected torch/CUDA build. | Use a non-DCN recipe, or install a Detectron2 build with working `DeformConv`/`ModulatedDeformConv`. Keep DCN fields `[False, True, True, True]`, modulated true, and deform groups 2 only when operators load. |
+| `_BASE_` file not found during config merge | A config file still depends on relative includes that are not present in the user's project. | Make the config self-contained by copying the needed base fields into one user config, or provide a complete include tree alongside the config. The bundled probe does not supply source checkout configs. |
+| `Dataset 'coco_2017_train' is not registered` or evaluation has no data | COCO datasets are not installed/registered in Detectron2's expected names. | Prepare COCO 2017 images and annotations, set the dataset root or register custom dataset names, and update `DATASETS.TRAIN`/`DATASETS.TEST` accordingly. |
+| Panoptic config fails to find separated panoptic data | Panoptic JSON/files or separated registrations are missing. | Prepare `panoptic_train2017`, `panoptic_val2017`, panoptic annotation JSON files, and registrations equivalent to `coco_2017_train_panoptic_separated` and `coco_2017_val_panoptic_separated`. |
+| `pycocotools` import/build failure | COCO evaluation dependency is missing or compiled for the wrong environment. | Install a compatible `pycocotools` wheel or build it with a working compiler for the active Python environment before COCO eval. |
+| Released external checkpoint URL fails to load | Network, access, cache, or checkpoint compatibility issue. | Download the checkpoint through an approved channel and set `MODEL.WEIGHTS` to the local file, or use the backbone initialization URL for training. Verify the checkpoint matches the recipe family and depth. |
+| Poor colors/metrics after switching to ResNeSt | ResNeSt released configs use RGB input and specific pixel statistics, while many Detectron2 defaults assume BGR. | Keep `INPUT.FORMAT: "RGB"`, `PIXEL_MEAN: [123.68, 116.779, 103.939]`, and `PIXEL_STD: [58.393, 57.12, 57.375]` when using released ResNeSt weights. |
+| `NotImplementedError: no Evaluator for the dataset` | The dataset metadata lacks a supported `evaluator_type`. | Register metadata with evaluator type `coco`, `coco_panoptic_seg`, `sem_seg`, `pascal_voc`, `lvis`, or implement a custom evaluator in the launcher. |
+| Out of memory with ResNeSt-200, all-tricks, DCN, TTA, or large scales | Heavy backbone, high image scale, SyncBN, crop, DCN, or test-time augmentation exceeds available memory. | First validate with ResNeSt-50 non-DCN and no TTA. Then reduce `IMS_PER_BATCH`, image size, crop/TTA, or depth; adjust LR schedule if changing effective batch size. |
+| `CfgNode` is frozen before overrides | The launcher freezes config before merging user opts. | Merge config files and `KEY VALUE` options first, then call `cfg.freeze()`. |
+| Detectron2 API changed relative to the ResNeSt integration | The ResNeSt integration targets an older Detectron2 API surface. | Pin a compatible Detectron2 version or adapt imports/registry locations in the user's launcher. Re-run the bundled probe after any version change. |
+
+## Fast diagnosis sequence
+
+1. Run `python scripts/detectron2_config_probe.py`. If it reports missing Detectron2, stop runtime Detectron2 work and install/repair Detectron2 first.
+2. Run the probe with the user's config file. Fix `_BASE_` include, unknown-key, and opts issues before building a model.
+3. Confirm the printed `MODEL.BACKBONE.NAME` is `build_resnest_fpn_backbone` and the ResNeSt fields are `STRIDE_IN_1X1=False`, `DEEP_STEM=True`, `AVD=True`, `AVG_DOWN=True`, `RADIX=2`, `BOTTLENECK_WIDTH=64`.
+4. For DCN, import Detectron2 deformable conv layers before training and fall back to a non-DCN recipe if operators are unavailable.
+5. For eval-only, verify dataset registration and checkpoint compatibility separately; a successful config merge does not prove COCO data or weights are available.

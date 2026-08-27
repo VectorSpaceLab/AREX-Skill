@@ -1,0 +1,5174 @@
+{
+  "schema": "papers-in-100-lines-of-code.implementation-index.v1",
+  "generated_skill": "papers-in-100-lines-of-code",
+  "scope": "Self-contained catalog distilled from root README, per-paper READMEs, requirements files, and AST inspection. Source directory labels are provenance/evidence labels, not runtime links.",
+  "sub_skill_groups": {
+    "generative-models": [
+      "Adversarial_Feature_Learning",
+      "Adversarially_Learned_Inference",
+      "Auto_Encoding_Variational_Bayes",
+      "Conditional_Generative_Adversarial_Nets",
+      "DPM_Solver_A_Fast_ODE_Solver_for_Diffusion_Probabilistic_Model_Sampling_in_Around_10_Steps",
+      "Deep_Unsupervised_Learning_using_Nonequilibrium_Thermodynamics",
+      "Denoising_Diffusion_Implicit_Models",
+      "Denoising_Diffusion_Probabilistic_Models",
+      "Density_Estimation_Using_Real_NVP",
+      "DreamBooth_Fine_Tuning_Text_to_Image_Diffusion_Models_for_Subject_Driven_Generation",
+      "Flow_Straight_and_Fast_Learning_to_Generate_and_Transfer_Data_with_Rectified_Flow",
+      "Generative_Adversarial_Networks",
+      "Gromov_Wasserstein_Distances_between_Gaussian_Distributions",
+      "High_Resolution_Image_Synthesis_with_Latent_Diffusion_Models",
+      "Image_to_Image_Translation_with_Conditional_Adversarial_Nets",
+      "Improved_Techniques_for_Training_GANs",
+      "Improved_Training_of_Wasserstein_GANs",
+      "Least_Squares_Generative_Adversarial_Networks",
+      "Likelihood_free_MCMC_with_Amortized_Approximate_Ratio_Estimators",
+      "Masked_Autoregressive_Flow_for_Density_Estimation",
+      "NICE_Non_linear_Independent_Components_Estimation",
+      "Pseudo_Numerical_Methods_for_Diffusion_Models_on_Manifolds",
+      "Sequential_Neural_Likelihood",
+      "Unpaired_Image_to_Image_Translation_using_Cycle_Consistent_Adversarial_Networks",
+      "Unsupervised_Representation_Learning_with_Deep_Convolutional_Generative_Adversarial_Networks",
+      "Variational_Inference_with_Normalizing_Flows",
+      "Wasserstein_GAN"
+    ],
+    "neural-rendering-3d": [
+      "3D_Gaussian_Splatting_for_Real_Time_Radiance_Field_Rendering",
+      "A_Pixel_Is_Worth_More_Than_One_3D_Gaussians_in_Single_View_3D_Reconstruction",
+      "FastNeRF_High_Fidelity_Neural_Rendering_at_200FPS",
+      "Fourier_Features_Let_Networks_Learn_High_Frequency_Functions_in_Low_Dimensional_Domains",
+      "FreeNeRF_Improving_Few_shot_Neural_Rendering_with_Free_Frequency_Regularization",
+      "Implicit_Neural_Representations_with_Periodic_Activation_Functions",
+      "InfoNeRF_Ray_Entropy_Minimization_for_Few_Shot_Neural_Volume_Rendering",
+      "Instant_Neural_Graphics_Primitives_with_a_Multiresolution_Hash_Encoding",
+      "KPlanes_Explicit_Radiance_Fields_in_Space_Time_and_Appearance",
+      "KiloNeRF_Speeding_up_Neural_Radiance_Fields_with_Thousands_of_Tiny_MLPs",
+      "Light_Field_Networks_Neural_Scene_Representations_with_Single_Evaluation_Rendering",
+      "Multiplicative_Filter_Networks",
+      "NeRF_Representing_Scenes_as_Neural_Radiance_Fields_for_View_Synthesis",
+      "Neural_Radiance_Fields_Without_Known_Camera_Parameters",
+      "PlenOctrees_for_Real_time_Rendering_of_Neural_Radiance_Fields",
+      "Plenoxels_Radiance_Fields_without_Neural_Networks",
+      "Speedy_Splat_Fast_3D_Gaussian_Splatting_with_Sparse_Pixels_and_Sparse_Primitives",
+      "Spherical_Voronoi_Directional_Appearance_as_a_Differentiable_Partition_of_the_Sphere",
+      "Splatter_Image_Ultra_Fast_Single_View_3D_Reconstruction"
+    ],
+    "optimization-meta-rl": [
+      "Adam_a_Method_For_Stochastic_Optimization",
+      "Deep_Image_Prior",
+      "Deep_Reinforcement_Learning_with_Double_Q_learning",
+      "Fast_and_Accurate_Deep_Network_Learning_by_Exponential_Linear_Units_ELUs",
+      "Gaussian_Error_Linear_Units_GELUs",
+      "Human_level_control_through_deep_reinforcement_learning",
+      "Learned_Initializations_for_Optimizing_Coordinate_Based_Neural_Representations",
+      "Maxout_Networks",
+      "Model_Agnostic_Meta_Learning_for_Fast_Adaptation_of_Deep_Networks",
+      "Network_In_Network",
+      "On_First_Order_Meta_Learning_Algorithms",
+      "On_the_Variance_of_the_Adaptive_Learning_Rate_and_Beyond",
+      "Optimizing_Millions_of_Hyperparameters_by_Implicit_Differentiation",
+      "Playing_Atari_with_Deep_Reinforcement_Learning",
+      "Proximal_Policy_Optimization_Algorithms",
+      "Self_Normalizing_Neural_Networks"
+    ]
+  },
+  "entries": [
+    {
+      "id": "3d-gaussian-splatting-for-real-time-radiance-field-rendering",
+      "paper_title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "source_directory_evidence_label": "3D_Gaussian_Splatting_for_Real_Time_Radiance_Field_Rendering",
+      "owner_sub_skill": "neural-rendering-3d",
+      "categories": [
+        "neural-rendering-3d"
+      ],
+      "python_scripts": [
+        "3dgs.py"
+      ],
+      "key_symbols": [
+        "build_sigma_from_params",
+        "evaluate_sh",
+        "inv2x2",
+        "project_points",
+        "quat_to_rotmat",
+        "render",
+        "scale_intrinsics"
+      ],
+      "requirements": [
+        "torch==2.2.1",
+        "numpy==1.24.4",
+        "pillow==10.2.0",
+        "tqdm==4.64.1"
+      ],
+      "asset_labels": [
+        "novel_views",
+        "camera_trajectories",
+        "out_colmap"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://3dgaussiansplattingcourse.com",
+        "https://drive.google.com/file/d/1NOx8dnD5_iz5dkuZuNzIpORRvhS87Zth/view?usp=sharing"
+      ],
+      "title": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "name": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "paper": "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+      "directory": "3D_Gaussian_Splatting_for_Real_Time_Radiance_Field_Rendering",
+      "dir": "3D_Gaussian_Splatting_for_Real_Time_Radiance_Field_Rendering",
+      "folder": "3D_Gaussian_Splatting_for_Real_Time_Radiance_Field_Rendering",
+      "owner": "neural-rendering-3d",
+      "group": "neural-rendering-3d",
+      "subskill": "neural-rendering-3d",
+      "scripts": [
+        "3dgs.py"
+      ],
+      "source_scripts": [
+        "3dgs.py"
+      ],
+      "symbols": [
+        "build_sigma_from_params",
+        "evaluate_sh",
+        "inv2x2",
+        "project_points",
+        "quat_to_rotmat",
+        "render",
+        "scale_intrinsics"
+      ],
+      "asset_dirs": [
+        "novel_views",
+        "camera_trajectories",
+        "out_colmap"
+      ],
+      "assets": [
+        "novel_views",
+        "camera_trajectories",
+        "out_colmap"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "3D Gaussian Splatting for Real Time Radiance Field Rendering",
+        "3D Gaussian Splatting for Real-Time Radiance Field Rendering",
+        "3D_Gaussian_Splatting_for_Real_Time_Radiance_Field_Rendering",
+        "Field",
+        "Gaussian",
+        "Radiance",
+        "Real",
+        "Rendering",
+        "Splatting",
+        "Time",
+        "for",
+        "gaussian splatting"
+      ]
+    },
+    {
+      "id": "a-pixel-is-worth-more-than-one-3d-gaussians-in-single-view-3d-reconstruction",
+      "paper_title": "A Pixel Is Worth More Than One 3D Gaussians in Single-View 3D Reconstruction",
+      "source_directory_evidence_label": "A_Pixel_Is_Worth_More_Than_One_3D_Gaussians_in_Single_View_3D_Reconstruction",
+      "owner_sub_skill": "neural-rendering-3d",
+      "categories": [
+        "misc"
+      ],
+      "python_scripts": [
+        "gaussian_splatting.py",
+        "pixels_to_gaussians.py",
+        "unet.py"
+      ],
+      "key_symbols": [
+        "ChildGaussianMLPs",
+        "DownBlock",
+        "NMRDataset",
+        "ResBlock",
+        "SplatterImageUNet",
+        "UpBlock",
+        "build_pixel_grid_from_intrinsics",
+        "camera_space_points",
+        "decode_child_gaussians",
+        "decode_parent_gaussians",
+        "evaluate_sh",
+        "init_child_mlps",
+        "init_output_head",
+        "intrinsics_to_fxfycxcy",
+        "inv2x2",
+        "inv_sigmoid_scalar",
+        "project_points",
+        "quat_xyzw_to_rotmat",
+        "render",
+        "render_novel_view_grid",
+        "sample_source_target_indices",
+        "scale_intrinsics"
+      ],
+      "requirements": [
+        "matplotlib==3.7.2",
+        "numpy==1.24.3",
+        "Pillow==9.4.0",
+        "torch==2.7.0+cu126",
+        "tqdm==4.65.0"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2405.20310",
+        "https://drive.google.com/drive/folders/1lRfg-Ov1dd3ldke9Gv9dyzGGTxiFOhIs"
+      ],
+      "title": "A Pixel Is Worth More Than One 3D Gaussians in Single-View 3D Reconstruction",
+      "name": "A Pixel Is Worth More Than One 3D Gaussians in Single-View 3D Reconstruction",
+      "paper": "A Pixel Is Worth More Than One 3D Gaussians in Single-View 3D Reconstruction",
+      "directory": "A_Pixel_Is_Worth_More_Than_One_3D_Gaussians_in_Single_View_3D_Reconstruction",
+      "dir": "A_Pixel_Is_Worth_More_Than_One_3D_Gaussians_in_Single_View_3D_Reconstruction",
+      "folder": "A_Pixel_Is_Worth_More_Than_One_3D_Gaussians_in_Single_View_3D_Reconstruction",
+      "owner": "neural-rendering-3d",
+      "group": "neural-rendering-3d",
+      "subskill": "neural-rendering-3d",
+      "scripts": [
+        "gaussian_splatting.py",
+        "pixels_to_gaussians.py",
+        "unet.py"
+      ],
+      "source_scripts": [
+        "gaussian_splatting.py",
+        "pixels_to_gaussians.py",
+        "unet.py"
+      ],
+      "symbols": [
+        "ChildGaussianMLPs",
+        "DownBlock",
+        "NMRDataset",
+        "ResBlock",
+        "SplatterImageUNet",
+        "UpBlock",
+        "build_pixel_grid_from_intrinsics",
+        "camera_space_points",
+        "decode_child_gaussians",
+        "decode_parent_gaussians",
+        "evaluate_sh",
+        "init_child_mlps",
+        "init_output_head",
+        "intrinsics_to_fxfycxcy",
+        "inv2x2",
+        "inv_sigmoid_scalar",
+        "project_points",
+        "quat_xyzw_to_rotmat",
+        "render",
+        "render_novel_view_grid",
+        "sample_source_target_indices",
+        "scale_intrinsics"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "A Pixel Is Worth More Than One 3D Gaussians in Single View 3D Reconstruction",
+        "A Pixel Is Worth More Than One 3D Gaussians in Single-View 3D Reconstruction",
+        "A_Pixel_Is_Worth_More_Than_One_3D_Gaussians_in_Single_View_3D_Reconstruction",
+        "Gaussians",
+        "More",
+        "One",
+        "Pixel",
+        "Reconstruction",
+        "Single",
+        "Than",
+        "View",
+        "Worth"
+      ]
+    },
+    {
+      "id": "adam-a-method-for-stochastic-optimization",
+      "paper_title": "Adam: A Method For Stochastic Optimization",
+      "source_directory_evidence_label": "Adam_a_Method_For_Stochastic_Optimization",
+      "owner_sub_skill": "optimization-meta-rl",
+      "categories": [
+        "layers-optimizers"
+      ],
+      "python_scripts": [
+        "adam.py"
+      ],
+      "key_symbols": [
+        "Adam",
+        "train"
+      ],
+      "requirements": [
+        "keras==2.11.0",
+        "matplotlib==3.2.2",
+        "numpy==1.22.4",
+        "seaborn==0.11.2",
+        "torch==1.13.1",
+        "tqdm==4.64.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1412.6980"
+      ],
+      "title": "Adam: A Method For Stochastic Optimization",
+      "name": "Adam: A Method For Stochastic Optimization",
+      "paper": "Adam: A Method For Stochastic Optimization",
+      "directory": "Adam_a_Method_For_Stochastic_Optimization",
+      "dir": "Adam_a_Method_For_Stochastic_Optimization",
+      "folder": "Adam_a_Method_For_Stochastic_Optimization",
+      "owner": "optimization-meta-rl",
+      "group": "optimization-meta-rl",
+      "subskill": "optimization-meta-rl",
+      "scripts": [
+        "adam.py"
+      ],
+      "source_scripts": [
+        "adam.py"
+      ],
+      "symbols": [
+        "Adam",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Adam",
+        "Adam a Method For Stochastic Optimization",
+        "Adam: A Method For Stochastic Optimization",
+        "Adam_a_Method_For_Stochastic_Optimization",
+        "For",
+        "Method",
+        "Optimization",
+        "Stochastic",
+        "adam"
+      ]
+    },
+    {
+      "id": "adversarial-feature-learning",
+      "paper_title": "Adversarial Feature Learning",
+      "source_directory_evidence_label": "Adversarial_Feature_Learning",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "gan-image-translation"
+      ],
+      "python_scripts": [
+        "adversarial_feature_learning.py"
+      ],
+      "key_symbols": [
+        "D",
+        "E",
+        "G",
+        "get_minibatch",
+        "sample_latent",
+        "train"
+      ],
+      "requirements": [
+        "keras==2.8.0",
+        "matplotlib==3.2.2",
+        "numpy==1.21.6",
+        "torch==1.12.1+cu113",
+        "tqdm==4.64.0"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1605.09782"
+      ],
+      "title": "Adversarial Feature Learning",
+      "name": "Adversarial Feature Learning",
+      "paper": "Adversarial Feature Learning",
+      "directory": "Adversarial_Feature_Learning",
+      "dir": "Adversarial_Feature_Learning",
+      "folder": "Adversarial_Feature_Learning",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "adversarial_feature_learning.py"
+      ],
+      "source_scripts": [
+        "adversarial_feature_learning.py"
+      ],
+      "symbols": [
+        "D",
+        "E",
+        "G",
+        "get_minibatch",
+        "sample_latent",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Adversarial",
+        "Adversarial Feature Learning",
+        "Adversarial_Feature_Learning",
+        "Feature",
+        "Learning"
+      ]
+    },
+    {
+      "id": "adversarially-learned-inference",
+      "paper_title": "Adversarially Learned Inference",
+      "source_directory_evidence_label": "Adversarially_Learned_Inference",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "gan-image-translation"
+      ],
+      "python_scripts": [
+        "ali.py"
+      ],
+      "key_symbols": [
+        "Ali",
+        "Discriminator",
+        "GeneratorX",
+        "GeneratorZ",
+        "init_weights",
+        "sample_bach",
+        "sample_latent"
+      ],
+      "requirements": [
+        "matplotlib==3.2.2",
+        "scipy==1.7.3",
+        "torch==1.12.1+cu113",
+        "tqdm==4.64.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1606.00704",
+        "http://ufldl.stanford.edu/housenumbers/"
+      ],
+      "title": "Adversarially Learned Inference",
+      "name": "Adversarially Learned Inference",
+      "paper": "Adversarially Learned Inference",
+      "directory": "Adversarially_Learned_Inference",
+      "dir": "Adversarially_Learned_Inference",
+      "folder": "Adversarially_Learned_Inference",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "ali.py"
+      ],
+      "source_scripts": [
+        "ali.py"
+      ],
+      "symbols": [
+        "Ali",
+        "Discriminator",
+        "GeneratorX",
+        "GeneratorZ",
+        "init_weights",
+        "sample_bach",
+        "sample_latent"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Adversarially",
+        "Adversarially Learned Inference",
+        "Adversarially_Learned_Inference",
+        "Inference",
+        "Learned"
+      ]
+    },
+    {
+      "id": "auto-encoding-variational-bayes",
+      "paper_title": "Auto-Encoding Variational Bayes",
+      "source_directory_evidence_label": "Auto_Encoding_Variational_Bayes",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "probabilistic-flows-vaes"
+      ],
+      "python_scripts": [
+        "VAEs.py"
+      ],
+      "key_symbols": [
+        "AVEB",
+        "Model",
+        "get_minibatch"
+      ],
+      "requirements": [],
+      "asset_labels": [
+        "Imgs",
+        "Data"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "main_guard"
+      ],
+      "backend_posture": "cpu/static or dependency-specific",
+      "full_run_safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1312.6114",
+        "https://www.youtube.com/watch?v=jvDFn0qPCM0&t=3s"
+      ],
+      "title": "Auto-Encoding Variational Bayes",
+      "name": "Auto-Encoding Variational Bayes",
+      "paper": "Auto-Encoding Variational Bayes",
+      "directory": "Auto_Encoding_Variational_Bayes",
+      "dir": "Auto_Encoding_Variational_Bayes",
+      "folder": "Auto_Encoding_Variational_Bayes",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "VAEs.py"
+      ],
+      "source_scripts": [
+        "VAEs.py"
+      ],
+      "symbols": [
+        "AVEB",
+        "Model",
+        "get_minibatch"
+      ],
+      "asset_dirs": [
+        "Imgs",
+        "Data"
+      ],
+      "assets": [
+        "Imgs",
+        "Data"
+      ],
+      "safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "aliases": [
+        "Auto",
+        "Auto Encoding Variational Bayes",
+        "Auto-Encoding Variational Bayes",
+        "Auto_Encoding_Variational_Bayes",
+        "Bayes",
+        "Encoding",
+        "Variational"
+      ]
+    },
+    {
+      "id": "conditional-generative-adversarial-nets",
+      "paper_title": "Conditional Generative Adversarial Nets",
+      "source_directory_evidence_label": "Conditional_Generative_Adversarial_Nets",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "gan-image-translation"
+      ],
+      "python_scripts": [
+        "cgan.py"
+      ],
+      "key_symbols": [
+        "Discriminator",
+        "Generator",
+        "get_minibatch",
+        "sample_noise",
+        "train"
+      ],
+      "requirements": [
+        "keras==2.8.0",
+        "matplotlib==3.2.2",
+        "numpy==1.21.6",
+        "torch==1.12.1+cu113",
+        "tqdm==4.64.0"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "main_guard"
+      ],
+      "backend_posture": "cpu-or-cuda torch depending on edits/device",
+      "full_run_safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1411.1784"
+      ],
+      "title": "Conditional Generative Adversarial Nets",
+      "name": "Conditional Generative Adversarial Nets",
+      "paper": "Conditional Generative Adversarial Nets",
+      "directory": "Conditional_Generative_Adversarial_Nets",
+      "dir": "Conditional_Generative_Adversarial_Nets",
+      "folder": "Conditional_Generative_Adversarial_Nets",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "cgan.py"
+      ],
+      "source_scripts": [
+        "cgan.py"
+      ],
+      "symbols": [
+        "Discriminator",
+        "Generator",
+        "get_minibatch",
+        "sample_noise",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "aliases": [
+        "Adversarial",
+        "Conditional",
+        "Conditional Generative Adversarial Nets",
+        "Conditional_Generative_Adversarial_Nets",
+        "Generative",
+        "Nets"
+      ]
+    },
+    {
+      "id": "dpm-solver-a-fast-ode-solver-for-diffusion-probabilistic-model-sampling-in-around-10-steps",
+      "paper_title": "DPM-Solver",
+      "source_directory_evidence_label": "DPM_Solver_A_Fast_ODE_Solver_for_Diffusion_Probabilistic_Model_Sampling_in_Around_10_Steps",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "diffusion-generative-sampling"
+      ],
+      "python_scripts": [
+        "dpm_solver.py",
+        "unet.py"
+      ],
+      "key_symbols": [
+        "AttentionBlock",
+        "DiffusionModel",
+        "Downsample",
+        "Nin",
+        "ResNetBlock",
+        "UNet",
+        "Upsample",
+        "get_timestep_embedding"
+      ],
+      "requirements": [
+        "matplotlib==3.5.3",
+        "numpy==1.24.1",
+        "torch==1.12.0",
+        "tqdm==4.64.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "main_guard"
+      ],
+      "backend_posture": "cpu-or-cuda torch depending on edits/device",
+      "full_run_safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2206.00927"
+      ],
+      "title": "DPM-Solver",
+      "name": "DPM-Solver",
+      "paper": "DPM-Solver",
+      "directory": "DPM_Solver_A_Fast_ODE_Solver_for_Diffusion_Probabilistic_Model_Sampling_in_Around_10_Steps",
+      "dir": "DPM_Solver_A_Fast_ODE_Solver_for_Diffusion_Probabilistic_Model_Sampling_in_Around_10_Steps",
+      "folder": "DPM_Solver_A_Fast_ODE_Solver_for_Diffusion_Probabilistic_Model_Sampling_in_Around_10_Steps",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "dpm_solver.py",
+        "unet.py"
+      ],
+      "source_scripts": [
+        "dpm_solver.py",
+        "unet.py"
+      ],
+      "symbols": [
+        "AttentionBlock",
+        "DiffusionModel",
+        "Downsample",
+        "Nin",
+        "ResNetBlock",
+        "UNet",
+        "Upsample",
+        "get_timestep_embedding"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "aliases": [
+        "DPM",
+        "DPM Solver A Fast ODE Solver for Diffusion Probabilistic Model Sampling in Around 10 Steps",
+        "DPM-Solver",
+        "DPM_Solver_A_Fast_ODE_Solver_for_Diffusion_Probabilistic_Model_Sampling_in_Around_10_Steps",
+        "Solver",
+        "dpm solver"
+      ]
+    },
+    {
+      "id": "deep-image-prior",
+      "paper_title": "Deep Image Prior",
+      "source_directory_evidence_label": "Deep_Image_Prior",
+      "owner_sub_skill": "optimization-meta-rl",
+      "categories": [
+        "misc"
+      ],
+      "python_scripts": [
+        "deep_image_prior.py"
+      ],
+      "key_symbols": [
+        "D",
+        "Model",
+        "S",
+        "U"
+      ],
+      "requirements": [
+        "matplotlib==3.5.2",
+        "numpy==1.24.4",
+        "Pillow==10.0.0",
+        "torch==2.0.0",
+        "tqdm==4.64.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "main_guard"
+      ],
+      "backend_posture": "cpu-or-cuda torch depending on edits/device",
+      "full_run_safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1711.10925"
+      ],
+      "title": "Deep Image Prior",
+      "name": "Deep Image Prior",
+      "paper": "Deep Image Prior",
+      "directory": "Deep_Image_Prior",
+      "dir": "Deep_Image_Prior",
+      "folder": "Deep_Image_Prior",
+      "owner": "optimization-meta-rl",
+      "group": "optimization-meta-rl",
+      "subskill": "optimization-meta-rl",
+      "scripts": [
+        "deep_image_prior.py"
+      ],
+      "source_scripts": [
+        "deep_image_prior.py"
+      ],
+      "symbols": [
+        "D",
+        "Model",
+        "S",
+        "U"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "aliases": [
+        "Deep",
+        "Deep Image Prior",
+        "Deep_Image_Prior",
+        "Image",
+        "Prior"
+      ]
+    },
+    {
+      "id": "deep-reinforcement-learning-with-double-q-learning",
+      "paper_title": "Deep Reinforcement Learning with Double Q-learning",
+      "source_directory_evidence_label": "Deep_Reinforcement_Learning_with_Double_Q_learning",
+      "owner_sub_skill": "optimization-meta-rl",
+      "categories": [
+        "reinforcement-learning"
+      ],
+      "python_scripts": [
+        "ddqn.py"
+      ],
+      "key_symbols": [
+        "DQN",
+        "Deep_Q_Learning"
+      ],
+      "requirements": [
+        "gym==0.23.1",
+        "matplotlib==3.5.2",
+        "numpy==1.18.0",
+        "stable_baselines3==1.2.0",
+        "torch==1.10.1",
+        "tqdm==4.64.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "main_guard"
+      ],
+      "backend_posture": "cpu-or-cuda torch depending on edits/device",
+      "full_run_safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1509.06461"
+      ],
+      "title": "Deep Reinforcement Learning with Double Q-learning",
+      "name": "Deep Reinforcement Learning with Double Q-learning",
+      "paper": "Deep Reinforcement Learning with Double Q-learning",
+      "directory": "Deep_Reinforcement_Learning_with_Double_Q_learning",
+      "dir": "Deep_Reinforcement_Learning_with_Double_Q_learning",
+      "folder": "Deep_Reinforcement_Learning_with_Double_Q_learning",
+      "owner": "optimization-meta-rl",
+      "group": "optimization-meta-rl",
+      "subskill": "optimization-meta-rl",
+      "scripts": [
+        "ddqn.py"
+      ],
+      "source_scripts": [
+        "ddqn.py"
+      ],
+      "symbols": [
+        "DQN",
+        "Deep_Q_Learning"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "aliases": [
+        "Deep",
+        "Deep Reinforcement Learning with Double Q learning",
+        "Deep Reinforcement Learning with Double Q-learning",
+        "Deep_Reinforcement_Learning_with_Double_Q_learning",
+        "Double",
+        "Learning",
+        "Reinforcement",
+        "learning",
+        "with"
+      ]
+    },
+    {
+      "id": "deep-unsupervised-learning-using-nonequilibrium-thermodynamics",
+      "paper_title": "Deep Unsupervised Learning using Nonequilibrium Thermodynamics",
+      "source_directory_evidence_label": "Deep_Unsupervised_Learning_using_Nonequilibrium_Thermodynamics",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "diffusion-generative-sampling"
+      ],
+      "python_scripts": [
+        "diffusion_models.py"
+      ],
+      "key_symbols": [
+        "DiffusionModel",
+        "MLP",
+        "plot",
+        "sample_batch",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.5.3",
+        "numpy==1.24.1",
+        "sklearn==1.1.1",
+        "torch==1.12.0",
+        "tqdm==4.64.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://www.diffusionacademy.com"
+      ],
+      "title": "Deep Unsupervised Learning using Nonequilibrium Thermodynamics",
+      "name": "Deep Unsupervised Learning using Nonequilibrium Thermodynamics",
+      "paper": "Deep Unsupervised Learning using Nonequilibrium Thermodynamics",
+      "directory": "Deep_Unsupervised_Learning_using_Nonequilibrium_Thermodynamics",
+      "dir": "Deep_Unsupervised_Learning_using_Nonequilibrium_Thermodynamics",
+      "folder": "Deep_Unsupervised_Learning_using_Nonequilibrium_Thermodynamics",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "diffusion_models.py"
+      ],
+      "source_scripts": [
+        "diffusion_models.py"
+      ],
+      "symbols": [
+        "DiffusionModel",
+        "MLP",
+        "plot",
+        "sample_batch",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Deep",
+        "Deep Unsupervised Learning using Nonequilibrium Thermodynamics",
+        "Deep_Unsupervised_Learning_using_Nonequilibrium_Thermodynamics",
+        "Learning",
+        "Nonequilibrium",
+        "Thermodynamics",
+        "Unsupervised",
+        "using"
+      ]
+    },
+    {
+      "id": "denoising-diffusion-implicit-models",
+      "paper_title": "Denoising Diffusion Implicit Models",
+      "source_directory_evidence_label": "Denoising_Diffusion_Implicit_Models",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "diffusion-generative-sampling"
+      ],
+      "python_scripts": [
+        "ddim.py",
+        "unet.py"
+      ],
+      "key_symbols": [
+        "AttentionBlock",
+        "DiffusionModel",
+        "Downsample",
+        "Nin",
+        "ResNetBlock",
+        "UNet",
+        "Upsample",
+        "get_timestep_embedding"
+      ],
+      "requirements": [
+        "keras==2.8.0",
+        "matplotlib==3.5.3",
+        "numpy==1.24.1",
+        "torch==1.12.0",
+        "tqdm==4.64.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "main_guard"
+      ],
+      "backend_posture": "cpu-or-cuda torch depending on edits/device",
+      "full_run_safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2010.02502"
+      ],
+      "title": "Denoising Diffusion Implicit Models",
+      "name": "Denoising Diffusion Implicit Models",
+      "paper": "Denoising Diffusion Implicit Models",
+      "directory": "Denoising_Diffusion_Implicit_Models",
+      "dir": "Denoising_Diffusion_Implicit_Models",
+      "folder": "Denoising_Diffusion_Implicit_Models",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "ddim.py",
+        "unet.py"
+      ],
+      "source_scripts": [
+        "ddim.py",
+        "unet.py"
+      ],
+      "symbols": [
+        "AttentionBlock",
+        "DiffusionModel",
+        "Downsample",
+        "Nin",
+        "ResNetBlock",
+        "UNet",
+        "Upsample",
+        "get_timestep_embedding"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "aliases": [
+        "Denoising",
+        "Denoising Diffusion Implicit Models",
+        "Denoising_Diffusion_Implicit_Models",
+        "Diffusion",
+        "Implicit",
+        "Models"
+      ]
+    },
+    {
+      "id": "denoising-diffusion-probabilistic-models",
+      "paper_title": "Denoising Diffusion Probabilistic Models",
+      "source_directory_evidence_label": "Denoising_Diffusion_Probabilistic_Models",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "diffusion-generative-sampling"
+      ],
+      "python_scripts": [
+        "diffusion_models.py",
+        "unet.py"
+      ],
+      "key_symbols": [
+        "AttentionBlock",
+        "DiffusionModel",
+        "Downsample",
+        "Nin",
+        "ResNetBlock",
+        "UNet",
+        "Upsample",
+        "get_timestep_embedding",
+        "sample_batch"
+      ],
+      "requirements": [
+        "keras==2.8.0",
+        "matplotlib==3.5.3",
+        "numpy==1.24.1",
+        "torch==1.12.0",
+        "tqdm==4.64.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://www.diffusionacademy.com"
+      ],
+      "title": "Denoising Diffusion Probabilistic Models",
+      "name": "Denoising Diffusion Probabilistic Models",
+      "paper": "Denoising Diffusion Probabilistic Models",
+      "directory": "Denoising_Diffusion_Probabilistic_Models",
+      "dir": "Denoising_Diffusion_Probabilistic_Models",
+      "folder": "Denoising_Diffusion_Probabilistic_Models",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "diffusion_models.py",
+        "unet.py"
+      ],
+      "source_scripts": [
+        "diffusion_models.py",
+        "unet.py"
+      ],
+      "symbols": [
+        "AttentionBlock",
+        "DiffusionModel",
+        "Downsample",
+        "Nin",
+        "ResNetBlock",
+        "UNet",
+        "Upsample",
+        "get_timestep_embedding",
+        "sample_batch"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Denoising",
+        "Denoising Diffusion Probabilistic Models",
+        "Denoising_Diffusion_Probabilistic_Models",
+        "Diffusion",
+        "Models",
+        "Probabilistic"
+      ]
+    },
+    {
+      "id": "density-estimation-using-real-nvp",
+      "paper_title": "Code for *Density estimation using Real NVP*",
+      "source_directory_evidence_label": "Density_Estimation_Using_Real_NVP",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "probabilistic-flows-vaes"
+      ],
+      "python_scripts": [
+        "real_nvp.py"
+      ],
+      "key_symbols": [
+        "BatchNorm2dNoAffine",
+        "Coupling",
+        "LogitTransform",
+        "RealNVP",
+        "ResBlock",
+        "STNet",
+        "Squeeze",
+        "channel_mask",
+        "checkerboard_mask",
+        "gaussian_log_p",
+        "squeeze2d",
+        "unsqueeze2d"
+      ],
+      "requirements": [
+        "matplotlib==3.10.7",
+        "numpy==1.26.4",
+        "torch==2.7.0",
+        "torchvision==0.22.0",
+        "tqdm==4.67.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "dataset_download",
+        "downloads_or_network",
+        "file_outputs",
+        "main_guard"
+      ],
+      "backend_posture": "cpu-or-cuda torch depending on edits/device",
+      "full_run_safety": "skip-network for full run; inspect statically or use tiny offline adaptation",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1605.08803"
+      ],
+      "title": "Code for *Density estimation using Real NVP*",
+      "name": "Code for *Density estimation using Real NVP*",
+      "paper": "Code for *Density estimation using Real NVP*",
+      "directory": "Density_Estimation_Using_Real_NVP",
+      "dir": "Density_Estimation_Using_Real_NVP",
+      "folder": "Density_Estimation_Using_Real_NVP",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "real_nvp.py"
+      ],
+      "source_scripts": [
+        "real_nvp.py"
+      ],
+      "symbols": [
+        "BatchNorm2dNoAffine",
+        "Coupling",
+        "LogitTransform",
+        "RealNVP",
+        "ResBlock",
+        "STNet",
+        "Squeeze",
+        "channel_mask",
+        "checkerboard_mask",
+        "gaussian_log_p",
+        "squeeze2d",
+        "unsqueeze2d"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-network for full run; inspect statically or use tiny offline adaptation",
+      "aliases": [
+        "Code",
+        "Code for *Density estimation using Real NVP*",
+        "Density",
+        "Density Estimation Using Real NVP",
+        "Density_Estimation_Using_Real_NVP",
+        "NVP",
+        "Real",
+        "estimation",
+        "for",
+        "real nvp",
+        "using"
+      ]
+    },
+    {
+      "id": "dreambooth-fine-tuning-text-to-image-diffusion-models-for-subject-driven-generation",
+      "paper_title": "DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation",
+      "source_directory_evidence_label": "DreamBooth_Fine_Tuning_Text_to_Image_Diffusion_Models_for_Subject_Driven_Generation",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "diffusion-generative-sampling"
+      ],
+      "python_scripts": [
+        "dreambooth.py"
+      ],
+      "key_symbols": [
+        "DreamBoothPairedDataset",
+        "sample"
+      ],
+      "requirements": [
+        "diffusers==0.30.3",
+        "matplotlib==3.5.1",
+        "Pillow==9.0.1",
+        "torch==2.7.0",
+        "torchvision==0.22.0",
+        "tqdm==4.67.1",
+        "transformers==4.46.3"
+      ],
+      "asset_labels": [
+        "Imgs",
+        "data"
+      ],
+      "runtime_flags": [
+        "downloads_or_network",
+        "file_outputs",
+        "main_guard"
+      ],
+      "backend_posture": "cpu-or-cuda torch depending on edits/device",
+      "full_run_safety": "skip-network for full run; inspect statically or use tiny offline adaptation",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2208.12242"
+      ],
+      "title": "DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation",
+      "name": "DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation",
+      "paper": "DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation",
+      "directory": "DreamBooth_Fine_Tuning_Text_to_Image_Diffusion_Models_for_Subject_Driven_Generation",
+      "dir": "DreamBooth_Fine_Tuning_Text_to_Image_Diffusion_Models_for_Subject_Driven_Generation",
+      "folder": "DreamBooth_Fine_Tuning_Text_to_Image_Diffusion_Models_for_Subject_Driven_Generation",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "dreambooth.py"
+      ],
+      "source_scripts": [
+        "dreambooth.py"
+      ],
+      "symbols": [
+        "DreamBoothPairedDataset",
+        "sample"
+      ],
+      "asset_dirs": [
+        "Imgs",
+        "data"
+      ],
+      "assets": [
+        "Imgs",
+        "data"
+      ],
+      "safety": "skip-network for full run; inspect statically or use tiny offline adaptation",
+      "aliases": [
+        "Diffusion",
+        "DreamBooth",
+        "DreamBooth Fine Tuning Text to Image Diffusion Models for Subject Driven Generation",
+        "DreamBooth: Fine Tuning Text-to-Image Diffusion Models for Subject-Driven Generation",
+        "DreamBooth_Fine_Tuning_Text_to_Image_Diffusion_Models_for_Subject_Driven_Generation",
+        "Driven",
+        "Fine",
+        "Generation",
+        "Image",
+        "Models",
+        "Subject",
+        "Text",
+        "Tuning",
+        "dreambooth",
+        "for"
+      ]
+    },
+    {
+      "id": "fastnerf-high-fidelity-neural-rendering-at-200fps",
+      "paper_title": "FastNeRF: High-Fidelity Neural Rendering at 200FPS",
+      "source_directory_evidence_label": "FastNeRF_High_Fidelity_Neural_Rendering_at_200FPS",
+      "owner_sub_skill": "neural-rendering-3d",
+      "categories": [
+        "neural-rendering-3d"
+      ],
+      "python_scripts": [
+        "fast_nerf.py"
+      ],
+      "key_symbols": [
+        "Cache",
+        "FastNerf",
+        "compute_accumulated_transmittance",
+        "render_rays",
+        "test",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.5.2",
+        "numpy==1.23.1",
+        "torch==1.12.0+cu116",
+        "tqdm==4.64.0"
+      ],
+      "asset_labels": [
+        "novel_views"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2103.10380",
+        "https://drive.google.com/drive/folders/18bwm-RiHETRCS5yD9G00seFIcrJHIvD-?usp=sharing"
+      ],
+      "title": "FastNeRF: High-Fidelity Neural Rendering at 200FPS",
+      "name": "FastNeRF: High-Fidelity Neural Rendering at 200FPS",
+      "paper": "FastNeRF: High-Fidelity Neural Rendering at 200FPS",
+      "directory": "FastNeRF_High_Fidelity_Neural_Rendering_at_200FPS",
+      "dir": "FastNeRF_High_Fidelity_Neural_Rendering_at_200FPS",
+      "folder": "FastNeRF_High_Fidelity_Neural_Rendering_at_200FPS",
+      "owner": "neural-rendering-3d",
+      "group": "neural-rendering-3d",
+      "subskill": "neural-rendering-3d",
+      "scripts": [
+        "fast_nerf.py"
+      ],
+      "source_scripts": [
+        "fast_nerf.py"
+      ],
+      "symbols": [
+        "Cache",
+        "FastNerf",
+        "compute_accumulated_transmittance",
+        "render_rays",
+        "test",
+        "train"
+      ],
+      "asset_dirs": [
+        "novel_views"
+      ],
+      "assets": [
+        "novel_views"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "200FPS",
+        "FastNeRF",
+        "FastNeRF High Fidelity Neural Rendering at 200FPS",
+        "FastNeRF: High-Fidelity Neural Rendering at 200FPS",
+        "FastNeRF_High_Fidelity_Neural_Rendering_at_200FPS",
+        "Fidelity",
+        "High",
+        "Neural",
+        "Rendering",
+        "nerf"
+      ]
+    },
+    {
+      "id": "fast-and-accurate-deep-network-learning-by-exponential-linear-units-elus",
+      "paper_title": "Fast and Accurate Deep Network Learning by Exponential Linear Units (ELUs)",
+      "source_directory_evidence_label": "Fast_and_Accurate_Deep_Network_Learning_by_Exponential_Linear_Units_ELUs",
+      "owner_sub_skill": "optimization-meta-rl",
+      "categories": [
+        "layers-optimizers"
+      ],
+      "python_scripts": [
+        "elu.py"
+      ],
+      "key_symbols": [
+        "ELU",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.5.1",
+        "keras==2.11.0",
+        "numpy==1.22.1",
+        "seaborn==0.11.2",
+        "sklearn==1.1.1",
+        "torch==1.10.1",
+        "tqdm==4.62.3"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1511.07289"
+      ],
+      "title": "Fast and Accurate Deep Network Learning by Exponential Linear Units (ELUs)",
+      "name": "Fast and Accurate Deep Network Learning by Exponential Linear Units (ELUs)",
+      "paper": "Fast and Accurate Deep Network Learning by Exponential Linear Units (ELUs)",
+      "directory": "Fast_and_Accurate_Deep_Network_Learning_by_Exponential_Linear_Units_ELUs",
+      "dir": "Fast_and_Accurate_Deep_Network_Learning_by_Exponential_Linear_Units_ELUs",
+      "folder": "Fast_and_Accurate_Deep_Network_Learning_by_Exponential_Linear_Units_ELUs",
+      "owner": "optimization-meta-rl",
+      "group": "optimization-meta-rl",
+      "subskill": "optimization-meta-rl",
+      "scripts": [
+        "elu.py"
+      ],
+      "source_scripts": [
+        "elu.py"
+      ],
+      "symbols": [
+        "ELU",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Accurate",
+        "Deep",
+        "ELUs",
+        "Exponential",
+        "Fast",
+        "Fast and Accurate Deep Network Learning by Exponential Linear Units (ELUs)",
+        "Fast and Accurate Deep Network Learning by Exponential Linear Units ELUs",
+        "Fast_and_Accurate_Deep_Network_Learning_by_Exponential_Linear_Units_ELUs",
+        "Learning",
+        "Linear",
+        "Network",
+        "Units",
+        "and"
+      ]
+    },
+    {
+      "id": "flow-straight-and-fast-learning-to-generate-and-transfer-data-with-rectified-flow",
+      "paper_title": "Flow Straight and Fast: Learning to Generate and Transfer Data with Rectified Flow",
+      "source_directory_evidence_label": "Flow_Straight_and_Fast_Learning_to_Generate_and_Transfer_Data_with_Rectified_Flow",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "diffusion-generative-sampling",
+        "probabilistic-flows-vaes"
+      ],
+      "python_scripts": [
+        "flow_straight_and_fast.py"
+      ],
+      "key_symbols": [
+        "Dataset",
+        "MLP",
+        "sample",
+        "sample_multimodal_distribution",
+        "train_rectified_flow"
+      ],
+      "requirements": [
+        "matplotlib==3.5.1",
+        "numpy==1.25.2",
+        "torch==2.0.1",
+        "tqdm==4.66.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2209.03003"
+      ],
+      "title": "Flow Straight and Fast: Learning to Generate and Transfer Data with Rectified Flow",
+      "name": "Flow Straight and Fast: Learning to Generate and Transfer Data with Rectified Flow",
+      "paper": "Flow Straight and Fast: Learning to Generate and Transfer Data with Rectified Flow",
+      "directory": "Flow_Straight_and_Fast_Learning_to_Generate_and_Transfer_Data_with_Rectified_Flow",
+      "dir": "Flow_Straight_and_Fast_Learning_to_Generate_and_Transfer_Data_with_Rectified_Flow",
+      "folder": "Flow_Straight_and_Fast_Learning_to_Generate_and_Transfer_Data_with_Rectified_Flow",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "flow_straight_and_fast.py"
+      ],
+      "source_scripts": [
+        "flow_straight_and_fast.py"
+      ],
+      "symbols": [
+        "Dataset",
+        "MLP",
+        "sample",
+        "sample_multimodal_distribution",
+        "train_rectified_flow"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Data",
+        "Fast",
+        "Flow",
+        "Flow Straight and Fast Learning to Generate and Transfer Data with Rectified Flow",
+        "Flow Straight and Fast: Learning to Generate and Transfer Data with Rectified Flow",
+        "Flow_Straight_and_Fast_Learning_to_Generate_and_Transfer_Data_with_Rectified_Flow",
+        "Generate",
+        "Learning",
+        "Rectified",
+        "Straight",
+        "Transfer",
+        "and",
+        "with"
+      ]
+    },
+    {
+      "id": "fourier-features-let-networks-learn-high-frequency-functions-in-low-dimensional-domains",
+      "paper_title": "Fourier Features Let Networks Learn High Frequency Functions in Low Dimensional Domains",
+      "source_directory_evidence_label": "Fourier_Features_Let_Networks_Learn_High_Frequency_Functions_in_Low_Dimensional_Domains",
+      "owner_sub_skill": "neural-rendering-3d",
+      "categories": [
+        "neural-rendering-3d"
+      ],
+      "python_scripts": [
+        "inverse_rendering.py"
+      ],
+      "key_symbols": [
+        "NerfModel",
+        "compute_accumulated_transmittance",
+        "render_rays",
+        "test",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.1.3",
+        "numpy==1.19.5",
+        "torch==1.9.0+cu111",
+        "tqdm==4.48.2"
+      ],
+      "asset_labels": [
+        "novel_views"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2006.10739",
+        "https://drive.google.com/drive/folders/18bwm-RiHETRCS5yD9G00seFIcrJHIvD-?usp=sharing",
+        "https://github.com/kwea123/nerf_pl/blob/master/datasets/blender.py"
+      ],
+      "title": "Fourier Features Let Networks Learn High Frequency Functions in Low Dimensional Domains",
+      "name": "Fourier Features Let Networks Learn High Frequency Functions in Low Dimensional Domains",
+      "paper": "Fourier Features Let Networks Learn High Frequency Functions in Low Dimensional Domains",
+      "directory": "Fourier_Features_Let_Networks_Learn_High_Frequency_Functions_in_Low_Dimensional_Domains",
+      "dir": "Fourier_Features_Let_Networks_Learn_High_Frequency_Functions_in_Low_Dimensional_Domains",
+      "folder": "Fourier_Features_Let_Networks_Learn_High_Frequency_Functions_in_Low_Dimensional_Domains",
+      "owner": "neural-rendering-3d",
+      "group": "neural-rendering-3d",
+      "subskill": "neural-rendering-3d",
+      "scripts": [
+        "inverse_rendering.py"
+      ],
+      "source_scripts": [
+        "inverse_rendering.py"
+      ],
+      "symbols": [
+        "NerfModel",
+        "compute_accumulated_transmittance",
+        "render_rays",
+        "test",
+        "train"
+      ],
+      "asset_dirs": [
+        "novel_views"
+      ],
+      "assets": [
+        "novel_views"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Dimensional",
+        "Domains",
+        "Features",
+        "Fourier",
+        "Fourier Features Let Networks Learn High Frequency Functions in Low Dimensional Domains",
+        "Fourier_Features_Let_Networks_Learn_High_Frequency_Functions_in_Low_Dimensional_Domains",
+        "Frequency",
+        "Functions",
+        "High",
+        "Learn",
+        "Let",
+        "Low",
+        "Networks"
+      ]
+    },
+    {
+      "id": "freenerf-improving-few-shot-neural-rendering-with-free-frequency-regularization",
+      "paper_title": "FreeNeRF: Improving Few-shot Neural Rendering with Free Frequency Regularization",
+      "source_directory_evidence_label": "FreeNeRF_Improving_Few_shot_Neural_Rendering_with_Free_Frequency_Regularization",
+      "owner_sub_skill": "neural-rendering-3d",
+      "categories": [
+        "neural-rendering-3d"
+      ],
+      "python_scripts": [
+        "freenerf.py"
+      ],
+      "key_symbols": [
+        "NerfModel",
+        "compute_accumulated_transmittance",
+        "render_rays",
+        "sample_batch",
+        "test",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.5.2",
+        "numpy==1.23.1",
+        "torch==1.12.0",
+        "tqdm==4.64.0"
+      ],
+      "asset_labels": [
+        "novel_views"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2303.07418",
+        "https://drive.google.com/drive/folders/18bwm-RiHETRCS5yD9G00seFIcrJHIvD-?usp=sharing"
+      ],
+      "title": "FreeNeRF: Improving Few-shot Neural Rendering with Free Frequency Regularization",
+      "name": "FreeNeRF: Improving Few-shot Neural Rendering with Free Frequency Regularization",
+      "paper": "FreeNeRF: Improving Few-shot Neural Rendering with Free Frequency Regularization",
+      "directory": "FreeNeRF_Improving_Few_shot_Neural_Rendering_with_Free_Frequency_Regularization",
+      "dir": "FreeNeRF_Improving_Few_shot_Neural_Rendering_with_Free_Frequency_Regularization",
+      "folder": "FreeNeRF_Improving_Few_shot_Neural_Rendering_with_Free_Frequency_Regularization",
+      "owner": "neural-rendering-3d",
+      "group": "neural-rendering-3d",
+      "subskill": "neural-rendering-3d",
+      "scripts": [
+        "freenerf.py"
+      ],
+      "source_scripts": [
+        "freenerf.py"
+      ],
+      "symbols": [
+        "NerfModel",
+        "compute_accumulated_transmittance",
+        "render_rays",
+        "sample_batch",
+        "test",
+        "train"
+      ],
+      "asset_dirs": [
+        "novel_views"
+      ],
+      "assets": [
+        "novel_views"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Few",
+        "Free",
+        "FreeNeRF",
+        "FreeNeRF Improving Few shot Neural Rendering with Free Frequency Regularization",
+        "FreeNeRF: Improving Few-shot Neural Rendering with Free Frequency Regularization",
+        "FreeNeRF_Improving_Few_shot_Neural_Rendering_with_Free_Frequency_Regularization",
+        "Frequency",
+        "Improving",
+        "Neural",
+        "Regularization",
+        "Rendering",
+        "nerf",
+        "shot",
+        "with"
+      ]
+    },
+    {
+      "id": "gaussian-error-linear-units-gelus",
+      "paper_title": "Gaussian Error Linear Units (GELUs)",
+      "source_directory_evidence_label": "Gaussian_Error_Linear_Units_GELUs",
+      "owner_sub_skill": "optimization-meta-rl",
+      "categories": [
+        "layers-optimizers"
+      ],
+      "python_scripts": [
+        "gelu.py"
+      ],
+      "key_symbols": [
+        "GELU",
+        "_init_weights",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.5.1",
+        "keras==2.11.0",
+        "numpy==1.22.1",
+        "seaborn==0.11.2",
+        "sklearn==1.1.1",
+        "torch==1.10.1",
+        "tqdm==4.62.3"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1606.08415"
+      ],
+      "title": "Gaussian Error Linear Units (GELUs)",
+      "name": "Gaussian Error Linear Units (GELUs)",
+      "paper": "Gaussian Error Linear Units (GELUs)",
+      "directory": "Gaussian_Error_Linear_Units_GELUs",
+      "dir": "Gaussian_Error_Linear_Units_GELUs",
+      "folder": "Gaussian_Error_Linear_Units_GELUs",
+      "owner": "optimization-meta-rl",
+      "group": "optimization-meta-rl",
+      "subskill": "optimization-meta-rl",
+      "scripts": [
+        "gelu.py"
+      ],
+      "source_scripts": [
+        "gelu.py"
+      ],
+      "symbols": [
+        "GELU",
+        "_init_weights",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Error",
+        "GELUs",
+        "Gaussian",
+        "Gaussian Error Linear Units (GELUs)",
+        "Gaussian Error Linear Units GELUs",
+        "Gaussian_Error_Linear_Units_GELUs",
+        "Linear",
+        "Units"
+      ]
+    },
+    {
+      "id": "generative-adversarial-networks",
+      "paper_title": "Generative Adversarial Networks",
+      "source_directory_evidence_label": "Generative_Adversarial_Networks",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "gan-image-translation"
+      ],
+      "python_scripts": [
+        "GANs.py"
+      ],
+      "key_symbols": [
+        "Discriminator",
+        "Generator",
+        "get_minibatch",
+        "sample_noise",
+        "train"
+      ],
+      "requirements": [
+        "Keras==2.4.3",
+        "matplotlib==3.3.1",
+        "numpy==1.19.4",
+        "torch==1.7.1",
+        "tqdm==4.48.2"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "main_guard"
+      ],
+      "backend_posture": "cpu-or-cuda torch depending on edits/device",
+      "full_run_safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1406.2661"
+      ],
+      "title": "Generative Adversarial Networks",
+      "name": "Generative Adversarial Networks",
+      "paper": "Generative Adversarial Networks",
+      "directory": "Generative_Adversarial_Networks",
+      "dir": "Generative_Adversarial_Networks",
+      "folder": "Generative_Adversarial_Networks",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "GANs.py"
+      ],
+      "source_scripts": [
+        "GANs.py"
+      ],
+      "symbols": [
+        "Discriminator",
+        "Generator",
+        "get_minibatch",
+        "sample_noise",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "aliases": [
+        "Adversarial",
+        "Generative",
+        "Generative Adversarial Networks",
+        "Generative_Adversarial_Networks",
+        "Networks"
+      ]
+    },
+    {
+      "id": "gromov-wasserstein-distances-between-gaussian-distributions",
+      "paper_title": "Gromov-Wasserstein Distances between Gaussian Distributions",
+      "source_directory_evidence_label": "Gromov_Wasserstein_Distances_between_Gaussian_Distributions",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "gan-image-translation",
+        "probabilistic-flows-vaes"
+      ],
+      "python_scripts": [
+        "GWOT.py"
+      ],
+      "key_symbols": [
+        "Distribution",
+        "TW2",
+        "symsqrt"
+      ],
+      "requirements": [
+        "matplotlib==3.3.4",
+        "torch==1.7.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "main_guard"
+      ],
+      "backend_posture": "cpu-or-cuda torch depending on edits/device",
+      "full_run_safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "readme_external_links": [
+        "https://arxiv.org/pdf/2104.07970"
+      ],
+      "title": "Gromov-Wasserstein Distances between Gaussian Distributions",
+      "name": "Gromov-Wasserstein Distances between Gaussian Distributions",
+      "paper": "Gromov-Wasserstein Distances between Gaussian Distributions",
+      "directory": "Gromov_Wasserstein_Distances_between_Gaussian_Distributions",
+      "dir": "Gromov_Wasserstein_Distances_between_Gaussian_Distributions",
+      "folder": "Gromov_Wasserstein_Distances_between_Gaussian_Distributions",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "GWOT.py"
+      ],
+      "source_scripts": [
+        "GWOT.py"
+      ],
+      "symbols": [
+        "Distribution",
+        "TW2",
+        "symsqrt"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "aliases": [
+        "Distances",
+        "Distributions",
+        "Gaussian",
+        "Gromov",
+        "Gromov Wasserstein Distances between Gaussian Distributions",
+        "Gromov-Wasserstein Distances between Gaussian Distributions",
+        "Gromov_Wasserstein_Distances_between_Gaussian_Distributions",
+        "Wasserstein",
+        "between"
+      ]
+    },
+    {
+      "id": "high-resolution-image-synthesis-with-latent-diffusion-models",
+      "paper_title": "Stable Diffusion v1-5 / High-Resolution Image Synthesis with Latent Diffusion Models",
+      "source_directory_evidence_label": "High_Resolution_Image_Synthesis_with_Latent_Diffusion_Models",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "diffusion-generative-sampling"
+      ],
+      "python_scripts": [
+        "model.py",
+        "sample.py"
+      ],
+      "key_symbols": [
+        "AttnBlockVAE",
+        "CLIPEncoder",
+        "CLIPEncoderLayer",
+        "CLIPMLP",
+        "CLIPTextEmbeddings",
+        "CLIPTextModel_",
+        "CLIPTextTransformerWrapper",
+        "DownsampleVAE",
+        "FrozenCLIPEmbedder",
+        "ResnetBlockVAE",
+        "SD15_Minimal",
+        "SelfAttention",
+        "UpsampleVAE",
+        "predict_eps",
+        "text2img_ddpm",
+        "tokenize"
+      ],
+      "requirements": [
+        "numpy==1.26.4",
+        "Pillow==11.3.0",
+        "safetensors==0.5.3",
+        "torch==2.5.1",
+        "tqdm==4.67.1",
+        "transformers==4.56.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "downloads_or_network",
+        "file_outputs",
+        "main_guard"
+      ],
+      "backend_posture": "cpu-or-cuda torch depending on edits/device",
+      "full_run_safety": "skip-network for full run; inspect statically or use tiny offline adaptation",
+      "readme_external_links": [],
+      "title": "Stable Diffusion v1-5 / High-Resolution Image Synthesis with Latent Diffusion Models",
+      "name": "Stable Diffusion v1-5 / High-Resolution Image Synthesis with Latent Diffusion Models",
+      "paper": "Stable Diffusion v1-5 / High-Resolution Image Synthesis with Latent Diffusion Models",
+      "directory": "High_Resolution_Image_Synthesis_with_Latent_Diffusion_Models",
+      "dir": "High_Resolution_Image_Synthesis_with_Latent_Diffusion_Models",
+      "folder": "High_Resolution_Image_Synthesis_with_Latent_Diffusion_Models",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "model.py",
+        "sample.py"
+      ],
+      "source_scripts": [
+        "model.py",
+        "sample.py"
+      ],
+      "symbols": [
+        "AttnBlockVAE",
+        "CLIPEncoder",
+        "CLIPEncoderLayer",
+        "CLIPMLP",
+        "CLIPTextEmbeddings",
+        "CLIPTextModel_",
+        "CLIPTextTransformerWrapper",
+        "DownsampleVAE",
+        "FrozenCLIPEmbedder",
+        "ResnetBlockVAE",
+        "SD15_Minimal",
+        "SelfAttention",
+        "UpsampleVAE",
+        "predict_eps",
+        "text2img_ddpm",
+        "tokenize"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-network for full run; inspect statically or use tiny offline adaptation",
+      "aliases": [
+        "Diffusion",
+        "High",
+        "High Resolution Image Synthesis with Latent Diffusion Models",
+        "High-Resolution Image Synthesis with Latent Diffusion Models",
+        "High_Resolution_Image_Synthesis_with_Latent_Diffusion_Models",
+        "Image",
+        "Latent",
+        "Models",
+        "Resolution",
+        "Synthesis",
+        "latent diffusion",
+        "sd 1.5",
+        "sd15",
+        "stable diffusion",
+        "stable diffusion 1.5",
+        "stable diffusion v1-5",
+        "text to image",
+        "with"
+      ]
+    },
+    {
+      "id": "human-level-control-through-deep-reinforcement-learning",
+      "paper_title": "Human-level control through deep reinforcement learning",
+      "source_directory_evidence_label": "Human_level_control_through_deep_reinforcement_learning",
+      "owner_sub_skill": "optimization-meta-rl",
+      "categories": [
+        "reinforcement-learning"
+      ],
+      "python_scripts": [
+        "dqn.py"
+      ],
+      "key_symbols": [
+        "DQN",
+        "deep_Q_learning"
+      ],
+      "requirements": [
+        "gym==0.23.1",
+        "matplotlib==3.5.2",
+        "numpy==1.18.0",
+        "stable_baselines3==1.2.0",
+        "torch==1.10.1",
+        "tqdm==4.64.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "main_guard"
+      ],
+      "backend_posture": "cpu-or-cuda torch depending on edits/device",
+      "full_run_safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "readme_external_links": [
+        "https://www.nature.com/articles/nature14236"
+      ],
+      "title": "Human-level control through deep reinforcement learning",
+      "name": "Human-level control through deep reinforcement learning",
+      "paper": "Human-level control through deep reinforcement learning",
+      "directory": "Human_level_control_through_deep_reinforcement_learning",
+      "dir": "Human_level_control_through_deep_reinforcement_learning",
+      "folder": "Human_level_control_through_deep_reinforcement_learning",
+      "owner": "optimization-meta-rl",
+      "group": "optimization-meta-rl",
+      "subskill": "optimization-meta-rl",
+      "scripts": [
+        "dqn.py"
+      ],
+      "source_scripts": [
+        "dqn.py"
+      ],
+      "symbols": [
+        "DQN",
+        "deep_Q_learning"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "aliases": [
+        "Human",
+        "Human level control through deep reinforcement learning",
+        "Human-level control through deep reinforcement learning",
+        "Human_level_control_through_deep_reinforcement_learning",
+        "control",
+        "deep",
+        "learning",
+        "level",
+        "reinforcement",
+        "through"
+      ]
+    },
+    {
+      "id": "image-to-image-translation-with-conditional-adversarial-nets",
+      "paper_title": "Image-to-Image Translation with Conditional Adversarial Networks",
+      "source_directory_evidence_label": "Image_to_Image_Translation_with_Conditional_Adversarial_Nets",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "gan-image-translation"
+      ],
+      "python_scripts": [
+        "pix2pix.py"
+      ],
+      "key_symbols": [
+        "Dataset",
+        "DownConvBlock",
+        "PatchGAN",
+        "UNet",
+        "UpConvBlock",
+        "init_weights",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.5.1",
+        "numpy==1.25.2",
+        "pillow==10.3.0",
+        "torch==2.0.1",
+        "torchvision==0.15.2",
+        "tqdm==4.66.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1611.07004",
+        "https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/tree/master?tab=readme-ov-file#pix2pix-traintest"
+      ],
+      "title": "Image-to-Image Translation with Conditional Adversarial Networks",
+      "name": "Image-to-Image Translation with Conditional Adversarial Networks",
+      "paper": "Image-to-Image Translation with Conditional Adversarial Networks",
+      "directory": "Image_to_Image_Translation_with_Conditional_Adversarial_Nets",
+      "dir": "Image_to_Image_Translation_with_Conditional_Adversarial_Nets",
+      "folder": "Image_to_Image_Translation_with_Conditional_Adversarial_Nets",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "pix2pix.py"
+      ],
+      "source_scripts": [
+        "pix2pix.py"
+      ],
+      "symbols": [
+        "Dataset",
+        "DownConvBlock",
+        "PatchGAN",
+        "UNet",
+        "UpConvBlock",
+        "init_weights",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Adversarial",
+        "Conditional",
+        "Image",
+        "Image to Image Translation with Conditional Adversarial Nets",
+        "Image-to-Image Translation with Conditional Adversarial Networks",
+        "Image_to_Image_Translation_with_Conditional_Adversarial_Nets",
+        "Networks",
+        "Translation",
+        "with"
+      ]
+    },
+    {
+      "id": "implicit-neural-representations-with-periodic-activation-functions",
+      "paper_title": "Implicit Neural Representations with Periodic Activation Functions",
+      "source_directory_evidence_label": "Implicit_Neural_Representations_with_Periodic_Activation_Functions",
+      "owner_sub_skill": "neural-rendering-3d",
+      "categories": [
+        "implicit-representations"
+      ],
+      "python_scripts": [
+        "siren.py"
+      ],
+      "key_symbols": [
+        "MLP",
+        "SineLayer",
+        "Siren",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.3.4",
+        "numpy==1.19.5",
+        "skimage==0.17.2",
+        "torch==1.9.0+cu111",
+        "tqdm==4.48.2"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2006.09661"
+      ],
+      "title": "Implicit Neural Representations with Periodic Activation Functions",
+      "name": "Implicit Neural Representations with Periodic Activation Functions",
+      "paper": "Implicit Neural Representations with Periodic Activation Functions",
+      "directory": "Implicit_Neural_Representations_with_Periodic_Activation_Functions",
+      "dir": "Implicit_Neural_Representations_with_Periodic_Activation_Functions",
+      "folder": "Implicit_Neural_Representations_with_Periodic_Activation_Functions",
+      "owner": "neural-rendering-3d",
+      "group": "neural-rendering-3d",
+      "subskill": "neural-rendering-3d",
+      "scripts": [
+        "siren.py"
+      ],
+      "source_scripts": [
+        "siren.py"
+      ],
+      "symbols": [
+        "MLP",
+        "SineLayer",
+        "Siren",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Activation",
+        "Functions",
+        "Implicit",
+        "Implicit Neural Representations with Periodic Activation Functions",
+        "Implicit_Neural_Representations_with_Periodic_Activation_Functions",
+        "Neural",
+        "Periodic",
+        "Representations",
+        "with"
+      ]
+    },
+    {
+      "id": "improved-techniques-for-training-gans",
+      "paper_title": "Improved Techniques for Training GANs",
+      "source_directory_evidence_label": "Improved_Techniques_for_Training_GANs",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "gan-image-translation"
+      ],
+      "python_scripts": [
+        "semi_supervised_learning.py"
+      ],
+      "key_symbols": [
+        "Discriminator",
+        "GaussianNoiseLayer",
+        "Generator",
+        "generate_training_dataset",
+        "train"
+      ],
+      "requirements": [
+        "keras==2.8.0",
+        "matplotlib==3.2.2",
+        "numpy==1.21.6",
+        "torch==1.12.1+cu113",
+        "tqdm==4.64.0"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1606.03498"
+      ],
+      "title": "Improved Techniques for Training GANs",
+      "name": "Improved Techniques for Training GANs",
+      "paper": "Improved Techniques for Training GANs",
+      "directory": "Improved_Techniques_for_Training_GANs",
+      "dir": "Improved_Techniques_for_Training_GANs",
+      "folder": "Improved_Techniques_for_Training_GANs",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "semi_supervised_learning.py"
+      ],
+      "source_scripts": [
+        "semi_supervised_learning.py"
+      ],
+      "symbols": [
+        "Discriminator",
+        "GaussianNoiseLayer",
+        "Generator",
+        "generate_training_dataset",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "GANs",
+        "Improved",
+        "Improved Techniques for Training GANs",
+        "Improved_Techniques_for_Training_GANs",
+        "Techniques",
+        "Training",
+        "for"
+      ]
+    },
+    {
+      "id": "improved-training-of-wasserstein-gans",
+      "paper_title": "Improved Training of Wasserstein GANs",
+      "source_directory_evidence_label": "Improved_Training_of_Wasserstein_GANs",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "gan-image-translation"
+      ],
+      "python_scripts": [
+        "wgan.py"
+      ],
+      "key_symbols": [
+        "Dataset",
+        "Discriminator",
+        "DownResBlock",
+        "Generator",
+        "UpResBlock",
+        "moving_average",
+        "sample_noise",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.7.5",
+        "numpy==1.24.4",
+        "pillow==10.2.0",
+        "torch==2.0.1",
+        "torchvision==0.15.2",
+        "tqdm==4.66.2"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1704.00028",
+        "https://github.com/fyu/lsun"
+      ],
+      "title": "Improved Training of Wasserstein GANs",
+      "name": "Improved Training of Wasserstein GANs",
+      "paper": "Improved Training of Wasserstein GANs",
+      "directory": "Improved_Training_of_Wasserstein_GANs",
+      "dir": "Improved_Training_of_Wasserstein_GANs",
+      "folder": "Improved_Training_of_Wasserstein_GANs",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "wgan.py"
+      ],
+      "source_scripts": [
+        "wgan.py"
+      ],
+      "symbols": [
+        "Dataset",
+        "Discriminator",
+        "DownResBlock",
+        "Generator",
+        "UpResBlock",
+        "moving_average",
+        "sample_noise",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "GANs",
+        "Improved",
+        "Improved Training of Wasserstein GANs",
+        "Improved_Training_of_Wasserstein_GANs",
+        "Training",
+        "Wasserstein"
+      ]
+    },
+    {
+      "id": "infonerf-ray-entropy-minimization-for-few-shot-neural-volume-rendering",
+      "paper_title": "InfoNeRF: Ray Entropy Minimization for Few-Shot Neural Volume Rendering",
+      "source_directory_evidence_label": "InfoNeRF_Ray_Entropy_Minimization_for_Few_Shot_Neural_Volume_Rendering",
+      "owner_sub_skill": "neural-rendering-3d",
+      "categories": [
+        "neural-rendering-3d"
+      ],
+      "python_scripts": [
+        "infonerf.py"
+      ],
+      "key_symbols": [
+        "NerfModel",
+        "compute_accumulated_transmittance",
+        "render_rays",
+        "test",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.5.3",
+        "numpy==1.24.1",
+        "torch==1.12.1",
+        "tqdm==4.64.1"
+      ],
+      "asset_labels": [
+        "novel_views"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2112.15399",
+        "https://drive.google.com/drive/folders/18bwm-RiHETRCS5yD9G00seFIcrJHIvD-?usp=sharing"
+      ],
+      "title": "InfoNeRF: Ray Entropy Minimization for Few-Shot Neural Volume Rendering",
+      "name": "InfoNeRF: Ray Entropy Minimization for Few-Shot Neural Volume Rendering",
+      "paper": "InfoNeRF: Ray Entropy Minimization for Few-Shot Neural Volume Rendering",
+      "directory": "InfoNeRF_Ray_Entropy_Minimization_for_Few_Shot_Neural_Volume_Rendering",
+      "dir": "InfoNeRF_Ray_Entropy_Minimization_for_Few_Shot_Neural_Volume_Rendering",
+      "folder": "InfoNeRF_Ray_Entropy_Minimization_for_Few_Shot_Neural_Volume_Rendering",
+      "owner": "neural-rendering-3d",
+      "group": "neural-rendering-3d",
+      "subskill": "neural-rendering-3d",
+      "scripts": [
+        "infonerf.py"
+      ],
+      "source_scripts": [
+        "infonerf.py"
+      ],
+      "symbols": [
+        "NerfModel",
+        "compute_accumulated_transmittance",
+        "render_rays",
+        "test",
+        "train"
+      ],
+      "asset_dirs": [
+        "novel_views"
+      ],
+      "assets": [
+        "novel_views"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Entropy",
+        "Few",
+        "InfoNeRF",
+        "InfoNeRF Ray Entropy Minimization for Few Shot Neural Volume Rendering",
+        "InfoNeRF: Ray Entropy Minimization for Few-Shot Neural Volume Rendering",
+        "InfoNeRF_Ray_Entropy_Minimization_for_Few_Shot_Neural_Volume_Rendering",
+        "Minimization",
+        "Neural",
+        "Ray",
+        "Rendering",
+        "Shot",
+        "Volume",
+        "for",
+        "nerf"
+      ]
+    },
+    {
+      "id": "instant-neural-graphics-primitives-with-a-multiresolution-hash-encoding",
+      "paper_title": "Instant Neural Graphics Primitives with a Multiresolution Hash Encoding",
+      "source_directory_evidence_label": "Instant_Neural_Graphics_Primitives_with_a_Multiresolution_Hash_Encoding",
+      "owner_sub_skill": "neural-rendering-3d",
+      "categories": [
+        "neural-rendering-3d"
+      ],
+      "python_scripts": [
+        "ngp.py"
+      ],
+      "key_symbols": [
+        "NGP",
+        "compute_accumulated_transmittance",
+        "render_rays",
+        "test",
+        "train"
+      ],
+      "requirements": [
+        "numpy==1.26.0",
+        "pillow==10.0.1",
+        "torch==1.13.0",
+        "tqdm==4.66.1"
+      ],
+      "asset_labels": [
+        "novel_views"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2201.05989",
+        "https://drive.google.com/drive/folders/1eO7DXFhWWpauC-9LDhOimtIKxY3yRCIm?usp=sharing"
+      ],
+      "title": "Instant Neural Graphics Primitives with a Multiresolution Hash Encoding",
+      "name": "Instant Neural Graphics Primitives with a Multiresolution Hash Encoding",
+      "paper": "Instant Neural Graphics Primitives with a Multiresolution Hash Encoding",
+      "directory": "Instant_Neural_Graphics_Primitives_with_a_Multiresolution_Hash_Encoding",
+      "dir": "Instant_Neural_Graphics_Primitives_with_a_Multiresolution_Hash_Encoding",
+      "folder": "Instant_Neural_Graphics_Primitives_with_a_Multiresolution_Hash_Encoding",
+      "owner": "neural-rendering-3d",
+      "group": "neural-rendering-3d",
+      "subskill": "neural-rendering-3d",
+      "scripts": [
+        "ngp.py"
+      ],
+      "source_scripts": [
+        "ngp.py"
+      ],
+      "symbols": [
+        "NGP",
+        "compute_accumulated_transmittance",
+        "render_rays",
+        "test",
+        "train"
+      ],
+      "asset_dirs": [
+        "novel_views"
+      ],
+      "assets": [
+        "novel_views"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Encoding",
+        "Graphics",
+        "Hash",
+        "Instant",
+        "Instant Neural Graphics Primitives with a Multiresolution Hash Encoding",
+        "Instant_Neural_Graphics_Primitives_with_a_Multiresolution_Hash_Encoding",
+        "Multiresolution",
+        "Neural",
+        "Primitives",
+        "with"
+      ]
+    },
+    {
+      "id": "kplanes-explicit-radiance-fields-in-space-time-and-appearance",
+      "paper_title": "K-Planes: Explicit Radiance Fields in Space, Time, and Appearance",
+      "source_directory_evidence_label": "KPlanes_Explicit_Radiance_Fields_in_Space_Time_and_Appearance",
+      "owner_sub_skill": "neural-rendering-3d",
+      "categories": [
+        "neural-rendering-3d"
+      ],
+      "python_scripts": [
+        "kplanes.py"
+      ],
+      "key_symbols": [
+        "NerfModel",
+        "compute_accumulated_transmittance",
+        "render_rays",
+        "test",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.5.2",
+        "numpy==1.23.1",
+        "torch==1.12.0",
+        "tqdm==4.64.0"
+      ],
+      "asset_labels": [
+        "novel_views"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2301.10241",
+        "https://drive.google.com/drive/folders/18bwm-RiHETRCS5yD9G00seFIcrJHIvD-?usp=sharing"
+      ],
+      "title": "K-Planes: Explicit Radiance Fields in Space, Time, and Appearance",
+      "name": "K-Planes: Explicit Radiance Fields in Space, Time, and Appearance",
+      "paper": "K-Planes: Explicit Radiance Fields in Space, Time, and Appearance",
+      "directory": "KPlanes_Explicit_Radiance_Fields_in_Space_Time_and_Appearance",
+      "dir": "KPlanes_Explicit_Radiance_Fields_in_Space_Time_and_Appearance",
+      "folder": "KPlanes_Explicit_Radiance_Fields_in_Space_Time_and_Appearance",
+      "owner": "neural-rendering-3d",
+      "group": "neural-rendering-3d",
+      "subskill": "neural-rendering-3d",
+      "scripts": [
+        "kplanes.py"
+      ],
+      "source_scripts": [
+        "kplanes.py"
+      ],
+      "symbols": [
+        "NerfModel",
+        "compute_accumulated_transmittance",
+        "render_rays",
+        "test",
+        "train"
+      ],
+      "asset_dirs": [
+        "novel_views"
+      ],
+      "assets": [
+        "novel_views"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Appearance",
+        "Explicit",
+        "Fields",
+        "K-Planes: Explicit Radiance Fields in Space, Time, and Appearance",
+        "KPlanes Explicit Radiance Fields in Space Time and Appearance",
+        "KPlanes_Explicit_Radiance_Fields_in_Space_Time_and_Appearance",
+        "Planes",
+        "Radiance",
+        "Space",
+        "Time",
+        "and"
+      ]
+    },
+    {
+      "id": "kilonerf-speeding-up-neural-radiance-fields-with-thousands-of-tiny-mlps",
+      "paper_title": "KiloNeRF: Speeding up Neural Radiance Fields with Thousands of Tiny MLPs",
+      "source_directory_evidence_label": "KiloNeRF_Speeding_up_Neural_Radiance_Fields_with_Thousands_of_Tiny_MLPs",
+      "owner_sub_skill": "neural-rendering-3d",
+      "categories": [
+        "neural-rendering-3d"
+      ],
+      "python_scripts": [
+        "kilo_nerf.py"
+      ],
+      "key_symbols": [
+        "KiloNerf",
+        "compute_accumulated_transmittance",
+        "render_rays",
+        "test",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.5.2",
+        "numpy==1.23.1",
+        "torch==1.12.0+cu116",
+        "tqdm==4.64.0"
+      ],
+      "asset_labels": [
+        "novel_views"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2103.13744",
+        "https://drive.google.com/drive/folders/18bwm-RiHETRCS5yD9G00seFIcrJHIvD-?usp=sharing"
+      ],
+      "title": "KiloNeRF: Speeding up Neural Radiance Fields with Thousands of Tiny MLPs",
+      "name": "KiloNeRF: Speeding up Neural Radiance Fields with Thousands of Tiny MLPs",
+      "paper": "KiloNeRF: Speeding up Neural Radiance Fields with Thousands of Tiny MLPs",
+      "directory": "KiloNeRF_Speeding_up_Neural_Radiance_Fields_with_Thousands_of_Tiny_MLPs",
+      "dir": "KiloNeRF_Speeding_up_Neural_Radiance_Fields_with_Thousands_of_Tiny_MLPs",
+      "folder": "KiloNeRF_Speeding_up_Neural_Radiance_Fields_with_Thousands_of_Tiny_MLPs",
+      "owner": "neural-rendering-3d",
+      "group": "neural-rendering-3d",
+      "subskill": "neural-rendering-3d",
+      "scripts": [
+        "kilo_nerf.py"
+      ],
+      "source_scripts": [
+        "kilo_nerf.py"
+      ],
+      "symbols": [
+        "KiloNerf",
+        "compute_accumulated_transmittance",
+        "render_rays",
+        "test",
+        "train"
+      ],
+      "asset_dirs": [
+        "novel_views"
+      ],
+      "assets": [
+        "novel_views"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Fields",
+        "KiloNeRF",
+        "KiloNeRF Speeding up Neural Radiance Fields with Thousands of Tiny MLPs",
+        "KiloNeRF: Speeding up Neural Radiance Fields with Thousands of Tiny MLPs",
+        "KiloNeRF_Speeding_up_Neural_Radiance_Fields_with_Thousands_of_Tiny_MLPs",
+        "MLPs",
+        "Neural",
+        "Radiance",
+        "Speeding",
+        "Thousands",
+        "Tiny",
+        "nerf",
+        "with"
+      ]
+    },
+    {
+      "id": "learned-initializations-for-optimizing-coordinate-based-neural-representations",
+      "paper_title": "Learned Initializations for Optimizing Coordinate-Based Neural Representations",
+      "source_directory_evidence_label": "Learned_Initializations_for_Optimizing_Coordinate_Based_Neural_Representations",
+      "owner_sub_skill": "optimization-meta-rl",
+      "categories": [
+        "meta-learning-hyperopt"
+      ],
+      "python_scripts": [
+        "nerf_mv.py"
+      ],
+      "key_symbols": [
+        "NerfModel",
+        "compute_accumulated_transmittance",
+        "load_data",
+        "perform_k_training_steps",
+        "render_rays",
+        "reptile",
+        "sample_task"
+      ],
+      "requirements": [
+        "imageio==2.19.3",
+        "json==2.0.9",
+        "matplotlib==3.5.1",
+        "numpy==1.22.1",
+        "torch==1.10.1",
+        "tqdm==4.62.3"
+      ],
+      "asset_labels": [
+        "Imgs",
+        "data"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2012.02189",
+        "https://drive.google.com/drive/folders/1lRfg-Ov1dd3ldke9Gv9dyzGGTxiFOhIs"
+      ],
+      "title": "Learned Initializations for Optimizing Coordinate-Based Neural Representations",
+      "name": "Learned Initializations for Optimizing Coordinate-Based Neural Representations",
+      "paper": "Learned Initializations for Optimizing Coordinate-Based Neural Representations",
+      "directory": "Learned_Initializations_for_Optimizing_Coordinate_Based_Neural_Representations",
+      "dir": "Learned_Initializations_for_Optimizing_Coordinate_Based_Neural_Representations",
+      "folder": "Learned_Initializations_for_Optimizing_Coordinate_Based_Neural_Representations",
+      "owner": "optimization-meta-rl",
+      "group": "optimization-meta-rl",
+      "subskill": "optimization-meta-rl",
+      "scripts": [
+        "nerf_mv.py"
+      ],
+      "source_scripts": [
+        "nerf_mv.py"
+      ],
+      "symbols": [
+        "NerfModel",
+        "compute_accumulated_transmittance",
+        "load_data",
+        "perform_k_training_steps",
+        "render_rays",
+        "reptile",
+        "sample_task"
+      ],
+      "asset_dirs": [
+        "Imgs",
+        "data"
+      ],
+      "assets": [
+        "Imgs",
+        "data"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Based",
+        "Coordinate",
+        "Initializations",
+        "Learned",
+        "Learned Initializations for Optimizing Coordinate Based Neural Representations",
+        "Learned Initializations for Optimizing Coordinate-Based Neural Representations",
+        "Learned_Initializations_for_Optimizing_Coordinate_Based_Neural_Representations",
+        "Neural",
+        "Optimizing",
+        "Representations",
+        "for"
+      ]
+    },
+    {
+      "id": "least-squares-generative-adversarial-networks",
+      "paper_title": "Least Squares Generative Adversarial Networks",
+      "source_directory_evidence_label": "Least_Squares_Generative_Adversarial_Networks",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "gan-image-translation"
+      ],
+      "python_scripts": [
+        "lsgan.py"
+      ],
+      "key_symbols": [
+        "Discriminator",
+        "Generator",
+        "get_minibatch",
+        "sample_noise",
+        "show_distribution",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.1.3",
+        "numpy==1.19.5",
+        "seaborn==0.10.0",
+        "torch==1.9.0+cu111",
+        "tqdm==4.48.2"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1611.04076"
+      ],
+      "title": "Least Squares Generative Adversarial Networks",
+      "name": "Least Squares Generative Adversarial Networks",
+      "paper": "Least Squares Generative Adversarial Networks",
+      "directory": "Least_Squares_Generative_Adversarial_Networks",
+      "dir": "Least_Squares_Generative_Adversarial_Networks",
+      "folder": "Least_Squares_Generative_Adversarial_Networks",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "lsgan.py"
+      ],
+      "source_scripts": [
+        "lsgan.py"
+      ],
+      "symbols": [
+        "Discriminator",
+        "Generator",
+        "get_minibatch",
+        "sample_noise",
+        "show_distribution",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Adversarial",
+        "Generative",
+        "Least",
+        "Least Squares Generative Adversarial Networks",
+        "Least_Squares_Generative_Adversarial_Networks",
+        "Networks",
+        "Squares"
+      ]
+    },
+    {
+      "id": "light-field-networks-neural-scene-representations-with-single-evaluation-rendering",
+      "paper_title": "Light Field Networks: Neural Scene Representations with Single-Evaluation Rendering",
+      "source_directory_evidence_label": "Light_Field_Networks_Neural_Scene_Representations_with_Single_Evaluation_Rendering",
+      "owner_sub_skill": "neural-rendering-3d",
+      "categories": [
+        "neural-rendering-3d"
+      ],
+      "python_scripts": [
+        "lfn.py"
+      ],
+      "key_symbols": [
+        "HyperNet",
+        "NMRDataset",
+        "intrinsics_to_fxfycxcy",
+        "invert_latent",
+        "lfn_forward",
+        "plucker_rays",
+        "render_novel_view_grid",
+        "render_view"
+      ],
+      "requirements": [
+        "matplotlib==3.7.2",
+        "numpy==1.24.3",
+        "Pillow==9.4.0",
+        "torch==2.7.0",
+        "tqdm==4.65.0"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2106.02634",
+        "https://drive.google.com/drive/folders/1lRfg-Ov1dd3ldke9Gv9dyzGGTxiFOhIs"
+      ],
+      "title": "Light Field Networks: Neural Scene Representations with Single-Evaluation Rendering",
+      "name": "Light Field Networks: Neural Scene Representations with Single-Evaluation Rendering",
+      "paper": "Light Field Networks: Neural Scene Representations with Single-Evaluation Rendering",
+      "directory": "Light_Field_Networks_Neural_Scene_Representations_with_Single_Evaluation_Rendering",
+      "dir": "Light_Field_Networks_Neural_Scene_Representations_with_Single_Evaluation_Rendering",
+      "folder": "Light_Field_Networks_Neural_Scene_Representations_with_Single_Evaluation_Rendering",
+      "owner": "neural-rendering-3d",
+      "group": "neural-rendering-3d",
+      "subskill": "neural-rendering-3d",
+      "scripts": [
+        "lfn.py"
+      ],
+      "source_scripts": [
+        "lfn.py"
+      ],
+      "symbols": [
+        "HyperNet",
+        "NMRDataset",
+        "intrinsics_to_fxfycxcy",
+        "invert_latent",
+        "lfn_forward",
+        "plucker_rays",
+        "render_novel_view_grid",
+        "render_view"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Evaluation",
+        "Field",
+        "Light",
+        "Light Field Networks Neural Scene Representations with Single Evaluation Rendering",
+        "Light Field Networks: Neural Scene Representations with Single-Evaluation Rendering",
+        "Light_Field_Networks_Neural_Scene_Representations_with_Single_Evaluation_Rendering",
+        "Networks",
+        "Neural",
+        "Rendering",
+        "Representations",
+        "Scene",
+        "Single",
+        "with"
+      ]
+    },
+    {
+      "id": "likelihood-free-mcmc-with-amortized-approximate-ratio-estimators",
+      "paper_title": "Likelihood-free MCMC with Amortized Approximate Ratio Estimators",
+      "source_directory_evidence_label": "Likelihood_free_MCMC_with_Amortized_Approximate_Ratio_Estimators",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "probabilistic-flows-vaes"
+      ],
+      "python_scripts": [
+        "AALR-MCMC.py"
+      ],
+      "key_symbols": [
+        "MLP",
+        "MultivariateNormalTransitionDistribution",
+        "SLCPSimulator",
+        "UniformPrior",
+        "algorithm1",
+        "likelihood_free_metropolis_hastings",
+        "make_plot"
+      ],
+      "requirements": [
+        "matplotlib==3.3.2",
+        "torch==1.7.1",
+        "tqdm==4.50.2"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "main_guard"
+      ],
+      "backend_posture": "cpu-or-cuda torch depending on edits/device",
+      "full_run_safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1903.04057"
+      ],
+      "title": "Likelihood-free MCMC with Amortized Approximate Ratio Estimators",
+      "name": "Likelihood-free MCMC with Amortized Approximate Ratio Estimators",
+      "paper": "Likelihood-free MCMC with Amortized Approximate Ratio Estimators",
+      "directory": "Likelihood_free_MCMC_with_Amortized_Approximate_Ratio_Estimators",
+      "dir": "Likelihood_free_MCMC_with_Amortized_Approximate_Ratio_Estimators",
+      "folder": "Likelihood_free_MCMC_with_Amortized_Approximate_Ratio_Estimators",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "AALR-MCMC.py"
+      ],
+      "source_scripts": [
+        "AALR-MCMC.py"
+      ],
+      "symbols": [
+        "MLP",
+        "MultivariateNormalTransitionDistribution",
+        "SLCPSimulator",
+        "UniformPrior",
+        "algorithm1",
+        "likelihood_free_metropolis_hastings",
+        "make_plot"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "aliases": [
+        "Amortized",
+        "Approximate",
+        "Estimators",
+        "Likelihood",
+        "Likelihood free MCMC with Amortized Approximate Ratio Estimators",
+        "Likelihood-free MCMC with Amortized Approximate Ratio Estimators",
+        "Likelihood_free_MCMC_with_Amortized_Approximate_Ratio_Estimators",
+        "MCMC",
+        "Ratio",
+        "free",
+        "with"
+      ]
+    },
+    {
+      "id": "masked-autoregressive-flow-for-density-estimation",
+      "paper_title": "Code for *Masked Autoregressive Flow for Density Estimation*",
+      "source_directory_evidence_label": "Masked_Autoregressive_Flow_for_Density_Estimation",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "probabilistic-flows-vaes"
+      ],
+      "python_scripts": [
+        "maf.py"
+      ],
+      "key_symbols": [
+        "BatchNorm",
+        "LogitTransform1d",
+        "MADE",
+        "MAF",
+        "MaskedLinear",
+        "ReversePermutation",
+        "create_mask",
+        "std_normal_logprob"
+      ],
+      "requirements": [
+        "keras==3.10.0",
+        "matplotlib==3.5.1",
+        "numpy==1.26.4",
+        "torch==2.7.0",
+        "tqdm==4.67.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "main_guard"
+      ],
+      "backend_posture": "cpu-or-cuda torch depending on edits/device",
+      "full_run_safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1705.07057"
+      ],
+      "title": "Code for *Masked Autoregressive Flow for Density Estimation*",
+      "name": "Code for *Masked Autoregressive Flow for Density Estimation*",
+      "paper": "Code for *Masked Autoregressive Flow for Density Estimation*",
+      "directory": "Masked_Autoregressive_Flow_for_Density_Estimation",
+      "dir": "Masked_Autoregressive_Flow_for_Density_Estimation",
+      "folder": "Masked_Autoregressive_Flow_for_Density_Estimation",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "maf.py"
+      ],
+      "source_scripts": [
+        "maf.py"
+      ],
+      "symbols": [
+        "BatchNorm",
+        "LogitTransform1d",
+        "MADE",
+        "MAF",
+        "MaskedLinear",
+        "ReversePermutation",
+        "create_mask",
+        "std_normal_logprob"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "aliases": [
+        "Autoregressive",
+        "Code",
+        "Code for *Masked Autoregressive Flow for Density Estimation*",
+        "Density",
+        "Estimation",
+        "Flow",
+        "Masked",
+        "Masked Autoregressive Flow for Density Estimation",
+        "Masked_Autoregressive_Flow_for_Density_Estimation",
+        "for"
+      ]
+    },
+    {
+      "id": "maxout-networks",
+      "paper_title": "Maxout Networks",
+      "source_directory_evidence_label": "Maxout_Networks",
+      "owner_sub_skill": "optimization-meta-rl",
+      "categories": [
+        "layers-optimizers"
+      ],
+      "python_scripts": [
+        "maxout_networks.py"
+      ],
+      "key_symbols": [
+        "Maxout",
+        "train"
+      ],
+      "requirements": [
+        "keras==2.8.0",
+        "matplotlib==3.2.2",
+        "numpy==1.21.6",
+        "seaborn==0.11.2",
+        "torch==1.12.1+cu113",
+        "tqdm==4.64.0"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1302.4389"
+      ],
+      "title": "Maxout Networks",
+      "name": "Maxout Networks",
+      "paper": "Maxout Networks",
+      "directory": "Maxout_Networks",
+      "dir": "Maxout_Networks",
+      "folder": "Maxout_Networks",
+      "owner": "optimization-meta-rl",
+      "group": "optimization-meta-rl",
+      "subskill": "optimization-meta-rl",
+      "scripts": [
+        "maxout_networks.py"
+      ],
+      "source_scripts": [
+        "maxout_networks.py"
+      ],
+      "symbols": [
+        "Maxout",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Maxout",
+        "Maxout Networks",
+        "Maxout_Networks",
+        "Networks"
+      ]
+    },
+    {
+      "id": "model-agnostic-meta-learning-for-fast-adaptation-of-deep-networks",
+      "paper_title": "Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks",
+      "source_directory_evidence_label": "Model_Agnostic_Meta_Learning_for_Fast_Adaptation_of_Deep_Networks",
+      "owner_sub_skill": "optimization-meta-rl",
+      "categories": [
+        "meta-learning-hyperopt"
+      ],
+      "python_scripts": [
+        "maml.py"
+      ],
+      "key_symbols": [
+        "Task",
+        "maml",
+        "mlp",
+        "perform_k_training_steps",
+        "sample_task"
+      ],
+      "requirements": [
+        "matplotlib==3.3.4",
+        "numpy==1.19.5",
+        "torch==1.9.0+cu111",
+        "tqdm==4.48.2"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1703.03400"
+      ],
+      "title": "Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks",
+      "name": "Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks",
+      "paper": "Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks",
+      "directory": "Model_Agnostic_Meta_Learning_for_Fast_Adaptation_of_Deep_Networks",
+      "dir": "Model_Agnostic_Meta_Learning_for_Fast_Adaptation_of_Deep_Networks",
+      "folder": "Model_Agnostic_Meta_Learning_for_Fast_Adaptation_of_Deep_Networks",
+      "owner": "optimization-meta-rl",
+      "group": "optimization-meta-rl",
+      "subskill": "optimization-meta-rl",
+      "scripts": [
+        "maml.py"
+      ],
+      "source_scripts": [
+        "maml.py"
+      ],
+      "symbols": [
+        "Task",
+        "maml",
+        "mlp",
+        "perform_k_training_steps",
+        "sample_task"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Adaptation",
+        "Agnostic",
+        "Deep",
+        "Fast",
+        "Learning",
+        "Meta",
+        "Model",
+        "Model Agnostic Meta Learning for Fast Adaptation of Deep Networks",
+        "Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks",
+        "Model_Agnostic_Meta_Learning_for_Fast_Adaptation_of_Deep_Networks",
+        "Networks",
+        "for"
+      ]
+    },
+    {
+      "id": "multiplicative-filter-networks",
+      "paper_title": "Multiplicative Filter Networks",
+      "source_directory_evidence_label": "Multiplicative_Filter_Networks",
+      "owner_sub_skill": "neural-rendering-3d",
+      "categories": [
+        "implicit-representations"
+      ],
+      "python_scripts": [
+        "mfn.py"
+      ],
+      "key_symbols": [
+        "GaborFilter",
+        "GaborNet",
+        "SineLayer",
+        "Siren",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.3.4",
+        "numpy==1.19.5",
+        "skimage==0.17.2",
+        "torch==1.9.0+cu111",
+        "torchvision==0.10.0+cu111",
+        "tqdm==4.48.2"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://openreview.net/forum?id=OmtmcPkkhT"
+      ],
+      "title": "Multiplicative Filter Networks",
+      "name": "Multiplicative Filter Networks",
+      "paper": "Multiplicative Filter Networks",
+      "directory": "Multiplicative_Filter_Networks",
+      "dir": "Multiplicative_Filter_Networks",
+      "folder": "Multiplicative_Filter_Networks",
+      "owner": "neural-rendering-3d",
+      "group": "neural-rendering-3d",
+      "subskill": "neural-rendering-3d",
+      "scripts": [
+        "mfn.py"
+      ],
+      "source_scripts": [
+        "mfn.py"
+      ],
+      "symbols": [
+        "GaborFilter",
+        "GaborNet",
+        "SineLayer",
+        "Siren",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Filter",
+        "Multiplicative",
+        "Multiplicative Filter Networks",
+        "Multiplicative_Filter_Networks",
+        "Networks"
+      ]
+    },
+    {
+      "id": "nice-non-linear-independent-components-estimation",
+      "paper_title": "NICE: Non-linear Independent Components Estimation",
+      "source_directory_evidence_label": "NICE_Non_linear_Independent_Components_Estimation",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "probabilistic-flows-vaes"
+      ],
+      "python_scripts": [
+        "NICE.py"
+      ],
+      "key_symbols": [
+        "NICE",
+        "StandardLogisticDistribution",
+        "training"
+      ],
+      "requirements": [
+        "Keras==2.4.3",
+        "matplotlib==3.3.4",
+        "numpy==1.19.5",
+        "torch==1.7.1",
+        "tqdm==4.48.2"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1410.8516"
+      ],
+      "title": "NICE: Non-linear Independent Components Estimation",
+      "name": "NICE: Non-linear Independent Components Estimation",
+      "paper": "NICE: Non-linear Independent Components Estimation",
+      "directory": "NICE_Non_linear_Independent_Components_Estimation",
+      "dir": "NICE_Non_linear_Independent_Components_Estimation",
+      "folder": "NICE_Non_linear_Independent_Components_Estimation",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "NICE.py"
+      ],
+      "source_scripts": [
+        "NICE.py"
+      ],
+      "symbols": [
+        "NICE",
+        "StandardLogisticDistribution",
+        "training"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Components",
+        "Estimation",
+        "Independent",
+        "NICE",
+        "NICE Non linear Independent Components Estimation",
+        "NICE: Non-linear Independent Components Estimation",
+        "NICE_Non_linear_Independent_Components_Estimation",
+        "Non",
+        "linear",
+        "nice"
+      ]
+    },
+    {
+      "id": "nerf-representing-scenes-as-neural-radiance-fields-for-view-synthesis",
+      "paper_title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "source_directory_evidence_label": "NeRF_Representing_Scenes_as_Neural_Radiance_Fields_for_View_Synthesis",
+      "owner_sub_skill": "neural-rendering-3d",
+      "categories": [
+        "neural-rendering-3d"
+      ],
+      "python_scripts": [
+        "nerf.py"
+      ],
+      "key_symbols": [
+        "NerfModel",
+        "compute_accumulated_transmittance",
+        "render_rays",
+        "test",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.3.4",
+        "numpy==1.19.5",
+        "torch==1.7.1",
+        "tqdm==4.48.2"
+      ],
+      "asset_labels": [
+        "novel_views"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://www.udemy.com/course/neural-radiance-fields-nerf/?referralCode=DD33817D57404AF048DF",
+        "https://drive.google.com/drive/folders/18bwm-RiHETRCS5yD9G00seFIcrJHIvD-?usp=sharing",
+        "https://github.com/kwea123/nerf_pl/blob/master/datasets/blender.py",
+        "https://github.com/kwea123/nerf_pl"
+      ],
+      "title": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "name": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "paper": "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+      "directory": "NeRF_Representing_Scenes_as_Neural_Radiance_Fields_for_View_Synthesis",
+      "dir": "NeRF_Representing_Scenes_as_Neural_Radiance_Fields_for_View_Synthesis",
+      "folder": "NeRF_Representing_Scenes_as_Neural_Radiance_Fields_for_View_Synthesis",
+      "owner": "neural-rendering-3d",
+      "group": "neural-rendering-3d",
+      "subskill": "neural-rendering-3d",
+      "scripts": [
+        "nerf.py"
+      ],
+      "source_scripts": [
+        "nerf.py"
+      ],
+      "symbols": [
+        "NerfModel",
+        "compute_accumulated_transmittance",
+        "render_rays",
+        "test",
+        "train"
+      ],
+      "asset_dirs": [
+        "novel_views"
+      ],
+      "assets": [
+        "novel_views"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Fields",
+        "NeRF",
+        "NeRF Representing Scenes as Neural Radiance Fields for View Synthesis",
+        "NeRF: Representing Scenes as Neural Radiance Fields for View Synthesis",
+        "NeRF_Representing_Scenes_as_Neural_Radiance_Fields_for_View_Synthesis",
+        "Neural",
+        "Radiance",
+        "Representing",
+        "Scenes",
+        "Synthesis",
+        "View",
+        "for",
+        "nerf"
+      ]
+    },
+    {
+      "id": "network-in-network",
+      "paper_title": "Network In Network",
+      "source_directory_evidence_label": "Network_In_Network",
+      "owner_sub_skill": "optimization-meta-rl",
+      "categories": [
+        "layers-optimizers"
+      ],
+      "python_scripts": [
+        "nin.py"
+      ],
+      "key_symbols": [
+        "NiN",
+        "train"
+      ],
+      "requirements": [
+        "keras==2.9.0",
+        "matplotlib==3.5.2",
+        "numpy==1.23.1",
+        "seaborn==0.11.2",
+        "torch==1.12.0"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1312.4400"
+      ],
+      "title": "Network In Network",
+      "name": "Network In Network",
+      "paper": "Network In Network",
+      "directory": "Network_In_Network",
+      "dir": "Network_In_Network",
+      "folder": "Network_In_Network",
+      "owner": "optimization-meta-rl",
+      "group": "optimization-meta-rl",
+      "subskill": "optimization-meta-rl",
+      "scripts": [
+        "nin.py"
+      ],
+      "source_scripts": [
+        "nin.py"
+      ],
+      "symbols": [
+        "NiN",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Network",
+        "Network In Network",
+        "Network_In_Network"
+      ]
+    },
+    {
+      "id": "neural-radiance-fields-without-known-camera-parameters",
+      "paper_title": "NeRF--: Neural Radiance Fields Without Known Camera Parameters",
+      "source_directory_evidence_label": "Neural_Radiance_Fields_Without_Known_Camera_Parameters",
+      "owner_sub_skill": "neural-rendering-3d",
+      "categories": [
+        "neural-rendering-3d"
+      ],
+      "python_scripts": [
+        "nerfmm.py"
+      ],
+      "key_symbols": [
+        "NerfModel",
+        "compute_accumulated_transmittance",
+        "get_ndc_rays",
+        "initialize_camera_parameters",
+        "load_images",
+        "render_rays",
+        "sample_batch",
+        "test",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.5.3",
+        "numpy==1.24.1",
+        "torch==1.12.1",
+        "tqdm==4.64.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2102.07064",
+        "https://drive.google.com/drive/folders/128yBriW1IG_3NJ5Rp7APSTZsJqdJdfc1"
+      ],
+      "title": "NeRF--: Neural Radiance Fields Without Known Camera Parameters",
+      "name": "NeRF--: Neural Radiance Fields Without Known Camera Parameters",
+      "paper": "NeRF--: Neural Radiance Fields Without Known Camera Parameters",
+      "directory": "Neural_Radiance_Fields_Without_Known_Camera_Parameters",
+      "dir": "Neural_Radiance_Fields_Without_Known_Camera_Parameters",
+      "folder": "Neural_Radiance_Fields_Without_Known_Camera_Parameters",
+      "owner": "neural-rendering-3d",
+      "group": "neural-rendering-3d",
+      "subskill": "neural-rendering-3d",
+      "scripts": [
+        "nerfmm.py"
+      ],
+      "source_scripts": [
+        "nerfmm.py"
+      ],
+      "symbols": [
+        "NerfModel",
+        "compute_accumulated_transmittance",
+        "get_ndc_rays",
+        "initialize_camera_parameters",
+        "load_images",
+        "render_rays",
+        "sample_batch",
+        "test",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Camera",
+        "Fields",
+        "Known",
+        "NeRF",
+        "NeRF--: Neural Radiance Fields Without Known Camera Parameters",
+        "Neural",
+        "Neural Radiance Fields Without Known Camera Parameters",
+        "Neural_Radiance_Fields_Without_Known_Camera_Parameters",
+        "Parameters",
+        "Radiance",
+        "Without",
+        "nerf"
+      ]
+    },
+    {
+      "id": "on-first-order-meta-learning-algorithms",
+      "paper_title": "On First-Order Meta-Learning Algorithms",
+      "source_directory_evidence_label": "On_First_Order_Meta_Learning_Algorithms",
+      "owner_sub_skill": "optimization-meta-rl",
+      "categories": [
+        "meta-learning-hyperopt"
+      ],
+      "python_scripts": [
+        "reptile.py"
+      ],
+      "key_symbols": [
+        "MLP",
+        "perform_k_training_steps",
+        "reptile",
+        "sample_task"
+      ],
+      "requirements": [
+        "matplotlib==3.3.2",
+        "numpy==1.19.2",
+        "torch==1.7.1",
+        "tqdm==4.50.2"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "main_guard"
+      ],
+      "backend_posture": "cpu-or-cuda torch depending on edits/device",
+      "full_run_safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1803.02999"
+      ],
+      "title": "On First-Order Meta-Learning Algorithms",
+      "name": "On First-Order Meta-Learning Algorithms",
+      "paper": "On First-Order Meta-Learning Algorithms",
+      "directory": "On_First_Order_Meta_Learning_Algorithms",
+      "dir": "On_First_Order_Meta_Learning_Algorithms",
+      "folder": "On_First_Order_Meta_Learning_Algorithms",
+      "owner": "optimization-meta-rl",
+      "group": "optimization-meta-rl",
+      "subskill": "optimization-meta-rl",
+      "scripts": [
+        "reptile.py"
+      ],
+      "source_scripts": [
+        "reptile.py"
+      ],
+      "symbols": [
+        "MLP",
+        "perform_k_training_steps",
+        "reptile",
+        "sample_task"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "aliases": [
+        "Algorithms",
+        "First",
+        "Learning",
+        "Meta",
+        "On First Order Meta Learning Algorithms",
+        "On First-Order Meta-Learning Algorithms",
+        "On_First_Order_Meta_Learning_Algorithms",
+        "Order"
+      ]
+    },
+    {
+      "id": "on-the-variance-of-the-adaptive-learning-rate-and-beyond",
+      "paper_title": "On the Variance of the Adaptive Learning Rate and Beyond",
+      "source_directory_evidence_label": "On_the_Variance_of_the_Adaptive_Learning_Rate_and_Beyond",
+      "owner_sub_skill": "optimization-meta-rl",
+      "categories": [
+        "misc"
+      ],
+      "python_scripts": [
+        "radam.py"
+      ],
+      "key_symbols": [
+        "RAdam",
+        "train"
+      ],
+      "requirements": [
+        "keras==2.11.0",
+        "matplotlib==3.2.2",
+        "numpy==1.22.4",
+        "seaborn==0.11.2",
+        "torch==1.13.1",
+        "tqdm==4.64.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1908.03265"
+      ],
+      "title": "On the Variance of the Adaptive Learning Rate and Beyond",
+      "name": "On the Variance of the Adaptive Learning Rate and Beyond",
+      "paper": "On the Variance of the Adaptive Learning Rate and Beyond",
+      "directory": "On_the_Variance_of_the_Adaptive_Learning_Rate_and_Beyond",
+      "dir": "On_the_Variance_of_the_Adaptive_Learning_Rate_and_Beyond",
+      "folder": "On_the_Variance_of_the_Adaptive_Learning_Rate_and_Beyond",
+      "owner": "optimization-meta-rl",
+      "group": "optimization-meta-rl",
+      "subskill": "optimization-meta-rl",
+      "scripts": [
+        "radam.py"
+      ],
+      "source_scripts": [
+        "radam.py"
+      ],
+      "symbols": [
+        "RAdam",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Adaptive",
+        "Beyond",
+        "Learning",
+        "On the Variance of the Adaptive Learning Rate and Beyond",
+        "On_the_Variance_of_the_Adaptive_Learning_Rate_and_Beyond",
+        "Rate",
+        "Variance",
+        "and",
+        "the"
+      ]
+    },
+    {
+      "id": "optimizing-millions-of-hyperparameters-by-implicit-differentiation",
+      "paper_title": "Optimizing Millions of Hyperparameters by Implicit Differentiation",
+      "source_directory_evidence_label": "Optimizing_Millions_of_Hyperparameters_by_Implicit_Differentiation",
+      "owner_sub_skill": "optimization-meta-rl",
+      "categories": [
+        "meta-learning-hyperopt"
+      ],
+      "python_scripts": [
+        "gradient_based_HO.py"
+      ],
+      "key_symbols": [
+        "MLP",
+        "WeightDecay",
+        "approxInverseHVP",
+        "compute_loss",
+        "compute_pred",
+        "gradient_based_ho",
+        "hypergradient"
+      ],
+      "requirements": [
+        "Keras==2.4.3",
+        "matplotlib==3.3.1",
+        "numpy==1.19.4",
+        "torch==1.7.1",
+        "torchvision==0.9.0",
+        "tqdm==4.48.2",
+        "typing-extensions==3.7.4.3"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "main_guard"
+      ],
+      "backend_posture": "cpu-or-cuda torch depending on edits/device",
+      "full_run_safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "readme_external_links": [
+        "http://proceedings.mlr.press/v108/lorraine20a/lorraine20a.pdf"
+      ],
+      "title": "Optimizing Millions of Hyperparameters by Implicit Differentiation",
+      "name": "Optimizing Millions of Hyperparameters by Implicit Differentiation",
+      "paper": "Optimizing Millions of Hyperparameters by Implicit Differentiation",
+      "directory": "Optimizing_Millions_of_Hyperparameters_by_Implicit_Differentiation",
+      "dir": "Optimizing_Millions_of_Hyperparameters_by_Implicit_Differentiation",
+      "folder": "Optimizing_Millions_of_Hyperparameters_by_Implicit_Differentiation",
+      "owner": "optimization-meta-rl",
+      "group": "optimization-meta-rl",
+      "subskill": "optimization-meta-rl",
+      "scripts": [
+        "gradient_based_HO.py"
+      ],
+      "source_scripts": [
+        "gradient_based_HO.py"
+      ],
+      "symbols": [
+        "MLP",
+        "WeightDecay",
+        "approxInverseHVP",
+        "compute_loss",
+        "compute_pred",
+        "gradient_based_ho",
+        "hypergradient"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "aliases": [
+        "Differentiation",
+        "Hyperparameters",
+        "Implicit",
+        "Millions",
+        "Optimizing",
+        "Optimizing Millions of Hyperparameters by Implicit Differentiation",
+        "Optimizing_Millions_of_Hyperparameters_by_Implicit_Differentiation"
+      ]
+    },
+    {
+      "id": "playing-atari-with-deep-reinforcement-learning",
+      "paper_title": "Playing Atari with Deep Reinforcement Learning",
+      "source_directory_evidence_label": "Playing_Atari_with_Deep_Reinforcement_Learning",
+      "owner_sub_skill": "optimization-meta-rl",
+      "categories": [
+        "reinforcement-learning"
+      ],
+      "python_scripts": [
+        "dqn.py"
+      ],
+      "key_symbols": [
+        "DQN",
+        "Deep_Q_Learning"
+      ],
+      "requirements": [
+        "gym==0.23.1",
+        "matplotlib==3.5.2",
+        "numpy==1.18.0",
+        "stable_baselines3==1.2.0",
+        "torch==1.10.1",
+        "tqdm==4.64.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "main_guard"
+      ],
+      "backend_posture": "cpu-or-cuda torch depending on edits/device",
+      "full_run_safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1312.5602"
+      ],
+      "title": "Playing Atari with Deep Reinforcement Learning",
+      "name": "Playing Atari with Deep Reinforcement Learning",
+      "paper": "Playing Atari with Deep Reinforcement Learning",
+      "directory": "Playing_Atari_with_Deep_Reinforcement_Learning",
+      "dir": "Playing_Atari_with_Deep_Reinforcement_Learning",
+      "folder": "Playing_Atari_with_Deep_Reinforcement_Learning",
+      "owner": "optimization-meta-rl",
+      "group": "optimization-meta-rl",
+      "subskill": "optimization-meta-rl",
+      "scripts": [
+        "dqn.py"
+      ],
+      "source_scripts": [
+        "dqn.py"
+      ],
+      "symbols": [
+        "DQN",
+        "Deep_Q_Learning"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "aliases": [
+        "Atari",
+        "Deep",
+        "Learning",
+        "Playing",
+        "Playing Atari with Deep Reinforcement Learning",
+        "Playing_Atari_with_Deep_Reinforcement_Learning",
+        "Reinforcement",
+        "with"
+      ]
+    },
+    {
+      "id": "plenoctrees-for-real-time-rendering-of-neural-radiance-fields",
+      "paper_title": "PlenOctrees for Real-time Rendering of Neural Radiance Fields",
+      "source_directory_evidence_label": "PlenOctrees_for_Real_time_Rendering_of_Neural_Radiance_Fields",
+      "owner_sub_skill": "neural-rendering-3d",
+      "categories": [
+        "neural-rendering-3d"
+      ],
+      "python_scripts": [
+        "nerf-sg.py"
+      ],
+      "key_symbols": [
+        "NerfModel",
+        "compute_accumulated_transmittance",
+        "render_rays",
+        "test",
+        "to_cartesian",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.5.3",
+        "numpy==1.24.1",
+        "torch==1.12.1",
+        "tqdm==4.64.1"
+      ],
+      "asset_labels": [
+        "novel_views"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2103.14024",
+        "https://drive.google.com/drive/folders/18bwm-RiHETRCS5yD9G00seFIcrJHIvD-?usp=sharing"
+      ],
+      "title": "PlenOctrees for Real-time Rendering of Neural Radiance Fields",
+      "name": "PlenOctrees for Real-time Rendering of Neural Radiance Fields",
+      "paper": "PlenOctrees for Real-time Rendering of Neural Radiance Fields",
+      "directory": "PlenOctrees_for_Real_time_Rendering_of_Neural_Radiance_Fields",
+      "dir": "PlenOctrees_for_Real_time_Rendering_of_Neural_Radiance_Fields",
+      "folder": "PlenOctrees_for_Real_time_Rendering_of_Neural_Radiance_Fields",
+      "owner": "neural-rendering-3d",
+      "group": "neural-rendering-3d",
+      "subskill": "neural-rendering-3d",
+      "scripts": [
+        "nerf-sg.py"
+      ],
+      "source_scripts": [
+        "nerf-sg.py"
+      ],
+      "symbols": [
+        "NerfModel",
+        "compute_accumulated_transmittance",
+        "render_rays",
+        "test",
+        "to_cartesian",
+        "train"
+      ],
+      "asset_dirs": [
+        "novel_views"
+      ],
+      "assets": [
+        "novel_views"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Fields",
+        "Neural",
+        "PlenOctrees",
+        "PlenOctrees for Real time Rendering of Neural Radiance Fields",
+        "PlenOctrees for Real-time Rendering of Neural Radiance Fields",
+        "PlenOctrees_for_Real_time_Rendering_of_Neural_Radiance_Fields",
+        "Radiance",
+        "Real",
+        "Rendering",
+        "for",
+        "time"
+      ]
+    },
+    {
+      "id": "plenoxels-radiance-fields-without-neural-networks",
+      "paper_title": "Plenoxels: Radiance Fields without Neural Networks",
+      "source_directory_evidence_label": "Plenoxels_Radiance_Fields_without_Neural_Networks",
+      "owner_sub_skill": "neural-rendering-3d",
+      "categories": [
+        "neural-rendering-3d"
+      ],
+      "python_scripts": [
+        "plenoxels.py"
+      ],
+      "key_symbols": [
+        "NerfModel",
+        "compute_accumulated_transmittance",
+        "eval_spherical_function",
+        "render_rays",
+        "test",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.5.2",
+        "numpy==1.23.1",
+        "torch==1.12.0",
+        "tqdm==4.64.0"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2112.05131",
+        "https://drive.google.com/drive/folders/18bwm-RiHETRCS5yD9G00seFIcrJHIvD-?usp=sharing"
+      ],
+      "title": "Plenoxels: Radiance Fields without Neural Networks",
+      "name": "Plenoxels: Radiance Fields without Neural Networks",
+      "paper": "Plenoxels: Radiance Fields without Neural Networks",
+      "directory": "Plenoxels_Radiance_Fields_without_Neural_Networks",
+      "dir": "Plenoxels_Radiance_Fields_without_Neural_Networks",
+      "folder": "Plenoxels_Radiance_Fields_without_Neural_Networks",
+      "owner": "neural-rendering-3d",
+      "group": "neural-rendering-3d",
+      "subskill": "neural-rendering-3d",
+      "scripts": [
+        "plenoxels.py"
+      ],
+      "source_scripts": [
+        "plenoxels.py"
+      ],
+      "symbols": [
+        "NerfModel",
+        "compute_accumulated_transmittance",
+        "eval_spherical_function",
+        "render_rays",
+        "test",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Fields",
+        "Networks",
+        "Neural",
+        "Plenoxels",
+        "Plenoxels Radiance Fields without Neural Networks",
+        "Plenoxels: Radiance Fields without Neural Networks",
+        "Plenoxels_Radiance_Fields_without_Neural_Networks",
+        "Radiance",
+        "without"
+      ]
+    },
+    {
+      "id": "proximal-policy-optimization-algorithms",
+      "paper_title": "Proximal Policy Optimization Algorithms",
+      "source_directory_evidence_label": "Proximal_Policy_Optimization_Algorithms",
+      "owner_sub_skill": "optimization-meta-rl",
+      "categories": [
+        "misc"
+      ],
+      "python_scripts": [
+        "ppo.py"
+      ],
+      "key_symbols": [
+        "ActorCritic",
+        "Environments",
+        "PPO"
+      ],
+      "requirements": [
+        "gym==0.23.1",
+        "matplotlib==3.5.2",
+        "numpy==1.18.0",
+        "stable_baselines3==1.2.0",
+        "torch==1.10.1",
+        "tqdm==4.64.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1707.06347"
+      ],
+      "title": "Proximal Policy Optimization Algorithms",
+      "name": "Proximal Policy Optimization Algorithms",
+      "paper": "Proximal Policy Optimization Algorithms",
+      "directory": "Proximal_Policy_Optimization_Algorithms",
+      "dir": "Proximal_Policy_Optimization_Algorithms",
+      "folder": "Proximal_Policy_Optimization_Algorithms",
+      "owner": "optimization-meta-rl",
+      "group": "optimization-meta-rl",
+      "subskill": "optimization-meta-rl",
+      "scripts": [
+        "ppo.py"
+      ],
+      "source_scripts": [
+        "ppo.py"
+      ],
+      "symbols": [
+        "ActorCritic",
+        "Environments",
+        "PPO"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Algorithms",
+        "Optimization",
+        "Policy",
+        "Proximal",
+        "Proximal Policy Optimization Algorithms",
+        "Proximal_Policy_Optimization_Algorithms"
+      ]
+    },
+    {
+      "id": "pseudo-numerical-methods-for-diffusion-models-on-manifolds",
+      "paper_title": "Pseudo Numerical Methods for Diffusion Models",
+      "source_directory_evidence_label": "Pseudo_Numerical_Methods_for_Diffusion_Models_on_Manifolds",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "diffusion-generative-sampling"
+      ],
+      "python_scripts": [
+        "pndms_solver.py",
+        "unet.py"
+      ],
+      "key_symbols": [
+        "AttentionBlock",
+        "DiffusionModel",
+        "Downsample",
+        "Nin",
+        "ResNetBlock",
+        "UNet",
+        "Upsample",
+        "get_timestep_embedding"
+      ],
+      "requirements": [
+        "matplotlib==3.5.3",
+        "torch==1.12.0",
+        "tqdm==4.64.1"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "main_guard"
+      ],
+      "backend_posture": "cpu-or-cuda torch depending on edits/device",
+      "full_run_safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2202.09778"
+      ],
+      "title": "Pseudo Numerical Methods for Diffusion Models",
+      "name": "Pseudo Numerical Methods for Diffusion Models",
+      "paper": "Pseudo Numerical Methods for Diffusion Models",
+      "directory": "Pseudo_Numerical_Methods_for_Diffusion_Models_on_Manifolds",
+      "dir": "Pseudo_Numerical_Methods_for_Diffusion_Models_on_Manifolds",
+      "folder": "Pseudo_Numerical_Methods_for_Diffusion_Models_on_Manifolds",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "pndms_solver.py",
+        "unet.py"
+      ],
+      "source_scripts": [
+        "pndms_solver.py",
+        "unet.py"
+      ],
+      "symbols": [
+        "AttentionBlock",
+        "DiffusionModel",
+        "Downsample",
+        "Nin",
+        "ResNetBlock",
+        "UNet",
+        "Upsample",
+        "get_timestep_embedding"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "aliases": [
+        "Diffusion",
+        "Methods",
+        "Models",
+        "Numerical",
+        "Pseudo",
+        "Pseudo Numerical Methods for Diffusion Models",
+        "Pseudo Numerical Methods for Diffusion Models on Manifolds",
+        "Pseudo_Numerical_Methods_for_Diffusion_Models_on_Manifolds",
+        "for"
+      ]
+    },
+    {
+      "id": "self-normalizing-neural-networks",
+      "paper_title": "Self-Normalizing Neural Networks",
+      "source_directory_evidence_label": "Self_Normalizing_Neural_Networks",
+      "owner_sub_skill": "optimization-meta-rl",
+      "categories": [
+        "misc"
+      ],
+      "python_scripts": [
+        "selu.py"
+      ],
+      "key_symbols": [
+        "MLP",
+        "SELU",
+        "SNN",
+        "_init_weights",
+        "train"
+      ],
+      "requirements": [
+        "keras==2.11.0",
+        "matplotlib==3.5.1",
+        "numpy==1.22.1",
+        "seaborn==0.11.2",
+        "scikit-learn==1.0.2",
+        "torch==1.10.1",
+        "tqdm==4.62.3"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1706.02515"
+      ],
+      "title": "Self-Normalizing Neural Networks",
+      "name": "Self-Normalizing Neural Networks",
+      "paper": "Self-Normalizing Neural Networks",
+      "directory": "Self_Normalizing_Neural_Networks",
+      "dir": "Self_Normalizing_Neural_Networks",
+      "folder": "Self_Normalizing_Neural_Networks",
+      "owner": "optimization-meta-rl",
+      "group": "optimization-meta-rl",
+      "subskill": "optimization-meta-rl",
+      "scripts": [
+        "selu.py"
+      ],
+      "source_scripts": [
+        "selu.py"
+      ],
+      "symbols": [
+        "MLP",
+        "SELU",
+        "SNN",
+        "_init_weights",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Networks",
+        "Neural",
+        "Normalizing",
+        "Self",
+        "Self Normalizing Neural Networks",
+        "Self-Normalizing Neural Networks",
+        "Self_Normalizing_Neural_Networks"
+      ]
+    },
+    {
+      "id": "sequential-neural-likelihood",
+      "paper_title": "Sequential Neural Likelihood: Fast Likelihood-free Inference with Autoregressive Flows",
+      "source_directory_evidence_label": "Sequential_Neural_Likelihood",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "probabilistic-flows-vaes"
+      ],
+      "python_scripts": [
+        "snl.py"
+      ],
+      "key_symbols": [
+        "MultivariateNormalDistribution",
+        "SLCPSimulator",
+        "UniformPrior",
+        "make_plot",
+        "sample_from_mcmc",
+        "snl",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.3.2",
+        "torch==1.7.1",
+        "tqdm==4.50.2",
+        "UMNN==1.0"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1805.07226"
+      ],
+      "title": "Sequential Neural Likelihood: Fast Likelihood-free Inference with Autoregressive Flows",
+      "name": "Sequential Neural Likelihood: Fast Likelihood-free Inference with Autoregressive Flows",
+      "paper": "Sequential Neural Likelihood: Fast Likelihood-free Inference with Autoregressive Flows",
+      "directory": "Sequential_Neural_Likelihood",
+      "dir": "Sequential_Neural_Likelihood",
+      "folder": "Sequential_Neural_Likelihood",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "snl.py"
+      ],
+      "source_scripts": [
+        "snl.py"
+      ],
+      "symbols": [
+        "MultivariateNormalDistribution",
+        "SLCPSimulator",
+        "UniformPrior",
+        "make_plot",
+        "sample_from_mcmc",
+        "snl",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Autoregressive",
+        "Fast",
+        "Flows",
+        "Inference",
+        "Likelihood",
+        "Neural",
+        "Sequential",
+        "Sequential Neural Likelihood",
+        "Sequential Neural Likelihood: Fast Likelihood-free Inference with Autoregressive Flows",
+        "Sequential_Neural_Likelihood",
+        "free",
+        "with"
+      ]
+    },
+    {
+      "id": "speedy-splat-fast-3d-gaussian-splatting-with-sparse-pixels-and-sparse-primitives",
+      "paper_title": "Code for Speedy-Splat: Fast 3D Gaussian Splatting with Sparse Pixels and Sparse Primitives",
+      "source_directory_evidence_label": "Speedy_Splat_Fast_3D_Gaussian_Splatting_with_Sparse_Pixels_and_Sparse_Primitives",
+      "owner_sub_skill": "neural-rendering-3d",
+      "categories": [
+        "neural-rendering-3d"
+      ],
+      "python_scripts": [
+        "speedy_splat.py"
+      ],
+      "key_symbols": [
+        "build_sigma_from_params",
+        "evaluate_sh",
+        "inv2x2",
+        "project_points",
+        "quat_to_rotmat",
+        "render",
+        "scale_intrinsics"
+      ],
+      "requirements": [
+        "torch==2.2.1",
+        "numpy==1.24.4",
+        "pillow==10.2.0",
+        "tqdm==4.64.1"
+      ],
+      "asset_labels": [
+        "novel_views",
+        "camera_trajectories",
+        "out_colmap"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://3dgaussiansplattingcourse.com",
+        "https://drive.google.com/file/d/1NOx8dnD5_iz5dkuZuNzIpORRvhS87Zth/view?usp=sharing"
+      ],
+      "title": "Code for Speedy-Splat: Fast 3D Gaussian Splatting with Sparse Pixels and Sparse Primitives",
+      "name": "Code for Speedy-Splat: Fast 3D Gaussian Splatting with Sparse Pixels and Sparse Primitives",
+      "paper": "Code for Speedy-Splat: Fast 3D Gaussian Splatting with Sparse Pixels and Sparse Primitives",
+      "directory": "Speedy_Splat_Fast_3D_Gaussian_Splatting_with_Sparse_Pixels_and_Sparse_Primitives",
+      "dir": "Speedy_Splat_Fast_3D_Gaussian_Splatting_with_Sparse_Pixels_and_Sparse_Primitives",
+      "folder": "Speedy_Splat_Fast_3D_Gaussian_Splatting_with_Sparse_Pixels_and_Sparse_Primitives",
+      "owner": "neural-rendering-3d",
+      "group": "neural-rendering-3d",
+      "subskill": "neural-rendering-3d",
+      "scripts": [
+        "speedy_splat.py"
+      ],
+      "source_scripts": [
+        "speedy_splat.py"
+      ],
+      "symbols": [
+        "build_sigma_from_params",
+        "evaluate_sh",
+        "inv2x2",
+        "project_points",
+        "quat_to_rotmat",
+        "render",
+        "scale_intrinsics"
+      ],
+      "asset_dirs": [
+        "novel_views",
+        "camera_trajectories",
+        "out_colmap"
+      ],
+      "assets": [
+        "novel_views",
+        "camera_trajectories",
+        "out_colmap"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Code",
+        "Code for Speedy-Splat: Fast 3D Gaussian Splatting with Sparse Pixels and Sparse Primitives",
+        "Fast",
+        "Gaussian",
+        "Pixels",
+        "Primitives",
+        "Sparse",
+        "Speedy",
+        "Speedy Splat Fast 3D Gaussian Splatting with Sparse Pixels and Sparse Primitives",
+        "Speedy_Splat_Fast_3D_Gaussian_Splatting_with_Sparse_Pixels_and_Sparse_Primitives",
+        "Splat",
+        "Splatting",
+        "and",
+        "for",
+        "gaussian splatting",
+        "with"
+      ]
+    },
+    {
+      "id": "spherical-voronoi-directional-appearance-as-a-differentiable-partition-of-the-sphere",
+      "paper_title": "Spherical Voronoi: Directional Appearance as a Differentiable Partition of the Sphere",
+      "source_directory_evidence_label": "Spherical_Voronoi_Directional_Appearance_as_a_Differentiable_Partition_of_the_Sphere",
+      "owner_sub_skill": "neural-rendering-3d",
+      "categories": [
+        "misc"
+      ],
+      "python_scripts": [
+        "3dgs_sv.py"
+      ],
+      "key_symbols": [
+        "build_sigma_from_params",
+        "evaluate_sv",
+        "inv2x2",
+        "project_points",
+        "quat_to_rotmat",
+        "render",
+        "scale_intrinsics"
+      ],
+      "requirements": [
+        "torch==2.2.1",
+        "numpy==1.24.4",
+        "pillow==10.2.0",
+        "tqdm==4.64.1"
+      ],
+      "asset_labels": [
+        "novel_views",
+        "camera_trajectories",
+        "out_colmap"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://3dgaussiansplattingcourse.com",
+        "https://drive.google.com/file/d/1jN2F7n2PR08BlRRP33V9SrIDlmGrQgAU/view?usp=sharing"
+      ],
+      "title": "Spherical Voronoi: Directional Appearance as a Differentiable Partition of the Sphere",
+      "name": "Spherical Voronoi: Directional Appearance as a Differentiable Partition of the Sphere",
+      "paper": "Spherical Voronoi: Directional Appearance as a Differentiable Partition of the Sphere",
+      "directory": "Spherical_Voronoi_Directional_Appearance_as_a_Differentiable_Partition_of_the_Sphere",
+      "dir": "Spherical_Voronoi_Directional_Appearance_as_a_Differentiable_Partition_of_the_Sphere",
+      "folder": "Spherical_Voronoi_Directional_Appearance_as_a_Differentiable_Partition_of_the_Sphere",
+      "owner": "neural-rendering-3d",
+      "group": "neural-rendering-3d",
+      "subskill": "neural-rendering-3d",
+      "scripts": [
+        "3dgs_sv.py"
+      ],
+      "source_scripts": [
+        "3dgs_sv.py"
+      ],
+      "symbols": [
+        "build_sigma_from_params",
+        "evaluate_sv",
+        "inv2x2",
+        "project_points",
+        "quat_to_rotmat",
+        "render",
+        "scale_intrinsics"
+      ],
+      "asset_dirs": [
+        "novel_views",
+        "camera_trajectories",
+        "out_colmap"
+      ],
+      "assets": [
+        "novel_views",
+        "camera_trajectories",
+        "out_colmap"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Appearance",
+        "Differentiable",
+        "Directional",
+        "Partition",
+        "Sphere",
+        "Spherical",
+        "Spherical Voronoi Directional Appearance as a Differentiable Partition of the Sphere",
+        "Spherical Voronoi: Directional Appearance as a Differentiable Partition of the Sphere",
+        "Spherical_Voronoi_Directional_Appearance_as_a_Differentiable_Partition_of_the_Sphere",
+        "Voronoi",
+        "the"
+      ]
+    },
+    {
+      "id": "splatter-image-ultra-fast-single-view-3d-reconstruction",
+      "paper_title": "Splatter Image: Ultra-Fast Single-View 3D Reconstruction",
+      "source_directory_evidence_label": "Splatter_Image_Ultra_Fast_Single_View_3D_Reconstruction",
+      "owner_sub_skill": "neural-rendering-3d",
+      "categories": [
+        "neural-rendering-3d"
+      ],
+      "python_scripts": [
+        "gaussian_splatting.py",
+        "splatter_image.py",
+        "unet.py"
+      ],
+      "key_symbols": [
+        "DownBlock",
+        "NMRDataset",
+        "ResBlock",
+        "SplatterImageUNet",
+        "UpBlock",
+        "build_pixel_grid_from_intrinsics",
+        "camera_space_points",
+        "decode_gaussians",
+        "evaluate_sh",
+        "init_output_head",
+        "intrinsics_to_fxfycxcy",
+        "inv2x2",
+        "project_points",
+        "quat_xyzw_to_rotmat",
+        "render",
+        "render_novel_view_grid",
+        "sample_source_target_indices",
+        "scale_intrinsics"
+      ],
+      "requirements": [
+        "matplotlib==3.7.2",
+        "numpy==1.24.3",
+        "Pillow==9.4.0",
+        "torch==2.7.0+cu126",
+        "tqdm==4.65.0"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/2312.13150",
+        "https://drive.google.com/drive/folders/1lRfg-Ov1dd3ldke9Gv9dyzGGTxiFOhIs"
+      ],
+      "title": "Splatter Image: Ultra-Fast Single-View 3D Reconstruction",
+      "name": "Splatter Image: Ultra-Fast Single-View 3D Reconstruction",
+      "paper": "Splatter Image: Ultra-Fast Single-View 3D Reconstruction",
+      "directory": "Splatter_Image_Ultra_Fast_Single_View_3D_Reconstruction",
+      "dir": "Splatter_Image_Ultra_Fast_Single_View_3D_Reconstruction",
+      "folder": "Splatter_Image_Ultra_Fast_Single_View_3D_Reconstruction",
+      "owner": "neural-rendering-3d",
+      "group": "neural-rendering-3d",
+      "subskill": "neural-rendering-3d",
+      "scripts": [
+        "gaussian_splatting.py",
+        "splatter_image.py",
+        "unet.py"
+      ],
+      "source_scripts": [
+        "gaussian_splatting.py",
+        "splatter_image.py",
+        "unet.py"
+      ],
+      "symbols": [
+        "DownBlock",
+        "NMRDataset",
+        "ResBlock",
+        "SplatterImageUNet",
+        "UpBlock",
+        "build_pixel_grid_from_intrinsics",
+        "camera_space_points",
+        "decode_gaussians",
+        "evaluate_sh",
+        "init_output_head",
+        "intrinsics_to_fxfycxcy",
+        "inv2x2",
+        "project_points",
+        "quat_xyzw_to_rotmat",
+        "render",
+        "render_novel_view_grid",
+        "sample_source_target_indices",
+        "scale_intrinsics"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Fast",
+        "Image",
+        "Reconstruction",
+        "Single",
+        "Splatter",
+        "Splatter Image Ultra Fast Single View 3D Reconstruction",
+        "Splatter Image: Ultra-Fast Single-View 3D Reconstruction",
+        "Splatter_Image_Ultra_Fast_Single_View_3D_Reconstruction",
+        "Ultra",
+        "View"
+      ]
+    },
+    {
+      "id": "unpaired-image-to-image-translation-using-cycle-consistent-adversarial-networks",
+      "paper_title": "CycleGAN",
+      "source_directory_evidence_label": "Unpaired_Image_to_Image_Translation_using_Cycle_Consistent_Adversarial_Networks",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "gan-image-translation"
+      ],
+      "python_scripts": [
+        "cycle_gan.py"
+      ],
+      "key_symbols": [
+        "Buffer",
+        "Dataset",
+        "Generator",
+        "NLayerDiscriminator",
+        "ResnetBlock",
+        "init_weights",
+        "training_loop"
+      ],
+      "requirements": [
+        "matplotlib==3.7.5",
+        "numpy==1.24.4",
+        "pillow==10.2.0",
+        "torch==2.0.1",
+        "torchvision==0.15.2",
+        "tqdm==4.66.2"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1703.10593",
+        "https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix"
+      ],
+      "title": "CycleGAN",
+      "name": "CycleGAN",
+      "paper": "CycleGAN",
+      "directory": "Unpaired_Image_to_Image_Translation_using_Cycle_Consistent_Adversarial_Networks",
+      "dir": "Unpaired_Image_to_Image_Translation_using_Cycle_Consistent_Adversarial_Networks",
+      "folder": "Unpaired_Image_to_Image_Translation_using_Cycle_Consistent_Adversarial_Networks",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "cycle_gan.py"
+      ],
+      "source_scripts": [
+        "cycle_gan.py"
+      ],
+      "symbols": [
+        "Buffer",
+        "Dataset",
+        "Generator",
+        "NLayerDiscriminator",
+        "ResnetBlock",
+        "init_weights",
+        "training_loop"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "CycleGAN",
+        "Unpaired Image to Image Translation using Cycle Consistent Adversarial Networks",
+        "Unpaired_Image_to_Image_Translation_using_Cycle_Consistent_Adversarial_Networks",
+        "cyclegan"
+      ]
+    },
+    {
+      "id": "unsupervised-representation-learning-with-deep-convolutional-generative-adversarial-networks",
+      "paper_title": "Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks",
+      "source_directory_evidence_label": "Unsupervised_Representation_Learning_with_Deep_Convolutional_Generative_Adversarial_Networks",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "gan-image-translation"
+      ],
+      "python_scripts": [
+        "conv_gan.py"
+      ],
+      "key_symbols": [
+        "Dataset",
+        "Discriminator",
+        "Generator",
+        "init_weights",
+        "sample_noise",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.2.2",
+        "numpy==1.21.6",
+        "torch==1.12.1+cu113",
+        "torchvision==0.13.1+cu113",
+        "tqdm==4.64.0"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "main_guard"
+      ],
+      "backend_posture": "cpu-or-cuda torch depending on edits/device",
+      "full_run_safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1511.06434",
+        "https://github.com/fyu/lsun"
+      ],
+      "title": "Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks",
+      "name": "Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks",
+      "paper": "Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks",
+      "directory": "Unsupervised_Representation_Learning_with_Deep_Convolutional_Generative_Adversarial_Networks",
+      "dir": "Unsupervised_Representation_Learning_with_Deep_Convolutional_Generative_Adversarial_Networks",
+      "folder": "Unsupervised_Representation_Learning_with_Deep_Convolutional_Generative_Adversarial_Networks",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "conv_gan.py"
+      ],
+      "source_scripts": [
+        "conv_gan.py"
+      ],
+      "symbols": [
+        "Dataset",
+        "Discriminator",
+        "Generator",
+        "init_weights",
+        "sample_noise",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-expensive for full native run; use static/tiny adaptation first",
+      "aliases": [
+        "Adversarial",
+        "Convolutional",
+        "Deep",
+        "Generative",
+        "Learning",
+        "Networks",
+        "Representation",
+        "Unsupervised",
+        "Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks",
+        "Unsupervised_Representation_Learning_with_Deep_Convolutional_Generative_Adversarial_Networks",
+        "with"
+      ]
+    },
+    {
+      "id": "variational-inference-with-normalizing-flows",
+      "paper_title": "Variational Inference with Normalizing Flows",
+      "source_directory_evidence_label": "Variational_Inference_with_Normalizing_Flows",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "probabilistic-flows-vaes"
+      ],
+      "python_scripts": [
+        "Flows.py"
+      ],
+      "key_symbols": [
+        "NormalizingFlow",
+        "PlanarFlow",
+        "gaussian_log_pdf",
+        "plot_exact_density",
+        "plot_flow_density",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.3.1",
+        "numpy==1.19.4",
+        "torch==1.7.1",
+        "tqdm==4.48.2"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1505.05770"
+      ],
+      "title": "Variational Inference with Normalizing Flows",
+      "name": "Variational Inference with Normalizing Flows",
+      "paper": "Variational Inference with Normalizing Flows",
+      "directory": "Variational_Inference_with_Normalizing_Flows",
+      "dir": "Variational_Inference_with_Normalizing_Flows",
+      "folder": "Variational_Inference_with_Normalizing_Flows",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "Flows.py"
+      ],
+      "source_scripts": [
+        "Flows.py"
+      ],
+      "symbols": [
+        "NormalizingFlow",
+        "PlanarFlow",
+        "gaussian_log_pdf",
+        "plot_exact_density",
+        "plot_flow_density",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "Flows",
+        "Inference",
+        "Normalizing",
+        "Variational",
+        "Variational Inference with Normalizing Flows",
+        "Variational_Inference_with_Normalizing_Flows",
+        "with"
+      ]
+    },
+    {
+      "id": "wasserstein-gan",
+      "paper_title": "Wasserstein GAN",
+      "source_directory_evidence_label": "Wasserstein_GAN",
+      "owner_sub_skill": "generative-models",
+      "categories": [
+        "gan-image-translation"
+      ],
+      "python_scripts": [
+        "wgan.py"
+      ],
+      "key_symbols": [
+        "Dataset",
+        "Discriminator",
+        "Generator",
+        "init_weights",
+        "moving_average",
+        "sample_noise",
+        "train"
+      ],
+      "requirements": [
+        "matplotlib==3.7.5",
+        "numpy==1.24.4",
+        "pillow==10.2.0",
+        "torch==2.0.1",
+        "torchvision==0.15.2",
+        "tqdm==4.66.2"
+      ],
+      "asset_labels": [
+        "Imgs"
+      ],
+      "runtime_flags": [
+        "file_outputs",
+        "hardcoded_cuda",
+        "main_guard"
+      ],
+      "backend_posture": "cuda-hardcoded in at least one file",
+      "full_run_safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "readme_external_links": [
+        "https://arxiv.org/abs/1701.07875",
+        "https://github.com/fyu/lsun"
+      ],
+      "title": "Wasserstein GAN",
+      "name": "Wasserstein GAN",
+      "paper": "Wasserstein GAN",
+      "directory": "Wasserstein_GAN",
+      "dir": "Wasserstein_GAN",
+      "folder": "Wasserstein_GAN",
+      "owner": "generative-models",
+      "group": "generative-models",
+      "subskill": "generative-models",
+      "scripts": [
+        "wgan.py"
+      ],
+      "source_scripts": [
+        "wgan.py"
+      ],
+      "symbols": [
+        "Dataset",
+        "Discriminator",
+        "Generator",
+        "init_weights",
+        "moving_average",
+        "sample_noise",
+        "train"
+      ],
+      "asset_dirs": [
+        "Imgs"
+      ],
+      "assets": [
+        "Imgs"
+      ],
+      "safety": "skip-gpu-or-hardware for full run unless CUDA/data are approved",
+      "aliases": [
+        "GAN",
+        "Wasserstein",
+        "Wasserstein GAN",
+        "Wasserstein_GAN"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "libmtl-office-benchmark"
+version = "0.1.0"
+description = "Self-contained LibMTL Office-31 and Office-Home benchmark runtime package"
+requires-python = ">=3.9"
+dependencies = [
+  "LibMTL==1.1.5",
+  "torch",
+  "torchvision",
+  "Pillow",
+]
+
+[project.scripts]
+libmtl-office = "libmtl_office_benchmark.main:cli_main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+libmtl_office_benchmark = ["data_txt/**/*.txt"]

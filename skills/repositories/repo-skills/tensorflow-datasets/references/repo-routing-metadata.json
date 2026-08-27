@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "tensorflow/datasets",
+  "skill_id": "tensorflow-datasets",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "MLOps",
+      "family": "Dataset Management"
+    },
+    {
+      "area": "Training Infrastructure",
+      "family": "Training Data Pipelines"
+    },
+    {
+      "area": "Data Science",
+      "family": "Dataset Discovery"
+    }
+  ]
+}

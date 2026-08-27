@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "microsoft/PromptCraft-Robotics",
+  "skill_id": "promptcraft-robotics",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "LLM Applications",
+      "family": "Prompting and Reasoning Methods"
+    },
+    {
+      "area": "Robotics and Embodied AI",
+      "family": "Robot Simulation"
+    },
+    {
+      "area": "Robotics and Embodied AI",
+      "family": "Manipulation"
+    }
+  ]
+}

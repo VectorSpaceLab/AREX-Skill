@@ -1,0 +1,82 @@
+{
+  "decoder": {
+    "unets": [
+      {
+        "dim": 16,
+        "image_embed_dim": 768,
+        "cond_dim": 16,
+        "channels": 3,
+        "dim_mults": [1, 2],
+        "attn_dim_head": 16,
+        "attn_heads": 4,
+        "cond_on_text_encodings": false
+      }
+    ],
+    "image_sizes": [64],
+    "channels": 3,
+    "timesteps": 8,
+    "sample_timesteps": [4],
+    "loss_type": "l2",
+    "beta_schedule": ["cosine"],
+    "learned_variance": false
+  },
+  "data": {
+    "webdataset_base_url": "file:///ABSOLUTE/PATH/TO/webdataset/shard-{}.tar",
+    "img_embeddings_url": "file:///ABSOLUTE/PATH/TO/image-embeddings/",
+    "text_embeddings_url": null,
+    "num_workers": 0,
+    "batch_size": 1,
+    "start_shard": 0,
+    "end_shard": 1,
+    "shard_width": 1,
+    "index_width": 4,
+    "splits": {
+      "train": 0.5,
+      "val": 0.25,
+      "test": 0.25
+    },
+    "shuffle_train": false,
+    "resample_train": false,
+    "preprocessing": {
+      "ToTensor": true
+    }
+  },
+  "train": {
+    "epochs": 1,
+    "lr": 1e-4,
+    "wd": 0.01,
+    "max_grad_norm": 0.5,
+    "save_every_n_samples": 8,
+    "n_sample_images": 0,
+    "device": "cpu",
+    "epoch_samples": null,
+    "validation_samples": 2,
+    "save_immediately": false,
+    "use_ema": true,
+    "ema_beta": 0.99,
+    "amp": false,
+    "unet_training_mask": [true]
+  },
+  "evaluate": {
+    "n_evaluation_samples": 0,
+    "FID": null,
+    "IS": null,
+    "KID": null,
+    "LPIPS": null
+  },
+  "tracker": {
+    "data_path": "./runs/dalle2-decoder-tracker",
+    "overwrite_data_path": true,
+    "log": {
+      "log_type": "console",
+      "verbose": true
+    },
+    "load": null,
+    "save": {
+      "save_to": "local",
+      "save_latest_to": "./runs/dalle2-decoder/latest.pth",
+      "save_type": "checkpoint"
+    }
+  },
+  "seed": 0
+}

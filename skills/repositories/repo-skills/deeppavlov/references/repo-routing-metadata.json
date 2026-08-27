@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "deeppavlov/DeepPavlov",
+  "skill_id": "deeppavlov",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "Natural Language Processing",
+      "family": "Text Classification"
+    },
+    {
+      "area": "Natural Language Processing",
+      "family": "NLP Toolkit Suites"
+    },
+    {
+      "area": "Natural Language Processing",
+      "family": "Information Extraction"
+    }
+  ]
+}

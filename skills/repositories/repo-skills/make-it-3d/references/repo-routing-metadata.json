@@ -1,0 +1,17 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "junshutang/Make-It-3D",
+  "skill_id": "make-it-3d",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "Generative Media",
+      "family": "3D Asset Generation"
+    },
+    {
+      "area": "Generative Media",
+      "family": "Neural Rendering"
+    }
+  ]
+}

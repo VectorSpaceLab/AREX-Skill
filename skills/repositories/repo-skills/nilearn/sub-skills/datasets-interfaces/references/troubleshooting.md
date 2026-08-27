@@ -1,0 +1,25 @@
+# Troubleshooting
+
+| Symptom | Likely cause | Fix |
+| --- | --- | --- |
+| A dataset fetch starts a large download unexpectedly. | A `fetch_*` function was used where a local `load_*` helper or cached path was enough. | Stop if possible, switch to `load_mni152_*`, `load_fsaverage(mesh="fsaverage5")`, or a bounded fetch with explicit `data_dir`. |
+| Files appear in a surprising cache directory. | `data_dir` was omitted and environment/home fallback was used. | Call `get_data_dirs()` and rerun with explicit `data_dir`; document whether `NILEARN_SHARED_DATA`, `NILEARN_DATA`, or home cache is intended. |
+| Fetch fails while resuming a partial file. | Server did not honor range requests or a `.part` file is stale. | Retry with `resume=False` or remove the partial file after user approval; avoid deleting complete cached data. |
+| Archive extraction or checksum validation fails. | Corrupt or incomplete download, upstream archive changed, or interrupted extraction. | Re-fetch into a clean cache subdirectory, keep `resume=True` for normal retries, and avoid manually unpacking archives outside Nilearn. |
+| Cache path is a file or not writable. | `data_dir` or an environment data path points to a file or read-only location. | Use a writable directory; if a read-only shared cache already contains the dataset, use it only for reads. |
+| OpenNeuro fetch complains about URLs. | URLs do not match the expected OpenNeuro dataset prefix/version. | Build URLs from `fetch_ds000030_urls`, reduce with `select_from_index`, and pass a consistent `dataset_version`. |
+| OpenNeuro default fetch is too broad. | `fetch_openneuro_dataset(urls=None)` was called. | Fetch or provide an index first, then pass a small selected URL list. |
+| NeuroVault returns too many or unexpected maps. | Defaults and custom filters were misunderstood. | Set `max_images`; remember default `image_terms`/`collection_terms` still apply unless explicitly passed as `{}`. Use `mode="offline"` for cache-only work. |
+| TemplateFlow-like resource is missing. | Nilearn ships selected templates and surfaces but does not make every TemplateFlow resource local. | Use shipped MNI/fsaverage loaders when possible; otherwise confirm a download fetcher or external data source with the user. |
+| Atlas labels do not match map integers. | Some deterministic atlases use explicit indices or LUT rows rather than label list positions. | Inspect `lut` and `indices`; do not assume `labels[i]` equals map value `i`. |
+| Probabilistic atlas fails in a labels masker. | 4D probabilistic maps were routed to a labels-image workflow. | Use a maps masker/soft-map workflow, or choose a deterministic atlas. |
+| `load_confounds` cannot find the associated confounds file. | The processed image and TSV/JSON are not in the same directory or names do not share BIDS entities. | Pass the processed image path; ensure adjacent `desc-confounds_timeseries.tsv` or `desc-confounds_regressors.tsv` plus JSON sidecar. |
+| `load_confounds` finds more than one confounds file. | Multiple adjacent candidates match the image entities. | Remove ambiguity by moving unrelated TSVs, using a more specific image path/entities, or selecting the intended derivative directory. |
+| `load_confounds` rejects the image type. | Strategy expects a special file name: AROMA, TEDANA, GIFTI pair, CIFTI, or preprocessed NIfTI. | Use `desc-preproc_bold.nii.gz` for regular confounds, `desc-smoothAROMAnonaggr_bold.nii.gz` for full AROMA, `desc-optcom_bold.nii.gz` for TEDANA, or a left/right GIFTI pair. |
+| Error mentions CamelCase headers or no header. | fMRIPrep output is from an unsupported old version. | Regenerate confounds with fMRIPrep >= 1.2; anatomical CompCor needs >= 1.4-style metadata. |
+| Error mentions missing CompCor JSON metadata. | Anatomical CompCor requires the confounds JSON sidecar. | Restore the sidecar or use `denoise_strategy="simple"` / non-CompCor components. |
+| `compcor` strategy errors because `high_pass` is absent. | `load_confounds` requires high-pass regressors with CompCor. | Include `"high_pass"` in the strategy or use `load_confounds_strategy(..., denoise_strategy="compcor")`. |
+| `sample_mask` removes all or too many volumes. | Scrubbing thresholds are too strict or many non-steady-state/outlier volumes exist. | Inspect FD/DVARS columns, tune `fd_threshold`, `std_dvars_threshold`, and `scrub`, or exclude high-motion runs/subjects. |
+| ICA-AROMA strategy fails on current fMRIPrep outputs. | fMRIPrep deprecated and removed `--use-aroma` in recent versions. | Use non-AROMA strategies unless matching AROMA/fMRIPost-AROMA outputs are available with expected filenames. |
+| TEDANA confounds fail. | Missing or malformed mixing/status TSVs, wrong image file, or component names differ by version. | Pass `desc-optcom_bold.nii.gz`, keep mixing and metrics TSVs adjacent, and verify columns such as `ICA_*`, `Component`, and `classification`. |
+| FSL `.mat` DataFrame has wrong columns. | `column_names` length does not match matrix width or the file has unusual sections. | Inspect shape after `get_design_from_fslmat`; supply matching names before GLM use. |

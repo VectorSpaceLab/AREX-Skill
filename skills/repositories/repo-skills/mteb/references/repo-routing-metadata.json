@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "embeddings-benchmark/mteb",
+  "skill_id": "mteb",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "Natural Language Processing",
+      "family": "Text Embeddings"
+    },
+    {
+      "area": "LLM Models, Training, and Alignment",
+      "family": "Model Evaluation Benchmarks"
+    },
+    {
+      "area": "Information Retrieval",
+      "family": "Retrieval Evaluation"
+    }
+  ]
+}

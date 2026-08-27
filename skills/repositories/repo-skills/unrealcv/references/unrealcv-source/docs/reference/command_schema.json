@@ -1,0 +1,1071 @@
+{
+  "schema_version": 2,
+  "generated_from": "Source/UnrealCV/Private/**/*.cpp (excluding Tests)",
+  "command_count": 133,
+  "commands": [
+    {
+      "command": "vbp [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 blueprint function",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 71
+    },
+    {
+      "command": "vbp [str] [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 blueprint function",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 72
+    },
+    {
+      "command": "vbp [str] [str] [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 blueprint function",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 73
+    },
+    {
+      "command": "vbp [str] [str] [str] [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 blueprint function",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 74
+    },
+    {
+      "command": "vbp [str] [str] [str] [str] [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 blueprint function",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 75
+    },
+    {
+      "command": "vbp [str] [str] [str] [str] [str] [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 blueprint function",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 76
+    },
+    {
+      "command": "vbp [str] [str] [str] [str] [str] [str] [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 blueprint function",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 77
+    },
+    {
+      "command": "vbp [str] [str] [str] [str] [str] [str] [str] [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 blueprint function",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 78
+    },
+    {
+      "command": "vbp [str] [str] [str] [str] [str] [str] [str] [str] [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 blueprint function",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 79
+    },
+    {
+      "command": "vbp [str] [str] [str] [str] [str] [str] [str] [str] [str] [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 blueprint function",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 80
+    },
+    {
+      "command": "vcmd [str]",
+      "category": "misc",
+      "description": "Run UE5 built-in commands",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 52
+    },
+    {
+      "command": "vexec [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 blueprint function",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 63
+    },
+    {
+      "command": "vexec [str] [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 blueprint function",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 64
+    },
+    {
+      "command": "vexec [str] [str] [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 blueprint function",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 65
+    },
+    {
+      "command": "vexec [str] [str] [str] [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 blueprint function",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 66
+    },
+    {
+      "command": "vexec [str] [str] [str] [str] [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 blueprint function",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 67
+    },
+    {
+      "command": "vexec [str] [str] [str] [str] [str] [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 blueprint function",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 68
+    },
+    {
+      "command": "vget /action/game/is_paused",
+      "category": "action",
+      "description": "Get the pause status",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ActionHandler.cpp",
+      "line": 26
+    },
+    {
+      "command": "vget /camera/[uint]/cine",
+      "category": "camera",
+      "description": "Get physical Cine camera settings as JSON",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1220
+    },
+    {
+      "command": "vget /camera/[uint]/cine/enabled",
+      "category": "camera",
+      "description": "Get whether the physical Cine camera path is enabled",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1224
+    },
+    {
+      "command": "vget /camera/[uint]/cine/intrinsics",
+      "category": "camera",
+      "description": "Get Cine intrinsics, projection offsets, FOVs, and projection matrix as JSON",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1228
+    },
+    {
+      "command": "vget /camera/[uint]/depth [str]",
+      "category": "camera",
+      "description": "Get npy binary data from depth sensor",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1165
+    },
+    {
+      "command": "vget /camera/[uint]/depth_shared",
+      "category": "camera",
+      "description": "Get depth image through Windows shared memory",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1176
+    },
+    {
+      "command": "vget /camera/[uint]/fov",
+      "category": "camera",
+      "description": "Get FOV",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1214
+    },
+    {
+      "command": "vget /camera/[uint]/lit [str]",
+      "category": "camera",
+      "description": "Get png binary data from lit sensor",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1161
+    },
+    {
+      "command": "vget /camera/[uint]/lit_shared",
+      "category": "camera",
+      "description": "Get lit image through Windows shared memory",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1173
+    },
+    {
+      "command": "vget /camera/[uint]/location",
+      "category": "camera",
+      "description": "Get sensor location in world space",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1140
+    },
+    {
+      "command": "vget /camera/[uint]/normal [str]",
+      "category": "camera",
+      "description": "Get npy binary data from surface normal sensor",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1169
+    },
+    {
+      "command": "vget /camera/[uint]/normal_shared",
+      "category": "camera",
+      "description": "Get normal image through Windows shared memory",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1179
+    },
+    {
+      "command": "vget /camera/[uint]/object_mask [str]",
+      "category": "camera",
+      "description": "Get object mask from camera sensor",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1192
+    },
+    {
+      "command": "vget /camera/[uint]/object_mask_shared",
+      "category": "camera",
+      "description": "Get object mask through Windows shared memory",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1199
+    },
+    {
+      "command": "vget /camera/[uint]/optical_flow [str]",
+      "category": "camera",
+      "description": "Get npy binary data from optical flow sensor",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1188
+    },
+    {
+      "command": "vget /camera/[uint]/rotation",
+      "category": "camera",
+      "description": "Get sensor rotation in world space",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1153
+    },
+    {
+      "command": "vget /camera/[uint]/seg [str]",
+      "category": "camera",
+      "description": "Get object mask from camera sensor",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1196
+    },
+    {
+      "command": "vget /camera/[uint]/seg_shared",
+      "category": "camera",
+      "description": "Get segmentation through Windows shared memory",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1202
+    },
+    {
+      "command": "vget /camera/[uint]/size",
+      "category": "camera",
+      "description": "Get Camera Film Size",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1276
+    },
+    {
+      "command": "vget /cameras",
+      "category": "cameras",
+      "description": "List all sensors in the scene",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1132
+    },
+    {
+      "command": "vget /level/name",
+      "category": "level",
+      "description": "Get current level name",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/PluginHandler.cpp",
+      "line": 129
+    },
+    {
+      "command": "vget /object/[str]/bones",
+      "category": "object",
+      "description": "Get all bone transforms in component space as JSON.",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 240
+    },
+    {
+      "command": "vget /object/[str]/bones [str]",
+      "category": "object",
+      "description": "Get comma-separated bones, or all bones in component|world space, as JSON.",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 244
+    },
+    {
+      "command": "vget /object/[str]/bones [str] [str]",
+      "category": "object",
+      "description": "Get comma-separated bones in component|world space as JSON.",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 248
+    },
+    {
+      "command": "vget /object/[str]/bounds",
+      "category": "object",
+      "description": "Return the bounds in the world coordinate, formate is [minx, y, z, maxx, y, z]",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 236
+    },
+    {
+      "command": "vget /object/[str]/color",
+      "category": "object",
+      "description": "Get the labeling color of an object (used in object instance mask)",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 180
+    },
+    {
+      "command": "vget /object/[str]/label",
+      "category": "object",
+      "description": "Get actor label",
+      "availability": "editor",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 210
+    },
+    {
+      "command": "vget /object/[str]/location",
+      "category": "object",
+      "description": "Get object location [x, y, z]",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 160
+    },
+    {
+      "command": "vget /object/[str]/material",
+      "category": "object",
+      "description": "Get the material(s) of the object",
+      "availability": "editor",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 219
+    },
+    {
+      "command": "vget /object/[str]/mobility",
+      "category": "object",
+      "description": "Is the object static or movable?",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 188
+    },
+    {
+      "command": "vget /object/[str]/rotation",
+      "category": "object",
+      "description": "Get object rotation [pitch, yaw, roll]",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 168
+    },
+    {
+      "command": "vget /object/[str]/scale",
+      "category": "object",
+      "description": "Get object rotation [x, y, z]",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 228
+    },
+    {
+      "command": "vget /object/[str]/uclass_name",
+      "category": "object",
+      "description": "Get the UClass name for filtering objects",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 201
+    },
+    {
+      "command": "vget /object/[str]/vertex_location",
+      "category": "object",
+      "description": "Get vertex location",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 176
+    },
+    {
+      "command": "vget /objects",
+      "category": "objects",
+      "description": "Get the name of all objects",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 124
+    },
+    {
+      "command": "vget /persistent_level/id",
+      "category": "persistent_level",
+      "description": "Get persistent level id, so that we can call BP function defined in it",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 97
+    },
+    {
+      "command": "vget /persistent_level/level_script_actor/id",
+      "category": "persistent_level",
+      "description": "Get persistent level id, so that we can call BP function defined in it",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 101
+    },
+    {
+      "command": "vget /scene/name",
+      "category": "scene",
+      "description": "Get the name of this scene, to make sure the annotation data is for this scene.",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/PluginHandler.cpp",
+      "line": 127
+    },
+    {
+      "command": "vget /screenshot [str]",
+      "category": "screenshot",
+      "description": "Get screenshot",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1128
+    },
+    {
+      "command": "vget /unrealcv/commands",
+      "category": "unrealcv",
+      "description": "List registered UnrealCV command templates, one command per line",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/PluginHandler.cpp",
+      "line": 115
+    },
+    {
+      "command": "vget /unrealcv/echo [str]",
+      "category": "unrealcv",
+      "description": "[debug] Echo back all message, for debug",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/PluginHandler.cpp",
+      "line": 119
+    },
+    {
+      "command": "vget /unrealcv/help",
+      "category": "unrealcv",
+      "description": "List all available commands and their help message",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/PluginHandler.cpp",
+      "line": 111
+    },
+    {
+      "command": "vget /unrealcv/status",
+      "category": "unrealcv",
+      "description": "Get the status of UnrealCV plugin",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/PluginHandler.cpp",
+      "line": 107
+    },
+    {
+      "command": "vget /unrealcv/version",
+      "category": "unrealcv",
+      "description": "Get the version of UnrealCV, the format is v0.*.*",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/PluginHandler.cpp",
+      "line": 123
+    },
+    {
+      "command": "vget /viewmode",
+      "category": "viewmode",
+      "description": "Get current ViewMode",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1210
+    },
+    {
+      "command": "vreflect [str] [str]",
+      "category": "misc",
+      "description": "Reflect functions and properties, or invoke a function with JSON arguments",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 84
+    },
+    {
+      "command": "vreflect [str] [str] [str]",
+      "category": "misc",
+      "description": "Reflect functions and properties, or invoke a function with JSON arguments",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 85
+    },
+    {
+      "command": "vreflect [str] [str] [str] [str]",
+      "category": "misc",
+      "description": "Reflect functions and properties, or invoke a function with JSON arguments",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 86
+    },
+    {
+      "command": "vreflect [str] [str] [str] [str] [str]",
+      "category": "misc",
+      "description": "Reflect functions and properties, or invoke a function with JSON arguments",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 87
+    },
+    {
+      "command": "vreflect [str] [str] [str] [str] [str] [str]",
+      "category": "misc",
+      "description": "Reflect functions and properties, or invoke a function with JSON arguments",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 88
+    },
+    {
+      "command": "vreflect [str] [str] [str] [str] [str] [str] [str]",
+      "category": "misc",
+      "description": "Reflect functions and properties, or invoke a function with JSON arguments",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 89
+    },
+    {
+      "command": "vreflect [str] [str] [str] [str] [str] [str] [str] [str]",
+      "category": "misc",
+      "description": "Reflect functions and properties, or invoke a function with JSON arguments",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 90
+    },
+    {
+      "command": "vreflect [str] [str] [str] [str] [str] [str] [str] [str] [str]",
+      "category": "misc",
+      "description": "Reflect functions and properties, or invoke a function with JSON arguments",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 91
+    },
+    {
+      "command": "vreflect [str] [str] [str] [str] [str] [str] [str] [str] [str] [str]",
+      "category": "misc",
+      "description": "Reflect functions and properties, or invoke a function with JSON arguments",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 92
+    },
+    {
+      "command": "vreflect [str] [str] [str] [str] [str] [str] [str] [str] [str] [str] [str]",
+      "category": "misc",
+      "description": "Reflect functions and properties, or invoke a function with JSON arguments",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 93
+    },
+    {
+      "command": "vreflect [str] [str] [str] [str] [str] [str] [str] [str] [str] [str] [str] [str]",
+      "category": "misc",
+      "description": "Reflect functions and properties, or invoke a function with JSON arguments",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 95
+    },
+    {
+      "command": "vrun [str]",
+      "category": "alias",
+      "description": "Run UE5 built-in commands",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 53
+    },
+    {
+      "command": "vrun [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 built-in commands",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 54
+    },
+    {
+      "command": "vrun [str] [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 built-in commands",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 55
+    },
+    {
+      "command": "vrun [str] [str] [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 built-in commands",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 56
+    },
+    {
+      "command": "vrun [str] [str] [str] [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 built-in commands",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 57
+    },
+    {
+      "command": "vrun [str] [str] [str] [str] [str] [str]",
+      "category": "alias",
+      "description": "Run UE5 built-in commands",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/AliasHandler.cpp",
+      "line": 58
+    },
+    {
+      "command": "vset /action/eyes_distance [float]",
+      "category": "action",
+      "description": "Set the distance of binocular stereo camera",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ActionHandler.cpp",
+      "line": 46
+    },
+    {
+      "command": "vset /action/game/level [str]",
+      "category": "action",
+      "description": "Open level",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ActionHandler.cpp",
+      "line": 34
+    },
+    {
+      "command": "vset /action/game/pause",
+      "category": "action",
+      "description": "Pause the game",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ActionHandler.cpp",
+      "line": 20
+    },
+    {
+      "command": "vset /action/game/resume",
+      "category": "action",
+      "description": "Resume the game",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ActionHandler.cpp",
+      "line": 24
+    },
+    {
+      "command": "vset /action/input/disable",
+      "category": "action",
+      "description": "Disable input",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ActionHandler.cpp",
+      "line": 42
+    },
+    {
+      "command": "vset /action/input/enable",
+      "category": "action",
+      "description": "Enable input",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ActionHandler.cpp",
+      "line": 38
+    },
+    {
+      "command": "vset /action/keyboard [str] [float]",
+      "category": "action",
+      "description": "Send a keyboard action to the game",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ActionHandler.cpp",
+      "line": 51
+    },
+    {
+      "command": "vset /camera/[uint]/auto_brightness [float] [float]",
+      "category": "camera",
+      "description": "Set camera auto-exposure min max brightness",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1312
+    },
+    {
+      "command": "vset /camera/[uint]/auto_speed [float] [float]",
+      "category": "camera",
+      "description": "Set camera auto-exposure speed down and speed up",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1308
+    },
+    {
+      "command": "vset /camera/[uint]/cine/crop [float] [float] [uint] [uint]",
+      "category": "camera",
+      "description": "Set Cine crop aspect ratio, overscan, crop state, and resolution-scaling state",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1260
+    },
+    {
+      "command": "vset /camera/[uint]/cine/enabled [uint]",
+      "category": "camera",
+      "description": "Enable or disable the physical Cine camera path",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1232
+    },
+    {
+      "command": "vset /camera/[uint]/cine/exposure [float] [float] [uint]",
+      "category": "camera",
+      "description": "Set Cine ISO, shutter-speed reciprocal, and physical-exposure state",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1268
+    },
+    {
+      "command": "vset /camera/[uint]/cine/filmback [float] [float] [float] [float]",
+      "category": "camera",
+      "description": "Set Cine filmback width, height, horizontal offset, and vertical offset in millimeters",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1236
+    },
+    {
+      "command": "vset /camera/[uint]/cine/focus [float]",
+      "category": "camera",
+      "description": "Set Cine manual focus distance in centimeters",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1248
+    },
+    {
+      "command": "vset /camera/[uint]/cine/focus_mode [str] [uint] [float] [float]",
+      "category": "camera",
+      "description": "Set Cine focus mode, smoothing state, smoothing speed, and focus offset",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1252
+    },
+    {
+      "command": "vset /camera/[uint]/cine/focus_tracking [str] [float] [float] [float]",
+      "category": "camera",
+      "description": "Set Cine tracking-focus actor and relative offset",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1256
+    },
+    {
+      "command": "vset /camera/[uint]/cine/lens [float] [float]",
+      "category": "camera",
+      "description": "Set Cine focal length in millimeters and aperture in f-stops",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1240
+    },
+    {
+      "command": "vset /camera/[uint]/cine/lens_settings [float] [float] [float] [float] [float] [float] [uint]",
+      "category": "camera",
+      "description": "Set Cine lens limits, minimum focus distance, squeeze factor, and blade count",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1244
+    },
+    {
+      "command": "vset /camera/[uint]/cine/near_clip [uint] [float]",
+      "category": "camera",
+      "description": "Enable or disable the Cine near clipping plane and set its distance in centimeters",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1264
+    },
+    {
+      "command": "vset /camera/[uint]/exposure_bias [float]",
+      "category": "camera",
+      "description": "Set camera exposure bias",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1304
+    },
+    {
+      "command": "vset /camera/[uint]/exposure_method [str]",
+      "category": "camera",
+      "description": "Set camera exposure method",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1300
+    },
+    {
+      "command": "vset /camera/[uint]/focal [float] [float]",
+      "category": "camera",
+      "description": "Set camera focus distance and range",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1325
+    },
+    {
+      "command": "vset /camera/[uint]/fov [float]",
+      "category": "camera",
+      "description": "Set FOV",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1217
+    },
+    {
+      "command": "vset /camera/[uint]/illumination [str]",
+      "category": "camera",
+      "description": "Set camera global illumination method: None, Lumen, ScreenSpace, Plugin,",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1296
+    },
+    {
+      "command": "vset /camera/[uint]/lit_source [str]",
+      "category": "camera",
+      "description": "Set the capture source of the lit camera",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1288
+    },
+    {
+      "command": "vset /camera/[uint]/location [float] [float] [float]",
+      "category": "camera",
+      "description": "Set sensor to location [x, y, z]",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1144
+    },
+    {
+      "command": "vset /camera/[uint]/motion_blur [float] [float] [float] [uint]",
+      "category": "camera",
+      "description": "Set camera motion blur amount, max, per object, fps",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1321
+    },
+    {
+      "command": "vset /camera/[uint]/moveto [float] [float] [float]",
+      "category": "camera",
+      "description": "Move camera to location [x, y, z], will be blocked by objects",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1149
+    },
+    {
+      "command": "vset /camera/[uint]/ortho_width [float]",
+      "category": "camera",
+      "description": "Set ortho width of the camera",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1280
+    },
+    {
+      "command": "vset /camera/[uint]/physical_exposure [uint]",
+      "category": "camera",
+      "description": "Set camera apply physical camera exposure",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1316
+    },
+    {
+      "command": "vset /camera/[uint]/projection_type [str]",
+      "category": "camera",
+      "description": "Set camera projection type",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1284
+    },
+    {
+      "command": "vset /camera/[uint]/reflection [str]",
+      "category": "camera",
+      "description": "Set camera reflection method: None, Lumen, ScreenSpace",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1292
+    },
+    {
+      "command": "vset /camera/[uint]/rotation [float] [float] [float]",
+      "category": "camera",
+      "description": "Set rotation [pitch, yaw, roll] of camera [id]",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1157
+    },
+    {
+      "command": "vset /camera/[uint]/size [uint] [uint]",
+      "category": "camera",
+      "description": "Set Camera Film Size",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1272
+    },
+    {
+      "command": "vset /cameras/spawn",
+      "category": "cameras",
+      "description": "Spawn a new camera actor in the scene",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1136
+    },
+    {
+      "command": "vset /object/[str]/color [uint] [uint] [uint]",
+      "category": "object",
+      "description": "Set the labeling color of an object [r, g, b]",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 184
+    },
+    {
+      "command": "vset /object/[str]/destroy",
+      "category": "object",
+      "description": "Destroy object",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 198
+    },
+    {
+      "command": "vset /object/[str]/hide",
+      "category": "object",
+      "description": "Hide object",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 195
+    },
+    {
+      "command": "vset /object/[str]/label [str]",
+      "category": "object",
+      "description": "Set actor label",
+      "availability": "editor",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 214
+    },
+    {
+      "command": "vset /object/[str]/location [float] [float] [float]",
+      "category": "object",
+      "description": "Set object location [x, y, z]",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 164
+    },
+    {
+      "command": "vset /object/[str]/material [uint] [str]",
+      "category": "object",
+      "description": "Set material of the object (via slot index)",
+      "availability": "editor",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 223
+    },
+    {
+      "command": "vset /object/[str]/name [str]",
+      "category": "object",
+      "description": "Set the name of the object",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 205
+    },
+    {
+      "command": "vset /object/[str]/rotation [float] [float] [float]",
+      "category": "object",
+      "description": "Set object rotation [pitch, yaw, roll]",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 172
+    },
+    {
+      "command": "vset /object/[str]/scale [float] [float] [float]",
+      "category": "object",
+      "description": "Set object scale [x, y, z]",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 232
+    },
+    {
+      "command": "vset /object/[str]/show",
+      "category": "object",
+      "description": "Show object",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 192
+    },
+    {
+      "command": "vset /objects/spawn [str]",
+      "category": "objects",
+      "description": "Spawn an object with UClassName as the argument.",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 144
+    },
+    {
+      "command": "vset /objects/spawn [str] [float] [float] [float]",
+      "category": "objects",
+      "description": "Spawn an object at world location [x, y, z].",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 152
+    },
+    {
+      "command": "vset /objects/spawn [str] [str]",
+      "category": "objects",
+      "description": "Spawn an object with UClassName as the argument.",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 148
+    },
+    {
+      "command": "vset /objects/spawn [str] [str] [float] [float] [float]",
+      "category": "objects",
+      "description": "Spawn a named object at world location [x, y, z].",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 156
+    },
+    {
+      "command": "vset /objects/spawn_cube",
+      "category": "objects",
+      "description": "Spawn a box in the scene for debugging purpose.",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 128
+    },
+    {
+      "command": "vset /objects/spawn_cube [float] [float] [float]",
+      "category": "objects",
+      "description": "Spawn a box at world location [x, y, z].",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 136
+    },
+    {
+      "command": "vset /objects/spawn_cube [str]",
+      "category": "objects",
+      "description": "Spawn a box in the scene for debugging purpose, with optional argument name.",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 132
+    },
+    {
+      "command": "vset /objects/spawn_cube [str] [float] [float] [float]",
+      "category": "objects",
+      "description": "Spawn a named box at world location [x, y, z].",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/ObjectHandler.cpp",
+      "line": 140
+    },
+    {
+      "command": "vset /viewmode [str]",
+      "category": "viewmode",
+      "description": "Set ViewMode to (lit, normal, depth, object_mask)",
+      "availability": "runtime",
+      "source": "Source/UnrealCV/Private/Commands/CameraHandler.cpp",
+      "line": 1206
+    }
+  ]
+}

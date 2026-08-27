@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "TsingZ0/PFLlib",
+  "skill_id": "pfllib",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "Training Infrastructure",
+      "family": "Distributed Training Systems"
+    },
+    {
+      "area": "Training Infrastructure",
+      "family": "Domain Adaptation and Transfer Learning"
+    },
+    {
+      "area": "Training Infrastructure",
+      "family": "Pedagogical ML Implementations"
+    }
+  ]
+}

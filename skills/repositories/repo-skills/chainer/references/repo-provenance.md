@@ -1,0 +1,27 @@
+# Repo Provenance
+
+- Schema: `disco.repo-provenance.v1`
+- Repository: Chainer
+- Source commit: `a8e15cbe55a90854a3918b8b5a976abbbff9ec94`
+- Branch: `master`
+- Exact tag: none
+- Working tree state: dirty; untracked `skills/`
+- Package version: `7.8.1`
+- Evidence used:
+  - `README.md`
+  - `MANIFEST.in`
+  - `setup.cfg`
+  - `setup.py`
+  - `chainer/`
+  - `chainermn/`
+  - `chainerx/`
+  - `onnx_chainer/`
+  - `docs/source/`
+  - `examples/`
+  - `tests/`
+  - `chainerx_build_helper.py`
+  - `scripts/ci/`
+- Remote URL: omitted-private-or-unknown
+- Notes:
+  - The repository is in maintenance mode.
+  - The generated skill is self-contained and does not depend on this checkout at runtime.

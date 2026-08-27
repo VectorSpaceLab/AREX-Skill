@@ -1,0 +1,355 @@
+#!/usr/bin/env python3
+"""Build or validate a safe DeepResearch-style .env file.
+
+This helper is intentionally stdlib-only and does not start model servers,
+contact external services, or require real secrets. It records the variables
+expected by the ReAct inference workflow and reports missing placeholders before
+an expensive rollout.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import re
+import sys
+from collections import OrderedDict
+from pathlib import Path
+from typing import Dict, Iterable, List, MutableMapping, Tuple
+
+PLACEHOLDER_RE = re.compile(r"^(|your_.*|<.*>|PATH_OR_MODEL_ID|MODEL_ID_OR_PATH|DATASET_PATH|OUTPUT_DIR|REQUIRED_.*|OPTIONAL_.*|placeholder|none|null)$", re.IGNORECASE)
+
+ENV_SECTIONS: List[Tuple[str, List[Tuple[str, str]]]] = [
+    (
+        "Torch/NCCL configuration for multi-GPU local serving",
+        [
+            ("TORCHDYNAMO_VERBOSE", "1"),
+            ("TORCHDYNAMO_DISABLE", "1"),
+            ("NCCL_IB_TC", "16"),
+            ("NCCL_IB_SL", "5"),
+            ("NCCL_IB_GID_INDEX", "3"),
+            ("NCCL_SOCKET_IFNAME", "eth"),
+            ("NCCL_DEBUG", "INFO"),
+            ("NCCL_IB_HCA", "mlx5"),
+            ("NCCL_IB_TIMEOUT", "22"),
+            ("NCCL_IB_QPS_PER_CONNECTION", "8"),
+            ("NCCL_MIN_NCHANNELS", "4"),
+            ("NCCL_NET_PLUGIN", "none"),
+            ("GLOO_SOCKET_IFNAME", "eth0"),
+        ],
+    ),
+    (
+        "DeepResearch feature flags",
+        [
+            ("QWEN_DOC_PARSER_USE_IDP", "false"),
+            ("QWEN_IDP_ENABLE_CSI", "false"),
+            ("NLP_WEB_SEARCH_ONLY_CACHE", "false"),
+            ("NLP_WEB_SEARCH_ENABLE_READPAGE", "false"),
+            ("NLP_WEB_SEARCH_ENABLE_SFILTER", "false"),
+            ("QWEN_SEARCH_ENABLE_CSI", "false"),
+            ("SPECIAL_CODE_MODE", "false"),
+            ("PYTHONDONTWRITEBYTECODE", "1"),
+        ],
+    ),
+    (
+        "Model and rollout parameters",
+        [
+            ("MODEL_PATH", "MODEL_ID_OR_PATH"),
+            ("DATASET", "DATASET_PATH"),
+            ("OUTPUT_PATH", "OUTPUT_DIR"),
+            ("ROLLOUT_COUNT", "3"),
+            ("TEMPERATURE", "0.85"),
+            ("PRESENCE_PENALTY", "1.1"),
+            ("MAX_WORKERS", "30"),
+        ],
+    ),
+    (
+        "External services used by ReAct tools",
+        [
+            ("SERPER_KEY_ID", "REQUIRED_IF_USING_SEARCH_OR_SCHOLAR"),
+            ("JINA_API_KEYS", "REQUIRED_IF_USING_VISIT"),
+            ("API_KEY", "REQUIRED_IF_USING_VISIT_SUMMARY"),
+            ("API_BASE", "REQUIRED_IF_USING_VISIT_SUMMARY"),
+            ("SUMMARY_MODEL_NAME", "REQUIRED_IF_USING_VISIT_SUMMARY"),
+            ("DASHSCOPE_API_KEY", "REQUIRED_IF_USING_PARSE_FILE"),
+            ("DASHSCOPE_API_BASE", "OPTIONAL_DASHSCOPE_BASE"),
+            ("VIDEO_MODEL_NAME", "OPTIONAL_VIDEO_MODEL"),
+            ("VIDEO_ANALYSIS_MODEL_NAME", "OPTIONAL_VIDEO_ANALYSIS_MODEL"),
+        ],
+    ),
+    (
+        "Python sandbox and optional IDP file parsing",
+        [
+            ("SANDBOX_FUSION_ENDPOINT", "REQUIRED_IF_USING_PYTHON_TOOL"),
+            ("TORCH_COMPILE_CACHE_DIR", "./cache"),
+            ("USE_IDP", "False"),
+            ("IDP_KEY_ID", "OPTIONAL_IDP_KEY_ID"),
+            ("IDP_KEY_SECRET", "OPTIONAL_IDP_KEY_SECRET"),
+        ],
+    ),
+]
+
+NUMERIC_RULES = {
+    "ROLLOUT_COUNT": (int, 1, None),
+    "MAX_WORKERS": (int, 1, None),
+    "TEMPERATURE": (float, 0.0, None),
+    "PRESENCE_PENALTY": (float, None, None),
+}
+
+SERVICE_GROUPS = {
+    "search": ["SERPER_KEY_ID"],
+    "scholar": ["SERPER_KEY_ID"],
+    "visit": ["JINA_API_KEYS", "API_KEY", "API_BASE", "SUMMARY_MODEL_NAME"],
+    "python": ["SANDBOX_FUSION_ENDPOINT"],
+    "parse-file": ["DASHSCOPE_API_KEY"],
+    "openai-compatible-model": ["API_KEY", "API_BASE"],
+}
+
+
+def template_values() -> "OrderedDict[str, str]":
+    values: "OrderedDict[str, str]" = OrderedDict()
+    for _, pairs in ENV_SECTIONS:
+        for key, value in pairs:
+            values[key] = value
+    return values
+
+
+def parse_env_file(path: Path) -> "OrderedDict[str, str]":
+    values: "OrderedDict[str, str]" = OrderedDict()
+    for line_no, raw in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("export "):
+            line = line[len("export ") :].lstrip()
+        if "=" not in line:
+            raise ValueError(f"line {line_no}: expected KEY=VALUE")
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if not key:
+            raise ValueError(f"line {line_no}: empty key")
+        values[key] = value
+    return values
+
+
+def is_placeholder(value: str) -> bool:
+    return bool(PLACEHOLDER_RE.match(value.strip()))
+
+
+def render_env(values: MutableMapping[str, str]) -> str:
+    lines: List[str] = [
+        "# DeepResearch ReAct inference environment",
+        "# Generated by the react-inference helper. Replace placeholder service values before using the corresponding tool.",
+    ]
+    for section, pairs in ENV_SECTIONS:
+        lines.append("")
+        lines.append(f"# {section}")
+        for key, default in pairs:
+            value = values.get(key, default)
+            lines.append(f"{key}={value}")
+    extras = [(k, v) for k, v in values.items() if k not in template_values()]
+    if extras:
+        lines.append("")
+        lines.append("# Additional user-provided values")
+        for key, value in extras:
+            lines.append(f"{key}={value}")
+    lines.append("")
+    return "\n".join(lines)
+
+
+def add_if(args: argparse.Namespace, values: MutableMapping[str, str], attr: str, env_key: str) -> None:
+    value = getattr(args, attr)
+    if value is not None:
+        values[env_key] = str(value)
+
+
+def build_values(args: argparse.Namespace) -> "OrderedDict[str, str]":
+    values = template_values()
+    add_if(args, values, "model_path", "MODEL_PATH")
+    add_if(args, values, "dataset", "DATASET")
+    add_if(args, values, "output_path", "OUTPUT_PATH")
+    add_if(args, values, "rollout_count", "ROLLOUT_COUNT")
+    add_if(args, values, "temperature", "TEMPERATURE")
+    add_if(args, values, "presence_penalty", "PRESENCE_PENALTY")
+    add_if(args, values, "max_workers", "MAX_WORKERS")
+    add_if(args, values, "serper_key_id", "SERPER_KEY_ID")
+    add_if(args, values, "jina_api_keys", "JINA_API_KEYS")
+    add_if(args, values, "summary_api_key", "API_KEY")
+    add_if(args, values, "summary_api_base", "API_BASE")
+    add_if(args, values, "summary_model_name", "SUMMARY_MODEL_NAME")
+    add_if(args, values, "dashscope_api_key", "DASHSCOPE_API_KEY")
+    add_if(args, values, "dashscope_api_base", "DASHSCOPE_API_BASE")
+    add_if(args, values, "video_model_name", "VIDEO_MODEL_NAME")
+    add_if(args, values, "video_analysis_model_name", "VIDEO_ANALYSIS_MODEL_NAME")
+    add_if(args, values, "sandbox_fusion_endpoint", "SANDBOX_FUSION_ENDPOINT")
+    add_if(args, values, "torch_compile_cache_dir", "TORCH_COMPILE_CACHE_DIR")
+    add_if(args, values, "use_idp", "USE_IDP")
+    add_if(args, values, "idp_key_id", "IDP_KEY_ID")
+    add_if(args, values, "idp_key_secret", "IDP_KEY_SECRET")
+    return values
+
+
+def validate_values(values: MutableMapping[str, str], args: argparse.Namespace) -> Tuple[List[str], List[str]]:
+    errors: List[str] = []
+    warnings: List[str] = []
+
+    for key in ("MODEL_PATH", "DATASET", "OUTPUT_PATH"):
+        value = values.get(key, "")
+        if is_placeholder(value):
+            errors.append(f"{key} is empty or still a placeholder")
+
+    route = args.route
+    model_value = values.get("MODEL_PATH", "")
+    if route == "local-vllm":
+        if model_value.startswith(("http://", "https://")):
+            errors.append("local-vllm route expects MODEL_PATH to be a local model path, not an HTTP URL")
+        if args.check_paths and model_value and not is_placeholder(model_value) and not Path(model_value).exists():
+            errors.append("MODEL_PATH does not exist; point it to downloaded model weights or disable --check-paths")
+    elif route == "openai-compatible":
+        if not values.get("MODEL_PATH") or is_placeholder(values.get("MODEL_PATH", "")):
+            errors.append("openai-compatible route still needs MODEL_PATH set to the provider model id used by run_multi_react.py")
+        for key in ("API_KEY", "API_BASE"):
+            if is_placeholder(values.get(key, "")):
+                warnings.append(f"{key} must be set for the OpenAI-compatible model route and for visit summarization")
+
+    dataset = values.get("DATASET", "")
+    if dataset and not is_placeholder(dataset):
+        if not dataset.endswith((".json", ".jsonl")):
+            errors.append("DATASET should point to a .json or .jsonl file")
+        if args.check_paths and not Path(dataset).exists():
+            errors.append("DATASET file does not exist")
+        if os.path.isabs(dataset):
+            warnings.append("run_multi_react.py uses DATASET both as input path and output subdirectory; absolute DATASET values can collide with output layout")
+
+    output_path = values.get("OUTPUT_PATH", "")
+    if args.check_paths and output_path and not is_placeholder(output_path):
+        parent = Path(output_path).expanduser().parent
+        if not parent.exists():
+            errors.append("parent directory of OUTPUT_PATH does not exist")
+
+    for key, (cast, minimum, maximum) in NUMERIC_RULES.items():
+        raw = values.get(key, "")
+        try:
+            parsed = cast(raw)
+        except Exception:
+            errors.append(f"{key} must be a {cast.__name__}")
+            continue
+        if minimum is not None and parsed < minimum:
+            errors.append(f"{key} must be >= {minimum}")
+        if maximum is not None and parsed > maximum:
+            errors.append(f"{key} must be <= {maximum}")
+
+    for group in args.require_service:
+        for key in SERVICE_GROUPS[group]:
+            if is_placeholder(values.get(key, "")):
+                errors.append(f"{key} is required by --require-service {group}")
+
+    for key in ("SERPER_KEY_ID", "JINA_API_KEYS", "API_KEY", "API_BASE", "SUMMARY_MODEL_NAME", "DASHSCOPE_API_KEY", "SANDBOX_FUSION_ENDPOINT"):
+        if is_placeholder(values.get(key, "")):
+            warnings.append(f"{key} is placeholder; the corresponding tool will fail until configured")
+
+    endpoint_value = values.get("SANDBOX_FUSION_ENDPOINT", "")
+    if endpoint_value and not is_placeholder(endpoint_value):
+        endpoints = [item.strip() for item in endpoint_value.split(",") if item.strip()]
+        if not endpoints:
+            errors.append("SANDBOX_FUSION_ENDPOINT contains no usable endpoints")
+        for endpoint in endpoints:
+            if not endpoint.startswith(("http://", "https://")):
+                warnings.append(f"Sandbox endpoint {endpoint!r} is not an HTTP(S) URL")
+
+    return errors, warnings
+
+
+def print_report(errors: Iterable[str], warnings: Iterable[str], values: MutableMapping[str, str], json_mode: bool) -> None:
+    errors = list(errors)
+    warnings = list(warnings)
+    if json_mode:
+        print(json.dumps({"ok": not errors, "errors": errors, "warnings": warnings, "keys": sorted(values)}, indent=2))
+        return
+    if errors:
+        print("ERRORS:", file=sys.stderr)
+        for err in errors:
+            print(f"  - {err}", file=sys.stderr)
+    if warnings:
+        print("WARNINGS:", file=sys.stderr)
+        for warn in warnings:
+            print(f"  - {warn}", file=sys.stderr)
+    if not errors:
+        print("DeepResearch ReAct .env validation passed.")
+
+
+def parse_args(argv: List[str]) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Generate or validate a DeepResearch ReAct .env file without contacting services.")
+    parser.add_argument("--print-template", action="store_true", help="print a placeholder .env template and exit")
+    parser.add_argument("--validate", type=Path, help="validate an existing .env-style file")
+    parser.add_argument("--write", type=Path, help="write the generated .env content to this path instead of stdout")
+    parser.add_argument("--force", action="store_true", help="allow --write to overwrite an existing file")
+    parser.add_argument("--route", choices=("local-vllm", "openai-compatible"), default="local-vllm", help="configuration route to validate")
+    parser.add_argument("--check-paths", action="store_true", help="also check local MODEL_PATH, DATASET, and OUTPUT_PATH parent paths")
+    parser.add_argument("--json", action="store_true", help="print validation report as JSON")
+    parser.add_argument("--require-service", choices=sorted(SERVICE_GROUPS), action="append", default=[], help="treat a tool/service placeholder as an error; may be repeated")
+
+    parser.add_argument("--model-path", help="MODEL_PATH value: local weights for local-vllm, provider model id for openai-compatible")
+    parser.add_argument("--dataset", help="DATASET value: .json or .jsonl input file")
+    parser.add_argument("--output-path", help="OUTPUT_PATH value: rollout output base directory")
+    parser.add_argument("--rollout-count", type=int, default=None, help="ROLLOUT_COUNT value; source default is 3")
+    parser.add_argument("--temperature", type=float, default=None, help="TEMPERATURE value; README example uses 0.85")
+    parser.add_argument("--presence-penalty", type=float, default=None, help="PRESENCE_PENALTY value; README example uses 1.1")
+    parser.add_argument("--max-workers", type=int, default=None, help="MAX_WORKERS value; README example uses 30")
+
+    parser.add_argument("--serper-key-id", help="SERPER_KEY_ID for search and google_scholar")
+    parser.add_argument("--jina-api-keys", help="JINA_API_KEYS for visit page reading")
+    parser.add_argument("--summary-api-key", help="API_KEY for OpenAI-compatible page summarization")
+    parser.add_argument("--summary-api-base", help="API_BASE for OpenAI-compatible page summarization or model route")
+    parser.add_argument("--summary-model-name", help="SUMMARY_MODEL_NAME for page summarization")
+    parser.add_argument("--dashscope-api-key", help="DASHSCOPE_API_KEY for file parsing")
+    parser.add_argument("--dashscope-api-base", help="DASHSCOPE_API_BASE for file parsing when needed")
+    parser.add_argument("--video-model-name", help="VIDEO_MODEL_NAME for media file parsing")
+    parser.add_argument("--video-analysis-model-name", help="VIDEO_ANALYSIS_MODEL_NAME for media analysis")
+    parser.add_argument("--sandbox-fusion-endpoint", help="comma-separated SandboxFusion endpoints for PythonInterpreter")
+    parser.add_argument("--torch-compile-cache-dir", help="TORCH_COMPILE_CACHE_DIR value")
+    parser.add_argument("--use-idp", choices=("True", "False", "true", "false"), help="USE_IDP flag for optional document parsing")
+    parser.add_argument("--idp-key-id", help="IDP_KEY_ID for optional IDP parsing")
+    parser.add_argument("--idp-key-secret", help="IDP_KEY_SECRET for optional IDP parsing")
+    return parser.parse_args(argv)
+
+
+def main(argv: List[str] | None = None) -> int:
+    args = parse_args(sys.argv[1:] if argv is None else argv)
+
+    if args.print_template:
+        print(render_env(template_values()), end="")
+        return 0
+
+    try:
+        if args.validate:
+            values = template_values()
+            values.update(parse_env_file(args.validate))
+        else:
+            values = build_values(args)
+    except Exception as exc:
+        print(f"Failed to read environment file: {exc}", file=sys.stderr)
+        return 2
+
+    errors, warnings = validate_values(values, args)
+
+    if args.write:
+        if errors:
+            print_report(errors, warnings, values, args.json)
+            return 1
+        if args.write.exists() and not args.force:
+            print(f"Refusing to overwrite existing file: {args.write}", file=sys.stderr)
+            return 2
+        args.write.parent.mkdir(parents=True, exist_ok=True)
+        args.write.write_text(render_env(values), encoding="utf-8")
+        if not args.json:
+            print(f"Wrote DeepResearch ReAct environment to {args.write}")
+
+    print_report(errors, warnings, values, args.json)
+    return 1 if errors else 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

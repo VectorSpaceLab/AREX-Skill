@@ -1,0 +1,34 @@
+{
+  "distribution": "pyts",
+  "version": "0.13.0",
+  "import_names": ["pyts"],
+  "source_root": ["pyts"],
+  "requires_python": ">=3.8",
+  "build_system": {
+    "backend": "setuptools",
+    "configuration_files": ["setup.py", "setup.cfg"],
+    "pyproject": false
+  },
+  "runtime_dependencies": [
+    "numpy>=1.22.4",
+    "scipy>=1.8.1",
+    "scikit-learn>=1.2.0",
+    "joblib>=1.1.1",
+    "numba>=0.55.2"
+  ],
+  "optional_dependencies": {
+    "linting": ["flake8"],
+    "tests": ["pytest", "pytest-cov"],
+    "docs": ["docutils", "sphinx==1.8.5", "alabaster==0.7.12", "sphinx-gallery", "numpydoc", "matplotlib", "packaging"]
+  },
+  "package_data": [
+    "pyts/datasets/cached_datasets/UCR/Coffee/*.txt",
+    "pyts/datasets/cached_datasets/UCR/GunPoint/*.txt",
+    "pyts/datasets/cached_datasets/UCR/PigCVP/*.txt",
+    "pyts/datasets/cached_datasets/UEA/BasicMotions/*.arff",
+    "pyts/datasets/cached_datasets/UEA/BasicMotions/*.txt",
+    "pyts/datasets/info/*.pickle"
+  ],
+  "console_scripts": [],
+  "verified_compatibility_note": "The inspected snapshot needed scikit-learn 1.5.2 for the DTW/classifier smoke path; newer scikit-learn releases triggered a force_all_finite validation error in dtw."
+}

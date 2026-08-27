@@ -1,0 +1,85 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "eosphoros-ai/DB-GPT",
+  "skill_id": "db-gpt",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "LLM Applications",
+      "family": "Multi-Agent Orchestration"
+    },
+    {
+      "area": "LLM Applications",
+      "family": "Agent SDKs"
+    },
+    {
+      "area": "LLM Applications",
+      "family": "Agent Platforms"
+    },
+    {
+      "area": "LLM Applications",
+      "family": "LLM Workflow Frameworks"
+    },
+    {
+      "area": "LLM Applications",
+      "family": "RAG Frameworks"
+    },
+    {
+      "area": "LLM Applications",
+      "family": "Memory and Context"
+    },
+    {
+      "area": "LLM Applications",
+      "family": "Agent Tools and Skills"
+    },
+    {
+      "area": "LLM Applications",
+      "family": "Chat and Knowledge Applications"
+    },
+    {
+      "area": "LLM Applications",
+      "family": "Autonomous Agent Applications"
+    },
+    {
+      "area": "LLM Applications",
+      "family": "Code Generation"
+    },
+    {
+      "area": "LLM Applications",
+      "family": "LLM Application Evaluation"
+    },
+    {
+      "area": "Information Retrieval",
+      "family": "First-Stage Retrieval"
+    },
+    {
+      "area": "Information Retrieval",
+      "family": "Vector Search"
+    },
+    {
+      "area": "Information Retrieval",
+      "family": "Retrieval Evaluation"
+    },
+    {
+      "area": "Model Deployment and Optimization",
+      "family": "Inference Serving"
+    },
+    {
+      "area": "Graph Learning",
+      "family": "Knowledge Graphs"
+    },
+    {
+      "area": "Data Science",
+      "family": "Data Profiling"
+    },
+    {
+      "area": "Data Science",
+      "family": "Data Visualization"
+    },
+    {
+      "area": "Data Science",
+      "family": "Data Integration"
+    }
+  ]
+}

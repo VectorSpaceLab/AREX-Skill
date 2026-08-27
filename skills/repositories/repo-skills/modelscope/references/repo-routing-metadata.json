@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "modelscope/modelscope",
+  "skill_id": "modelscope",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "MLOps",
+      "family": "Model Hubs and Registries"
+    },
+    {
+      "area": "Training Infrastructure",
+      "family": "Training Loop Toolkits"
+    },
+    {
+      "area": "Training Infrastructure",
+      "family": "Cross-Domain Model Libraries"
+    }
+  ]
+}

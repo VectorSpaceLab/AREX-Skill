@@ -1,0 +1,182 @@
+# Troubleshooting: geemap Machine Learning and AI
+
+## Quick decision tree
+
+1. Local scikit-learn conversion fails before any Earth Engine call: check estimator compatibility, fitted status, `feature_names`, scikit-learn availability, and `output_mode`.
+2. `strings_to_classifier`, `csv_to_classifier`, or `fc_to_classifier` creates an object but classification/export fails: check Earth Engine authentication, project, asset permissions, and server-side inputs.
+3. Classified result exists but does not display or has incorrect styling: route display and palettes to [../../interactive-earth-engine-maps/SKILL.md](../../interactive-earth-engine-maps/SKILL.md) and [../../visualization-and-charts/SKILL.md](../../visualization-and-charts/SKILL.md).
+4. AI dataset search or Genie fails: check `geemap[ai]`, Google API key, Google Cloud project, Vertex/Gemini availability, notebook widgets, and network access.
+
+## scikit-learn is missing
+
+Symptoms:
+
+- `ModuleNotFoundError: No module named 'sklearn'`.
+- The bundled smoke script prints that scikit-learn is not installed.
+
+Resolution:
+
+- Install scikit-learn only when local model conversion is needed.
+- The Earth Engine classifier/clusterer workflows can still be used without scikit-learn if all training happens inside Earth Engine.
+- The bundled smoke script's `--help` path does not require scikit-learn.
+
+## Estimator is not compatible or not fitted
+
+Symptoms:
+
+- `AttributeError` for missing `tree_`, `estimators_`, `classes_`, or `criterion`.
+- Conversion fails on an estimator object that has not been trained.
+
+Resolution:
+
+- For `tree_to_string`, pass a fitted `DecisionTreeClassifier` or `DecisionTreeRegressor`-style object.
+- For `rf_to_strings`, pass a fitted ensemble with `estimators_`, such as `RandomForestClassifier`, `RandomForestRegressor`, or a compatible ExtraTrees-style estimator.
+- Call `.fit(X, y)` before conversion.
+- Keep `feature_names` length and order aligned to model training features.
+- If estimator inference is ambiguous, set `output_mode="CLASSIFICATION"`, `"REGRESSION"`, or `"PROBABILITY"` explicitly instead of `"INFER"`.
+
+## Invalid or ambiguous `output_mode`
+
+Symptoms:
+
+- `ValueError: The provided output_mode is not available.` from `rf_to_strings`.
+- `RuntimeError: Could not infer the output type from the estimator.`
+- `RuntimeError: Could not understand estimator type and parse out the values.`
+
+Resolution:
+
+- Use one of `INFER`, `CLASSIFICATION`, `REGRESSION`, or `PROBABILITY` with `rf_to_strings`.
+- Use `CLASSIFICATION` for class labels and `REGRESSION` for continuous outputs when inference fails.
+- Use `PROBABILITY` only for binary classifiers.
+- Do not request `MULTIPROBABILITY`; it is not implemented.
+- Be aware that newer scikit-learn regressor criteria names may not be recognized by geemap's inference logic; explicit `REGRESSION` is safer.
+
+## Probability mode fails
+
+Symptoms:
+
+- `ValueError` containing `shape mismatch: outputs from trees`.
+- Requesting multiprobability raises `NotImplementedError`.
+
+Resolution:
+
+- `PROBABILITY` supports binary classification only.
+- For multiclass models, use `CLASSIFICATION` unless the user has implemented a separate multiclass probability strategy outside geemap.
+- Do not route probability charts here; once values exist, visualization belongs to the charts sub-skill.
+
+## Feature names or labels produce wrong classification
+
+Symptoms:
+
+- Classification runs but output classes are nonsensical.
+- Earth Engine `image.select(feature_names)` fails because band names do not exist.
+- Label values differ from expected map classes.
+
+Resolution:
+
+- Use the exact training feature order as `feature_names` during conversion and Earth Engine `select`.
+- Verify class labels are numeric when using `labels`.
+- If labels are remapped for display, keep display remapping separate from model conversion.
+- Confirm that local training features and Earth Engine image bands have matching units/scales/preprocessing.
+
+## CSV not found or malformed
+
+Symptoms:
+
+- `csv_to_classifier("...")` prints `could not be found` and returns `None`.
+- A classifier loaded from CSV fails later.
+
+Resolution:
+
+- Check the file path before calling `csv_to_classifier`.
+- Treat `None` as an error condition in caller code:
+
+```python
+classifier = ml.csv_to_classifier("rf_trees.csv")
+if classifier is None:
+    raise FileNotFoundError("rf_trees.csv was not found")
+```
+
+- Use `trees_to_csv` to create the file when possible; it applies geemap's expected newline encoding.
+- Keep CSV files as one tree per line with encoded `#` separators; do not edit them into spreadsheet columns unless the loader is also adjusted.
+
+## Earth Engine classifier creation from strings fails
+
+Symptoms:
+
+- Failure near `ee.Classifier.decisionTreeEnsemble`.
+- Errors appear only when applying the classifier to an image or requesting server-side results.
+
+Resolution:
+
+- Confirm every item in `trees` is a non-empty string generated by `tree_to_string` or `rf_to_strings`.
+- Construct classifier locally with `ml.strings_to_classifier(trees)`.
+- Initialize Earth Engine before evaluating or using the classifier remotely:
+
+```python
+import ee
+ee.Initialize(project="your-ee-project")
+```
+
+- Confirm the target image contains all `feature_names` bands and uses the same preprocessing as local training data.
+
+## FeatureCollection asset reload fails
+
+Symptoms:
+
+- `fc_to_classifier(ee.FeatureCollection(asset_id))` fails.
+- Asset export starts but asset cannot be found.
+- Permission or quota errors from Earth Engine.
+
+Resolution:
+
+- `export_trees_to_fc` starts an asynchronous Earth Engine table export task; wait for it to finish before reloading.
+- Ensure `asset_id` points to a writable Earth Engine asset location.
+- Ensure the FeatureCollection has a `tree` property on each feature.
+- For generic task monitoring and asset/export organization, use [../../conversion-and-io/SKILL.md](../../conversion-and-io/SKILL.md).
+
+## Classification display or accuracy assessment is the real problem
+
+Symptoms:
+
+- Model conversion succeeds but the user asks why the layer is invisible, has wrong colors, or the confusion matrix/chart is wrong.
+
+Resolution:
+
+- Displaying a classified layer, setting map center, and adding layer controls belong to [../../interactive-earth-engine-maps/SKILL.md](../../interactive-earth-engine-maps/SKILL.md).
+- Palettes, legends, categorical map rendering, confusion matrix display, charts, and static outputs belong to [../../visualization-and-charts/SKILL.md](../../visualization-and-charts/SKILL.md).
+- Keep this sub-skill focused on model/classifier creation, persistence, and classification workflow structure.
+
+## AI extra and credential failures
+
+Symptoms:
+
+- Importing `geemap.ai` prints `Please install the required packages. pip install 'geemap[ai]'`.
+- `ValueError: Please provide a valid project ID`.
+- `ValueError: Please provide a valid Google API key`.
+- Google API, Vertex AI, Cloud Storage, Gemini, or LangChain import/errors.
+- Dataset explorer widget loads indefinitely or fails in a non-notebook terminal.
+
+Resolution:
+
+- Install the optional AI dependency group only when the user wants AI-assisted dataset search or Genie workflows.
+- Provide a Google Cloud project through the function argument or environment variable expected by the call, typically `GOOGLE_PROJECT_ID` or `EE_PROJECT_ID`.
+- Provide a Google API key through the function argument or `GOOGLE_API_KEY`.
+- Confirm Earth Engine authentication and initialization.
+- Confirm Google Cloud Storage access to Earth Engine catalog/embedding assets and Vertex/Gemini API availability for the chosen project.
+- Run widget interfaces in a compatible notebook or Colab environment with working ipywidgets display.
+- If credentials, network, or notebook UI are unavailable, fall back to non-AI dataset search and standard Earth Engine catalog selection; do not mark local geemap ML conversion as failed.
+
+## Optional AI interfaces produce code that does not run
+
+Symptoms:
+
+- Genie or dataset explorer suggests Earth Engine code that uses JavaScript-only methods or invalid Python syntax.
+- Code execution errors recur after LLM repair attempts.
+
+Resolution:
+
+- Prefer simple, explicit Earth Engine Python snippets for production workflows.
+- `fix_ee_python_code` can ask Gemini to repair a snippet, but it is credentialed/networked and not a guarantee.
+- Manually remove JavaScript-only methods such as `setOptions` when generating Python Earth Engine code.
+- Route map layer addition and display mechanics to the interactive map sub-skill.

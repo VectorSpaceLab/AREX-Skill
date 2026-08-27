@@ -1,0 +1,141 @@
+# Neural Architecture Guide
+
+## Purpose
+
+Read this when a user asks for ML Glossary architecture explanations or wants to compare the repository's autoencoder, CNN, GAN, MLP, RNN, and VAE content. This guide is self-contained and includes source-snippet caveats.
+
+## High-level comparison
+
+| Architecture | Input / task shape | Core idea | Typical use in source text | Caveat |
+| --- | --- | --- | --- | --- |
+| Autoencoder | Input equals reconstruction target | Encoder compresses input to a latent code; decoder reconstructs input. | Dimensionality reduction, denoising, feature learning, VAE bridge. | Not a general-purpose compression winner; data-specific. |
+| CNN | Grid-like data such as images | Convolution and pooling learn local/hierarchical features before classification. | Image classification and computer vision intuition. | Source PyTorch code is illustrative and may require datasets/framework setup. |
+| GAN | Generative modeling | Generator creates samples; discriminator judges real vs fake in an adversarial game. | Image/tensor generation intuition. | Training is unstable/complex; source snippets are not full production recipes. |
+| MLP | Flat vector input | Fully connected feedforward layers. | Fashion-MNIST-style flattened image classifier example. | Original code depended on PyTorch/torchvision and a dataset. |
+| RNN | Sequences | Hidden state carries information over timesteps. | Character/name sequence classification example. | Original notebook was not useful as runtime; code needs framework/data. |
+| VAE | Generative autoencoder | Encoder predicts distribution parameters; decoder samples latent vectors. | Generating new images and regularized latent spaces. | Requires reconstruction + KL loss and probabilistic reasoning. |
+
+## Autoencoder
+
+An autoencoder tries to copy its input to its output through a constrained hidden representation.
+
+Components:
+
+- **Encoder**: `h = f(x)` maps input to latent code.
+- **Decoder**: `r = g(h)` reconstructs input from code.
+- **Loss**: compares reconstruction `r` with original `x`.
+
+Teaching points:
+
+- The code layer is a compressed representation.
+- If the model could simply learn identity for everything, it would not be useful; constraints force it to preserve important structure.
+- Use cases include denoising, dimensionality reduction, feature learning, and as a bridge to VAEs.
+
+## CNN
+
+A convolutional neural network uses convolutional layers to detect local patterns, pooling layers to reduce dimensions, and fully connected layers to produce final predictions.
+
+Teaching points:
+
+- Early layers detect simpler features such as edges/colors; deeper layers combine them into more complex patterns.
+- Kernels/filters slide over input with a stride to create feature maps.
+- Pooling reduces feature-map size and can reduce overfitting.
+- CNNs are especially associated with computer vision tasks such as image classification, segmentation, and object detection.
+
+## GAN
+
+A generative adversarial network has two competing networks:
+
+- **Generator**: creates synthetic samples.
+- **Discriminator**: predicts whether samples are real or generated.
+
+The generator improves by trying to fool the discriminator; the discriminator improves by distinguishing real from fake. The source text framed the goal as the generator producing samples that the discriminator rates as roughly equally likely real/fake.
+
+Common caveats:
+
+- GAN training can be unstable.
+- Evaluation is not as direct as supervised accuracy.
+- Do not use GANs when the task only needs classification or regression.
+
+## MLP
+
+A multilayer perceptron is a feedforward network with fully connected layers. The source example described flattened 28×28 Fashion-MNIST images, hidden fully connected layers, and an output layer with 10 classes.
+
+Teaching points:
+
+- MLPs are a natural neural baseline for vector/tabular inputs.
+- For images, flattening discards spatial structure; CNNs usually exploit images better.
+- Output layer size should match the prediction target (e.g., number of classes).
+
+## RNN, GRU, and LSTM
+
+### RNN
+
+An RNN keeps a hidden state that is updated at each timestep and carries past information forward.
+
+Use for:
+
+- Text or character sequences.
+- Time series.
+- Any variable-length sequential input.
+
+Caveat: vanilla RNNs can struggle with long-term dependencies.
+
+### GRU
+
+A GRU uses gates:
+
+- **Reset gate**: controls how much previous hidden state to remember when forming a candidate.
+- **Update gate**: controls how much of the previous state to carry forward.
+
+It is a simpler gated recurrent unit than LSTM.
+
+### LSTM
+
+An LSTM adds a memory cell and gates for forgetting, input, and output. It is designed to preserve useful long-term information and reduce vanishing-gradient issues across time.
+
+## VAE
+
+A variational autoencoder modifies an autoencoder so the latent representation models a probability distribution, typically with mean and variance. New samples can be generated by sampling latent vectors and decoding them.
+
+VAE loss combines:
+
+- Reconstruction loss, such as cross-entropy or MSE.
+- KL divergence, encouraging the latent distribution to stay near a target prior.
+
+Use cases:
+
+- Generative modeling.
+- Structured latent spaces.
+- Regularized representation learning.
+
+## Source-code caveats by architecture
+
+- Autoencoder, CNN, GAN, MLP, RNN, and VAE code examples in the source tree were PyTorch-style educational snippets, often including training functions and dataset assumptions.
+- They were not selected as required runtime verification because they can require `torch`, `torchvision`, downloads, and training time.
+- If a user wants executable modern examples, provide a small fresh snippet or ask whether to use a particular framework; do not claim the original examples are production-ready.
+- For glossary/documentation work, it is enough to include model purpose, components, expected input/output shape, and citations/further reading.
+
+## Architecture selection heuristics
+
+| User goal | Suggest |
+| --- | --- |
+| Compress or denoise inputs | Autoencoder. |
+| Generate new samples with a structured latent space | VAE. |
+| Generate realistic images/tensors adversarially | GAN. |
+| Classify flattened vectors or tabular features | MLP or classical models. |
+| Process images while preserving spatial locality | CNN. |
+| Process sequences with hidden state | RNN/GRU/LSTM. |
+| Need beginner comparison across classifiers | Combine this guide with `../../classical-algorithms/SKILL.md`. |
+
+## Documentation-entry template
+
+For a concise architecture entry, use this order:
+
+1. One-sentence definition.
+2. Component list.
+3. Input/output shape intuition.
+4. Typical use cases.
+5. One diagram or formula if available in the user's active docs.
+6. Code snippet only if it is short, Python 3, dependency-clear, and not a full training pipeline.
+7. Citations/further reading.

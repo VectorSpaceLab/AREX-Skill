@@ -1,0 +1,112 @@
+{
+  "name": "@auto-ml-skills/disco",
+  "version": "0.2.0",
+  "description": "Skill-powered research agent with Creator and Researcher modes",
+  "type": "module",
+  "discoConfig": {
+    "name": "disco",
+    "configDir": ".disco"
+  },
+  "bin": {
+    "disco": "dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./rpc-entry": {
+      "types": "./dist/rpc-entry.d.ts",
+      "import": "./dist/rpc-entry.js"
+    }
+  },
+  "files": [
+    "dist",
+    "docs",
+    "examples",
+    "npm-shrinkwrap.json",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "scripts": {
+    "clean": "shx rm -rf dist",
+    "build": "npm run clean && tsc -p tsconfig.build.json && node scripts/copy-assets.mjs && shx chmod +x dist/cli.js dist/rpc-entry.js",
+    "typecheck": "tsc --noEmit -p tsconfig.build.json",
+    "test": "vitest --run --config vitest.config.ts",
+    "test:examples": "tsc --noEmit -p tsconfig.examples.json",
+    "verify:provenance": "node scripts/upstream-provenance.mjs --check",
+    "verify:package": "node scripts/verify-package.mjs",
+    "prepublishOnly": "npm run typecheck && npm test && npm run test:examples && npm run verify:provenance && npm run build && npm run verify:package"
+  },
+  "dependencies": {
+    "@earendil-works/pi-agent-core": "0.83.0",
+    "@earendil-works/pi-ai": "0.83.0",
+    "@earendil-works/pi-tui": "0.83.0",
+    "@silvia-odwyer/photon-node": "0.3.4",
+    "acorn": "8.16.0",
+    "chalk": "5.6.2",
+    "cross-spawn": "7.0.6",
+    "diff": "8.0.4",
+    "glob": "13.0.6",
+    "highlight.js": "10.7.3",
+    "hosted-git-info": "9.0.3",
+    "ignore": "7.0.5",
+    "jiti": "2.7.0",
+    "minimatch": "10.2.5",
+    "proper-lockfile": "4.1.2",
+    "semver": "7.8.0",
+    "typebox": "1.3.7",
+    "undici": "8.5.0",
+    "yaml": "2.9.0"
+  },
+  "optionalDependencies": {
+    "@mariozechner/clipboard": "0.3.9"
+  },
+  "devDependencies": {
+    "@anthropic-ai/sandbox-runtime": "^0.0.26",
+    "@earendil-works/gondolin": "^0.12.0",
+    "@types/cross-spawn": "6.0.6",
+    "@types/diff": "7.0.2",
+    "@types/hosted-git-info": "3.0.5",
+    "@types/ms": "2.1.0",
+    "@types/node": "24.12.4",
+    "@types/proper-lockfile": "4.1.4",
+    "@types/semver": "7.7.1",
+    "marked": "^18.0.5",
+    "shx": "0.4.0",
+    "typescript": "5.9.3",
+    "vitest": "4.1.9"
+  },
+  "overrides": {
+    "protobufjs": "7.6.5",
+    "rimraf": "6.1.2",
+    "gaxios": {
+      "rimraf": "6.1.2"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VectorSpaceLab/AREX-Skill.git",
+    "directory": "cli"
+  },
+  "keywords": [
+    "research-agent",
+    "coding-agent",
+    "agent-skills",
+    "cli",
+    "tui",
+    "llm"
+  ],
+  "author": "AREX-Skill contributors",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.19.0"
+  }
+}

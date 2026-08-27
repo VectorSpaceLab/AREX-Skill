@@ -1,0 +1,433 @@
+{
+  "schema": "disco.generative-models.catalog.v1",
+  "repo": "generative-models",
+  "notice": "Relative source_artifact values identify evidence paths from the source repository snapshot. The bundled skill does not include full training scripts; use this catalog for routing and compatibility triage, and only execute source artifacts when the user is intentionally working in a compatible checkout.",
+  "shared_assumptions": [
+    "Standalone legacy training loops, not packaged import APIs or CLIs.",
+    "MNIST input is loaded through TensorFlow 1.x-era helpers in most scripts.",
+    "Sample images are written under a working-directory-local out/ directory.",
+    "Long training loops are not safe quick smoke tests."
+  ],
+  "families": {
+    "gan": {
+      "title": "Generative Adversarial Nets",
+      "owner_sub_skill": "sub-skills/gan/SKILL.md",
+      "items": [
+        {
+          "id": "vanilla-gan",
+          "title": "Vanilla GAN",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "GAN/vanilla_gan/gan_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "GAN/vanilla_gan/gan_pytorch.py"
+            }
+          ],
+          "selection_hint": "Default baseline when the user only asks for a classic GAN."
+        },
+        {
+          "id": "conditional-gan",
+          "title": "Conditional GAN",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "GAN/conditional_gan/cgan_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "GAN/conditional_gan/cgan_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for label-conditioned MNIST generation."
+        },
+        {
+          "id": "infogan",
+          "title": "InfoGAN",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "GAN/infogan/infogan_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "GAN/infogan/infogan_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for latent-code control or disentanglement."
+        },
+        {
+          "id": "wasserstein-gan",
+          "title": "Wasserstein GAN",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "GAN/wasserstein_gan/wgan_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "GAN/wasserstein_gan/wgan_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for a Wasserstein critic baseline with weight clipping style examples."
+        },
+        {
+          "id": "wgan-gp",
+          "title": "Improved Wasserstein GAN / WGAN-GP",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "GAN/improved_wasserstein_gan/wgan_gp_tensorflow.py"
+            }
+          ],
+          "selection_hint": "Use when the user asks for gradient penalty; TensorFlow-only in this repo."
+        },
+        {
+          "id": "mode-regularized-gan",
+          "title": "Mode Regularized GAN",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "GAN/mode_regularized_gan/mode_reg_gan_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "GAN/mode_regularized_gan/mode_reg_gan_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for mode-coverage regularization and mode-collapse experiments."
+        },
+        {
+          "id": "coupled-gan",
+          "title": "Coupled GAN / COGAN",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "GAN/coupled_gan/cogan_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "GAN/coupled_gan/cogan_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for coupled generators/discriminators sharing latent structure."
+        },
+        {
+          "id": "auxiliary-classifier-gan",
+          "title": "Auxiliary Classifier GAN / ACGAN",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "GAN/auxiliary_classifier_gan/ac_gan_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "GAN/auxiliary_classifier_gan/ac_gan_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for GANs with class-prediction auxiliary loss."
+        },
+        {
+          "id": "least-squares-gan",
+          "title": "Least Squares GAN / LSGAN",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "GAN/least_squares_gan/lsgan_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "GAN/least_squares_gan/lsgan_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for least-squares discriminator objective."
+        },
+        {
+          "id": "boundary-seeking-gan",
+          "title": "Boundary Seeking GAN / BGAN",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "GAN/boundary_seeking_gan/bgan_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "GAN/boundary_seeking_gan/bgan_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use when the user names boundary-seeking loss."
+        },
+        {
+          "id": "energy-based-gan",
+          "title": "Energy Based GAN / EBGAN",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "GAN/ebgan/ebgan_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "GAN/ebgan/ebgan_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for autoencoder/energy-style discriminator examples."
+        },
+        {
+          "id": "f-gan",
+          "title": "f-GAN",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "GAN/f_gan/f_gan_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "GAN/f_gan/f_gan_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for f-divergence formulation questions."
+        },
+        {
+          "id": "generative-adversarial-parallelization",
+          "title": "Generative Adversarial Parallelization / GAP",
+          "source_artifacts": [
+            {
+              "framework": "pytorch",
+              "path": "GAN/generative_adversarial_parallelization/gap_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for GAP or parallelized adversarial training; PyTorch-only in this repo."
+        },
+        {
+          "id": "discogan",
+          "title": "DiscoGAN",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "GAN/disco_gan/discogan_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "GAN/disco_gan/discogan_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for unpaired cross-domain translation style examples."
+        },
+        {
+          "id": "dualgan",
+          "title": "DualGAN",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "GAN/dual_gan/dualgan_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "GAN/dual_gan/dualgan_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for two-domain dual-learning image translation examples."
+        },
+        {
+          "id": "ali-bigan",
+          "title": "Adversarial Feature Learning / ALI-BiGAN",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "GAN/ali_bigan/ali_bigan_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "GAN/ali_bigan/ali_bigan_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for joint encoder-generator adversarial inference."
+        },
+        {
+          "id": "boundary-equilibrium-gan",
+          "title": "Boundary Equilibrium GAN / BEGAN",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "GAN/boundary_equilibrium_gan/began_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "GAN/boundary_equilibrium_gan/began_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for BEGAN equilibrium-control examples."
+        },
+        {
+          "id": "magan",
+          "title": "Margin Adaptation GAN / MAGAN",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "GAN/magan/magan_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "GAN/magan/magan_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for margin adaptation / mode-collapse mitigation examples."
+        },
+        {
+          "id": "softmax-gan",
+          "title": "Softmax GAN",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "GAN/softmax_gan/softmax_gan_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "GAN/softmax_gan/softmax_gan_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for softmax discriminator objective examples."
+        },
+        {
+          "id": "gibbsnet",
+          "title": "GibbsNet",
+          "source_artifacts": [
+            {
+              "framework": "pytorch",
+              "path": "GAN/gibbsnet/gibbsnet_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for iterative adversarial inference; PyTorch-only in this repo."
+        }
+      ]
+    },
+    "vae": {
+      "title": "Variational Autoencoders",
+      "owner_sub_skill": "sub-skills/vae/SKILL.md",
+      "items": [
+        {
+          "id": "vanilla-vae",
+          "title": "Vanilla VAE",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "VAE/vanilla_vae/vae_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "VAE/vanilla_vae/vae_pytorch.py"
+            }
+          ],
+          "selection_hint": "Default unsupervised MNIST VAE baseline."
+        },
+        {
+          "id": "conditional-vae",
+          "title": "Conditional VAE",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "VAE/conditional_vae/cvae_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "VAE/conditional_vae/cvae_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for label-conditioned VAE generation."
+        },
+        {
+          "id": "denoising-vae",
+          "title": "Denoising VAE",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "VAE/denoising_vae/dvae_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "VAE/denoising_vae/dvae_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for reconstructing clean images from corrupted inputs."
+        },
+        {
+          "id": "adversarial-autoencoder",
+          "title": "Adversarial Autoencoder",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "VAE/adversarial_autoencoder/aae_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "VAE/adversarial_autoencoder/aae_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for adversarial latent regularization."
+        },
+        {
+          "id": "adversarial-variational-bayes",
+          "title": "Adversarial Variational Bayes",
+          "source_artifacts": [
+            {
+              "framework": "tensorflow",
+              "path": "VAE/adversarial_vb/avb_tensorflow.py"
+            },
+            {
+              "framework": "pytorch",
+              "path": "VAE/adversarial_vb/avb_pytorch.py"
+            }
+          ],
+          "selection_hint": "Use for the AVB/T network variational objective."
+        }
+      ]
+    },
+    "rbm": {
+      "title": "Restricted Boltzmann Machines",
+      "owner_sub_skill": "sub-skills/rbm/SKILL.md",
+      "items": [
+        {
+          "id": "binary-rbm-cd",
+          "title": "Binary RBM with Contrastive Divergence",
+          "source_artifacts": [
+            {
+              "framework": "numpy",
+              "path": "RBM/rbm_binary_cd.py"
+            }
+          ],
+          "selection_hint": "Default binary RBM baseline with a negative phase restarted from data."
+        },
+        {
+          "id": "binary-rbm-pcd",
+          "title": "Binary RBM with Persistent Contrastive Divergence",
+          "source_artifacts": [
+            {
+              "framework": "numpy",
+              "path": "RBM/rbm_binary_pcd.py"
+            }
+          ],
+          "selection_hint": "Use when the user asks for persistent chains or PCD."
+        }
+      ]
+    },
+    "helmholtz-machine": {
+      "title": "Helmholtz Machine",
+      "owner_sub_skill": "sub-skills/helmholtz-machine/SKILL.md",
+      "items": [
+        {
+          "id": "binary-helmholtz-wake-sleep",
+          "title": "Binary Helmholtz Machine with Wake-Sleep",
+          "source_artifacts": [
+            {
+              "framework": "numpy",
+              "path": "HelmholtzMachine/vanilla_HM/helmholtz.py"
+            }
+          ],
+          "selection_hint": "Use for the repository's one-layer wake-sleep example."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "opengeos/geoai",
+  "skill_id": "geoai",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "Computer Vision",
+      "family": "Image Segmentation"
+    },
+    {
+      "area": "Scientific Computing",
+      "family": "Earth Observation"
+    },
+    {
+      "area": "Data Science",
+      "family": "Geospatial Computing"
+    }
+  ]
+}

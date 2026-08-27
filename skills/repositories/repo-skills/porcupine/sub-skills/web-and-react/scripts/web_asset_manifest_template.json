@@ -1,0 +1,59 @@
+{
+  "porcupineWebAssetPlanVersion": 1,
+  "packages": {
+    "web": "@picovoice/porcupine-web",
+    "react": "@picovoice/porcupine-react",
+    "voiceProcessor": "@picovoice/web-voice-processor"
+  },
+  "deployment": {
+    "baseUrl": "/",
+    "publicPathRequiresHttpServer": true,
+    "secureContextForMicrophone": true,
+    "crossOriginIsolationHeaders": {
+      "Cross-Origin-Opener-Policy": "same-origin",
+      "Cross-Origin-Embedder-Policy": "require-corp"
+    }
+  },
+  "model": {
+    "language": "en",
+    "strategy": "publicPath",
+    "publicPath": "/models/porcupine_params.pv",
+    "base64Import": null,
+    "customWritePath": "porcupine_model_en_v1",
+    "forceWrite": true,
+    "version": 1
+  },
+  "keywords": [
+    {
+      "kind": "builtIn",
+      "builtin": "Porcupine",
+      "label": "Porcupine",
+      "sensitivity": 0.5
+    },
+    {
+      "kind": "custom",
+      "label": "Hey App",
+      "targetPlatform": "Web (WASM)",
+      "strategy": "publicPath",
+      "publicPath": "/keywords/hey_app_wasm.ppn",
+      "base64Import": null,
+      "customWritePath": "hey_app_wasm_v1",
+      "forceWrite": true,
+      "version": 1,
+      "sensitivity": 0.6
+    }
+  ],
+  "reactLifecycle": {
+    "initOn": "user action after AccessKey is available",
+    "startOn": "microphone consent action after isLoaded is true",
+    "stopOn": "pause, route change, or before replacing worker",
+    "releaseOn": "component unmount or keyword/model/language change"
+  },
+  "validationChecklist": [
+    "Public asset URLs return binary bytes and not HTML fallbacks",
+    "If using base64, imported variables are strings generated from the intended files",
+    "customWritePath/version changes when asset bytes change",
+    "worker-enabled pages are served over HTTP(S) with required headers when multithreading is needed",
+    "microphone flow is tested on localhost or HTTPS with browser permission granted"
+  ]
+}

@@ -1,0 +1,7133 @@
+{
+  "schemaVersion": 1,
+  "source": "PINTO_model_zoo README.md parsed from pre-quantized model tables",
+  "generated_at_utc": "2026-08-16T03:31:09Z",
+  "counts": {
+    "entries": 494,
+    "categories": {
+      "Image Classification": 53,
+      "2D Object Detection": 89,
+      "3D Object Detection": 6,
+      "2D/3D Face Detection": 40,
+      "2D/3D Hand Detection": 6,
+      "2D/3D Human/Animal Pose Estimation": 27,
+      "Depth Estimation from Monocular/Stereo Images": 52,
+      "Semantic Segmentation": 43,
+      "Anomaly Detection": 2,
+      "Artistic": 11,
+      "Super Resolution": 82,
+      "Sound Classifier": 8,
+      "Natural Language Processing": 3,
+      "Text Recognition": 3,
+      "Action Recognition": 3,
+      "Inpainting": 4,
+      "GAN": 2,
+      "Transformer": 1,
+      "Others": 59
+    },
+    "formats": {
+      "FP32": 309,
+      "INT8": 235,
+      "WQ": 269,
+      "DQ": 138,
+      "FP16": 293,
+      "OV": 243,
+      "CM": 202,
+      "TFJS": 218,
+      "TF-TRT": 159,
+      "ONNX": 467,
+      "TPU": 97
+    },
+    "model_directories": 498
+  },
+  "format_legend": {
+    "FP32": "float32 TensorFlow/SavedModel/TFLite family when listed",
+    "FP16": "float16 quantized artifact",
+    "INT8": "integer quantization artifact",
+    "DQ": "dynamic range quantization artifact",
+    "TPU": "EdgeTPU-oriented artifact",
+    "WQ": "weight quantization artifact",
+    "OV": "OpenVINO IR",
+    "CM": "CoreML",
+    "TFJS": "TensorFlow.js",
+    "TF-TRT": "TensorFlow-TensorRT",
+    "ONNX": "ONNX"
+  },
+  "entries": [
+    {
+      "no": 4,
+      "name": "Efficientnet",
+      "category": "Image Classification",
+      "directory": "004_efficientnet",
+      "formats": [
+        "FP32",
+        "INT8",
+        "WQ"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 10,
+      "name": "Mobilenetv3",
+      "category": "Image Classification",
+      "directory": "010_mobilenetv3",
+      "formats": [
+        "FP32",
+        "INT8",
+        "WQ"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 11,
+      "name": "Mobilenetv2",
+      "category": "Image Classification",
+      "directory": "011_mobilenetv2",
+      "formats": [
+        "FP32",
+        "INT8",
+        "DQ",
+        "WQ"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 16,
+      "name": "Efficientnet-lite",
+      "category": "Image Classification",
+      "directory": "016_EfficientNet-lite",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 70,
+      "name": "age-gender-recognition",
+      "category": "Image Classification",
+      "directory": "070_age-gender-recognition",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 83,
+      "name": "Person_Reidentification",
+      "category": "Image Classification",
+      "directory": "083_Person_Reidentification",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "248,277,286,287,288,300"
+    },
+    {
+      "no": 87,
+      "name": "DeepSort",
+      "category": "Image Classification",
+      "directory": "087_DeepSort",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 124,
+      "name": "person-attributes-recognition-crossroad-0230",
+      "category": "Image Classification",
+      "directory": "124_person-attributes-recognition-crossroad-0230",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 125,
+      "name": "person-attributes-recognition-crossroad-0234",
+      "category": "Image Classification",
+      "directory": "125_person-attributes-recognition-crossroad-0234",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 126,
+      "name": "person-attributes-recognition-crossroad-0238",
+      "category": "Image Classification",
+      "directory": "126_person-attributes-recognition-crossroad-0238",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 175,
+      "name": "face-recognition-resnet100-arcface-onnx",
+      "category": "Image Classification",
+      "directory": "175_face-recognition-resnet100-arcface-onnx",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "RGB/BGR,112x112,[1,512]"
+    },
+    {
+      "no": 187,
+      "name": "vehicle-attributes-recognition-barrier-0039",
+      "category": "Image Classification",
+      "directory": "187_vehicle-attributes-recognition-barrier-0039",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "72x72"
+    },
+    {
+      "no": 188,
+      "name": "vehicle-attributes-recognition-barrier-0042",
+      "category": "Image Classification",
+      "directory": "188_vehicle-attributes-recognition-barrier-0042",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "72x72"
+    },
+    {
+      "no": 191,
+      "name": "anti-spoof-mn3",
+      "category": "Image Classification",
+      "directory": "191_anti-spoof-mn3",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "128x128"
+    },
+    {
+      "no": 192,
+      "name": "open-closed-eye-0001",
+      "category": "Image Classification",
+      "directory": "192_open-closed-eye-0001",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "32x32"
+    },
+    {
+      "no": 194,
+      "name": "face_recognizer_fast",
+      "category": "Image Classification",
+      "directory": "194_face_recognizer_fast",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "112x112"
+    },
+    {
+      "no": 195,
+      "name": "person_reid_youtu",
+      "category": "Image Classification",
+      "directory": "195_person_reid_youtu",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "256x128, ReID"
+    },
+    {
+      "no": 199,
+      "name": "NSFW",
+      "category": "Image Classification",
+      "directory": "199_NSFW",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "224x224"
+    },
+    {
+      "no": 244,
+      "name": "FINNger",
+      "category": "Image Classification",
+      "directory": "244_FINNger",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "96x96"
+    },
+    {
+      "no": 256,
+      "name": "SFace",
+      "category": "Image Classification",
+      "directory": "256_SFace",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "112x112"
+    },
+    {
+      "no": 257,
+      "name": "PiCANet",
+      "category": "Image Classification",
+      "directory": "257_PiCANet",
+      "formats": [
+        "OV",
+        "ONNX"
+      ],
+      "remarks": "BDDA,SAGE/224x224"
+    },
+    {
+      "no": 259,
+      "name": "Emotion_FERPlus",
+      "category": "Image Classification",
+      "directory": "259_Emotion_FERPlus",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "64x64"
+    },
+    {
+      "no": 290,
+      "name": "AdaFace",
+      "category": "Image Classification",
+      "directory": "290_AdaFace",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "112x112"
+    },
+    {
+      "no": 317,
+      "name": "MobileOne",
+      "category": "Image Classification",
+      "directory": "317_MobileOne",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "224x224"
+    },
+    {
+      "no": 346,
+      "name": "facial_expression_recognition_mobilefacenet",
+      "category": "Image Classification",
+      "directory": "346_facial_expression_recognition_mobilefacenet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "ONNX"
+      ],
+      "remarks": "112x112"
+    },
+    {
+      "no": 379,
+      "name": "PP-LCNetV2",
+      "category": "Image Classification",
+      "directory": "379_PP-LCNetV2",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": "224x224"
+    },
+    {
+      "no": 429,
+      "name": "OSNet",
+      "category": "Image Classification",
+      "directory": "429_OSNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "256x128, ReID"
+    },
+    {
+      "no": 430,
+      "name": "FastReID",
+      "category": "Image Classification",
+      "directory": "430_FastReID",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "384x128, ReID"
+    },
+    {
+      "no": 431,
+      "name": "NITEC",
+      "category": "Image Classification",
+      "directory": "431_NITEC",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "224x224, Gaze Estimation"
+    },
+    {
+      "no": 432,
+      "name": "face-reidentification-retail-0095",
+      "category": "Image Classification",
+      "directory": "432_face-reidentification-retail-0095",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": "128x128, FaceReID"
+    },
+    {
+      "no": 451,
+      "name": "DAN",
+      "category": "Image Classification",
+      "directory": "451_DAN",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "224x224, Facial Expression"
+    },
+    {
+      "no": 452,
+      "name": "FairFace",
+      "category": "Image Classification",
+      "directory": "452_FairFace",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "224x224, Face Attribute"
+    },
+    {
+      "no": 453,
+      "name": "FairDAN",
+      "category": "Image Classification",
+      "directory": "453_FairDAN",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "224x224, Face Attribute + Facial Expression"
+    },
+    {
+      "no": 462,
+      "name": "Gaze-LLE",
+      "category": "Image Classification",
+      "directory": "462_Gaze-LLE",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "448x448, Attention"
+    },
+    {
+      "no": 474,
+      "name": "Gaze-LLE-DINOv3",
+      "category": "Image Classification",
+      "directory": "474_Gaze-LLE-DINOv3",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "640x640,416x416,320x320, Attention"
+    },
+    {
+      "no": 475,
+      "name": "VSDLM",
+      "category": "Image Classification",
+      "directory": "475_VSDLM",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "30x48, Lip motion"
+    },
+    {
+      "no": 476,
+      "name": "OCEC",
+      "category": "Image Classification",
+      "directory": "476_OCEC",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "24x40, Wink/Blink"
+    },
+    {
+      "no": 477,
+      "name": "PGC",
+      "category": "Image Classification",
+      "directory": "477_PGC",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "32x32, Pointing"
+    },
+    {
+      "no": 478,
+      "name": "SC",
+      "category": "Image Classification",
+      "directory": "478_SC",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "32x24, Sitting"
+    },
+    {
+      "no": 479,
+      "name": "PUC",
+      "category": "Image Classification",
+      "directory": "479_PUC",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "32x24, Phone Usage Classifier"
+    },
+    {
+      "no": 480,
+      "name": "HSC",
+      "category": "Image Classification",
+      "directory": "480_HSC",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "48x48, Happy smile classifier"
+    },
+    {
+      "no": 481,
+      "name": "WHC",
+      "category": "Image Classification",
+      "directory": "481_WHC",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "4x32x32,6x32x32,8x32x32, Waving Hand Classification"
+    },
+    {
+      "no": 483,
+      "name": "LVFace",
+      "category": "Image Classification",
+      "directory": "483_LVFace",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Nx3x112x112, Cosine similarity"
+    },
+    {
+      "no": 484,
+      "name": "TransFace",
+      "category": "Image Classification",
+      "directory": "484_TransFace",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Nx3x112x112, Cosine similarity"
+    },
+    {
+      "no": 486,
+      "name": "MWC",
+      "category": "Image Classification",
+      "directory": "486_MWC",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Nx3x48x48, Mask wearing classifier"
+    },
+    {
+      "no": 489,
+      "name": "Glasses-Detector",
+      "category": "Image Classification",
+      "directory": "489_Glasses-Detector",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Glasses"
+    },
+    {
+      "no": 491,
+      "name": "SGC",
+      "category": "Image Classification",
+      "directory": "491_SGC",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Sunglasses"
+    },
+    {
+      "no": 492,
+      "name": "HHC",
+      "category": "Image Classification",
+      "directory": "493_HHC",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Hat"
+    },
+    {
+      "no": 494,
+      "name": "BPC",
+      "category": "Image Classification",
+      "directory": "494_BPC",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Background Plain classification"
+    },
+    {
+      "no": 495,
+      "name": "Comprehensive-Head-Classification",
+      "category": "Image Classification",
+      "directory": "495_Comprehensive-Head-Classification",
+      "formats": [
+        "FP32",
+        "ONNX"
+      ],
+      "remarks": "Comprehensive head classification"
+    },
+    {
+      "no": 497,
+      "name": "PPC",
+      "category": "Image Classification",
+      "directory": "497_PPC",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Binary classification to determine whether the subject is holding a smartphone"
+    },
+    {
+      "no": 502,
+      "name": "PersonViT",
+      "category": "Image Classification",
+      "directory": "502_PersonViT",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Person Re-Identification"
+    },
+    {
+      "no": 503,
+      "name": "CDNet",
+      "category": "Image Classification",
+      "directory": "503_CDNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Person Re-Identification"
+    },
+    {
+      "no": 2,
+      "name": "Mobilenetv3-SSD",
+      "category": "2D Object Detection",
+      "directory": "002_mobilenetv3-ssd",
+      "formats": [
+        "FP32",
+        "INT8",
+        "WQ",
+        "CM"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 6,
+      "name": "Mobilenetv2-SSDlite",
+      "category": "2D Object Detection",
+      "directory": "006_mobilenetv2-ssdlite",
+      "formats": [
+        "FP32",
+        "INT8",
+        "TPU",
+        "WQ"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 8,
+      "name": "Mask_RCNN_Inceptionv2",
+      "category": "2D Object Detection",
+      "directory": "008_mask_rcnn_inceptionv2",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 18,
+      "name": "EfficientDet",
+      "category": "2D Object Detection",
+      "directory": "018_EfficientDet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 23,
+      "name": "Yolov3-nano",
+      "category": "2D Object Detection",
+      "directory": "023_yolov3-nano",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 24,
+      "name": "Yolov3-lite",
+      "category": "2D Object Detection",
+      "directory": "024_yolov3-lite",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 31,
+      "name": "Yolov4",
+      "category": "2D Object Detection",
+      "directory": "031_yolov4",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 34,
+      "name": "SSD_Mobilenetv2_mnasfpn",
+      "category": "2D Object Detection",
+      "directory": "034_ssd_mobilenet_v2_mnasfpn_shared_box_predictor",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 38,
+      "name": "SSDlite_MobileDet_edgetpu",
+      "category": "2D Object Detection",
+      "directory": "038_ssdlite_mobiledet_edgetpu",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 39,
+      "name": "SSDlite_MobileDet_cpu",
+      "category": "2D Object Detection",
+      "directory": "039_ssdlite_mobiledet_cpu",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 42,
+      "name": "Centernet",
+      "category": "2D Object Detection",
+      "directory": "042_centernet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 45,
+      "name": "SSD_Mobilenetv2_oid_v4",
+      "category": "2D Object Detection",
+      "directory": "045_ssd_mobilenet_v2_oid_v4",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "TFJS"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 46,
+      "name": "Yolov4-tiny",
+      "category": "2D Object Detection",
+      "directory": "046_yolov4-tiny",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 47,
+      "name": "SpineNetMB_49",
+      "category": "2D Object Detection",
+      "directory": "047_SpineNetMB_49",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "ONNX"
+      ],
+      "remarks": "Mobile RetinaNet"
+    },
+    {
+      "no": 51,
+      "name": "East_Text_Detection",
+      "category": "2D Object Detection",
+      "directory": "051_East_Text_Detection",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 54,
+      "name": "KNIFT",
+      "category": "2D Object Detection",
+      "directory": "054_KNIFT",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "ONNX"
+      ],
+      "remarks": "MediaPipe"
+    },
+    {
+      "no": 56,
+      "name": "TextBoxes++ with dense blocks, separable convolution and Focal Loss",
+      "category": "2D Object Detection",
+      "directory": "056_TextBoxes++",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 58,
+      "name": "keras-retinanet",
+      "category": "2D Object Detection",
+      "directory": "058_keras-retinanet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "OV",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "resnet50_coco_best_v2.1.0.h5,320x320"
+    },
+    {
+      "no": 72,
+      "name": "NanoDet",
+      "category": "2D Object Detection",
+      "directory": "072_NanoDet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "issue #274"
+    },
+    {
+      "no": 73,
+      "name": "RetinaNet",
+      "category": "2D Object Detection",
+      "directory": "073_RetinaNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 74,
+      "name": "Yolact",
+      "category": "2D Object Detection",
+      "directory": "074_Yolact",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 85,
+      "name": "Yolact_Edge",
+      "category": "2D Object Detection",
+      "directory": "085_Yolact_Edge",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "21/10/05 new MobileNetV2(550x550)"
+    },
+    {
+      "no": 89,
+      "name": "DETR",
+      "category": "2D Object Detection",
+      "directory": "089_DETR",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "ONNX"
+      ],
+      "remarks": "256x256"
+    },
+    {
+      "no": 103,
+      "name": "EfficientDet_lite",
+      "category": "2D Object Detection",
+      "directory": "103_EfficientDet_lite",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "lite0,lite1,lite2,lite3,lite4"
+    },
+    {
+      "no": 116,
+      "name": "DroNet",
+      "category": "2D Object Detection",
+      "directory": "116_DroNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "DroNet,DroNetV3"
+    },
+    {
+      "no": 123,
+      "name": "YOLOR",
+      "category": "2D Object Detection",
+      "directory": "123_YOLOR",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "ssss_s2d/320x320,640x640,960x960,1280x1280"
+    },
+    {
+      "no": 132,
+      "name": "YOLOX",
+      "category": "2D Object Detection",
+      "directory": "132_YOLOX",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "nano,tiny,s,m,l,x/256x320,320x320,416x416,480x640,544x960,736x1280,1088x1920"
+    },
+    {
+      "no": 143,
+      "name": "RAPiD",
+      "category": "2D Object Detection",
+      "directory": "143_RAPiD",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "ONNX"
+      ],
+      "remarks": "Fisheye, cepdof/habbof/mw_r, 608x608/1024x1024"
+    },
+    {
+      "no": 145,
+      "name": "text_detection_db",
+      "category": "2D Object Detection",
+      "directory": "145_text_detection_db",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "480x640"
+    },
+    {
+      "no": 151,
+      "name": "object_detection_mobile_object_localizer",
+      "category": "2D Object Detection",
+      "directory": "151_object_detection_mobile_object_localizer",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "192x192"
+    },
+    {
+      "no": 169,
+      "name": "spaghettinet_edgetpu",
+      "category": "2D Object Detection",
+      "directory": "169_spaghettinet_edgetpu",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "320x320,S/M/L"
+    },
+    {
+      "no": 174,
+      "name": "PP-PicoDet",
+      "category": "2D Object Detection",
+      "directory": "174_PP-PicoDet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "S/M/L,320x320/416x416/640x640"
+    },
+    {
+      "no": 178,
+      "name": "vehicle-detection-0200",
+      "category": "2D Object Detection",
+      "directory": "178_vehicle-detection-0200",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "256x256,PriorBoxClustered->ndarray(0.npy)"
+    },
+    {
+      "no": 179,
+      "name": "person-detection-0202",
+      "category": "2D Object Detection",
+      "directory": "179_person-detection-0202",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "512x512,PriorBoxClustered->ndarray(0.npy)"
+    },
+    {
+      "no": 183,
+      "name": "pedestrian-detection-adas-0002",
+      "category": "2D Object Detection",
+      "directory": "183_pedestrian-detection-adas-0002",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "384x672,PriorBox->ndarray(0.npy)"
+    },
+    {
+      "no": 184,
+      "name": "pedestrian-and-vehicle-detector-adas-0001",
+      "category": "2D Object Detection",
+      "directory": "184_pedestrian-and-vehicle-detector-adas-0001",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "384x672,PriorBox->ndarray(0.npy)"
+    },
+    {
+      "no": 185,
+      "name": "person-vehicle-bike-detection-crossroad-0078",
+      "category": "2D Object Detection",
+      "directory": "185_person-vehicle-bike-detection-crossroad-0078",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "1024x1024,PriorBoxClustered->ndarray(0.npy)"
+    },
+    {
+      "no": 186,
+      "name": "person-vehicle-bike-detection-crossroad-1016",
+      "category": "2D Object Detection",
+      "directory": "186_person-vehicle-bike-detection-crossroad-1016",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "512x512,PriorBoxClustered->ndarray(0.npy)"
+    },
+    {
+      "no": 189,
+      "name": "vehicle-license-plate-detection-barrier-0106",
+      "category": "2D Object Detection",
+      "directory": "189_vehicle-license-plate-detection-barrier-0106",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "300x300,PriorBoxClustered->ndarray(0.npy)"
+    },
+    {
+      "no": 190,
+      "name": "person-detection-asl-0001",
+      "category": "2D Object Detection",
+      "directory": "190_person-detection-asl-0001",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "ONNX"
+      ],
+      "remarks": "320x320"
+    },
+    {
+      "no": 197,
+      "name": "yolact-resnet50-fpn",
+      "category": "2D Object Detection",
+      "directory": "197_yolact-resnet50-fpn",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "RGB,550x550"
+    },
+    {
+      "no": 198,
+      "name": "YOLOF",
+      "category": "2D Object Detection",
+      "directory": "198_YOLOF",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "BGR/RGB,608x608"
+    },
+    {
+      "no": 221,
+      "name": "YOLACT-PyTorch",
+      "category": "2D Object Detection",
+      "directory": "221_YOLACT-PyTorch",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "180x320,240x320,320x480,480x640,544x544,720x1280"
+    },
+    {
+      "no": 226,
+      "name": "CascadeTableNet",
+      "category": "2D Object Detection",
+      "directory": "226_CascadeTableNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "DQ",
+        "WQ",
+        "OV",
+        "ONNX"
+      ],
+      "remarks": "General,320x320 only"
+    },
+    {
+      "no": 262,
+      "name": "ByteTrack",
+      "category": "2D Object Detection",
+      "directory": "262_ByteTrack",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "YOLOX/nano,tiny,s,m,l,x,mot17,ablation/128x320,192x320,192x448,192x640,256x320,256x448,256x640,384x640,512x1280,736x1280"
+    },
+    {
+      "no": 264,
+      "name": "object_localization_network",
+      "category": "2D Object Detection",
+      "directory": "264_object_localization_network",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "180x320,240x320,270x480,360x480,360x480,360x640,480x640,720x1280"
+    },
+    {
+      "no": 307,
+      "name": "YOLOv7",
+      "category": "2D Object Detection",
+      "directory": "307_YOLOv7",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "YOLOv7,YOLOv7-tiny"
+    },
+    {
+      "no": 308,
+      "name": "FastestDet",
+      "category": "2D Object Detection",
+      "directory": "308_FastestDet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "180x320,256x320,320x480,352x352,352x640,480x640,736x1280"
+    },
+    {
+      "no": 329,
+      "name": "YOLOX-PAI",
+      "category": "2D Object Detection",
+      "directory": "329_YOLOX-PAI",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 332,
+      "name": "CrowdDet",
+      "category": "2D Object Detection",
+      "directory": "332_CrowdDet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 334,
+      "name": "DAMO-YOLO",
+      "category": "2D Object Detection",
+      "directory": "334_DAMO-YOLO",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 336,
+      "name": "PP-YOLOE-Plus",
+      "category": "2D Object Detection",
+      "directory": "336_PP-YOLOE-Plus",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 337,
+      "name": "FreeYOLO",
+      "category": "2D Object Detection",
+      "directory": "337_FreeYOLO",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 341,
+      "name": "YOLOv6",
+      "category": "2D Object Detection",
+      "directory": "341_YOLOv6",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 356,
+      "name": "EdgeYOLO",
+      "category": "2D Object Detection",
+      "directory": "356_EdgeYOLO",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 376,
+      "name": "RT-DETR",
+      "category": "2D Object Detection",
+      "directory": "376_RT-DETR",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "ResNet50,ResNet101,HgNetv2-L,HgNetv2-X"
+    },
+    {
+      "no": 386,
+      "name": "naruto_handsign_detection",
+      "category": "2D Object Detection",
+      "directory": "386_naruto_handsign_detection",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 422,
+      "name": "Gold-YOLO-Head-Hand",
+      "category": "2D Object Detection",
+      "directory": "422_Gold-YOLO-Head-Hand",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Head,Hand"
+    },
+    {
+      "no": 424,
+      "name": "Gold-YOLO-Body",
+      "category": "2D Object Detection",
+      "directory": "424_Gold-YOLO-Body",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Body"
+    },
+    {
+      "no": 425,
+      "name": "Gold-YOLO-Body-Head-Hand",
+      "category": "2D Object Detection",
+      "directory": "425_Gold-YOLO-Body-Head-Hand",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Body,Head,Hand"
+    },
+    {
+      "no": 426,
+      "name": "YOLOX-Body-Head-Hand",
+      "category": "2D Object Detection",
+      "directory": "426_YOLOX-Body-Head-Hand",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "ONNX"
+      ],
+      "remarks": "Body,Head,Hand, tflite float16 XNNPACK boost (ARMv8.2)"
+    },
+    {
+      "no": 434,
+      "name": "YOLOX-Body-Head-Hand-Face",
+      "category": "2D Object Detection",
+      "directory": "434_YOLOX-Body-Head-Hand-Face",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Body,Head,Hand,Face"
+    },
+    {
+      "no": 441,
+      "name": "YOLOX-Body-Head-Hand-Face-Dist",
+      "category": "2D Object Detection",
+      "directory": "441_YOLOX-Body-Head-Hand-Face-Dist",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Body,Head,Hand,Face,Complex Distorted"
+    },
+    {
+      "no": 442,
+      "name": "YOLOX-Body-Head-Face-HandLR-Dist",
+      "category": "2D Object Detection",
+      "directory": "442_YOLOX-Body-Head-Face-HandLR-Dist",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Body,Head,Hands,Left-Hand,Right-Hand,Face,Complex Distorted"
+    },
+    {
+      "no": 444,
+      "name": "YOLOX-Foot-Dist",
+      "category": "2D Object Detection",
+      "directory": "444_YOLOX-Foot-Dist",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Foot,Complex Distorted"
+    },
+    {
+      "no": 445,
+      "name": "YOLOX-Body-Head-Face-HandLR-Foot-Dist",
+      "category": "2D Object Detection",
+      "directory": "445_YOLOX-Body-Head-Face-HandLR-Foot-Dist",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Body,Head,Face,Hands,Left-Hand,Right-Hand,Foot,Complex Distorted"
+    },
+    {
+      "no": 446,
+      "name": "YOLOX-Body-With-Wheelchair",
+      "category": "2D Object Detection",
+      "directory": "446_YOLOX-Body-With-Wheelchair",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Body with WheelChair"
+    },
+    {
+      "no": 447,
+      "name": "YOLOX-Wholebody-with-Wheelchair",
+      "category": "2D Object Detection",
+      "directory": "447_YOLOX-Wholebody-with-Wheelchair",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Wholebody with WheelChair"
+    },
+    {
+      "no": 448,
+      "name": "YOLOX-Eye-Nose-Mouth-Ear",
+      "category": "2D Object Detection",
+      "directory": "448_YOLOX-Eye-Nose-Mouth-Ear",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 449,
+      "name": "YOLOX-WholeBody12",
+      "category": "2D Object Detection",
+      "directory": "449_YOLOX-WholeBody12",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Body,BodyWithWheelchair,Head,Face,Eye,Nose,Mouth,Ear,Hand,Hand-Left,Hand-Right,Foot"
+    },
+    {
+      "no": 450,
+      "name": "YOLOv9-Wholebody-with-Wheelchair",
+      "category": "2D Object Detection",
+      "directory": "450_YOLOv9-Wholebody-with-Wheelchair",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Wholebody with WheelChair"
+    },
+    {
+      "no": 454,
+      "name": "YOLOv9-Wholebody13",
+      "category": "2D Object Detection",
+      "directory": "454_YOLOv9-Wholebody13",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Body,BodyWithWheelchair,BodyWithCrutches,Head,Face,Eye,Nose,Mouth,Ear,Hand,Hand-Left,Hand-Right,Foot"
+    },
+    {
+      "no": 455,
+      "name": "YOLOv9-Gender",
+      "category": "2D Object Detection",
+      "directory": "455_YOLOv9-Gender",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Body,Male,Female"
+    },
+    {
+      "no": 456,
+      "name": "YOLOv9-Wholebody15",
+      "category": "2D Object Detection",
+      "directory": "456_YOLOv9-Wholebody15",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Body,Male,Female,BodyWithWheelchair,BodyWithCrutches,Head,Face,Eye,Nose,Mouth,Ear,Hand,Hand-Left,Hand-Right,Foot"
+    },
+    {
+      "no": 457,
+      "name": "YOLOv9-Wholebody17",
+      "category": "2D Object Detection",
+      "directory": "457_YOLOv9-Wholebody17",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Body,Male,Adult,Child,Female,BodyWithWheelchair,BodyWithCrutches,Head,Face,Eye,Nose,Mouth,Ear,Hand,Hand-Left,Hand-Right,Foot"
+    },
+    {
+      "no": 458,
+      "name": "YOLOv9-Discrete-HeadPose-Yaw",
+      "category": "2D Object Detection",
+      "directory": "458_YOLOv9-Discrete-HeadPose-Yaw",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Head,Front,Right-Front,Right-Side,Right-Back,Back,Left-Back,Left-Side,Left-Front"
+    },
+    {
+      "no": 459,
+      "name": "YOLOv9-Wholebody25",
+      "category": "2D Object Detection",
+      "directory": "459_YOLOv9-Wholebody25",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Body,Adult,Child,Male,Female,Body_with_Wheelchair,Body_with_Crutches,Head,Front,Right_Front,Right_Side,Right_Back,Back,Left_Back,Left_Side,Left_Front,Face,Eye,Nose,Mouth,Ear,Hand,Hand_Left,Hand_Right,Foot"
+    },
+    {
+      "no": 460,
+      "name": "RT-DETRv2-Wholebody25",
+      "category": "2D Object Detection",
+      "directory": "460_RT-DETRv2-Wholebody25",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Body,Adult,Child,Male,Female,Body_with_Wheelchair,Body_with_Crutches,Head,Front,Right_Front,Right_Side,Right_Back,Back,Left_Back,Left_Side,Left_Front,Face,Eye,Nose,Mouth,Ear,Hand,Hand_Left,Hand_Right,Foot"
+    },
+    {
+      "no": 461,
+      "name": "YOLOv9-Phone",
+      "category": "2D Object Detection",
+      "directory": "461_YOLOv9-Phone",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Phone"
+    },
+    {
+      "no": 463,
+      "name": "YOLOv9-Shoulder-Elbow-Knee",
+      "category": "2D Object Detection",
+      "directory": "463_YOLOv9-Shoulder-Elbow-Knee",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Shoulder,Elbow,Knee"
+    },
+    {
+      "no": 464,
+      "name": "YOLOv9-Wholebody28",
+      "category": "2D Object Detection",
+      "directory": "464_YOLOv9-Wholebody28",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Body,Adult,Child,Male,Female,Body_with_Wheelchair,Body_with_Crutches,Head,Front,Right_Front,Right_Side,Right_Back,Back,Left_Back,Left_Side,Left_Front,Face,Eye,Nose,Mouth,Ear,Shoulder,Elbow,Hand,Hand_Left,Hand_Right,Knee,Foot"
+    },
+    {
+      "no": 465,
+      "name": "DEIM-Wholebody28",
+      "category": "2D Object Detection",
+      "directory": "465_DEIM-Wholebody28",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Body,Adult,Child,Male,Female,Body_with_Wheelchair,Body_with_Crutches,Head,Front,Right_Front,Right_Side,Right_Back,Back,Left_Back,Left_Side,Left_Front,Face,Eye,Nose,Mouth,Ear,Shoulder,Elbow,Hand,Hand_Left,Hand_Right,Knee,Foot"
+    },
+    {
+      "no": 468,
+      "name": "YOLOv9-Wholebody28-Refine",
+      "category": "2D Object Detection",
+      "directory": "468_YOLOv9-Wholebody28-Refine",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Body,Adult,Child,Male,Female,Body_with_Wheelchair,Body_with_Crutches,Head,Front,Right_Front,Right_Side,Right_Back,Back,Left_Back,Left_Side,Left_Front,Face,Eye,Nose,Mouth,Ear,Shoulder,Elbow,Hand,Hand_Left,Hand_Right,Knee,Foot"
+    },
+    {
+      "no": 471,
+      "name": "YOLO-Wholebody34",
+      "category": "2D Object Detection",
+      "directory": "471_YOLO-Wholebody34",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "body,adult,child,male,female,body_with_wheelchair,body_with_crutches,head,front,right-front,right-side,right-back,back,left-back,left-side,left-front,face,eye,nose,mouth,ear,collarbone,shoulder,solar_plexus,elbow,wrist,hand,hand_left,hand_right,abdomen,hip_joint,knee,ankle,foot"
+    },
+    {
+      "no": 472,
+      "name": "DEIMv2-Wholebody34",
+      "category": "2D Object Detection",
+      "directory": "472_DEIMv2-Wholebody34",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "body,adult,child,male,female,body_with_wheelchair,body_with_crutches,head,front,right-front,right-side,right-back,back,left-back,left-side,left-front,face,eye,nose,mouth,ear,collarbone,shoulder,solar_plexus,elbow,wrist,hand,hand_left,hand_right,abdomen,hip_joint,knee,ankle,foot"
+    },
+    {
+      "no": 473,
+      "name": "HISDF",
+      "category": "2D Object Detection",
+      "directory": "473_HISDF",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Object Detection x Depth Estimation x Pose Estimation x Instance Segmentation x Binary Segmentation"
+    },
+    {
+      "no": 482,
+      "name": "UHD",
+      "category": "2D Object Detection",
+      "directory": "482_UHD",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "64x64, Object Detection, Human Detection"
+    },
+    {
+      "no": 485,
+      "name": "DEIMv2-Wholebody40",
+      "category": "2D Object Detection",
+      "directory": "485_DEIMv2-Wholebody40",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "40 classes"
+    },
+    {
+      "no": 489,
+      "name": "489_Glasses-Detector",
+      "category": "2D Object Detection",
+      "directory": "489_Glasses-Detector",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "glasses"
+    },
+    {
+      "no": 36,
+      "name": "Objectron",
+      "category": "3D Object Detection",
+      "directory": "036_Objectron",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "MediaPipe/camera,chair,chair_1stage,cup,sneakers,sneakers_1stage,ssd_mobilenetv2_oidv4_fp16"
+    },
+    {
+      "no": 63,
+      "name": "3D BoundingBox estimation for autonomous driving",
+      "category": "3D Object Detection",
+      "directory": "063_3d-bounding-box-estimation-for-autonomous-driving",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "YouTube"
+    },
+    {
+      "no": 107,
+      "name": "SFA3D",
+      "category": "3D Object Detection",
+      "directory": "107_SFA3D",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 263,
+      "name": "EgoNet",
+      "category": "3D Object Detection",
+      "directory": "263_EgoNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 321,
+      "name": "DID-M3D",
+      "category": "3D Object Detection",
+      "directory": "321_DID-M3D",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 363,
+      "name": "YOLO-6D-Pose",
+      "category": "3D Object Detection",
+      "directory": "363_YOLO-6D-Pose",
+      "formats": [
+        "FP32",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "Texas Instruments ver, PINTO Special ver"
+    },
+    {
+      "no": 25,
+      "name": "Head_Pose_Estimation",
+      "category": "2D/3D Face Detection",
+      "directory": "025_head_pose_estimation",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 30,
+      "name": "BlazeFace",
+      "category": "2D/3D Face Detection",
+      "directory": "030_BlazeFace",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "MediaPipe"
+    },
+    {
+      "no": 32,
+      "name": "FaceMesh",
+      "category": "2D/3D Face Detection",
+      "directory": "032_FaceMesh",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "MediaPipe"
+    },
+    {
+      "no": 40,
+      "name": "DSFD_vgg",
+      "category": "2D/3D Face Detection",
+      "directory": "040_DSFD_vgg",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 41,
+      "name": "DBFace",
+      "category": "2D/3D Face Detection",
+      "directory": "041_DBFace",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "MobileNetV2/V3, 320x320,480x640,640x960,800x1280"
+    },
+    {
+      "no": 43,
+      "name": "Face_Landmark",
+      "category": "2D/3D Face Detection",
+      "directory": "043_face_landmark",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 49,
+      "name": "Iris_Landmark",
+      "category": "2D/3D Face Detection",
+      "directory": "049_iris_landmark",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "MediaPipe"
+    },
+    {
+      "no": 95,
+      "name": "CenterFace",
+      "category": "2D/3D Face Detection",
+      "directory": "095_centerface",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 96,
+      "name": "RetinaFace",
+      "category": "2D/3D Face Detection",
+      "directory": "096_RetinaFace",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 106,
+      "name": "WHENet",
+      "category": "2D/3D Face Detection",
+      "directory": "106_WHENet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "Real-time Fine-Grained Estimation for Wide Range Head Pose"
+    },
+    {
+      "no": 129,
+      "name": "SCRFD",
+      "category": "2D/3D Face Detection",
+      "directory": "129_SCRFD",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "All types"
+    },
+    {
+      "no": 134,
+      "name": "head-pose-estimation-adas-0001",
+      "category": "2D/3D Face Detection",
+      "directory": "134_head-pose-estimation-adas-0001",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "60x60"
+    },
+    {
+      "no": 144,
+      "name": "YuNet",
+      "category": "2D/3D Face Detection",
+      "directory": "144_YuNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "120x160"
+    },
+    {
+      "no": 227,
+      "name": "face-detection-adas-0001",
+      "category": "2D/3D Face Detection",
+      "directory": "227_face-detection-adas-0001",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "384x672,PriorBox->ndarray(0.npy)"
+    },
+    {
+      "no": 250,
+      "name": "Face-Mask-Detection",
+      "category": "2D/3D Face Detection",
+      "directory": "250_Face-Mask-Detection",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "PriorBox->ndarray(0.npy)"
+    },
+    {
+      "no": 282,
+      "name": "face_landmark_with_attention",
+      "category": "2D/3D Face Detection",
+      "directory": "282_face_landmark_with_attention",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "MediaPipe,192x192"
+    },
+    {
+      "no": 289,
+      "name": "face-detection-0100",
+      "category": "2D/3D Face Detection",
+      "directory": "289_face-detection-0100",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "256x256,PriorBoxClustered->ndarray(0.npy)"
+    },
+    {
+      "no": 293,
+      "name": "Lightweight-Head-Pose-Estimation",
+      "category": "2D/3D Face Detection",
+      "directory": "293_Lightweight-Head-Pose-Estimation",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "HeadPose, 224x224"
+    },
+    {
+      "no": 300,
+      "name": "6DRepNet",
+      "category": "2D/3D Face Detection",
+      "directory": "300_6DRepNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "6D HeadPose, 224x224"
+    },
+    {
+      "no": 301,
+      "name": "YOLOv4_Face",
+      "category": "2D/3D Face Detection",
+      "directory": "301_YOLOv4_Face",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "480x640"
+    },
+    {
+      "no": 302,
+      "name": "SLPT",
+      "category": "2D/3D Face Detection",
+      "directory": "302_SLPT",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "decoder=6/12,256x256"
+    },
+    {
+      "no": 303,
+      "name": "FAN",
+      "category": "2D/3D Face Detection",
+      "directory": "303_FAN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "Face Alignment,128x128/256x256"
+    },
+    {
+      "no": 304,
+      "name": "SynergyNet",
+      "category": "2D/3D Face Detection",
+      "directory": "304_SynergyNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "6D HeadPose,224x224"
+    },
+    {
+      "no": 305,
+      "name": "DMHead",
+      "category": "2D/3D Face Detection",
+      "directory": "305_DMHead",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "6D HeadPose,Multi-Model-Fused,224x224,PINTO's custom models"
+    },
+    {
+      "no": 311,
+      "name": "HHP-Net",
+      "category": "2D/3D Face Detection",
+      "directory": "311_HHP-Net",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "6D HeadPose,No-LICENSE"
+    },
+    {
+      "no": 319,
+      "name": "ACR-Loss",
+      "category": "2D/3D Face Detection",
+      "directory": "319_ACR-Loss",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "Face Alignment"
+    },
+    {
+      "no": 322,
+      "name": "YOLOv7_Head",
+      "category": "2D/3D Face Detection",
+      "directory": "322_YOLOv7_Head",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "PINTO's custom models"
+    },
+    {
+      "no": 383,
+      "name": "DirectMHP",
+      "category": "2D/3D Face Detection",
+      "directory": "383_DirectMHP",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 387,
+      "name": "YuNetV2",
+      "category": "2D/3D Face Detection",
+      "directory": "387_YuNetV2",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "ONNX"
+      ],
+      "remarks": "640x640"
+    },
+    {
+      "no": 390,
+      "name": "BlendshapeV2",
+      "category": "2D/3D Face Detection",
+      "directory": "390_BlendshapeV2",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": "1x146x2,Nx146x2,MediaPipe"
+    },
+    {
+      "no": 399,
+      "name": "RetinaFace_MobileNetv2",
+      "category": "2D/3D Face Detection",
+      "directory": "399_RetinaFace_MobileNetv2",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 410,
+      "name": "FaceMeshV2",
+      "category": "2D/3D Face Detection",
+      "directory": "410_FaceMeshV2",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "OV",
+        "ONNX"
+      ],
+      "remarks": "MediaPipe"
+    },
+    {
+      "no": 414,
+      "name": "STAR",
+      "category": "2D/3D Face Detection",
+      "directory": "414_STAR",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "OV",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 421,
+      "name": "Gold-YOLO-Head",
+      "category": "2D/3D Face Detection",
+      "directory": "421_Gold-YOLO-Head",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Head (not Face)"
+    },
+    {
+      "no": 423,
+      "name": "6DRepNet360",
+      "category": "2D/3D Face Detection",
+      "directory": "423_6DRepNet360",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "6D HeadPose, FullRange, 224x224"
+    },
+    {
+      "no": 433,
+      "name": "FaceBoxes.PyTorch",
+      "category": "2D/3D Face Detection",
+      "directory": "433_FaceBoxes.PyTorch",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "2D Face"
+    },
+    {
+      "no": 435,
+      "name": "MobileFaceNet",
+      "category": "2D/3D Face Detection",
+      "directory": "435_MobileFaceNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Face Alignment,112x112"
+    },
+    {
+      "no": 436,
+      "name": "Peppa_Pig_Face_Landmark",
+      "category": "2D/3D Face Detection",
+      "directory": "436_Peppa_Pig_Face_Landmark",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Face Alignment,128x128,256x256"
+    },
+    {
+      "no": 437,
+      "name": "PIPNet",
+      "category": "2D/3D Face Detection",
+      "directory": "437_PIPNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Face Alignment,256x256"
+    },
+    {
+      "no": 443,
+      "name": "Opal23_HeadPose",
+      "category": "2D/3D Face Detection",
+      "directory": "443_Opal23_HeadPose",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "6D HeadPose, FullRange, 128x128"
+    },
+    {
+      "no": 27,
+      "name": "Minimal-Hand",
+      "category": "2D/3D Hand Detection",
+      "directory": "027_minimal-hand",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 33,
+      "name": "Hand_Detection_and_Tracking",
+      "category": "2D/3D Hand Detection",
+      "directory": "033_Hand_Detection_and_Tracking",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "MediaPipe"
+    },
+    {
+      "no": 94,
+      "name": "hand_recrop",
+      "category": "2D/3D Hand Detection",
+      "directory": "094_hand_recrop",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "MediaPipe"
+    },
+    {
+      "no": 403,
+      "name": "trt_pose_hand",
+      "category": "2D/3D Hand Detection",
+      "directory": null,
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "2D"
+    },
+    {
+      "no": 420,
+      "name": "Gold-YOLO-Hand",
+      "category": "2D/3D Hand Detection",
+      "directory": "420_Gold-YOLO-Hand",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "2D"
+    },
+    {
+      "no": 438,
+      "name": "PeCLR",
+      "category": "2D/3D Hand Detection",
+      "directory": "438_PeCLR",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "2D+3D"
+    },
+    {
+      "no": 3,
+      "name": "Posenet",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "003_posenet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 7,
+      "name": "Mobilenetv2_Pose_Estimation",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "007_mobilenetv2-poseestimation",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "TFJS",
+        "TF-TRT"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 29,
+      "name": "Human_Pose_Estimation_3D",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "029_human-pose-estimation-3d-0001",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "RGB,180x320,240x320,360x640,480x640,720x1280"
+    },
+    {
+      "no": 53,
+      "name": "BlazePose",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "053_BlazePose",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "MediaPipe"
+    },
+    {
+      "no": 65,
+      "name": "ThreeDPoseUnityBarracuda",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "065_ThreeDPoseUnityBarracuda",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "YouTube"
+    },
+    {
+      "no": 80,
+      "name": "tf_pose_estimation",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "080_tf_pose_estimation",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 84,
+      "name": "EfficientPose",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "084_EfficientPose",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "SinglePose"
+    },
+    {
+      "no": 88,
+      "name": "Mobilenetv3_Pose_Estimation",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "088_mobilenetv3-poseestimation",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 115,
+      "name": "MoveNet",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "115_MoveNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "lightning,thunder"
+    },
+    {
+      "no": 137,
+      "name": "MoveNet_MultiPose",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "137_MoveNet_MultiPose",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "lightning,192x192,192x256,256x256,256x320,320x320,480x640,720x1280,1280x1920"
+    },
+    {
+      "no": 156,
+      "name": "MobileHumanPose",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "156_MobileHumanPose",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "3D"
+    },
+    {
+      "no": 157,
+      "name": "3DMPPE_POSENET",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "157_3DMPPE_POSENET",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "3D,192x192/256x256/320x320/416x416/480x640/512x512"
+    },
+    {
+      "no": 265,
+      "name": "PoseAug",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "265_PoseAug",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "2D->3D/GCN,MLP,STGCN,VideoPose/Nx16x2"
+    },
+    {
+      "no": 268,
+      "name": "Lite-HRNet",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "268_Lite-HRNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "COCO,MPII/Top-Down"
+    },
+    {
+      "no": 269,
+      "name": "Higher-HRNet",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "269_Higher-HRNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "192x320,256x320,320x480,384x640,480x640,512x512,576x960,736x1280/Bottom-Up"
+    },
+    {
+      "no": 271,
+      "name": "HRNet",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "271_HRNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "COCO,MPII/Top-Down"
+    },
+    {
+      "no": 333,
+      "name": "E2Pose",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "333_E2Pose",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "ONNX"
+      ],
+      "remarks": "COCO/CrowdPose,End-to-End"
+    },
+    {
+      "no": 350,
+      "name": "P-STMO",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "350_P-STMO",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "2D->3D,in_the_wild"
+    },
+    {
+      "no": 355,
+      "name": "MHFormer",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "355_MHFormer",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": "2D->3D"
+    },
+    {
+      "no": 365,
+      "name": "HTNet",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "365_HTNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": "2D->3D"
+    },
+    {
+      "no": 392,
+      "name": "STCFormer",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "392_STCFormer",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": "2D->3D"
+    },
+    {
+      "no": 393,
+      "name": "RTMPose_WholeBody",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "393_RTMPose_WholeBody",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "ONNX"
+      ],
+      "remarks": "2D"
+    },
+    {
+      "no": 394,
+      "name": "RTMPose_Animal",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "394_RTMPose_Animal",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "ONNX"
+      ],
+      "remarks": "2D"
+    },
+    {
+      "no": 402,
+      "name": "trt_pose",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "402_trt_pose",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "2D"
+    },
+    {
+      "no": 412,
+      "name": "pytorch_cpn",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "412_pytorch_cpn",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": "2D"
+    },
+    {
+      "no": 427,
+      "name": "RTMPose_Hand",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "427_RTMPose_Hand",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "2D"
+    },
+    {
+      "no": 440,
+      "name": "ViTPose",
+      "category": "2D/3D Human/Animal Pose Estimation",
+      "directory": "440_ViTPose",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "2D"
+    },
+    {
+      "no": 9,
+      "name": "Multi-Scale Local Planar Guidance for Monocular Depth Estimation",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "009_multi-scale_local_planar_guidance_for_monocular_depth_estimation",
+      "formats": [
+        "FP32"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 14,
+      "name": "tf-monodepth2",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "014_tf-monodepth2",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 28,
+      "name": "struct2depth",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "028_struct2depth",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 64,
+      "name": "Dense Depth",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "064_Dense_Depth",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 66,
+      "name": "Footprints",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "066_footprints",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 67,
+      "name": "MiDaS",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "067_MiDaS",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 81,
+      "name": "MiDaS v2",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "081_MiDaS_v2",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 135,
+      "name": "CoEx",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "135_CoEx",
+      "formats": [
+        "OV",
+        "ONNX"
+      ],
+      "remarks": "WIP, onnx/OpenVINO only"
+    },
+    {
+      "no": 142,
+      "name": "HITNET",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "142_HITNET",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "ONNX"
+      ],
+      "remarks": "WIP issue1,issue2,flyingthings_finalpass_xl/eth3d/middlebury_d400,120x160/240x320/256x256/480x640/720x1280"
+    },
+    {
+      "no": 146,
+      "name": "FastDepth",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "146_FastDepth",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "128x160,224x224,256x256,256x320,320x320,480x640,512x512,768x1280"
+    },
+    {
+      "no": 147,
+      "name": "PackNet-SfM",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "147_PackNet-SfM",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "ddad/kitti,Convert all ResNet18 backbones only"
+    },
+    {
+      "no": 148,
+      "name": "LapDepth",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "148_LapDepth",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "kitti/nyu,192x320/256x320/368x640/480x640/720x1280"
+    },
+    {
+      "no": 149,
+      "name": "depth_estimation",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "149_depth_estimation",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "nyu,180x320/240x320/360x640/480x640/720x1280"
+    },
+    {
+      "no": 150,
+      "name": "MobileStereoNet",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "150_MobileStereoNet",
+      "formats": [],
+      "remarks": "WIP. Conversion script only."
+    },
+    {
+      "no": 153,
+      "name": "MegaDepth",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "153_MegaDepth",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "192x256,384x512"
+    },
+    {
+      "no": 158,
+      "name": "HR-Depth",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "158_HR-Depth",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 159,
+      "name": "EPCDepth",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "159_EPCDepth",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 160,
+      "name": "msg_chn_wacv20",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "160_msg_chn_wacv20",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "192x320,240x320,256x256,352x480,368x480,368x640,480x640,720x1280,1280x1920"
+    },
+    {
+      "no": 162,
+      "name": "PyDNet",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "162_PyDNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 164,
+      "name": "MADNet",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "164_MADNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "Real-time-self-adaptive-deep-stereo (perform only inference mode, no-backprop, kitti)"
+    },
+    {
+      "no": 165,
+      "name": "RealtimeStereo",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "165_RealtimeStereo",
+      "formats": [
+        "FP32",
+        "FP16",
+        "DQ",
+        "WQ",
+        "OV",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "180x320,216x384,240x320,270x480,360x480,360x640,480x640,720x1280"
+    },
+    {
+      "no": 166,
+      "name": "Insta-DM",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "166_Insta-DM",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "192x320,256x320,256x832,384x640,480x640,736x1280"
+    },
+    {
+      "no": 167,
+      "name": "DPT",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "168_DPT",
+      "formats": [
+        "FP32",
+        "FP16",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "dpt-hybrid,480x640,ViT,ONNX 96x128/256x320/384x480/480x640"
+    },
+    {
+      "no": 173,
+      "name": "MVDepthNet",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "173_MVDepthNet",
+      "formats": [
+        "OV",
+        "ONNX"
+      ],
+      "remarks": "256x320"
+    },
+    {
+      "no": 202,
+      "name": "stereoDNN",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "202_stereoDNN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "NVSmall_321x1025,NVTiny_161x513,ResNet18_321x1025,ResNet18_2d_257x513"
+    },
+    {
+      "no": 203,
+      "name": "SRHNet",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "203_SRHNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "finetune2_kitti/sceneflow,maxdisp192,320x480/480x640"
+    },
+    {
+      "no": 210,
+      "name": "SC_Depth_pl",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "210_SC_Depth_pl",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "kitti/nyu,320x320,320x480,480x640,640x800"
+    },
+    {
+      "no": 211,
+      "name": "Lac-GwcNet",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "211_Lac-GwcNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "kitti,240x320,320x480,480x640,720x1280"
+    },
+    {
+      "no": 219,
+      "name": "StereoNet",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "219_StereoNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "Left/180x320,240x320,320x480,360x640,480x640"
+    },
+    {
+      "no": 235,
+      "name": "W-Stereo-Disp",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "235_W-Stereo-Disp",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Kitti,Sceneflow/320x480,384x576,480x640"
+    },
+    {
+      "no": 236,
+      "name": "A-TVSNet",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "236_A-TVSNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "DQ",
+        "WQ",
+        "ONNX"
+      ],
+      "remarks": "Stereo only/192x320,256x320,320x480,480x640"
+    },
+    {
+      "no": 239,
+      "name": "CasStereoNet",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "239_CasStereoNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Stereo KITTI only/256x320,384x480,480x640,736x1280"
+    },
+    {
+      "no": 245,
+      "name": "GLPDepth",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "245_GLPDepth",
+      "formats": [
+        "OV",
+        "ONNX"
+      ],
+      "remarks": "Kitti,NYU/192x320,320x480,384x640,480x640,736x1280,non-commercial use only"
+    },
+    {
+      "no": 258,
+      "name": "TinyHITNet",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "258_TinyHITNet",
+      "formats": [
+        "OV",
+        "ONNX"
+      ],
+      "remarks": "180x320,240x320,300x400,360x640,384x512,480x640,720x960,720x1280"
+    },
+    {
+      "no": 266,
+      "name": "ACVNet",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "266_ACVNet",
+      "formats": [
+        "OV",
+        "ONNX"
+      ],
+      "remarks": "sceneflow,kitti/240x320,320x480,384x640,480x640,544x960,720x1280"
+    },
+    {
+      "no": 280,
+      "name": "GASDA",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "280_GASDA",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "No-LICENSE"
+    },
+    {
+      "no": 284,
+      "name": "CREStereo",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "284_CREStereo",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "ITER2,ITER5,ITER10,ITER20/240x320,320x480,360x640,480x640,480x640,720x1280"
+    },
+    {
+      "no": 292,
+      "name": "Graft-PSMNet",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "292_Graft-PSMNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "192x320,240x320,320x480,368x640,480x640,720x1280"
+    },
+    {
+      "no": 294,
+      "name": "FSRE-Depth",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "294_FSRE-Depth",
+      "formats": [
+        "OV",
+        "ONNX"
+      ],
+      "remarks": "192x320,256x320,320x480,368x640,480x640,736x1280"
+    },
+    {
+      "no": 296,
+      "name": "MGNet",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "296_MGNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "240x320,360x480,360x640,360x1280,480x640,720x1280"
+    },
+    {
+      "no": 312,
+      "name": "NeWCRFs",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "312_NeWCRFs",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "384x384,384x576,384x768,384x960,576x768,768x1344"
+    },
+    {
+      "no": 313,
+      "name": "PyDNet2",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "314_PyDNet2",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "Mono-Depth"
+    },
+    {
+      "no": 327,
+      "name": "EMDC",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "327_EMDC",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "RGB+SarseDepth"
+    },
+    {
+      "no": 338,
+      "name": "Fast-ACVNet",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "338_Fast-ACVNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Stereo/grid_sample opset=16,no_grid_sample opset=11"
+    },
+    {
+      "no": 358,
+      "name": "CGI-Stereo",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "358_CGI-Stereo",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": "Stereo"
+    },
+    {
+      "no": 362,
+      "name": "ZoeDepth",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "362_ZoeDepth",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Mono-Depth"
+    },
+    {
+      "no": 364,
+      "name": "IGEV",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "364_IGEV",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Stereo"
+    },
+    {
+      "no": 371,
+      "name": "Lite-Mono",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "371_Lite-Mono",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Mono"
+    },
+    {
+      "no": 384,
+      "name": "TCMonoDepth",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "384_TCMonoDepth",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Mono"
+    },
+    {
+      "no": 397,
+      "name": "MiDaSv3.1",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "397_MiDaSv3.1",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Mono"
+    },
+    {
+      "no": 415,
+      "name": "High-frequency-Stereo-Matching-Network",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "415_High-frequency-Stereo-Matching-Network",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Stereo"
+    },
+    {
+      "no": 439,
+      "name": "Depth-Anything",
+      "category": "Depth Estimation from Monocular/Stereo Images",
+      "directory": "439_Depth-Anything",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Mono"
+    },
+    {
+      "no": 1,
+      "name": "deeplabv3",
+      "category": "Semantic Segmentation",
+      "directory": "001_deeplabv3",
+      "formats": [
+        "FP32",
+        "WQ"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 15,
+      "name": "Faster-Grad-CAM",
+      "category": "Semantic Segmentation",
+      "directory": "015_Faster-Grad-CAM",
+      "formats": [
+        "FP32",
+        "INT8",
+        "WQ"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 20,
+      "name": "EdgeTPU-Deeplab",
+      "category": "Semantic Segmentation",
+      "directory": "020_edgetpu-deeplab",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 21,
+      "name": "EdgeTPU-Deeplab-slim",
+      "category": "Semantic Segmentation",
+      "directory": "021_edgetpu-deeplab-slim",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 26,
+      "name": "Mobile-Deeplabv3-plus",
+      "category": "Semantic Segmentation",
+      "directory": "026_mobile-deeplabv3-plus",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 35,
+      "name": "BodyPix",
+      "category": "Semantic Segmentation",
+      "directory": "035_BodyPix",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "MediaPipe,MobileNet0.50/0.75/1.00,ResNet50"
+    },
+    {
+      "no": 57,
+      "name": "BiSeNetV2",
+      "category": "Semantic Segmentation",
+      "directory": "057_BiSeNetV2",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 60,
+      "name": "Hair Segmentation",
+      "category": "Semantic Segmentation",
+      "directory": "060_hair_segmentation",
+      "formats": [
+        "FP32",
+        "WQ",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "WIP,MediaPipe"
+    },
+    {
+      "no": 61,
+      "name": "U^2-Net",
+      "category": "Semantic Segmentation",
+      "directory": "061_U-2-Net",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 69,
+      "name": "ENet",
+      "category": "Semantic Segmentation",
+      "directory": "069_ENet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "Cityscapes,512x1024"
+    },
+    {
+      "no": 75,
+      "name": "ERFNet",
+      "category": "Semantic Segmentation",
+      "directory": "075_ERFNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "Cityscapes,256x512,384x786,512x1024"
+    },
+    {
+      "no": 78,
+      "name": "MODNet",
+      "category": "Semantic Segmentation",
+      "directory": "078_MODNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "128x128,192x192,256x256,512x512"
+    },
+    {
+      "no": 82,
+      "name": "MediaPipe_Meet_Segmentation",
+      "category": "Semantic Segmentation",
+      "directory": "082_MediaPipe_Meet_Segmentation",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "MediaPipe,128x128,144x256,96x160"
+    },
+    {
+      "no": 104,
+      "name": "DeeplabV3-plus",
+      "category": "Semantic Segmentation",
+      "directory": "104_DeeplabV3-plus",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "cityscapes,200x400,400x800,800x1600"
+    },
+    {
+      "no": 109,
+      "name": "Selfie_Segmentation",
+      "category": "Semantic Segmentation",
+      "directory": "109_Selfie_Segmentation",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "256x256"
+    },
+    {
+      "no": 136,
+      "name": "road-segmentation-adas-0001",
+      "category": "Semantic Segmentation",
+      "directory": "136_road-segmentation-adas-0001",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 138,
+      "name": "BackgroundMattingV2",
+      "category": "Semantic Segmentation",
+      "directory": "138_BackgroundMattingV2",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "OV",
+        "ONNX"
+      ],
+      "remarks": "720x1280,2160x4096"
+    },
+    {
+      "no": 181,
+      "name": "models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_default_argmax",
+      "category": "Semantic Segmentation",
+      "directory": "181_models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_default_argmax",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 182,
+      "name": "models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_fused_argmax",
+      "category": "Semantic Segmentation",
+      "directory": "182_models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_fused_argmax",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 196,
+      "name": "human_segmentation_pphumanseg",
+      "category": "Semantic Segmentation",
+      "directory": "196_human_segmentation_pphumanseg",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 201,
+      "name": "CityscapesSOTA",
+      "category": "Semantic Segmentation",
+      "directory": "201_CityscapesSOTA",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "180x320,240x320,360x640,480x640,720x1280"
+    },
+    {
+      "no": 206,
+      "name": "Matting",
+      "category": "Semantic Segmentation",
+      "directory": "206_Matting",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "PaddleSeg/modnet_mobilenetv2,modnet_hrnet_w18,modnet_resnet50_vd/256x256,384x384,512x512,640x640"
+    },
+    {
+      "no": 228,
+      "name": "Fast-SCNN",
+      "category": "Semantic Segmentation",
+      "directory": "228_Fast-SCNN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "192x384,384x384,384x576,576x576,576x768,768x1344"
+    },
+    {
+      "no": 238,
+      "name": "SUIM-Net",
+      "category": "Semantic Segmentation",
+      "directory": "238_SUIM-Net",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "ONNX"
+      ],
+      "remarks": "RSB,VGG/240x320,256x320,320x480,360x640,384x480,384x640,480x640,720x1280"
+    },
+    {
+      "no": 242,
+      "name": "RobustVideoMatting",
+      "category": "Semantic Segmentation",
+      "directory": "242_RobustVideoMatting",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "Mbnv3,ResNet50/192x320,240x320,320x480,384x640,480x640,720x1280,1088x1920,2160x3840"
+    },
+    {
+      "no": 246,
+      "name": "SqueezeSegV3",
+      "category": "Semantic Segmentation",
+      "directory": "246_SqueezeSegV3",
+      "formats": [
+        "FP32",
+        "FP16",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "21,53/180x320,240x320,320x480,360x640,480x640,720x1280"
+    },
+    {
+      "no": 267,
+      "name": "LIOT",
+      "category": "Semantic Segmentation",
+      "directory": "267_LIOT",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "180x320,240x320,320x480,360x640,480x640,540x960,720x1280,1080x1920"
+    },
+    {
+      "no": 287,
+      "name": "Topformer",
+      "category": "Semantic Segmentation",
+      "directory": "287_Topformer",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "Tiny,Small,Base/448x448,512x512"
+    },
+    {
+      "no": 295,
+      "name": "SparseInst",
+      "category": "Semantic Segmentation",
+      "directory": "295_SparseInst",
+      "formats": [
+        "OV",
+        "ONNX"
+      ],
+      "remarks": "r50_giam_aug/192x384,384x384,384x576,384x768,576x576,576x768,768x1344"
+    },
+    {
+      "no": 299,
+      "name": "DGNet",
+      "category": "Semantic Segmentation",
+      "directory": "299_DGNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 313,
+      "name": "IS-Net",
+      "category": "Semantic Segmentation",
+      "directory": "313_IS-Net",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "180x320,240x320,320x480,360x640,480x640,720x1280,1080x1920,1080x2048,2160x4096,N-batch,Dynamic-HeightxWidth"
+    },
+    {
+      "no": 335,
+      "name": "PIDNet",
+      "category": "Semantic Segmentation",
+      "directory": "335_PIDNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Cityscapes,CamVid/Dynamic-HeightxWidth"
+    },
+    {
+      "no": 343,
+      "name": "PP-MattingV2",
+      "category": "Semantic Segmentation",
+      "directory": "343_PP-MattingV2",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": "HumanSeg"
+    },
+    {
+      "no": 347,
+      "name": "RGBX_Semantic_Segmentation",
+      "category": "Semantic Segmentation",
+      "directory": "347_RGBX_Semantic_Segmentation",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 369,
+      "name": "Segment_Anything",
+      "category": "Semantic Segmentation",
+      "directory": "369_Segment_Anything",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 380,
+      "name": "Skin-Clothes-Hair-Segmentation-using-SMP",
+      "category": "Semantic Segmentation",
+      "directory": "380_Skin-Clothes-Hair-Segmentation-using-SMP",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 391,
+      "name": "MagicTouch",
+      "category": "Semantic Segmentation",
+      "directory": "391_MagicTouch",
+      "formats": [
+        "FP32",
+        "FP16",
+        "DQ",
+        "ONNX"
+      ],
+      "remarks": "MediaPipe"
+    },
+    {
+      "no": 405,
+      "name": "Ear_Segmentation",
+      "category": "Semantic Segmentation",
+      "directory": "405_Ear_Segmentation",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Ear"
+    },
+    {
+      "no": 417,
+      "name": "PopNet",
+      "category": "Semantic Segmentation",
+      "directory": "417_PopNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Saliency"
+    },
+    {
+      "no": 466,
+      "name": "People_Segmentation",
+      "category": "Semantic Segmentation",
+      "directory": "466_People_Segmentation",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "UNet"
+    },
+    {
+      "no": 467,
+      "name": "Human_Parsing",
+      "category": "Semantic Segmentation",
+      "directory": "467_Human_Parsing",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 470,
+      "name": "RHIS",
+      "category": "Semantic Segmentation",
+      "directory": "470_RHIS",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "UNet+UNet"
+    },
+    {
+      "no": 489,
+      "name": "489_Glasses-Detector",
+      "category": "Semantic Segmentation",
+      "directory": "489_Glasses-Detector",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "glasses"
+    },
+    {
+      "no": 5,
+      "name": "One_Class_Anomaly_Detection",
+      "category": "Anomaly Detection",
+      "directory": "005_one_class_anomaly_detection",
+      "formats": [
+        "FP32",
+        "INT8",
+        "TPU",
+        "WQ"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 99,
+      "name": "Efficientnet_Anomaly_Detection_Segmentation",
+      "category": "Anomaly Detection",
+      "directory": "099_efficientnet_anomaly_detection_segmentation",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 17,
+      "name": "Artistic-Style-Transfer",
+      "category": "Artistic",
+      "directory": "017_Artistic-Style-Transfer",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 19,
+      "name": "White-box-Cartoonization",
+      "category": "Artistic",
+      "directory": "019_White-box-Cartoonization",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 37,
+      "name": "First_Neural_Style_Transfer",
+      "category": "Artistic",
+      "directory": "037_First_Neural_Style_Transfer",
+      "formats": [
+        "FP32",
+        "WQ",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 44,
+      "name": "Selfie2Anime",
+      "category": "Artistic",
+      "directory": "044_selfie2anime",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 50,
+      "name": "AnimeGANv2",
+      "category": "Artistic",
+      "directory": "050_AnimeGANv2",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 62,
+      "name": "Facial Cartoonization",
+      "category": "Artistic",
+      "directory": "062_facial_cartoonization",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 68,
+      "name": "Colorful_Image_Colorization",
+      "category": "Artistic",
+      "directory": "068_Colorful_Image_Colorization",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "experimental"
+    },
+    {
+      "no": 101,
+      "name": "arbitrary_image_stylization",
+      "category": "Artistic",
+      "directory": "101_arbitrary_image_stylization",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "magenta"
+    },
+    {
+      "no": 113,
+      "name": "Anime2Sketch",
+      "category": "Artistic",
+      "directory": "113_Anime2Sketch",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 161,
+      "name": "EigenGAN-Tensorflow",
+      "category": "Artistic",
+      "directory": "161_EigenGAN-Tensorflow",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "Anime,CelebA"
+    },
+    {
+      "no": 193,
+      "name": "CoCosNet",
+      "category": "Artistic",
+      "directory": "193_CoCosNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "RGB,256x256"
+    },
+    {
+      "no": 12,
+      "name": "Fast_Accurate_and_Lightweight_Super-Resolution",
+      "category": "Super Resolution",
+      "directory": "012_Fast_Accurate_and_Lightweight_Super-Resolution",
+      "formats": [
+        "FP32",
+        "INT8",
+        "WQ"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 22,
+      "name": "Learning_to_See_Moving_Objects_in_the_Dark",
+      "category": "Super Resolution",
+      "directory": "022_Learning_to_See_Moving_Objects_in_the_Dark",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 71,
+      "name": "Noise2Noise",
+      "category": "Super Resolution",
+      "directory": "071_Noise2Noise",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "ONNX"
+      ],
+      "remarks": "srresnet/clear only"
+    },
+    {
+      "no": 76,
+      "name": "Deep_White_Balance",
+      "category": "Super Resolution",
+      "directory": "076_Deep_White_Balance",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 77,
+      "name": "ESRGAN",
+      "category": "Super Resolution",
+      "directory": "077_ESRGAN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "50x50->x4, 100x100->x4"
+    },
+    {
+      "no": 79,
+      "name": "MIRNet",
+      "category": "Super Resolution",
+      "directory": "079_MIRNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement/40x40,80x80,120x120,120x160,120x320,120x480,120x640,120x1280,180x480,180x640,180x1280,180x320,240x320,240x480,360x480,360x640,480x640,720x1280"
+    },
+    {
+      "no": 86,
+      "name": "Defocus Deblurring Using Dual-Pixel",
+      "category": "Super Resolution",
+      "directory": "086_defocus-deblurring-dual-pixel",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 90,
+      "name": "Ghost-free_Shadow_Removal",
+      "category": "Super Resolution",
+      "directory": "090_Ghost-free_Shadow_Removal",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "ONNX"
+      ],
+      "remarks": "256x256"
+    },
+    {
+      "no": 111,
+      "name": "SRN-Deblur",
+      "category": "Super Resolution",
+      "directory": "111_SRN-Deblur",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "240x320,480x640,720x1280,1024x1280"
+    },
+    {
+      "no": 112,
+      "name": "DeblurGANv2",
+      "category": "Super Resolution",
+      "directory": "112_DeblurGANv2",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "inception/mobilenetv2:256x256,320x320,480x640,736x1280,1024x1280"
+    },
+    {
+      "no": 114,
+      "name": "Two-branch-dehazing",
+      "category": "Super Resolution",
+      "directory": "114_Two-branch-dehazing",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "240x320,480x640,720x1280"
+    },
+    {
+      "no": 133,
+      "name": "Real-ESRGAN",
+      "category": "Super Resolution",
+      "directory": "133_Real-ESRGAN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "16x16,32x32,64x64,128x128,240x320,256x256,320x320,480x640"
+    },
+    {
+      "no": 152,
+      "name": "DeepLPF",
+      "category": "Super Resolution",
+      "directory": "152_DeepLPF",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "OV",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 170,
+      "name": "Learning-to-See-in-the-Dark",
+      "category": "Super Resolution",
+      "directory": "170_Learning-to-See-in-the-Dark",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "sony/fuji, 240x320,360x480,360x640,480x640"
+    },
+    {
+      "no": 171,
+      "name": "Fast-SRGAN",
+      "category": "Super Resolution",
+      "directory": "171_Fast-SRGAN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "ONNX"
+      ],
+      "remarks": "120x160,128x128,240x320,256x256,480x640,512x512"
+    },
+    {
+      "no": 172,
+      "name": "Real-Time-Super-Resolution",
+      "category": "Super Resolution",
+      "directory": "172_Real-Time-Super-Resolution",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "64x64,96x96,128x128,256x256,240x320,480x640"
+    },
+    {
+      "no": 176,
+      "name": "StableLLVE",
+      "category": "Super Resolution",
+      "directory": "176_StableLLVE",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "Low-light Image/Video Enhancement,180x240,240x320,360x640,480x640,720x1280"
+    },
+    {
+      "no": 200,
+      "name": "AGLLNet",
+      "category": "Super Resolution",
+      "directory": "200_AGLLNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "Low-light Image/Video Enhancement,256x256,256x384,384x512,512x640,768x768,768x1280"
+    },
+    {
+      "no": 204,
+      "name": "HINet",
+      "category": "Super Resolution",
+      "directory": "204_HINet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "DeBlur,DeNoise,DeRain/256x320,320x480,480x640"
+    },
+    {
+      "no": 205,
+      "name": "MBLLEN",
+      "category": "Super Resolution",
+      "directory": "205_MBLLEN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "Low-light Image/Video Enhancement,180x320,240x320,360x640,480x640,720x1280"
+    },
+    {
+      "no": 207,
+      "name": "GLADNet",
+      "category": "Super Resolution",
+      "directory": "207_GLADNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "Low-light Image/Video Enhancement,180x320,240x320,360x640,480x640,720x1280,No-LICENSE"
+    },
+    {
+      "no": 208,
+      "name": "SAPNet",
+      "category": "Super Resolution",
+      "directory": "208_SAPNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "DeRain,180x320,240x320,360x640,480x640,720x1280"
+    },
+    {
+      "no": 209,
+      "name": "MSBDN-DFF",
+      "category": "Super Resolution",
+      "directory": "209_MSBDN-DFF",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "Dehazing,192x320,240x320,320x480,384x640,480x640,720x1280,No-LICENSE"
+    },
+    {
+      "no": 212,
+      "name": "GFN",
+      "category": "Super Resolution",
+      "directory": "212_GFN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "DeBlur+SuperResolution,x4/64x64,96x96,128x128,192x192,240x320,256x256,480x640,720x1280"
+    },
+    {
+      "no": 213,
+      "name": "TBEFN",
+      "category": "Super Resolution",
+      "directory": "213_TBEFN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280"
+    },
+    {
+      "no": 214,
+      "name": "EnlightenGAN",
+      "category": "Super Resolution",
+      "directory": "214_EnlightenGAN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement/192x320,240x320,320x480,368x640,480x640,720x1280"
+    },
+    {
+      "no": 215,
+      "name": "AOD-Net",
+      "category": "Super Resolution",
+      "directory": "215_AOD-Net",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "DeHazing/180x320,240x320,320x480,360x640,480x640,720x1280"
+    },
+    {
+      "no": 216,
+      "name": "Zero-DCE-TF",
+      "category": "Super Resolution",
+      "directory": "216_Zero-DCE-TF",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280"
+    },
+    {
+      "no": 217,
+      "name": "RUAS",
+      "category": "Super Resolution",
+      "directory": "217_RUAS",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280,No-LICENSE"
+    },
+    {
+      "no": 218,
+      "name": "DSLR",
+      "category": "Super Resolution",
+      "directory": "218_DSLR",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement/256x256,256x384,256x512,384x640,512x640,768x1280"
+    },
+    {
+      "no": 220,
+      "name": "HEP",
+      "category": "Super Resolution",
+      "directory": "220_HEP",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640"
+    },
+    {
+      "no": 222,
+      "name": "LFT",
+      "category": "Super Resolution",
+      "directory": "222_LFT",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Transformer/2x,4x/65x65"
+    },
+    {
+      "no": 223,
+      "name": "DA_dahazing",
+      "category": "Super Resolution",
+      "directory": "223_DA_dahazing",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "DeHazing/192x320,240x320,320x480,360x640,480x640,720x1280,No-LICENSE"
+    },
+    {
+      "no": 224,
+      "name": "Y-net",
+      "category": "Super Resolution",
+      "directory": "224_Y-net",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "DeHazing/192x320,240x320,320x480,384x640,480x640,720x1280"
+    },
+    {
+      "no": 225,
+      "name": "DRBL",
+      "category": "Super Resolution",
+      "directory": "225_NTIRE-2021-Dehazing-Two-branch",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "DeHazing/192x320,240x320,320x480,384x640,480x640,720x1280"
+    },
+    {
+      "no": 230,
+      "name": "Single-Image-Desnowing-HDCWNet",
+      "category": "Super Resolution",
+      "directory": "230_Single-Image-Desnowing-HDCWNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "DQ",
+        "WQ",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "DeSnowing/512x672"
+    },
+    {
+      "no": 231,
+      "name": "DRBL",
+      "category": "Super Resolution",
+      "directory": "231_DRBL",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280,No-LICENSE"
+    },
+    {
+      "no": 232,
+      "name": "MIMO-UNet",
+      "category": "Super Resolution",
+      "directory": "232_MIMO-UNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "DeBlur/180x320,240x320,320x480,360x640,480x640,720x1280,No-LICENSE"
+    },
+    {
+      "no": 234,
+      "name": "FBCNN",
+      "category": "Super Resolution",
+      "directory": "234_FBCNN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "DeNoise/180x320,240x320,320x480,360x640,480x640,720x1280"
+    },
+    {
+      "no": 240,
+      "name": "BSRGAN",
+      "category": "Super Resolution",
+      "directory": "240_BSRGAN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "x2,x4/64x64,96x96,128x128,160x160,180x320,240x320,No-LICENSE"
+    },
+    {
+      "no": 241,
+      "name": "SCL-LLE",
+      "category": "Super Resolution",
+      "directory": "241_SCL-LLE",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement/180x320,240x320,320x480,480x640,720x1280,No-LICENSE"
+    },
+    {
+      "no": 243,
+      "name": "Zero-DCE-improved",
+      "category": "Super Resolution",
+      "directory": "243_Zero-DCE-improved",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280,academic use only"
+    },
+    {
+      "no": 249,
+      "name": "Real-CUGAN",
+      "category": "Super Resolution",
+      "directory": "249_Real-CUGAN",
+      "formats": [
+        "CM",
+        "ONNX"
+      ],
+      "remarks": "2x,3x,4x/64x64,96x96,128x128,120x160,160x160,180x320,240x320"
+    },
+    {
+      "no": 251,
+      "name": "AU-GAN",
+      "category": "Super Resolution",
+      "directory": "251_AU-GAN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement/128x256,240x320,240x640,256x512,480x640,512x1024,720x1280"
+    },
+    {
+      "no": 253,
+      "name": "TransWeather",
+      "category": "Super Resolution",
+      "directory": "253_TransWeather",
+      "formats": [
+        "OV",
+        "ONNX"
+      ],
+      "remarks": "DeRain,DeHaizing,DeSnow/192x320,256x320,320x480,384x640,480x640,736x1280"
+    },
+    {
+      "no": 261,
+      "name": "EfficientDerain",
+      "category": "Super Resolution",
+      "directory": "261_EfficientDerain",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "v4_SPA,v4_rain100H,v4_rain1400/192x320,256x320,320x480,384x640,480x640,608x800,736x1280"
+    },
+    {
+      "no": 270,
+      "name": "HWMNet",
+      "category": "Super Resolution",
+      "directory": "270_HWMNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement/192x320,256x320,320x480,384x640,480x640,544x960,720x1280"
+    },
+    {
+      "no": 275,
+      "name": "FD-GAN",
+      "category": "Super Resolution",
+      "directory": "275_FD-GAN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "DeHaizing/192x320,256x320,384x640,480x640,720x1280,1080x1920,No-LICENSE"
+    },
+    {
+      "no": 277,
+      "name": "EDN-GTM",
+      "category": "Super Resolution",
+      "directory": "277_EDN-GTM",
+      "formats": [
+        "FP32",
+        "FP16",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "DeHaizing/192x320,240x320,384x480,480x640,512x512,720x1280,1088x1920"
+    },
+    {
+      "no": 281,
+      "name": "IMDN",
+      "category": "Super Resolution",
+      "directory": "281_IMDN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "x4/64x64,96x96,128x128,120x160,160x160,180x320,192x192,256x256,180x320,240x320,360x640,480x640"
+    },
+    {
+      "no": 283,
+      "name": "UIE-WD",
+      "category": "Super Resolution",
+      "directory": "283_UIE-WD",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Underwater Image Enhancement/WIP issue #97/192x320,240x320,320x480,360x640,480x640,720x1280,1080x1920"
+    },
+    {
+      "no": 285,
+      "name": "Decoupled-Low-light-Image-Enhancement",
+      "category": "Super Resolution",
+      "directory": "285_Decoupled-Low-light-Image-Enhancement",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement/180x320,240x320,360x480,360x640,480x640,720x1280"
+    },
+    {
+      "no": 286,
+      "name": "SCI",
+      "category": "Super Resolution",
+      "directory": "286_SCI",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement/180x320,240x320,360x480,360x640,480x640,720x1280"
+    },
+    {
+      "no": 315,
+      "name": "Illumination-Adaptive-Transformer",
+      "category": "Super Resolution",
+      "directory": "315_Illumination-Adaptive-Transformer",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement"
+    },
+    {
+      "no": 316,
+      "name": "night_enhancement",
+      "category": "Super Resolution",
+      "directory": "316_night_enhancement",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement"
+    },
+    {
+      "no": 320,
+      "name": "Dehamer",
+      "category": "Super Resolution",
+      "directory": "320_Dehamer",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Dehazing"
+    },
+    {
+      "no": 323,
+      "name": "Stripformer",
+      "category": "Super Resolution",
+      "directory": "323_Stripformer",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "DeBlur"
+    },
+    {
+      "no": 325,
+      "name": "DehazeFormer",
+      "category": "Super Resolution",
+      "directory": "325_DehazeFormer",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Dehazing"
+    },
+    {
+      "no": 344,
+      "name": "XYDeblur",
+      "category": "Super Resolution",
+      "directory": "344_XYDeblur",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "DeBlur"
+    },
+    {
+      "no": 348,
+      "name": "Bread",
+      "category": "Super Resolution",
+      "directory": "348_Bread",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement"
+    },
+    {
+      "no": 348,
+      "name": "PMN",
+      "category": "Super Resolution",
+      "directory": "349_PMN",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "DeNoise, Low-light Image Enhancement"
+    },
+    {
+      "no": 351,
+      "name": "RFDN",
+      "category": "Super Resolution",
+      "directory": "351_RFDN",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "x4"
+    },
+    {
+      "no": 352,
+      "name": "MAXIM",
+      "category": "Super Resolution",
+      "directory": "352_MAXIM",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": "Dehaze only"
+    },
+    {
+      "no": 353,
+      "name": "ShadowFormer",
+      "category": "Super Resolution",
+      "directory": "353_ShadowFormer",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Shadow Removal"
+    },
+    {
+      "no": 354,
+      "name": "DEA-Net",
+      "category": "Super Resolution",
+      "directory": "354_DEA-Net",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": "DeHaze"
+    },
+    {
+      "no": 359,
+      "name": "MSPFN",
+      "category": "Super Resolution",
+      "directory": "359_MSPFN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": "DeRain"
+    },
+    {
+      "no": 361,
+      "name": "KBNet",
+      "category": "Super Resolution",
+      "directory": "361_KBNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Real Image Denoising"
+    },
+    {
+      "no": 367,
+      "name": "FLW-Net",
+      "category": "Super Resolution",
+      "directory": "367_FLW-Net",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement"
+    },
+    {
+      "no": 368,
+      "name": "C2PNet",
+      "category": "Super Resolution",
+      "directory": "368_C2PNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "DeHaze"
+    },
+    {
+      "no": 370,
+      "name": "Semantic-Guided-Low-Light-Image-Enhancement",
+      "category": "Super Resolution",
+      "directory": "370_Semantic-Guided-Low-Light-Image-Enhancement",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement"
+    },
+    {
+      "no": 372,
+      "name": "URetinex-Net",
+      "category": "Super Resolution",
+      "directory": "372_URetinex-Net",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement"
+    },
+    {
+      "no": 375,
+      "name": "SCANet",
+      "category": "Super Resolution",
+      "directory": "375_SCANet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "DeHaze"
+    },
+    {
+      "no": 377,
+      "name": "DRSformer",
+      "category": "Super Resolution",
+      "directory": "377_DRSformer",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "DeRain"
+    },
+    {
+      "no": 385,
+      "name": "PairLIE",
+      "category": "Super Resolution",
+      "directory": "385_PairLIE",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement"
+    },
+    {
+      "no": 389,
+      "name": "WGWS-Net",
+      "category": "Super Resolution",
+      "directory": "389_WGWS-Net",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "DeRain,DeRainDrop,DeHaize,DeSnow"
+    },
+    {
+      "no": 396,
+      "name": "MixDehazeNet",
+      "category": "Super Resolution",
+      "directory": "396_MixDehazeNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "DeHaize"
+    },
+    {
+      "no": 400,
+      "name": "CSRNet",
+      "category": "Super Resolution",
+      "directory": "400_CSRNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Low-light Image Enhancement"
+    },
+    {
+      "no": 404,
+      "name": "HDR-Transformer",
+      "category": "Super Resolution",
+      "directory": "404_HDR-Transformer",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 409,
+      "name": "nighttime_dehaze",
+      "category": "Super Resolution",
+      "directory": "409_nighttime_dehaze",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "DeHaze"
+    },
+    {
+      "no": 411,
+      "name": "UDR-S2Former_deraining",
+      "category": "Super Resolution",
+      "directory": "411_UDR-S2Former_deraining",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "DeRain"
+    },
+    {
+      "no": 418,
+      "name": "Diffusion-Low-Light",
+      "category": "Super Resolution",
+      "directory": "418_Diffusion-Low-Light",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": "Diffusion, Low-light Image Enhancement"
+    },
+    {
+      "no": 469,
+      "name": "Face_Deblurring",
+      "category": "Super Resolution",
+      "directory": "469_Face_Deblurring",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "64x64, HxW"
+    },
+    {
+      "no": 13,
+      "name": "ml-sound-classifier",
+      "category": "Sound Classifier",
+      "directory": "013_ml-sound-classifier",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "TFJS",
+        "TF-TRT"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 97,
+      "name": "YAMNet",
+      "category": "Sound Classifier",
+      "directory": "097_YAMNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 98,
+      "name": "SPICE",
+      "category": "Sound Classifier",
+      "directory": "098_SPICE",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "TFJS",
+        "TF-TRT"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 118,
+      "name": "Speech-enhancement",
+      "category": "Sound Classifier",
+      "directory": "118_Speech-enhancement",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "WIP,EdgeTPU(LeakyLeRU)"
+    },
+    {
+      "no": 120,
+      "name": "FRILL",
+      "category": "Sound Classifier",
+      "directory": "120_FRILL",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "nofrontend"
+    },
+    {
+      "no": 177,
+      "name": "BirdNET-Lite",
+      "category": "Sound Classifier",
+      "directory": "177_BirdNET-Lite",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "TF-TRT"
+      ],
+      "remarks": "non-flex"
+    },
+    {
+      "no": 381,
+      "name": "Whisper",
+      "category": "Sound Classifier",
+      "directory": "381_Whisper",
+      "formats": [
+        "TF-TRT"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 382,
+      "name": "Light-SERNet",
+      "category": "Sound Classifier",
+      "directory": "382_Light-SERNet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 48,
+      "name": "Mobile_BERT",
+      "category": "Natural Language Processing",
+      "directory": "048_mobile_bert",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 121,
+      "name": "GPT2/DistillGPT2",
+      "category": "Natural Language Processing",
+      "directory": "121_GPT2_DistillGPT2",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 122,
+      "name": "DistillBert",
+      "category": "Natural Language Processing",
+      "directory": "122_DistillBert",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 52,
+      "name": "Handwritten_Text_Recognition",
+      "category": "Text Recognition",
+      "directory": "052_Handwritten_Text_Recognition",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 55,
+      "name": "Handwritten_Japanese_Recognition",
+      "category": "Text Recognition",
+      "directory": "055_Handwritten_Japanese_Recognition",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 93,
+      "name": "ocr_japanese",
+      "category": "Text Recognition",
+      "directory": "093_ocr_japanese",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "120x160"
+    },
+    {
+      "no": 92,
+      "name": "weld-porosity-detection-0001",
+      "category": "Action Recognition",
+      "directory": "092_weld-porosity-detection-0001",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 247,
+      "name": "PoseC3D",
+      "category": "Action Recognition",
+      "directory": "247_PoseC3D",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Skeleton-based/FineGYM,NTU60_XSub,NTU120_XSub,UCF101,HMDB51/1x20x48x64x64"
+    },
+    {
+      "no": 248,
+      "name": "MS-G3D",
+      "category": "Action Recognition",
+      "directory": "248_MS-G3D",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Skeleton-based/Kinetics,NTU60,NTU120/1x3xTx25x2"
+    },
+    {
+      "no": 100,
+      "name": "HiFill",
+      "category": "Inpainting",
+      "directory": "100_HiFill",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "OV",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 163,
+      "name": "MST_inpainting",
+      "category": "Inpainting",
+      "directory": "163_MST_inpainting",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 273,
+      "name": "OPN(Onion-Peel Networks)",
+      "category": "Inpainting",
+      "directory": "273_OPN",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 274,
+      "name": "DeepFillv2",
+      "category": "Inpainting",
+      "directory": "274_DeepFillv2",
+      "formats": [
+        "FP32",
+        "FP16",
+        "DQ",
+        "WQ",
+        "OV",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 105,
+      "name": "MobileStyleGAN",
+      "category": "GAN",
+      "directory": "105_MobileStyleGAN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 310,
+      "name": "attentive-gan-derainnet",
+      "category": "GAN",
+      "directory": "310_attentive-gan-derainnet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "DeRain/180x320,240x320,240x360,320x480,360x640,480x640,720x1280"
+    },
+    {
+      "no": 127,
+      "name": "dino",
+      "category": "Transformer",
+      "directory": "127_dino",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "experimental,dino_deits8/dino_deits16"
+    },
+    {
+      "no": 91,
+      "name": "gaze-estimation-adas-0002",
+      "category": "Others",
+      "directory": "091_gaze-estimation-adas-0002",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 102,
+      "name": "Coconet",
+      "category": "Others",
+      "directory": "102_Coconet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "TFJS"
+      ],
+      "remarks": "magenta"
+    },
+    {
+      "no": 108,
+      "name": "HAWP",
+      "category": "Others",
+      "directory": "108_HAWP",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Line Parsing,WIP"
+    },
+    {
+      "no": 110,
+      "name": "L-CNN",
+      "category": "Others",
+      "directory": "110_L-CNN",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Line Parsing,WIP"
+    },
+    {
+      "no": 117,
+      "name": "DTLN",
+      "category": "Others",
+      "directory": "117_DTLN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 119,
+      "name": "M-LSD",
+      "category": "Others",
+      "directory": "119_M-LSD",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 131,
+      "name": "CFNet",
+      "category": "Others",
+      "directory": "131_CFNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "256x256,512x768"
+    },
+    {
+      "no": 139,
+      "name": "PSD-Principled-Synthetic-to-Real-Dehazing-Guided-by-Physical-Priors",
+      "category": "Others",
+      "directory": "139_PSD-Principled-Synthetic-to-Real-Dehazing-Guided-by-Physical-Priors",
+      "formats": [
+        "FP32",
+        "FP16",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 140,
+      "name": "Ultra-Fast-Lane-Detection",
+      "category": "Others",
+      "directory": "140_Ultra-Fast-Lane-Detection",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "288x800"
+    },
+    {
+      "no": 141,
+      "name": "lanenet-lane-detection",
+      "category": "Others",
+      "directory": "141_lanenet-lane-detection",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "TPU",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "256x512"
+    },
+    {
+      "no": 154,
+      "name": "driver-action-recognition-adas-0002-encoder",
+      "category": "Others",
+      "directory": "154_driver-action-recognition-adas-0002-encoder",
+      "formats": [
+        "FP32",
+        "FP16",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 155,
+      "name": "driver-action-recognition-adas-0002-decoder",
+      "category": "Others",
+      "directory": "155_driver-action-recognition-adas-0002-decoder",
+      "formats": [
+        "FP32",
+        "FP16",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 167,
+      "name": "LSTR",
+      "category": "Others",
+      "directory": "167_LSTR",
+      "formats": [
+        "FP32",
+        "FP16",
+        "DQ",
+        "WQ",
+        "OV",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "180x320,240x320,360x640,480x640,720x1280"
+    },
+    {
+      "no": 229,
+      "name": "DexiNed",
+      "category": "Others",
+      "directory": "229_DexiNed",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "TF-TRT",
+        "ONNX"
+      ],
+      "remarks": "160x320,320x480,368x640,480x640,720x1280"
+    },
+    {
+      "no": 233,
+      "name": "HRNet-for-Fashion-Landmark-Estimation",
+      "category": "Others",
+      "directory": "233_HRNet-for-Fashion-Landmark-Estimation",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "192x320,256x320,320x480,384x640,480x640,736x1280"
+    },
+    {
+      "no": 237,
+      "name": "piano_transcription",
+      "category": "Others",
+      "directory": "237_piano_transcription",
+      "formats": [
+        "OV",
+        "ONNX"
+      ],
+      "remarks": "1x160000,Nx160000"
+    },
+    {
+      "no": 252,
+      "name": "RAFT",
+      "category": "Others",
+      "directory": "252_RAFT",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "small,chairs,kitti,sintel,things/iters=10,20/240x320,360x480,480x640"
+    },
+    {
+      "no": 254,
+      "name": "FullSubNet-plus",
+      "category": "Others",
+      "directory": "254_FullSubNet-plus",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "1x1x257x100,200,500,1000,2000,3000,5000,7000,8000,10000"
+    },
+    {
+      "no": 255,
+      "name": "FILM",
+      "category": "Others",
+      "directory": "255_FILM",
+      "formats": [
+        "FP32",
+        "FP16",
+        "DQ",
+        "WQ",
+        "OV",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "L1,Style,VGG/256x256,180x320,240x320,360x640,480x640,720x1280,1080x1920"
+    },
+    {
+      "no": 260,
+      "name": "KP2D",
+      "category": "Others",
+      "directory": "260_KP2D",
+      "formats": [
+        "FP32",
+        "FP16",
+        "DQ",
+        "WQ",
+        "OV",
+        "ONNX"
+      ],
+      "remarks": "ResNet/128x320,192x320,192x448,192x640,256x320,256x448,256x640,320x448,384x640,480x640,512x1280,736x1280"
+    },
+    {
+      "no": 272,
+      "name": "CSFlow",
+      "category": "Others",
+      "directory": "272_CSFlow",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "chairs,kitti,things/iters=10,20/192x320,240x320,320x480,384x640,480x640,736x1280"
+    },
+    {
+      "no": 276,
+      "name": "HybridNets",
+      "category": "Others",
+      "directory": "276_HybridNets",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "anchor_HxW.npy/256x384,256x512,384x512,384x640,384x1024,512x640,768x1280,1152x1920"
+    },
+    {
+      "no": 278,
+      "name": "DWARF",
+      "category": "Others",
+      "directory": "278_DWARF",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "CM",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "StereoDepth+OpticalFlow,/192x320,256x320,384x640,512x640,512x640,768x1280"
+    },
+    {
+      "no": 279,
+      "name": "F-Clip",
+      "category": "Others",
+      "directory": "279_F-Clip",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "Line Parsing/ALL/192x320,256x320,320x480,384x640,480x640,736x1280"
+    },
+    {
+      "no": 288,
+      "name": "perceptual-reflection-removal",
+      "category": "Others",
+      "directory": "288_perceptual-reflection-removal",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "Reflection-Removal/180x320,240x320,360x480,360x640,480x640,720x1280"
+    },
+    {
+      "no": 291,
+      "name": "SeAFusion",
+      "category": "Others",
+      "directory": "291_SeAFusion",
+      "formats": [
+        "FP32",
+        "FP16",
+        "DQ",
+        "WQ",
+        "OV",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "180x320,240x320,360x480,360x640,480x640,720x1280"
+    },
+    {
+      "no": 297,
+      "name": "GazeNet",
+      "category": "Others",
+      "directory": "297_GazeNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "1x7x3x256x192/NxFx3x256x192"
+    },
+    {
+      "no": 298,
+      "name": "DEQ-Flow",
+      "category": "Others",
+      "directory": "298_DEQ-Flow",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "AGPL-3.0 license"
+    },
+    {
+      "no": 306,
+      "name": "GMFlowNet",
+      "category": "Others",
+      "directory": "306_GMFlowNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "OpticalFlow/192x320,240x320,320x480,360x640,480x640,720x1280"
+    },
+    {
+      "no": 309,
+      "name": "ImageForensicsOSN",
+      "category": "Others",
+      "directory": "309_ImageForensicsOSN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "OV",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "forgery detection/180x320,240x320,320x480,360x640,480x640,720x1280"
+    },
+    {
+      "no": 318,
+      "name": "pips",
+      "category": "Others",
+      "directory": "318_pips",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 324,
+      "name": "Ultra-Fast-Lane-Detection-v2",
+      "category": "Others",
+      "directory": "324_Ultra-Fast-Lane-Detection-v2",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 326,
+      "name": "YOLOPv2",
+      "category": "Others",
+      "directory": "326_YOLOPv2",
+      "formats": [
+        "FP32",
+        "FP16",
+        "DQ",
+        "WQ",
+        "OV",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 328,
+      "name": "Stable_Diffusion",
+      "category": "Others",
+      "directory": "328_Stable_Diffusion",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 339,
+      "name": "DeepLSD",
+      "category": "Others",
+      "directory": "339_DeepLSD",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 342,
+      "name": "ALIKE",
+      "category": "Others",
+      "directory": "342_ALIKE",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "WQ",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 357,
+      "name": "Unimatch",
+      "category": "Others",
+      "directory": "357_Unimatch",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": "OpticalFlow, StereoDepth"
+    },
+    {
+      "no": 360,
+      "name": "PARSeq",
+      "category": "Others",
+      "directory": "360_PARSeq",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": "Scene Text Recognition"
+    },
+    {
+      "no": 366,
+      "name": "text_recognition_CRNN",
+      "category": "Others",
+      "directory": "366_text_recognition_CRNN",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": "CN/CH/EN"
+    },
+    {
+      "no": 373,
+      "name": "LiteTrack",
+      "category": "Others",
+      "directory": "373_LiteTrack",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": "Tracking"
+    },
+    {
+      "no": 374,
+      "name": "LaneSOD",
+      "category": "Others",
+      "directory": "374_LaneSOD",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Lane Segmentation"
+    },
+    {
+      "no": 378,
+      "name": "P2PNet_tfkeras",
+      "category": "Others",
+      "directory": "378_P2PNet_tfkeras",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": ""
+    },
+    {
+      "no": 388,
+      "name": "LightGlue",
+      "category": "Others",
+      "directory": "388_LightGlue",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Keypoint Matching"
+    },
+    {
+      "no": 398,
+      "name": "L2CS-Net",
+      "category": "Others",
+      "directory": "398_L2CS-Net",
+      "formats": [
+        "FP32",
+        "FP16",
+        "INT8",
+        "DQ",
+        "ONNX"
+      ],
+      "remarks": "Gaze Pose 448x448"
+    },
+    {
+      "no": 401,
+      "name": "CLRerNet",
+      "category": "Others",
+      "directory": "401_CLRerNet",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Lane Detection"
+    },
+    {
+      "no": 406,
+      "name": "DeDoDe",
+      "category": "Others",
+      "directory": "406_DeDoDe",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": "Keypoint Detection, Description, Matching"
+    },
+    {
+      "no": 407,
+      "name": "Generalizing_Gaze_Estimation",
+      "category": "Others",
+      "directory": "407_Generalizing_Gaze_Estimation",
+      "formats": [
+        "FP32",
+        "FP16",
+        "ONNX"
+      ],
+      "remarks": "Gaze Pose 160x160"
+    },
+    {
+      "no": 408,
+      "name": "UAED",
+      "category": "Others",
+      "directory": "408_UAED",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Edge Detectopm"
+    },
+    {
+      "no": 413,
+      "name": "DocShadow",
+      "category": "Others",
+      "directory": "413_DocShadow",
+      "formats": [
+        "FP32",
+        "ONNX"
+      ],
+      "remarks": "Document Shadow Removal"
+    },
+    {
+      "no": 416,
+      "name": "GeoNet",
+      "category": "Others",
+      "directory": "416_GeoNet",
+      "formats": [
+        "FP32",
+        "ONNX"
+      ],
+      "remarks": "MonoDepth, CameraPose, OpticalFlow"
+    },
+    {
+      "no": 428,
+      "name": "ISR",
+      "category": "Others",
+      "directory": "428_ISR",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Person ReID"
+    },
+    {
+      "no": 487,
+      "name": "DDN",
+      "category": "Others",
+      "directory": "487_DDN",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "edge detector"
+    },
+    {
+      "no": 490,
+      "name": "ICAONet",
+      "category": "Others",
+      "directory": "490_ICAONet",
+      "formats": [
+        "FP32",
+        "FP16",
+        "CM",
+        "ONNX"
+      ],
+      "remarks": "ISO/IEC 19794-5"
+    },
+    {
+      "no": 492,
+      "name": "Efficient-FIQA",
+      "category": "Others",
+      "directory": "492_Efficient-FIQA",
+      "formats": [
+        "FP32",
+        "FP16",
+        "TFJS",
+        "ONNX"
+      ],
+      "remarks": "Efficient Face Image Quality Assessment"
+    },
+    {
+      "no": 496,
+      "name": "LGT-Net",
+      "category": "Others",
+      "directory": "496_LGT-Net",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Indoor Panoramic Room Layout Estimation"
+    },
+    {
+      "no": 498,
+      "name": "DocRes",
+      "category": "Others",
+      "directory": "498_DocRes",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "A Generalist Model Toward Unifying Document Image Restoration Tasks"
+    },
+    {
+      "no": 499,
+      "name": "LINEA",
+      "category": "Others",
+      "directory": "499_LINEA",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Fast and accurate line detection using scalable transformers"
+    },
+    {
+      "no": 500,
+      "name": "ScaleLSD",
+      "category": "Others",
+      "directory": "500_ScaleLSD",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Scalable Deep Line Segment Detection Streamlined"
+    },
+    {
+      "no": 501,
+      "name": "LINEAE",
+      "category": "Others",
+      "directory": "501_LINEAE",
+      "formats": [
+        "ONNX"
+      ],
+      "remarks": "Line Segment Detection"
+    }
+  ]
+}

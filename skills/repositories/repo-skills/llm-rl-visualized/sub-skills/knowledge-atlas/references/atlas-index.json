@@ -1,0 +1,603 @@
+{
+  "name": "knowledge-atlas",
+  "repo": "llm-rl-visualized",
+  "summary": "Compact bilingual index for concept lookup and diagram routing.",
+  "source_anchors": [
+    "README.md",
+    "src/README_EN.md",
+    "AI-Roadmap(AI知识架构).md",
+    "LLM-VLM-index (汇总).md",
+    "src/references.md",
+    "src/code_from_book.md",
+    "LICENSE"
+  ],
+  "entries": [
+    {
+      "id": "llm-basics",
+      "category": "LLM basics",
+      "concept": "LLM architecture, input/output, decoding, and training flow",
+      "aliases": [
+        "LLM",
+        "大模型",
+        "LLM基础",
+        "decoder-only",
+        "MoE",
+        "结构",
+        "生成与解码",
+        "输入层",
+        "输出层",
+        "训练流程",
+        "VLM",
+        "MLLM"
+      ],
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "diagram_families": [
+        "LLM structure",
+        "LLM generation and decoding",
+        "LLM input",
+        "LLM output",
+        "LLM training process",
+        "MLLM and VLM"
+      ],
+      "targets": [
+        "references/atlas-guide.md"
+      ],
+      "provenance": [
+        "README.md",
+        "src/README_EN.md"
+      ],
+      "notes": "Use for architecture, token flow, and decode-strategy questions."
+    },
+    {
+      "id": "sft-lora",
+      "category": "SFT",
+      "concept": "Supervised fine-tuning, LoRA, Prefix-Tuning, packing, token mapping, and SFT loss",
+      "aliases": [
+        "SFT",
+        "监督微调",
+        "微调",
+        "LoRA",
+        "Prefix-Tuning",
+        "Packing",
+        "交叉熵",
+        "Token ID",
+        "Token",
+        "instruction tuning"
+      ],
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "diagram_families": [
+        "Categories of fine-tuning techniques",
+        "LoRA(1 of 2)",
+        "LoRA(2 of 2)",
+        "Prefix-Tuning",
+        "Token ID and Token",
+        "Loss of SFT",
+        "Packing"
+      ],
+      "targets": [
+        "references/atlas-guide.md",
+        "references/book-code-snippets.md"
+      ],
+      "provenance": [
+        "README.md",
+        "src/README_EN.md",
+        "src/code_from_book.md",
+        "src/references.md (LoRA / SFT cluster)"
+      ],
+      "notes": "Book snippets are educational, not production code."
+    },
+    {
+      "id": "dpo",
+      "category": "DPO",
+      "concept": "Direct Preference Optimization, chosen/rejected pairs, beta, and RLHF comparison",
+      "aliases": [
+        "DPO",
+        "直接偏好优化",
+        "偏好优化",
+        "RLHF vs DPO",
+        "chosen",
+        "rejected",
+        "beta",
+        "β"
+      ],
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "diagram_families": [
+        "RLHF vs DPO training architecture comparison",
+        "Prompt collection",
+        "DPO",
+        "DPO training overview",
+        "beta parameter effect",
+        "Implicit reward difference"
+      ],
+      "targets": [
+        "references/atlas-guide.md",
+        "references/citation-and-license.md"
+      ],
+      "provenance": [
+        "README.md",
+        "src/README_EN.md",
+        "src/code_from_book.md",
+        "src/references.md (DPO cluster)"
+      ],
+      "notes": "Use when the user asks how DPO differs from PPO or RLHF."
+    },
+    {
+      "id": "training-free-optimization",
+      "category": "Optimization without training",
+      "concept": "CoT, search, sampling, RAG, function calling, and decoding-side optimization",
+      "aliases": [
+        "免训练",
+        "无训练优化",
+        "CoT",
+        "Chain of Thought",
+        "链式思维",
+        "ToT",
+        "GoT",
+        "RAG",
+        "检索增强生成",
+        "Function Calling",
+        "函数调用",
+        "greedy search",
+        "beam search",
+        "top-k",
+        "top-p",
+        "sampling",
+        "contrastive search",
+        "speculative decoding",
+        "lookahead decoding",
+        "DoLa"
+      ],
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "diagram_families": [
+        "CoT vs traditional Q&A",
+        "CoT / Self-consistency CoT / ToT / GoT",
+        "search strategies",
+        "RAG",
+        "Function Calling"
+      ],
+      "targets": [
+        "references/atlas-guide.md",
+        "references/book-code-snippets.md"
+      ],
+      "provenance": [
+        "README.md",
+        "src/README_EN.md",
+        "src/references.md (CoT / RAG / decoding cluster)"
+      ],
+      "notes": "Distinguish decoding strategy from training objective."
+    },
+    {
+      "id": "rl-basics",
+      "category": "RL basics",
+      "concept": "MDP, return, value, exploration, MC, TD, DQN, policy/value, IL, BC, and IRL",
+      "aliases": [
+        "RL",
+        "强化学习",
+        "MDP",
+        "MC",
+        "TD",
+        "DQN",
+        "Q-learning",
+        "policy-based",
+        "value-based",
+        "IL",
+        "模仿学习",
+        "BC",
+        "行为克隆",
+        "IRL",
+        "逆向强化学习",
+        "model-based",
+        "model-free",
+        "MARL",
+        "DDPG"
+      ],
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "diagram_families": [
+        "RL history",
+        "Three machine learning paradigms",
+        "RL architecture",
+        "Markov Chain vs MDP",
+        "Exploration vs exploitation",
+        "Return",
+        "Reward / Return / Value",
+        "MC vs TD",
+        "DQN",
+        "policy vs value",
+        "IL / BC / IRL",
+        "model-based vs model-free"
+      ],
+      "targets": [
+        "references/atlas-guide.md"
+      ],
+      "provenance": [
+        "README.md",
+        "src/README_EN.md",
+        "src/references.md (RL basics cluster)"
+      ],
+      "notes": "Use for generic RL concepts before policy optimization."
+    },
+    {
+      "id": "policy-optimization",
+      "category": "Policy optimization",
+      "concept": "Actor-Critic, advantage, GAE, TRPO, PPO, GRPO, and DPG/DDPG",
+      "aliases": [
+        "策略优化",
+        "Actor-Critic",
+        "GAE",
+        "TRPO",
+        "PPO",
+        "PPO-Clip",
+        "GRPO",
+        "DPG",
+        "DDPG",
+        "优势函数",
+        "importance sampling",
+        "baseline"
+      ],
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "diagram_families": [
+        "Actor-Critic",
+        "baseline / advantage",
+        "GAE",
+        "TRPO",
+        "importance sampling",
+        "PPO-Clip",
+        "PPO update process",
+        "PPO pseudocode",
+        "GRPO & PPO",
+        "deterministic vs stochastic policy",
+        "DPG",
+        "DDPG"
+      ],
+      "targets": [
+        "references/atlas-guide.md",
+        "references/book-code-snippets.md",
+        "references/citation-and-license.md"
+      ],
+      "provenance": [
+        "README.md",
+        "src/README_EN.md",
+        "src/code_from_book.md",
+        "src/references.md (GAE / TRPO / PPO / GRPO cluster)"
+      ],
+      "notes": "Best entry for PPO vs GRPO vs TRPO questions."
+    },
+    {
+      "id": "rlhf-rlaif",
+      "category": "RLHF / RLAIF",
+      "concept": "Language-model RL, reward models, KL penalty, rejection sampling, CAI, and rule-based rewards",
+      "aliases": [
+        "RLHF",
+        "RLAIF",
+        "基于人类反馈的强化学习",
+        "人类反馈",
+        "reward model",
+        "奖励模型",
+        "RM",
+        "KL",
+        "rejection sampling",
+        "拒绝采样",
+        "Constitutional AI",
+        "宪法AI",
+        "CAI",
+        "RBR",
+        "PPO-based RLHF",
+        "PPO"
+      ],
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "diagram_families": [
+        "language model RL modeling",
+        "two-stage RLHF",
+        "reward model structure",
+        "reward model input/output",
+        "reward loss",
+        "RM training",
+        "four models in PPO",
+        "KL computation",
+        "PPO-based RLHF",
+        "rejection sampling",
+        "RLAIF vs RLHF",
+        "CAI",
+        "OpenAI RBR"
+      ],
+      "targets": [
+        "references/atlas-guide.md",
+        "references/citation-and-license.md"
+      ],
+      "provenance": [
+        "README.md",
+        "src/README_EN.md",
+        "src/references.md (RLHF / RLAIF cluster)"
+      ],
+      "notes": "Use for reward-model and alignment flow questions."
+    },
+    {
+      "id": "reasoning-optimization",
+      "category": "Reasoning optimization",
+      "concept": "Reasoning capability optimization, distillation, ORM/PRM, MCTS, BoN, and majority vote",
+      "aliases": [
+        "推理优化",
+        "Reasoning",
+        "逻辑推理",
+        "MCTS",
+        "BoN",
+        "best-of-n",
+        "多数投票",
+        "ORM",
+        "PRM",
+        "知识蒸馏",
+        "distillation",
+        "DeepSeek reasoning",
+        "search tree"
+      ],
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "diagram_families": [
+        "CoT distillation",
+        "DeepSeek distillation",
+        "ORM and PRM",
+        "MCTS steps",
+        "MCTS run",
+        "language search tree",
+        "BoN",
+        "Majority Vote",
+        "AlphaGo Zero performance"
+      ],
+      "targets": [
+        "references/atlas-guide.md",
+        "references/book-code-snippets.md"
+      ],
+      "provenance": [
+        "README.md",
+        "src/README_EN.md",
+        "src/references.md (reasoning cluster)"
+      ],
+      "notes": "Use for search-based reasoning and post-training reasoning optimization."
+    },
+    {
+      "id": "llm-extensions",
+      "category": "LLM extensions",
+      "concept": "RoPE, ALiBi, quantization, normalization, attention variants, benchmarks, and efficiency tricks",
+      "aliases": [
+        "LLM基础拓展",
+        "RoPE",
+        "ALiBi",
+        "quantization",
+        "量化",
+        "RMSNorm",
+        "LayerNorm",
+        "BatchNorm",
+        "SwiGLU",
+        "MHA",
+        "GQA",
+        "MQA",
+        "MLA",
+        "Benchmark",
+        "梯度累积",
+        "梯度重计算",
+        "剪枝"
+      ],
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "diagram_families": [
+        "performance optimization map",
+        "ALiBi",
+        "traditional knowledge distillation",
+        "numerical representation / quantization",
+        "forward/backward",
+        "gradient accumulation",
+        "gradient checkpoint",
+        "full recomputation",
+        "LLM Benchmark",
+        "MHA / GQA / MQA / MLA",
+        "RNN",
+        "pre-norm / post-norm",
+        "BatchNorm / LayerNorm",
+        "RMSNorm",
+        "prune",
+        "temperature",
+        "SwiGLU",
+        "RoPE",
+        "RoPE effects"
+      ],
+      "targets": [
+        "references/atlas-guide.md"
+      ],
+      "provenance": [
+        "README.md",
+        "src/README_EN.md",
+        "src/references.md (RoPE / quantization / normalization cluster)"
+      ],
+      "notes": "Use for architecture refinements and efficiency questions."
+    },
+    {
+      "id": "roadmap",
+      "category": "Roadmap",
+      "concept": "AI learning roadmap, resource recommendations, and study-sequence orientation",
+      "aliases": [
+        "AI roadmap",
+        "AI知识架构",
+        "学习路线",
+        "资源推荐",
+        "math",
+        "infra"
+      ],
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "diagram_families": [
+        "AI Roadmap"
+      ],
+      "targets": [
+        "references/atlas-guide.md"
+      ],
+      "provenance": [
+        "AI-Roadmap(AI知识架构).md"
+      ],
+      "notes": "Use for study-sequence or resource orientation."
+    },
+    {
+      "id": "model-catalog",
+      "category": "Model catalog",
+      "concept": "LLM, VLM, MLLM, world-model, and embodied-AI catalog orientation",
+      "aliases": [
+        "model catalog",
+        "LLM-VLM-index",
+        "汇总",
+        "模型目录",
+        "模型汇总",
+        "open-source LLMs",
+        "open-source VLMs",
+        "VLM",
+        "MLLM",
+        "world models",
+        "embodied AI"
+      ],
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "diagram_families": [
+        "LLM table",
+        "VLM table"
+      ],
+      "targets": [
+        "references/model-catalog-guide.md",
+        "references/troubleshooting.md"
+      ],
+      "provenance": [
+        "LLM-VLM-index (汇总).md"
+      ],
+      "notes": "Snapshot-oriented; verify freshness with the official model card."
+    },
+    {
+      "id": "citation-license",
+      "category": "Citation & license",
+      "concept": "Reuse, attribution, non-commercial use, publication citation, and BibTeX",
+      "aliases": [
+        "citation",
+        "引用",
+        "license",
+        "许可证",
+        "non-commercial",
+        "非商业",
+        "BibTeX",
+        "reference section",
+        "使用条款",
+        "attribution"
+      ],
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "diagram_families": [
+        "Terms of Use",
+        "Citation format",
+        "BibTeX"
+      ],
+      "targets": [
+        "references/citation-and-license.md"
+      ],
+      "provenance": [
+        "LICENSE",
+        "README.md",
+        "src/README_EN.md"
+      ],
+      "notes": "Keep embedded author attribution in online use."
+    },
+    {
+      "id": "book-snippets",
+      "category": "Book snippets",
+      "concept": "Educational code orientation for LoRA, jq SFT cleaning, DPO, GAE, and PPO / RLHF",
+      "aliases": [
+        "code from book",
+        "书中代码",
+        "算法实现示例",
+        "educational code",
+        "jq",
+        "LoRA code",
+        "DPO code",
+        "GAE",
+        "PPO pseudo code",
+        "RLHF code"
+      ],
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "diagram_families": [
+        "LoRA implementation",
+        "jq data cleaning",
+        "DPO implementation",
+        "GAE core",
+        "PPO / RLHF code sketch"
+      ],
+      "targets": [
+        "references/book-code-snippets.md",
+        "references/troubleshooting.md"
+      ],
+      "provenance": [
+        "src/code_from_book.md"
+      ],
+      "notes": "Educational orientation only; not production-grade implementations."
+    },
+    {
+      "id": "bilingual-terms",
+      "category": "Bilingual terms",
+      "concept": "Chinese / English term normalization for atlas lookups",
+      "aliases": [
+        "bilingual",
+        "中英对照",
+        "双语",
+        "术语",
+        "命名",
+        "file names",
+        "file name",
+        "aliases"
+      ],
+      "languages": [
+        "zh",
+        "en"
+      ],
+      "diagram_families": [
+        "bilingual terminology notes"
+      ],
+      "targets": [
+        "references/atlas-guide.md",
+        "references/troubleshooting.md"
+      ],
+      "provenance": [
+        "README.md",
+        "src/README_EN.md",
+        "LLM-VLM-index (汇总).md"
+      ],
+      "notes": "Search both the acronym and the expanded English term."
+    }
+  ]
+}

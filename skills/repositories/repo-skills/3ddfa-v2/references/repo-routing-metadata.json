@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "cleardusk/3DDFA_V2",
+  "skill_id": "3ddfa-v2",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "Computer Vision",
+      "family": "Visual Identity Analysis"
+    },
+    {
+      "area": "Computer Vision",
+      "family": "Pose Estimation"
+    },
+    {
+      "area": "Computer Vision",
+      "family": "Object Tracking"
+    }
+  ]
+}

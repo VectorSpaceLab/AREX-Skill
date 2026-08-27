@@ -23,11 +23,18 @@ wheelhouse/
 /bin-build/
 
 # JavaScript/TypeScript dependencies and build output
-/src/node_modules/
-/src/packages/*/node_modules/
-/src/packages/*/dist/
-/src/packages/coding-agent/binaries/
-/src/packages/coding-agent/*.bun-build
+/node_modules/
+/src/**/node_modules/
+/src/.artifacts/
+/src/.npm/
+/src/compaction-results/
+/cli/packages/*/dist-chrome/
+/cli/packages/*/dist-firefox/
+/cli/packages/ai/src/providers/data/
+/cli/packages/ai/src/providers/.model-generation-*/
+/cli/packages/coding-agent/binaries/
+/cli/packages/coding-agent/*.bun-build
+/src/**/*.cpuprofile
 *.tsbuildinfo
 
 # Virtual environments
@@ -63,11 +70,9 @@ htmlcov/
 .ruff_cache/
 .cache/
 /coverage/
-/src/coverage/
-/src/packages/*/coverage/
+/src/**/coverage/
 /.nyc_output/
-/src/.nyc_output/
-/src/packages/*/.nyc_output/
+/src/**/.nyc_output/
 
 # Jupyter notebooks
 .ipynb_checkpoints/
@@ -103,11 +108,13 @@ Thumbs.db
 desktop.ini
 .idea/
 .vscode/
+/src/**/.zed/
+/src/**/.claude/
 *.swp
 *.swo
 *~
 
 # Project-local generated artifacts
 site/
-repo-skills/**/__pycache__/
-repo-skills/**/*.py[cod]
+research-skills-library/repo-skills/**/__pycache__/
+research-skills-library/repo-skills/**/*.py[cod]

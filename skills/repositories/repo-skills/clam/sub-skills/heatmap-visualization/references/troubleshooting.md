@@ -1,0 +1,188 @@
+# Heatmap Troubleshooting
+
+Use this reference when `create_heatmaps.py` fails before rendering, waits at the prompt, writes raw outputs but not production images, or produces checkpoint/encoder shape errors.
+
+## Config Is Not Found
+
+Symptom:
+
+- File-not-found error for `heatmaps/configs/<value>`.
+
+Likely cause:
+
+- The script always resolves configs with `os.path.join('heatmaps/configs', args.config_file)`.
+
+Fix:
+
+- Place the YAML under `heatmaps/configs/` and pass only its filename:
+
+```bash
+python create_heatmaps.py --config_file cohort_heatmaps.yaml
+```
+
+Avoid passing an absolute path or a path that already starts with `heatmaps/configs/` unless you intentionally want it joined under that directory.
+
+## Script Prints Config and Then Waits
+
+Symptom:
+
+- The script prints every YAML section and appears stuck at `Continue? Y/N`.
+
+Likely cause:
+
+- `create_heatmaps.py` intentionally asks for confirmation before heavy WSI/checkpoint work.
+
+Fix:
+
+- Type `Y` interactively, or use `printf 'Y\n' | python create_heatmaps.py --config_file ...` in a scripted run after static validation.
+
+## Checkpoint Path Is Missing or Wrong
+
+Symptom:
+
+- Failure around `torch.load(ckpt_path)` or file-not-found after `ckpt path:` is printed.
+
+Likely cause:
+
+- `model_arguments.ckpt_path` does not point to a trained checkpoint visible from the current working directory.
+
+Fix:
+
+- Set `model_arguments.ckpt_path` to the intended checkpoint file.
+- Keep checkpoint selection consistent with `model_type`, `model_size`, `drop_out`, `embed_dim`, and `n_classes` from training.
+
+## Checkpoint Shape Mismatch
+
+Symptom:
+
+- Strict `load_state_dict` errors for linear, attention, or classifier tensor shapes.
+
+Likely causes and fixes:
+
+- `embed_dim` mismatch: use `1024` for ResNet50-truncated or UNI checkpoints, and `512` for CONCH v1 checkpoints.
+- `n_classes` mismatch: set `exp_arguments.n_classes` to the number of classes used in training and make `label_dict` values cover the same class indices.
+- `model_type` mismatch: use `clam_sb` for single-branch checkpoints and `clam_mb` for multi-branch checkpoints.
+- `model_size` mismatch: use the same `small` or `big` setting used during training.
+- `drop_out` mismatch: use the same dropout probability used to construct the training model.
+
+For the difficult CONCH case: if a checkpoint was trained on CONCH features and heatmap generation fails with first-layer or attention-network shape errors, set `encoder_arguments.model_name: conch_v1` and `model_arguments.embed_dim: 512`; also ensure the CONCH package and `CONCH_CKPT_PATH` are available at runtime.
+
+## Unsupported Model Type for Heatmaps
+
+Symptom:
+
+- `NotImplementedError` from `infer_single_slide` after model inference starts.
+
+Likely cause:
+
+- Heatmap attention inference is implemented for `CLAM_SB` and `CLAM_MB`. Although `initiate_model` can construct MIL models, `infer_single_slide` rejects non-CLAM models.
+
+Fix:
+
+- Use a CLAM checkpoint with `model_arguments.model_type: clam_sb` or `clam_mb` for attention heatmaps.
+
+## UNI or CONCH Encoder Is Not Available
+
+Symptoms:
+
+- Assertion error such as `UNI is not available` or `CONCH is not available`.
+- Console message that `CONCH_CKPT_PATH` or `UNI_CKPT_PATH` is not set.
+
+Likely cause:
+
+- The heatmap run recomputes features from WSI patches and loads the selected encoder. UNI needs `UNI_CKPT_PATH`; CONCH needs both the CONCH package and `CONCH_CKPT_PATH`.
+
+Fix:
+
+- For `uni_v1`, set `UNI_CKPT_PATH` to the downloaded UNI checkpoint before launching the run.
+- For `conch_v1`, install the compatible CONCH package and set `CONCH_CKPT_PATH` before launching the run.
+- If the checkpoint was trained with ResNet50-truncated features, use `encoder_arguments.model_name: resnet50_trunc` instead of UNI/CONCH.
+
+## Slides or Process List Are Missing
+
+Symptoms:
+
+- File-not-found for the process list.
+- Empty `list of slides to process`.
+- OpenSlide error when opening a slide path.
+
+Likely causes and fixes:
+
+- `data_arguments.process_list` is resolved under `heatmaps/process_lists/`; place the CSV there or adjust the filename.
+- Process-list rows with `process` set to `0` are skipped.
+- `slide_id` plus `data_arguments.slide_ext` must match actual filenames. If `slide_id` already includes the extension, the script does not append another copy.
+- When `data_dir` is a mapping, each processed row must include the `data_dir_key` column and its value must exist in the mapping.
+- OpenSlide must support the slide format and runtime environment.
+
+## ROI Coordinates Fail
+
+Symptoms:
+
+- KeyError for `x1`, `x2`, `y1`, or `y2`.
+- ROI heatmap is blank or covers the wrong region.
+
+Likely causes and fixes:
+
+- If `heatmap_arguments.use_roi: true`, include numeric `x1`, `x2`, `y1`, `y2` for every processed row.
+- Coordinates are level-0 WSI coordinates. Use the same coordinate frame as OpenSlide reads.
+- Ensure `x1 < x2` and `y1 < y2`.
+- If a process list was generated by non-heatmap patching utilities, add ROI columns manually before enabling ROI heatmaps.
+
+## Raw Outputs Exist but Production Heatmap Is Missing
+
+Symptoms:
+
+- Raw masks, features, or block maps exist, but final production image is not created.
+
+Likely causes and fixes:
+
+- If `heatmap_arguments.calc_heatmap: false`, the overlapping/ROI HDF5 may not be computed; final rendering can skip if the expected HDF5 is absent.
+- If `use_roi: true` and the ROI HDF5 is absent, the script attempts to fall back to the whole-slide HDF5 named with `roi_False`; verify the printed `heatmap ... not found` messages.
+- Check write permissions and paths for `production_save_dir`.
+- Large images can stress memory during rendering; raise downsampling or use a higher `vis_level` if needed.
+
+## GPU Memory or Runtime Is Too High
+
+Symptoms:
+
+- CUDA out-of-memory during `compute_from_patches`.
+- Very slow run on large slides or dense ROI scans.
+
+Fixes:
+
+- Lower `exp_arguments.batch_size`.
+- Increase `patching_arguments.overlap` only when needed; more overlap means more patch reads and feature extraction.
+- Use ROI boxes to restrict computation when biologically appropriate.
+- Increase `heatmap_arguments.custom_downsample` or select a coarser `vis_level` for final rendering.
+- Confirm the selected encoder is expected: UNI and CONCH can be more expensive than ResNet50-truncated.
+
+## Heatmap Looks Too Smooth, Too Sparse, or Binary
+
+Relevant settings:
+
+- `patching_arguments.overlap`: higher overlap densifies attention sampling.
+- `heatmap_arguments.blur`: smooths rendered heatmap.
+- `heatmap_arguments.use_ref_scores`: normalizes overlapping/ROI scores against non-overlapping reference scores.
+- `heatmap_arguments.binarize` and `binary_thresh`: switch from continuous attention to thresholded attention.
+- `heatmap_arguments.alpha`: controls overlay strength.
+- `heatmap_arguments.blank_canvas`: removes the slide image background.
+- `heatmap_arguments.cmap`: changes color map.
+
+If scores look inconsistent between whole-slide and ROI runs, check whether `use_ref_scores` changed between runs.
+
+## Sampled Patches Are Missing or Unexpected
+
+Symptoms:
+
+- No sampled patch folder, fewer patches than requested, or patches appear low-attention.
+
+Likely causes and fixes:
+
+- Each sample item must have `sample: true`.
+- `mode` must be one of `topk`, `reverse_topk`, or `range_sample`.
+- For `range_sample`, the requested percentile window may contain fewer than `k` patches.
+- Scores are converted to percentiles before sampling; interpret `score_start` and `score_end` as percentile fractions in the current implementation.
+
+## Static Validator Passes but Runtime Fails
+
+The bundled validator intentionally does not open slides, load checkpoints, import PyTorch, call OpenSlide, or initialize encoders. A passing validator means the YAML/CSV shape and common consistency checks look reasonable; it does not prove that slide files, encoder checkpoints, GPU memory, or CLAM checkpoint tensors are valid.

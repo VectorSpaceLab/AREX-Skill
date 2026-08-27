@@ -1,0 +1,19 @@
+protobuf
+transformers==4.30.2
+cpm_kernels
+torch>=2.0
+# Legacy-compatible UI dependencies for the bundled/repo-era Gradio and Streamlit demos.
+gradio==3.50.2
+streamlit==1.24.0
+mdtex2html
+sentencepiece
+accelerate
+# API serving extras.
+fastapi
+uvicorn
+sse-starlette
+# P-Tuning and evaluation extras.
+datasets
+rouge_chinese
+nltk
+jieba

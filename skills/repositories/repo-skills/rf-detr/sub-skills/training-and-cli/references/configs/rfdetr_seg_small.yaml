@@ -1,0 +1,17 @@
+# Bundled public example. Replace dataset_dir/output_dir for your run.
+model:
+  model_config:
+    class_path: rfdetr.config.RFDETRSegSmallConfig
+    init_args:
+      num_classes: 3
+  train_config:
+    class_path: rfdetr.config.SegmentationTrainConfig
+    init_args:
+      dataset_file: roboflow
+      dataset_dir: data/my_segmentation_dataset
+      output_dir: outputs/rfdetr-seg-small
+      epochs: 100
+      batch_size: 2
+      grad_accum_steps: 8
+      num_workers: 2
+      tensorboard: true

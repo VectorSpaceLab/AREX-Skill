@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "tobegit3hub/tensorflow_template_application",
+  "skill_id": "tensorflow-template-application",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "MLOps",
+      "family": "ML Project Scaffolding"
+    },
+    {
+      "area": "Model Deployment and Optimization",
+      "family": "Inference Serving"
+    },
+    {
+      "area": "Training Infrastructure",
+      "family": "Cross-Domain Model Libraries"
+    }
+  ]
+}

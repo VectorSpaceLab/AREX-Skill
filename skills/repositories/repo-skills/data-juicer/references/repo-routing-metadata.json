@@ -1,0 +1,21 @@
+{
+  "schema_version": "2.0",
+  "repo_id": "datajuicer/data-juicer",
+  "skill_id": "data-juicer",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "routing_status": "classified",
+  "assignments": [
+    {
+      "area": "MLOps",
+      "family": "Data Validation"
+    },
+    {
+      "area": "Training Infrastructure",
+      "family": "Training Data Pipelines"
+    },
+    {
+      "area": "Data Science",
+      "family": "Data Profiling"
+    }
+  ]
+}
