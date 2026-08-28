@@ -7,7 +7,7 @@ Choose a repository below only when its description, package/repository identity
 | Repo skill | Repository | Skill description |
 | --- | --- | --- |
 | [`trafilatura`](../../../../repo-skills/trafilatura/SKILL.md) | `adbar/trafilatura` | Use Trafilatura for web text discovery, downloading, extraction, metadata, CLI batch processing, deduplication, and structured corpus outputs. |
-| [`docs-gpt`](../../../../repo-skills/docs-gpt/SKILL.md) | `arc53/DocsGPT` | Use DocsGPT for repository-specific backend/API, agent/tool/workflow, source/retrieval, deployment/auth/operations, frontend/extensions, and E2E work. |
+| [`docsgpt`](../../../../repo-skills/docsgpt/SKILL.md) | `arc53/DocsGPT` | Routes DocsGPT deployment, source ingestion, retrieval, agent workflows, tools, integrations, and native or OpenAI-compatible API operations. |
 | [`gpt-academic`](../../../../repo-skills/gpt-academic/SKILL.md) | `binary-husky/gpt_academic` | Operate GPT Academic chat, academic document, code analysis, agent tooling, and multimodal media workflows. |
 | [`owl`](../../../../repo-skills/owl/SKILL.md) | `camel-ai/owl` | Guides the OWL multi-agent task-automation package, CAMEL Workforce orchestration, document tools, Gradio/Docker runtime, and GAIA evaluation workflows. |
 | [`kotaemon`](../../../../repo-skills/kotaemon/SKILL.md) | `Cinnamon/kotaemon` | Use Kotaemon to build, deploy, configure, extend, and troubleshoot document QA, RAG, model-provider, ingestion, and Gradio app workflows. |

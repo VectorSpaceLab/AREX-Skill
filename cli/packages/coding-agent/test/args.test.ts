@@ -84,6 +84,75 @@ describe("parseArgs", () => {
 		});
 	});
 
+	describe("agent mode flags", () => {
+		test("parses --creator", () => {
+			const result = parseArgs(["--creator"]);
+
+			expect(result.agentMode).toBe("creator");
+			expect(result.diagnostics).toEqual([]);
+		});
+
+		test("parses --researcher", () => {
+			const result = parseArgs(["--researcher"]);
+
+			expect(result.agentMode).toBe("researcher");
+			expect(result.diagnostics).toEqual([]);
+		});
+
+		test("keeps --agent-mode as a compatibility form", () => {
+			const result = parseArgs(["--agent-mode", "creator"]);
+
+			expect(result.agentMode).toBe("creator");
+			expect(result.diagnostics).toEqual([]);
+		});
+
+		test("keeps the equals-form compatibility syntax", () => {
+			const result = parseArgs(["--agent-mode=researcher"]);
+
+			expect(result.agentMode).toBe("researcher");
+			expect(result.diagnostics).toEqual([]);
+		});
+
+		test("accepts repeated selectors for the same mode", () => {
+			const result = parseArgs(["--creator", "--agent-mode=creator"]);
+
+			expect(result.agentMode).toBe("creator");
+			expect(result.diagnostics).toEqual([]);
+		});
+
+		test("rejects conflicting mode selectors instead of using the last one", () => {
+			const result = parseArgs(["--creator", "--researcher"]);
+
+			expect(result.agentMode).toBe("creator");
+			expect(result.diagnostics).toEqual([
+				{
+					type: "error",
+					message:
+						"Conflicting agent modes: creator and researcher. Use only one of --creator, --researcher, or --agent-mode <mode>.",
+				},
+			]);
+		});
+
+		test("rejects values attached to boolean mode flags", () => {
+			const result = parseArgs(["--creator=researcher", "--researcher=creator"]);
+
+			expect(result.agentMode).toBeUndefined();
+			expect(result.diagnostics).toEqual([
+				{ type: "error", message: "--creator does not take a value" },
+				{ type: "error", message: "--researcher does not take a value" },
+			]);
+		});
+
+		test("combines --creator with non-interactive mode and a prompt", () => {
+			const result = parseArgs(["--creator", "-p", "Create a skill"]);
+
+			expect(result.agentMode).toBe("creator");
+			expect(result.print).toBe(true);
+			expect(result.messages).toEqual(["Create a skill"]);
+			expect(result.diagnostics).toEqual([]);
+		});
+	});
+
 	describe("flags with values", () => {
 		test("parses --provider", () => {
 			const result = parseArgs(["--provider", "openai"]);
@@ -448,6 +517,20 @@ describe("parseArgs", () => {
 });
 
 describe("printHelp", () => {
+	test("documents the concise agent mode flags", () => {
+		const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
+		try {
+			printHelp();
+			const output = logSpy.mock.calls.map(([message]) => String(message)).join("\n");
+			expect(output).toContain("--creator");
+			expect(output).toContain("--researcher");
+			expect(output).toContain("Compatibility form: creator or researcher");
+			expect(output).toContain('disco --creator -p "Create a skill');
+		} finally {
+			logSpy.mockRestore();
+		}
+	});
+
 	test("documents the credential printing commands and examples", () => {
 		const logSpy = vi.spyOn(console, "log").mockImplementation(() => {});
 		try {

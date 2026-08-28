@@ -484,10 +484,24 @@ frontmatter:
 name: repo-or-sub-skill-name
 description: "Specific third-person description with trigger terms broad enough for natural user requests."
 disable-model-invocation: true
+license: <repository-license-or-NO_LICENSE>
 metadata:
   disco-role: operating
 ---
 ```
+
+`license` is a top-level field, not part of `metadata`. The main agent resolves
+one repository-level value with the bundled
+`../../verify-repo-skill/scripts/resolve_repo_license.mjs` helper after the
+canonical GitHub identity and exact source commit are known, then passes that
+value to every subagent. After generation, use
+`../../verify-repo-skill/scripts/apply_repo_license.mjs` to write the value
+recursively before verification; the helper must update the staged runtime tree,
+not the source checkout or live managed copy.
+Every root and sub-skill must use the same non-empty single-line value. Use
+`NO_LICENSE` when GitHub CLI cannot return a usable `license.spdx_id`; preserve
+`NOASSERTION` when GitHub returns it; keep the resolution report outside the
+runtime tree and warn the user at handoff when the fallback is used.
 
 Always double-quote `description` values, even when the text does not contain
 YAML-sensitive characters. If the quoted string itself contains double quotes,

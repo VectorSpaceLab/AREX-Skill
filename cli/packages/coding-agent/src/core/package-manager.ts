@@ -149,6 +149,12 @@ interface ConfiguredUpdateSource {
 	scope: InstalledSourceScope;
 }
 
+interface EffectivePackageSource {
+	pkg: PackageSource;
+	scope: SourceScope;
+	isDefault: boolean;
+}
+
 interface NpmUpdateTarget extends ConfiguredUpdateSource {
 	parsed: NpmSource;
 }
@@ -166,7 +172,7 @@ interface DisCoManifest {
 
 const DEFAULT_DISCO_PACKAGES: PackageSource[] = [
 	"npm:@juicesharp/rpiv-ask-user-question",
-	"npm:@juicesharp/rpiv-todo",
+	"npm:@juicesharp/rpiv-todo@^2.7.1",
 	"npm:pi-subagents",
 ];
 
@@ -926,22 +932,7 @@ export class DefaultPackageManager implements PackageManager {
 		const globalSettings = this.settingsManager.getGlobalSettings();
 		const projectSettings = this.settingsManager.getProjectSettings();
 
-		// Collect all packages with scope (project first so cwd resources win collisions)
-		const allPackages: Array<{ pkg: PackageSource; scope: SourceScope }> = [];
-		for (const pkg of projectSettings.packages ?? []) {
-			allPackages.push({ pkg, scope: "project" });
-		}
-		for (const pkg of globalSettings.packages ?? []) {
-			allPackages.push({ pkg, scope: "user" });
-		}
-		if (this.includeDisCoDefaults) {
-			for (const pkg of DEFAULT_DISCO_PACKAGES) {
-				allPackages.push({ pkg, scope: "user" });
-			}
-		}
-
-		// Dedupe: project scope wins over global for same package identity
-		const packageSources = this.dedupePackages(allPackages);
+		const packageSources = this.getEffectivePackageSources();
 		await this.resolvePackageSources(packageSources, accumulator, onMissing);
 
 		const globalBaseDir = this.agentDir;
@@ -1074,30 +1065,26 @@ export class DefaultPackageManager implements PackageManager {
 	}
 
 	async update(source?: string): Promise<void> {
-		const globalSettings = this.settingsManager.getGlobalSettings();
-		const projectSettings = this.settingsManager.getProjectSettings();
 		const identity = source ? this.getPackageIdentity(source) : undefined;
 		let matched = false;
 		const updateSources: ConfiguredUpdateSource[] = [];
 
-		for (const pkg of globalSettings.packages ?? []) {
+		for (const { pkg, scope, isDefault } of this.getEffectivePackageSources()) {
+			if (scope === "temporary") continue;
 			const sourceStr = typeof pkg === "string" ? pkg : pkg.source;
-			if (identity && this.getPackageIdentity(sourceStr, "user") !== identity) continue;
+			if (identity && this.getPackageIdentity(sourceStr, scope) !== identity) continue;
 			matched = true;
-			updateSources.push({ source: sourceStr, scope: "user" });
-		}
-		for (const pkg of projectSettings.packages ?? []) {
-			const sourceStr = typeof pkg === "string" ? pkg : pkg.source;
-			if (identity && this.getPackageIdentity(sourceStr, "project") !== identity) continue;
-			matched = true;
-			updateSources.push({ source: sourceStr, scope: "project" });
+			// Defaults are installed as part of normal resource resolution. An
+			// update command should refresh an installed default, but must not
+			// install every missing built-in package as a side effect.
+			if (isDefault && !this.getInstalledPath(sourceStr, scope)) continue;
+			updateSources.push({ source: sourceStr, scope });
 		}
 
 		if (source && !matched) {
 			throw new Error(
 				this.buildNoMatchingPackageMessage(source, [
-					...(globalSettings.packages ?? []),
-					...(projectSettings.packages ?? []),
+					...this.getEffectivePackageSources().map(({ pkg }) => pkg),
 				]),
 			);
 		}
@@ -1205,21 +1192,10 @@ export class DefaultPackageManager implements PackageManager {
 			return [];
 		}
 
-		const globalSettings = this.settingsManager.getGlobalSettings();
-		const projectSettings = this.settingsManager.getProjectSettings();
-		const allPackages: Array<{ pkg: PackageSource; scope: SourceScope }> = [];
-		for (const pkg of projectSettings.packages ?? []) {
-			allPackages.push({ pkg, scope: "project" });
-		}
-		for (const pkg of globalSettings.packages ?? []) {
-			allPackages.push({ pkg, scope: "user" });
-		}
-
-		const packageSources = this.dedupePackages(allPackages);
+		const packageSources = this.getEffectivePackageSources();
 		const checks = packageSources
 			.filter(
-				(entry): entry is { pkg: PackageSource; scope: Exclude<SourceScope, "temporary"> } =>
-					entry.scope !== "temporary",
+				(entry): entry is EffectivePackageSource & { scope: InstalledSourceScope } => entry.scope !== "temporary",
 			)
 			.map((entry) => async (): Promise<PackageUpdate | undefined> => {
 				const source = typeof entry.pkg === "string" ? entry.pkg : entry.pkg.source;
@@ -1723,9 +1699,9 @@ export class DefaultPackageManager implements PackageManager {
 	 * is a delta over the global entry, so both are kept (delta first).
 	 */
 	private dedupePackages(
-		packages: Array<{ pkg: PackageSource; scope: SourceScope }>,
-	): Array<{ pkg: PackageSource; scope: SourceScope }> {
-		const result: Array<{ pkg: PackageSource; scope: SourceScope }> = [];
+		packages: EffectivePackageSource[],
+	): EffectivePackageSource[] {
+		const result: EffectivePackageSource[] = [];
 		const seen = new Map<string, number>();
 		for (const entry of packages) {
 			const identity = this.getPackageIdentity(this.getPackageSourceString(entry.pkg), entry.scope);
@@ -1743,6 +1719,27 @@ export class DefaultPackageManager implements PackageManager {
 			}
 		}
 		return result;
+	}
+
+	private getEffectivePackageSources(): EffectivePackageSource[] {
+		const globalSettings = this.settingsManager.getGlobalSettings();
+		const projectSettings = this.settingsManager.getProjectSettings();
+		const allPackages: EffectivePackageSource[] = [];
+
+		// Keep project and global settings ahead of defaults so explicit configuration wins.
+		for (const pkg of projectSettings.packages ?? []) {
+			allPackages.push({ pkg, scope: "project", isDefault: false });
+		}
+		for (const pkg of globalSettings.packages ?? []) {
+			allPackages.push({ pkg, scope: "user", isDefault: false });
+		}
+		if (this.includeDisCoDefaults) {
+			for (const pkg of DEFAULT_DISCO_PACKAGES) {
+				allPackages.push({ pkg, scope: "user", isDefault: true });
+			}
+		}
+
+		return this.dedupePackages(allPackages);
 	}
 
 	private parseNpmSpec(spec: string): { name: string; version?: string } {

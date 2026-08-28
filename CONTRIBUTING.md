@@ -1,6 +1,6 @@
 # Contributing
 
-Auto-ML Skills treats skills as operating guidance that future agents may load
+AREX-Skill treats skills as operating guidance that future agents may load
 and follow. Good contributions are evidence-grounded, easy to audit, and clear
 about how the skill was produced.
 
@@ -109,11 +109,13 @@ example generation, review, refinement, or verification.
 
 ## Documentation Changes
 
-The root README, architecture guide, portable-meta-skill guide, contribution
-guide, and Research Skills Library guide are bilingual. When changing one side
-of a paired page, update the other side in the same change. The repository
-catalog is one shared data page covering 1,000 roots and 2,186 memberships;
-keep its localized summaries and links in the Chinese README aligned with it.
+The root README, installation guide, architecture guide, DisCo meta-skills
+guide, repository-skill refresh guide, contribution guide, and AREX-Skill
+Library guide are bilingual. When
+changing one side of a paired page, update the other side in the same change.
+The repository catalog is one shared data page covering 1,000 roots and
+2,209 memberships; keep its localized summaries and links in the Chinese
+README aligned with it.
 
 Rules:
 
@@ -141,7 +143,7 @@ PY
 
 `cli/packages/coding-agent/src/disco/skills/` is the single source of truth for
 workflow skills bundled with DisCo and optionally copied into external agents.
-The separate [meta-skill guide](docs/meta-skills-for-other-agents.md) defines
+The separate [DisCo Meta Skills guide](docs/disco-meta-skills.md) defines
 which Creator-only directories may be copied; do not copy the operating router
 or repository collection as meta skills.
 Keep portable instructions understandable without DisCo-only extensions.
@@ -173,7 +175,7 @@ The DisCo CLI source lives under `cli/`.
 Common checks:
 
 ```bash
-cd src
+cd cli
 npm ci --ignore-scripts
 npm run prepublishOnly
 ```

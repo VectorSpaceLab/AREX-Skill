@@ -23,16 +23,22 @@ external production routing-decision artifact, not in the runtime skill graph.
 
 The normal importer passes the verified external handoff to the updater with
 `--routing-entry`. That handoff supplies the canonical source URL, source
-commit, source/target skill roots, and portable skill content digest for the
-repository index. Do not infer those fields from a repository name when a
-verified handoff is available.
+commit, and source/target skill roots for the repository index. It may also
+carry a one-time portable skill content digest for import-time integrity
+checking, but that digest is not persisted in the repository index. Do not
+infer provenance fields from a repository name when a verified handoff is
+available.
 
 The central `repositories.jsonl` index preserves canonical repository identity,
-optional `legacy_repo_id`, source provenance, target skill root, aliases,
-content digest, and root description. The central `assignments.jsonl` index
+optional `legacy_repo_id`, source provenance, target skill root, aliases, and
+root description. It intentionally omits a per-repository-skill content digest,
+because skills can be refreshed independently without requiring index updates.
+The central `assignments.jsonl` index
 preserves canonical identity, optional `legacy_repo_id`, skill ID, exact
-area/family path, and confidence. Unknown fields, duplicate identities, stale
-digests, and mismatches with the per-skill metadata are validation errors.
+area/family path, and confidence. Unknown fields, duplicate identities, and
+mismatches with the per-skill metadata are validation errors. The complete
+repository and assignment index files remain protected by the overall digests
+in `build-metadata.json`.
 
 `unclassified` is valid only when no exact family is supported. Ask the user
 whether to import it; if they want it included, propose a taxonomy extension

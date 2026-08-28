@@ -1,7 +1,7 @@
 # Architecture
 
-AREX-Skill separates the published skill library from the DisCo runtime
-that routes, uses, creates, and maintains it.
+The AREX-Skill repository separates the published AREX-Skill Library from the
+DisCo runtime that routes, uses, creates, and maintains it.
 
 ## Current Repository Snapshot
 
@@ -21,7 +21,7 @@ AREX-Skill/
   cli/
 ```
 
-The current checkout contains both the published skill library and the DisCo
+The current checkout contains both the AREX-Skill Library and the DisCo
 TypeScript source tree. The broader library boundary is
 `skills/`; this checkout currently publishes its repository
 skill collection under `skills/repositories/repo-skills/` and a sibling
@@ -138,15 +138,14 @@ and prompt construction. Shared visibility does not relax either mode's task
 boundary; bundled construction and generated operating artifacts remain
 strictly `meta` and `operating`, respectively.
 
-Creator starts with `distill-ml-knowledge`. It owns the canonical task and
-construction vocabulary, assesses visible workflows and bounded compositions,
-and selects `direct`, `reuse-existing`, or `design-reusable`. Only an
-evidence-backed recurring construction gap enters `design-meta-skill`, which
-consumes the exact routing handoff rather than repeating adequacy or path
-selection. The entry point records only a lightweight routing contract before
-selection; the chosen direct or reusable-bundle branch owns its exact
-construction specification. An approved new meta skill is reusable Creator
-infrastructure and is installed at
+Creator starts with `distill-ml-knowledge`. It identifies a source or task
+anchor and drives the paper-aligned `scope`, `ground`, `construct`, and `verify`
+stages. It records `z`, `Q`, `X`, `G_tilde`, accepted `G`, and construction
+record `R`; `direct`, `reuse-existing`, and `design-reusable` are Creator
+construction strategies recorded in `R`, not additional distillation forms.
+Only an evidence-backed recurring construction gap enters `design-meta-skill`,
+which consumes the exact routing handoff rather than repeating the strategy
+decision. An approved new meta skill is reusable Creator infrastructure and is installed at
 `~/.disco/agent/skills/<meta-skill-id>/`. The operating graph it later produces
 has a separate reuse assessment, destination proposal, and approval. It is
 consumed only in a new Researcher session.
@@ -156,7 +155,7 @@ cross-role switch persists the old session, creates a clean session, rebuilds
 the prompts and role-filtered registry, and leaves the old trajectory available
 through `/resume`. `/export` exports only the current session; it never merges
 messages from the previous role. Non-interactive and RPC clients select the
-initial role with `--agent-mode creator|researcher`, independently of
+initial role with `--creator` or `--researcher`, independently of
 `--mode text|json|rpc`. A request that belongs to the other role is rejected
 before execution, with an explicit suggestion to switch; DisCo never changes
 roles implicitly.
@@ -325,6 +324,9 @@ staging and review input rather than becoming live automatically.
 
 ### Bundled Workflow Skills
 
+For the complete catalog of Creator meta skills and portable installation
+instructions, see [DisCo Meta Skills](disco-meta-skills.md).
+
 The package/repo workflow skills include:
 
 | Workflow Skill | Role |
@@ -381,8 +383,8 @@ Generated repo skills are expected to include:
 
 ## Router
 
-The repo-skills router is a generated area-family index for the published
-repository skill library:
+The repo-skills router is a generated area-family index for the repository
+collection published in the AREX-Skill Library:
 
 ```text
 skills/
@@ -450,10 +452,20 @@ when explicitly invoked while disabled. Use
 router into another runtime such as `~/.agents/skills/`, `~/.claude/skills/`, or
 an explicitly selected legacy `~/.codex/skills/`.
 
+Cross-agent export uses a dedicated persisted transaction. It stages the final
+merged repository collection, regenerates the root repository index and router,
+validates both, and swaps only the two managed siblings. A failed mutation
+restores the recorded target snapshot; an interrupted transaction resumes from
+the helper-reported transaction directory.
+
 When exporting to Codex, the import workflow also adds target-side
 `agents/openai.yaml` files with `policy.allow_implicit_invocation: false` to
 non-router repo skills, because Codex does not use the
-`disable-model-invocation` frontmatter field for that policy.
+`disable-model-invocation` frontmatter field for that policy. These target-only
+files are excluded from the one-time portable-tree digest used by the import
+handoff, but remain subject to normal path, file-type, and policy validation.
+The long-lived repository indexes do not store per-repository skill content
+digests.
 
 ## Source Of Truth
 

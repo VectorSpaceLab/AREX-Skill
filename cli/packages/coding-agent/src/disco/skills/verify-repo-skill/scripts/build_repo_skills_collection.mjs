@@ -13,9 +13,10 @@ import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseDocument, Scalar } from "yaml";
+import { assertRepoSkillLicenses } from "./license-validation.mjs";
 
 const DEFAULT_EXPECTED_REPOSITORIES = 1000;
-const DEFAULT_EXPECTED_ASSIGNMENTS = 2186;
+const DEFAULT_EXPECTED_ASSIGNMENTS = 2209;
 const TAXONOMY_SHA256 = "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431";
 const REPO_ID = /^[^/\s]+\/[^/\s]+$/;
 const SKILL_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -163,19 +164,6 @@ function copyTree(source, destination) {
 	}
 }
 
-function treeDigest(root) {
-	const hash = createHash("sha256");
-	const files = collectFiles(root).sort((left, right) => left.localeCompare(right));
-	for (const filePath of files) {
-		const relativePath = path.relative(root, filePath).split(path.sep).join("/");
-		const content = fs.readFileSync(filePath);
-		hash.update(`file\0${relativePath}\0${content.byteLength}\0`);
-		hash.update(content);
-		hash.update("\0");
-	}
-	return `sha256:${hash.digest("hex")}`;
-}
-
 function validateMarkdownLinks(skillRoot) {
 	for (const filePath of collectFiles(skillRoot).filter((file) => path.extname(file).toLowerCase() === ".md")) {
 		const content = fs.readFileSync(filePath, "utf8");
@@ -220,6 +208,7 @@ function normalizeSkillGraph(sourceRoot, targetRoot, skillId) {
 		if (seenNames.has(finalName)) throw new BuilderError(`skill graph contains duplicate skill name ${finalName}: ${sourceRoot}`);
 		seenNames.add(finalName);
 	}
+	assertRepoSkillLicenses(targetRoot);
 	validateMarkdownLinks(targetRoot);
 }
 
@@ -438,7 +427,7 @@ function validateOutput(outputDir, repositoryById, assignmentByRepo, expectedAss
 	for (const record of repositoryIndex) {
 		const unknownField = Object.keys(record).find((key) => !new Set([
 			"schema_version", "repo_id", "legacy_repo_id", "repo_name", "skill_id", "source_url",
-			"source_commit", "source_skill_root", "target_skill_root", "aliases", "content_sha256", "description",
+			"source_commit", "source_skill_root", "target_skill_root", "aliases", "description",
 		]).has(key));
 		if (unknownField) throw new BuilderError(`generated repository index contains unknown field ${unknownField}`);
 		if (!repositoryById.has(record.repo_id) || !regularFile(path.join(repoSkillsRoot, record.skill_id, "SKILL.md"))) throw new BuilderError(`generated repository index contains an invalid or missing skill: ${record.repo_id} -> ${record.skill_id}`);
@@ -447,7 +436,8 @@ function validateOutput(outputDir, repositoryById, assignmentByRepo, expectedAss
 		if (record.source_commit !== null && (typeof record.source_commit !== "string" || !/^[0-9a-f]{40}$/i.test(record.source_commit))) throw new BuilderError(`generated repository index contains an invalid source_commit: ${record.repo_id}`);
 		if (record.source_skill_root !== null && (typeof record.source_skill_root !== "string" || path.isAbsolute(record.source_skill_root))) throw new BuilderError(`generated repository index contains an invalid source_skill_root: ${record.repo_id}`);
 		if (!Array.isArray(record.aliases) || record.aliases.some((alias) => typeof alias !== "string")) throw new BuilderError(`generated repository index contains invalid aliases: ${record.repo_id}`);
-		if (typeof record.content_sha256 !== "string" || !/^sha256:[0-9a-f]{64}$/i.test(record.content_sha256) || typeof record.description !== "string" || !record.description.trim()) throw new BuilderError(`generated repository index contains invalid content metadata: ${record.repo_id}`);
+		if (typeof record.description !== "string" || !record.description.trim()) throw new BuilderError(`generated repository index contains an invalid description: ${record.repo_id}`);
+		assertRepoSkillLicenses(path.join(repoSkillsRoot, record.skill_id));
 		const foldedRepoId = record.repo_id.toLowerCase();
 		if (repositoryIds.has(record.repo_id) || foldedRepositoryIds.has(foldedRepoId)) throw new BuilderError(`generated repository index contains duplicate repo_id: ${record.repo_id}`);
 		repositoryIds.add(record.repo_id);
@@ -519,7 +509,7 @@ Optional:
   --template-dir DIR            Empty bundled repo-skills-router template
   --source-root DIR             Base for relative source_skill_root values
   --expected-repositories N     Expected repository count (default: 1000)
-  --expected-assignments N      Expected membership count (default: 2186)
+  --expected-assignments N      Expected membership count (default: 2209)
   --source-router-run-id ID     Recorded in generated build metadata
 
 Each source manifest record must contain repo_id, skill_id, source_url,
@@ -562,7 +552,6 @@ function build(args) {
 			validateRuntimePrivacy(targetRoot, source);
 			validateSourceMetadata(targetRoot, source, assignmentByRepo.get(repoId), taxonomy);
 			writeRoutingMetadata(targetRoot, source, assignmentByRepo.get(repoId));
-			const contentSha256 = treeDigest(targetRoot);
 			repositoryIndex.push({
 				schema_version: 1,
 				repo_id: source.repo_id,
@@ -574,7 +563,6 @@ function build(args) {
 				source_skill_root: source.source_skill_root,
 				target_skill_root: `repo-skills/${source.skill_id}`,
 			aliases: Array.isArray(source.aliases) ? [...new Set(source.aliases)].sort() : [],
-			content_sha256: contentSha256,
 			description: parseFrontmatter(path.join(targetRoot, "SKILL.md")).frontmatter.description,
 		});
 		}

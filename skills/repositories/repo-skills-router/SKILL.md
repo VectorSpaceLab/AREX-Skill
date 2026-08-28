@@ -24,10 +24,10 @@ A repository may appear in several families. Choose the smallest set of reposito
 | --- | ---: | ---: | --- |
 | [Computer Vision](references/areas/computer-vision.md) | 21 | 312 |
 | [Biomedical AI](references/areas/biomedical-ai.md) | 11 | 50 |
-| [Generative Media](references/areas/generative-media.md) | 13 | 192 |
-| [Speech and Audio](references/areas/speech-and-audio.md) | 5 | 55 |
+| [Generative Media](references/areas/generative-media.md) | 13 | 194 |
+| [Speech and Audio](references/areas/speech-and-audio.md) | 5 | 56 |
 | [Natural Language Processing](references/areas/natural-language-processing.md) | 9 | 78 |
-| [LLM Applications](references/areas/llm-applications.md) | 16 | 323 |
+| [LLM Applications](references/areas/llm-applications.md) | 16 | 325 |
 | [LLM Models, Training, and Alignment](references/areas/llm-models-training-and-alignment.md) | 6 | 149 |
 | [Information Retrieval](references/areas/information-retrieval.md) | 4 | 67 |
 | [MLOps](references/areas/mlops.md) | 15 | 116 |

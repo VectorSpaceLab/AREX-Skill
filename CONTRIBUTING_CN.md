@@ -1,6 +1,6 @@
 # 贡献指南
 
-Auto-ML Skills 把 skills 视为未来 agent 可能加载并执行的操作指导。好的贡献应
+AREX-Skill 把 skills 视为未来 agent 可能加载并执行的操作指导。好的贡献应
 基于证据、容易审计，并清楚说明 skill 是如何生成的。
 
 ## 贡献路径
@@ -97,10 +97,11 @@ review、refinement 或 verification。
 
 ## 文档变更
 
-根 README、架构说明、portable meta skills 安装说明、贡献指南和 Research
-Skills Library 说明都有中英文版本。修改其中一份时，应在同一个变更中同步另
-一种语言。repository catalog 是一个共享数据页，覆盖 1,000 个 root 和
-2,186 个 memberships；中文 README 中的摘要和链接必须与它保持一致。
+根 README、安装指南、架构说明、DisCo meta skills 说明、repository-skill 刷新指南、
+贡献指南和
+AREX-Skill Library 说明都有中英文版本。修改其中一份时，应在同一个变更中同步
+另一种语言。repository catalog 是一个共享数据页，覆盖 1,000 个 root 和
+2,209 个 memberships；中文 README 中的摘要和链接必须与它保持一致。
 
 规则：
 
@@ -129,7 +130,7 @@ PY
 external agents 的 workflow skills 的唯一 source of truth。portable 指令应
 在没有 DisCo-only extensions 的情况下也能读懂。
 哪些 Creator-only 目录可以复制，以及为什么不能复制 operating router 或
-repository collection，见 [Meta Skills 专题文档](docs/meta-skills-for-other-agents.zh.md)。
+repository collection，见 [DisCo Meta Skills 专题文档](docs/disco-meta-skills.zh.md)。
 
 更新 workflow skills 时：
 
@@ -156,7 +157,7 @@ DisCo CLI 源码位于 `cli/`。
 常用检查：
 
 ```bash
-cd src
+cd cli
 npm ci --ignore-scripts
 npm run prepublishOnly
 ```

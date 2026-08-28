@@ -260,6 +260,9 @@ Recommended review artifacts:
 - `reports/final/human-review.md`: concise review summary for a human reviewer.
 - `reports/final/publication-checklist.md`: pre-publication checklist.
 - `reports/final/prompt-sampling.md`: quick samples from generated usability prompts.
+- `reports/license-resolution.json`: source-commit-bound GitHub CLI license
+  resolution, recursive runtime update, and final validation report. Keep this
+  report outside the runtime skill tree.
 
 Treat this review package as a quality gate. Fix critical or high failures
 before finishing unless the user explicitly accepts the risk.
@@ -284,6 +287,18 @@ Before finishing, confirm:
   `repo-skills-router/SKILL.md`, declares `metadata.disco-role: operating`.
 - Every generated repo root and sub-skill `SKILL.md` contains
   `disable-model-invocation: true`.
+- `reports/license-resolution.json` exists and records the canonical
+  repository, exact source commit, old and final license values, resolver
+  status (`resolved` or `unavailable`), unavailable reason when applicable,
+  and the number of runtime `SKILL.md` files updated.
+- The report value matches the top-level `license` value in the root and every
+  `sub-skills/**/SKILL.md`; every file has exactly one valid license field, and
+  GitHub `NOASSERTION` is allowed and may be preserved consistently across the
+  runtime tree.
+- When the final value is `NO_LICENSE`, the report and final handoff state that
+  GitHub CLI did not provide a usable result for the exact source commit, name
+  the repository and reason, and tell the user that `NO_LICENSE` is not a
+  legal conclusion and may be manually replaced after review.
 - A canonical or exported `repo-skills-router/SKILL.md` does not contain
   `disable-model-invocation: true`. A live DisCo router may contain it only as
   the persisted result of the user's `disco repo-skills router disable` policy;
@@ -476,6 +491,26 @@ generated skill. Do not hide partial coverage under broad labels like
 "miscellaneous"; name the specific omitted or weak capabilities.
 
 ## Final Handoff
+
+Include a `License Resolution` subsection in the final handoff with:
+
+```markdown
+## License Resolution
+
+- report: reports/license-resolution.json
+- repository: owner/repository
+- source commit: <exact commit>
+- old license value: <value or unavailable>
+- new license value: source `license.spdx_id`, including `NOASSERTION`, or `NO_LICENSE`
+- status: resolved | unavailable
+- reason: <required when unavailable>
+- runtime files updated: <count>
+```
+
+For `NO_LICENSE`, explicitly state that the value is a warning fallback from
+the GitHub CLI lookup, not confirmation that the repository has no legal
+license. The report must remain under the review artifact root and must not be
+copied into the runtime skill tree.
 
 When presenting the verified skill to the user, include a short verification report. Keep it concise, but do not omit these items:
 

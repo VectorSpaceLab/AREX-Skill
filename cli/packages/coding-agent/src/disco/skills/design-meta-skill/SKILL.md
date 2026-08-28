@@ -1,56 +1,56 @@
 ---
 name: design-meta-skill
-description: "Design and validate a reusable Creator meta-skill bundle for an evidence-backed recurring construction gap after distill-ml-knowledge selects design-reusable. Use when the canonical routing handoff proves that no existing visible meta workflow or bounded composition covers the required source, evidence, graph, verification, environment, or recovery contract. If invoked without that handoff, route through distill-ml-knowledge before beginning design."
+description: "Designs and validates a reusable Creator meta-skill workflow for an evidence-backed recurring construction gap after distill-ml-knowledge selects the design-reusable strategy. Use it to parameterize future source or task anchors, verify the workflow, and prepare an approved managed Creator-infrastructure import."
 metadata:
   disco-role: meta
 ---
 
 # Design Reusable Meta Skill Bundle
 
-Design a parameterized construction workflow, not the operating skills for one
-task and not the final research result. Treat `distill-ml-knowledge` as the
-owner of task normalization, adequacy assessment, composition assessment, and
-path selection. This skill owns only the `design-reusable` branch.
+Design a parameterized Creator workflow for future distillation anchors. This
+skill does not produce the operating graph for the current task and does not
+execute the final research or software task. The paper distinguishes only
+task-agnostic and task-oriented distillation; `design-reusable` is a Creator
+construction strategy, not a third distillation form.
+
+`distill-ml-knowledge` owns anchor identification, `Q` scoping, adequacy
+assessment, composition assessment, and strategy selection. This skill owns the
+reusable workflow design, validation, approval, and managed Creator-infrastructure
+import after it receives that exact handoff.
 
 ## Required Handoff
 
-Require the exact canonical routing handoff from `distill-ml-knowledge`:
+Require the current routing handoff with:
 
-- Routing-decision revision with `selected path: design-reusable`.
-- Normalized downstream task `tau`, source requirements, required operating
-  capabilities, verification/recovery needs, and construction constraints.
-- Creator-visible capability matrix and inventory snapshot.
-- Uncovered reusable construction contract and evidence that existing workflow
-  extension or bounded composition is inadequate.
-- Evidence that the construction capability will recur across future source
-  anchors.
-- Unknowns, assumptions, and user approval state.
+- decision revision and `construction strategy: design-reusable`;
+- `anchor kind`, anchor identity, and `distillation form`;
+- current task `tau = (q, D, E, g)` when the gap came from a task-oriented run;
+- future anchor class and intended operating output when it came from a
+  task-agnostic source run;
+- scoped capabilities `Q`, required evidence/source behavior, and
+  verification/recovery needs;
+- Creator-visible capability matrix and inventory snapshot;
+- uncovered recurring construction contract, recurrence evidence, and why
+  extension or bounded composition is inadequate;
+- construction constraints, unknowns, assumptions, and approval state.
 
-If the skill is explicitly invoked without this handoff, read
-`../distill-ml-knowledge/SKILL.md` and complete canonical routing first. Do not
-start a parallel `reuse | compose | gap` decision here. If the visible inventory
-or requirements changed materially after the handoff, return the changed
-evidence to `distill-ml-knowledge` for a new routing revision.
+If invoked without this handoff, read `../distill-ml-knowledge/SKILL.md` and
+return through canonical routing. Do not start another reuse, composition, or
+gap decision here. If the visible inventory or requirements changed materially,
+return the evidence for a new routing revision.
 
 ## Workflow
 
-1. Validate that the handoff is complete, current, internally consistent, and
-   selects `design-reusable`. Do not inspect Researcher-only skills or hidden
-   skill paths to challenge it. For missing required fields or blocking
-   unknowns, return the exact list to `distill-ml-knowledge` and stop this branch
-   until the user supplies the required information or decision and routing is
-   revised.
-2. Read
-   [reusable-bundle-specification.md](references/reusable-bundle-specification.md).
-   Draft the parameterized `reusable-bundle` specification from the handoff,
-   preserving unresolved assumptions and exclusions. Obtain approval of its
-   exact revision before material source exploration, file generation, or
-   compute use.
-3. Create a staging directory outside every live skill root. Use a layout such
-   as:
+1. Validate the handoff and stop with the exact missing blocking fields. Do not
+   inspect Researcher-only skills or hidden paths.
+2. Read [reusable-bundle-specification.md](references/reusable-bundle-specification.md).
+   Draft the exact future-anchor and four-stage specification, preserving
+   exclusions and assumption owners. Obtain approval before material source
+   exploration, file generation, or compute use.
+3. Stage all artifacts outside live skill roots, for example:
 
    ```text
-   ~/.disco/agent/creator-runs/<task-slug>/<timestamp>/
+   ~/.disco/agent/creator-runs/<run>/<timestamp>/
      routing-handoff.md
      reusable-bundle-spec.md
      evidence-plan.md
@@ -59,42 +59,33 @@ evidence to `distill-ml-knowledge` for a new routing revision.
      construction-record.md
    ```
 
-4. Read
-   [generation-verification-and-review.md](references/generation-verification-and-review.md).
-   Execute knowledge exploration, meta-skill generation, representative
-   forward verification, failure-recovery verification, and focused refinement
-   against the approved specification.
-5. Parameterize the candidate over future caller-supplied source anchors. Do not
-   hardcode the current checkout, environment prefix, credentials, one task's
-   transient paths, or current routing handoff.
-6. Require every draft meta `SKILL.md` to declare:
-
-   ```yaml
-   metadata:
-     disco-role: meta
-   ```
-
-   Keep the DisCo runtime tree free of target-specific `agents/` directories and
-   `agents/openai.yaml`. Require every root, router, and sub-skill in the
-   operating graphs it later generates to declare
-   `metadata.disco-role: operating`.
-7. Require the candidate workflow to verify each generated operating graph,
-   perform its reusability assessment after verification, keep the whole graph
-   in one scope, show the exact deployment proposal, and use the correct locked
-   importer. Preserve the repo workflow's nested collection and sibling-router
-   transaction as the managed special case.
+4. Read [generation-verification-and-review.md](references/generation-verification-and-review.md)
+   and generate a workflow that later performs scope, ground, construct, and
+   verify for caller-supplied anchors.
+5. Parameterize all source, task, environment, permissions, budget, graph, and
+   handoff inputs. Never hardcode the current checkout, credentials, temporary
+   task state, or machine-specific paths.
+6. Keep every draft meta `SKILL.md` explicitly `metadata.disco-role: meta`. Do
+   not include target-specific `agents/` or `agents/openai.yaml`. Require every
+   operating root, router, and sub-skill produced by the future workflow to
+   declare `metadata.disco-role: operating`.
+7. Verify the candidate workflow on representative anchors: one task-agnostic
+   source anchor, one task-oriented task anchor with source discovery, one
+   source/access failure and recovery, one graph verification failure and local
+   repair, one task-bound/project deployment, and one self-contained/managed
+   deployment. Confirm uncertain reuse defaults to project scope, each graph
+   stays in one scope, and repo output uses its specialized locked transaction.
 8. Run the validator before review:
 
    ```bash
    node scripts/validate_meta_skill.mjs <draft-meta-skill-dir>
    ```
 
-9. Present the routing-decision revision, reusable-bundle specification,
-   evidence plan, candidate file list, verification results, unresolved gaps,
-   exact managed target, collisions, and overwrite impact. Obtain explicit
-   approval for the exact artifact revision; do not infer it from vague
-   continuation language.
-10. After approval, import only the reviewed runtime bundle as managed Creator
+9. Present the routing revision, reusable-bundle specification, evidence plan,
+   candidate files, verification results, unresolved gaps, exact managed target,
+   collisions, and overwrite impact. Obtain approval for this exact artifact
+   revision.
+10. After approval, import only the reviewed runtime meta bundle as Creator
     infrastructure:
 
     ```bash
@@ -103,40 +94,37 @@ evidence to `distill-ml-knowledge` for a new routing revision.
       <creator-run-dir>/draft/<meta-skill-id>
     ```
 
-    If the target exists, obtain separate overwrite approval before adding
-    `--overwrite`. The helper may revise an existing `meta` target but refuses to
+    Use `--overwrite` only after separate approval. The helper refuses to
     replace an operating or unclassified target.
-11. Tell the user to run `/reload`, then invoke the new meta skill with a
-    concrete source anchor. That later invocation owns operating-graph
-    construction and writes `researcher-handoff.md` after its deployment
-    decision; this design session does not execute the downstream research task.
+11. Tell the user to run `/reload`. The next invocation of the imported meta
+    skill, not this design run, constructs and verifies the operating graph and
+    writes its `researcher-handoff.md`.
 
 ## Required Outputs
 
-- Validated canonical routing handoff and recurring-gap evidence.
-- User-approved reusable-bundle specification.
-- Evidence plan and staged, parameterized meta-skill draft.
-- Verification evidence, repairs, and explicit unverified points.
-- Human-readable construction record tied to both exact revisions.
-- Reviewed managed-import proposal or approved meta-skill import result.
-- Contract for later operating-graph verification, one-scope deployment,
-  transaction-safe import, and Researcher handoff.
+- validated routing handoff and recurring-gap evidence;
+- approved reusable-bundle specification;
+- staged, parameterized meta-skill draft and evidence plan;
+- verification results, repairs, unresolved points, and construction record;
+- separate managed Creator-infrastructure import proposal or result;
+- contract for later operating graph verification, one-scope deployment, locked
+  import, and Researcher handoff.
+
+The future workflow's output is accepted operating graph `G` and construction
+record `R`; the current meta bundle itself is not an operating graph. Its
+reusability is assessed against recurring anchors and the generated workflow's
+ability to support both project deployment under `.agents/skills/` and managed
+deployment under `~/.disco/agent/skills/`.
 
 ## Failure Rules
 
-- If the handoff is missing, stale, or no longer supports `design-reusable`,
-  return to `distill-ml-knowledge`; do not independently select another path.
-- If source access, credentials, hardware, permissions, or budget is unresolved,
-  keep it in the reusable-bundle construction environment, stop before use, and
-  ask the user.
-- If a strict verification gate cannot pass, report the unverified bundle and
-  do not import it as accepted Creator infrastructure.
-- If a newly visible adequate workflow or composition invalidates the recorded
-  gap, return that evidence for a new routing revision and stop generation.
-- Require separate approval for any collision, overwrite, expanded source
-  access, expanded cost, or weakened verification.
-- Never write drafts or review artifacts directly into
-  `~/.disco/agent/skills/` or `<project-dir>/.agents/skills/`.
-- Never split one later operating graph across project and managed scopes, send
-  repo routing metadata through the generic importer, or execute the final ML
-  research task in this workflow.
+- Missing or stale handoff: return to `distill-ml-knowledge`.
+- Unresolved source access, credentials, hardware, permissions, or budget: keep
+  the item in the future construction environment and stop before use.
+- Failed strict verification: report the unverified bundle and do not import it.
+- Invalidated recurring gap: return evidence for a new routing revision.
+- Collision, overwrite, expanded source access/cost, or weakened verification:
+  obtain separate approval.
+- Never write drafts or review artifacts into live skill roots, split one future
+  operating graph across scopes, send repo metadata through the generic
+  importer, or execute the final downstream task here.

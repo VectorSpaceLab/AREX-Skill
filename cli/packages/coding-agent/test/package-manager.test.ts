@@ -3,6 +3,7 @@ import { existsSync, mkdirSync, rmSync, statSync, symlinkSync, writeFileSync } f
 import { tmpdir } from "node:os";
 import { join, relative } from "node:path";
 import { PassThrough } from "node:stream";
+import { satisfies } from "semver";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { DefaultPackageManager, type ProgressEvent, type ResolvedResource } from "../src/core/package-manager.ts";
 import { SettingsManager } from "../src/core/settings-manager.ts";
@@ -53,8 +54,10 @@ function createTestPackageManager(options: {
 	cwd: string;
 	agentDir: string;
 	settingsManager: SettingsManager;
+	includeDisCoDefaults?: boolean;
 }): DefaultPackageManager {
-	return new DefaultPackageManager({ ...options, includeDisCoDefaults: false });
+	const { includeDisCoDefaults = false, ...managerOptions } = options;
+	return new DefaultPackageManager({ ...managerOptions, includeDisCoDefaults });
 }
 
 // Helper to check if a resource is enabled
@@ -2435,6 +2438,45 @@ export default function(api) { api.registerTool({ name: "test", description: "te
 			expect(installParsedSourceSpy).toHaveBeenCalledTimes(1);
 		});
 
+		it("should migrate an installed default rpiv-todo package to the required version range", async () => {
+			const defaultPackageManager = createTestPackageManager({
+				cwd: tempDir,
+				agentDir,
+				settingsManager,
+				includeDisCoDefaults: true,
+			});
+			const installedPath = join(agentDir, "npm", "node_modules", "@juicesharp", "rpiv-todo");
+			mkdirSync(installedPath, { recursive: true });
+			writeFileSync(join(installedPath, "package.json"), JSON.stringify({ name: "@juicesharp/rpiv-todo", version: "1.20.0" }));
+
+			const installParsedSourceSpy = vi
+				.spyOn(defaultPackageManager as any, "installParsedSource")
+				.mockResolvedValue(undefined);
+
+			await defaultPackageManager.resolve();
+
+			const rpivTodoInstallCalls = installParsedSourceSpy.mock.calls.filter(
+				([source, scope]) => source.type === "npm" && source.name === "@juicesharp/rpiv-todo" && scope === "user",
+			);
+			expect(rpivTodoInstallCalls).toHaveLength(1);
+			const parsedSource = rpivTodoInstallCalls[0]?.[0] as {
+				type: string;
+				name: string;
+				version?: string;
+				range?: string;
+				pinned: boolean;
+			};
+			expect(parsedSource).toMatchObject({
+				type: "npm",
+				name: "@juicesharp/rpiv-todo",
+				version: "^2.7.1",
+				pinned: false,
+			});
+			expect(parsedSource.range).toBeDefined();
+			expect(satisfies("2.7.1", parsedSource.range!)).toBe(true);
+			expect(satisfies("1.20.0", parsedSource.range!)).toBe(false);
+		});
+
 		it("should not check package updates when offline", async () => {
 			process.env.DISCO_OFFLINE = "1";
 			const runCommandCaptureSpy = vi.spyOn(packageManager as any, "runCommandCapture");
@@ -2461,6 +2503,171 @@ export default function(api) { api.registerTool({ name: "test", description: "te
 					scope: "project",
 				},
 			]);
+		});
+
+		it("should report updates for installed default npm packages", async () => {
+			const defaultPackageManager = createTestPackageManager({
+				cwd: tempDir,
+				agentDir,
+				settingsManager,
+				includeDisCoDefaults: true,
+			});
+			const installedPath = join(agentDir, "npm", "node_modules", "@juicesharp", "rpiv-todo");
+			mkdirSync(installedPath, { recursive: true });
+			writeFileSync(join(installedPath, "package.json"), JSON.stringify({ name: "@juicesharp/rpiv-todo", version: "1.20.0" }));
+
+			const runCommandCaptureSpy = vi
+				.spyOn(defaultPackageManager as any, "runCommandCapture")
+				.mockResolvedValue('"2.7.1"');
+
+			const updates = await defaultPackageManager.checkForAvailableUpdates();
+
+			expect(updates).toEqual([
+				{
+					source: "npm:@juicesharp/rpiv-todo@^2.7.1",
+					displayName: "@juicesharp/rpiv-todo",
+					type: "npm",
+					scope: "user",
+				},
+			]);
+			expect(runCommandCaptureSpy).toHaveBeenCalledWith(
+				"npm",
+				["view", "@juicesharp/rpiv-todo@^2.7.1", "version", "--json"],
+				expect.objectContaining({ cwd: tempDir, timeoutMs: expect.any(Number) }),
+		);
+		});
+
+		it("should update an installed default npm package without persisting it to settings", async () => {
+			const defaultPackageManager = createTestPackageManager({
+				cwd: tempDir,
+				agentDir,
+				settingsManager,
+				includeDisCoDefaults: true,
+			});
+			const installedPath = join(agentDir, "npm", "node_modules", "@juicesharp", "rpiv-todo");
+			mkdirSync(installedPath, { recursive: true });
+			writeFileSync(join(installedPath, "package.json"), JSON.stringify({ name: "@juicesharp/rpiv-todo", version: "2.7.1" }));
+
+			const runCommandCaptureSpy = vi
+				.spyOn(defaultPackageManager as any, "runCommandCapture")
+				.mockResolvedValue('"2.8.0"');
+			const runCommandSpy = vi.spyOn(defaultPackageManager as any, "runCommand").mockResolvedValue(undefined);
+
+			await defaultPackageManager.update("npm:@juicesharp/rpiv-todo");
+
+			expect(runCommandCaptureSpy).toHaveBeenCalledWith(
+				"npm",
+				["view", "@juicesharp/rpiv-todo@^2.7.1", "version", "--json"],
+				expect.objectContaining({ cwd: tempDir, timeoutMs: expect.any(Number) }),
+		);
+			expect(runCommandSpy).toHaveBeenCalledWith(
+				"npm",
+				[
+					"install",
+					"@juicesharp/rpiv-todo@^2.7.1",
+					"--prefix",
+					join(agentDir, "npm"),
+					"--legacy-peer-deps",
+				],
+				undefined,
+			);
+			expect(settingsManager.getGlobalSettings().packages ?? []).toEqual([]);
+			expect(settingsManager.getProjectSettings().packages ?? []).toEqual([]);
+		});
+
+		it("should migrate a legacy default rpiv-todo install into the managed npm root", async () => {
+			const defaultPackageManager = createTestPackageManager({
+				cwd: tempDir,
+				agentDir,
+				settingsManager,
+				includeDisCoDefaults: true,
+			});
+			const legacyRoot = join(tempDir, "legacy-global", "node_modules");
+			const legacyPath = join(legacyRoot, "@juicesharp", "rpiv-todo");
+			const managedPath = join(agentDir, "npm", "node_modules", "@juicesharp", "rpiv-todo");
+			mkdirSync(legacyPath, { recursive: true });
+			writeFileSync(
+				join(legacyPath, "package.json"),
+				JSON.stringify({ name: "@juicesharp/rpiv-todo", version: "1.20.0" }),
+			);
+
+			vi.spyOn(defaultPackageManager as any, "getGlobalNpmRoot").mockReturnValue(legacyRoot);
+			const runCommandCaptureSpy = vi.spyOn(defaultPackageManager as any, "runCommandCapture");
+			const runCommandSpy = vi
+				.spyOn(defaultPackageManager as any, "runCommand")
+				.mockImplementation(async (...callArgs: unknown[]) => {
+					const [command, args] = callArgs as [string, string[]];
+					expect(command).toBe("npm");
+					expect(args).toEqual([
+						"install",
+						"@juicesharp/rpiv-todo@^2.7.1",
+						"--prefix",
+						join(agentDir, "npm"),
+						"--legacy-peer-deps",
+					]);
+					mkdirSync(managedPath, { recursive: true });
+					writeFileSync(
+						join(managedPath, "package.json"),
+						JSON.stringify({ name: "@juicesharp/rpiv-todo", version: "2.7.1" }),
+					);
+				});
+
+			expect(defaultPackageManager.getInstalledPath("npm:@juicesharp/rpiv-todo", "user")).toBe(legacyPath);
+
+			await defaultPackageManager.update("npm:@juicesharp/rpiv-todo");
+
+			expect(runCommandCaptureSpy).not.toHaveBeenCalled();
+			expect(runCommandSpy).toHaveBeenCalledTimes(1);
+			expect(defaultPackageManager.getInstalledPath("npm:@juicesharp/rpiv-todo", "user")).toBe(managedPath);
+			expect(settingsManager.getGlobalSettings().packages ?? []).toEqual([]);
+			expect(settingsManager.getProjectSettings().packages ?? []).toEqual([]);
+		});
+
+		it("should not install missing default packages during an update", async () => {
+			const defaultPackageManager = createTestPackageManager({
+				cwd: tempDir,
+				agentDir,
+				settingsManager,
+				includeDisCoDefaults: true,
+			});
+			const getInstalledPathSpy = vi.spyOn(defaultPackageManager, "getInstalledPath").mockReturnValue(undefined);
+			const runCommandSpy = vi.spyOn(defaultPackageManager as any, "runCommand");
+			const runCommandCaptureSpy = vi.spyOn(defaultPackageManager as any, "runCommandCapture");
+
+			await defaultPackageManager.update();
+
+			expect(getInstalledPathSpy).toHaveBeenCalledTimes(3);
+			expect(runCommandSpy).not.toHaveBeenCalled();
+			expect(runCommandCaptureSpy).not.toHaveBeenCalled();
+		});
+
+		it("should not duplicate a default package when it is explicitly configured", async () => {
+			const defaultPackageManager = createTestPackageManager({
+				cwd: tempDir,
+				agentDir,
+				settingsManager,
+				includeDisCoDefaults: true,
+			});
+			const installedPath = join(agentDir, "npm", "node_modules", "@juicesharp", "rpiv-todo");
+			mkdirSync(installedPath, { recursive: true });
+			writeFileSync(join(installedPath, "package.json"), JSON.stringify({ name: "@juicesharp/rpiv-todo", version: "2.7.1" }));
+			settingsManager.setPackages(["npm:@juicesharp/rpiv-todo@^2.7.1"]);
+
+			const runCommandCaptureSpy = vi
+				.spyOn(defaultPackageManager as any, "runCommandCapture")
+				.mockResolvedValue('"2.8.0"');
+
+			const updates = await defaultPackageManager.checkForAvailableUpdates();
+
+			expect(updates).toEqual([
+				{
+					source: "npm:@juicesharp/rpiv-todo@^2.7.1",
+					displayName: "@juicesharp/rpiv-todo",
+					type: "npm",
+					scope: "user",
+				},
+			]);
+			expect(runCommandCaptureSpy).toHaveBeenCalledTimes(1);
 		});
 
 		it("should skip pinned packages when checking for updates", async () => {

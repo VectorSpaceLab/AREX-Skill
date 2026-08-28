@@ -50,7 +50,6 @@ const REPOSITORY_INDEX_FIELDS = new Set([
 	"source_skill_root",
 	"target_skill_root",
 	"aliases",
-	"content_sha256",
 	"description",
 ]);
 const ASSIGNMENT_INDEX_FIELDS = new Set([
@@ -410,22 +409,6 @@ function digestFile(file: string): string {
 	return `sha256:${createHash("sha256").update(readFileSync(file)).digest("hex")}`;
 }
 
-// The collection builder/updater stores content_sha256 using file bytes and
-// portable relative paths, without executable-mode bits. Keep this separate
-// from the manager's live-tree digest, whose mode-sensitive value detects local
-// mutations during managed collection updates.
-function digestRepositorySkillContent(root: string): string {
-	const hash = createHash("sha256");
-	for (const file of collectPortableFiles(root).sort((left, right) => left.localeCompare(right))) {
-		const relativePath = toPosix(relative(root, file));
-		const content = readFileSync(file);
-		hash.update(`file\0${relativePath}\0${content.byteLength}\0`);
-		hash.update(content);
-		hash.update("\0");
-	}
-	return `sha256:${hash.digest("hex")}`;
-}
-
 function sortJsonValue(value: unknown): unknown {
 	if (Array.isArray(value)) return value.map(sortJsonValue);
 	if (!value || typeof value !== "object") return value;
@@ -512,7 +495,6 @@ function loadRepositoryIndex(repoSkillsRoot: string): Set<string> {
 			!(record.source_skill_root === null || (typeof record.source_skill_root === "string" && record.source_skill_root.trim() && !isAbsolute(record.source_skill_root))) ||
 			record.target_skill_root !== `repo-skills/${record.skill_id}`
 			|| !Array.isArray(record.aliases) || record.aliases.some((alias) => typeof alias !== "string")
-			|| typeof record.content_sha256 !== "string" || !/^sha256:[0-9a-f]{64}$/i.test(record.content_sha256)
 			|| typeof record.description !== "string" || !record.description.trim()
 		) {
 			throw new RepoSkillsLibraryError(`Invalid repository-index.jsonl identity at line ${lineIndex + 1}${unknownField ? ` (unknown field ${unknownField})` : ""}`);
@@ -774,7 +756,6 @@ function routerCoverageIssues(routerDir: string, expectedSkillIds: Set<string>, 
 			const sourceMatch = normalizedSourceUrl.match(/^https:\/\/github\.com\/([^/]+)\/([^/]+)$/i);
 			const sourceSkillRoot = typeof record.source_skill_root === "string" ? record.source_skill_root : undefined;
 			const legacyRepoId = record.legacy_repo_id;
-			const contentSha256 = typeof record.content_sha256 === "string" ? record.content_sha256 : "";
 			if (
 				unknownField ||
 				record.schema_version !== 1 ||
@@ -791,7 +772,6 @@ function routerCoverageIssues(routerDir: string, expectedSkillIds: Set<string>, 
 				record.target_skill_root !== `repo-skills/${record.skill_id}` ||
 				(sourceSkillRoot !== undefined && (!sourceSkillRoot || isAbsolute(sourceSkillRoot))) ||
 				!Array.isArray(record.aliases) || record.aliases.some((alias) => typeof alias !== "string") ||
-				!/^sha256:[0-9a-f]{64}$/i.test(contentSha256) ||
 				typeof record.description !== "string" || !record.description.trim()
 			) throw new Error("missing or invalid repository identity fields");
 			if (covered.has(record.skill_id)) throw new Error(`duplicate skill_id ${record.skill_id}`);
@@ -802,10 +782,6 @@ function routerCoverageIssues(routerDir: string, expectedSkillIds: Set<string>, 
 			caseFoldedRepoIds.set(foldedRepoId, record.repo_id);
 			repositoryBySkill.set(record.skill_id, record.repo_id);
 			legacyRepositoryBySkill.set(record.skill_id, legacyRepoId);
-			const liveSkillRoot = join(dirname(routerDir), "repo-skills", record.skill_id);
-			if (contentSha256.toLowerCase() !== digestRepositorySkillContent(liveSkillRoot).toLowerCase()) {
-				throw new Error(`content_sha256 does not match live skill ${record.skill_id}`);
-			}
 		} catch (error) {
 			issues.push(`invalid repository index line ${lineIndex + 1}: ${error instanceof Error ? error.message : String(error)}`);
 		}

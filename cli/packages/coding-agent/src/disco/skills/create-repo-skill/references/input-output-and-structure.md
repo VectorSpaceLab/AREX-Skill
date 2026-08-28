@@ -206,6 +206,14 @@ declare `metadata.disco-role: operating`. This keeps the graph available in
 Researcher mode and excluded from Creator mode. Do not rely on the missing-role
 Researcher fallback for DisCo-owned generated output.
 
+Every root and sub-skill `SKILL.md` must also declare the same top-level
+`license` value for the source repository. Resolve it once with
+`../verify-repo-skill/scripts/resolve_repo_license.mjs` using the exact source
+commit. A usable GitHub `license.spdx_id` is written as-is, including
+`NOASSERTION`; unavailable, unauthenticated, 404, unparseable, or missing
+results become `license: NO_LICENSE`. This value is metadata about the source repository, not
+the DisCo package license, and is rechecked by `verify-repo-skill` before import.
+
 Self-contained means future agents can use the generated skill after the original repository checkout is gone. Do not write generated instructions such as "run `examples/foo.py` from the repo" or "see `docs/bar.md` in the original repository." If source repo material is important, copy, distill, adapt, or wrap it into the generated skill's own `references/` or `scripts/`.
 
 When the generated skill mentions a source repo script, example, notebook, tool,
@@ -335,7 +343,9 @@ central repository index, not only the area/family assignments:
 ```
 
 `skill_content_sha256` is computed over the portable runtime skill tree and is
-checked again during import. `confidence` is required for every classified
+checked once more during import as a handoff-integrity field. It is not copied
+into the long-lived `repository-index.jsonl` or router repository index;
+those indexes intentionally omit per-repository content digests. `confidence` is required for every classified
 assignment in the external handoff and belongs to the central assignment
 index; it is deliberately not copied into the runtime v2 metadata. Every
 classified assignment needs at least one non-generated repository evidence

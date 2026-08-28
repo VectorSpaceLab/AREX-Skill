@@ -412,7 +412,8 @@
 {"repo_id":"AUTOMATIC1111/stable-diffusion-webui","legacy_repo_id":"batch_1/stable-diffusion-webui","skill_id":"stable-diffusion-webui","area":"Generative Media","family":"Media Generation Applications","confidence":"high"}
 {"repo_id":"bytedance/InfiniteYou","legacy_repo_id":"batch_9/InfiniteYou","skill_id":"infinite-you","area":"Generative Media","family":"Media Generation Applications","confidence":"high"}
 {"repo_id":"carson-katri/dream-textures","legacy_repo_id":"batch_5/dream-textures","skill_id":"dream-textures","area":"Generative Media","family":"Media Generation Applications","confidence":"high"}
-{"repo_id":"comfyanonymous/ComfyUI","legacy_repo_id":"batch_0/ComfyUI","skill_id":"comfy-ui","area":"Generative Media","family":"Media Generation Applications","confidence":"high"}
+{"repo_id":"Comfy-Org/ComfyUI","legacy_repo_id":"batch_0/ComfyUI","skill_id":"comfy-ui","area":"Generative Media","family":"Media Generation Applications","confidence":"high"}
+{"repo_id":"hao-ai-lab/FastVideo","legacy_repo_id":"batch_8/FastVideo","skill_id":"fastvideo","area":"Generative Media","family":"Media Generation Applications","confidence":"high"}
 {"repo_id":"invoke-ai/InvokeAI","legacy_repo_id":"batch_1/InvokeAI","skill_id":"invokeai","area":"Generative Media","family":"Media Generation Applications","confidence":"high"}
 {"repo_id":"JIA-Lab-research/DreamOmni2","legacy_repo_id":"batch_10/DreamOmni2","skill_id":"dreamomni2","area":"Generative Media","family":"Media Generation Applications","confidence":"high"}
 {"repo_id":"jina-ai/discoart","legacy_repo_id":"batch_8/discoart","skill_id":"discoart","area":"Generative Media","family":"Media Generation Applications","confidence":"high"}
@@ -509,7 +510,7 @@
 {"repo_id":"microsoft/muzic","legacy_repo_id":"batch_7/muzic","skill_id":"muzic","area":"Generative Media","family":"Audio Generation","confidence":"high"}
 {"repo_id":"OpenMOSS/MOSS-TTS","legacy_repo_id":"batch_7/MOSS-TTS","skill_id":"moss-tts","area":"Generative Media","family":"Audio Generation","confidence":"high"}
 {"repo_id":"archinetai/audio-diffusion-pytorch","legacy_repo_id":"batch_10/audio-diffusion-pytorch","skill_id":"audio-diffusion-pytorch","area":"Generative Media","family":"Generative Model Components","confidence":"high"}
-{"repo_id":"comfyanonymous/ComfyUI","legacy_repo_id":"batch_0/ComfyUI","skill_id":"comfy-ui","area":"Generative Media","family":"Generative Model Components","confidence":"high"}
+{"repo_id":"Comfy-Org/ComfyUI","legacy_repo_id":"batch_0/ComfyUI","skill_id":"comfy-ui","area":"Generative Media","family":"Generative Model Components","confidence":"high"}
 {"repo_id":"FoundationVision/LlamaGen","legacy_repo_id":"batch_10/LlamaGen","skill_id":"llamagen","area":"Generative Media","family":"Generative Model Components","confidence":"high"}
 {"repo_id":"huggingface/diffusers","legacy_repo_id":"batch_0/diffusers","skill_id":"diffusers","area":"Generative Media","family":"Generative Model Components","confidence":"high"}
 {"repo_id":"jy0205/Pyramid-Flow","legacy_repo_id":"batch_8/Pyramid-Flow","skill_id":"pyramid-flow","area":"Generative Media","family":"Generative Model Components","confidence":"high"}
@@ -546,12 +547,14 @@
 {"repo_id":"thu-ml/TurboDiffusion","legacy_repo_id":"batch_8/TurboDiffusion","skill_id":"turbo-diffusion","area":"Generative Media","family":"Generative Model Adaptation","confidence":"high"}
 {"repo_id":"ali-vilab/VGen","legacy_repo_id":"batch_8/VGen","skill_id":"vgen","area":"Generative Media","family":"Generative Media Evaluation","confidence":"high"}
 {"repo_id":"bytedance/LatentSync","legacy_repo_id":"batch_6/LatentSync","skill_id":"latent-sync","area":"Generative Media","family":"Generative Media Evaluation","confidence":"high"}
+{"repo_id":"hao-ai-lab/FastVideo","legacy_repo_id":"batch_8/FastVideo","skill_id":"fastvideo","area":"Generative Media","family":"Generative Media Evaluation","confidence":"high"}
 {"repo_id":"hkchengrex/MMAudio","legacy_repo_id":"batch_10/MMAudio","skill_id":"mmaudio","area":"Generative Media","family":"Generative Media Evaluation","confidence":"high"}
 {"repo_id":"Lightning-AI/torchmetrics","legacy_repo_id":"batch_9/torchmetrics","skill_id":"torchmetrics","area":"Generative Media","family":"Generative Media Evaluation","confidence":"high"}
 {"repo_id":"mseitzer/pytorch-fid","legacy_repo_id":"batch_8/pytorch-fid","skill_id":"pytorch-fid","area":"Generative Media","family":"Generative Media Evaluation","confidence":"high"}
 {"repo_id":"open-mmlab/mmgeneration","legacy_repo_id":"batch_10/mmgeneration","skill_id":"mmgeneration","area":"Generative Media","family":"Generative Media Evaluation","confidence":"high"}
 {"repo_id":"PKU-YuanGroup/Helios","legacy_repo_id":"batch_10/Helios","skill_id":"helios","area":"Generative Media","family":"Generative Media Evaluation","confidence":"high"}
 {"repo_id":"POSTECH-CVLab/PyTorch-StudioGAN","legacy_repo_id":"batch_8/PyTorch-StudioGAN","skill_id":"py-torch-studio-gan","area":"Generative Media","family":"Generative Media Evaluation","confidence":"high"}
+{"repo_id":"arc53/DocsGPT","legacy_repo_id":"batch_3/DocsGPT","skill_id":"docsgpt","area":"Speech and Audio","family":"Speech Recognition","confidence":"high"}
 {"repo_id":"Blaizzy/mlx-audio","legacy_repo_id":"batch_5/mlx-audio","skill_id":"mlx-audio","area":"Speech and Audio","family":"Speech Recognition","confidence":"high"}
 {"repo_id":"docling-project/docling","legacy_repo_id":"batch_0/docling","skill_id":"docling","area":"Speech and Audio","family":"Speech Recognition","confidence":"high"}
 {"repo_id":"espnet/espnet","legacy_repo_id":"batch_5/espnet","skill_id":"espnet","area":"Speech and Audio","family":"Speech Recognition","confidence":"high"}
@@ -562,7 +565,7 @@
 {"repo_id":"modelscope/FunASR","legacy_repo_id":"batch_3/FunASR","skill_id":"funasr","area":"Speech and Audio","family":"Speech Recognition","confidence":"high"}
 {"repo_id":"modelscope/FunClip","legacy_repo_id":"batch_6/FunClip","skill_id":"funclip","area":"Speech and Audio","family":"Speech Recognition","confidence":"high"}
 {"repo_id":"nl8590687/ASRT_SpeechRecognition","legacy_repo_id":"batch_5/ASRT_SpeechRecognition","skill_id":"asrt-speech-recognition","area":"Speech and Audio","family":"Speech Recognition","confidence":"high"}
-{"repo_id":"NVIDIA-NeMo/NeMo","legacy_repo_id":"batch_2/NeMo","skill_id":"nemo","area":"Speech and Audio","family":"Speech Recognition","confidence":"high"}
+{"repo_id":"NVIDIA-NeMo/Speech","legacy_repo_id":"batch_2/NeMo","skill_id":"nemo","area":"Speech and Audio","family":"Speech Recognition","confidence":"high"}
 {"repo_id":"OFA-Sys/OFA","legacy_repo_id":"batch_9/OFA","skill_id":"ofa","area":"Speech and Audio","family":"Speech Recognition","confidence":"high"}
 {"repo_id":"PaddlePaddle/PaddleSpeech","legacy_repo_id":"batch_4/PaddleSpeech","skill_id":"paddlespeech","area":"Speech and Audio","family":"Speech Recognition","confidence":"high"}
 {"repo_id":"Picovoice/porcupine","legacy_repo_id":"batch_7/porcupine","skill_id":"porcupine","area":"Speech and Audio","family":"Speech Recognition","confidence":"high"}
@@ -577,7 +580,7 @@
 {"repo_id":"jaywalnut310/vits","legacy_repo_id":"batch_5/vits","skill_id":"vits","area":"Speech and Audio","family":"Speech Synthesis","confidence":"high"}
 {"repo_id":"jik876/hifi-gan","legacy_repo_id":"batch_10/hifi-gan","skill_id":"hifi-gan","area":"Speech and Audio","family":"Speech Synthesis","confidence":"high"}
 {"repo_id":"keithito/tacotron","legacy_repo_id":"batch_9/tacotron","skill_id":"tacotron","area":"Speech and Audio","family":"Speech Synthesis","confidence":"high"}
-{"repo_id":"NVIDIA-NeMo/NeMo","legacy_repo_id":"batch_2/NeMo","skill_id":"nemo","area":"Speech and Audio","family":"Speech Synthesis","confidence":"high"}
+{"repo_id":"NVIDIA-NeMo/Speech","legacy_repo_id":"batch_2/NeMo","skill_id":"nemo","area":"Speech and Audio","family":"Speech Synthesis","confidence":"high"}
 {"repo_id":"OpenMOSS/MOSS-TTS","legacy_repo_id":"batch_7/MOSS-TTS","skill_id":"moss-tts","area":"Speech and Audio","family":"Speech Synthesis","confidence":"high"}
 {"repo_id":"PaddlePaddle/PaddleSpeech","legacy_repo_id":"batch_4/PaddleSpeech","skill_id":"paddlespeech","area":"Speech and Audio","family":"Speech Synthesis","confidence":"high"}
 {"repo_id":"speechbrain/speechbrain","legacy_repo_id":"batch_4/speechbrain","skill_id":"speechbrain","area":"Speech and Audio","family":"Speech Synthesis","confidence":"high"}
@@ -602,7 +605,7 @@
 {"repo_id":"m-bain/whisperX","legacy_repo_id":"batch_4/whisperX","skill_id":"whisperx","area":"Speech and Audio","family":"Speech and Audio Toolkits","confidence":"high"}
 {"repo_id":"modelscope/ClearerVoice-Studio","legacy_repo_id":"batch_7/ClearerVoice-Studio","skill_id":"clearer-voice-studio","area":"Speech and Audio","family":"Speech and Audio Toolkits","confidence":"high"}
 {"repo_id":"modelscope/FunASR","legacy_repo_id":"batch_3/FunASR","skill_id":"funasr","area":"Speech and Audio","family":"Speech and Audio Toolkits","confidence":"high"}
-{"repo_id":"NVIDIA-NeMo/NeMo","legacy_repo_id":"batch_2/NeMo","skill_id":"nemo","area":"Speech and Audio","family":"Speech and Audio Toolkits","confidence":"high"}
+{"repo_id":"NVIDIA-NeMo/Speech","legacy_repo_id":"batch_2/NeMo","skill_id":"nemo","area":"Speech and Audio","family":"Speech and Audio Toolkits","confidence":"high"}
 {"repo_id":"PaddlePaddle/PaddleSpeech","legacy_repo_id":"batch_4/PaddleSpeech","skill_id":"paddlespeech","area":"Speech and Audio","family":"Speech and Audio Toolkits","confidence":"high"}
 {"repo_id":"speechbrain/speechbrain","legacy_repo_id":"batch_4/speechbrain","skill_id":"speechbrain","area":"Speech and Audio","family":"Speech and Audio Toolkits","confidence":"high"}
 {"repo_id":"tyiannak/pyAudioAnalysis","legacy_repo_id":"batch_6/pyAudioAnalysis","skill_id":"py-audio-analysis","area":"Speech and Audio","family":"Speech and Audio Toolkits","confidence":"high"}
@@ -751,7 +754,7 @@
 {"repo_id":"Upsonic/Upsonic","legacy_repo_id":"batch_5/Upsonic","skill_id":"upsonic","area":"LLM Applications","family":"Agent SDKs","confidence":"high"}
 {"repo_id":"1Panel-dev/MaxKB","legacy_repo_id":"batch_3/MaxKB","skill_id":"maxkb","area":"LLM Applications","family":"Agent Platforms","confidence":"high"}
 {"repo_id":"agentscope-ai/agentscope","legacy_repo_id":"batch_3/agentscope","skill_id":"agentscope","area":"LLM Applications","family":"Agent Platforms","confidence":"high"}
-{"repo_id":"arc53/DocsGPT","legacy_repo_id":"batch_3/DocsGPT","skill_id":"docs-gpt","area":"LLM Applications","family":"Agent Platforms","confidence":"high"}
+{"repo_id":"arc53/DocsGPT","legacy_repo_id":"batch_3/DocsGPT","skill_id":"docsgpt","area":"LLM Applications","family":"Agent Platforms","confidence":"high"}
 {"repo_id":"dataelement/bisheng","legacy_repo_id":"batch_4/bisheng","skill_id":"bisheng","area":"LLM Applications","family":"Agent Platforms","confidence":"high"}
 {"repo_id":"eosphoros-ai/DB-GPT","legacy_repo_id":"batch_4/DB-GPT","skill_id":"db-gpt","area":"LLM Applications","family":"Agent Platforms","confidence":"high"}
 {"repo_id":"GetBindu/Bindu","legacy_repo_id":"batch_5/Bindu","skill_id":"bindu","area":"LLM Applications","family":"Agent Platforms","confidence":"high"}
@@ -775,6 +778,7 @@
 {"repo_id":"TransformerOptimus/SuperAGI","legacy_repo_id":"batch_4/SuperAGI","skill_id":"super-agi","area":"LLM Applications","family":"Agent Platforms","confidence":"high"}
 {"repo_id":"xerrors/Yuxi","legacy_repo_id":"batch_6/Yuxi","skill_id":"yuxi","area":"LLM Applications","family":"Agent Platforms","confidence":"high"}
 {"repo_id":"1Panel-dev/MaxKB","legacy_repo_id":"batch_3/MaxKB","skill_id":"maxkb","area":"LLM Applications","family":"LLM Workflow Frameworks","confidence":"high"}
+{"repo_id":"arc53/DocsGPT","legacy_repo_id":"batch_3/DocsGPT","skill_id":"docsgpt","area":"LLM Applications","family":"LLM Workflow Frameworks","confidence":"high"}
 {"repo_id":"crewAIInc/crewAI","legacy_repo_id":"batch_1/crewAI","skill_id":"crewai","area":"LLM Applications","family":"LLM Workflow Frameworks","confidence":"high"}
 {"repo_id":"dataelement/bisheng","legacy_repo_id":"batch_4/bisheng","skill_id":"bisheng","area":"LLM Applications","family":"LLM Workflow Frameworks","confidence":"high"}
 {"repo_id":"deepset-ai/haystack","legacy_repo_id":"batch_0/haystack","skill_id":"haystack","area":"LLM Applications","family":"LLM Workflow Frameworks","confidence":"high"}
@@ -796,6 +800,7 @@
 {"repo_id":"superduper-io/superduper","legacy_repo_id":"batch_6/superduper","skill_id":"superduper","area":"LLM Applications","family":"LLM Workflow Frameworks","confidence":"high"}
 {"repo_id":"SylphAI-Inc/AdalFlow","legacy_repo_id":"batch_7/AdalFlow","skill_id":"adalflow","area":"LLM Applications","family":"LLM Workflow Frameworks","confidence":"high"}
 {"repo_id":"The-Pocket/PocketFlow","legacy_repo_id":"batch_4/PocketFlow","skill_id":"pocketflow","area":"LLM Applications","family":"LLM Workflow Frameworks","confidence":"high"}
+{"repo_id":"arc53/DocsGPT","legacy_repo_id":"batch_3/DocsGPT","skill_id":"docsgpt","area":"LLM Applications","family":"RAG Frameworks","confidence":"high"}
 {"repo_id":"camel-ai/camel","legacy_repo_id":"batch_1/camel","skill_id":"camel-ai","area":"LLM Applications","family":"RAG Frameworks","confidence":"high"}
 {"repo_id":"Cinnamon/kotaemon","legacy_repo_id":"batch_2/kotaemon","skill_id":"kotaemon","area":"LLM Applications","family":"RAG Frameworks","confidence":"high"}
 {"repo_id":"dataelement/bisheng","legacy_repo_id":"batch_4/bisheng","skill_id":"bisheng","area":"LLM Applications","family":"RAG Frameworks","confidence":"high"}
@@ -894,7 +899,7 @@
 {"repo_id":"wanshuiyin/Auto-claude-code-research-in-sleep","legacy_repo_id":"batch_4/Auto-claude-code-research-in-sleep","skill_id":"aris","area":"LLM Applications","family":"Agent Tools and Skills","confidence":"high"}
 {"repo_id":"Zipstack/unstract","legacy_repo_id":"batch_5/unstract","skill_id":"unstract","area":"LLM Applications","family":"Agent Tools and Skills","confidence":"high"}
 {"repo_id":"adbar/trafilatura","legacy_repo_id":"batch_6/trafilatura","skill_id":"trafilatura","area":"LLM Applications","family":"Document Intelligence","confidence":"medium"}
-{"repo_id":"arc53/DocsGPT","legacy_repo_id":"batch_3/DocsGPT","skill_id":"docs-gpt","area":"LLM Applications","family":"Document Intelligence","confidence":"high"}
+{"repo_id":"arc53/DocsGPT","legacy_repo_id":"batch_3/DocsGPT","skill_id":"docsgpt","area":"LLM Applications","family":"Document Intelligence","confidence":"high"}
 {"repo_id":"binary-husky/gpt_academic","legacy_repo_id":"batch_4/gpt_academic","skill_id":"gpt-academic","area":"LLM Applications","family":"Document Intelligence","confidence":"high"}
 {"repo_id":"camel-ai/owl","legacy_repo_id":"batch_4/owl","skill_id":"owl","area":"LLM Applications","family":"Document Intelligence","confidence":"high"}
 {"repo_id":"Cinnamon/kotaemon","legacy_repo_id":"batch_2/kotaemon","skill_id":"kotaemon","area":"LLM Applications","family":"Document Intelligence","confidence":"high"}
@@ -920,7 +925,7 @@
 {"repo_id":"Zipstack/unstract","legacy_repo_id":"batch_5/unstract","skill_id":"unstract","area":"LLM Applications","family":"Document Intelligence","confidence":"high"}
 {"repo_id":"NVIDIA-NeMo/Guardrails","legacy_repo_id":"batch_5/Guardrails","skill_id":"nemoguardrails","area":"LLM Applications","family":"LLM Safety Guardrails","confidence":"high"}
 {"repo_id":"1Panel-dev/MaxKB","legacy_repo_id":"batch_3/MaxKB","skill_id":"maxkb","area":"LLM Applications","family":"Chat and Knowledge Applications","confidence":"high"}
-{"repo_id":"arc53/DocsGPT","legacy_repo_id":"batch_3/DocsGPT","skill_id":"docs-gpt","area":"LLM Applications","family":"Chat and Knowledge Applications","confidence":"high"}
+{"repo_id":"arc53/DocsGPT","legacy_repo_id":"batch_3/DocsGPT","skill_id":"docsgpt","area":"LLM Applications","family":"Chat and Knowledge Applications","confidence":"high"}
 {"repo_id":"binary-husky/gpt_academic","legacy_repo_id":"batch_4/gpt_academic","skill_id":"gpt-academic","area":"LLM Applications","family":"Chat and Knowledge Applications","confidence":"high"}
 {"repo_id":"chatchat-space/Langchain-Chatchat","legacy_repo_id":"batch_4/Langchain-Chatchat","skill_id":"langchain-chatchat","area":"LLM Applications","family":"Chat and Knowledge Applications","confidence":"high"}
 {"repo_id":"Cinnamon/kotaemon","legacy_repo_id":"batch_2/kotaemon","skill_id":"kotaemon","area":"LLM Applications","family":"Chat and Knowledge Applications","confidence":"high"}
@@ -1054,7 +1059,7 @@
 {"repo_id":"tatsu-lab/stanford_alpaca","legacy_repo_id":"batch_4/stanford_alpaca","skill_id":"stanford-alpaca","area":"LLM Models, Training, and Alignment","family":"LLM Fine-Tuning","confidence":"high"}
 {"repo_id":"texttron/tevatron","legacy_repo_id":"batch_1/tevatron","skill_id":"tevatron","area":"LLM Models, Training, and Alignment","family":"LLM Fine-Tuning","confidence":"high"}
 {"repo_id":"unslothai/unsloth","legacy_repo_id":"batch_1/unsloth","skill_id":"unsloth","area":"LLM Models, Training, and Alignment","family":"LLM Fine-Tuning","confidence":"high"}
-{"repo_id":"volcengine/verl","legacy_repo_id":"batch_0/verl","skill_id":"verl","area":"LLM Models, Training, and Alignment","family":"LLM Fine-Tuning","confidence":"high"}
+{"repo_id":"verl-project/verl","legacy_repo_id":"batch_0/verl","skill_id":"verl","area":"LLM Models, Training, and Alignment","family":"LLM Fine-Tuning","confidence":"high"}
 {"repo_id":"WangRongsheng/XrayGLM","legacy_repo_id":"batch_11/XrayGLM","skill_id":"xrayglm","area":"LLM Models, Training, and Alignment","family":"LLM Fine-Tuning","confidence":"high"}
 {"repo_id":"YiVal/YiVal","legacy_repo_id":"batch_10/YiVal","skill_id":"yi-val","area":"LLM Models, Training, and Alignment","family":"LLM Fine-Tuning","confidence":"high"}
 {"repo_id":"ymcui/Chinese-LLaMA-Alpaca","legacy_repo_id":"batch_4/Chinese-LLaMA-Alpaca","skill_id":"chinese-llama-alpaca","area":"LLM Models, Training, and Alignment","family":"LLM Fine-Tuning","confidence":"high"}
@@ -1091,7 +1096,7 @@
 {"repo_id":"rllm-org/rllm","legacy_repo_id":"batch_6/rllm","skill_id":"rllm","area":"LLM Models, Training, and Alignment","family":"Preference and Reinforcement Alignment","confidence":"high"}
 {"repo_id":"stochasticai/xTuring","legacy_repo_id":"batch_9/xTuring","skill_id":"x-turing","area":"LLM Models, Training, and Alignment","family":"Preference and Reinforcement Alignment","confidence":"high"}
 {"repo_id":"unslothai/unsloth","legacy_repo_id":"batch_1/unsloth","skill_id":"unsloth","area":"LLM Models, Training, and Alignment","family":"Preference and Reinforcement Alignment","confidence":"high"}
-{"repo_id":"volcengine/verl","legacy_repo_id":"batch_0/verl","skill_id":"verl","area":"LLM Models, Training, and Alignment","family":"Preference and Reinforcement Alignment","confidence":"high"}
+{"repo_id":"verl-project/verl","legacy_repo_id":"batch_0/verl","skill_id":"verl","area":"LLM Models, Training, and Alignment","family":"Preference and Reinforcement Alignment","confidence":"high"}
 {"repo_id":"areal-project/AReaL","legacy_repo_id":"batch_6/AReaL","skill_id":"areal","area":"LLM Models, Training, and Alignment","family":"Multi-Stage LLM Training","confidence":"high"}
 {"repo_id":"FareedKhan-dev/train-llm-from-scratch","legacy_repo_id":"batch_5/train-llm-from-scratch","skill_id":"train-llm-from-scratch","area":"LLM Models, Training, and Alignment","family":"Multi-Stage LLM Training","confidence":"high"}
 {"repo_id":"InternLM/xtuner","legacy_repo_id":"batch_6/xtuner","skill_id":"xtuner","area":"LLM Models, Training, and Alignment","family":"Multi-Stage LLM Training","confidence":"high"}
@@ -1102,7 +1107,7 @@
 {"repo_id":"OptimalScale/LMFlow","legacy_repo_id":"batch_5/LMFlow","skill_id":"lmflow","area":"LLM Models, Training, and Alignment","family":"Multi-Stage LLM Training","confidence":"high"}
 {"repo_id":"ruc-datalab/DeepAnalyze","legacy_repo_id":"batch_7/DeepAnalyze","skill_id":"deep-analyze","area":"LLM Models, Training, and Alignment","family":"Multi-Stage LLM Training","confidence":"high"}
 {"repo_id":"unslothai/unsloth","legacy_repo_id":"batch_1/unsloth","skill_id":"unsloth","area":"LLM Models, Training, and Alignment","family":"Multi-Stage LLM Training","confidence":"medium"}
-{"repo_id":"volcengine/verl","legacy_repo_id":"batch_0/verl","skill_id":"verl","area":"LLM Models, Training, and Alignment","family":"Multi-Stage LLM Training","confidence":"high"}
+{"repo_id":"verl-project/verl","legacy_repo_id":"batch_0/verl","skill_id":"verl","area":"LLM Models, Training, and Alignment","family":"Multi-Stage LLM Training","confidence":"high"}
 {"repo_id":"baichuan-inc/Baichuan-7B","legacy_repo_id":"batch_6/Baichuan-7B","skill_id":"baichuan-7b","area":"LLM Models, Training, and Alignment","family":"Pretraining","confidence":"high"}
 {"repo_id":"BlinkDL/RWKV-LM","legacy_repo_id":"batch_4/RWKV-LM","skill_id":"rwkv-lm","area":"LLM Models, Training, and Alignment","family":"Pretraining","confidence":"high"}
 {"repo_id":"codertimo/BERT-pytorch","legacy_repo_id":"batch_6/BERT-pytorch","skill_id":"bert-pytorch","area":"LLM Models, Training, and Alignment","family":"Pretraining","confidence":"high"}
@@ -1279,7 +1284,7 @@
 {"repo_id":"cleanlab/cleanlab","legacy_repo_id":"batch_3/cleanlab","skill_id":"cleanlab","area":"MLOps","family":"Data Validation","confidence":"high"}
 {"repo_id":"datajuicer/data-juicer","legacy_repo_id":"batch_3/data-juicer","skill_id":"data-juicer","area":"MLOps","family":"Data Validation","confidence":"high"}
 {"repo_id":"deepchecks/deepchecks","legacy_repo_id":"batch_3/deepchecks","skill_id":"deepchecks","area":"MLOps","family":"Data Validation","confidence":"high"}
-{"repo_id":"great-expectations/great_expectations","legacy_repo_id":"batch_1/great_expectations","skill_id":"great-expectations","area":"MLOps","family":"Data Validation","confidence":"high"}
+{"repo_id":"fivetran/great_expectations","legacy_repo_id":"batch_1/great_expectations","skill_id":"great-expectations","area":"MLOps","family":"Data Validation","confidence":"high"}
 {"repo_id":"NVIDIA-NeMo/DataDesigner","legacy_repo_id":"batch_10/DataDesigner","skill_id":"data-designer-repo-skill","area":"MLOps","family":"Data Validation","confidence":"high"}
 {"repo_id":"visual-layer/fastdup","legacy_repo_id":"batch_10/fastdup","skill_id":"fastdup","area":"MLOps","family":"Data Validation","confidence":"high"}
 {"repo_id":"NannyML/nannyml","legacy_repo_id":"batch_10/nannyml","skill_id":"nannyml","area":"MLOps","family":"Model Monitoring","confidence":"high"}
@@ -1346,7 +1351,7 @@
 {"repo_id":"bentoml/OpenLLM","legacy_repo_id":"batch_4/OpenLLM","skill_id":"openllm","area":"Model Deployment and Optimization","family":"Inference Serving","confidence":"high"}
 {"repo_id":"BerriAI/litellm","legacy_repo_id":"batch_0/litellm","skill_id":"litellm","area":"Model Deployment and Optimization","family":"Inference Serving","confidence":"high"}
 {"repo_id":"bigscience-workshop/petals","legacy_repo_id":"batch_5/petals","skill_id":"petals","area":"Model Deployment and Optimization","family":"Inference Serving","confidence":"high"}
-{"repo_id":"comfyanonymous/ComfyUI","legacy_repo_id":"batch_0/ComfyUI","skill_id":"comfy-ui","area":"Model Deployment and Optimization","family":"Inference Serving","confidence":"high"}
+{"repo_id":"Comfy-Org/ComfyUI","legacy_repo_id":"batch_0/ComfyUI","skill_id":"comfy-ui","area":"Model Deployment and Optimization","family":"Inference Serving","confidence":"high"}
 {"repo_id":"deepspeedai/DeepSpeed","legacy_repo_id":"batch_0/DeepSpeed","skill_id":"deepspeed","area":"Model Deployment and Optimization","family":"Inference Serving","confidence":"high"}
 {"repo_id":"dexmal/dexbotic","legacy_repo_id":"batch_11/dexbotic","skill_id":"dexbotic","area":"Model Deployment and Optimization","family":"Inference Serving","confidence":"high"}
 {"repo_id":"eosphoros-ai/DB-GPT","legacy_repo_id":"batch_4/DB-GPT","skill_id":"db-gpt","area":"Model Deployment and Optimization","family":"Inference Serving","confidence":"high"}
@@ -1645,6 +1650,7 @@
 {"repo_id":"DLR-RM/stable-baselines3","legacy_repo_id":"batch_0/stable-baselines3","skill_id":"stable-baselines3","area":"Reinforcement Learning","family":"RL Environments","confidence":"high"}
 {"repo_id":"Farama-Foundation/Gymnasium","legacy_repo_id":"batch_2/Gymnasium","skill_id":"gymnasium","area":"Reinforcement Learning","family":"RL Environments","confidence":"high"}
 {"repo_id":"Farama-Foundation/HighwayEnv","legacy_repo_id":"batch_8/HighwayEnv","skill_id":"highway-env","area":"Reinforcement Learning","family":"RL Environments","confidence":"high"}
+{"repo_id":"Farama-Foundation/PettingZoo","legacy_repo_id":"batch_1/PettingZoo","skill_id":"pettingzoo","area":"Reinforcement Learning","family":"RL Environments","confidence":"high"}
 {"repo_id":"google-deepmind/acme","legacy_repo_id":"batch_2/acme","skill_id":"acme","area":"Reinforcement Learning","family":"RL Environments","confidence":"high"}
 {"repo_id":"google-deepmind/dm_control","legacy_repo_id":"batch_7/dm_control","skill_id":"dm-control","area":"Reinforcement Learning","family":"RL Environments","confidence":"high"}
 {"repo_id":"huawei-noah/SMARTS","legacy_repo_id":"batch_11/SMARTS","skill_id":"smarts","area":"Reinforcement Learning","family":"RL Environments","confidence":"high"}
@@ -1654,7 +1660,6 @@
 {"repo_id":"MyoHub/myosuite","legacy_repo_id":"batch_11/myosuite","skill_id":"myosuite","area":"Reinforcement Learning","family":"RL Environments","confidence":"high"}
 {"repo_id":"nicrusso7/rex-gym","legacy_repo_id":"batch_11/rex-gym","skill_id":"rex-gym","area":"Reinforcement Learning","family":"RL Environments","confidence":"high"}
 {"repo_id":"opendilab/DI-engine","legacy_repo_id":"batch_8/DI-engine","skill_id":"di-engine","area":"Reinforcement Learning","family":"RL Environments","confidence":"high"}
-{"repo_id":"PettingZoo-Team/PettingZoo","legacy_repo_id":"batch_1/PettingZoo","skill_id":"pettingzoo","area":"Reinforcement Learning","family":"RL Environments","confidence":"high"}
 {"repo_id":"pytorch/rl","legacy_repo_id":"batch_8/rl","skill_id":"torchrl","area":"Reinforcement Learning","family":"RL Environments","confidence":"high"}
 {"repo_id":"StanfordVL/BEHAVIOR-1K","legacy_repo_id":"batch_11/BEHAVIOR-1K","skill_id":"behavior-1k","area":"Reinforcement Learning","family":"RL Environments","confidence":"high"}
 {"repo_id":"tensorforce/tensorforce","legacy_repo_id":"batch_8/tensorforce","skill_id":"tensorforce","area":"Reinforcement Learning","family":"RL Environments","confidence":"medium"}
@@ -2010,11 +2015,11 @@
 {"repo_id":"minimaxir/automl-gs","legacy_repo_id":"batch_10/automl-gs","skill_id":"automl-gs","area":"Data Science","family":"Tabular Modeling","confidence":"high"}
 {"repo_id":"mljar/mljar-supervised","legacy_repo_id":"batch_8/mljar-supervised","skill_id":"mljar-supervised","area":"Data Science","family":"Tabular Modeling","confidence":"high"}
 {"repo_id":"nidhaloff/igel","legacy_repo_id":"batch_8/igel","skill_id":"igel","area":"Data Science","family":"Tabular Modeling","confidence":"high"}
+{"repo_id":"NVIDIA/cuml","legacy_repo_id":"batch_6/cuml","skill_id":"cuml","area":"Data Science","family":"Tabular Modeling","confidence":"high"}
 {"repo_id":"okfn-brasil/serenata-de-amor","legacy_repo_id":"batch_7/serenata-de-amor","skill_id":"serenata-de-amor","area":"Data Science","family":"Tabular Modeling","confidence":"high"}
 {"repo_id":"Palashio/libra","legacy_repo_id":"batch_10/libra","skill_id":"libra","area":"Data Science","family":"Tabular Modeling","confidence":"high"}
 {"repo_id":"plexe-ai/plexe","legacy_repo_id":"batch_9/plexe","skill_id":"plexe","area":"Data Science","family":"Tabular Modeling","confidence":"high"}
 {"repo_id":"PriorLabs/TabPFN","legacy_repo_id":"batch_5/TabPFN","skill_id":"tabpfn","area":"Data Science","family":"Tabular Modeling","confidence":"high"}
-{"repo_id":"rapidsai/cuml","legacy_repo_id":"batch_6/cuml","skill_id":"cuml","area":"Data Science","family":"Tabular Modeling","confidence":"high"}
 {"repo_id":"rasbt/mlxtend","legacy_repo_id":"batch_6/mlxtend","skill_id":"mlxtend","area":"Data Science","family":"Tabular Modeling","confidence":"high"}
 {"repo_id":"rushter/MLAlgorithms","legacy_repo_id":"batch_4/MLAlgorithms","skill_id":"ml-algorithms","area":"Data Science","family":"Tabular Modeling","confidence":"high"}
 {"repo_id":"scikit-learn-contrib/imbalanced-learn","legacy_repo_id":"batch_5/imbalanced-learn","skill_id":"imbalanced-learn","area":"Data Science","family":"Tabular Modeling","confidence":"medium"}
@@ -2025,7 +2030,7 @@
 {"repo_id":"imbue-bit/AlphaGPT","legacy_repo_id":"batch_9/AlphaGPT","skill_id":"alpha-gpt","area":"Data Science","family":"Feature Engineering","confidence":"high"}
 {"repo_id":"microsoft/nni","legacy_repo_id":"batch_1/nni","skill_id":"nni","area":"Data Science","family":"Feature Engineering","confidence":"high"}
 {"repo_id":"Nixtla/statsforecast","legacy_repo_id":"batch_7/statsforecast","skill_id":"statsforecast","area":"Data Science","family":"Feature Engineering","confidence":"high"}
-{"repo_id":"rapidsai/cuml","legacy_repo_id":"batch_6/cuml","skill_id":"cuml","area":"Data Science","family":"Feature Engineering","confidence":"high"}
+{"repo_id":"NVIDIA/cuml","legacy_repo_id":"batch_6/cuml","skill_id":"cuml","area":"Data Science","family":"Feature Engineering","confidence":"high"}
 {"repo_id":"rasbt/mlxtend","legacy_repo_id":"batch_6/mlxtend","skill_id":"mlxtend","area":"Data Science","family":"Feature Engineering","confidence":"high"}
 {"repo_id":"scikit-learn-contrib/imbalanced-learn","legacy_repo_id":"batch_5/imbalanced-learn","skill_id":"imbalanced-learn","area":"Data Science","family":"Feature Engineering","confidence":"high"}
 {"repo_id":"uber/causalml","legacy_repo_id":"batch_6/causalml","skill_id":"causalml","area":"Data Science","family":"Feature Engineering","confidence":"medium"}
@@ -2103,7 +2108,7 @@
 {"repo_id":"DistrictDataLabs/yellowbrick","legacy_repo_id":"batch_7/yellowbrick","skill_id":"yellowbrick","area":"Data Science","family":"Dimensionality Reduction","confidence":"high"}
 {"repo_id":"lmcinnes/umap","legacy_repo_id":"batch_5/umap","skill_id":"umap-learn","area":"Data Science","family":"Dimensionality Reduction","confidence":"high"}
 {"repo_id":"mars-project/mars","legacy_repo_id":"batch_9/mars","skill_id":"mars","area":"Data Science","family":"Dimensionality Reduction","confidence":"medium"}
-{"repo_id":"rapidsai/cuml","legacy_repo_id":"batch_6/cuml","skill_id":"cuml","area":"Data Science","family":"Dimensionality Reduction","confidence":"high"}
+{"repo_id":"NVIDIA/cuml","legacy_repo_id":"batch_6/cuml","skill_id":"cuml","area":"Data Science","family":"Dimensionality Reduction","confidence":"high"}
 {"repo_id":"scverse/scanpy","legacy_repo_id":"batch_0/scanpy","skill_id":"scanpy","area":"Data Science","family":"Dimensionality Reduction","confidence":"high"}
 {"repo_id":"scverse/scvi-tools","legacy_repo_id":"batch_0/scvi-tools","skill_id":"scvi-tools","area":"Data Science","family":"Dimensionality Reduction","confidence":"high"}
 {"repo_id":"numenta/nupic-legacy","legacy_repo_id":"batch_6/nupic-legacy","skill_id":"nupic-legacy","area":"Data Science","family":"Online Machine Learning","confidence":"high"}

@@ -72,15 +72,15 @@ for the other documented update targets.
 Researcher is the default for a new session:
 
 ```bash
-disco --agent-mode researcher
-disco --agent-mode researcher -p "Reproduce this paper's primary result"
+disco --researcher
+disco --researcher -p "Reproduce this paper's primary result"
 ```
 
 Use Creator when the output is a reusable skill:
 
 ```bash
-disco --agent-mode creator
-disco --agent-mode creator -p "Inspect /path/to/repo and draft a skill creation plan"
+disco --creator
+disco --creator -p "Inspect /path/to/repo and draft a skill creation plan"
 ```
 
 In an interactive session, `/creator` and `/researcher` switch mode and rebuild

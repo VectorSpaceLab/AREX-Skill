@@ -130,7 +130,7 @@ describe("DisCo-owned skill role contracts", () => {
 			join(distillDir, "references", "task-and-construction-contract.md"),
 			"utf8",
 		);
-		const selection = readFileSync(join(distillDir, "references", "path-selection-and-adequacy.md"), "utf8");
+		const selection = readFileSync(join(distillDir, "references", "construction-strategy-and-adequacy.md"), "utf8");
 		const direct = readFileSync(join(distillDir, "references", "direct-construction-and-handoff.md"), "utf8");
 		const design = readFileSync(join(designDir, "SKILL.md"), "utf8");
 		const reusableBundle = readFileSync(
@@ -139,26 +139,34 @@ describe("DisCo-owned skill role contracts", () => {
 		);
 
 		expect(distill).toContain("task-and-construction-contract.md");
-		expect(distill).toContain("path-selection-and-adequacy.md");
-		expect(contract).toContain("tau = (x, E, B, J)");
-		expect(contract).toContain("selected path: direct | reuse-existing | design-reusable");
+		expect(distill).toContain("construction-strategy-and-adequacy.md");
+		expect(contract).toContain("tau = (q, D, E, g)");
+		expect(contract).toContain("anchor `z`");
+		expect(contract).toContain("scoped capabilities `Q`");
+		expect(contract).toContain("grounded evidence `X`");
+		expect(contract).toContain("candidate graph `G_tilde`");
+		expect(contract).toContain("accepted graph `G`");
+		expect(contract).toContain("construction record `R`");
+		expect(contract).toContain("construction strategy: direct | reuse-existing | design-reusable");
 		expect(contract).toContain("## Clarification Gate");
-		expect(contract).toContain("Do not treat approval of a record that");
-		expect(contract).toContain("still contains a blocking unknown as resolution");
-		expect(contract).toContain("`assumption-safe`");
+		expect(contract).toContain("Approval of a record containing a blocking unknown");
+		expect(contract).toContain("does not resolve that unknown");
+		expect(contract).toContain("explicit, reversible assumptions");
 		expect(selection).toContain("reuse mode: single");
 		expect(selection).toContain("reuse mode: compose");
-		expect(direct).toContain("only after `distill-ml-knowledge` has selected `direct`");
-		expect(direct).toContain("may retain only assumption-safe unknowns");
-		expect(direct).not.toContain("If `path preference` is `auto`");
-		expect(design).toContain("This skill owns only the `design-reusable` branch");
-		expect(design).toContain("missing required fields or blocking");
-		expect(design).toContain("stop this branch");
-		expect(design).toMatch(/Do not\s+start a parallel `reuse \| compose \| gap` decision here/);
+		expect(direct).toContain("construction strategy: direct");
+		expect(direct).toContain("assumption-safe unknowns");
+		expect(direct).not.toContain("tau = (x, E, B, J)");
+		expect(selection).toContain("construction strategy: direct | reuse-existing | design-reusable");
+		expect(design).toContain("design-reusable` is a Creator");
+		expect(design).toContain("exact missing blocking fields");
+		expect(design).toContain("stop before use");
+		expect(design).toMatch(/Do not\s+start another reuse, composition, or\s+gap decision here/);
 		expect(design).not.toContain("adequacy-and-capability-matrix.md");
-		expect(reusableBundle).toContain("Do not redefine them here or use this specification to select a path");
-		expect(reusableBundle).toContain("exact missing fields or blocking unknowns");
-		expect(reusableBundle).not.toContain("tau = (x, E, B, J)");
+		expect(reusableBundle).toMatch(/Do not use this specification to select a strategy/);
+		expect(reusableBundle).toMatch(/exact missing fields or changed evidence/);
+		expect(reusableBundle).toContain("tau = (q, D, E, g)");
+		expect(reusableBundle).toContain("Future Anchor Contract");
 		expect(existsSync(join(designDir, "references", "adequacy-and-capability-matrix.md"))).toBe(false);
 		expect(existsSync(join(designDir, "references", "construction-specification.md"))).toBe(false);
 	});

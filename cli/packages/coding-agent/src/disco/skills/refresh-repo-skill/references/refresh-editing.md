@@ -17,6 +17,7 @@ Every `SKILL.md` frontmatter block must remain valid:
 name: skill-id
 description: "Triggering description broad enough for natural user requests."
 disable-model-invocation: true
+license: <repository-license-or-NO_LICENSE>
 metadata:
   disco-role: operating
 ---
@@ -29,6 +30,31 @@ DisCo-owned repo skill must not depend on the missing-role fallback.
 Do not add development history to public runtime guidance unless it helps future
 agents choose correct current behavior. Put migration notes, stale-claim tables,
 and baseline details under the review/test artifact directory instead.
+
+## Refresh License Metadata
+
+After resolving the current canonical GitHub repository identity and refreshed
+source commit, run the shared resolver and apply its value to the external
+working tree before verification:
+
+```bash
+node ../verify-repo-skill/scripts/resolve_repo_license.mjs \
+  --repository <owner/repository> \
+  --source-commit <40-hex-source-commit> \
+  --json > <artifact-root>/reports/license-resolution.json
+node ../verify-repo-skill/scripts/apply_repo_license.mjs \
+  --skill-dir <external-runtime-skill-dir> \
+  --license <value-from-report>
+```
+
+The resolver is bound to the exact source commit and must run on every refresh.
+GitHub CLI failures, missing authentication, 404, no usable value, or an
+unparseable result become `NO_LICENSE`; `NOASSERTION` is preserved as an accepted
+source value. That same value must be present as a top-level field in the root and
+every sub-skill. Record old value, new value, source commit, status, and reason in
+the review/handoff artifact. `NO_LICENSE`
+means only that this query produced no usable result; it is not a legal
+conclusion.
 
 ## Edit In Place
 

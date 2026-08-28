@@ -6,6 +6,7 @@ Choose a repository below only when its description, package/repository identity
 
 | Repo skill | Repository | Skill description |
 | --- | --- | --- |
+| [`docsgpt`](../../../../repo-skills/docsgpt/SKILL.md) | `arc53/DocsGPT` | Routes DocsGPT deployment, source ingestion, retrieval, agent workflows, tools, integrations, and native or OpenAI-compatible API operations. |
 | [`camel-ai`](../../../../repo-skills/camel-ai/SKILL.md) | `camel-ai/camel` | Use CAMEL-AI to build, configure, tool, remember, evaluate, and troubleshoot multi-agent Python systems with self-contained routing across agents, models, tools, RAG, and evaluation workflows. |
 | [`kotaemon`](../../../../repo-skills/kotaemon/SKILL.md) | `Cinnamon/kotaemon` | Use Kotaemon to build, deploy, configure, extend, and troubleshoot document QA, RAG, model-provider, ingestion, and Gradio app workflows. |
 | [`bisheng`](../../../../repo-skills/bisheng/SKILL.md) | `dataelement/bisheng` | Use BiSheng's enterprise LLM application DevOps platform repository, including FastAPI backend, workflow/RAG/Linsight runtimes, permissions, dual React frontends, deployment, and maintainer workflows. |

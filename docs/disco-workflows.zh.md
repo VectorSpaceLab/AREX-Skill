@@ -2,7 +2,7 @@
 
 本文档集中说明主 README 为保持简洁而省略的操作细节，包括模式边界、
 Researcher 任务执行、Creator 技能构造流程、部署范围和跨 Agent 导出。使用公开
-仓库技能集合前，请先按[主 README](../README.zh-CN.md#installation)安装 DisCo
+仓库技能集合前，请先按[安装指南](installation.zh.md)安装 DisCo
 和 repository collection。
 
 ## Agent 模式与会话
@@ -14,7 +14,8 @@ Researcher 任务执行、Creator 技能构造流程、部署范围和跨 Agent 
 | **Researcher**（默认） | `operating` 与 `shared` 技能，包括没有声明 `metadata.disco-role` 的用户技能 | 使用经过路由的操作知识、代码、工具和实验完成机器学习研究任务。 |
 | **Creator** | 声明为 `metadata.disco-role: meta` 或 `shared` 的技能 | 先从 `distill-ml-knowledge` 开始，选择 `direct`、`reuse-existing`（单一流程或组合）或 `design-reusable`，只有经过验证且会重复出现的构造能力缺口才交给 `design-meta-skill`。 |
 
-非交互会话通过 `--agent-mode creator|researcher` 指定模式。在交互界面中，
+使用 `--creator` 或 `--researcher` 为新会话选择 Agent 模式；这两个参数同时适用于
+交互和非交互会话。在交互界面中，
 `/creator` 与 `/researcher` 会先提示用户，再用干净上下文创建一个新会话。原
 会话仍可通过 `/resume` 恢复并单独导出；新会话执行 `/export` 时，只会导出新
 会话中的轨迹。
@@ -50,7 +51,7 @@ skills。官方 skill 的本地修改会被报告为 drift；必须显式使用 
 安装后直接描述具体的研究目标即可。例如，可以在受控条件下比较两套推理系统：
 
 ```bash
-disco --agent-mode researcher -p "在这台机器上使用相同模型和工作负载评测 vLLM 与 SGLang。在相同硬件和显存约束下分别调优两套服务，报告各自经过验证的最佳吞吐量，并保留复现实验所需的命令和测量结果。"
+disco --researcher -p "在这台机器上使用相同模型和工作负载评测 vLLM 与 SGLang。在相同硬件和显存约束下分别调优两套服务，报告各自经过验证的最佳吞吐量，并保留复现实验所需的命令和测量结果。"
 ```
 
 对于与仓库知识相关的请求，DisCo 会读取 `repo-skills-router`，先打开一个或
@@ -73,7 +74,7 @@ Researcher session 中生效。
 已知具体技能名称时，也可以显式调用：
 
 ```bash
-disco --agent-mode researcher -p "/skill:vllm 为 <模型与工作负载> 找出并验证吞吐量最高的 vLLM 配置"
+disco --researcher -p "/skill:vllm 为 <模型与工作负载> 找出并验证吞吐量最高的 vLLM 配置"
 ```
 
 ### 使用经过审批的任务专用技能图
@@ -81,7 +82,7 @@ disco --agent-mode researcher -p "/skill:vllm 为 <模型与工作负载> 找出
 Creator 构造并导入任务专用的操作技能图后，调用交接记录中给出的入口技能：
 
 ```bash
-disco --agent-mode researcher -p "/skill:<graph-entry> 在 <环境与预算限制> 内完成 <研究任务>，并使用 <评测器> 验证结果。"
+disco --researcher -p "/skill:<graph-entry> 在 <环境与预算限制> 内完成 <研究任务>，并使用 <评测器> 验证结果。"
 ```
 
 Researcher 会渐进打开所需子图，并在执行过程中使用其中的方法、检查和故障
@@ -102,24 +103,24 @@ Researcher 会渐进打开所需子图，并在执行过程中使用其中的方
 需要构造、审阅、维护或导出技能时，启动 Creator：
 
 ```bash
-disco --agent-mode creator
+disco --creator
 ```
 
-Creator 可以看到 meta 与 shared 技能。它会先判断现有构造流程能否覆盖当前任务的构造规格，
-只要条件允许就优先复用或组合已有流程。
+Creator 可以看到 meta 与 shared 技能。它会先识别 source 或 task anchor，确定所需能力，
+再判断可见构造流程能否覆盖当前请求。复用或组合时必须保留完整的验证和交接契约，
+并将其记录为 Creator construction strategy。
 
 ### 评估构造流程是否足够
 
-先从 `distill-ml-knowledge` 开始处理普通的 ML knowledge distillation 请求。它
-拥有通用 task/construction contract，检查一个可见流程或有边界的流程组合是否
-充分，并选择 `direct`、`reuse-existing` 或 `design-reusable`。以仓库为知识源时，
+先从 `distill-ml-knowledge` 开始处理普通的 ML knowledge distillation 请求。它识别
+anchor，并驱动 `scope`、`ground`、`construct`、`verify` 四个阶段。以仓库为知识源时，
 通常通过 `reuse-existing` 使用 `create-repo-skill`；以论文为知识源时，通常复用
 内置论文工作流。只有在知识源处理、证据选择、技能图结构、验证、环境或恢复上
 存在有证据支撑且会重复出现的构造能力缺口时，才会把任务交给
 `design-meta-skill`：
 
 ```bash
-disco --agent-mode creator -p "/skill:distill-ml-knowledge 归一化 <任务与知识源锚点>；选择 direct、reuse-existing 或 design-reusable。"
+disco --creator -p "/skill:distill-ml-knowledge 识别 <source 或 task anchor>；完成 scope、ground、construct、verify。"
 ```
 
 新的元技能必须通过验证并得到用户明确批准，随后才会作为可复用的 Creator
@@ -133,7 +134,7 @@ disco --agent-mode creator -p "/skill:distill-ml-knowledge 归一化 <任务与�
 根据源码证据创建并验证仓库专用技能：
 
 ```bash
-disco --agent-mode creator -p "为 /path/to/repo 创建仓库技能。"
+disco --creator -p "为 /path/to/repo 创建仓库技能。"
 ```
 
 该流程会分析仓库结构，必要时准备或检查 Python 调研环境，编写运行时指导，
@@ -145,7 +146,7 @@ disco --agent-mode creator -p "为 /path/to/repo 创建仓库技能。"
 请求中明确授予这两项权限：
 
 ```bash
-disco --agent-mode creator -p "为 /path/to/repo 创建仓库技能，自动决定抽取范围，并在验证通过后自动导入。"
+disco --creator -p "为 /path/to/repo 创建仓库技能，自动决定抽取范围，并在验证通过后自动导入。"
 ```
 
 ### 构造论文复现技能
@@ -156,7 +157,7 @@ disco --agent-mode creator -p "为 /path/to/repo 创建仓库技能，自动决�
 ```bash
 cp cli/packages/coding-agent/src/disco/skills/create-paper-skills/assets/distiller-run-config-template.toml \
   /path/to/distiller_run_config.toml
-disco --agent-mode creator -p "使用 Distiller 为该配置中的每项运行生成并验证用于论文复现的技能。config_path: /path/to/distiller_run_config.toml"
+disco --creator -p "使用 Distiller 为该配置中的每项运行生成并验证用于论文复现的技能。config_path: /path/to/distiller_run_config.toml"
 ```
 
 论文来源可以是本地 PDF 或文本文件、PDF 直链、arXiv 链接或编号，也可以是
@@ -180,13 +181,13 @@ Distiller 会把论文拆分为模块，创建并验证用于论文复现的模�
 如果已有技能内容正确，但需要覆盖新的工作流领域，可以扩展它：
 
 ```bash
-disco --agent-mode creator -p "以 /path/to/repo 为证据，为 /path/to/repo/skills/example-skill 中的现有技能增加流式推理支持。"
+disco --creator -p "以 /path/to/repo 为证据，为 /path/to/repo/skills/example-skill 中的现有技能增加流式推理支持。"
 ```
 
 当上游 API、配置、示例、依赖或运行时行为发生变化时，可以刷新技能：
 
 ```bash
-disco --agent-mode creator -p "根据 /path/to/repo 的当前代码刷新 /path/to/repo/skills/example-skill 中的技能。"
+disco --creator -p "根据 /path/to/repo 的当前代码刷新 /path/to/repo/skills/example-skill 中的技能。"
 ```
 
 刷新流程会保留仍然正确的现有指导，并根据当前源码基线更新过期内容。
@@ -195,21 +196,25 @@ disco --agent-mode creator -p "根据 /path/to/repo 的当前代码刷新 /path/
 
 当 Codex、Claude Code 或其他兼容 Agent 需要 DisCo 托管仓库集合中的部分技
 能时，使用 `import-repo-skills-to-agent`。该流程会在目标技能目录中保持
-`repo-skills/` 与 `repo-skills-router/` 同级。
+`repo-skills/` 与 `repo-skills-router/` 同级。用户确认覆盖后，transactional
+helper 会重新生成最终根 index 和 scoped router，保留目标中无关的 repository
+skills，只向 Codex 目标副本添加 Codex policy，并在 mutation 失败时自动恢复原目
+标。发生中断时使用报告的 `--resume <transaction-directory>`；不要手工修复或合并
+部分产物。
 
 把路由器以及 `vllm`、`sglang` 导入 Claude Code：
 
 ```bash
-disco --agent-mode creator -p "/skill:import-repo-skills-to-agent import vllm and sglang to ~/.claude"
+disco --creator -p "/skill:import-repo-skills-to-agent import vllm and sglang to ~/.claude"
 ```
 
 把相同技能导入 Codex 推荐的用户级技能目录：
 
 ```bash
-disco --agent-mode creator -p "/skill:import-repo-skills-to-agent import vllm and sglang to ~/.agents"
+disco --creator -p "/skill:import-repo-skills-to-agent import vllm and sglang to ~/.agents"
 ```
 
-导入后请重启目标 Agent。[Research Skills Library
+导入后请重启目标 Agent。[AREX-Skill Library
 说明](../skills/README.md)介绍了源码布局和 DisCo 安装
 方式；[`import-repo-skills-to-agent`
 工作流](../cli/packages/coding-agent/src/disco/skills/import-repo-skills-to-agent/SKILL.md)
@@ -219,5 +224,5 @@ disco --agent-mode creator -p "/skill:import-repo-skills-to-agent import vllm an
 
 - [架构说明](architecture.zh.md)
 - [内置技能参考](../cli/packages/coding-agent/src/disco/skills/README.md)
-- [Research Skills Library](../skills/README.md)
-- [给其他 Agent 的 Meta Skills](meta-skills-for-other-agents.zh.md)
+- [AREX-Skill Library](../skills/README.md)
+- [DisCo Meta Skills](disco-meta-skills.zh.md)

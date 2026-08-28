@@ -7,11 +7,19 @@
   "assignments": [
     {
       "area": "Generative Media",
+      "family": "Media Generation Applications"
+    },
+    {
+      "area": "Generative Media",
       "family": "Video Synthesis"
     },
     {
       "area": "Generative Media",
       "family": "Generative Model Adaptation"
+    },
+    {
+      "area": "Generative Media",
+      "family": "Generative Media Evaluation"
     },
     {
       "area": "Model Deployment and Optimization",

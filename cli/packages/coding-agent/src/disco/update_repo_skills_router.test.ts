@@ -29,6 +29,7 @@ async function writeSkill(root: string, id: string, repoId: string, assignments:
 			"---",
 			`name: ${id}`,
 			`description: "Use ${id} for focused repository workflows."`,
+			"license: MIT",
 			"disable-model-invocation: true",
 			"metadata:",
 			"  disco-role: operating",
@@ -85,6 +86,17 @@ function run(libraryRoot: string, templateDir: string, extra: string[] = []) {
 	});
 }
 
+function runForAgent(agentDir: string, templateDir: string) {
+	return spawnSync(process.execPath, [scriptPath, "--agent-dir", agentDir, "--template-dir", templateDir, "--already-locked"], {
+		encoding: "utf8",
+		env: {
+			...process.env,
+			DISCO_ALLOW_UNLOCKED_ROUTER_UPDATE_FOR_TESTS: "1",
+			DISCO_ROUTER_ALLOW_NONCANONICAL_TAXONOMY_FOR_TESTS: "1",
+		},
+	});
+}
+
 describe("area/family repository skills router updater", () => {
 	it("builds deterministic root, area, family, and machine indexes", async () => {
 		const root = await mkdtemp(path.join(tmpdir(), "router-area-family-"));
@@ -134,6 +146,21 @@ describe("area/family repository skills router updater", () => {
 		expect(await readFile(path.join(output, "references", "index", "build-metadata.json"), "utf8")).toBe(await readFile(path.join(secondOutput, "references", "index", "build-metadata.json"), "utf8"));
 	});
 
+	it("resolves --agent-dir through skills/repositories", async () => {
+		const root = await mkdtemp(path.join(tmpdir(), "router-agent-layout-"));
+		cleanup.push(root);
+		const agentDir = path.join(root, "agent");
+		const library = path.join(agentDir, "skills", "repositories");
+		await mkdir(path.join(library, "repo-skills"), { recursive: true });
+		const template = await writeTemplate(root);
+		await writeSkill(library, "alpha", "owner/alpha", [{ area: "Vision", family: "Classification" }]);
+
+		const result = runForAgent(agentDir, template);
+		expect(result.status, result.stderr).toBe(0);
+		expect(existsSync(path.join(library, "repo-skills-router", "SKILL.md"))).toBe(true);
+		expect(existsSync(path.join(agentDir, "skills", "repo-skills-router"))).toBe(false);
+	});
+
 	it("fails closed on a non-exact taxonomy assignment", async () => {
 		const root = await mkdtemp(path.join(tmpdir(), "router-invalid-"));
 		cleanup.push(root);
@@ -146,7 +173,7 @@ describe("area/family repository skills router updater", () => {
 		expect(result.stderr).toContain("unknown taxonomy path");
 	});
 
-	it("recomputes repository content digests after a skill refresh", async () => {
+	it("does not persist a per-repository content digest when skills change", async () => {
 		const root = await mkdtemp(path.join(tmpdir(), "router-digest-refresh-"));
 		cleanup.push(root);
 		const library = path.join(root, "library");
@@ -157,11 +184,18 @@ describe("area/family repository skills router updater", () => {
 		expect(first.status, first.stderr).toBe(0);
 		const indexPath = path.join(library, "repo-skills-router", "references", "index", "repositories.jsonl");
 		const firstRecord = JSON.parse((await readFile(indexPath, "utf8")).trim());
+		await mkdir(path.join(library, "repo-skills", "alpha", "agents"), { recursive: true });
+		await writeFile(path.join(library, "repo-skills", "alpha", "agents", "openai.yaml"), "policy:\n  allow_implicit_invocation: false\n", "utf8");
+		const policyOnly = run(library, template);
+		expect(policyOnly.status, policyOnly.stderr).toBe(0);
+		const policyRecord = JSON.parse((await readFile(indexPath, "utf8")).trim());
+		expect(firstRecord).not.toHaveProperty("content_sha256");
+		expect(policyRecord).not.toHaveProperty("content_sha256");
 		await writeFile(path.join(library, "repo-skills", "alpha", "SKILL.md"), `${await readFile(path.join(library, "repo-skills", "alpha", "SKILL.md"), "utf8")}\nrefreshed\n`, "utf8");
 		const second = run(library, template);
 		expect(second.status, second.stderr).toBe(0);
 		const secondRecord = JSON.parse((await readFile(indexPath, "utf8")).trim());
-		expect(secondRecord.content_sha256).not.toBe(firstRecord.content_sha256);
+		expect(secondRecord).not.toHaveProperty("content_sha256");
 	});
 });
 

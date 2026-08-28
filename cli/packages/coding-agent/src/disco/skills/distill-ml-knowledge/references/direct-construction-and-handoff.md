@@ -1,135 +1,119 @@
 # Direct Construction And Handoff
 
-Read this reference only after `distill-ml-knowledge` has selected `direct` or
-the user has explicitly requested a direct run and the routing contract confirms
-that it is feasible. Read
-[task-and-construction-contract.md](task-and-construction-contract.md) for the
-canonical definitions of `tau`, `(s, u, v, e, sigma)`, `G = (S, L)`, and `R`.
-The direct path produces an operating graph and construction record; it does not
-author a reusable meta-skill bundle.
+Read this reference after `distill-ml-knowledge` records
+`construction strategy: direct` and the required source/task approvals are in
+place. The direct strategy produces an operating graph and construction record;
+it does not author a reusable Creator meta-skill.
 
-## Contents
+## Approve The Construction Specification
 
-- [Approve The Direct-Run Specification](#approve-the-direct-run-specification)
-- [Construct And Verify](#construct-and-verify)
-- [Deploy And Hand Off](#deploy-and-hand-off)
-
-## Approve The Direct-Run Specification
-
-Specialize the canonical fields for the current task and source anchor:
+For a task-oriented run, specialize the task anchor as
+`tau = (q, D, E, g)`. For a task-agnostic run, keep the source anchor as `z` and
+do not invent `tau`. Approve this exact revision after grounding has produced
+the evidence plan:
 
 ```markdown
-# Direct-Run Construction Specification
+# Direct Construction Specification
 
 - contract kind: operating-run
 - routing decision revision:
+- anchor kind: source | task
+- distillation form: task-agnostic | task-oriented
+- anchor `z`:
+- task `tau`, when applicable: `tau = (q, D, E, g)`
 
-## Downstream task
-- tau:
-- task and deliverable:
-- downstream environment:
-- constraints:
-- task evaluation:
-
-## Source contract (`s`)
-- accepted anchors and versions:
-- access and trust boundaries:
-- evidence selection constraints:
-
-## Operating use (`u`)
+## Scope `Q`
 - required capabilities and triggers:
-- expected observations:
-- non-goals:
+- expected operating observations:
+- graph boundaries and non-goals:
 
-## Skill verification (`v`)
-| Capability | Check | Expected observation | Gate |
+## Grounding `X`
+- accepted source material and revisions:
+- provenance, access, and trust boundaries:
+- evidence selection, exclusions, conflicts, and assumptions:
+
+## Candidate graph `G_tilde`
+- root/router and skill boundaries:
+- explicit routing, dependency, composition, and reference links:
+- progressive disclosure and bundled resources:
+
+## Verification
+| Capability or representative use | Check | Expected observation | Gate |
 |---|---|---|---|
+| ... | ... | ... | strict / soft |
 
-## Construction environment (`e`)
-- verified resources:
-- requested resources:
-- prohibited actions:
-- budget and stop conditions:
-
-## Graph structure (`sigma`)
-- root/router:
-- skill boundaries and links:
-- progressive disclosure:
+## Creator construction record
+- verified resources and permissions:
+- prohibited actions, budget, and stop conditions:
+- staging, resume, and recovery:
+- deployment scope and importer:
 
 ## Unknowns and assumptions
 | Item | Status | Owner | Resolution |
 |---|---|---|---|
+| ... | ... | ... | ... |
 
 ## User decision
 - status: proposed | approved | revise
 - approved revision identifier:
 ```
 
-Apply the shared clarification gate before requesting approval. The
-specification may retain only assumption-safe unknowns; if a blocking unknown
-remains, stop and ask for the missing information or decision instead of asking
-the user to approve an incomplete revision.
-
-Keep the run aligned to the approved revision. If the source anchor,
-permissions, budget, evidence contract, graph scope, or verification plan
-changes materially, pause and obtain a revised approval.
+The specification must have no blocking unknowns at approval. Keep only
+assumption-safe unknowns with an owner and validation plan. Reopen approval if
+the anchor, evidence boundary, graph scope, budget, permissions, or verification
+gate changes materially.
 
 ## Construct And Verify
 
-1. Resolve the approved source anchor and record its version, access path, and
-   trust boundary.
-2. Retain only evidence supporting the approved operating use, verification,
-   construction environment, and graph structure. Record exclusions, conflicts,
-   inaccessible evidence, missing support, and assumptions.
-3. Build candidate `G'` so each skill carries applicability, procedures,
-   expected observations, checks, recovery actions, and evidence provenance.
+1. Resolve the approved anchor and record source identity, revision, access, and
+   trust boundary in `R`.
+2. Retain only evidence supporting `Q`, the construction environment, graph
+   structure, and verification contract. Record exclusions, conflicts, missing
+   support, inaccessible material, and assumptions in `X`/`R`.
+3. Build candidate `G_tilde = (S_tilde, L_tilde)`. Each node must carry its
+   applicability, procedures, expected observations, checks, recovery actions,
+   and evidence provenance.
 4. Declare `metadata.disco-role: operating` on every root and sub-skill.
-5. Verify against the approved skill-verification and construction-environment
-   contract with static checks, source-support checks, graph/link checks,
-   feasible task trials, and failure-recovery checks when available.
-6. Repair only affected skills, links, evidence mappings, or verification
-   fixtures. Rerun affected checks and graph integration.
-7. If a strict check cannot run or the budget is exhausted, record the blocker
-   and return an unverified candidate instead of claiming acceptance.
+5. Verify static structure, source support, graph links, executable or
+   representative-use behavior, and failure recovery. For a task-oriented run,
+   run task-level trials when the approved `g` makes them applicable. For a
+   task-agnostic source run, use source-supported representative workflows and
+   do not substitute an invented task outcome.
+6. Repair only affected skills, links, evidence mappings, or fixtures, then
+   rerun the affected checks and graph integration. A strict blocker leaves the
+   candidate unverified.
 
-Keep evidence plans, drafts, candidate graphs, verification output,
-construction records, and handoff files outside every live skill root.
+Keep evidence plans, drafts, candidate graphs, verification output, construction
+records, and handoff files outside every live skill root.
 
 ## Deploy And Hand Off
 
-8. Assess reuse only after verification. Default task-bound or uncertain output
-   to `<project-dir>/.agents/skills/`; use `~/.disco/agent/skills/` only for
-   self-contained, provenance-backed output with evidence of cross-project use.
-9. Keep every root and sub-skill in one scope. Show the exact targets, entry
-   point, reuse evidence, verification, unresolved gaps, collisions, shadowing,
-   project-trust impact, and overwrite status before import approval.
-10. After approval, invoke `../scripts/import_operating_skill_graph.mjs` once
-    with every top-level root. Add `--overwrite` only after separate approval.
-11. Write `researcher-handoff.md` after the import decision. Do not copy review
-    artifacts into live skills or load the graph in the Creator session.
-
-Use this construction record shape:
-
-```markdown
-# Construction Record
-
-- task and direct-run specification revision:
-- routing decision revision:
-- retained/excluded/conflicting/missing evidence:
-- candidate roots, entry point, boundaries, links, and provenance:
-- checks, results, repairs, reruns, and unverified points:
-- selected scope, exact targets, collisions, shadowing, and overwrite status:
-- stop reason: accepted | unverified | blocked
-- budget used and remaining limits:
-```
+7. Assess reusability only after verification. Default task-bound or uncertain
+   output to `<project-dir>/.agents/skills/`; use managed scope only when the
+   complete graph is self-contained, provenance-backed, and supported by
+   cross-project representative-use evidence.
+8. Keep every root and sub-skill in one scope. Show exact targets, entry point,
+   verification, unresolved gaps, collisions, shadowing impact, and overwrite
+   status before import approval.
+9. After approval, invoke the selected locked importer once with every top-level
+   root. Add overwrite only after separate approval.
+10. Write `researcher-handoff.md` after the deployment decision. Do not load the
+    graph or execute the downstream task in the Creator session.
 
 Use this handoff shape:
 
 ```markdown
 # Researcher Handoff
 
-- task `tau` and source anchor:
-- selected path: direct
+- anchor kind: source | task
+- distillation form: task-agnostic | task-oriented
+- anchor `z`:
+- task `tau`, when applicable: `tau = (q, D, E, g)`
+- scoped capabilities `Q`:
+- grounded evidence `X` and provenance scope:
+- accepted or unverified graph `G`:
+- construction record `R` path:
+- construction strategy: direct
 - selected scope and exact imported paths:
 - skill ids and graph entry point:
 - verification evidence and unresolved limits:

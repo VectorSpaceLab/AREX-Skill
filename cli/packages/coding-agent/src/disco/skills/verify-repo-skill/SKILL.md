@@ -81,6 +81,9 @@ Read these references as the workflow reaches each stage:
   the global lock, stages and validates the runtime tree, installs it under
   `~/.disco/agent/skills/repositories/repo-skills/`, rebuilds the sibling live
   `repo-skills-router`, and rolls back both on failure.
+- [scripts/license-validation.mjs](scripts/license-validation.mjs): recursively
+  validates the top-level `license` field on every root and sub-skill and checks
+  that the complete repo skill tree uses one value.
 - [scripts/with_import_lock.mjs](scripts/with_import_lock.mjs): lower-level lock
   helper used by the dedicated importer and router updater. Do not manually
   compose the normal repo-skill import with this helper.
@@ -107,7 +110,16 @@ progress.
    `SKILL.md`, sub-skills, references, scripts, repo provenance, integration
    notes, native test/example candidate map, and long-tail gap register before
    writing verification artifacts.
-2. Usability test case generation:
+2. License metadata gate:
+   Run `node scripts/license-validation.mjs --json <runtime-skill-dir>` before
+   declaring the runtime tree import-ready. Require every root and sub-skill
+   `SKILL.md` to contain one non-empty, single-line top-level `license` value.
+   Missing, empty, duplicate, malformed, or inconsistent values are failures.
+   `NOASSERTION` is a valid source value and is preserved. `NO_LICENSE` is also
+   valid but produces a warning containing the repository, source commit, query
+   status, and reason from the creator's license-resolution report; it is not a
+   legal conclusion and does not by itself block import.
+3. Usability test case generation:
    Read [references/usability-test-cases.md](references/usability-test-cases.md).
    Create realistic, difficult, evidence-backed case directories under
    `<artifact-root>/test-cases/`, including `user_request.txt`, `README.md`,
@@ -121,14 +133,14 @@ progress.
    under `test-cases/integration/`; prefer adapting original repo tests/examples
    from the native candidate map, and synthesize only when no suitable native
    integrated case exists.
-3. Content-level self-refine:
+4. Content-level self-refine:
    Read [references/evaluation-verification-and-handoff.md](references/evaluation-verification-and-handoff.md).
    Review the whole skill against the user request, confirmed repository
    include/exclude map, planned sub-skill structure, subagent rubrics, coverage
    matrix, self-containment, privacy, routing, references, scripts, and
    assertion-backed usability cases. Revise the runtime skill when the review
    finds actionable gaps.
-4. Native repo test/example verification:
+5. Native repo test/example verification:
    Using the native test/example candidate map from the calling workflow or one
    built during setup, select a safe representative subset of original repo
    examples, tests, CLI help checks, tiny-fixture checks, or smoke scripts. Use
@@ -145,12 +157,12 @@ progress.
    evidence is unavailable. Treat it as a high or critical import blocker, not
    a skip or pass. Use failures or gaps to revise the runtime skill before
    static verification when the generated skill is wrong or thin.
-5. Static verification, final report, and review package:
+6. Static verification, final report, and review package:
    Run the static checks from the verification reference. Save verification
    reports, final skill coverage report, human-review notes, publication
    checklist, prompt samples, native verification reports, and any
    eval/self-refine notes under `<artifact-root>/reports/`.
-6. Router placement:
+7. Router placement:
    When the skill is intended for the managed repository collection, classify
    the repository against the exact fixed taxonomy after verification. Inspect
    README and substantive documentation first, then the generated root and
@@ -173,7 +185,7 @@ progress.
    current taxonomy hash, `routing_status`, exact assignments, and an
    `unclassified_reason` only when applicable. Do not store evidence or
    rationale in that runtime JSON.
-7. Handoff and import readiness:
+8. Handoff and import readiness:
    Report the runtime skill path, artifact path, usability coverage, native
    verification results, failures fixed, remaining long-tail gaps, and whether
    the skill is ready to import. Record that a self-contained, versioned
@@ -227,6 +239,11 @@ progress.
   skill tree, required bundled references/scripts are missing, local
   environment paths leak into public files, or root/sub-skill routing is too
   thin to use.
+- Do not mark a repo skill import-ready if any root or sub-skill is missing a
+  valid top-level `license`, uses an empty or multi-line value, contains a
+  duplicate `license` key, or disagrees with the repository-level value.
+  `NOASSERTION` is accepted as a source result. `NO_LICENSE` is the valid
+  unavailable-result fallback and remains a warning.
 - Do not treat the generated usability test cases as runtime documentation.
 - Do not treat skipped native repo examples/tests as passing. Record the skip
   reason and decide whether a synthetic assertion-backed case should cover the

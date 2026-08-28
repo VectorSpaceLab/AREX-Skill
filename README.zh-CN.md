@@ -21,6 +21,10 @@
 </p>
 
 ```mermaid
+---
+config:
+  fontSize: 18
+---
 flowchart LR
     subgraph SRC["📚 知识来源"]
         direction TB
@@ -55,12 +59,13 @@ flowchart LR
 - [为什么需要 AREX-Skill](#why-arex-skill)
 - [从知识到技能](#from-knowledge-to-skills)
 - [AREX Skill 是什么](#what-is-an-arex-skill)
+- [Router 设计](#router-design)
 - [AREX-Skill 的构建方式：DisCo](#how-arex-builds-skills)
-- [接入你现有的 Coding Agent](#works-with-your-coding-agent)
 - [技能库规模](#library-scale)
 - [技能一览](#skill-gallery)
 - [技能真的能让 Agent 更会做研究吗](#do-skills-make-agents-better-researchers)
 - [快速开始](#quick-start)
+- [接入你现有的 Coding Agent](#works-with-your-coding-agent)
 - [更大的图景](#the-bigger-vision)
 - [参与贡献](#contributing)
 - [文档](#documentation)
@@ -104,6 +109,10 @@ flowchart LR
 > **我们不做仓库摘要。我们把仓库编译成 Agent 可以执行的技能。**
 
 ```mermaid
+---
+config:
+  fontSize: 18
+---
 flowchart TB
     subgraph D["📚 描述性知识——写给人类"]
         direction LR
@@ -170,6 +179,20 @@ Repository Skill Graph
 scripts。root 与 sub-skills 之间的链接构成 **skill graph**——这是
 AREX-Skill 为支持渐进披露而增加的扩展，使 Agent 只读取任务需要的分支。
 
+### 🧭 Router 设计 <a id="router-design"></a>
+
+已发布的 repository collection 使用一个本身也是 AREX Skill 的 router：
+[`repo-skills-router/SKILL.md`](skills/repositories/repo-skills-router/SKILL.md)。它
+不是独立的黑盒路由服务，也不是必须安装的专有 runtime。
+
+Agent 应先读取 router，识别相关 repository 或 workflow，再按需加载匹配的
+skill branch 及其 `references/`、`scripts/`。这种渐进披露方式能保持初始上下文
+聚焦，同时允许任务需要时继续深入。
+
+该 `SKILL.md` router 是当前的可移植基线，而不是唯一实现。用户也可以根据延迟、
+成本、隐私和控制要求，使用查询 subagent 或 retrieval tool 构建其他路由层，但
+仍应保留清晰的 scope、渐进加载、provenance 和验证边界。
+
 ---
 
 ## ⚗️ AREX-Skill 的构建方式：DisCo <a id="how-arex-builds-skills"></a>
@@ -177,6 +200,10 @@ AREX-Skill 为支持渐进披露而增加的扩展，使 Agent 只读取任务�
 **AREX-Skill Library 通过 DisCo 的“发掘—蒸馏—验证”工作流构建。**
 
 ```mermaid
+---
+config:
+  fontSize: 18
+---
 flowchart LR
     S["📦 仓库 · 论文 · 博客"] --> A["🔍 <b>发掘</b><br><i>摸清这个来源<br>真正能做什么</i>"]
     A --> B["🧠 <b>蒸馏</b><br><i>写出带证据、检查项<br>与恢复路径的技能</i>"]
@@ -193,26 +220,6 @@ flowchart LR
 
 ---
 
-## 🤖 接入你现有的 Coding Agent <a id="works-with-your-coding-agent"></a>
-
-**不需要新 Agent，不需要新工作流。**
-
-```mermaid
-flowchart LR
-    S["🧠 <b>AREX Skills</b><br><i>标准 SKILL.md 技能图<br>+ 一个库级路由器</i>"] ==> G
-    subgraph G["你现有的 Agent——工作流不变"]
-        direction LR
-        A["<b>Claude Code</b><br><i>放进 skills 目录即可</i>"] ~~~ B["<b>Codex</b><br><i>benchmark 所用 harness</i>"] ~~~ C["<b>DisCo</b><br><i>内置 CLI：<br>安装 · 路由 · 更新</i>"]
-    end
-```
-
-技能就是标准的 `SKILL.md` 技能图（agent-skills 格式）。把它们放进你正在用
-的 coding agent 即可——没有专有 runtime，也不用迁移到新的研究平台。内置的
-[DisCo CLI](cli/) 负责安装、路由和更新，下方的 benchmark 结果用的正是未做
-任何修改的 Codex。
-
----
-
 ## 📊 技能库规模 <a id="library-scale"></a>
 
 <table align="center">
@@ -225,7 +232,7 @@ flowchart LR
 
 <p align="center">知识来源：GitHub · 论文 · 技术博客</p>
 
-这不是一个 demo，而是一个持续增长的**机器学习研究技能库**的第一个规模化
+这不是一个 demo，而是一个持续增长的 **AREX-Skill Library** 的第一个规模化
 节点——从训练基础设施、LLM 对齐、推理服务，到机器人、基因组学和科学计算。
 [技能目录](docs/imported-repo-skills.md)列出了每张技能图的上游仓库、源
 commit 和覆盖范围。
@@ -308,22 +315,30 @@ Stable-Baselines3 技能完成可审计的 RL 实验）。
 
 ## 🚀 快速开始 <a id="quick-start"></a>
 
-三步得到一个技能驱动的研究 Agent：
+安装 CLI、添加 AREX-Skill Library，然后打开一个交互式 Researcher 会话：
 
 ```bash
 # 1. 安装 DisCo CLI（Node.js >= 22.19）
 npm install -g @auto-ml-skills/disco
 
-# 2. 安装技能库（1,000 个仓库 + 路由器）
+# 2. 安装 AREX-Skill Library（1,000 个仓库 + 路由器）
 disco repo-skills install
 
-# 3. 带着技能做研究
-disco -p "使用已安装的技能，在这台机器上对 vLLM 和 SGLang 做基准测试，\
-分别报告可验证的吞吐量。"
+# 3. 打开交互式 DisCo CLI（Researcher 模式）
+disco
+```
+
+进入 DisCo 后，直接在提示框中输入研究任务：
+
+```text
+使用已安装的技能，在这台机器上对 vLLM 和 SGLang 做基准测试，分别报告可验证的吞吐量。
 ```
 
 首次运行时用 `/login` 或环境变量配置模型提供商
-（`ANTHROPIC_API_KEY`、`OPENAI_API_KEY`、`GEMINI_API_KEY` 等）。
+（`ANTHROPIC_API_KEY`、`OPENAI_API_KEY`、`GEMINI_API_KEY` 等）。DisCo 是一个
+交互式终端 CLI；`-p` / `--print` 只是可选的非交互模式，用于处理一个 prompt
+后退出，适合脚本和自动化场景。运行 `disco --help` 可以查看全部 CLI 命令和
+选项。
 
 <details>
 <summary><b>创建你自己的技能（Creator 模式）</b></summary>
@@ -332,33 +347,75 @@ DisCo 的 Creator 模式可以从任意仓库或论文蒸馏新技能图，并�
 
 ```bash
 git clone https://github.com/FlagOpen/FlagEmbedding.git
-disco --agent-mode creator -p \
-  "/skill:distill-ml-knowledge 为 ./FlagEmbedding 创建并验证一张仓库技能图，\
-覆盖 embedding 推理与评测。"
+disco --creator
 ```
 
-Researcher 是默认模式；用 `--agent-mode creator|researcher` 或界面里的
-`/creator` · `/researcher` 切换。15 个内置 Creator 元技能、验证门控和维护
-工作流见 [DisCo Workflows](docs/disco-workflows.md)。
+然后在 DisCo 提示框中输入 workflow 请求：
+
+```text
+/skill:distill-ml-knowledge 为 ./FlagEmbedding 创建并验证一张仓库技能图，覆盖 embedding 推理与评测。
+```
+
+Researcher 是默认模式；启动时可显式使用 `--creator` 或 `--researcher`，也可用
+界面里的 `/creator` · `/researcher` 切换。完整的 Creator 元技能清单和可移植安装方式见
+[DisCo Meta Skills](docs/disco-meta-skills.zh.md)；验证门控和维护工作流见
+[DisCo Workflows](docs/disco-workflows.zh.md)。
 
 </details>
 
-<details>
-<summary><b>在其他 Agent 中使用技能、管理技能集合、从源码构建</b></summary>
+---
 
-- **其他 Agent**：技能是标准 `SKILL.md` 技能图；Claude Code / Codex 的安装
-  方式见 [Meta Skills For Other Agents](docs/meta-skills-for-other-agents.md)。
-- **管理**：`disco repo-skills status | update`，路由器开关
-  `disco repo-skills router disable|enable`。
-- **手动安装**：把 `skills/repositories/repo-skills` 和
-  `skills/repositories/repo-skills-router` 复制到
-  `~/.disco/agent/skills/repositories/`。
-- **源码构建**：clone 后执行 `bash scripts/build-from-source-link.sh`。
+## 🤖 接入你现有的 Coding Agent <a id="works-with-your-coding-agent"></a>
 
-完整的[安装指南](docs/installation.md)覆盖提供商配置、更新/备份语义、
-路由器行为和所有兜底路径。
+**不需要新 Agent，不需要新工作流。**
 
-</details>
+```mermaid
+---
+config:
+  fontSize: 18
+---
+flowchart LR
+    S["🧠 <b>AREX Skills</b><br><i>标准 SKILL.md 技能图<br>+ 一个库级路由器</i>"] ==> G
+    subgraph G["你现有的 Agent——工作流不变"]
+        direction LR
+        A["<b>Claude Code</b><br><i>从 DisCo 导入</i>"] ~~~ B["<b>Codex</b><br><i>从 DisCo 导入</i>"] ~~~ C["<b>DisCo</b><br><i>Researcher 模式<br>原生支持</i>"]
+    end
+```
+
+技能就是标准的 `SKILL.md` 技能图（agent-skills 格式）。DisCo Researcher 可以
+原生加载和路由 AREX-Skill Library；Creator workflow 可以把选定的 skills 和
+scoped router 导出到 Codex 或 Claude Code。整个过程不依赖专有 skill runtime，
+也不要求迁移现有工作流。[DisCo CLI](cli/) 负责安装、路由、导出和更新。
+
+安装 collection 后，在交互式 Creator 会话中执行导出：
+
+```bash
+disco --creator
+```
+
+在 DisCo 提示框中，把 `vllm` 和 `sglang` 导入 Codex：
+
+```text
+/skill:import-repo-skills-to-agent import vllm and sglang to Codex
+```
+
+把相同的 skills 导入 Claude Code：
+
+```text
+/skill:import-repo-skills-to-agent import vllm and sglang to Claude Code
+```
+
+该 workflow 会把选定 skills 复制到目标的 `repositories/repo-skills/`，重建或合并
+同级的 `repositories/repo-skills-router/`，并只为 Codex 目标副本添加
+`agents/openai.yaml`。导入后请重启目标 Agent；完整规则见
+[DisCo Meta Skills](docs/disco-meta-skills.zh.md)。
+
+---
+
+安装和维护细节见[安装指南](docs/installation.zh.md)。该文档说明如何通过 npm
+安装或从源码构建 DisCo CLI、配置模型提供商，以及 AREX-Skill Library 的
+install/status/update 行为（包括冲突处理和可恢复备份）、router 控制、
+手动安装兜底方案和其他 Agent 的 portable Creator meta-skill 安装方式。
 
 ---
 
@@ -370,6 +427,10 @@ Researcher 是默认模式；用 `--agent-mode creator|researcher` 或界面里�
 > AREX 把它变成 AI 研究者的操作知识。
 
 ```mermaid
+---
+config:
+  fontSize: 18
+---
 flowchart LR
     A["📦 <b>仓库 + 论文</b><br><i>写给人类</i>"] --> B["🧠 <b>研究技能</b><br><i>蒸馏一次，验证入库</i>"]
     B --> C["🌐 <b>技能生态</b><br><i>共享与继承</i>"]
@@ -390,16 +451,28 @@ ML 研究知识不应只以论文和仓库的形式存在，还应被编译为 A
 
 ## 🤝 参与贡献 <a id="contributing"></a>
 
-欢迎三类贡献——新的仓库技能、既有技能的更新，以及 DisCo CLI 的改进。技能
-PR 需附带来源信息（模型、源 commit、验证步骤）；完整清单见
-[CONTRIBUTING_CN.md](CONTRIBUTING_CN.md)。
+欢迎三类贡献：
+
+1. **新增 repo skills。** 在
+   `skills/repositories/repo-skills/<skill-id>/` 下提交经过验证的 skill，并更新
+   同级 router 和公开 catalog，确保 Agent 可以发现它。
+2. **刷新或扩展已有 skills。** 根据最新上游证据修正过期内容，或增加更深的
+   workflow 覆盖，同时保持 provenance 和 routing metadata 一致。
+3. **改进 DisCo CLI。** 改进 `cli/` 下的 CLI/runtime，以及内置的 repository
+   和 paper workflows。
+
+Skill PR 需要说明使用的 model 和 provider、source commit 及 verification
+steps；routing 发生变化时同步更新 router 和 catalog。完整要求见
+[贡献指南](CONTRIBUTING_CN.md)。
 
 ## 📚 文档 <a id="documentation"></a>
 
 | 页面 | 说明 |
 | --- | --- |
-| [安装指南](docs/installation.md) | CLI 与技能集合的完整安装、提供商配置、路由器开关、手动兜底方案。 |
-| [DisCo Workflows](docs/disco-workflows.md) | 模式与会话、Researcher 执行、Creator 构建、部署范围。 |
+| [安装指南](docs/installation.zh.md) | DisCo npm/源码安装、提供商配置、Library install/status/update 行为、冲突备份、router 控制、手动兜底和 portable Creator meta-skill 安装。 |
+| [DisCo Workflows](docs/disco-workflows.zh.md) | 模式与会话、Researcher 执行、Creator 构建、部署范围。 |
+| [刷新 Repo Skills](docs/refreshing-repo-skills.zh.md) | 使用 DisCo 刷新已有 repository skill，同步 runtime 与发布元数据、验证结果并准备贡献 PR。 |
+| [DisCo Meta Skills](docs/disco-meta-skills.zh.md) | 完整的 Creator 元技能清单，以及安装到其他 Agent 的方式。 |
 | [AREX-Skill Library](skills/README.md) | 技能库模型、集合布局、安装方式。 |
 | [Imported Repo Skills Catalog](docs/imported-repo-skills.md) | 全部已发布技能图及其上游基线。 |
 | [Repository Catalog](docs/repository-catalog.md) | 按 area -> family 组织的全部已发布仓库技能清单。 |
@@ -421,11 +494,13 @@ AREX-Skill 同样离不开 GitHub 开源社区。这个库中的仓库技能建�
 
 ## 📄 许可证 <a id="license"></a>
 
-除非文件或组件另有说明，仓库级 AREX-Skill 材料采用 Apache-2.0 许可证。技能
-库中发布的每个 skill 都有独立的许可证。使用、复制、修改或再分发某个 skill
-前，请查看该 skill 的 `SKILL.md` 中的 `license` metadata 字段；该许可证是该
-skill 的权威声明，可能不同于本仓库的 Apache-2.0，并包含额外的条件或限制。
-用户应自行审查并遵守所使用的每个 skill 的许可证条款。
+除非文件或组件另有说明，仓库级 AREX-Skill 材料采用 Apache-2.0 许可证。
+
+> ⚠️ **AREX-Skill Library 中的每个 skill 都有自己的独立许可证。** 使用、复制、
+> 修改或再分发某个 skill 前，必须查看该 skill 的 `SKILL.md` 中的 `license`
+> metadata 字段。**对该 skill 而言，其独立许可证才是权威依据，而不是本仓库的
+> Apache-2.0 许可证。**其中可能包含不同条款、附加条件或使用限制。用户需要逐一
+> 审查并遵守所使用 skill 的许可证。
 
 [`cli/`](cli/) 下独立发布的 DisCo npm 包采用其自身的
 [MIT License](cli/LICENSE)，上游署名见

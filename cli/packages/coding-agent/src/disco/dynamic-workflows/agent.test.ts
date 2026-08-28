@@ -133,7 +133,7 @@ describe("DisCo agent positioning", () => {
 		expect(researcherPrompt).not.toContain("distill-ml-knowledge");
 
 		expect(creatorPrompt).toContain("ML knowledge distillation agent");
-		expect(creatorPrompt).toContain("verified, task-related operating-knowledge skill graph");
+		expect(creatorPrompt).toContain("verified operating skill graph");
 		expect(creatorPrompt).toContain("distill-ml-knowledge");
 		expect(creatorPrompt).not.toContain("skill-powered research agent");
 		expect(creatorPrompt).not.toContain("path preference: direct | reusable | auto");
@@ -473,35 +473,27 @@ describe("repo skills router and export workflow-skill constraints", () => {
 	it("defines import-repo-skills-to-agent overwrite prompts and router merge behavior", () => {
 		const skill = readImportSkill("SKILL.md");
 
-		expect(skill).toContain("Use this workflow skill to copy DisCo's managed skill library into another");
-		expect(skill).toContain("agent tool");
+		expect(skill).toContain("Export DisCo's managed repository-skill collection to another agent");
 		expect(skill).toContain("DisCo already uses");
-		expect(skill).toContain("at runtime through");
-		expect(skill).toContain("explicit `/skill:<name>` invocation");
-		expect(skill).toContain("If the path basename is `skills`, treat it as the exact target skills root");
-		expect(skill).toContain("default to the current standard user-level");
-		expect(skill).toContain("`~/.agents/skills/`");
-		expect(skill).toContain("do not choose `~/.codex/skills` by default");
-		expect(skill).toContain("<target-skills-root>/repositories/repo-skills/<skill-id>/");
-		expect(skill).toContain("<target-skills-root>/repositories/repo-skills-router/");
-		expect(skill).toContain("Ask the user whether to overwrite the target copy");
-		expect(skill).toContain("Never silently overwrite a non-router skill");
-		expect(skill).toContain("If the target already");
-		expect(skill).toContain("has `repo-skills-router`, merge the filtered");
-		expect(skill).toContain("must be a filtered router for the selected import set");
-		expect(skill).toContain("--include-skill <selected-skill-id>");
-		expect(skill).toContain("--output-router-dir <temp-dir>/repo-skills-router");
-		expect(skill).toContain("Do not copy");
-		expect(skill).toContain("directly for a subset import");
-		expect(skill).toContain("preserving unrelated target skills and their exact assignments");
-		expect(skill).toContain("the target router does not gain entries for unselected DisCo source");
-		expect(skill).toContain("generated area/family index");
-		expect(skill).toContain("Treat the target as Codex");
-		expect(skill).toContain("scripts/apply_codex_openai_policy.py");
+		expect(skill).toContain("explicit `/skill:<name>`");
+		expect(skill).toContain("scripts/export_repo_skills_to_agent.mjs");
+		expect(skill).toContain("Do not manually copy skills");
+		expect(skill).toContain("--target-skills-root <dir>");
+		expect(skill).toContain("--target-agent-dir <dir>");
+		expect(skill).toContain("`~/.agents`");
+		expect(skill).toContain("not the legacy `~/.codex`");
+		expect(skill).toContain("<target-skills-root>/repositories/");
+		expect(skill).toContain("Ask whether to replace that exact target skill");
+		expect(skill).toContain("Never silently overwrite a repository skill");
+		expect(skill).toContain("--include-skill <skill-id>");
+		expect(skill).toContain("Merge selected source records with unrelated target records");
+		expect(skill).toContain("Regenerate `repo-skills/repository-index.jsonl`");
+		expect(skill).toContain("byte-for-byte consistent");
+		expect(skill).toContain("not leak unselected source skills");
 		expect(skill).toContain("policy.allow_implicit_invocation: false");
-		expect(skill).toContain("preserve unrelated");
-		expect(skill).toContain("do not rely on `disable-model-invocation: true` alone");
-		expect(skill).toContain("for Codex targets, number of `agents/openai.yaml` policy files written");
+		expect(skill).toContain("Target-specific `agents/openai.yaml` files are still excluded");
+		expect(skill).toContain("--resume <transaction-directory>");
+		expect(skill).toMatch(/restore the exact previous\s+target/);
 	});
 
 	it("provides a Codex policy helper that preserves existing OpenAI metadata", () => {

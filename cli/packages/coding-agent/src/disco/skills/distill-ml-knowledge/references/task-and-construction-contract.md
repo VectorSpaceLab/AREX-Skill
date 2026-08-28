@@ -1,131 +1,155 @@
-# Task And Construction Contract
+# Distillation Contract
 
-Read this reference before path selection. It owns the vocabulary shared by
-`direct`, `reuse-existing`, and `design-reusable`; branch-specific references
-must extend this contract rather than redefine it.
+Read this reference before routing or branch-specific construction. It owns
+the paper-aligned vocabulary shared by `distill-ml-knowledge`,
+`design-meta-skill`, and the specialized Creator workflows. It does not define
+a second construction shorthand. Engineering details belong in the
+construction record `R` using their full descriptive names.
 
-## Contents
+## Canonical Objects
 
-- [Canonical Task](#canonical-task)
-- [Construction Fields](#construction-fields)
-- [Clarification Gate](#clarification-gate)
-- [Artifact Model](#artifact-model)
-- [Routing Before Specification](#routing-before-specification)
-- [Preference Mapping And Change Control](#preference-mapping-and-change-control)
+The canonical distillation record is:
 
-## Canonical Task
+```markdown
+- anchor `z`:
+- distillation form: task-agnostic | task-oriented
+- scoped capabilities `Q`:
+- grounded evidence `X`:
+- candidate graph `G_tilde`:
+- accepted graph `G`:
+- construction record `R`:
+```
 
-Record the downstream ML research task as `tau = (x, E, B, J)`:
+- `z` is either a source anchor or a task anchor. A source anchor identifies
+  material such as a repository, paper, tutorial, dataset, or benchmark. A task
+  anchor identifies the problem from which source discovery may begin.
+- `Q` is the capability scope: what the graph should enable, its triggers,
+  boundaries, non-goals, and required observations.
+- `X` is retained evidence with source identity, revision, provenance, access and
+  trust boundaries, exclusions, conflicts, and assumptions.
+- `G_tilde` is the candidate graph. Write it as
+  `G_tilde = (S_tilde, L_tilde)`, where nodes are candidate root/sub-skills and
+  links are explicit routing, dependency, composition, or reference links.
+- `G` is the accepted verified graph, written as `G = (S, L)`.
+- `R` is the construction record for decisions and execution evidence. It
+  includes the routing and specification revisions, evidence plan, construction
+  details, verification and repairs, deployment decision, import result, and
+  stop reason. Keep `R` outside live runtime skill roots.
 
-- `x` (`task`): research problem and expected deliverable.
-- `E` (`downstream environment`): resources and runtime in which Researcher
-  will later execute the task.
-- `B` (`constraints`): time, token, compute, cost, data, safety, permission, and
-  stop conditions.
-- `J` (`task evaluation`): evaluator, acceptance observations, metrics, or
-  review procedure for the downstream result.
+## Task Anchor
 
-Unknown fields remain `unknown`. Record assumptions separately with an owner
-and a validation plan.
+Only task-oriented distillation uses the task tuple:
 
-## Construction Fields
+```text
+tau = (q, D, E, g)
+```
 
-Use the five construction fields only as shorthand after their plain-language
-names are established:
+- `q`: task or problem description.
+- `D`: task-provided data or material.
+- `E`: downstream environment in which Researcher will execute, including
+  available tools and limits.
+- `g`: desired outcome or acceptance goal.
 
-- `s` (`source contract`): source kinds, identifiers, versions, access methods,
-  trust boundaries, and evidence-selection constraints.
-- `u` (`operating use`): capabilities the resulting operating graph must
-  support, trigger conditions, expected observations, and non-goals.
-- `v` (`skill verification`): checks, fixtures or trials, expected results, and
-  strict or soft gates used before the graph is accepted.
-- `e` (`construction environment`): Creator workspace, tools, source access,
-  network, credentials, permissions, hardware, software environments,
-  concurrency, storage, and construction budget.
-- `sigma` (`graph structure`): skill boundaries, root/router behavior, links,
-  canonical ids, references/scripts, ownership, and progressive disclosure.
+Do not create a task tuple for a task-agnostic source run merely to fill a
+template. If a task-oriented run lacks a value that can change source discovery,
+scope, verification, or acceptance, stop at the clarification gate.
 
-Keep these distinctions explicit:
+## Construction Record `R`
 
-| Downstream task field | Construction field | Difference |
-| --- | --- | --- |
-| `x` task/deliverable | `u` operating use | What the user ultimately needs versus what the graph must teach Researcher to do. |
-| `E` downstream environment | `e` construction environment | Where Researcher will execute versus where Creator builds and verifies. |
-| `J` task evaluation | `v` skill verification | How the final research result is judged versus how the generated graph is validated before import. |
+Record implementation details by stage rather than by another symbolic model:
+
+- **Anchor provenance:** source identity, revision, access method, and trust
+  boundary.
+- **Scope decisions:** capability set `Q`, triggers, non-goals, skill boundaries,
+  graph entry points, and expected observations.
+- **Grounding decisions:** evidence set `X`, source discovery range, selected and
+  excluded material, provenance, conflicts, inaccessible content, and
+  assumptions.
+- **Construction details:** chosen construction strategy, graph links,
+  resources, scripts, ownership, Creator workspace, tools, permissions, budget,
+  staging, resume, and recovery.
+- **Verification results:** static and source-support checks, executable or
+  representative-use checks, task-level trials when applicable, failure cases,
+  repairs, strict or soft gates, and unverified points.
+- **Deployment and handoff:** project/managed scope, one-scope invariant, exact
+  targets, import approval, overwrite state, accepted `G`, and Researcher
+  handoff.
+
+Distinguish `E` from the Creator workspace and tools recorded in `R`.
+Distinguish the task goal `g` from verification observations recorded in `R`.
+
+## Anchor Classification And Stage Rules
+
+### Task-agnostic source anchor
+
+Use source understanding and capability identification to scope `Q`, then
+extract and select evidence `X` from the source anchor. Construct and verify
+source-supported operating uses. Verification should include safe executable
+examples or tests, API/CLI smoke checks, graph/link checks, evidence-support
+checks, and failure-recovery cases when available. Do not require a
+task-level outcome trial without a downstream task.
+
+### Task-oriented task anchor
+
+Use `tau` for task decomposition and capability gap analysis. In the grounding
+stage, perform only the approved source discovery needed to cover the gaps, then
+select evidence `X`. Approve the scope/preflight, source-discovery range,
+budget, and verification targets before discovery; approve the grounded
+evidence plan or exact construction specification before material construction.
+Import and overwrite approval remain separate.
 
 ## Clarification Gate
 
-First resolve facts through permitted read-only inspection when reasonable. An
-unknown is blocking when assuming it could change the selected path or exact
-branch specification, task/deliverable/acceptance, source identity/access/trust,
-required permissions/credentials/hardware/budget, a strict verification gate,
-recurrence evidence for `design-reusable`, or a live destination/overwrite
-decision.
+Resolve permitted read-only facts directly. A missing value is blocking when an
+assumption could change the anchor classification, `Q`, source identity/access
+or trust, source-discovery scope, permissions, credentials, hardware, budget,
+verification gate, recurrence evidence for `design-reusable`, or live
+destination/overwrite decision. Ask for all blocking information or decisions
+together before the affected action.
 
-Before the affected decision or action, stop, list only the blocking information
-or decisions, and ask for them together. Do not treat approval of a record that
-still contains a blocking unknown as resolution. Other unknowns may remain as
-`assumption-safe` only when they are safe and reversible, do not materially
-affect those decisions, and have an owner and validation plan.
+Other unknowns may remain only as explicit, reversible assumptions with an
+owner and validation plan. Approval of a record containing a blocking unknown
+does not resolve that unknown.
 
-## Artifact Model
+## Routing Record
 
-Represent an operating graph as `G = (S, L)`:
-
-- `S`: root and sub-skill nodes.
-- `L`: explicit routing, dependency, composition, and relative-reference links.
-
-Use `R` for the construction record containing the task/specification revision,
-evidence plan, candidate graph, verification and repair evidence, deployment
-review, and stop reason. `R` and other review artifacts stay outside live skill
-roots.
-
-## Routing Before Specification
-
-Create a lightweight routing record before writing a branch-specific exact
-specification:
+Create this lightweight record before branch-specific material construction:
 
 ```markdown
 # Routing Record
 
-- task `tau`:
-- source requirements:
-- required operating capabilities:
+- anchor kind: source | task
+- distillation form: task-agnostic | task-oriented
+- anchor `z`:
+- task `tau`, when applicable: `tau = (q, D, E, g)`
+- scoped capabilities `Q`:
+- grounded evidence requirements `X`:
 - required verification and recovery:
-- construction constraints:
-- path preference: auto | direct | reusable
-- selected path: direct | reuse-existing | design-reusable
+- construction strategy: direct | reuse-existing | design-reusable
 - reuse mode: single | compose | not-applicable
 - selected visible contracts:
-- uncovered contract:
+- uncovered recurring construction gap:
 - recurrence evidence:
-- rationale:
+- construction constraints and approval state:
 - unknowns and assumptions:
 - decision revision:
 ```
 
-Then specialize the contract exactly once:
-
-- `direct`: approve an `operating-run` specification for the current anchor and
-  task before material construction.
-- `reuse-existing`: pass the routing record to the selected existing workflow;
-  that workflow owns its exact branch specification and normal importer.
-- `design-reusable`: pass the routing record and verified recurring gap to
-  `design-meta-skill`, which owns a separate `reusable-bundle` specification for
-  a parameterized future construction workflow.
+The routing record is an engineering artifact in `R`; it does not replace the
+paper's two distillation forms. `design-meta-skill` consumes a complete
+`design-reusable` handoff and must not independently select another strategy.
 
 ## Preference Mapping And Change Control
 
-- `auto`: select the smallest adequate existing workflow or composition; use
-  `direct` for a task-conditioned need; use `design-reusable` for a verified
+- `auto`: prefer an adequate existing workflow; otherwise use `direct` for a
+  concrete task-conditioned need or `design-reusable` for an evidence-backed
   recurring construction gap.
-- `direct`: select `direct` only when the source, verification, permissions, and
-  construction environment allow it; otherwise report the conflict.
-- `reusable`: select `reuse-existing` when possible, otherwise
-  `design-reusable` only for a verified recurring gap. Do not silently fall back
-  to `direct`.
+- `direct`: require a feasible source, evidence, verification, permission, and
+  Creator construction environment; surface conflicts instead of guessing.
+- `reusable`: try `reuse-existing` first; use `design-reusable` only when
+  recurrence is evidenced. Do not silently convert a one-off request to a direct
+  run.
 
-Approval applies to an exact revision. Revisit the affected routing or branch
-specification when source access, permissions, budget, evidence requirements,
-graph scope, or verification changes materially. Import destination approval
-and overwrite approval remain separate decisions.
+Approval applies to the exact revision. Revisit the affected record when the
+anchor, source access, scope, evidence plan, permissions, budget, graph scope,
+verification, or deployment target changes materially.

@@ -12,7 +12,7 @@ Read this before deciding whether this skill is current for a cuML checkout. If 
   "generated_at_utc": "2026-08-15T18:57:21Z",
   "repository": {
     "name": "cuml",
-    "remote_url": "https://github.com/rapidsai/cuml.git",
+    "remote_url": "https://github.com/NVIDIA/cuml.git",
     "vcs": "git",
     "branch": "main",
     "tag": null,

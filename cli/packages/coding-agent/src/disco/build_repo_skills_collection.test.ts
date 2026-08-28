@@ -29,7 +29,8 @@ async function writeSkill(
 		[
 			"---",
 			`name: ${sourceName}`,
-			"description: Source repository skill used by the collection builder",
+			'description: "Source repository skill used by the collection builder."',
+			"license: MIT",
 			"---",
 			"",
 			"# Source skill",
@@ -44,6 +45,7 @@ async function writeSkill(
 			"---",
 			"name: setup",
 			'description: "Setup guidance."',
+			"license: MIT",
 			"---",
 			"",
 			"# Setup",
@@ -150,6 +152,13 @@ describe("build_repo_skills_collection.mjs", () => {
 		expect(assignmentIndex).toContain('"legacy_repo_id":"batch_0/alpha"');
 		expect(assignmentIndex).toContain('"confidence":"medium"');
 		expect(await readFile(path.join(fixture.output, "repo-skills-router", "references", "families", "computer-vision", "image-classification.md"), "utf8")).toContain("repo-skills/alpha-repo/SKILL.md");
+	});
+
+	it("keeps the default assignment help aligned with the published collection", () => {
+		const result = spawnSync(process.execPath, [scriptPath, "--help"], { encoding: "utf8" });
+		expect(result.status).toBe(0);
+		expect(result.stdout).toContain("Expected membership count (default: 2209)");
+		expect(result.stdout).not.toContain("2186");
 	});
 
 	it("validates all inputs before publishing and leaves no partial output", async () => {

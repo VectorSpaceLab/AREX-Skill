@@ -38,10 +38,10 @@
   - [Medical Imaging Toolkits (15 repos)](#biomedical-ai-medical-imaging-toolkits)
   - [Clinical Prediction from Health Records (1 repos)](#biomedical-ai-clinical-prediction-from-health-records)
   - [Physiological Signal Analysis (2 repos)](#biomedical-ai-physiological-signal-analysis)
-- [Generative Media (192 repos)](#generative-media)
+- [Generative Media (194 repos)](#generative-media)
   - [Image Synthesis (33 repos)](#generative-media-image-synthesis)
   - [Image Synthesis Toolkits (15 repos)](#generative-media-image-synthesis-toolkits)
-  - [Media Generation Applications (24 repos)](#generative-media-media-generation-applications)
+  - [Media Generation Applications (25 repos)](#generative-media-media-generation-applications)
   - [VAE Libraries (2 repos)](#generative-media-vae-libraries)
   - [Image Editing (26 repos)](#generative-media-image-editing)
   - [Character Motion Editing (2 repos)](#generative-media-character-motion-editing)
@@ -51,9 +51,9 @@
   - [Audio Generation (8 repos)](#generative-media-audio-generation)
   - [Generative Model Components (11 repos)](#generative-media-generative-model-components)
   - [Generative Model Adaptation (25 repos)](#generative-media-generative-model-adaptation)
-  - [Generative Media Evaluation (8 repos)](#generative-media-generative-media-evaluation)
-- [Speech and Audio (55 repos)](#speech-and-audio)
-  - [Speech Recognition (18 repos)](#speech-and-audio-speech-recognition)
+  - [Generative Media Evaluation (9 repos)](#generative-media-generative-media-evaluation)
+- [Speech and Audio (56 repos)](#speech-and-audio)
+  - [Speech Recognition (19 repos)](#speech-and-audio-speech-recognition)
   - [Speech Synthesis (13 repos)](#speech-and-audio-speech-synthesis)
   - [Audio Enhancement (4 repos)](#speech-and-audio-audio-enhancement)
   - [Audio Understanding (6 repos)](#speech-and-audio-audio-understanding)
@@ -68,12 +68,12 @@
   - [Language-Specific NLP (7 repos)](#natural-language-processing-language-specific-nlp)
   - [Dialogue Systems (1 repos)](#natural-language-processing-dialogue-systems)
   - [Text Generation (8 repos)](#natural-language-processing-text-generation)
-- [LLM Applications (323 repos)](#llm-applications)
+- [LLM Applications (325 repos)](#llm-applications)
   - [Multi-Agent Orchestration (29 repos)](#llm-applications-multi-agent-orchestration)
   - [Agent SDKs (35 repos)](#llm-applications-agent-sdks)
   - [Agent Platforms (25 repos)](#llm-applications-agent-platforms)
-  - [LLM Workflow Frameworks (22 repos)](#llm-applications-llm-workflow-frameworks)
-  - [RAG Frameworks (35 repos)](#llm-applications-rag-frameworks)
+  - [LLM Workflow Frameworks (23 repos)](#llm-applications-llm-workflow-frameworks)
+  - [RAG Frameworks (36 repos)](#llm-applications-rag-frameworks)
   - [Memory and Context (17 repos)](#llm-applications-memory-and-context)
   - [Agent Tools and Skills (45 repos)](#llm-applications-agent-tools-and-skills)
   - [Document Intelligence (25 repos)](#llm-applications-document-intelligence)
@@ -211,7 +211,7 @@ The machine-readable sources of truth are [`repository-index.jsonl`](../skills/r
 
 The commit shown beside each GitHub link is the source snapshot used to build the skill. It is displayed using only the first seven characters; when a full SHA is recorded, the link targets that full commit, and when only an abbreviated source identifier is available, the link uses its displayed prefix. `commit not recorded` means that neither the repository index nor the skill provenance contains a usable source snapshot identifier.
 
-Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**, and **2,204 area-family memberships**.
+Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**, and **2,209 area-family memberships**.
 
 ## <a id="computer-vision"></a>Computer Vision (312 repos)
 
@@ -739,7 +739,7 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `sunlabuiuc/PyHealth` | `pyhealth` | [`repo-skills/pyhealth`](../skills/repositories/repo-skills/pyhealth/SKILL.md) | [GitHub](<https://github.com/sunlabuiuc/PyHealth>) · [`0a75f99`](<https://github.com/sunlabuiuc/PyHealth/commit/0a75f99dba1fb96d6d9876790edecf252fd0d2f4>) |
 | `ubicomplab/rPPG-Toolbox` | `rppg-toolbox` | [`repo-skills/rppg-toolbox`](../skills/repositories/repo-skills/rppg-toolbox/SKILL.md) | [GitHub](<https://github.com/ubicomplab/rPPG-Toolbox>) · [`b7500b8`](<https://github.com/ubicomplab/rPPG-Toolbox/commit/b7500b848f84ad7f86e277b4612563b69f4f88f9>) |
 
-## <a id="generative-media"></a>Generative Media (192 repos)
+## <a id="generative-media"></a>Generative Media (194 repos)
 
 ### <a id="generative-media-image-synthesis"></a>Image Synthesis (33 repos)
 
@@ -799,7 +799,7 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `Stability-AI/generative-models` | `stability-ai-generative-models` | [`repo-skills/stability-ai-generative-models`](../skills/repositories/repo-skills/stability-ai-generative-models/SKILL.md) | [GitHub](<https://github.com/Stability-AI/generative-models>) · [`e8cd657`](<https://github.com/Stability-AI/generative-models/commit/e8cd657656fa5d61688191730d0e03242bf4ed44>) |
 | `taesungp/contrastive-unpaired-translation` | `contrastive-unpaired-translation` | [`repo-skills/contrastive-unpaired-translation`](../skills/repositories/repo-skills/contrastive-unpaired-translation/SKILL.md) | [GitHub](<https://github.com/taesungp/contrastive-unpaired-translation>) · [`b3ac297`](<https://github.com/taesungp/contrastive-unpaired-translation/commit/b3ac297708dfb6f7589d04662277e53c0d579c27>) |
 
-### <a id="generative-media-media-generation-applications"></a>Media Generation Applications (24 repos)
+### <a id="generative-media-media-generation-applications"></a>Media Generation Applications (25 repos)
 
 | Repo ID | Skill ID | Repository skill | GitHub / source commit |
 | --- | --- | --- | --- |
@@ -807,7 +807,8 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `AUTOMATIC1111/stable-diffusion-webui` | `stable-diffusion-webui` | [`repo-skills/stable-diffusion-webui`](../skills/repositories/repo-skills/stable-diffusion-webui/SKILL.md) | [GitHub](<https://github.com/AUTOMATIC1111/stable-diffusion-webui>) · [`82a973c`](<https://github.com/AUTOMATIC1111/stable-diffusion-webui/commit/82a973c04367123ae98bd9abdf80d9eda9b910e2>) |
 | `bytedance/InfiniteYou` | `infinite-you` | [`repo-skills/infinite-you`](../skills/repositories/repo-skills/infinite-you/SKILL.md) | [GitHub](<https://github.com/bytedance/InfiniteYou>) · [`aaa6ea5`](<https://github.com/bytedance/InfiniteYou/commit/aaa6ea5f75ba2ff58b9025fa7df45e4a139ed717>) |
 | `carson-katri/dream-textures` | `dream-textures` | [`repo-skills/dream-textures`](../skills/repositories/repo-skills/dream-textures/SKILL.md) | [GitHub](<https://github.com/carson-katri/dream-textures>) · [`c2622a8`](<https://github.com/carson-katri/dream-textures/commit/c2622a8a9f1ae6b790cfe1d2571f814b126811b4>) |
-| `comfyanonymous/ComfyUI` | `comfy-ui` | [`repo-skills/comfy-ui`](../skills/repositories/repo-skills/comfy-ui/SKILL.md) | [GitHub](<https://github.com/comfyanonymous/ComfyUI>) · [`0d8b751`](<https://github.com/comfyanonymous/ComfyUI/commit/0d8b7510bdc5409f4a76c3191e122ddea50f4aa2>) |
+| `Comfy-Org/ComfyUI` | `comfy-ui` | [`repo-skills/comfy-ui`](../skills/repositories/repo-skills/comfy-ui/SKILL.md) | [GitHub](<https://github.com/Comfy-Org/ComfyUI>) · [`0d8b751`](<https://github.com/Comfy-Org/ComfyUI/commit/0d8b7510bdc5409f4a76c3191e122ddea50f4aa2>) |
+| `hao-ai-lab/FastVideo` | `fastvideo` | [`repo-skills/fastvideo`](../skills/repositories/repo-skills/fastvideo/SKILL.md) | [GitHub](<https://github.com/hao-ai-lab/FastVideo>) · [`8208536`](<https://github.com/hao-ai-lab/FastVideo/commit/8208536cd1db7a1d32b68aaa6a679953ae23ab8b>) |
 | `invoke-ai/InvokeAI` | `invokeai` | [`repo-skills/invokeai`](../skills/repositories/repo-skills/invokeai/SKILL.md) | [GitHub](<https://github.com/invoke-ai/InvokeAI>) · [`de66582`](<https://github.com/invoke-ai/InvokeAI/commit/de66582b91929de0e4220619955ae43c04cd4a6d>) |
 | `JIA-Lab-research/DreamOmni2` | `dreamomni2` | [`repo-skills/dreamomni2`](../skills/repositories/repo-skills/dreamomni2/SKILL.md) | [GitHub](<https://github.com/JIA-Lab-research/DreamOmni2>) · [`b0b98e0`](<https://github.com/JIA-Lab-research/DreamOmni2/commit/b0b98e03bfc95c2bf0f27a5f9ca33d9b16a525b5>) |
 | `jina-ai/discoart` | `discoart` | [`repo-skills/discoart`](../skills/repositories/repo-skills/discoart/SKILL.md) | [GitHub](<https://github.com/jina-ai/discoart>) · [`0394629`](<https://github.com/jina-ai/discoart/commit/03946299dd2781215a01c690c86ccd13e0f65c80>) |
@@ -944,7 +945,7 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | Repo ID | Skill ID | Repository skill | GitHub / source commit |
 | --- | --- | --- | --- |
 | `archinetai/audio-diffusion-pytorch` | `audio-diffusion-pytorch` | [`repo-skills/audio-diffusion-pytorch`](../skills/repositories/repo-skills/audio-diffusion-pytorch/SKILL.md) | [GitHub](<https://github.com/archinetai/audio-diffusion-pytorch>) · [`f4052e3`](<https://github.com/archinetai/audio-diffusion-pytorch/commit/f4052e321c820e467e51e14d005f3d0077997278>) |
-| `comfyanonymous/ComfyUI` | `comfy-ui` | [`repo-skills/comfy-ui`](../skills/repositories/repo-skills/comfy-ui/SKILL.md) | [GitHub](<https://github.com/comfyanonymous/ComfyUI>) · [`0d8b751`](<https://github.com/comfyanonymous/ComfyUI/commit/0d8b7510bdc5409f4a76c3191e122ddea50f4aa2>) |
+| `Comfy-Org/ComfyUI` | `comfy-ui` | [`repo-skills/comfy-ui`](../skills/repositories/repo-skills/comfy-ui/SKILL.md) | [GitHub](<https://github.com/Comfy-Org/ComfyUI>) · [`0d8b751`](<https://github.com/Comfy-Org/ComfyUI/commit/0d8b7510bdc5409f4a76c3191e122ddea50f4aa2>) |
 | `FoundationVision/LlamaGen` | `llamagen` | [`repo-skills/llamagen`](../skills/repositories/repo-skills/llamagen/SKILL.md) | [GitHub](<https://github.com/FoundationVision/LlamaGen>) · [`ce98ec4`](<https://github.com/FoundationVision/LlamaGen/commit/ce98ec41803a74a90ce68c40ababa9eaeffeb4ec>) |
 | `huggingface/diffusers` | `diffusers` | [`repo-skills/diffusers`](../skills/repositories/repo-skills/diffusers/SKILL.md) | [GitHub](<https://github.com/huggingface/diffusers>) · [`2d0110f`](<https://github.com/huggingface/diffusers/commit/2d0110f8182d18834d5039b19232e5761023b5f6>) |
 | `jy0205/Pyramid-Flow` | `pyramid-flow` | [`repo-skills/pyramid-flow`](../skills/repositories/repo-skills/pyramid-flow/SKILL.md) | [GitHub](<https://github.com/jy0205/Pyramid-Flow>) · [`a012faa`](<https://github.com/jy0205/Pyramid-Flow/commit/a012faa1dc4d71301a7a153c7f9554c081947ea2>) |
@@ -985,12 +986,13 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `Tencent-Hunyuan/HunyuanVideo-I2V` | `hunyuanvideo-i2v` | [`repo-skills/hunyuanvideo-i2v`](../skills/repositories/repo-skills/hunyuanvideo-i2v/SKILL.md) | [GitHub](<https://github.com/Tencent-Hunyuan/HunyuanVideo-I2V>) · [`c8bba70`](<https://github.com/Tencent-Hunyuan/HunyuanVideo-I2V/commit/c8bba70b9517f08d770a9a2a3d1e93cc6d5b7949>) |
 | `thu-ml/TurboDiffusion` | `turbo-diffusion` | [`repo-skills/turbo-diffusion`](../skills/repositories/repo-skills/turbo-diffusion/SKILL.md) | [GitHub](<https://github.com/thu-ml/TurboDiffusion>) · [`73df7e1`](<https://github.com/thu-ml/TurboDiffusion/commit/73df7e1c60cd3647518ad77b76dc09a927cf9930>) |
 
-### <a id="generative-media-generative-media-evaluation"></a>Generative Media Evaluation (8 repos)
+### <a id="generative-media-generative-media-evaluation"></a>Generative Media Evaluation (9 repos)
 
 | Repo ID | Skill ID | Repository skill | GitHub / source commit |
 | --- | --- | --- | --- |
 | `ali-vilab/VGen` | `vgen` | [`repo-skills/vgen`](../skills/repositories/repo-skills/vgen/SKILL.md) | [GitHub](<https://github.com/ali-vilab/VGen>) · [`4014d1f`](<https://github.com/ali-vilab/VGen/commit/4014d1fae4ac4a35e8e8442123611e913001399e>) |
 | `bytedance/LatentSync` | `latent-sync` | [`repo-skills/latent-sync`](../skills/repositories/repo-skills/latent-sync/SKILL.md) | [GitHub](<https://github.com/bytedance/LatentSync>) · [`a229c39`](<https://github.com/bytedance/LatentSync/commit/a229c3948406bc2cf6eaf4873e662e70c6a04746>) |
+| `hao-ai-lab/FastVideo` | `fastvideo` | [`repo-skills/fastvideo`](../skills/repositories/repo-skills/fastvideo/SKILL.md) | [GitHub](<https://github.com/hao-ai-lab/FastVideo>) · [`8208536`](<https://github.com/hao-ai-lab/FastVideo/commit/8208536cd1db7a1d32b68aaa6a679953ae23ab8b>) |
 | `hkchengrex/MMAudio` | `mmaudio` | [`repo-skills/mmaudio`](../skills/repositories/repo-skills/mmaudio/SKILL.md) | [GitHub](<https://github.com/hkchengrex/MMAudio>) · [`974010a`](<https://github.com/hkchengrex/MMAudio/commit/974010a026c731054592d8f777218bd9d85a6c24>) |
 | `Lightning-AI/torchmetrics` | `torchmetrics` | [`repo-skills/torchmetrics`](../skills/repositories/repo-skills/torchmetrics/SKILL.md) | [GitHub](<https://github.com/Lightning-AI/torchmetrics>) · [`37a8080`](<https://github.com/Lightning-AI/torchmetrics/commit/37a808094850aa1e05bc6e9fcf63fae86dfd01ce>) |
 | `mseitzer/pytorch-fid` | `pytorch-fid` | [`repo-skills/pytorch-fid`](../skills/repositories/repo-skills/pytorch-fid/SKILL.md) | [GitHub](<https://github.com/mseitzer/pytorch-fid>) · [`b9c1811`](<https://github.com/mseitzer/pytorch-fid/commit/b9c18118d082cbd263c1b8963fc4221dc1cbb659>) |
@@ -998,12 +1000,13 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `PKU-YuanGroup/Helios` | `helios` | [`repo-skills/helios`](../skills/repositories/repo-skills/helios/SKILL.md) | [GitHub](<https://github.com/PKU-YuanGroup/Helios>) · [`47219a0`](<https://github.com/PKU-YuanGroup/Helios/commit/47219a07860f158ce56a3b1d1ee2e012aab5c39b>) |
 | `POSTECH-CVLab/PyTorch-StudioGAN` | `py-torch-studio-gan` | [`repo-skills/py-torch-studio-gan`](../skills/repositories/repo-skills/py-torch-studio-gan/SKILL.md) | [GitHub](<https://github.com/POSTECH-CVLab/PyTorch-StudioGAN>) · [`947b35e`](<https://github.com/POSTECH-CVLab/PyTorch-StudioGAN/commit/947b35e9835b67860fdce44d337f6d7fee7c8db3>) |
 
-## <a id="speech-and-audio"></a>Speech and Audio (55 repos)
+## <a id="speech-and-audio"></a>Speech and Audio (56 repos)
 
-### <a id="speech-and-audio-speech-recognition"></a>Speech Recognition (18 repos)
+### <a id="speech-and-audio-speech-recognition"></a>Speech Recognition (19 repos)
 
 | Repo ID | Skill ID | Repository skill | GitHub / source commit |
 | --- | --- | --- | --- |
+| `arc53/DocsGPT` | `docsgpt` | [`repo-skills/docsgpt`](../skills/repositories/repo-skills/docsgpt/SKILL.md) | [GitHub](<https://github.com/arc53/DocsGPT>) · [`ff5bc01`](<https://github.com/arc53/DocsGPT/commit/ff5bc01d20430b52d9028f71ebcaaa34c1a6b8e0>) |
 | `Blaizzy/mlx-audio` | `mlx-audio` | [`repo-skills/mlx-audio`](../skills/repositories/repo-skills/mlx-audio/SKILL.md) | [GitHub](<https://github.com/Blaizzy/mlx-audio>) · [`727fc93`](<https://github.com/Blaizzy/mlx-audio/commit/727fc9301de58b2179eff415710b7d95dda59169>) |
 | `docling-project/docling` | `docling` | [`repo-skills/docling`](../skills/repositories/repo-skills/docling/SKILL.md) | [GitHub](<https://github.com/docling-project/docling>) · [`898dd73`](<https://github.com/docling-project/docling/commit/898dd7330dc15a8c9d7294df1aea409e74cf396c>) |
 | `espnet/espnet` | `espnet` | [`repo-skills/espnet`](../skills/repositories/repo-skills/espnet/SKILL.md) | [GitHub](<https://github.com/espnet/espnet>) · [`870554a`](<https://github.com/espnet/espnet/commit/870554ac258caf2e6eb7074863d53b4f299ba223>) |
@@ -1014,7 +1017,7 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `modelscope/FunASR` | `funasr` | [`repo-skills/funasr`](../skills/repositories/repo-skills/funasr/SKILL.md) | [GitHub](<https://github.com/modelscope/FunASR>) · [`680b1b3`](<https://github.com/modelscope/FunASR/commit/680b1b3f10d35c9fc388230800a3c8b0570271b0>) |
 | `modelscope/FunClip` | `funclip` | [`repo-skills/funclip`](../skills/repositories/repo-skills/funclip/SKILL.md) | [GitHub](<https://github.com/modelscope/FunClip>) · [`6eab789`](<https://github.com/modelscope/FunClip/commit/6eab789b3920afecaa08280cd824049482c354df>) |
 | `nl8590687/ASRT_SpeechRecognition` | `asrt-speech-recognition` | [`repo-skills/asrt-speech-recognition`](../skills/repositories/repo-skills/asrt-speech-recognition/SKILL.md) | [GitHub](<https://github.com/nl8590687/ASRT_SpeechRecognition>) · [`6c7571a`](<https://github.com/nl8590687/ASRT_SpeechRecognition/commit/6c7571ac41ed6ab1669d2ee8eee32dc00a34334e>) |
-| `NVIDIA-NeMo/NeMo` | `nemo` | [`repo-skills/nemo`](../skills/repositories/repo-skills/nemo/SKILL.md) | [GitHub](<https://github.com/NVIDIA-NeMo/NeMo>) · [`8f85359`](<https://github.com/NVIDIA-NeMo/NeMo/commit/8f85359bf29638682816dd53badf4893de8a75a3>) |
+| `NVIDIA-NeMo/Speech` | `nemo` | [`repo-skills/nemo`](../skills/repositories/repo-skills/nemo/SKILL.md) | [GitHub](<https://github.com/NVIDIA-NeMo/Speech>) · [`8f85359`](<https://github.com/NVIDIA-NeMo/Speech/commit/8f85359bf29638682816dd53badf4893de8a75a3>) |
 | `OFA-Sys/OFA` | `ofa` | [`repo-skills/ofa`](../skills/repositories/repo-skills/ofa/SKILL.md) | [GitHub](<https://github.com/OFA-Sys/OFA>) · [`a36b91c`](<https://github.com/OFA-Sys/OFA/commit/a36b91ce86ff105ac8d9e513aa88f42b85e33479>) |
 | `PaddlePaddle/PaddleSpeech` | `paddlespeech` | [`repo-skills/paddlespeech`](../skills/repositories/repo-skills/paddlespeech/SKILL.md) | [GitHub](<https://github.com/PaddlePaddle/PaddleSpeech>) · [`6b25a40`](<https://github.com/PaddlePaddle/PaddleSpeech/commit/6b25a400008d393f9c3af837b3c692b17f29ee1a>) |
 | `Picovoice/porcupine` | `porcupine` | [`repo-skills/porcupine`](../skills/repositories/repo-skills/porcupine/SKILL.md) | [GitHub](<https://github.com/Picovoice/porcupine>) · [`b42ec9f`](<https://github.com/Picovoice/porcupine/commit/b42ec9f849c05bb2aa99e6cbd1c85c9b66e103bb>) |
@@ -1034,7 +1037,7 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `jaywalnut310/vits` | `vits` | [`repo-skills/vits`](../skills/repositories/repo-skills/vits/SKILL.md) | [GitHub](<https://github.com/jaywalnut310/vits>) · [`2e561ba`](<https://github.com/jaywalnut310/vits/commit/2e561ba58618d021b5b8323d3765880f7e0ecfdb>) |
 | `jik876/hifi-gan` | `hifi-gan` | [`repo-skills/hifi-gan`](../skills/repositories/repo-skills/hifi-gan/SKILL.md) | [GitHub](<https://github.com/jik876/hifi-gan>) · [`4769534`](<https://github.com/jik876/hifi-gan/commit/4769534d45265d52a904b850da5a622601885777>) |
 | `keithito/tacotron` | `tacotron` | [`repo-skills/tacotron`](../skills/repositories/repo-skills/tacotron/SKILL.md) | [GitHub](<https://github.com/keithito/tacotron>) · [`d26c763`](<https://github.com/keithito/tacotron/commit/d26c763342518d4e432e9c4036a1aff3b4fdaa1e>) |
-| `NVIDIA-NeMo/NeMo` | `nemo` | [`repo-skills/nemo`](../skills/repositories/repo-skills/nemo/SKILL.md) | [GitHub](<https://github.com/NVIDIA-NeMo/NeMo>) · [`8f85359`](<https://github.com/NVIDIA-NeMo/NeMo/commit/8f85359bf29638682816dd53badf4893de8a75a3>) |
+| `NVIDIA-NeMo/Speech` | `nemo` | [`repo-skills/nemo`](../skills/repositories/repo-skills/nemo/SKILL.md) | [GitHub](<https://github.com/NVIDIA-NeMo/Speech>) · [`8f85359`](<https://github.com/NVIDIA-NeMo/Speech/commit/8f85359bf29638682816dd53badf4893de8a75a3>) |
 | `OpenMOSS/MOSS-TTS` | `moss-tts` | [`repo-skills/moss-tts`](../skills/repositories/repo-skills/moss-tts/SKILL.md) | [GitHub](<https://github.com/OpenMOSS/MOSS-TTS>) · [`58b20a0`](<https://github.com/OpenMOSS/MOSS-TTS/commit/58b20a0d5fcc6766658d50967a90a9d890009a46>) |
 | `PaddlePaddle/PaddleSpeech` | `paddlespeech` | [`repo-skills/paddlespeech`](../skills/repositories/repo-skills/paddlespeech/SKILL.md) | [GitHub](<https://github.com/PaddlePaddle/PaddleSpeech>) · [`6b25a40`](<https://github.com/PaddlePaddle/PaddleSpeech/commit/6b25a400008d393f9c3af837b3c692b17f29ee1a>) |
 | `speechbrain/speechbrain` | `speechbrain` | [`repo-skills/speechbrain`](../skills/repositories/repo-skills/speechbrain/SKILL.md) | [GitHub](<https://github.com/speechbrain/speechbrain>) · [`e5cb1f6`](<https://github.com/speechbrain/speechbrain/commit/e5cb1f65b940634215650aa1171e0440d0808123>) |
@@ -1074,7 +1077,7 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `m-bain/whisperX` | `whisperx` | [`repo-skills/whisperx`](../skills/repositories/repo-skills/whisperx/SKILL.md) | [GitHub](<https://github.com/m-bain/whisperX>) · [`2cfd7b7`](<https://github.com/m-bain/whisperX/commit/2cfd7b7c5c7bba144954364db747319b50e8232b>) |
 | `modelscope/ClearerVoice-Studio` | `clearer-voice-studio` | [`repo-skills/clearer-voice-studio`](../skills/repositories/repo-skills/clearer-voice-studio/SKILL.md) | [GitHub](<https://github.com/modelscope/ClearerVoice-Studio>) · [`6b3774d`](<https://github.com/modelscope/ClearerVoice-Studio/commit/6b3774dc79c46ae8bed2a4fa5f706f0ac8c75c61>) |
 | `modelscope/FunASR` | `funasr` | [`repo-skills/funasr`](../skills/repositories/repo-skills/funasr/SKILL.md) | [GitHub](<https://github.com/modelscope/FunASR>) · [`680b1b3`](<https://github.com/modelscope/FunASR/commit/680b1b3f10d35c9fc388230800a3c8b0570271b0>) |
-| `NVIDIA-NeMo/NeMo` | `nemo` | [`repo-skills/nemo`](../skills/repositories/repo-skills/nemo/SKILL.md) | [GitHub](<https://github.com/NVIDIA-NeMo/NeMo>) · [`8f85359`](<https://github.com/NVIDIA-NeMo/NeMo/commit/8f85359bf29638682816dd53badf4893de8a75a3>) |
+| `NVIDIA-NeMo/Speech` | `nemo` | [`repo-skills/nemo`](../skills/repositories/repo-skills/nemo/SKILL.md) | [GitHub](<https://github.com/NVIDIA-NeMo/Speech>) · [`8f85359`](<https://github.com/NVIDIA-NeMo/Speech/commit/8f85359bf29638682816dd53badf4893de8a75a3>) |
 | `PaddlePaddle/PaddleSpeech` | `paddlespeech` | [`repo-skills/paddlespeech`](../skills/repositories/repo-skills/paddlespeech/SKILL.md) | [GitHub](<https://github.com/PaddlePaddle/PaddleSpeech>) · [`6b25a40`](<https://github.com/PaddlePaddle/PaddleSpeech/commit/6b25a400008d393f9c3af837b3c692b17f29ee1a>) |
 | `speechbrain/speechbrain` | `speechbrain` | [`repo-skills/speechbrain`](../skills/repositories/repo-skills/speechbrain/SKILL.md) | [GitHub](<https://github.com/speechbrain/speechbrain>) · [`e5cb1f6`](<https://github.com/speechbrain/speechbrain/commit/e5cb1f65b940634215650aa1171e0440d0808123>) |
 | `tyiannak/pyAudioAnalysis` | `py-audio-analysis` | [`repo-skills/py-audio-analysis`](../skills/repositories/repo-skills/py-audio-analysis/SKILL.md) | [GitHub](<https://github.com/tyiannak/pyAudioAnalysis>) · [`3dd60a2`](<https://github.com/tyiannak/pyAudioAnalysis/commit/3dd60a2e904d11465b7a27332d1f4ce69182fa93>) |
@@ -1205,7 +1208,7 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `thunlp/OpenPrompt` | `openprompt` | [`repo-skills/openprompt`](../skills/repositories/repo-skills/openprompt/SKILL.md) | [GitHub](<https://github.com/thunlp/OpenPrompt>) · [`f6fb080`](<https://github.com/thunlp/OpenPrompt/commit/f6fb080ef755c37c01b7959e7560d007049510e8>) |
 | `wb14123/seq2seq-couplet` | `seq2seq-couplet` | [`repo-skills/seq2seq-couplet`](../skills/repositories/repo-skills/seq2seq-couplet/SKILL.md) | [GitHub](<https://github.com/wb14123/seq2seq-couplet>) · [`53c3d25`](<https://github.com/wb14123/seq2seq-couplet/commit/53c3d2592b6c85211936e0ec41a8c2be831c9b58>) |
 
-## <a id="llm-applications"></a>LLM Applications (323 repos)
+## <a id="llm-applications"></a>LLM Applications (325 repos)
 
 ### <a id="llm-applications-multi-agent-orchestration"></a>Multi-Agent Orchestration (29 repos)
 
@@ -1287,7 +1290,7 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | --- | --- | --- | --- |
 | `1Panel-dev/MaxKB` | `maxkb` | [`repo-skills/maxkb`](../skills/repositories/repo-skills/maxkb/SKILL.md) | [GitHub](<https://github.com/1Panel-dev/MaxKB>) · [`01b21db`](<https://github.com/1Panel-dev/MaxKB/commit/01b21db88145278d98bf5e9bd55e6abd6b3aad43>) |
 | `agentscope-ai/agentscope` | `agentscope` | [`repo-skills/agentscope`](../skills/repositories/repo-skills/agentscope/SKILL.md) | [GitHub](<https://github.com/agentscope-ai/agentscope>) · [`29b5923`](<https://github.com/agentscope-ai/agentscope/commit/29b592358c2e983a0d10dd5227316b7a02d8c23a>) |
-| `arc53/DocsGPT` | `docs-gpt` | [`repo-skills/docs-gpt`](../skills/repositories/repo-skills/docs-gpt/SKILL.md) | [GitHub](<https://github.com/arc53/DocsGPT>) · [`ff5bc01`](<https://github.com/arc53/DocsGPT/commit/ff5bc01d20430b52d9028f71ebcaaa34c1a6b8e0>) |
+| `arc53/DocsGPT` | `docsgpt` | [`repo-skills/docsgpt`](../skills/repositories/repo-skills/docsgpt/SKILL.md) | [GitHub](<https://github.com/arc53/DocsGPT>) · [`ff5bc01`](<https://github.com/arc53/DocsGPT/commit/ff5bc01d20430b52d9028f71ebcaaa34c1a6b8e0>) |
 | `dataelement/bisheng` | `bisheng` | [`repo-skills/bisheng`](../skills/repositories/repo-skills/bisheng/SKILL.md) | [GitHub](<https://github.com/dataelement/bisheng>) · [`a378811`](<https://github.com/dataelement/bisheng/commit/a3788115d71f4b5888a34fbe7e1f0f3f9f13784c>) |
 | `eosphoros-ai/DB-GPT` | `db-gpt` | [`repo-skills/db-gpt`](../skills/repositories/repo-skills/db-gpt/SKILL.md) | [GitHub](<https://github.com/eosphoros-ai/DB-GPT>) · [`c5fd007`](<https://github.com/eosphoros-ai/DB-GPT/commit/c5fd007399691cc936e6d6a4bf4dee829db92135>) |
 | `GetBindu/Bindu` | `bindu` | [`repo-skills/bindu`](../skills/repositories/repo-skills/bindu/SKILL.md) | [GitHub](<https://github.com/GetBindu/Bindu>) · [`7b1ff75`](<https://github.com/GetBindu/Bindu/commit/7b1ff75ac93f3b3eb94b975f727bdee9436cc7ce>) |
@@ -1311,11 +1314,12 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `TransformerOptimus/SuperAGI` | `super-agi` | [`repo-skills/super-agi`](../skills/repositories/repo-skills/super-agi/SKILL.md) | [GitHub](<https://github.com/TransformerOptimus/SuperAGI>) · [`c3c1982`](<https://github.com/TransformerOptimus/SuperAGI/commit/c3c1982e7bd6a11cfed53c5a193ea502f924b1b6>) |
 | `xerrors/Yuxi` | `yuxi` | [`repo-skills/yuxi`](../skills/repositories/repo-skills/yuxi/SKILL.md) | [GitHub](<https://github.com/xerrors/Yuxi>) · [`c46ce7f`](<https://github.com/xerrors/Yuxi/commit/c46ce7ff1c7b926fb2f32f2084129a3371d6375b>) |
 
-### <a id="llm-applications-llm-workflow-frameworks"></a>LLM Workflow Frameworks (22 repos)
+### <a id="llm-applications-llm-workflow-frameworks"></a>LLM Workflow Frameworks (23 repos)
 
 | Repo ID | Skill ID | Repository skill | GitHub / source commit |
 | --- | --- | --- | --- |
 | `1Panel-dev/MaxKB` | `maxkb` | [`repo-skills/maxkb`](../skills/repositories/repo-skills/maxkb/SKILL.md) | [GitHub](<https://github.com/1Panel-dev/MaxKB>) · [`01b21db`](<https://github.com/1Panel-dev/MaxKB/commit/01b21db88145278d98bf5e9bd55e6abd6b3aad43>) |
+| `arc53/DocsGPT` | `docsgpt` | [`repo-skills/docsgpt`](../skills/repositories/repo-skills/docsgpt/SKILL.md) | [GitHub](<https://github.com/arc53/DocsGPT>) · [`ff5bc01`](<https://github.com/arc53/DocsGPT/commit/ff5bc01d20430b52d9028f71ebcaaa34c1a6b8e0>) |
 | `crewAIInc/crewAI` | `crewai` | [`repo-skills/crewai`](../skills/repositories/repo-skills/crewai/SKILL.md) | [GitHub](<https://github.com/crewAIInc/crewAI>) · [`9db2d44`](<https://github.com/crewAIInc/crewAI/commit/9db2d4476641fda3e13347662152214d528f4d79>) |
 | `dataelement/bisheng` | `bisheng` | [`repo-skills/bisheng`](../skills/repositories/repo-skills/bisheng/SKILL.md) | [GitHub](<https://github.com/dataelement/bisheng>) · [`a378811`](<https://github.com/dataelement/bisheng/commit/a3788115d71f4b5888a34fbe7e1f0f3f9f13784c>) |
 | `deepset-ai/haystack` | `haystack` | [`repo-skills/haystack`](../skills/repositories/repo-skills/haystack/SKILL.md) | [GitHub](<https://github.com/deepset-ai/haystack>) · [`75c51b6`](<https://github.com/deepset-ai/haystack/commit/75c51b683f07045460f377679bc491b4b9c0c044>) |
@@ -1338,10 +1342,11 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `SylphAI-Inc/AdalFlow` | `adalflow` | [`repo-skills/adalflow`](../skills/repositories/repo-skills/adalflow/SKILL.md) | [GitHub](<https://github.com/SylphAI-Inc/AdalFlow>) · [`810de99`](<https://github.com/SylphAI-Inc/AdalFlow/commit/810de99d86191b3aa0c939aa6d6d1a21977555aa>) |
 | `The-Pocket/PocketFlow` | `pocketflow` | [`repo-skills/pocketflow`](../skills/repositories/repo-skills/pocketflow/SKILL.md) | [GitHub](<https://github.com/The-Pocket/PocketFlow>) · [`f74d023`](<https://github.com/The-Pocket/PocketFlow/commit/f74d023f93607b8c3268133339a5e532a949898c>) |
 
-### <a id="llm-applications-rag-frameworks"></a>RAG Frameworks (35 repos)
+### <a id="llm-applications-rag-frameworks"></a>RAG Frameworks (36 repos)
 
 | Repo ID | Skill ID | Repository skill | GitHub / source commit |
 | --- | --- | --- | --- |
+| `arc53/DocsGPT` | `docsgpt` | [`repo-skills/docsgpt`](../skills/repositories/repo-skills/docsgpt/SKILL.md) | [GitHub](<https://github.com/arc53/DocsGPT>) · [`ff5bc01`](<https://github.com/arc53/DocsGPT/commit/ff5bc01d20430b52d9028f71ebcaaa34c1a6b8e0>) |
 | `camel-ai/camel` | `camel-ai` | [`repo-skills/camel-ai`](../skills/repositories/repo-skills/camel-ai/SKILL.md) | [GitHub](<https://github.com/camel-ai/camel>) · [`51ae9bb`](<https://github.com/camel-ai/camel/commit/51ae9bb92be2b124927e9d9822210873e4b29c16>) |
 | `Cinnamon/kotaemon` | `kotaemon` | [`repo-skills/kotaemon`](../skills/repositories/repo-skills/kotaemon/SKILL.md) | [GitHub](<https://github.com/Cinnamon/kotaemon>) · [`9ad3e4e`](<https://github.com/Cinnamon/kotaemon/commit/9ad3e4e49aa35b8acddd235918a5d9753c1cfdf9>) |
 | `dataelement/bisheng` | `bisheng` | [`repo-skills/bisheng`](../skills/repositories/repo-skills/bisheng/SKILL.md) | [GitHub](<https://github.com/dataelement/bisheng>) · [`a378811`](<https://github.com/dataelement/bisheng/commit/a3788115d71f4b5888a34fbe7e1f0f3f9f13784c>) |
@@ -1455,7 +1460,7 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | Repo ID | Skill ID | Repository skill | GitHub / source commit |
 | --- | --- | --- | --- |
 | `adbar/trafilatura` | `trafilatura` | [`repo-skills/trafilatura`](../skills/repositories/repo-skills/trafilatura/SKILL.md) | [GitHub](<https://github.com/adbar/trafilatura>) · [`a397f89`](<https://github.com/adbar/trafilatura/commit/a397f890f75bd3f1df216915617839523010fae8>) |
-| `arc53/DocsGPT` | `docs-gpt` | [`repo-skills/docs-gpt`](../skills/repositories/repo-skills/docs-gpt/SKILL.md) | [GitHub](<https://github.com/arc53/DocsGPT>) · [`ff5bc01`](<https://github.com/arc53/DocsGPT/commit/ff5bc01d20430b52d9028f71ebcaaa34c1a6b8e0>) |
+| `arc53/DocsGPT` | `docsgpt` | [`repo-skills/docsgpt`](../skills/repositories/repo-skills/docsgpt/SKILL.md) | [GitHub](<https://github.com/arc53/DocsGPT>) · [`ff5bc01`](<https://github.com/arc53/DocsGPT/commit/ff5bc01d20430b52d9028f71ebcaaa34c1a6b8e0>) |
 | `binary-husky/gpt_academic` | `gpt-academic` | [`repo-skills/gpt-academic`](../skills/repositories/repo-skills/gpt-academic/SKILL.md) | [GitHub](<https://github.com/binary-husky/gpt_academic>) · [`d6bde0f`](<https://github.com/binary-husky/gpt_academic/commit/d6bde0fa54373309bd05823a49bda8da019d2c77>) |
 | `camel-ai/owl` | `owl` | [`repo-skills/owl`](../skills/repositories/repo-skills/owl/SKILL.md) | [GitHub](<https://github.com/camel-ai/owl>) · [`fa5c0b4`](<https://github.com/camel-ai/owl/commit/fa5c0b4c3d31217e53fef0b4889f89152b0ecfe6>) |
 | `Cinnamon/kotaemon` | `kotaemon` | [`repo-skills/kotaemon`](../skills/repositories/repo-skills/kotaemon/SKILL.md) | [GitHub](<https://github.com/Cinnamon/kotaemon>) · [`9ad3e4e`](<https://github.com/Cinnamon/kotaemon/commit/9ad3e4e49aa35b8acddd235918a5d9753c1cfdf9>) |
@@ -1491,7 +1496,7 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | Repo ID | Skill ID | Repository skill | GitHub / source commit |
 | --- | --- | --- | --- |
 | `1Panel-dev/MaxKB` | `maxkb` | [`repo-skills/maxkb`](../skills/repositories/repo-skills/maxkb/SKILL.md) | [GitHub](<https://github.com/1Panel-dev/MaxKB>) · [`01b21db`](<https://github.com/1Panel-dev/MaxKB/commit/01b21db88145278d98bf5e9bd55e6abd6b3aad43>) |
-| `arc53/DocsGPT` | `docs-gpt` | [`repo-skills/docs-gpt`](../skills/repositories/repo-skills/docs-gpt/SKILL.md) | [GitHub](<https://github.com/arc53/DocsGPT>) · [`ff5bc01`](<https://github.com/arc53/DocsGPT/commit/ff5bc01d20430b52d9028f71ebcaaa34c1a6b8e0>) |
+| `arc53/DocsGPT` | `docsgpt` | [`repo-skills/docsgpt`](../skills/repositories/repo-skills/docsgpt/SKILL.md) | [GitHub](<https://github.com/arc53/DocsGPT>) · [`ff5bc01`](<https://github.com/arc53/DocsGPT/commit/ff5bc01d20430b52d9028f71ebcaaa34c1a6b8e0>) |
 | `binary-husky/gpt_academic` | `gpt-academic` | [`repo-skills/gpt-academic`](../skills/repositories/repo-skills/gpt-academic/SKILL.md) | [GitHub](<https://github.com/binary-husky/gpt_academic>) · [`d6bde0f`](<https://github.com/binary-husky/gpt_academic/commit/d6bde0fa54373309bd05823a49bda8da019d2c77>) |
 | `chatchat-space/Langchain-Chatchat` | `langchain-chatchat` | [`repo-skills/langchain-chatchat`](../skills/repositories/repo-skills/langchain-chatchat/SKILL.md) | [GitHub](<https://github.com/chatchat-space/Langchain-Chatchat>) · [`49165d6`](<https://github.com/chatchat-space/Langchain-Chatchat/commit/49165d6af4438aa7e8a1f71ce276db55f4405151>) |
 | `Cinnamon/kotaemon` | `kotaemon` | [`repo-skills/kotaemon`](../skills/repositories/repo-skills/kotaemon/SKILL.md) | [GitHub](<https://github.com/Cinnamon/kotaemon>) · [`9ad3e4e`](<https://github.com/Cinnamon/kotaemon/commit/9ad3e4e49aa35b8acddd235918a5d9753c1cfdf9>) |
@@ -1662,7 +1667,7 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `tatsu-lab/stanford_alpaca` | `stanford-alpaca` | [`repo-skills/stanford-alpaca`](../skills/repositories/repo-skills/stanford-alpaca/SKILL.md) | [GitHub](<https://github.com/tatsu-lab/stanford_alpaca>) · [`761dc5b`](<https://github.com/tatsu-lab/stanford_alpaca/commit/761dc5bfbdeeffa89b8bff5d038781a4055f796a>) |
 | `texttron/tevatron` | `tevatron` | [`repo-skills/tevatron`](../skills/repositories/repo-skills/tevatron/SKILL.md) | [GitHub](<https://github.com/texttron/tevatron>) · [`f0fc1e8`](<https://github.com/texttron/tevatron/commit/f0fc1e8b73ecda0075e69bed66ab72611413979e>) |
 | `unslothai/unsloth` | `unsloth` | [`repo-skills/unsloth`](../skills/repositories/repo-skills/unsloth/SKILL.md) | [GitHub](<https://github.com/unslothai/unsloth>) · [`dbc13f0`](<https://github.com/unslothai/unsloth/commit/dbc13f02c989d6efc6c830796a4226c3f9a6cca6>) |
-| `volcengine/verl` | `verl` | [`repo-skills/verl`](../skills/repositories/repo-skills/verl/SKILL.md) | [GitHub](<https://github.com/volcengine/verl>) · [`8a69493`](<https://github.com/volcengine/verl/commit/8a694930275061f52ebd538c906ef8819af56dbd>) |
+| `verl-project/verl` | `verl` | [`repo-skills/verl`](../skills/repositories/repo-skills/verl/SKILL.md) | [GitHub](<https://github.com/verl-project/verl>) · [`8a69493`](<https://github.com/verl-project/verl/commit/8a694930275061f52ebd538c906ef8819af56dbd>) |
 | `WangRongsheng/XrayGLM` | `xrayglm` | [`repo-skills/xrayglm`](../skills/repositories/repo-skills/xrayglm/SKILL.md) | [GitHub](<https://github.com/WangRongsheng/XrayGLM>) · [`a30173b`](<https://github.com/WangRongsheng/XrayGLM/commit/a30173b61645fdc91eb746d17f8d85e909d08fdd>) |
 | `YiVal/YiVal` | `yi-val` | [`repo-skills/yi-val`](../skills/repositories/repo-skills/yi-val/SKILL.md) | [GitHub](<https://github.com/YiVal/YiVal>) · [`22a1fa0`](<https://github.com/YiVal/YiVal/commit/22a1fa0e3ed27b8e2639a8340d6c3662e64c4e2f>) |
 | `ymcui/Chinese-LLaMA-Alpaca` | `chinese-llama-alpaca` | [`repo-skills/chinese-llama-alpaca`](../skills/repositories/repo-skills/chinese-llama-alpaca/SKILL.md) | [GitHub](<https://github.com/ymcui/Chinese-LLaMA-Alpaca>) · [`5b8bb55`](<https://github.com/ymcui/Chinese-LLaMA-Alpaca/commit/5b8bb552e8b738da0f19a8e2cedf6db6b5c3fd14>) |
@@ -1704,7 +1709,7 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `rllm-org/rllm` | `rllm` | [`repo-skills/rllm`](../skills/repositories/repo-skills/rllm/SKILL.md) | [GitHub](<https://github.com/rllm-org/rllm>) · [`cf0ff43`](<https://github.com/rllm-org/rllm/commit/cf0ff432d2c5632e6eeb5232aaa89e61b0523ec5>) |
 | `stochasticai/xTuring` | `x-turing` | [`repo-skills/x-turing`](../skills/repositories/repo-skills/x-turing/SKILL.md) | [GitHub](<https://github.com/stochasticai/xTuring>) · [`fb16cc2`](<https://github.com/stochasticai/xTuring/commit/fb16cc2b3bd5dde09167a4079580f05f91b5dcda>) |
 | `unslothai/unsloth` | `unsloth` | [`repo-skills/unsloth`](../skills/repositories/repo-skills/unsloth/SKILL.md) | [GitHub](<https://github.com/unslothai/unsloth>) · [`dbc13f0`](<https://github.com/unslothai/unsloth/commit/dbc13f02c989d6efc6c830796a4226c3f9a6cca6>) |
-| `volcengine/verl` | `verl` | [`repo-skills/verl`](../skills/repositories/repo-skills/verl/SKILL.md) | [GitHub](<https://github.com/volcengine/verl>) · [`8a69493`](<https://github.com/volcengine/verl/commit/8a694930275061f52ebd538c906ef8819af56dbd>) |
+| `verl-project/verl` | `verl` | [`repo-skills/verl`](../skills/repositories/repo-skills/verl/SKILL.md) | [GitHub](<https://github.com/verl-project/verl>) · [`8a69493`](<https://github.com/verl-project/verl/commit/8a694930275061f52ebd538c906ef8819af56dbd>) |
 
 ### <a id="llm-models-training-and-alignment-multi-stage-llm-training"></a>Multi-Stage LLM Training (11 repos)
 
@@ -1720,7 +1725,7 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `OptimalScale/LMFlow` | `lmflow` | [`repo-skills/lmflow`](../skills/repositories/repo-skills/lmflow/SKILL.md) | [GitHub](<https://github.com/OptimalScale/LMFlow>) · [`e9b1da0`](<https://github.com/OptimalScale/LMFlow/commit/e9b1da012f08d17fadad698278f505800d30a8af>) |
 | `ruc-datalab/DeepAnalyze` | `deep-analyze` | [`repo-skills/deep-analyze`](../skills/repositories/repo-skills/deep-analyze/SKILL.md) | [GitHub](<https://github.com/ruc-datalab/DeepAnalyze>) · [`0b54741`](<https://github.com/ruc-datalab/DeepAnalyze/commit/0b54741848df5c157303eb82f80a8dca1afb438f>) |
 | `unslothai/unsloth` | `unsloth` | [`repo-skills/unsloth`](../skills/repositories/repo-skills/unsloth/SKILL.md) | [GitHub](<https://github.com/unslothai/unsloth>) · [`dbc13f0`](<https://github.com/unslothai/unsloth/commit/dbc13f02c989d6efc6c830796a4226c3f9a6cca6>) |
-| `volcengine/verl` | `verl` | [`repo-skills/verl`](../skills/repositories/repo-skills/verl/SKILL.md) | [GitHub](<https://github.com/volcengine/verl>) · [`8a69493`](<https://github.com/volcengine/verl/commit/8a694930275061f52ebd538c906ef8819af56dbd>) |
+| `verl-project/verl` | `verl` | [`repo-skills/verl`](../skills/repositories/repo-skills/verl/SKILL.md) | [GitHub](<https://github.com/verl-project/verl>) · [`8a69493`](<https://github.com/verl-project/verl/commit/8a694930275061f52ebd538c906ef8819af56dbd>) |
 
 ### <a id="llm-models-training-and-alignment-pretraining"></a>Pretraining (16 repos)
 
@@ -1961,7 +1966,7 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `cleanlab/cleanlab` | `cleanlab` | [`repo-skills/cleanlab`](../skills/repositories/repo-skills/cleanlab/SKILL.md) | [GitHub](<https://github.com/cleanlab/cleanlab>) · [`7506257`](<https://github.com/cleanlab/cleanlab/commit/750625747de1b26d8530954f51f0530bd0b51d3c>) |
 | `datajuicer/data-juicer` | `data-juicer` | [`repo-skills/data-juicer`](../skills/repositories/repo-skills/data-juicer/SKILL.md) | [GitHub](<https://github.com/datajuicer/data-juicer>) · [`0e40a86`](<https://github.com/datajuicer/data-juicer/commit/0e40a8659a759286d9bb3899cb3ef7f6fdbc624c>) |
 | `deepchecks/deepchecks` | `deepchecks` | [`repo-skills/deepchecks`](../skills/repositories/repo-skills/deepchecks/SKILL.md) | [GitHub](<https://github.com/deepchecks/deepchecks>) · [`98475d1`](<https://github.com/deepchecks/deepchecks/commit/98475d17b08a21fca29d533b94b8ec3c70544a85>) |
-| `great-expectations/great_expectations` | `great-expectations` | [`repo-skills/great-expectations`](../skills/repositories/repo-skills/great-expectations/SKILL.md) | [GitHub](<https://github.com/great-expectations/great_expectations>) · [`eec491e`](<https://github.com/great-expectations/great_expectations/commit/eec491e4487df4fedf3500e29172a30568ce5317>) |
+| `fivetran/great_expectations` | `great-expectations` | [`repo-skills/great-expectations`](../skills/repositories/repo-skills/great-expectations/SKILL.md) | [GitHub](<https://github.com/fivetran/great_expectations>) · [`eec491e`](<https://github.com/fivetran/great_expectations/commit/eec491e4487df4fedf3500e29172a30568ce5317>) |
 | `NVIDIA-NeMo/DataDesigner` | `data-designer-repo-skill` | [`repo-skills/data-designer-repo-skill`](../skills/repositories/repo-skills/data-designer-repo-skill/SKILL.md) | [GitHub](<https://github.com/NVIDIA-NeMo/DataDesigner>) · [`27acf14`](<https://github.com/NVIDIA-NeMo/DataDesigner/commit/27acf141170eceb1e8242c132d56b49107462fce>) |
 | `visual-layer/fastdup` | `fastdup` | [`repo-skills/fastdup`](../skills/repositories/repo-skills/fastdup/SKILL.md) | [GitHub](<https://github.com/visual-layer/fastdup>) · [`2beaa49`](<https://github.com/visual-layer/fastdup/commit/2beaa4951902b8b646f997cce8ee724cfdadece4>) |
 
@@ -2085,7 +2090,7 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `bentoml/OpenLLM` | `openllm` | [`repo-skills/openllm`](../skills/repositories/repo-skills/openllm/SKILL.md) | [GitHub](<https://github.com/bentoml/OpenLLM>) · [`ec2355c`](<https://github.com/bentoml/OpenLLM/commit/ec2355ce1a75176164c451cbb7592b3046531540>) |
 | `BerriAI/litellm` | `litellm` | [`repo-skills/litellm`](../skills/repositories/repo-skills/litellm/SKILL.md) | [GitHub](<https://github.com/BerriAI/litellm>) · [`84c1414`](<https://github.com/BerriAI/litellm/commit/84c1414aef6732254d7ec17c544b6b77cb90d460>) |
 | `bigscience-workshop/petals` | `petals` | [`repo-skills/petals`](../skills/repositories/repo-skills/petals/SKILL.md) | [GitHub](<https://github.com/bigscience-workshop/petals>) · [`22afba6`](<https://github.com/bigscience-workshop/petals/commit/22afba627a7eb4fcfe9418c49472c6a51334b8ac>) |
-| `comfyanonymous/ComfyUI` | `comfy-ui` | [`repo-skills/comfy-ui`](../skills/repositories/repo-skills/comfy-ui/SKILL.md) | [GitHub](<https://github.com/comfyanonymous/ComfyUI>) · [`0d8b751`](<https://github.com/comfyanonymous/ComfyUI/commit/0d8b7510bdc5409f4a76c3191e122ddea50f4aa2>) |
+| `Comfy-Org/ComfyUI` | `comfy-ui` | [`repo-skills/comfy-ui`](../skills/repositories/repo-skills/comfy-ui/SKILL.md) | [GitHub](<https://github.com/Comfy-Org/ComfyUI>) · [`0d8b751`](<https://github.com/Comfy-Org/ComfyUI/commit/0d8b7510bdc5409f4a76c3191e122ddea50f4aa2>) |
 | `deepspeedai/DeepSpeed` | `deepspeed` | [`repo-skills/deepspeed`](../skills/repositories/repo-skills/deepspeed/SKILL.md) | [GitHub](<https://github.com/deepspeedai/DeepSpeed>) · [`ad026a1`](<https://github.com/deepspeedai/DeepSpeed/commit/ad026a1fd1239071f2afb0a9c07f04b3cd732e02>) |
 | `dexmal/dexbotic` | `dexbotic` | [`repo-skills/dexbotic`](../skills/repositories/repo-skills/dexbotic/SKILL.md) | [GitHub](<https://github.com/dexmal/dexbotic>) · [`6356c98`](<https://github.com/dexmal/dexbotic/commit/6356c98e6b75d3f4fbc8765913d64ddfd9fe0823>) |
 | `eosphoros-ai/DB-GPT` | `db-gpt` | [`repo-skills/db-gpt`](../skills/repositories/repo-skills/db-gpt/SKILL.md) | [GitHub](<https://github.com/eosphoros-ai/DB-GPT>) · [`c5fd007`](<https://github.com/eosphoros-ai/DB-GPT/commit/c5fd007399691cc936e6d6a4bf4dee829db92135>) |
@@ -2487,7 +2492,7 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `MyoHub/myosuite` | `myosuite` | [`repo-skills/myosuite`](../skills/repositories/repo-skills/myosuite/SKILL.md) | [GitHub](<https://github.com/MyoHub/myosuite>) · [`9430099`](<https://github.com/MyoHub/myosuite/commit/94300995076b20ed6a8cfc65794c54bc997a0697>) |
 | `nicrusso7/rex-gym` | `rex-gym` | [`repo-skills/rex-gym`](../skills/repositories/repo-skills/rex-gym/SKILL.md) | [GitHub](<https://github.com/nicrusso7/rex-gym>) · [`2666304`](<https://github.com/nicrusso7/rex-gym/commit/26663048bd3c3da307714da4458b1a2a9dc81824>) |
 | `opendilab/DI-engine` | `di-engine` | [`repo-skills/di-engine`](../skills/repositories/repo-skills/di-engine/SKILL.md) | [GitHub](<https://github.com/opendilab/DI-engine>) · [`d0b21d0`](<https://github.com/opendilab/DI-engine/commit/d0b21d065b2d80317cc16b28a95301be8871d950>) |
-| `PettingZoo-Team/PettingZoo` | `pettingzoo` | [`repo-skills/pettingzoo`](../skills/repositories/repo-skills/pettingzoo/SKILL.md) | [GitHub](<https://github.com/PettingZoo-Team/PettingZoo>) · [`3991748`](<https://github.com/PettingZoo-Team/PettingZoo/commit/39917484f8f37e6fb735fcd99f7bc43a53609df7>) |
+| `Farama-Foundation/PettingZoo` | `pettingzoo` | [`repo-skills/pettingzoo`](../skills/repositories/repo-skills/pettingzoo/SKILL.md) | [GitHub](<https://github.com/Farama-Foundation/PettingZoo>) · [`3991748`](<https://github.com/Farama-Foundation/PettingZoo/commit/39917484f8f37e6fb735fcd99f7bc43a53609df7>) |
 | `pytorch/rl` | `torchrl` | [`repo-skills/torchrl`](../skills/repositories/repo-skills/torchrl/SKILL.md) | [GitHub](<https://github.com/pytorch/rl>) · [`a46e872`](<https://github.com/pytorch/rl/commit/a46e872e036e9d9485f45f5bef67295ac1f5637f>) |
 | `StanfordVL/BEHAVIOR-1K` | `behavior-1k` | [`repo-skills/behavior-1k`](../skills/repositories/repo-skills/behavior-1k/SKILL.md) | [GitHub](<https://github.com/StanfordVL/BEHAVIOR-1K>) · [`eb3c012`](<https://github.com/StanfordVL/BEHAVIOR-1K/commit/eb3c01263b76f4404e8187c1bcd758d48d47a020>) |
 | `tensorforce/tensorforce` | `tensorforce` | [`repo-skills/tensorforce`](../skills/repositories/repo-skills/tensorforce/SKILL.md) | [GitHub](<https://github.com/tensorforce/tensorforce>) · [`b05defa`](<https://github.com/tensorforce/tensorforce/commit/b05defa283d8054d3165740c74c6604aa38c81d4>) |
@@ -3032,7 +3037,7 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `Palashio/libra` | `libra` | [`repo-skills/libra`](../skills/repositories/repo-skills/libra/SKILL.md) | [GitHub](<https://github.com/Palashio/libra>) · [`4767c9d`](<https://github.com/Palashio/libra/commit/4767c9d079d65ebf8afb162fc08f0c261d8e1c60>) |
 | `plexe-ai/plexe` | `plexe` | [`repo-skills/plexe`](../skills/repositories/repo-skills/plexe/SKILL.md) | [GitHub](<https://github.com/plexe-ai/plexe>) · [`a1e05f6`](<https://github.com/plexe-ai/plexe/commit/a1e05f6dc4c0875e0075f3b6f020fbecef57a699>) |
 | `PriorLabs/TabPFN` | `tabpfn` | [`repo-skills/tabpfn`](../skills/repositories/repo-skills/tabpfn/SKILL.md) | [GitHub](<https://github.com/PriorLabs/TabPFN>) · [`9262fa2`](<https://github.com/PriorLabs/TabPFN/commit/9262fa277b0fd92967f443e0f4171c3b2e745df7>) |
-| `rapidsai/cuml` | `cuml` | [`repo-skills/cuml`](../skills/repositories/repo-skills/cuml/SKILL.md) | [GitHub](<https://github.com/rapidsai/cuml>) · [`0d3a802`](<https://github.com/rapidsai/cuml/commit/0d3a802b2a13811db3e6e52ef4e344c2d2adf9d2>) |
+| `NVIDIA/cuml` | `cuml` | [`repo-skills/cuml`](../skills/repositories/repo-skills/cuml/SKILL.md) | [GitHub](<https://github.com/NVIDIA/cuml>) · [`0d3a802`](<https://github.com/NVIDIA/cuml/commit/0d3a802b2a13811db3e6e52ef4e344c2d2adf9d2>) |
 | `rasbt/mlxtend` | `mlxtend` | [`repo-skills/mlxtend`](../skills/repositories/repo-skills/mlxtend/SKILL.md) | [GitHub](<https://github.com/rasbt/mlxtend>) · [`9aadcee`](<https://github.com/rasbt/mlxtend/commit/9aadcee334f8b07003246d436cd9135b6d62a6b2>) |
 | `rushter/MLAlgorithms` | `ml-algorithms` | [`repo-skills/ml-algorithms`](../skills/repositories/repo-skills/ml-algorithms/SKILL.md) | [GitHub](<https://github.com/rushter/MLAlgorithms>) · [`3fe473a`](<https://github.com/rushter/MLAlgorithms/commit/3fe473a7a0de0c6defc3220559242132a3a76e75>) |
 | `scikit-learn-contrib/imbalanced-learn` | `imbalanced-learn` | [`repo-skills/imbalanced-learn`](../skills/repositories/repo-skills/imbalanced-learn/SKILL.md) | [GitHub](<https://github.com/scikit-learn-contrib/imbalanced-learn>) · [`8504e95`](<https://github.com/scikit-learn-contrib/imbalanced-learn/commit/8504e95f0160f61d1b617ca66f779646d2ee609e>) |
@@ -3048,7 +3053,7 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `imbue-bit/AlphaGPT` | `alpha-gpt` | [`repo-skills/alpha-gpt`](../skills/repositories/repo-skills/alpha-gpt/SKILL.md) | [GitHub](<https://github.com/imbue-bit/AlphaGPT>) · [`d851f22`](<https://github.com/imbue-bit/AlphaGPT/commit/d851f2221dcaf4d53a707344f68ae6801e3e5af5>) |
 | `microsoft/nni` | `nni` | [`repo-skills/nni`](../skills/repositories/repo-skills/nni/SKILL.md) | [GitHub](<https://github.com/microsoft/nni>) · [`767ed7f`](<https://github.com/microsoft/nni/commit/767ed7f22e1e588ce76cbbecb6c6a4a76a309805>) |
 | `Nixtla/statsforecast` | `statsforecast` | [`repo-skills/statsforecast`](../skills/repositories/repo-skills/statsforecast/SKILL.md) | [GitHub](<https://github.com/Nixtla/statsforecast>) · [`4876cd0`](<https://github.com/Nixtla/statsforecast/commit/4876cd0d9ae83495b25e07f4b40ca42658f5793a>) |
-| `rapidsai/cuml` | `cuml` | [`repo-skills/cuml`](../skills/repositories/repo-skills/cuml/SKILL.md) | [GitHub](<https://github.com/rapidsai/cuml>) · [`0d3a802`](<https://github.com/rapidsai/cuml/commit/0d3a802b2a13811db3e6e52ef4e344c2d2adf9d2>) |
+| `NVIDIA/cuml` | `cuml` | [`repo-skills/cuml`](../skills/repositories/repo-skills/cuml/SKILL.md) | [GitHub](<https://github.com/NVIDIA/cuml>) · [`0d3a802`](<https://github.com/NVIDIA/cuml/commit/0d3a802b2a13811db3e6e52ef4e344c2d2adf9d2>) |
 | `rasbt/mlxtend` | `mlxtend` | [`repo-skills/mlxtend`](../skills/repositories/repo-skills/mlxtend/SKILL.md) | [GitHub](<https://github.com/rasbt/mlxtend>) · [`9aadcee`](<https://github.com/rasbt/mlxtend/commit/9aadcee334f8b07003246d436cd9135b6d62a6b2>) |
 | `scikit-learn-contrib/imbalanced-learn` | `imbalanced-learn` | [`repo-skills/imbalanced-learn`](../skills/repositories/repo-skills/imbalanced-learn/SKILL.md) | [GitHub](<https://github.com/scikit-learn-contrib/imbalanced-learn>) · [`8504e95`](<https://github.com/scikit-learn-contrib/imbalanced-learn/commit/8504e95f0160f61d1b617ca66f779646d2ee609e>) |
 | `uber/causalml` | `causalml` | [`repo-skills/causalml`](../skills/repositories/repo-skills/causalml/SKILL.md) | [GitHub](<https://github.com/uber/causalml>) · [`a77dfb4`](<https://github.com/uber/causalml/commit/a77dfb4f1eeb72cf02e20229c3ee1413fb14ae0a>) |
@@ -3161,7 +3166,7 @@ Current scope: **1,000 repository skill roots**, **20 areas**, **178 families**,
 | `DistrictDataLabs/yellowbrick` | `yellowbrick` | [`repo-skills/yellowbrick`](../skills/repositories/repo-skills/yellowbrick/SKILL.md) | [GitHub](<https://github.com/DistrictDataLabs/yellowbrick>) · [`f7a8e95`](<https://github.com/DistrictDataLabs/yellowbrick/commit/f7a8e950bd31452ea2f5d402a1c5d519cd163fd5>) |
 | `lmcinnes/umap` | `umap-learn` | [`repo-skills/umap-learn`](../skills/repositories/repo-skills/umap-learn/SKILL.md) | [GitHub](<https://github.com/lmcinnes/umap>) · [`e82ed0d`](<https://github.com/lmcinnes/umap/commit/e82ed0d457b566b043ef44f4007a7149b0daca74>) |
 | `mars-project/mars` | `mars` | [`repo-skills/mars`](../skills/repositories/repo-skills/mars/SKILL.md) | [GitHub](<https://github.com/mars-project/mars>) · [`bcc0005`](<https://github.com/mars-project/mars/commit/bcc000554c8bd9ebd5cafe7c61b1f0090ab9d53b>) |
-| `rapidsai/cuml` | `cuml` | [`repo-skills/cuml`](../skills/repositories/repo-skills/cuml/SKILL.md) | [GitHub](<https://github.com/rapidsai/cuml>) · [`0d3a802`](<https://github.com/rapidsai/cuml/commit/0d3a802b2a13811db3e6e52ef4e344c2d2adf9d2>) |
+| `NVIDIA/cuml` | `cuml` | [`repo-skills/cuml`](../skills/repositories/repo-skills/cuml/SKILL.md) | [GitHub](<https://github.com/NVIDIA/cuml>) · [`0d3a802`](<https://github.com/NVIDIA/cuml/commit/0d3a802b2a13811db3e6e52ef4e344c2d2adf9d2>) |
 | `scverse/scanpy` | `scanpy` | [`repo-skills/scanpy`](../skills/repositories/repo-skills/scanpy/SKILL.md) | [GitHub](<https://github.com/scverse/scanpy>) · [`39f1241`](<https://github.com/scverse/scanpy/commit/39f12414fea9cea9439a3d9f665d1e17636092a9>) |
 | `scverse/scvi-tools` | `scvi-tools` | [`repo-skills/scvi-tools`](../skills/repositories/repo-skills/scvi-tools/SKILL.md) | [GitHub](<https://github.com/scverse/scvi-tools>) · [`4bada97`](<https://github.com/scverse/scvi-tools/commit/4bada9744d4274f4f82c4015b1c73b4698d830e7>) |
 

@@ -6,8 +6,8 @@ description: "Operate DB-GPT 0.8.1 installation, profiles, TOML configuration,
   credentials or assuming remote services."
 metadata:
   disco-role: operating
-license: Apache 2.0
 disable-model-invocation: true
+license: MIT
 ---
 
 # Setup and CLI

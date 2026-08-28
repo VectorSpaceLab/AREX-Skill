@@ -7,6 +7,7 @@ import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { parse } from "yaml";
+import { inspectRepoSkillLicenses } from "./license-validation.mjs";
 
 const DEFAULT_TIMEOUT_SECONDS = 900;
 const CANONICAL_NAME = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -157,6 +158,9 @@ function digestPortableTree(root) {
 	const files = collectPortableFiles(root).sort((left, right) => left.localeCompare(right));
 	for (const filePath of files) {
 		const relativePath = path.relative(root, filePath).split(path.sep).join("/");
+		// Codex policy manifests are target-only and are not part of the
+		// portable runtime skill content digest.
+		if (relativePath === "agents/openai.yaml" || relativePath.endsWith("/agents/openai.yaml")) continue;
 		const content = fs.readFileSync(filePath);
 		hash.update(`file\0${relativePath}\0${content.byteLength}\0`);
 		hash.update(content);
@@ -329,9 +333,11 @@ function validateRepoSkill(skillRoot, routingEntryPath, manualUnrouted) {
 	}
 	const skillId = parseFrontmatter(rootSkillFile).frontmatter.name;
 	if (skillId === "repo-skills" || skillId === "repo-skills-router") throw new ImportError(`${skillId} is reserved for the managed repo-skill library`);
+	const license = inspectRepoSkillLicenses(skillRoot);
+	if (!license.valid) throw new ImportError(`repo skill license gate failed:\n${license.errors.map((error) => `- ${error}`).join("\n")}`);
 	const metadata = validateRoutingMetadata(skillRoot, skillId, routingEntryPath, manualUnrouted);
 	validateMarkdownLinks(skillRoot, markdownFiles);
-	return { skillId, metadata };
+	return { skillId, metadata, license };
 }
 
 function withImportLockScript() { return path.join(SCRIPT_DIR, "with_import_lock.mjs"); }
@@ -382,7 +388,10 @@ function importRepoSkill(args) {
 	const routingEntryPath = args.routingEntry ? path.resolve(expandHome(args.routingEntry)) : undefined;
 	if (!pathExists(sourceDir)) throw new ImportError(`runtime repo skill directory does not exist: ${sourceDir}`);
 	if (isWithin(skillsRoot, sourceDir)) throw new ImportError(`runtime repo skill must be staged outside the live DisCo skills root before import: ${skillsRoot}`);
-	const { skillId } = validateRepoSkill(sourceDir, routingEntryPath, args.manualUnrouted);
+	const { skillId, license } = validateRepoSkill(sourceDir, routingEntryPath, args.manualUnrouted);
+	if (license.value === "NO_LICENSE") {
+		console.warn(`warning: ${skillId} contains license: NO_LICENSE; GitHub CLI did not provide a usable license result. This is not a legal conclusion; review and supplement it manually if appropriate.`);
+	}
 	const targetDir = path.join(repoSkillsRoot, skillId);
 	if (pathExists(targetDir) && !args.overwrite) throw new ImportError(`live repo skill already exists: ${targetDir}. Obtain separate overwrite approval, then rerun with --overwrite`);
 	fs.mkdirSync(repoSkillsRoot, { recursive: true });

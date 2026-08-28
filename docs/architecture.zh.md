@@ -1,7 +1,7 @@
 # 架构说明
 
-AREX-Skill 把已发布技能库与负责路由、使用、创建和维护它的 DisCo runtime
-分开。
+AREX-Skill 项目将已发布的 AREX-Skill Library 与负责路由、使用、创建和维护
+它的 DisCo runtime 分开。
 
 ## 当前仓库快照
 
@@ -21,7 +21,7 @@ AREX-Skill/
   cli/
 ```
 
-当前 checkout 同时包含已发布的 skill library 和 DisCo TypeScript 源码树。
+当前 checkout 同时包含 AREX-Skill Library 和 DisCo TypeScript 源码树。
 更广义的 library 边界是 `skills/`；当前 checkout 的
 repository skill collection 位于 `skills/repositories/repo-skills/`，同级
 还有 `skills/repositories/repo-skills-router/`。bundled 与 portable DisCo
@@ -127,13 +127,14 @@ registration 和 prompt construction 之前。`shared` 的可见性不会放宽�
 任务边界；bundled construction artifacts 与 generated operating artifacts 仍
 分别严格使用 `meta` 和 `operating`。
 
-Creator 首先从 `distill-ml-knowledge` 开始。它拥有通用的 task/construction
-词汇，评估可见的单一流程与有边界的组合，并选择 `direct`、
-`reuse-existing` 或 `design-reusable`。只有有证据证明会重复出现的构造能力缺口
-才进入 `design-meta-skill`；后者消费准确的 routing handoff，不再重复充分性或
-路径判断。入口在选择前只记录轻量 routing contract；选中的 direct 或
-reusable-bundle 分支再负责自己的 exact construction specification。通过审批的
-新 meta skill 是可复用的 Creator 基础能力，安装到
+Creator 首先从 `distill-ml-knowledge` 开始。它识别 source 或 task anchor，
+并驱动与论文一致的 `scope`、`ground`、`construct`、`verify` 四个阶段，记录
+`z`、`Q`、`X`、`G_tilde`、accepted `G` 和 construction record `R`。
+`direct`、`reuse-existing` 和 `design-reusable` 是写入 `R` 的 Creator
+construction strategies，不是额外的 distillation forms。只有有证据证明会
+重复出现的构造能力缺口才进入 `design-meta-skill`；后者消费准确的 routing
+handoff，不再重复 strategy decision。通过审批的新 meta skill 是可复用的
+Creator 基础能力，安装到
 `~/.disco/agent/skills/<meta-skill-id>/`。它以后生成的 operating graph 需要
 单独评估复用性、提出目标路径并获得导入批准，随后才能在新的 Researcher
 session 中使用。
@@ -142,7 +143,7 @@ session 中使用。
 切换后，DisCo 会持久化旧 session、创建干净的新 session、重建 prompt 和
 role-filtered registry；旧轨迹仍可通过 `/resume` 找回。`/export` 只导出当前
 session，不会合并另一 role 的消息。非交互和 RPC 客户端使用
-`--agent-mode creator|researcher` 选择初始 role；它与
+`--creator` 或 `--researcher` 选择初始 role；它与
 `--mode text|json|rpc` 相互独立。如果请求属于另一 role，DisCo 会在执行前拒
 绝该操作并明确建议切换，不会隐式改变 role。
 
@@ -298,6 +299,9 @@ modules 必须留在同一 scope。流程随后写出 `researcher-handoff.md`；
 
 ### 内置工作流 Skills
 
+Creator meta skills 的完整清单和可移植安装方式见
+[DisCo Meta Skills](disco-meta-skills.zh.md)。
+
 package/repo workflow skills 包括：
 
 | Workflow Skill | 作用 |
@@ -353,7 +357,8 @@ generated repo skills 预期包含：
 
 ## 路由器
 
-repo-skills router 是 skill library 的生成/维护索引：
+repo-skills router 是 AREX-Skill Library 中 repository collection 的生成/维护
+索引：
 
 ```text
 skills/
@@ -416,9 +421,17 @@ runtime 时，才使用
 `~/.agents/skills/`、`~/.claude/skills/` 或用户显式指定的 legacy
 `~/.codex/skills/`。
 
+跨 agent 导出使用独立的持久化 transaction。它会 stage 最终合并后的 repository
+collection，重新生成根 repository index 和 router，校验两者，然后只替换两个受管
+理的同级目录。mutation 失败时恢复记录的目标快照；进程中断后使用 helper 报告的
+transaction directory 继续执行。
+
 导出到 Codex 时，import workflow 还会在目标侧为非 router repo skills 写入
 `agents/openai.yaml`，设置 `policy.allow_implicit_invocation: false`，因为
-Codex 不使用 `disable-model-invocation` frontmatter 字段表达这个 policy。
+Codex 不使用 `disable-model-invocation` frontmatter 字段表达这个 policy。这些目标
+专属文件不计入 import handoff 使用的一次性 portable-tree digest，但仍必须通过正常
+的路径、文件类型和 policy 校验。长期 repository index 不保存每个 repository skill
+的 content digest。
 
 ## 唯一事实来源
 

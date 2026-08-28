@@ -39,8 +39,9 @@
     "test": "vitest --run --config vitest.config.ts",
     "test:examples": "tsc --noEmit -p tsconfig.examples.json",
     "verify:provenance": "node scripts/upstream-provenance.mjs --check",
+    "verify:rpiv-todo-contract": "node scripts/verify-rpiv-todo-contract.mjs",
     "verify:package": "node scripts/verify-package.mjs",
-    "prepublishOnly": "npm run typecheck && npm test && npm run test:examples && npm run verify:provenance && npm run build && npm run verify:package"
+    "prepublishOnly": "npm run typecheck && npm test && npm run test:examples && npm run verify:provenance && npm run verify:rpiv-todo-contract && npm run build && npm run verify:package"
   },
   "dependencies": {
     "@earendil-works/pi-agent-core": "0.83.0",
@@ -60,7 +61,7 @@
     "proper-lockfile": "4.1.2",
     "semver": "7.8.0",
     "typebox": "1.3.7",
-    "undici": "8.5.0",
+    "undici": "8.10.0",
     "yaml": "2.9.0"
   },
   "optionalDependencies": {
@@ -82,6 +83,7 @@
     "vitest": "4.1.9"
   },
   "overrides": {
+    "nanoid": "3.3.18",
     "protobufjs": "7.6.5",
     "rimraf": "6.1.2",
     "gaxios": {

@@ -58,6 +58,12 @@ Use these skills in order, and explicitly open each `SKILL.md` before using it:
 
 Your job is to convert an AI research paper into reusable module-level skills for paper replication, validate those skills, prepare an auditable recovery runtime, run a recovery experiment without reading the original source repository, analyze the result, and iterate if needed.
 
+Use the paper as source anchor `z` for task-agnostic distillation unless the
+caller provides a concrete downstream replication task. If a task is provided,
+record `tau = (q, D, E, g)` and classify the run as task-oriented. Do not invent
+`tau` for a paper-only run. Organize the work as scope -> ground -> construct ->
+verify, producing `Q`, `X`, `G_tilde`, accepted `G`, and construction record `R`.
+
 ## Required User Inputs
 
 Before doing substantial work, inspect the local workspace and ask the user for any missing required information. Ask only for information that cannot be safely inferred from local files. If `config_path` is provided, treat the normalized config as the authoritative input and ask only for missing or ambiguous config values.
@@ -334,7 +340,9 @@ node <distill-ml-knowledge-root>/scripts/import_operating_skill_graph.mjs \
 ```
 
     Do not import distillation, recovery, analysis, test, or report artifacts.
-36. Write `<attempt_dir>/researcher-handoff.md` with the task, paper
+36. Write `<attempt_dir>/researcher-handoff.md` with anchor kind, distillation
+    form, `z` or `tau = (q, D, E, g)`, scoped capabilities `Q`, grounded evidence
+    `X`, accepted/unverified graph `G`, construction record `R`, paper
     source/version, reusability rationale, selected scope, exact imported paths,
     module ids, graph entry point, recovery/validation evidence, and unresolved
     limits. Suggest `/researcher` after import. If import is declined, state that

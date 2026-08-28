@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.0 - 2026-08-26
+## 0.2.0 - 2026-08-27
 
 - Replace the legacy scenario-oriented repository router with a taxonomy-driven
   `area -> family -> repository skill -> relevant sub-skill` router. The
@@ -37,6 +37,49 @@
   reported by `status` and preserved across repository-skill updates.
 - Remove internal taxonomy design notes from the published taxonomy snapshot
   so the released router contains only runtime routing data.
+- Add `--creator` and `--researcher` as concise CLI mode selectors for new
+  sessions while retaining `--agent-mode creator|researcher` as a compatibility
+  form. Conflicting selectors, selector values, and incompatible resume/fork
+  combinations now fail with explicit diagnostics, and the CLI help, prompts,
+  and bundled documentation use the shorter forms.
+- Rework `import-repo-skills-to-agent` around a bundled transactional export
+  helper for Codex, Claude Code, and agent-neutral skill roots. Full and
+  selected exports now regenerate the target `repository-index.jsonl` and
+  scoped router deterministically, preserve unrelated target skills, require
+  per-skill overwrite approval, reject source/target overlap and symlinks, and
+  persist enough transaction state for automatic rollback and `--resume`
+  recovery after interruption.
+- Keep repository skills portable across agents by applying
+  `agents/openai.yaml` only to Codex target copies and excluding that target-only
+  policy from repository content digests. Align router refresh defaults with
+  the managed `skills/repositories/` collection layout.
+- Stop persisting per-repository `content_sha256` values in long-lived
+  repository indexes. Whole-index integrity digests and transaction-only
+  source snapshots remain available for safe export recovery, while the
+  one-time `skill_content_sha256` handoff check remains in verified imports.
+- Include DisCo's built-in extension packages in startup update discovery and
+  `disco update --extensions` / `disco update --extension` processing without
+  persisting them into user settings or installing missing defaults as an
+  update side effect. Legacy global npm installs are migrated into DisCo's
+  managed npm root when updated.
+- Add source-commit-bound GitHub license resolution to repository-skill creation,
+  refresh, extension, verification, collection build, and cross-agent export.
+  Every root and sub-skill now receives one shared top-level `license` value;
+  GitHub `NOASSERTION` is preserved, while unavailable queries use `NO_LICENSE`
+  and report the required manual follow-up.
+- Align the paper-oriented Creator meta-skill contracts around
+  `scope -> ground -> construct -> verify`, including task-agnostic and
+  task-oriented anchors, construction adequacy guidance, and the renamed
+  `construction-strategy-and-adequacy.md` reference.
+- Update the published collection contract to the current 1,000 repository
+  roots and 2,209 area-family memberships, and add the corresponding default
+  collection-build guard and regression coverage.
+- Require `@juicesharp/rpiv-todo@^2.7.1` so main, child, and detached sessions
+  use isolated Todo state and status changes preserve task creation order. Add
+  an isolated published-package contract verifier for session separation,
+  child cleanup, foreground ownership, task IDs, and stable ordering.
+- Upgrade `undici` to `8.10.0` and override `nanoid` to `3.3.18`, removing the
+  high-severity advisories previously reported by a source installation audit.
 
 ## 0.1.1 - 2026-08-03
 

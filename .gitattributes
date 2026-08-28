@@ -21,3 +21,7 @@
 *.gz binary
 *.woff binary
 *.woff2 binary
+
+# Repository skills are content-addressed generated artifacts. Preserve their
+# exact bytes so Git EOL conversion cannot invalidate content_sha256 values.
+skills/repositories/repo-skills/** -text -eol

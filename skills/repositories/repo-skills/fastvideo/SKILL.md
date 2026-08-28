@@ -1,160 +1,94 @@
 ---
 name: fastvideo
-summary: Operate in the FastVideo repository for inference/serving,
-  model-porting, training, and Dreamverse tasks with backend-aware setup and
-  tests.
-description: "Use this repo-specific skill when the current task touches
-  FastVideo source, examples, tests, docs, scripts, or the Dreamverse app. It
-  routes work to the right FastVideo subsystem, preserves the repo's two
-  training stacks and per-directory AGENTS rules, and chooses bounded CUDA/test
-  verification instead of running heavyweight model jobs by default."
-license: Apache 2.0
+description: "Guides FastVideo video, image, and audio generation, config-first inference, serving, training, distillation, evaluation, and performance workflows."
+disable-model-invocation: true
 metadata:
   disco-role: operating
-disable-model-invocation: true
+license: Apache 2.0
 ---
 
-# FastVideo Repo Skill
+# FastVideo
 
-## What this skill covers
+Use this skill when a task involves the `fastvideo` Python package, its
+`VideoGenerator` API, registered video/image/audio diffusion models, the
+`fastvideo` CLI, attention/quantization optimizations, OpenAI-compatible or
+WebSocket serving, preprocessing, training, distillation, LoRA, checkpoint
+conversion, or evaluation.
 
-FastVideo is a GPU-first video generation repository. The stable operating
-surfaces are:
+## First route
 
-- public Python API: `fastvideo.VideoGenerator`, `PipelineConfig`, and
-  `SamplingParam`;
-- config-first CLI/server entrypoints: `fastvideo generate`, `serve`,
-  `router-serve`, `bench`, and `eval`;
-- model/config/pipeline registries and model-porting workflows;
-- two distinct training stacks: legacy `fastvideo/training/` and modular
-  `fastvideo/train/`;
-- `apps/dreamverse/` for the Dreamverse demo/server/mock/deployment app;
-- CUDA-oriented runtime dependencies, attention backends, and custom kernels.
+1. Read [provenance](references/repo-provenance.md) when checking version
+   alignment or deciding whether a refresh is needed. The structured
+   [routing metadata](references/repo-routing-metadata.json) is consumed by
+   managed repo-skill routing and is not a user configuration file.
+2. Read [troubleshooting](references/troubleshooting.md) before installing,
+   changing backends, or diagnosing a failed run.
+3. Choose exactly one focused route:
+   - [setup-and-configuration](sub-skills/setup-and-configuration/SKILL.md) for
+     installation, platform/backend selection, model registry, presets, and
+     configuration structure.
+   - [inference](sub-skills/inference/SKILL.md) for Python/CLI generation,
+     model inputs, offload, attention, quantization, compile, and output files.
+   - [serving](sub-skills/serving/SKILL.md) for HTTP, WebSocket streaming,
+     health checks, continuation state, and server configuration.
+   - [training-and-data](sub-skills/training-and-data/SKILL.md) for dataset
+     layouts, preprocessing, modular training, and legacy recipe boundaries.
+   - [distillation-and-adapters](sub-skills/distillation-and-adapters/SKILL.md)
+     for DMD/self-forcing/QAD, LoRA, and checkpoint conversion decisions.
+   - [evaluation-and-performance](sub-skills/evaluation-and-performance/SKILL.md)
+     for metrics, benchmarking, quality checks, and performance interpretation.
 
-Use repo-relative paths in user-facing output. Do not assume the construction
-host, prepared prefix, GPU count, or private logs are available on a later host.
-Construction evidence, if present, lives under
-`skills/tests/fastvideo-repo-skill/` and is for audit, not a user runtime
-contract.
+For a task spanning routes, read the route that owns the executable step first,
+then follow its sibling link. Do not mix the new modular trainer with the legacy
+training stack without an explicit reason.
 
-## First steps on every FastVideo task
+## Public install baseline
 
-1. Read the nearest in-scope `AGENTS.md` before editing any directory.
-   Important files include:
-   - `AGENTS.md`
-   - `fastvideo/AGENTS.md`
-   - `fastvideo/configs/AGENTS.md`
-   - `fastvideo/models/AGENTS.md`
-   - `fastvideo/layers/AGENTS.md`
-   - `fastvideo/attention/AGENTS.md`
-   - `fastvideo/pipelines/AGENTS.md`
-   - `fastvideo/training/AGENTS.md`
-   - `fastvideo/train/AGENTS.md`
-   - `fastvideo/tests/AGENTS.md`
-   - `fastvideo/tests/ssim/AGENTS.md`
-   - `scripts/checkpoint_conversion/AGENTS.md`
-   - `apps/dreamverse/AGENTS.md` for Dreamverse work.
-2. Identify the subsystem before editing. Do not move behavior between
-   `fastvideo/training/` and `fastvideo/train/` unless the user explicitly asks.
-3. Read the relevant user-facing docs before changing behavior or examples.
-4. Pick the smallest verification command that proves the touched surface.
-   Heavy generation, SSIM, training, large downloads, deployment, and kernel
-   builds require explicit GPU/runtime budget.
-5. Run project tools through the project's configured commands. In particular,
-   do not bypass pre-commit excludes by shelling out directly to individual
-   linters when repo guidance says to use `pre-commit`.
-
-## Route to a subskill
-
-- Inference, generation, public API, CLI/server, OpenAI-compatible endpoints,
-  streaming router, or attention backend behavior:
-  read `inference-serving/SKILL.md`.
-- Adding/adapting a model family, pipeline, config, preset, registry entry,
-  checkpoint converter, or local parity test:
-  read `model-porting/SKILL.md`.
-- Fine-tuning, distillation, datasets, training configs, launch scripts, or
-  trainer callbacks/methods/models:
-  read `training/SKILL.md`.
-- Dreamverse server/UI/mock server, GPU pool, session streaming, Docker/Modal,
-  or demo deployment:
-  read `dreamverse/SKILL.md`.
-
-If a task crosses categories, load the most specific subskill for the code you
-will edit first, then load the second subskill only for its verification or
-integration boundary.
-
-## Setup baseline
-
-Follow current repository docs, especially `README.md` and
-`docs/getting_started/installation.md`. The documented editable install style is
-backend-aware, for example:
+FastVideo 0.2.0 supports Python 3.10–3.12 in the documented path. For NVIDIA,
+create an isolated environment and choose the torch backend explicitly:
 
 ```bash
-UV_TORCH_BACKEND=cu126 uv pip install -e ".[dev]"
+uv venv --python 3.12 --seed
+# Activate the environment created by your shell/platform, then install:
+UV_TORCH_BACKEND=cu126 uv pip install fastvideo
 ```
 
-Use the CUDA backend that matches the host and docs (`cu126` or `cu130` in the
-current docs). For inspection-only or runtime-only tasks, a narrower editable
-install can be enough, but do not claim generation/training/backend coverage
-from a CPU-only import.
+Use `UV_TORCH_BACKEND=cu130` for a CUDA 13 installation. Apple Silicon uses
+MPS and the platform-specific install path; do not install Linux-only CUDA
+extensions there. ARM NVIDIA systems may need an editable source install so
+the kernel can compile. Read the setup route before selecting an install.
 
-Useful safe probes after install:
+Minimal package and CLI checks:
 
 ```bash
-python -m pip check
-python - <<'PY'
-import fastvideo, torch
-from fastvideo import VideoGenerator, PipelineConfig, SamplingParam
-print(fastvideo.__version__)
-print(torch.__version__, torch.version.cuda, torch.cuda.is_available())
-print(VideoGenerator, PipelineConfig, SamplingParam)
-PY
+python -c "import fastvideo; from fastvideo import VideoGenerator, PipelineConfig, SamplingParam; print(fastvideo.__version__)"
+fastvideo --version
 fastvideo --help
-fastvideo generate --help
-fastvideo serve --help
-fastvideo router-serve --help
 ```
 
-This skill also ships `scripts/verify_fastvideo_runtime.py`, a lightweight helper
-for import/signature/CLI/CUDA probes.
+Do not treat package import as proof that a model, GPU kernel, remote checkpoint,
+or full training workflow is usable. Check the backend, model support, memory,
+weights access, and optional dependency requirements for the selected route.
 
-## Verification ladder
+## Shared operating rules
 
-Prefer this order unless the task's own docs or tests require more:
+- Prefer typed `GenerationRequest` plus `VideoGenerator.generate()` for new
+  integrations. `generate_video()` remains a deprecated compatibility path.
+- The CLI is config-first: use `fastvideo generate --config FILE` and dotted
+  `--request.*` or `--generator.*` overrides, not flat ad-hoc flags.
+- Keep model initialization settings under `GeneratorConfig`; keep per-request
+  sampling and input settings under `GenerationRequest`.
+- Set attention backend before constructing the generator and reinstantiate
+  after changing it. A backend installed on the machine is not necessarily
+  compatible with every model or GPU.
+- Use deterministic seeds, fixed shapes, and a discarded warmup when comparing
+  performance or eager versus compiled execution.
+- Treat remote model/data downloads, credentials, multi-GPU jobs, training,
+  distillation, and quality regressions as explicit operations requiring a
+  suitable budget and hardware.
 
-1. Syntax/import/signature checks for the edited modules.
-2. Parser/config/registry unit tests that do not download models.
-3. CLI `--help` or config-translation tests.
-4. Mock/server contract tests that do not start long-lived production services.
-5. Targeted GPU smoke only when backend behavior is touched.
-6. Model generation, SSIM, training, or local parity suites only after confirming
-   model assets, credentials, GPU memory, runtime budget, and expected outputs.
+## Runtime files
 
-Representative commands:
-
-```bash
-pytest fastvideo/tests/api/test_cli_translation.py -q
-pytest fastvideo/tests/attention/test_selector_role_override.py -q
-pytest fastvideo/tests/entrypoints/test_video_generator.py -q
-pytest fastvideo/tests/entrypoints/streaming/test_server.py -q
-pytest apps/dreamverse/dreamverse/tests/test_entrypoints.py -q
-```
-
-Run SSIM, training, and `tests/local_tests/*` commands only when they match the
-actual model/backend task and budget.
-
-## Important boundaries
-
-- `fastvideo-kernel/` has a separate build flow (`cd fastvideo-kernel && ./build.sh`).
-  A prebuilt wheel import does not prove source rebuild readiness.
-- `FASTVIDEO_ATTENTION_BACKEND` must be set before constructing the generator or
-  model components. Do not mutate it mid-process to test multiple backends in
-  the same constructed object.
-- `fastvideo generate`, `serve`, and `router-serve` are config-first entrypoints;
-  prefer config files plus dotted overrides instead of ad-hoc argument surfaces.
-- `fastvideo/tests/` is intentionally excluded by the repo's pre-commit config;
-  do not bypass that policy with direct formatter/linter calls.
-- Dreamverse CLI/import checks are not the same as full Modal/Docker production
-  deployment.
-- Do not import this skill into a live router or external agent unless the user
-  explicitly requests import/export later.
+All linked references and helpers are bundled inside this skill. The focused
+routes own detailed API/configuration material and safe helpers; this root file
+is intentionally a router rather than a copy of the package manual.

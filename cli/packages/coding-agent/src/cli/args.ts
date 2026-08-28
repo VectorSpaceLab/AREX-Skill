@@ -64,14 +64,21 @@ export function isValidThinkingLevel(level: string): level is ThinkingLevel {
 }
 
 function parseAgentMode(value: string, result: Args): void {
-	if (isDiscoAgentMode(value)) {
-		result.agentMode = value;
+	if (!isDiscoAgentMode(value)) {
+		result.diagnostics.push({
+			type: "error",
+			message: `Invalid agent mode "${value}". Valid values: creator, researcher`,
+		});
 		return;
 	}
-	result.diagnostics.push({
-		type: "error",
-		message: `Invalid agent mode "${value}". Valid values: creator, researcher`,
-	});
+	if (result.agentMode !== undefined && result.agentMode !== value) {
+		result.diagnostics.push({
+			type: "error",
+			message: `Conflicting agent modes: ${result.agentMode} and ${value}. Use only one of --creator, --researcher, or --agent-mode <mode>.`,
+		});
+		return;
+	}
+	result.agentMode = value;
 }
 
 export function parseArgs(args: string[]): Args {
@@ -104,6 +111,14 @@ export function parseArgs(args: string[]): Args {
 			result.model = args[++i];
 		} else if (arg === "--api-key" && i + 1 < args.length) {
 			result.apiKey = args[++i];
+		} else if (arg === "--creator") {
+			parseAgentMode("creator", result);
+		} else if (arg.startsWith("--creator=")) {
+			result.diagnostics.push({ type: "error", message: "--creator does not take a value" });
+		} else if (arg === "--researcher") {
+			parseAgentMode("researcher", result);
+		} else if (arg.startsWith("--researcher=")) {
+			result.diagnostics.push({ type: "error", message: "--researcher does not take a value" });
 		} else if (arg === "--agent-mode") {
 			const value = args[i + 1];
 			if (value === undefined || value.startsWith("-")) {
@@ -267,7 +282,9 @@ ${chalk.bold("Options:")}
   --provider <name>              Provider name (default: google)
   --model <pattern>              Model pattern or ID (supports "provider/id" and optional ":<thinking>")
   --api-key <key>                API key (defaults to env vars)
-  --agent-mode <mode>            Agent role for a new session: creator or researcher (default)
+  --creator                      Start a new session in Creator mode
+  --researcher                   Start a new session in Researcher mode (default)
+  --agent-mode <mode>            Compatibility form: creator or researcher
   --system-prompt <text>         System prompt (default: DisCo coding and skill workflow prompt)
   --append-system-prompt <text>  Append text or file contents to the system prompt (can be used multiple times)
   --mode <mode>                  Output mode: text (default), json, or rpc
@@ -321,19 +338,19 @@ ${chalk.bold("Examples:")}
   ${APP_NAME} -p "Fix the failing tests in this repository and run the relevant test suite"
 
   # Create a repo skill non-interactively in Creator mode
-  ${APP_NAME} --agent-mode creator -p "Create a skill for /path/to/repo using Python /path/to/env/bin/python"
+  ${APP_NAME} --creator -p "Create a skill for /path/to/repo using Python /path/to/env/bin/python"
 
 	  # Generate and verify paper-replication skills in Creator mode
-	  ${APP_NAME} --agent-mode creator -p "Use Distiller to generate and verify paper-replication skills for each run in this config. config_path: /path/to/distiller_run_config.toml"
+	  ${APP_NAME} --creator -p "Use Distiller to generate and verify paper-replication skills for each run in this config. config_path: /path/to/distiller_run_config.toml"
 
   # Complete a task explicitly in Researcher mode
-  ${APP_NAME} --agent-mode researcher -p "Reproduce this paper's primary result"
+  ${APP_NAME} --researcher -p "Reproduce this paper's primary result"
 
   # Extend an existing skill
   ${APP_NAME} "Extend /path/to/skill with the new CLI workflows in /path/to/repo"
 
   # Non-interactive mode (process prompt and exit)
-  ${APP_NAME} --agent-mode creator -p "Inspect /path/to/repo and draft a skill creation plan"
+  ${APP_NAME} --creator -p "Inspect /path/to/repo and draft a skill creation plan"
 
   # Install a package that can provide skills, extensions, prompts, and themes
   ${APP_NAME} install npm:@foo/disco-skills

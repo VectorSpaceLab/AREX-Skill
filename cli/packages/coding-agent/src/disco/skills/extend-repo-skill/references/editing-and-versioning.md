@@ -15,6 +15,7 @@ Every `SKILL.md` frontmatter block must remain valid:
 name: skill-id
 description: "Triggering description broad enough for natural user requests."
 disable-model-invocation: true
+license: <repository-license-or-NO_LICENSE>
 metadata:
   disco-role: operating
 ---
@@ -26,6 +27,28 @@ compatible agents. Do not add it to `repo-skills-router` itself; Codex target
 visibility is handled during `import-repo-skills-to-agent`.
 Preserve or add `metadata.disco-role: operating` on the same files so they are
 available in Researcher mode and excluded from Creator mode.
+
+## Extension License Metadata
+
+Resolve the source repository license again for the exact source commit used by
+the extension. Use the shared resolver and apply the result to the complete
+external runtime tree before verification:
+
+```bash
+node ../verify-repo-skill/scripts/resolve_repo_license.mjs \
+  --repository <owner/repository> \
+  --source-commit <40-hex-source-commit> \
+  --json > <artifact-root>/reports/license-resolution.json
+node ../verify-repo-skill/scripts/apply_repo_license.mjs \
+  --skill-dir <external-runtime-skill-dir> \
+  --license <value-from-report>
+```
+
+Do not let individual subagents choose license values. Use one repository-level
+value in every root/sub-skill frontmatter. Preserve `NOASSERTION` results; use
+`NO_LICENSE` only for unavailable results; record old value, new value, source
+commit, status, and reason for the handoff. `NO_LICENSE` is a warning about
+query availability, not a legal conclusion.
 
 ## Edit The Working Runtime Tree
 

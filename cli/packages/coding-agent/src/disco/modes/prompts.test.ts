@@ -8,14 +8,18 @@ describe("DisCo mode prompts", () => {
 
 		expect(prompt).toContain("Mode: Creator");
 		expect(prompt).toContain("ML knowledge distillation agent");
-		expect(prompt).toContain("verified, task-related operating-knowledge skill graph");
+		expect(prompt).toContain("source or task anchor");
+		expect(prompt).toContain("scope, ground, construct, and verify");
 		expect(prompt).toContain("Only visible meta and shared skills are eligible");
 		expect(prompt).toContain("distill-ml-knowledge");
-		expect(prompt).toContain("Detailed source routing, direct versus reusable construction");
-		expect(prompt).toContain("source anchor, intended use, verification target");
+		expect(prompt).toContain("anchor `z`");
+		expect(prompt).toContain("scoped capabilities `Q`");
+		expect(prompt).toContain("candidate graph `G_tilde`");
+		expect(prompt).toContain("Detailed construction-strategy");
+		expect(prompt).toContain("A source anchor may start task-agnostic distillation");
 		expect(prompt).toContain("construction record");
 		expect(prompt).toContain("If asked to perform the downstream task, state the mode mismatch");
-		expect(prompt).toContain("restart with --agent-mode researcher");
+		expect(prompt).toContain("restart with --researcher");
 		expect(prompt).not.toContain("path preference: direct | reusable | auto");
 		expect(prompt).not.toContain("repo-to-skills output as a high-reuse managed special case");
 		expect(prompt).not.toContain("Mode: Researcher");
@@ -36,7 +40,7 @@ describe("DisCo mode prompts", () => {
 		expect(prompt).toContain("Follow progressive disclosure");
 		expect(prompt).toContain("do not preload the full skill graph");
 		expect(prompt).toContain("concrete capability gap");
-		expect(prompt).toContain("restart with --agent-mode creator");
+		expect(prompt).toContain("restart with --creator");
 		expect(prompt).not.toContain("Mode: Creator");
 		expect(prompt).not.toContain("ML knowledge distillation agent");
 		expect(prompt).not.toContain("distill-ml-knowledge");

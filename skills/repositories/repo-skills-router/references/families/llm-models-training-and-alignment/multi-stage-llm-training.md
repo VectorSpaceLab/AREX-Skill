@@ -16,4 +16,4 @@ Choose a repository below only when its description, package/repository identity
 | [`lmflow`](../../../../repo-skills/lmflow/SKILL.md) | `OptimalScale/LMFlow` | Routes LMFlow dataset, training, inference, evaluation, alignment, and multimodal workflows. |
 | [`deep-analyze`](../../../../repo-skills/deep-analyze/SKILL.md) | `ruc-datalab/DeepAnalyze` | Router for DeepAnalyze agentic data-science workflows. |
 | [`unsloth`](../../../../repo-skills/unsloth/SKILL.md) | `unslothai/unsloth` | Use Unsloth Core, CLI, Studio, and export workflows for fast LLM finetuning, local inference, Studio serving, and checkpoint conversion. |
-| [`verl`](../../../../repo-skills/verl/SKILL.md) | `volcengine/verl` | Use verl for LLM post-training workflows: setup, data and rewards, PPO/GRPO/SFT configs, rollout tools, checkpoints, profiling, and repository maintenance. |
+| [`verl`](../../../../repo-skills/verl/SKILL.md) | `verl-project/verl` | Use verl for LLM post-training workflows: setup, data and rewards, PPO/GRPO/SFT configs, rollout tools, checkpoints, profiling, and repository maintenance. |

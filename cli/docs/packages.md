@@ -215,6 +215,21 @@ Filter what a package loads using the object form in settings:
 - `-path` force-excludes an exact path.
 - Filters layer on top of the manifest. They narrow down what is already allowed.
 
+## Mode Targeting <a id="mode-targeting"></a>
+
+Use `disco install <source> --for ...` to set the default visibility of all
+resources from one package:
+
+| Target | Visible roles |
+|--------|---------------|
+| `creator` | Creator sessions |
+| `researcher` | Researcher sessions |
+| `both` | Creator and Researcher sessions |
+| `default` | Package default behavior |
+
+This changes package resource visibility without copying or splitting the
+package. Individual resource filters can further narrow the selected package.
+
 ## Enable and Disable Resources
 
 Use `disco config` to enable or disable extensions, skills, prompt templates, and themes from installed packages and local directories. `disco config` starts in global settings (`~/.disco/agent/settings.json`); press Tab to switch between global and project-local modes. Use `disco config -l` to start in project overrides (`.disco/settings.json`) with inherited global resources dimmed.

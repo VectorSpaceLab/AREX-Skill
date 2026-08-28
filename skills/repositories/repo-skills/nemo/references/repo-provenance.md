@@ -11,8 +11,8 @@ Read this before deciding whether this skill is current for a checkout of NVIDIA
   "schema": "disco.repo-provenance.v1",
   "generated_at_utc": "2026-06-29T16:49:30Z",
   "repository": {
-    "name": "NeMo",
-    "remote_url": "https://github.com/NVIDIA-NeMo/NeMo.git",
+    "name": "Speech",
+    "remote_url": "https://github.com/NVIDIA-NeMo/Speech.git",
     "vcs": "git",
     "branch": "main",
     "tag": null,

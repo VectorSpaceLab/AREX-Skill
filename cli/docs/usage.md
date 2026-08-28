@@ -161,6 +161,18 @@ These commands manage disco packages and `disco update` can update the disco CLI
 
 See [DisCo Packages](packages.md) for package sources and security notes.
 
+### Agent Modes
+
+| Flag | Description |
+|------|-------------|
+| `--creator` | Start a new session with Creator resources and workflow boundaries |
+| `--researcher` | Start a new session with Researcher resources and workflow boundaries |
+| `--agent-mode <mode>` | Compatibility form for `creator` or `researcher` |
+
+These selectors choose the Agent role and work with both interactive startup and
+non-interactive output. They are independent of `-p` / `--print` and
+`--mode text|json|rpc`.
+
 ### Modes
 
 | Flag | Description |
