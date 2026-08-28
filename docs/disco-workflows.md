@@ -3,7 +3,7 @@
 This guide covers the operational details intentionally omitted from the main
 README: mode boundaries, Researcher execution, Creator construction workflows,
 deployment scopes, and cross-agent export. Install DisCo and the published
-repository collection as described in the [main README](../README.md#installation)
+repository collection as described in the [Installation Guide](installation.md)
 before using repository guidance.
 
 ## Agent Modes And Sessions
@@ -15,7 +15,8 @@ Every DisCo session has one agent mode:
 | **Researcher** (default) | `operating` and `shared` skills, including user skills without `metadata.disco-role` | Use routed operating knowledge, code, tools, and experiments to complete an ML research task. |
 | **Creator** | Skills marked `metadata.disco-role: meta` or `shared` | Start with `distill-ml-knowledge`, select `direct`, `reuse-existing` (single or composed), or `design-reusable`, and route only a verified recurring construction gap to `design-meta-skill`. |
 
-Use `--agent-mode creator|researcher` for a non-interactive session. In the
+Use `--creator` or `--researcher` to select the role for a new session. These
+selectors work in both interactive and non-interactive sessions. In the
 interactive UI, `/creator` and `/researcher` warn before opening a new session
 with a clean context. The previous session remains available through `/resume`
 and can be exported separately; an export from the new session contains only
@@ -58,7 +59,7 @@ After installation, ask for a concrete research outcome. For example, compare
 two inference systems under a controlled protocol:
 
 ```bash
-disco --agent-mode researcher -p "Benchmark vLLM and SGLang with the same model and workload on this machine. Tune each server under identical hardware and memory constraints, report the best verified throughput for each, and preserve the commands and measurements needed to reproduce the comparison."
+disco --researcher -p "Benchmark vLLM and SGLang with the same model and workload on this machine. Tune each server under identical hardware and memory constraints, report the best verified throughput for each, and preserve the commands and measurements needed to reproduce the comparison."
 ```
 
 For a relevant request, DisCo reads `repo-skills-router`, opens one or two
@@ -82,7 +83,7 @@ Researcher session.
 When the exact skill is known, it can also be invoked explicitly:
 
 ```bash
-disco --agent-mode researcher -p "/skill:vllm determine and verify the highest-throughput vLLM configuration for <model and workload>"
+disco --researcher -p "/skill:vllm determine and verify the highest-throughput vLLM configuration for <model and workload>"
 ```
 
 ### Use An Approved Task-Specific Graph
@@ -91,7 +92,7 @@ After Creator constructs and imports a task-specific operating graph, invoke
 the entry skill recorded in its handoff:
 
 ```bash
-disco --agent-mode researcher -p "/skill:<graph-entry> Complete <research task> within <environment and budget constraints>, and verify it with <evaluator>."
+disco --researcher -p "/skill:<graph-entry> Complete <research task> within <environment and budget constraints>, and verify it with <evaluator>."
 ```
 
 Researcher progressively opens the required subgraph and applies its methods,
@@ -114,26 +115,27 @@ The handoff also records where the complete graph was deployed:
 Start Creator for construction, review, maintenance, or export:
 
 ```bash
-disco --agent-mode creator
+disco --creator
 ```
 
-Creator sees meta and shared skills. It first checks whether the current construction
-workflows cover the task's construction specification and reuses or composes
-them whenever possible.
+Creator sees meta and shared skills. It first identifies the source or task
+anchor, scopes the required capabilities, and checks whether the visible
+construction workflows cover the request. Reuse or composition is recorded as
+a Creator construction strategy when its full verification and handoff contract
+remains intact.
 
 ### Assess Construction-Workflow Adequacy
 
 Start with `distill-ml-knowledge` for an ordinary ML knowledge distillation
-request. It owns the shared task/construction contract, checks whether one
-visible workflow or a bounded composition is adequate, and selects `direct`,
-`reuse-existing`, or `design-reusable`. A repository source normally selects
+request. It identifies the anchor and drives `scope`, `ground`, `construct`,
+and `verify`. A repository source normally uses
 `reuse-existing` with `create-repo-skill`; a paper source normally reuses the
 paper workflow. Only an evidence-backed recurring gap in source handling,
 evidence selection, graph shape, verification, environment, or recovery is
 handed to `design-meta-skill`:
 
 ```bash
-disco --agent-mode creator -p "/skill:distill-ml-knowledge normalize <task and source anchors>; choose direct, reuse-existing, or design-reusable."
+disco --creator -p "/skill:distill-ml-knowledge identify <source or task anchor>; scope, ground, construct, and verify the operating skill graph."
 ```
 
 An approved new meta skill is imported only after validation and explicit user
@@ -148,7 +150,7 @@ rules above. Creator then writes a handoff for a new Researcher session.
 Create and verify a repository-specific skill from source evidence:
 
 ```bash
-disco --agent-mode creator -p "Create a repo skill for /path/to/repo."
+disco --creator -p "Create a repo skill for /path/to/repo."
 ```
 
 The workflow analyzes repository structure, prepares or checks a Python
@@ -162,7 +164,7 @@ To delegate both extraction-scope selection and managed-library import after
 successful verification, state that explicitly:
 
 ```bash
-disco --agent-mode creator -p "Create a repo skill for /path/to/repo with auto decide and auto import."
+disco --creator -p "Create a repo skill for /path/to/repo with auto decide and auto import."
 ```
 
 ### Construct Paper-Replication Skills
@@ -173,7 +175,7 @@ and fill the bundled run configuration, then pass it to DisCo:
 ```bash
 cp cli/packages/coding-agent/src/disco/skills/create-paper-skills/assets/distiller-run-config-template.toml \
   /path/to/distiller_run_config.toml
-disco --agent-mode creator -p "Use Distiller to generate and verify paper-replication skills for each run in this config. config_path: /path/to/distiller_run_config.toml"
+disco --creator -p "Use Distiller to generate and verify paper-replication skills for each run in this config. config_path: /path/to/distiller_run_config.toml"
 ```
 
 The paper source can be a local PDF or text file, direct PDF URL, arXiv URL or
@@ -199,14 +201,14 @@ it is approved and imported.
 Extend a correct skill when it needs deeper coverage for a new workflow area:
 
 ```bash
-disco --agent-mode creator -p "Add streaming inference coverage to the existing skill at /path/to/repo/skills/example-skill using /path/to/repo as evidence."
+disco --creator -p "Add streaming inference coverage to the existing skill at /path/to/repo/skills/example-skill using /path/to/repo as evidence."
 ```
 
 Refresh a skill when upstream APIs, configuration, examples, dependencies, or
 runtime behavior change:
 
 ```bash
-disco --agent-mode creator -p "Refresh the skill at /path/to/repo/skills/example-skill against the current /path/to/repo code."
+disco --creator -p "Refresh the skill at /path/to/repo/skills/example-skill against the current /path/to/repo code."
 ```
 
 Refresh preserves correct existing guidance while reconciling stale guidance
@@ -217,21 +219,26 @@ with the current source baseline.
 Use `import-repo-skills-to-agent` when Codex, Claude Code, or another compatible
 agent needs selected skills from DisCo's managed repository collection. The
 workflow preserves the sibling layout of `repo-skills/` and
-`repo-skills-router/` in the target skill directory.
+`repo-skills-router/` in the target skill directory. After overwrite approval,
+its transactional helper regenerates the final root index and scoped router,
+keeps unrelated target repository skills, applies Codex-only policy to target
+copies, and automatically restores the prior target on a failed mutation. Use
+the reported `--resume <transaction-directory>` command after interruption;
+do not repair or merge partial output manually.
 
 Import the router plus `vllm` and `sglang` into Claude Code:
 
 ```bash
-disco --agent-mode creator -p "/skill:import-repo-skills-to-agent import vllm and sglang to ~/.claude"
+disco --creator -p "/skill:import-repo-skills-to-agent import vllm and sglang to ~/.claude"
 ```
 
 Import the same skills into Codex's recommended user-level skills root:
 
 ```bash
-disco --agent-mode creator -p "/skill:import-repo-skills-to-agent import vllm and sglang to ~/.agents"
+disco --creator -p "/skill:import-repo-skills-to-agent import vllm and sglang to ~/.agents"
 ```
 
-Restart the target agent after import. The [Research Skills Library
+Restart the target agent after import. The [AREX-Skill Library
 guide](../skills/README.md) documents the source layout and
 DisCo installation, while the
 [`import-repo-skills-to-agent` workflow](../cli/packages/coding-agent/src/disco/skills/import-repo-skills-to-agent/SKILL.md)
@@ -241,5 +248,5 @@ defines target layouts, overwrite policy, and router invocation conventions.
 
 - [Architecture](architecture.md)
 - [Bundled Skills Reference](../cli/packages/coding-agent/src/disco/skills/README.md)
-- [Research Skills Library](../skills/README.md)
-- [Meta Skills For Other Agents](meta-skills-for-other-agents.md)
+- [AREX-Skill Library](../skills/README.md)
+- [DisCo Meta Skills](disco-meta-skills.md)

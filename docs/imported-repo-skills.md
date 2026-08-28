@@ -1,8 +1,9 @@
 # Repository Skills Catalog
 
-This catalog describes the current published repository-skill collection under
-`skills/repositories/`. The collection contains exactly 1,000 repository skill
-roots and is routed by the fixed area -> family taxonomy.
+This catalog describes the repository-skill collection currently published in
+the AREX-Skill Library under `skills/repositories/`. The collection contains
+exactly 1,000 repository skill roots and is routed by the fixed area -> family
+taxonomy.
 
 ## Scope
 
@@ -11,7 +12,7 @@ roots and is routed by the fixed area -> family taxonomy.
 | Repository skill roots | 1,000 |
 | Taxonomy areas | 20 |
 | Taxonomy families | 178 |
-| Area-family memberships | 2,204 |
+| Area-family memberships | 2,209 |
 | Multi-assigned repositories | 700 |
 | Unclassified / blocked / failed | 0 / 0 / 0 |
 
@@ -70,10 +71,10 @@ machine-readable membership.
 | --- | ---: | ---: |
 | Computer Vision | 21 | 312 |
 | Biomedical AI | 11 | 50 |
-| Generative Media | 13 | 192 |
-| Speech and Audio | 5 | 55 |
+| Generative Media | 13 | 194 |
+| Speech and Audio | 5 | 56 |
 | Natural Language Processing | 9 | 78 |
-| LLM Applications | 16 | 323 |
+| LLM Applications | 16 | 325 |
 | LLM Models, Training, and Alignment | 6 | 149 |
 | Information Retrieval | 4 | 67 |
 | MLOps | 15 | 116 |
@@ -140,6 +141,5 @@ The managed destination is:
   repo-skills-router/
 ```
 
-The previous `research-skills-library/` name is not part of this release.
 Installation, updates, and routing use only the current `skills/repositories/`
 layout.

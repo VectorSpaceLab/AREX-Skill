@@ -1,48 +1,65 @@
-# Portable Meta Skills For Other Agents
+# DisCo Meta Skills
 
-DisCo bundles a set of construction workflows for **Creator mode**. They are
-portable Agent Skills, so an agent that does not run the DisCo CLI can still
-follow the same evidence, review, and handoff process. This is a different
-installation path from the [Research Skills Library](../skills/README.md):
-the library contains Researcher-facing operating skills, while these skills
-teach an agent how to construct or maintain them.
+DisCo bundles 15 construction workflows for **Creator mode**. These are
+Creator-only meta skills: they teach an agent how to distill, verify, maintain,
+and export Researcher-facing operating skills. They are also portable Agent
+Skills, so an agent that does not run the DisCo CLI can follow the same
+evidence, review, and handoff process.
 
-## When To Install Them
+This is a different corpus from the [AREX-Skill
+Library](../skills/README.md): the library contains Researcher-facing
+operating skills, while these skills construct or maintain them.
 
-Install the portable meta skills when another agent should create, verify,
-refresh, extend, or export skills but cannot install DisCo. Install DisCo itself
-when you need mode-specific skill visibility, `/creator` and `/researcher`,
-session isolation, the managed library, locked imports, or the built-in tools.
-Copying these directories does **not** reproduce DisCo's mode/session boundary;
-the target agent must follow the role and approval rules in the skill text.
-
-## Bundled Meta Skills
+## Supported Meta Skills
 
 The source of truth is
-`cli/packages/coding-agent/src/disco/skills/`. The current Creator corpus has
-these 15 skills:
+`cli/packages/coding-agent/src/disco/skills/`. The 15 root directories below
+declare `metadata.disco-role: meta` and are available to Creator mode.
+
+### Shared Construction
 
 | Skill | Purpose |
 | --- | --- |
-| `distill-ml-knowledge` | Canonical Creator entry point; own the shared task/construction contract and select direct, reuse-existing (single or composed), or design-reusable. |
-| `design-meta-skill` | Consume a verified recurring-gap handoff and design the parameterized reusable meta-skill bundle without repeating path selection. |
-| `prepare-repo-skill-env` | Create or verify an isolated Python inspection environment for a repository. |
-| `create-repo-skill` | Turn repository evidence into a self-contained operating skill. |
-| `verify-repo-skill` | Run usability, evidence, static, native-check, and import-readiness gates. |
-| `refresh-repo-skill` | Update an existing repository skill after upstream drift. |
-| `extend-repo-skill` | Add a new workflow area to an existing repository skill. |
-| `import-repo-skills-to-agent` | Export selected managed operating skills and a scoped router to another agent. |
-| `create-paper-skills` | Entry point for generating and validating reusable skills for paper replication. |
-| `paper-skills-distiller` | Orchestrate paper source resolution, paper-replication skill generation, recovery, analysis, and refinement. |
-| `plan-paper-skill-modules` | Build a paper profile, module plan, and module documents. |
-| `create-paper-module-skill` | Convert a module document into a validated module skill. |
-| `prepare-paper-recovery-env` | Record bounded package, model, data, and runtime evidence for recovery. |
-| `recover-paper-result` | Run a bounded recovery experiment using generated skills. |
-| `analyze-paper-recovery` | Compare recovery evidence with the paper target and return accept/refine/blocker feedback. |
+| `distill-ml-knowledge` | Canonical Creator entry point; identifies a source or task anchor and drives scope, ground, construct, and verify. |
+| `design-meta-skill` | Designs and validates a reusable meta-skill bundle for an evidence-backed recurring construction gap. |
 
-All 15 directories declare `metadata.disco-role: meta`. The sibling
-`repo-skills-router` is an `operating` skill and must not be copied as part of
-this installation.
+### Repository Skills
+
+| Skill | Purpose |
+| --- | --- |
+| `prepare-repo-skill-env` | Creates or verifies an isolated, backend-aware Python inspection environment for a repository. |
+| `create-repo-skill` | Turns repository evidence into a self-contained operating skill. |
+| `verify-repo-skill` | Runs usability, evidence, static, native-check, and import-readiness gates. |
+| `refresh-repo-skill` | Updates an existing repository skill after upstream drift. |
+| `extend-repo-skill` | Adds a new workflow area or deeper coverage to an existing repository skill. |
+| `import-repo-skills-to-agent` | Exports selected managed repository skills and a scoped router to another agent. |
+
+### Paper Skills
+
+| Skill | Purpose |
+| --- | --- |
+| `create-paper-skills` | Entry point for generating and validating reusable skills for paper replication. |
+| `paper-skills-distiller` | Orchestrates paper source resolution, skill generation, recovery, analysis, and refinement. |
+| `plan-paper-skill-modules` | Builds a paper profile, module plan, and module documents. |
+| `create-paper-module-skill` | Converts a module document into a validated module skill. |
+| `prepare-paper-recovery-env` | Records bounded package, model, data, and runtime evidence for recovery. |
+| `recover-paper-result` | Runs a bounded recovery experiment using generated skills. |
+| `analyze-paper-recovery` | Compares recovery evidence with the paper target and returns accept/refine/blocker feedback. |
+
+The sibling `repo-skills-router` is an `operating` skill for Researcher-mode
+progressive routing, so it is not part of this meta-skill list and should not
+be copied as part of a portable Creator installation.
+
+## When To Install Them Outside DisCo
+
+DisCo already bundles these workflows. Install the portable meta skills into
+another compatible agent when that agent should create, verify, refresh,
+extend, or export skills but cannot run the DisCo CLI. Install DisCo itself
+when you need mode-specific skill visibility, `/creator` and `/researcher`,
+session isolation, the managed library, locked imports, or built-in tools.
+
+Copying these directories does **not** reproduce DisCo's mode/session boundary;
+the target agent must follow the role and approval rules in the skill text.
 
 ## Install Into Codex
 
@@ -124,9 +141,13 @@ one scope, and request approval for the exact destination and any overwrite.
 
 Repository graphs remain a special case. Prefer
 `import-repo-skills-to-agent`, which preserves the sibling `repo-skills/` and
-`repo-skills-router/` layout and builds a router scoped to the exported skills.
-Do not flatten repository skills into the managed root or send their routing
-metadata through the generic operating-graph importer.
+`repo-skills-router/` layout. Its bundled transactional helper merges exact
+repository and assignment records, regenerates both the root
+`repository-index.jsonl` and scoped router, validates the staged and installed
+collection, and restores the previous target on failure. Resume an interrupted
+transaction with the exact path reported by the helper. Do not flatten
+repository skills into the managed root, hand-merge router Markdown, or send
+their routing metadata through the generic operating-graph importer.
 
 ## What The Copy Does Not Provide
 
@@ -142,4 +163,4 @@ required by the workflow text.
 
 For the full runtime with Creator/Researcher isolation, install the
 [`disco` CLI](../cli/README.md) and then install the
-[Research Skills Library](../skills/README.md) separately.
+[AREX-Skill Library](../skills/README.md) separately.

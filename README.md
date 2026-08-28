@@ -21,6 +21,10 @@
 </p>
 
 ```mermaid
+---
+config:
+  fontSize: 18
+---
 flowchart LR
     subgraph SRC["📚 Sources"]
         direction TB
@@ -55,12 +59,13 @@ flowchart LR
 - [Why AREX-Skill](#why-arex-skill)
 - [From Knowledge to Skills](#from-knowledge-to-skills)
 - [What Is an AREX Skill](#what-is-an-arex-skill)
+- [Router Design](#router-design)
 - [How AREX-Skill Is Built: DisCo](#how-arex-builds-skills)
-- [Works With Your Coding Agent](#works-with-your-coding-agent)
 - [Library Scale](#library-scale)
 - [Skill Gallery](#skill-gallery)
 - [Do Skills Make Agents Better Researchers](#do-skills-make-agents-better-researchers)
 - [Quick Start](#quick-start)
+- [Works With Your Coding Agent](#works-with-your-coding-agent)
 - [The Bigger Vision](#the-bigger-vision)
 - [Contributing](#contributing)
 - [Documentation](#documentation)
@@ -107,6 +112,10 @@ skills.
 > **We don't summarize repositories. We compile them into skills agents can execute.**
 
 ```mermaid
+---
+config:
+  fontSize: 18
+---
 flowchart TB
     subgraph D["📚 Descriptive Knowledge — written for humans"]
         direction LR
@@ -176,6 +185,35 @@ scripts. The links from the root to its sub-skills form a **skill graph**—an
 AREX-Skill extension that supports progressive disclosure, so the agent reads
 only the branch required by the task.
 
+### 🧭 Router Design <a id="router-design"></a>
+
+The published repository collection currently uses a router that is itself an
+AREX Skill: [`repo-skills-router/SKILL.md`](skills/repositories/repo-skills-router/SKILL.md).
+It describes available capabilities and links to repository skill graphs; it is
+not a separate black-box routing service or a required proprietary runtime.
+
+The agent is expected to follow a **progressive disclosure** strategy: read the
+router first, identify the relevant repository or workflow, then load only the
+matching skill branch and its `references/` or `scripts/` when needed. This keeps
+the initial context focused while allowing deeper instructions and executable
+helpers to be loaded for the task at hand.
+
+This `SKILL.md` router is the current portable baseline, not the only possible
+design. Depending on the agent runtime, latency, cost, privacy, and control
+requirements, users can build other routing layers, for example:
+
+1. **Query subagent.** Give the main agent a dedicated subagent that searches
+   the skill library, selects candidate skills, and returns skill paths or a
+   loading plan for the main agent to review and execute.
+2. **Retrieval tool.** Expose a tool backed by an embedding model, reranking
+   model, or another retrieval component. The main agent submits the task,
+   receives ranked skill candidates, and then loads the relevant graph branches.
+
+Any alternative should preserve clear scope, progressive loading, provenance,
+and verification boundaries. AREX provides a portable `SKILL.md` router
+baseline, while users remain free to design the routing architecture that best
+fits their agent.
+
 ---
 
 ## ⚗️ How AREX-Skill Is Built: DisCo <a id="how-arex-builds-skills"></a>
@@ -184,6 +222,10 @@ only the branch required by the task.
 workflow.**
 
 ```mermaid
+---
+config:
+  fontSize: 18
+---
 flowchart LR
     S["📦 repo · paper · blog"] --> A["🔍 <b>Discover</b><br><i>map what the source<br>can actually do</i>"]
     A --> B["🧠 <b>Distill</b><br><i>write skills with evidence,<br>checks & recovery paths</i>"]
@@ -202,44 +244,34 @@ own tests.
 
 ---
 
-## 🤖 Works With Your Coding Agent <a id="works-with-your-coding-agent"></a>
-
-**No new agent. No new workflow.**
-
-```mermaid
-flowchart LR
-    S["🧠 <b>AREX Skills</b><br><i>plain SKILL.md graphs<br>+ one library router</i>"] ==> G
-    subgraph G["your existing agents — workflow unchanged"]
-        direction LR
-        A["<b>Claude Code</b><br><i>drop into skills dir</i>"] ~~~ B["<b>Codex</b><br><i>our benchmark harness</i>"] ~~~ C["<b>DisCo</b><br><i>bundled CLI:<br>install · route · update</i>"]
-    end
-```
-
-Skills are plain `SKILL.md` graphs in the emerging agent-skills format. Drop
-them into the coding agent you already use — no proprietary runtime, no new
-research platform to migrate to. The bundled [DisCo CLI](cli/) manages
-installation, routing, and updates, and our benchmark results below use
-unmodified Codex as the harness.
-
----
-
 ## 📊 Library Scale <a id="library-scale"></a>
 
-<table align="center">
-  <tr>
-    <td align="center"><h2>1,000</h2>widely used<br>ML repositories</td>
-    <td align="center"><h2>5,000+</h2>autonomously distilled<br>& verified skills</td>
-    <td align="center"><h2>20</h2>research areas,<br>178 task families</td>
-  </tr>
-</table>
+<p align="center">
+  <img src="assets/library.png" alt="AREX-Skill Library overview with 20 areas, 178 package families, 1,000 repositories, and 5,000-plus skills">
+</p>
 
-<p align="center">Sources: GitHub · Papers · Technical Blogs</p>
+This is not a demo. It is a growing **AREX-Skill Library**
+covering **20 research areas**, **178 package families**, **1,000 repositories**,
+and **5,000+ verified skills** — from training infrastructure, LLM alignment,
+and inference serving to robotics, genomics, and scientific computing. The
+[catalog](docs/imported-repo-skills.md) lists every graph with its upstream
+repository, source commit, and coverage.
 
-This is not a demo. It is the first scale point of a growing **Machine
-Learning Research Skill Library** — from training infrastructure, LLM
-alignment, and inference serving to robotics, genomics, and scientific
-computing. The [catalog](docs/imported-repo-skills.md) lists every graph with
-its upstream repository, source commit, and coverage.
+### 🔄 Library Maintenance <a id="library-maintenance"></a>
+
+Upstream repositories keep changing, so repo skills are maintained rather than
+treated as permanent snapshots. Our default maintenance target is to refresh the
+published repo skills about once a month, while major upstream changes, critical
+bugs, or security issues may trigger an earlier refresh. The monthly cadence is
+an operating target, not a fixed service-level commitment for every repository.
+
+The community is welcome to refresh individual repo skills at any time. A
+refresh contribution should use current upstream evidence, record the new source
+commit and verification steps, and update the router or catalog when routing or
+coverage changes. Each skill's own `SKILL.md` license continues to apply to
+refreshes and contributions. See the [Refreshing Repo Skills](docs/refreshing-repo-skills.md)
+guide for the DisCo workflow, synchronization checklist, and pull request
+requirements.
 
 ---
 
@@ -323,22 +355,31 @@ Stable-Baselines3 skills to an auditable RL experiment.
 
 ## 🚀 Quick Start <a id="quick-start"></a>
 
-Three steps to a skill-powered research agent:
+Install the CLI, add the AREX-Skill Library, and open an interactive Researcher
+session:
 
 ```bash
 # 1. Install the DisCo CLI (Node.js >= 22.19)
 npm install -g @auto-ml-skills/disco
 
-# 2. Install the skill library (1,000 repos + router)
+# 2. Install the AREX-Skill Library (1,000 repos + router)
 disco repo-skills install
 
-# 3. Research with skills
-disco -p "Use the installed skills to benchmark vLLM and SGLang \
-on this machine and report verified throughput for each."
+# 3. Open the interactive DisCo CLI (Researcher mode)
+disco
+```
+
+At the DisCo prompt, enter research tasks directly:
+
+```text
+Use the installed skills to benchmark vLLM and SGLang on this machine and report verified throughput for each.
 ```
 
 Configure a model provider on first run with `/login` or environment variables
-(`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `GEMINI_API_KEY`, …).
+(`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `GEMINI_API_KEY`, …). DisCo is an
+interactive terminal CLI; `-p` / `--print` is only the optional non-interactive
+mode that processes one prompt and exits, which is useful for scripts and
+automation. Run `disco --help` to see all CLI commands and options.
 
 <details>
 <summary><b>Create your own skills (Creator mode)</b></summary>
@@ -348,35 +389,82 @@ then verifies them before import:
 
 ```bash
 git clone https://github.com/FlagOpen/FlagEmbedding.git
-disco --agent-mode creator -p \
-  "/skill:distill-ml-knowledge Create and verify a repository skill graph \
-for ./FlagEmbedding covering embedding inference and evaluation."
+disco --creator
 ```
 
-Researcher is the default mode; switch with `--agent-mode creator|researcher`
-or `/creator` · `/researcher` in the UI. See
-[DisCo Workflows](docs/disco-workflows.md) for the 15 bundled Creator meta
-skills, verification gates, and maintenance workflows.
+Then enter the workflow request at the DisCo prompt:
+
+```text
+/skill:distill-ml-knowledge Create and verify a repository skill graph for ./FlagEmbedding covering embedding inference and evaluation.
+```
+
+Researcher is the default mode; start explicitly with `--creator` or
+`--researcher`, or use `/creator` · `/researcher` in the UI. See
+[DisCo Meta Skills](docs/disco-meta-skills.md) for the complete catalog and
+portable installation guide, and [DisCo Workflows](docs/disco-workflows.md)
+for verification gates and maintenance workflows.
 
 </details>
 
-<details>
-<summary><b>Use the skills in another agent, manage the collection, build from source</b></summary>
+For installation and maintenance details, see the
+[Installation Guide](docs/installation.md). It documents npm and source builds
+of the DisCo CLI, provider configuration, AREX-Skill Library
+install/status/update behavior (including conflict handling and recoverable
+backups), router controls, manual installation, and optional portable Creator
+meta-skill installation for other agents.
 
-- **Other agents**: skills are standard `SKILL.md` graphs; see
-  [Meta Skills For Other Agents](docs/meta-skills-for-other-agents.md) for
-  Claude Code / Codex installation.
-- **Manage**: `disco repo-skills status | update`, router toggle with
-  `disco repo-skills router disable|enable`.
-- **Manual install**: copy `skills/repositories/repo-skills` and
-  `skills/repositories/repo-skills-router` into
-  `~/.disco/agent/skills/repositories/`.
-- **From source**: `bash scripts/build-from-source-link.sh` after cloning.
+---
 
-The full [Installation Guide](docs/installation.md) covers provider setup,
-update/backup semantics, router behavior, and every fallback path.
+## 🤖 Works With Your Coding Agent <a id="works-with-your-coding-agent"></a>
 
-</details>
+**No new agent. No new workflow.**
+
+```mermaid
+---
+config:
+  fontSize: 18
+---
+flowchart LR
+    S["🧠 <b>AREX Skills</b><br><i>plain SKILL.md graphs<br>+ one library router</i>"] ==> G
+    subgraph G["your existing agents — workflow unchanged"]
+        direction LR
+        A["<b>Claude Code</b><br><i>import from DisCo</i>"] ~~~ B["<b>Codex</b><br><i>import from DisCo</i>"] ~~~ C["<b>DisCo</b><br><i>native in<br>Researcher mode</i>"]
+    end
+```
+
+Skills are plain `SKILL.md` graphs in the emerging agent-skills format. DisCo
+Researcher loads and routes the AREX-Skill Library natively; the Creator
+workflow can export selected skills and a scoped router to Codex or Claude
+Code. No proprietary skill runtime or workflow migration is required. The
+bundled [DisCo CLI](cli/) manages installation, routing, export, and updates.
+
+To export selected repository skills from DisCo's managed collection into
+another compatible agent, run the Creator workflow after
+`disco repo-skills install`:
+
+```bash
+disco --creator
+```
+
+For Codex, which writes to `~/.agents/skills/repositories/`, enter:
+
+```text
+/skill:import-repo-skills-to-agent import vllm and sglang to Codex
+```
+
+For Claude Code, which writes to `~/.claude/skills/repositories/`, enter:
+
+```text
+/skill:import-repo-skills-to-agent import vllm and sglang to Claude Code
+```
+
+The workflow copies the selected skills into
+`repositories/repo-skills/`, builds or merges a scoped
+`repositories/repo-skills-router/`, and adds Codex-specific
+`agents/openai.yaml` policy files when the target is Codex. Restart the target
+agent after import so it reloads the new skills. For portable Creator meta
+skills and manual target setup, see
+[DisCo Meta Skills](docs/disco-meta-skills.md).
 
 ---
 
@@ -388,6 +476,10 @@ update/backup semantics, router behavior, and every fallback path.
 > AREX turns it into operating knowledge for AI researchers.
 
 ```mermaid
+---
+config:
+  fontSize: 18
+---
 flowchart LR
     A["📦 <b>Repos + Papers</b><br><i>written for humans</i>"] --> B["🧠 <b>Research Skills</b><br><i>distilled once, verified</i>"]
     B --> C["🌐 <b>Skill Ecosystem</b><br><i>shared & inherited</i>"]
@@ -409,19 +501,32 @@ researchers can directly call.
 
 ## 🤝 Contributing <a id="contributing"></a>
 
-We welcome three kinds of contributions — new repo skills, refreshes of
-existing skills, and DisCo CLI improvements. Skill PRs should include
-provenance (model, source commit, verification steps); see
-[CONTRIBUTING.md](CONTRIBUTING.md) for the checklist and
-[Contributing docs](CONTRIBUTING.md) for the repo-skill layout and router
-update workflow.
+We welcome contributions in three areas:
+
+1. **Add repo skills.** Contribute a verified skill under
+   `skills/repositories/repo-skills/<skill-id>/`, then update the sibling router
+   and public catalog so agents can discover it.
+2. **Refresh or extend existing skills.** Update stale guidance or add deeper
+   coverage using current upstream evidence. The default library cadence is
+   roughly monthly, but focused community refreshes are welcome at any time;
+   keep provenance, verification, license, and routing metadata aligned. See
+   [Refreshing Repo Skills](docs/refreshing-repo-skills.md) for the detailed
+   workflow and PR checklist.
+3. **Improve the DisCo CLI.** Contribute CLI/runtime or bundled repository and
+   paper workflow changes under `cli/`.
+
+For skill PRs, include the model and provider, source commit, and verification
+steps; update the router and catalog when routing changes. See the
+[Contribution Guide](CONTRIBUTING.md) for the complete checklist.
 
 ## 📚 Documentation <a id="documentation"></a>
 
 | Page | Description |
 | --- | --- |
-| [Installation Guide](docs/installation.md) | Full CLI and skill-collection installation, provider setup, router toggle, manual fallback. |
+| [Installation Guide](docs/installation.md) | DisCo npm/source installation, provider setup, Library install/status/update behavior, conflict backups, router controls, manual fallback, portable Creator meta-skill installation. |
 | [DisCo Workflows](docs/disco-workflows.md) | Modes, sessions, Researcher execution, Creator construction, deployment scopes. |
+| [Refreshing Repo Skills](docs/refreshing-repo-skills.md) | Refresh an existing repository skill with DisCo, synchronize runtime and publication metadata, verify the result, and prepare a contribution PR. |
+| [DisCo Meta Skills](docs/disco-meta-skills.md) | Complete Creator meta-skill catalog and portable installation into other agents. |
 | [AREX-Skill Library](skills/README.md) | Library model, collection layout, installation. |
 | [Imported Repo Skills Catalog](docs/imported-repo-skills.md) | Every published graph with upstream baselines. |
 | [Repository Catalog](docs/repository-catalog.md) | Human-readable area -> family inventory of all published repository skills. |
@@ -446,13 +551,14 @@ available for the community to use and build on.
 ## 📄 License <a id="license"></a>
 
 Unless a file or component states otherwise, repository-level AREX-Skill
-materials are released under the Apache License 2.0. The skills published in
-the library are licensed separately: before using, copying, modifying, or
-redistributing a skill, inspect the `license` metadata field in that skill's
-`SKILL.md`. That license is authoritative for the individual skill, may differ
-from this repository's Apache-2.0 license, and may include additional terms or
-restrictions. Users are responsible for reviewing and complying with the terms
-of every individual skill they use.
+materials are released under the Apache License 2.0.
+
+> ⚠️ **Every skill in the AREX-Skill Library has its own license.** Before
+> using, copying, modifying, or redistributing a skill, check the `license`
+> metadata field in that skill's `SKILL.md`. **The per-skill license is
+> authoritative for that skill, not this repository's Apache-2.0 license.** It
+> may contain different terms, additional conditions, or restrictions. You are
+> responsible for reviewing and complying with each skill's license.
 
 The standalone DisCo npm package under [`cli/`](cli/) is distributed under its
 own [MIT License](cli/LICENSE), with upstream attribution in

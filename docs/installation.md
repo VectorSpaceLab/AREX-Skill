@@ -1,11 +1,11 @@
 # Installation Guide
 
-Using DisCo with the skill collection published in this repository requires
+Using DisCo with the AREX-Skill Library published in this repository requires
 both of the following installation steps, in order:
 
 1. Install the `disco` CLI.
-2. Install the public repository-skill collection into DisCo's managed skill
-   directory.
+2. Install the AREX-Skill Library's public repository-skill collection into
+   DisCo's managed skill directory.
 
 Installing portable Creator meta skills into another agent is optional. DisCo
 already bundles them.
@@ -108,8 +108,8 @@ and preserve additional local skill IDs.
 ## Portable Meta Skills For Another Agent (Optional)
 
 DisCo already bundles its Creator workflows. To run them in another compatible
-agent (Claude Code, Codex, or project-local agents), follow
-[Meta Skills For Other Agents](meta-skills-for-other-agents.md).
+agent (Claude Code, Codex, or project-local agents), follow the
+[DisCo Meta Skills](disco-meta-skills.md) catalog and portable installation guide.
 
 ## See Also
 
