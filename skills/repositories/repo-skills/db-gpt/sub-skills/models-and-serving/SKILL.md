@@ -6,8 +6,8 @@ description: "Configure DB-GPT 0.8.1 model providers and local backends,
   an import or registry record for a live deployment."
 metadata:
   disco-role: operating
-license: Apache 2.0
 disable-model-invocation: true
+license: MIT
 ---
 
 # Models and serving

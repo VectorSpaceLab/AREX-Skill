@@ -6,8 +6,8 @@ description: "Use DB-GPT 0.8.1 as an agentic AI data platform: install and
   execute code through explicitly bounded sandbox runtimes."
 metadata:
   disco-role: operating
-license: Apache 2.0
 disable-model-invocation: true
+license: MIT
 ---
 
 # DB-GPT

@@ -103,7 +103,7 @@ SGLang supports Sana as an inference backend for image generation.
 - Do not assume a ComfyUI workflow can be used without the required checkpoint and custom node setup.
 - Example setup shape:
   ```bash
-  git clone https://github.com/comfyanonymous/ComfyUI.git
+  git clone https://github.com/Comfy-Org/ComfyUI.git
   cd ComfyUI
   git clone https://github.com/lawrence-cj/ComfyUI_ExtraModels.git custom_nodes/ComfyUI_ExtraModels
   python main.py

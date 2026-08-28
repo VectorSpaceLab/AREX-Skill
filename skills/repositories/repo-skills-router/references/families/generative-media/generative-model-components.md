@@ -7,7 +7,7 @@ Choose a repository below only when its description, package/repository identity
 | Repo skill | Repository | Skill description |
 | --- | --- | --- |
 | [`audio-diffusion-pytorch`](../../../../repo-skills/audio-diffusion-pytorch/SKILL.md) | `archinetai/audio-diffusion-pytorch` | Use audio-diffusion-pytorch for PyTorch waveform diffusion generators, text-conditioned audio generation, inpainting, upsampling, vocoding, and diffusion autoencoding. |
-| [`comfy-ui`](../../../../repo-skills/comfy-ui/SKILL.md) | `comfyanonymous/ComfyUI` | Use ComfyUI as a modular AI content-creation engine: launch and automate the server, submit API workflows, validate graph JSON, author custom nodes, and configure model paths/backends. |
+| [`comfy-ui`](../../../../repo-skills/comfy-ui/SKILL.md) | `Comfy-Org/ComfyUI` | Use ComfyUI as a modular AI content-creation engine: launch and automate the server, submit API workflows, validate graph JSON, author custom nodes, and configure model paths/backends. |
 | [`llamagen`](../../../../repo-skills/llamagen/SKILL.md) | `FoundationVision/LlamaGen` | Router for LlamaGen autoregressive image-generation workflows, including tokenizers, data preparation, class-conditional generation, and text-conditional generation. |
 | [`diffusers`](../../../../repo-skills/diffusers/SKILL.md) | `huggingface/diffusers` | Use this skill for Hugging Face Diffusers tasks: pipeline inference, schedulers, adapters/loaders, training recipes, modular pipelines, conversion helpers, CLI checks, and repo maintenance. |
 | [`pyramid-flow`](../../../../repo-skills/pyramid-flow/SKILL.md) | `jy0205/Pyramid-Flow` | Use Pyramid-Flow for video generation, data precomputation, Causal Video VAE, distributed training, and reusable model-component inspection. |

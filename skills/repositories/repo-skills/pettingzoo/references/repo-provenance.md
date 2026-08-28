@@ -14,7 +14,7 @@ The source evidence snapshot was captured before writing the generated `skills/`
   "generated_at_utc": "2026-06-22T18:22:01Z",
   "repository": {
     "name": "PettingZoo",
-    "remote_url": "https://github.com/PettingZoo-Team/PettingZoo",
+    "remote_url": "https://github.com/Farama-Foundation/PettingZoo",
     "vcs": "git",
     "branch": "main",
     "tag": null,

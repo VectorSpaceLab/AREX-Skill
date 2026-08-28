@@ -7,7 +7,7 @@ Choose a repository below only when its description, package/repository identity
 | Repo skill | Repository | Skill description |
 | --- | --- | --- |
 | [`maxkb`](../../../../repo-skills/maxkb/SKILL.md) | `1Panel-dev/MaxKB` | Routes MaxKB repo work to focused sub-skills for runtime, workflows, knowledge/models, frontend, and admin surfaces. |
-| [`docs-gpt`](../../../../repo-skills/docs-gpt/SKILL.md) | `arc53/DocsGPT` | Use DocsGPT for repository-specific backend/API, agent/tool/workflow, source/retrieval, deployment/auth/operations, frontend/extensions, and E2E work. |
+| [`docsgpt`](../../../../repo-skills/docsgpt/SKILL.md) | `arc53/DocsGPT` | Routes DocsGPT deployment, source ingestion, retrieval, agent workflows, tools, integrations, and native or OpenAI-compatible API operations. |
 | [`gpt-academic`](../../../../repo-skills/gpt-academic/SKILL.md) | `binary-husky/gpt_academic` | Operate GPT Academic chat, academic document, code analysis, agent tooling, and multimodal media workflows. |
 | [`langchain-chatchat`](../../../../repo-skills/langchain-chatchat/SKILL.md) | `chatchat-space/Langchain-Chatchat` | Route Langchain-Chatchat setup, RAG/API service, Python SDK, and LangChain adapter workflows. |
 | [`kotaemon`](../../../../repo-skills/kotaemon/SKILL.md) | `Cinnamon/kotaemon` | Use Kotaemon to build, deploy, configure, extend, and troubleshoot document QA, RAG, model-provider, ingestion, and Gradio app workflows. |

@@ -12,7 +12,7 @@ This skill was generated from Great Expectations (GX Core) repository evidence.
 - Exact tag: none found
 - Package distribution/import: `great_expectations`
 - Package version observed during inspection: `0+untagged.1.geec491e`
-- Remote URL: `https://github.com/great-expectations/great_expectations`
+- Remote URL: `https://github.com/fivetran/great_expectations`
 - Working tree state during generation: dirty because this generated `skills/` tree was added during the workflow
 
 ## Primary Evidence Paths

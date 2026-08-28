@@ -5,8 +5,8 @@ description: "Build and debug DB-GPT agents, tools, skills, teams, and AWEL
   without assuming an LLM, credential, or external service."
 metadata:
   disco-role: operating
-license: Apache 2.0
 disable-model-invocation: true
+license: MIT
 ---
 
 # DB-GPT agents and AWEL

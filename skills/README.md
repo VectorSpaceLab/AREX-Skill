@@ -45,7 +45,7 @@ current repository-skills interface.
 This collection contains the high-reuse repository skill graphs used by DisCo
 Researcher and the generated router that selects them:
 
-The published collection contains 1,000 repository skill roots, 2,204 exact
+The published collection contains 1,000 repository skill roots, 2,209 exact
 area-family memberships, 20 taxonomy areas, and 178 families. A repository may
 appear in multiple families when it has distinct, evidence-backed
 capabilities. The router uses progressive disclosure:
@@ -67,9 +67,8 @@ assignments. Full classification rationale and evidence stay outside the
 runtime skill graph, in the production routing-decision artifacts or the
 repository's `skills/disco/routing_decision/` handoff directory.
 
-The previous `research-skills-library/` name is not part of this release.
-Runtime installation and selection use only the current
-`skills/repositories/` layout.
+Runtime installation and selection use only the current `skills/repositories/`
+layout in the AREX-Skill Library.
 
 ## Install into DisCo
 

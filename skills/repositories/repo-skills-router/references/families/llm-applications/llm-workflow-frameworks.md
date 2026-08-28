@@ -7,6 +7,7 @@ Choose a repository below only when its description, package/repository identity
 | Repo skill | Repository | Skill description |
 | --- | --- | --- |
 | [`maxkb`](../../../../repo-skills/maxkb/SKILL.md) | `1Panel-dev/MaxKB` | Routes MaxKB repo work to focused sub-skills for runtime, workflows, knowledge/models, frontend, and admin surfaces. |
+| [`docsgpt`](../../../../repo-skills/docsgpt/SKILL.md) | `arc53/DocsGPT` | Routes DocsGPT deployment, source ingestion, retrieval, agent workflows, tools, integrations, and native or OpenAI-compatible API operations. |
 | [`crewai`](../../../../repo-skills/crewai/SKILL.md) | `crewAIInc/crewAI` | Routes agents using or contributing to CrewAI, including crews, flows, CLI projects, tools, MCP, memory, RAG, LLM providers, observability, files, multimodal inputs, and repo development. |
 | [`bisheng`](../../../../repo-skills/bisheng/SKILL.md) | `dataelement/bisheng` | Use BiSheng's enterprise LLM application DevOps platform repository, including FastAPI backend, workflow/RAG/Linsight runtimes, permissions, dual React frontends, deployment, and maintainer workflows. |
 | [`haystack`](../../../../repo-skills/haystack/SKILL.md) | `deepset-ai/haystack` | Use Haystack to build, debug, evaluate, and maintain RAG, agent, pipeline, component, ingestion, retrieval, generator, tool-calling, and observability workflows for the haystack-ai package and repository. |

@@ -10,7 +10,7 @@ This router is generated from the fixed area -> family taxonomy and the v2 `refe
 4. Write the minimal v2 metadata fragment only after the decision is made; confidence remains in the central assignment index and is not copied into runtime metadata.
 5. Run the verified importer/updater under the shared lock so the skill, metadata, indexes, and router are updated together.
 
-The central `repositories.jsonl` index preserves canonical repository identity, optional `legacy_repo_id`, source provenance, target skill root, aliases, content digest, and root description. The central `assignments.jsonl` index preserves canonical identity, optional `legacy_repo_id`, skill ID, exact area/family path, and confidence. These generated indexes are validated together with the per-skill metadata; unknown fields, duplicate identities, stale digests, and mismatched assignments are errors.
+The central `repositories.jsonl` index preserves canonical repository identity, optional `legacy_repo_id`, source provenance, target skill root, aliases, and root description. It intentionally does not persist a per-repository-skill content digest because skills may be refreshed independently and the digest would add recurring maintenance without helping routing. The central `assignments.jsonl` index preserves canonical identity, optional `legacy_repo_id`, skill ID, exact area/family path, and confidence. These generated indexes are validated together with the per-skill metadata; unknown fields, duplicate identities, and mismatched assignments are errors. The complete repository and assignment index files remain protected by the overall digests in `build-metadata.json`. The one-time `skill_content_sha256` in an external import handoff may still be checked during import, but it is not copied into either long-lived repository index.
 
 `unclassified` is valid only when no exact family is supported. Ask the user whether to import it; if they want it included, propose a taxonomy extension and wait for approval/correction before changing the canonical taxonomy. `blocked` and `failed` are processing outcomes and must not be imported as routable skills.
 
@@ -18,6 +18,6 @@ The central `repositories.jsonl` index preserves canonical repository identity, 
 
 - Areas in taxonomy: 20
 - Routable repository skills: 1000
-- Taxonomy memberships: 2204
+- Taxonomy memberships: 2209
 
 Use `node update_repo_skills_router.mjs --library-root <library-root>` for a full rebuild, or `--include-skill <skill-id>` with `--output-router-dir <dir>` for a filtered export.

@@ -6,7 +6,7 @@ Read a family page only after confirming that the family scope matches the user'
 
 | Family | Scope | Repositories |
 | --- | --- | ---: |
-| [Speech Recognition](../families/speech-and-audio/speech-recognition.md) | Automatic speech recognition, transcription, alignment, voice-activity detection, keyword spotting, and streaming speech-to-text. | 18 |
+| [Speech Recognition](../families/speech-and-audio/speech-recognition.md) | Automatic speech recognition, transcription, alignment, voice-activity detection, keyword spotting, and streaming speech-to-text. | 19 |
 | [Speech Synthesis](../families/speech-and-audio/speech-synthesis.md) | Text-to-speech, expressive synthesis, voice cloning, acoustic modeling, neural vocoders, and spoken-voice generation. | 13 |
 | [Audio Enhancement](../families/speech-and-audio/audio-enhancement.md) | Denoising, dereverberation, source separation, target-speaker extraction, and quality restoration for speech and audio. | 4 |
 | [Audio Understanding](../families/speech-and-audio/audio-understanding.md) | Sound-event detection, speaker analysis, emotion recognition, acoustic embeddings, feature extraction, music information retrieval, and audio classification. | 6 |

@@ -8,6 +8,7 @@ Choose a repository below only when its description, package/repository identity
 | --- | --- | --- |
 | [`vgen`](../../../../repo-skills/vgen/SKILL.md) | `ali-vilab/VGen` | Route VGen video-generation workflows for text-to-video, image-to-video, DreamVideo customization, and InstructVideo reward fine-tuning. |
 | [`latent-sync`](../../../../repo-skills/latent-sync/SKILL.md) | `bytedance/LatentSync` | Route LatentSync video generation, raw-video preprocessing, training, and evaluation workflows to the right sub-skill. |
+| [`fastvideo`](../../../../repo-skills/fastvideo/SKILL.md) | `hao-ai-lab/FastVideo` | Guides FastVideo video, image, and audio generation, config-first inference, serving, training, distillation, evaluation, and performance workflows. |
 | [`mmaudio`](../../../../repo-skills/mmaudio/SKILL.md) | `hkchengrex/MMAudio` | Route MMAudio video-to-audio, text-to-audio, data preparation, CUDA training, and evaluation workflows. |
 | [`torchmetrics`](../../../../repo-skills/torchmetrics/SKILL.md) | `Lightning-AI/torchmetrics` | Use TorchMetrics to choose, inspect, and combine metric families for PyTorch evaluation, including core API, domain metrics, model-based metrics, and wrappers. |
 | [`pytorch-fid`](../../../../repo-skills/pytorch-fid/SKILL.md) | `mseitzer/pytorch-fid` | Use pytorch-fid to compute Frechet Inception Distance for image directories or saved activation statistics, precompute .npz stats, validate inputs, and troubleshoot PyTorch Inception FID workflows. |
