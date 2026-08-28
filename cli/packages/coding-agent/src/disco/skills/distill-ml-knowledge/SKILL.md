@@ -1,87 +1,128 @@
 ---
 name: distill-ml-knowledge
-description: "Canonical Creator entry point for ML knowledge distillation. Use for any request to turn repositories, papers, datasets, benchmark material, research notes, experiment evidence, or other source anchors into verified operating knowledge: normalize the downstream task, select direct, reuse-existing, or design-reusable, and route to the smallest adequate construction workflow."
+description: "Canonical Creator entry point for DisCo skill distillation. Use when turning a repository, paper, tutorial, dataset, benchmark, research note, task, or other source material into a verified operating skill graph. Identify the anchor, scope capabilities, ground them in evidence, construct a candidate graph, verify it into an accepted graph, and record the construction."
 metadata:
   disco-role: meta
 ---
 
 # Distill ML Knowledge
 
-Use this skill as the canonical Creator entry point for ML knowledge
-distillation. Turn caller-supplied source anchors into operating knowledge that
-a later Researcher can load. Do not execute the downstream research or software
-task in this session.
+Use this skill as the canonical Creator entry point for DisCo skill
+distillation. Convert a distillation anchor into a verified operating skill
+graph that a later Researcher can load. The four paper-aligned stages are
+**scope**, **ground**, **construct**, and **verify**. This skill does not execute
+the downstream research or software task in the current Creator session.
 
-## Inputs
-
-Before selecting a construction path, collect only the routing inputs:
-
-- Downstream ML research task, expected deliverable, execution environment,
-  constraints, and acceptance procedure.
-- Source anchor(s), access/version constraints, trust boundaries, and visible
-  evidence.
-- `path preference: auto | direct | reusable`.
-- Current Creator-visible meta-skill inventory.
-- User approval state for exploration, verification, import, and overwrite.
+## Identify The Anchor
 
 Read [task-and-construction-contract.md](references/task-and-construction-contract.md)
-and normalize these inputs into its canonical task and routing records. Keep
-unknown values explicit and apply its clarification gate before the affected
-routing decision: resolve permitted read-only facts directly, but stop and ask
-for blocking information or decisions together. Do not inspect Researcher-only
-skills or hidden skill paths to improve the inventory.
+and create one anchor record before material exploration:
 
-## Select The Path
+```markdown
+# Distillation Anchor
 
-1. Read [path-selection-and-adequacy.md](references/path-selection-and-adequacy.md).
-   Compare the required construction capabilities with the visible meta-skill
-   contracts before expensive exploration or branch-specific specification.
-2. Record exactly one `selected path`:
-   - `direct`: construct a task-conditioned operating graph `G` plus
-     construction record `R` from the concrete source anchor now.
-   - `reuse-existing`: invoke one adequate existing meta-skill bundle or a
-     bounded composition of existing bundles. Record the reuse mode as `single`
-     or `compose` and preserve each selected workflow's verification, recovery,
-     deployment, and import contract.
-   - `design-reusable`: hand a verified recurring construction gap to
-     `design-meta-skill`; do not use this path for a one-off prompt variation or
-     ordinary task-specific operating graph.
-3. Apply the preference mapping from the canonical contract. In particular,
-   `reusable` is a preference, not a selected path: try `reuse-existing` first,
-   then select `design-reusable` only for an evidence-backed recurring gap. If
-   neither is valid, surface the conflict instead of silently selecting
-   `direct` or inventing a reusable workflow.
+- anchor kind: source | task
+- anchor value:
+  - source anchor: repository | paper | tutorial | dataset | benchmark | other
+  - task anchor: `tau = (q, D, E, g)`
+- source material: provided | discovered during grounding | mixed
+- version/access/trust boundary:
+- intended future use:
+- unknowns and assumptions:
+```
 
-## Execute The Selected Path
+Use a source anchor for task-agnostic distillation. It may be a repository,
+paper, tutorial, dataset, benchmark, or comparable source and does not require a
+made-up downstream task. Use a task anchor for task-oriented distillation. The
+task-oriented `D`, `E`, and `g` values are blocking when routing or verification
+would change without them; ask for clarification before the affected action.
 
-4. For `direct`, read
-   [direct-construction-and-handoff.md](references/direct-construction-and-handoff.md).
-   Approve an exact direct-run specification, then execute knowledge
-   exploration, operating-graph generation, verification, refinement,
-   deployment review, and handoff. Keep all drafts and review artifacts outside
-   live skill roots.
-5. For `reuse-existing`, invoke the selected workflow or ordered composition
-   with the normalized task, approved source anchors, constraints, and handoff
-   ownership. Do not generate a replacement meta skill. Let specialized
-   workflows retain their own exact specification and importer; repository
-   graphs, for example, must use the repo workflow's locked router transaction.
-6. For `design-reusable`, read `../design-meta-skill/SKILL.md` and pass the exact
-   routing-decision revision, normalized task, source requirements, capability
-   matrix, uncovered contract, recurrence evidence, constraints, and approval
-   state. The downstream skill designs the reusable bundle; it does not repeat
-   path selection.
-7. After an accepted `direct` or `reuse-existing` run produces an operating
-   graph, apply that workflow's post-verification reuse assessment. Default
-   task-bound or uncertain output to project scope and reserve managed scope for
-   evidence-backed cross-project reuse. Keep every root and sub-skill in one
-   scope.
-8. Before import, show the selected scope, exact targets, graph entry point,
-   verification results, unresolved gaps, collisions, shadowing impact, and
-   overwrite status. Use the selected workflow's specialized importer when it
-   has one. Otherwise, after approval, invoke
-   [the bundled transaction helper](scripts/import_operating_skill_graph.mjs)
-   once with every top-level root.
-9. Write `researcher-handoff.md` with the normalized task, source anchor,
-   selected path, reuse mode when applicable, scope, exact imported paths,
-   skill ids, graph entry point, verification evidence, and unresolved limits.
-   Do not load or execute the resulting operating graph in the Creator session.
+## Scope, Ground, Construct, Verify
+
+1. **Scope** the capabilities `Q` and define applicability, non-goals, candidate
+   skill boundaries, graph entry points, and verification targets. For a
+   task-agnostic anchor, begin with source understanding and capability
+   identification. For a task-oriented anchor, begin with task decomposition and
+   capability gap analysis.
+2. **Ground** `Q` in retained evidence `X`. For task-agnostic distillation,
+   extract knowledge from the source anchor. For task-oriented distillation,
+   discover permitted source material for the capability gaps, then select and
+   record evidence. Preserve provenance, versions, exclusions, conflicts,
+   inaccessible material, and assumptions.
+3. **Construct** a candidate graph `G_tilde = (S_tilde, L_tilde)`. Use tool
+   encapsulation and skill packaging for source-oriented work, or skill
+   generation for task-oriented work. Each root and sub-skill needs a clear
+   responsibility, progressive-disclosure route, evidence boundary, checks, and
+   recovery behavior.
+4. **Verify** the candidate graph with static, source-support, executable,
+   graph/link, and applicable task-level or representative-use checks. Exercise
+   failure recovery and repair affected skills, links, evidence mappings, or
+   fixtures. The result is accepted graph `G` plus construction record `R`, or a
+   candidate with explicit unverified blockers. Task-agnostic runs use
+   source-supported representative workflows and do not invent a task-level
+   outcome trial when no downstream task exists.
+
+## Creator Construction Strategy
+
+After a lightweight scope/preflight, read
+[construction-strategy-and-adequacy.md](references/construction-strategy-and-adequacy.md)
+and record exactly one Creator construction strategy. This is implementation
+orchestration recorded in `R`, not a third distillation form:
+
+- `reuse-existing`: invoke one adequate visible workflow or a bounded
+  composition, preserving its verification, deployment, recovery, handoff, and
+  specialized importer contract.
+- `direct`: execute the four stages for the current anchor and produce the
+  operating graph now.
+- `design-reusable`: pass an evidence-backed recurring construction gap to
+  `design-meta-skill`, which designs a future Creator workflow. It does not
+  directly produce the current Researcher operating graph.
+
+Record the layered routing fields below. Do not use the construction strategy to
+pretend that the anchor form is a task form:
+
+```markdown
+# Routing Record
+
+- anchor kind: source | task
+- distillation form: task-agnostic | task-oriented
+- anchor `z`:
+- scoped capabilities `Q`:
+- required evidence and verification:
+- construction strategy: direct | reuse-existing | design-reusable
+- reuse mode: single | compose | not-applicable
+- selected visible contracts:
+- uncovered recurring construction gap:
+- recurrence evidence:
+- construction constraints and approval state:
+- decision revision:
+```
+
+Apply `auto` by preferring an adequate existing workflow, then `direct` for a
+concrete task-conditioned need or `design-reusable` only for a verified
+recurring construction gap. A `reusable` preference tries `reuse-existing`
+first and must surface a conflict rather than silently falling back to a
+one-off direct run.
+
+## Handoffs And Deployment
+
+For `direct`, read [direct-construction-and-handoff.md](references/direct-construction-and-handoff.md)
+and obtain approval of the exact construction specification after grounding.
+For `reuse-existing`, pass the anchor, `Q`, `X`, constraints, and ownership to
+the selected workflow without bypassing its verification or importer. For
+`design-reusable`, pass the complete routing handoff to
+`../design-meta-skill/SKILL.md`; that skill must not repeat strategy selection.
+
+After an accepted operating graph is verified, decide project or managed scope
+separately. Default task-bound or uncertain graphs to
+`<project-dir>/.agents/skills/`; use `~/.disco/agent/skills/` only for
+self-contained, provenance-backed graphs with representative reuse evidence.
+Keep every root and sub-skill in one scope, show exact destinations and
+collisions, obtain import approval, and invoke the selected specialized or
+generic locked importer once with all top-level roots.
+
+Write `researcher-handoff.md` outside live skill roots with the anchor kind,
+distillation form, `Q` summary, `X` provenance scope, accepted or unverified
+`G`, `R` path, construction strategy, selected scope, exact imported paths,
+entry point, verification evidence, and unresolved limits. Do not load the
+resulting operating graph or execute the downstream task in this Creator run.

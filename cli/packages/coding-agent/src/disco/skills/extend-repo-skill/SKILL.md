@@ -48,6 +48,10 @@ Read these references as the workflow reaches each stage:
 - [references/extension-planning.md](references/extension-planning.md): scope capture, current-skill audit, repository evidence gathering, coverage-gap planning, and extension plan format.
 - [references/editing-and-versioning.md](references/editing-and-versioning.md): editing rules, preserving existing behavior, frontmatter constraints, references/scripts updates, and usability-case expansion.
 - [references/verification-and-handoff.md](references/verification-and-handoff.md): automatic verification, human review package, regression-sensitive checks, and final handoff.
+- [../verify-repo-skill/scripts/resolve_repo_license.mjs](../verify-repo-skill/scripts/resolve_repo_license.mjs)
+  and [../verify-repo-skill/scripts/apply_repo_license.mjs](../verify-repo-skill/scripts/apply_repo_license.mjs):
+  resolve and recursively apply the source repository license for the exact
+  extension commit before verification.
 
 When useful, also read sibling workflow-skill references: `../create-repo-skill/references/` for canonical skill IDs, repository evidence discovery, installed-package inspection, planning, and writing, and `../verify-repo-skill/references/` for usability test-case format, verification review, and import/index routing guidance.
 
@@ -67,9 +71,28 @@ When useful, also read sibling workflow-skill references: `../create-repo-skill/
 3. Gather targeted repository evidence for the requested extension. Use source code plus installed-package inspection for API facts; use docs, examples, tests, and configs for intent and workflows.
 4. Write a concise extension plan that maps each new or changed capability to exactly one skill location, reference, script, or usability case.
 5. Read [references/editing-and-versioning.md](references/editing-and-versioning.md). Edit the resolved source or external working copy while preserving useful current guidance, frontmatter IDs, and public structure. Preserve the canonical `repo_id` and `skill_id` unless the user explicitly requests an identity migration. Treat the current area-family assignments as the baseline. If the extension is only deeper coverage of already routed capabilities, retain those assignments. If it adds a distinct capability, removes a capability, changes the repository's scope, changes the taxonomy hash, or the user requests reclassification, create a new external area-family routing handoff with assignment-specific evidence and update the minimal v2 metadata to match it. Never hand-edit generated family pages or silently change routing in the skill prose.
-6. Add or update usability test cases for the new capability and at least one regression-sensitive existing workflow under `test-cases/` in the review/test artifact directory.
-7. Read [references/verification-and-handoff.md](references/verification-and-handoff.md). Run automatic verification, create a human review package under `reports/` in the review/test artifact directory, and fix blocking issues.
-8. After verification passes, follow `verify-repo-skill`'s structured import
+6. Resolve and apply the repository license after the extension source commit
+   is known and before verification:
+
+   ```bash
+   node ../verify-repo-skill/scripts/resolve_repo_license.mjs \
+     --repository <owner/repository> \
+     --source-commit <40-hex-source-commit> \
+     --json > <artifact-root>/reports/license-resolution.json
+   node ../verify-repo-skill/scripts/apply_repo_license.mjs \
+     --skill-dir <external-runtime-skill-dir> \
+     --license <value-from-report>
+   ```
+
+   Re-query on every extension and synchronize the one returned value over the
+   complete root/sub-skill tree. Record old value, new value, source commit,
+   status, and reason in the handoff. Preserve `NOASSERTION` as the accepted
+   source value and use `NO_LICENSE` only when the resolver is unavailable; this
+   fallback is a warning, not a legal conclusion, and does not by itself block
+   verification or import.
+7. Add or update usability test cases for the new capability and at least one regression-sensitive existing workflow under `test-cases/` in the review/test artifact directory.
+8. Read [references/verification-and-handoff.md](references/verification-and-handoff.md). Run automatic verification, create a human review package under `reports/` in the review/test artifact directory, and fix blocking issues.
+9. After verification passes, follow `verify-repo-skill`'s structured import
    policy. Ask for import or overwrite approval unless the user already
    authorized that exact action, then run
    `verify-repo-skill/scripts/import_repo_skill.mjs` with the verified external

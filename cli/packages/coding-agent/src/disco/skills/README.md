@@ -27,15 +27,19 @@ workflows. Mode filtering removes an ineligible skill from both the system
 prompt and `/skill:*` commands; `disable-model-invocation` only controls prompt
 visibility after that filter.
 
-`distill-ml-knowledge` is the Creator bootstrap workflow and owner of the shared
-task/construction vocabulary, Creator-visible adequacy assessment, and path
-selection. It records a lightweight routing contract before branch-specific
-specification, then selects `direct`, `reuse-existing`, or `design-reusable`.
+`distill-ml-knowledge` is the Creator bootstrap workflow and owner of the
+paper-aligned distillation vocabulary. It identifies anchor `z`, distinguishes
+task-agnostic from task-oriented distillation, scopes capabilities `Q`, grounds
+them in evidence `X`, constructs candidate graph `G_tilde`, verifies accepted
+graph `G`, and records the run as `R`. Creator-visible adequacy assessment and
+`direct`, `reuse-existing`, or `design-reusable` are implementation strategy
+decisions recorded in `R`, not additional distillation forms.
 `reuse-existing` covers either one adequate bundle or a bounded composition with
 explicit artifact and handoff ownership. Only an evidence-backed recurring gap
 enters `design-meta-skill`, which consumes that exact routing handoff and owns
 the user-reviewed reusable-bundle specification, staged meta-skill generation,
-validation, final approval, and live import. It does not repeat path selection.
+validation, final approval, and live Creator-infrastructure import. It does not
+repeat strategy selection or produce the current Researcher operating graph.
 After an approved import, run `design-meta-skill`'s
 `scripts/import_meta_skill.mjs` transaction helper, then `/reload` before
 invoking the new meta skill. The helper refuses unapproved collisions, uses the
@@ -103,11 +107,11 @@ Use these in Creator mode for software repositories and Python packages:
   repository code, APIs, docs, examples, configs, or dependencies changed.
 - `extend-repo-skill`: expands an already implemented skill with new or
   deeper coverage without discarding useful current guidance.
-- `import-repo-skills-to-agent`: exports DisCo's managed skills and
-  `repo-skills-router` into another agent tool, asks before overwriting
-  duplicate skills, and merges an existing target router. When exporting only
-  selected skills, it builds a filtered router view for those selected skills
-  instead of copying the full DisCo-managed router.
+- `import-repo-skills-to-agent`: exports DisCo's managed skills, regenerated
+  `repository-index.jsonl`, and `repo-skills-router` into another agent tool.
+  Its dedicated helper requires approved replacements, merges selected skills
+  with unrelated target records, applies target-only Codex policy, validates
+  staging, and supports rollback plus `--resume` after interruption.
 
 Package workflow defaults:
 
@@ -255,13 +259,13 @@ and visible evidence determine whether the repo/package, paper, or another meta
 workflow applies:
 
 ```bash
-disco --agent-mode creator -p "Create a skill for /path/to/repo using Python /path/to/env/bin/python."
-disco --agent-mode creator -p "Use Distiller to generate and verify paper-replication skills for each run in this config. config_path: /path/to/distiller_run_config.toml"
+disco --creator -p "Create a skill for /path/to/repo using Python /path/to/env/bin/python."
+disco --creator -p "Use Distiller to generate and verify paper-replication skills for each run in this config. config_path: /path/to/distiller_run_config.toml"
 ```
 
-`--agent-mode` selects the agent role. The existing `--mode text|json|rpc`
-option selects only the output protocol. Non-interactive sessions default to
-Researcher when `--agent-mode` is omitted.
+`--creator` and `--researcher` select the agent role. The existing
+`--mode text|json|rpc` option selects only the output protocol. Non-interactive
+sessions default to Researcher when neither role flag is used.
 
 Creator first assesses adequacy. A normal repository task reuses the existing
 repo workflow, and a normal paper task reuses the paper workflow. Use
@@ -361,12 +365,14 @@ paper title. The optional implementation repo may be a local repo, Git URL,
 
 Use `import-repo-skills-to-agent` when another agent should receive selected
 Researcher-facing repository skills and the scoped `repo-skills-router`.
-That workflow handles the canonical nested layout, overwrite review, filtered
-router generation, and Codex `agents/openai.yaml` policy.
+That workflow resolves overwrite approval, then delegates the canonical nested
+layout, filtered router merge, regenerated root index, Codex
+`agents/openai.yaml` policy, and recoverable transaction to its bundled export
+helper. Do not hand-copy or hand-merge generated router files.
 
 For portable Creator workflows, use the package-root guide
-`docs/meta-skills-for-other-agents.md` (or its Chinese version,
-`docs/meta-skills-for-other-agents.zh.md`). It lists
+`docs/disco-meta-skills.md` (or its Chinese version,
+`docs/disco-meta-skills.zh.md`). It lists
 the exact 15 meta-skill directories and target paths without copying the
 Researcher operating library or router. This bundled corpus README intentionally
 does not duplicate shell-copy commands.

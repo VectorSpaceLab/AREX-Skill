@@ -20,6 +20,28 @@ Prefer a filled TOML config over free-form prompt fields. The reusable template
 is bundled at `assets/distiller-run-config-template.toml`; a longer reusable
 agent prompt is bundled at `assets/standard-distiller-run-prompt.md`.
 
+## Distillation Anchor And Stages
+
+Treat the paper, and any explicitly permitted implementation evidence, as the
+source anchor `z` for task-agnostic distillation. If the user instead starts
+from a concrete recovery or replication task, record the task anchor as
+`tau = (q, D, E, g)` and classify the run as task-oriented. Do not invent a task
+tuple for a paper-only request.
+
+Organize the run as the same four stages used by `distill-ml-knowledge`:
+
+1. **Scope** the capabilities `Q` from paper understanding and module planning,
+   including non-goals and verification targets.
+2. **Ground** `Q` in paper evidence `X`, with source/version provenance,
+   implementation-evidence boundaries, exclusions, and assumptions.
+3. **Construct** candidate module graph `G_tilde`, including module boundaries,
+   references, scripts, links, and recovery interfaces.
+4. **Verify** the candidate into accepted graph `G` and construction record `R`
+   through module validation, executable recovery, analysis, refinement, final
+   validation, deployment review, and handoff. A paper-only run uses
+   representative recovery/operating checks; it does not claim a task-level
+   outcome that was not part of the anchor.
+
 ## Workflow Classification
 
 - When the primary knowledge source is a software repository or package, use

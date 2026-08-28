@@ -47,6 +47,7 @@ async function writeCandidate(root: string, id = "alpha-repo", extraReference?: 
 			`name: ${id}`,
 			`description: "Use ${id} for repository import tests."`,
 			"disable-model-invocation: true",
+			"license: MIT",
 			"metadata:",
 			"  disco-role: operating",
 			"---",
@@ -62,6 +63,7 @@ async function writeCandidate(root: string, id = "alpha-repo", extraReference?: 
 			"name: setup",
 			'description: "Set up the repository import test workflow."',
 			"disable-model-invocation: true",
+			"license: MIT",
 			"metadata:",
 			"  disco-role: operating",
 			"---",
@@ -138,6 +140,62 @@ describe("import_repo_skill.mjs", () => {
 		expect(result.status).toBe(2);
 		expect(result.stderr).toContain("normal managed imports require --routing-entry");
 		expect(existsSync(path.join(root, "agent", "skills"))).toBe(false);
+	});
+
+	it("rejects a repo skill with a missing license before mutating the live tree", async () => {
+		const root = await mkdtemp(path.join(tmpdir(), "disco-repo-import-"));
+		cleanup.push(root);
+		const candidate = await writeCandidate(path.join(root, "draft"));
+		const skill = await readFile(path.join(candidate.skill, "SKILL.md"), "utf8");
+		await writeFile(path.join(candidate.skill, "SKILL.md"), skill.replace("license: MIT\n", ""), "utf8");
+
+		const agentDir = path.join(root, "agent");
+		const result = runImporter(agentDir, candidate);
+		expect(result.status).toBe(2);
+		expect(result.stderr).toContain("license gate failed");
+		expect(result.stderr).toContain("top-level license");
+		expect(existsSync(path.join(agentDir, "skills"))).toBe(false);
+	});
+
+	it("rejects inconsistent root and sub-skill licenses before mutating the live tree", async () => {
+		const root = await mkdtemp(path.join(tmpdir(), "disco-repo-import-"));
+		cleanup.push(root);
+		const candidate = await writeCandidate(path.join(root, "draft"));
+		const skill = await readFile(path.join(candidate.skill, "sub-skills", "setup", "SKILL.md"), "utf8");
+		await writeFile(
+			path.join(candidate.skill, "sub-skills", "setup", "SKILL.md"),
+			skill.replace("license: MIT", "license: Apache-2.0"),
+			"utf8",
+		);
+
+		const agentDir = path.join(root, "agent");
+		const result = runImporter(agentDir, candidate);
+		expect(result.status).toBe(2);
+		expect(result.stderr).toContain("license gate failed");
+		expect(result.stderr).toContain("one repository-level license value");
+		expect(existsSync(path.join(agentDir, "skills"))).toBe(false);
+	});
+
+	it("imports NO_LICENSE with a visible warning", async () => {
+		const root = await mkdtemp(path.join(tmpdir(), "disco-repo-import-"));
+		cleanup.push(root);
+		const candidate = await writeCandidate(path.join(root, "draft"));
+		for (const filePath of [
+			path.join(candidate.skill, "SKILL.md"),
+			path.join(candidate.skill, "sub-skills", "setup", "SKILL.md"),
+		]) {
+			const skill = await readFile(filePath, "utf8");
+			await writeFile(filePath, skill.replaceAll("license: MIT", "license: NO_LICENSE"), "utf8");
+		}
+		const handoff = JSON.parse(await readFile(candidate.handoff, "utf8"));
+		handoff.skill_content_sha256 = await digestTree(candidate.skill);
+		await writeFile(candidate.handoff, `${JSON.stringify(handoff, null, 2)}\n`, "utf8");
+
+		const agentDir = path.join(root, "agent");
+		const result = runImporter(agentDir, candidate);
+		expect(result.status, result.stderr).toBe(0);
+		expect(result.stderr).toContain("license: NO_LICENSE");
+		expect(result.stderr).toContain("not a legal conclusion");
 	});
 
 	it("rejects a classified routing handoff without an inspectable source checkout", async () => {

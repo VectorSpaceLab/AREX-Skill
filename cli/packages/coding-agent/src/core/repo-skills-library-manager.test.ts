@@ -72,7 +72,6 @@ async function createSourceRepository(root: string, marker = "source-v1"): Promi
 		source_skill_root: "repo-skills/alpha",
 		target_skill_root: "repo-skills/alpha",
 		aliases: [],
-		content_sha256: null,
 		description: "Use alpha for focused repository workflows.",
 	})}\n`, "utf8");
 	await writeFile(path.join(libraryRoot, "repo-skills-router", "references", "index", "assignments.jsonl"), `${JSON.stringify({
@@ -171,7 +170,6 @@ describe("RepoSkillsLibraryManager", () => {
 			source_skill_root: null,
 			target_skill_root: "repo-skills/local-routed",
 			aliases: [],
-			content_sha256: null,
 			description: "Local routed helper.",
 		})}\n`, "utf8");
 		const assignmentIndexPath = path.join(liveRoot, "repo-skills-router", "references", "index", "assignments.jsonl");
@@ -220,7 +218,7 @@ describe("RepoSkillsLibraryManager", () => {
 		);
 	});
 
-	it("detects stale router index digests, taxonomy counts, and live skill content", async () => {
+	it("detects stale router indexes and live skill content without a per-repository content digest", async () => {
 		const root = await makeRoot();
 		const source = await createSourceRepository(root);
 		const agentDir = path.join(root, "agent");
@@ -238,9 +236,26 @@ describe("RepoSkillsLibraryManager", () => {
 
 		const issues = manager(agentDir, source).status().issues;
 		expect(issues).toEqual(expect.arrayContaining([
-			expect.stringContaining("content_sha256 does not match live skill alpha"),
+			expect.stringContaining("invalid repository index line 1"),
 			expect.stringContaining("build metadata area_count is stale"),
 			expect.stringContaining("repository index digest is stale"),
+			expect.stringContaining("alpha: managed skill is modified"),
+		]));
+	});
+
+	it("does not validate live repository skill content against a per-repository digest", async () => {
+		const root = await makeRoot();
+		const source = await createSourceRepository(root);
+		const agentDir = path.join(root, "agent");
+		await manager(agentDir, source).install();
+		const policyDir = path.join(agentDir, "skills", "repositories", "repo-skills", "alpha", "agents");
+		await mkdir(policyDir, { recursive: true });
+		await writeFile(path.join(policyDir, "openai.yaml"), "policy:\n  allow_implicit_invocation: false\n", "utf8");
+
+		const issues = manager(agentDir, source).status().issues;
+		expect(issues.some((issue) => issue.includes("content_sha256 does not match live skill alpha"))).toBe(false);
+		expect(issues).toEqual(expect.arrayContaining([
+			expect.stringContaining("alpha: managed skill is modified"),
 		]));
 	});
 

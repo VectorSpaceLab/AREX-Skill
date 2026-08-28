@@ -261,7 +261,7 @@ function validateForkFlags(parsed: Args): void {
 		parsed.continue ? "--continue" : undefined,
 		parsed.resume ? "--resume" : undefined,
 		parsed.noSession ? "--no-session" : undefined,
-		parsed.agentMode ? "--agent-mode" : undefined,
+		parsed.agentMode ? "an explicit agent mode selector" : undefined,
 	].filter((flag): flag is string => flag !== undefined);
 
 	if (conflictingFlags.length > 0) {
@@ -419,8 +419,8 @@ function validateRequestedAgentMode(parsed: Args, sessionManager: SessionManager
 
 	console.error(
 		chalk.red(
-			`Error: --agent-mode ${parsed.agentMode} conflicts with the selected ${sessionMode} session. ` +
-				"Resume it without --agent-mode, or start a new session in the requested mode.",
+			`Error: Requested ${parsed.agentMode} mode conflicts with the selected ${sessionMode} session. ` +
+				"Resume it without an explicit agent mode selector, or start a new session in the requested mode.",
 		),
 	);
 	process.exit(1);

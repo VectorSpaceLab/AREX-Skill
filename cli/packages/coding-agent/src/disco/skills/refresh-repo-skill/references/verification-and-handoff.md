@@ -108,6 +108,9 @@ Recommended review artifacts:
 - `reports/final/publication-checklist.md`: final checks before committing or publishing the
   refreshed skill.
 - `reports/final/prompt-sampling.md`: usability prompt samples for quick inspection.
+- `reports/license-resolution.json`: source-commit-bound GitHub CLI license
+  resolution, recursive runtime update, and final validation report. Keep it
+  outside the runtime skill directory.
 
 Keep these artifacts outside runtime skill docs unless the user wants to publish
 them.
@@ -154,6 +157,29 @@ Confidence is a central-index audit field and does not belong in the runtime
 v2 metadata fragment.
 
 ## Final Handoff
+
+Include a `License Resolution` subsection in the final handoff:
+
+```markdown
+## License Resolution
+
+- report: reports/license-resolution.json
+- repository: owner/repository
+- source commit: <exact current source commit>
+- old license value: <previous tree value or unavailable>
+- new license value: source `license.spdx_id`, including `NOASSERTION`, or `NO_LICENSE`
+- status: resolved | unavailable
+- reason: <required when unavailable>
+- runtime files updated: <count>
+```
+
+The report must be reconciled with the refreshed runtime tree: root and every
+sub-skill `SKILL.md` have the same top-level `license`. A GitHub `NOASSERTION`
+value is accepted and preserved. If the resolver is unavailable, keep `NO_LICENSE` as the
+single tree value, report the repository, exact source commit, status, and
+reason, and tell the user that this is not a legal conclusion and may be
+manually replaced after review. The report is a review artifact and must not
+be placed in the runtime skill tree.
 
 Report:
 

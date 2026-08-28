@@ -93,15 +93,22 @@ const requiredBuildFiles = [
 	"dist/disco-resources/skills/README.md",
 	"dist/disco-resources/skills/distill-ml-knowledge/SKILL.md",
 	"dist/disco-resources/skills/distill-ml-knowledge/references/task-and-construction-contract.md",
-	"dist/disco-resources/skills/distill-ml-knowledge/references/path-selection-and-adequacy.md",
+	"dist/disco-resources/skills/distill-ml-knowledge/references/construction-strategy-and-adequacy.md",
 	"dist/disco-resources/skills/distill-ml-knowledge/references/direct-construction-and-handoff.md",
 	"dist/disco-resources/skills/distill-ml-knowledge/scripts/import_operating_skill_graph.mjs",
 	"dist/disco-resources/skills/design-meta-skill/SKILL.md",
 	"dist/disco-resources/skills/design-meta-skill/references/reusable-bundle-specification.md",
 	"dist/disco-resources/skills/design-meta-skill/references/generation-verification-and-review.md",
+	"dist/disco-resources/skills/verify-repo-skill/scripts/license-validation.mjs",
+	"dist/disco-resources/skills/verify-repo-skill/scripts/resolve_repo_license.mjs",
+	"dist/disco-resources/skills/verify-repo-skill/scripts/apply_repo_license.mjs",
+	"dist/disco-resources/skills/verify-repo-skill/scripts/sync_repo_license.mjs",
 	"dist/disco-resources/skills/verify-repo-skill/scripts/import_repo_skill.mjs",
 	"dist/disco-resources/skills/verify-repo-skill/scripts/update_repo_skills_router.mjs",
 	"dist/disco-resources/skills/verify-repo-skill/scripts/with_import_lock.mjs",
+	"dist/disco-resources/skills/import-repo-skills-to-agent/SKILL.md",
+	"dist/disco-resources/skills/import-repo-skills-to-agent/scripts/apply_codex_openai_policy.py",
+	"dist/disco-resources/skills/import-repo-skills-to-agent/scripts/export_repo_skills_to_agent.mjs",
 	"README.md",
 	"CHANGELOG.md",
 	"LICENSE",
@@ -168,8 +175,12 @@ check(packageManagerCli.includes("installSpec: `${PACKAGE_NAME}@latest`"), "self
 
 const packageManagerSource = await readFile(join(runtimeSourceRoot, "core", "package-manager.ts"), "utf8");
 for (const name of ["@juicesharp/rpiv-ask-user-question", "@juicesharp/rpiv-todo", "pi-subagents"]) {
-	check(packageManagerSource.includes(JSON.stringify(`npm:${name}`)), `default extension package is missing: ${name}`);
+	check(packageManagerSource.includes(`"npm:${name}`), `default extension package is missing: ${name}`);
 }
+check(
+	packageManagerSource.includes('"npm:@juicesharp/rpiv-todo@^2.7.1"'),
+	"default rpiv-todo package must require the session-isolated 2.x version line",
+);
 
 const builtDiscoResourceFiles = await walkFiles(join(packageRoot, "dist", "disco-resources"));
 const markdownFiles = [...publishableSourceFiles, ...builtDiscoResourceFiles].filter((path) => path.endsWith(".md"));

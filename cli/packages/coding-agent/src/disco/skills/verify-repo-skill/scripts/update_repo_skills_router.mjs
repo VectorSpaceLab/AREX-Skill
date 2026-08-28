@@ -29,7 +29,7 @@ const REPO_ID = /^[^/\s]+\/[^/\s]+$/;
 const TAXONOMY_SHA256 = "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431";
 const REPOSITORY_INDEX_FIELDS = new Set([
 	"schema_version", "repo_id", "legacy_repo_id", "repo_name", "skill_id", "source_url",
-	"source_commit", "source_skill_root", "target_skill_root", "aliases", "content_sha256", "description",
+	"source_commit", "source_skill_root", "target_skill_root", "aliases", "description",
 ]);
 const ASSIGNMENT_INDEX_FIELDS = new Set(["repo_id", "legacy_repo_id", "skill_id", "area", "family", "confidence"]);
 const ROUTER_DESCRIPTION = "Routes substantive ML, AI, data, scientific-computing, and software-engineering requests to the smallest useful set of managed repository skills. Invoke proactively when a request names or implies a package, framework, model family, dataset, modality, workflow, backend, deployment target, evaluation method, or implementation approach that may benefit from repository guidance, even if no repository is named. Narrow progressively from area to family to repository root: inspect only the one or two most likely area pages; compare candidates by capability, task surface, model/data format, training versus inference versus evaluation intent, runtime constraints, and root-skill description; then open only the selected root and relevant sub-skills, references, or scripts. Select multiple repositories only when each adds a distinct capability. Do not load the whole collection, treat dependencies or incidental integrations as capabilities, choose by name alone, or force a match when no exact taxonomy family applies.";
@@ -155,37 +155,6 @@ function normalizeGithubUrl(value) {
 	if (typeof value !== "string") return undefined;
 	const trimmed = value.trim().replace(/\.git\/?$/, "").replace(/\/$/, "");
 	return /^https:\/\/github\.com\/[^/\s]+\/[^/\s]+$/i.test(trimmed) ? trimmed : undefined;
-}
-
-function normalizeDigest(value) {
-	if (typeof value !== "string") return undefined;
-	const trimmed = value.trim();
-	if (/^sha256:[0-9a-f]{64}$/i.test(trimmed)) return trimmed.toLowerCase();
-	if (/^[0-9a-f]{64}$/i.test(trimmed)) return `sha256:${trimmed.toLowerCase()}`;
-	return undefined;
-}
-
-function treeDigest(root) {
-	const hash = createHash("sha256");
-	const files = [];
-	const visit = (directory) => {
-		for (const entry of fs.readdirSync(directory, { withFileTypes: true }).sort((left, right) => left.name.localeCompare(right.name))) {
-			const entryPath = path.join(directory, entry.name);
-			if (entry.isSymbolicLink()) throw new RouterError(`repository skill contains a symbolic link: ${entryPath}`);
-			if (entry.isDirectory()) visit(entryPath);
-			else if (entry.isFile()) files.push(entryPath);
-			else throw new RouterError(`repository skill contains a non-regular file: ${entryPath}`);
-		}
-	};
-	visit(root);
-	for (const filePath of files) {
-		const relativePath = path.relative(root, filePath).split(path.sep).join("/");
-		const content = fs.readFileSync(filePath);
-		hash.update(`file\0${relativePath}\0${content.byteLength}\0`);
-		hash.update(content);
-		hash.update("\0");
-	}
-	return `sha256:${hash.digest("hex")}`;
 }
 
 function readProvenance(skillDir) {
@@ -486,14 +455,6 @@ function makeRepositoryRecords(skills, existingRows, routingEntries) {
 					? String(provenanceRepository.commit).toLowerCase()
 					: null;
 		const sourceSkillRoot = handoff.source_skill_root || handoff.skill_root || prior.source_skill_root || provenanceSkill.root || null;
-		const currentContentSha256 = treeDigest(skill.dir);
-		const declaredContentSha256 = normalizeDigest(handoff.skill_content_sha256 || handoff.content_sha256);
-		if (declaredContentSha256 && declaredContentSha256 !== currentContentSha256) {
-			throw new RouterError(`routing handoff content digest does not match live skill ${skill.id}`);
-		}
-		// Always recompute the digest. Reusing a prior repository-index value would
-		// leave stale content_sha256 after a refresh or a local skill replacement.
-		const contentSha256 = currentContentSha256;
 		return {
 			schema_version: 1,
 			repo_id: skill.metadata.repoId,
@@ -509,7 +470,6 @@ function makeRepositoryRecords(skills, existingRows, routingEntries) {
 			source_skill_root: sourceSkillRoot,
 			target_skill_root: `repo-skills/${skill.id}`,
 			aliases: Array.isArray(prior.aliases) ? [...prior.aliases].sort() : [],
-			content_sha256: contentSha256,
 			description: skill.description,
 		};
 	}).sort((left, right) => left.repo_id.localeCompare(right.repo_id) || left.skill_id.localeCompare(right.skill_id));
@@ -596,7 +556,7 @@ function renderFamilyPage(area, family, skills) {
 }
 
 function renderMaintenance(taxonomy, skills) {
-	return `# Router maintenance\n\nThis router is generated from the fixed area -> family taxonomy and the v2 \`references/repo-routing-metadata.json\` fragment attached to each repository skill. The compact fragment contains only identity, taxonomy hash, status, and exact assignments. Full classification evidence belongs in the external production routing decision artifact, not in the runtime skill graph.\n\n## Import contract\n\n1. Finish and independently verify the generated repository skill.\n2. Classify it against the exact taxonomy using repository evidence plus the generated skill as navigation context.\n3. Write the external routing decision with assignment-specific rationale, evidence, and assignment-level confidence (\`high\`, \`medium\`, or \`low\`).\n4. Write the minimal v2 metadata fragment only after the decision is made; confidence remains in the central assignment index and is not copied into runtime metadata.\n5. Run the verified importer/updater under the shared lock so the skill, metadata, indexes, and router are updated together.\n\nThe central \`repositories.jsonl\` index preserves canonical repository identity, optional \`legacy_repo_id\`, source provenance, target skill root, aliases, content digest, and root description. The central \`assignments.jsonl\` index preserves canonical identity, optional \`legacy_repo_id\`, skill ID, exact area/family path, and confidence. These generated indexes are validated together with the per-skill metadata; unknown fields, duplicate identities, stale digests, and mismatched assignments are errors.\n\n\`unclassified\` is valid only when no exact family is supported. Ask the user whether to import it; if they want it included, propose a taxonomy extension and wait for approval/correction before changing the canonical taxonomy. \`blocked\` and \`failed\` are processing outcomes and must not be imported as routable skills.\n\n## Current generated scope\n\n- Areas in taxonomy: ${taxonomy.areas.length}\n- Routable repository skills: ${skills.length}\n- Taxonomy memberships: ${skills.reduce((sum, skill) => sum + skill.metadata.assignments.length, 0)}\n\nUse \`node update_repo_skills_router.mjs --library-root <library-root>\` for a full rebuild, or \`--include-skill <skill-id>\` with \`--output-router-dir <dir>\` for a filtered export.\n`;
+	return `# Router maintenance\n\nThis router is generated from the fixed area -> family taxonomy and the v2 \`references/repo-routing-metadata.json\` fragment attached to each repository skill. The compact fragment contains only identity, taxonomy hash, status, and exact assignments. Full classification evidence belongs in the external production routing decision artifact, not in the runtime skill graph.\n\n## Import contract\n\n1. Finish and independently verify the generated repository skill.\n2. Classify it against the exact taxonomy using repository evidence plus the generated skill as navigation context.\n3. Write the external routing decision with assignment-specific rationale, evidence, and assignment-level confidence (\`high\`, \`medium\`, or \`low\`).\n4. Write the minimal v2 metadata fragment only after the decision is made; confidence remains in the central assignment index and is not copied into runtime metadata.\n5. Run the verified importer/updater under the shared lock so the skill, metadata, indexes, and router are updated together.\n\nThe central \`repositories.jsonl\` index preserves canonical repository identity, optional \`legacy_repo_id\`, source provenance, target skill root, aliases, and root description. It intentionally does not persist a per-repository-skill content digest because skills may be refreshed independently and the digest would add recurring maintenance without helping routing. The central \`assignments.jsonl\` index preserves canonical identity, optional \`legacy_repo_id\`, skill ID, exact area/family path, and confidence. These generated indexes are validated together with the per-skill metadata; unknown fields, duplicate identities, and mismatched assignments are errors. The complete repository and assignment index files remain protected by the overall digests in \`build-metadata.json\`. The one-time \`skill_content_sha256\` in an external import handoff may still be checked during import, but it is not copied into either long-lived repository index.\n\n\`unclassified\` is valid only when no exact family is supported. Ask the user whether to import it; if they want it included, propose a taxonomy extension and wait for approval/correction before changing the canonical taxonomy. \`blocked\` and \`failed\` are processing outcomes and must not be imported as routable skills.\n\n## Current generated scope\n\n- Areas in taxonomy: ${taxonomy.areas.length}\n- Routable repository skills: ${skills.length}\n- Taxonomy memberships: ${skills.reduce((sum, skill) => sum + skill.metadata.assignments.length, 0)}\n\nUse \`node update_repo_skills_router.mjs --library-root <library-root>\` for a full rebuild, or \`--include-skill <skill-id>\` with \`--output-router-dir <dir>\` for a filtered export.\n`;
 }
 
 function clearGeneratedRouter(routerDir) {
@@ -691,6 +651,8 @@ function buildRouter(libraryRoot, templateDir, options) {
 	if (!isDirectory(repoSkillsRoot)) throw new RouterError(`repo-skills collection does not exist: ${repoSkillsRoot}`);
 	if (!isDirectory(templateDir)) throw new RouterError(`router template does not exist: ${templateDir}`);
 	const { taxonomy, taxonomySha256 } = resolveTaxonomy(liveRouterDir, templateDir);
+	const existingBuildMetadataFile = path.join(liveRouterDir, BUILD_METADATA_PATH);
+	const existingBuildMetadata = isRegularFile(existingBuildMetadataFile) ? loadJson(existingBuildMetadataFile) : null;
 	const existingRecords = readExistingRecords(repoSkillsRoot, liveRouterDir, templateDir);
 	const existingAssignmentRecords = readExistingAssignmentRecords(liveRouterDir, templateDir);
 	const managedSkillIds = existingRecords.length ? new Set(existingRecords.map((record) => record?.skill_id).filter((skillId) => typeof skillId === "string")) : undefined;
@@ -730,6 +692,8 @@ function buildRouter(libraryRoot, templateDir, options) {
 	const assignmentRecords = makeAssignmentRecords(skills, repositoryRecords, existingAssignmentRecords, routingEntries, taxonomy);
 	const repositoryIndexDigest = `sha256:${requireHash(repositoryRecords.map((record) => JSON.stringify(record)).join("\n") + "\n")}`;
 	const assignmentIndexDigest = `sha256:${requireHash(assignmentRecords.map((record) => JSON.stringify(record)).join("\n") + "\n")}`;
+	const sourceRouterRunId = process.env.DISCO_ROUTER_SOURCE_RUN_ID ||
+		(routerDir === liveRouterDir && typeof existingBuildMetadata?.source_router_run_id === "string" ? existingBuildMetadata.source_router_run_id : null);
 	const buildMetadata = {
 		schema_version: 1,
 		repository_count: repositoryRecords.length,
@@ -740,7 +704,7 @@ function buildRouter(libraryRoot, templateDir, options) {
 		taxonomy_sha256: taxonomySha256,
 		repository_index_sha256: repositoryIndexDigest,
 		assignment_index_sha256: assignmentIndexDigest,
-		source_router_run_id: process.env.DISCO_ROUTER_SOURCE_RUN_ID || null,
+		source_router_run_id: sourceRouterRunId,
 	};
 	writeText(path.join(routerDir, TAXONOMY_PATH), stableJson(taxonomy));
 	writeJsonLines(path.join(routerDir, REPOSITORIES_PATH), repositoryRecords);
@@ -800,7 +764,7 @@ function main(argv) {
 	let args;
 	try { args = parseArgs(argv); } catch (error) { console.error(`update_repo_skills_router.mjs: ${error.message}`); return 2; }
 	const agentDir = args.agentDir ? path.resolve(expandHome(args.agentDir)) : undefined;
-	const libraryRoot = path.resolve(expandHome(args.libraryRoot || path.join(agentDir, "skills")));
+	const libraryRoot = path.resolve(expandHome(args.libraryRoot || path.join(agentDir, "skills", "repositories")));
 	const templateDir = path.resolve(expandHome(args.templateDir));
 	const outputRouterDir = args.outputRouterDir ? path.resolve(expandHome(args.outputRouterDir)) : undefined;
 	const includeSkillIds = [...new Set(args.includeSkillIds)];

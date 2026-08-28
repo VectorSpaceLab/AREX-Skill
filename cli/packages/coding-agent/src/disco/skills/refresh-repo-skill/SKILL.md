@@ -59,6 +59,10 @@ Read these references as the workflow reaches each stage:
 - [references/verification-and-handoff.md](references/verification-and-handoff.md):
   run stale-claim checks, live verification, usability review, and final
   handoff.
+- [../verify-repo-skill/scripts/resolve_repo_license.mjs](../verify-repo-skill/scripts/resolve_repo_license.mjs)
+  and [../verify-repo-skill/scripts/apply_repo_license.mjs](../verify-repo-skill/scripts/apply_repo_license.mjs):
+  resolve and recursively apply the source repository license for the exact
+  refresh commit before final verification.
 
 Use [scripts/check_repo_provenance.py](scripts/check_repo_provenance.py) when
 `references/repo-provenance.md` exists. It compares the skill snapshot with the
@@ -116,15 +120,34 @@ When useful, also read sibling workflow-skill references:
    requests reclassification, produce a new external area-family routing
    handoff and matching minimal v2 metadata before import. Do not hand-edit
    generated router Markdown or silently change assignments in prose.
-6. Update usability test cases under the review/test artifact directory's
+6. Resolve and apply the repository license after the refreshed source commit
+   is known and before handing the tree to verification:
+
+   ```bash
+   node ../verify-repo-skill/scripts/resolve_repo_license.mjs \
+     --repository <owner/repository> \
+     --source-commit <40-hex-source-commit> \
+     --json > <artifact-root>/reports/license-resolution.json
+   node ../verify-repo-skill/scripts/apply_repo_license.mjs \
+     --skill-dir <external-runtime-skill-dir> \
+     --license <value-from-report>
+   ```
+
+   Re-query on every refresh; do not preserve a stale license solely because it
+   was present in the previous skill. Update all root/sub-skill frontmatter to
+   the same result. Preserve `NOASSERTION` when GitHub returns it; normalize only
+   unavailable results to `NO_LICENSE`, keep the report outside the runtime tree,
+   and carry old value, new value, source commit, status, and reason into the
+   handoff. `NO_LICENSE` is a warning and not a legal conclusion.
+7. Update usability test cases under the review/test artifact directory's
    `test-cases/` subtree so at least one case proves refreshed behavior and at
    least one case guards a pre-existing workflow that should remain valid.
-7. Read [references/verification-and-handoff.md](references/verification-and-handoff.md).
+8. Read [references/verification-and-handoff.md](references/verification-and-handoff.md).
    Verify that refreshed public skill content is self-contained, current,
    privacy-safe, and reachable from nearby `SKILL.md` files. Save staleness
    audits, verification reports, and human-review notes under the review/test
    artifact directory's `reports/` subtree.
-8. After verification passes, follow `verify-repo-skill`'s structured import
+9. After verification passes, follow `verify-repo-skill`'s structured import
    policy: use `ask_user_question` when approval is still required, then run the
    approved or auto-authorized refresh through
    `verify-repo-skill/scripts/import_repo_skill.mjs` with `--overwrite`, the

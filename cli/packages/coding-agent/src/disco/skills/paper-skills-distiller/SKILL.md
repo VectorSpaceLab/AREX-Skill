@@ -27,6 +27,26 @@ Default outputs use one run directory with two main children:
 create numbered attempt directories unless the user explicitly supplies a
 custom `attempt_dir` for that purpose.
 
+## Distillation Model
+
+Use the paper or tutorial source as anchor `z` for task-agnostic distillation
+unless the user supplies a concrete downstream replication task. For a concrete
+task, record the task anchor as `tau = (q, D, E, g)` and use task-oriented
+distillation; do not create a synthetic task tuple for a paper-only run.
+
+The run follows four stages:
+
+1. **Scope** the required capabilities `Q`, module boundaries, non-goals, and
+   verification targets.
+2. **Ground** `Q` in paper and permitted source evidence `X`, recording
+   provenance, revisions, exclusions, conflicts, and assumptions.
+3. **Construct** candidate graph `G_tilde` from module skills, references,
+   scripts, and links.
+4. **Verify** candidate `G_tilde` into accepted graph `G` and construction record
+   `R` through executable recovery, validation, refinement, deployment review,
+   and Researcher handoff. Task-agnostic runs use representative operating
+   checks when no downstream task-level outcome is defined.
+
 ## Source Rules
 
 - Paper: mandatory. Read the full paper or a faithful extracted text version. If the user gives a URL, arXiv id, or title instead of a local path, first resolve it to a local PDF/text artifact and save source acquisition evidence.
