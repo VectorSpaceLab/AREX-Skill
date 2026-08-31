@@ -1,0 +1,15 @@
+{
+  "schema": "disco.usability-case.v1",
+  "target_skill_area": "hosted-compute-and-integrations",
+  "target_capability": "local model cards and safe serialization",
+  "difficulty": "advanced",
+  "evidence_basis": ["docs/source/en/guides/integrations.md", "docs/source/en/guides/model-cards.md", "tests/test_hub_mixin.py", "tests/test_serialization.py", "tests/test_dduf.py"],
+  "expected_skill_files": ["sub-skills/hosted-compute-and-integrations/SKILL.md", "sub-skills/hosted-compute-and-integrations/references/model-integration-and-cards.md", "sub-skills/hosted-compute-and-integrations/references/serialization.md", "sub-skills/hosted-compute-and-integrations/scripts/local_integration_smoke.py"],
+  "assertions": [
+    "The response routes to hosted-compute-and-integrations and keeps the exercise local-only.",
+    "The response prefers safetensors, validates shard index and aggregate keys, and rejects untrusted pickle loading.",
+    "The response parses card metadata locally and distinguishes DDUF from a general ZIP archive.",
+    "The response rejects malformed shard metadata and traversal-like archive entries before unsafe operations.",
+    "The response does not upload or claim local success proves remote compatibility."
+  ]
+}

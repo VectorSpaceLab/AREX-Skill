@@ -1,0 +1,15 @@
+{
+  "schema": "disco.usability-case.v1",
+  "target_skill_area": "hub-operations",
+  "target_capability": "cards collections discussions and PR review",
+  "difficulty": "advanced",
+  "evidence_basis": ["docs/source/en/guides/model-cards.md", "docs/source/en/guides/collections.md", "docs/source/en/guides/community.md", "tests/test_repocard.py", "tests/test_cli_discussions.py"],
+  "expected_skill_files": ["sub-skills/hub-operations/SKILL.md", "sub-skills/hub-operations/references/api-reference.md", "sub-skills/hub-operations/references/workflows.md", "sub-skills/hub-operations/references/troubleshooting.md"],
+  "assertions": [
+    "The response begins with local card parsing and metadata validation.",
+    "The response names explicit repo type and identifiers before collection or discussion inspection.",
+    "The response distinguishes read-only inspection from comment, PR, or webhook mutations.",
+    "The response includes malformed metadata and wrong-repo-type recovery.",
+    "The response requires exact target approval and redacts sensitive object fields."
+  ]
+}

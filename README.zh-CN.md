@@ -1,3 +1,9 @@
+<p align="center">
+  <img src="assets/hero.png" alt="AREX-Skill 将仓库和论文知识转化为可供 coding agent 使用的可执行技能，支持自主 ML 研究">
+</p>
+
+
+
 <h1 align="center">AREX-Skill</h1>
 
 <p align="center">
@@ -5,13 +11,8 @@
 </p>
 
 <p align="center">
-  一个开放技能库：从 <b>1,000 个 ML 仓库</b>中蒸馏出
-  <b>5,000+ 个经过验证、可直接执行的技能</b>，并提供构建和使用它们的 DisCo agent。
-</p>
-
-<p align="center">
   <a href="skills/README.md"><img src="https://img.shields.io/badge/AREX--Skill_Library-5000%2B_skills-0E9B9B?style=for-the-badge" alt="AREX-Skill Library：5000+ skills"></a>
-  <a href="skills/repositories/repo-skills/"><img src="https://img.shields.io/badge/ML_Repositories-1000-5865F2?style=for-the-badge" alt="1,000 个 ML 仓库"></a>
+  <a href="docs/repository-catalog.md"><img src="https://img.shields.io/badge/ML_Repositories-1000-5865F2?style=for-the-badge" alt="1,000 个 ML 仓库"></a>
   <a href="https://www.npmjs.com/package/@auto-ml-skills/disco"><img src="https://img.shields.io/badge/CLI-disco%20v0.2.0-D22128?style=for-the-badge&logo=npm&logoColor=white" alt="DisCo CLI v0.2.0"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-lightgrey?style=for-the-badge&logo=apache&logoColor=white" alt="License: Apache 2.0"></a>
   <a href="#documentation"><img src="https://img.shields.io/badge/Documentation-README-0E9B9B?style=for-the-badge" alt="文档"></a>
@@ -23,11 +24,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/hero.png" alt="AREX-Skill 将仓库和论文知识转化为可供 coding agent 使用的可执行技能，支持自主 ML 研究">
-</p>
-
-<p align="center">
-  <strong>从 1,000 个 GitHub 仓库中蒸馏可复用技能</strong><br>
+  <strong>一个开放技能库：从 1,000 个 ML 仓库中蒸馏出 5,000+ 个经过验证、可直接执行的技能</strong><br>
   <strong>无缝接入 Codex、Claude Code、Pi 等 coding agents</strong><br>
   <strong>推进覆盖 ML engineering、paper replication 等场景的 frontier autonomous research</strong>
 </p>
@@ -73,18 +70,15 @@ skill/
 
 ### Skill 如何参与自主研究任务
 
-```mermaid
-flowchart LR
-    T["研究任务"] --> R["路由到相关 skill graph"]
-    R --> L["只加载所需的 SKILL.md 分支"]
-    L --> E["运行推荐的工作流和脚本"]
-    E --> V["根据检查项和目标指标验证"]
-    V --> P["通过：报告可复现结果"]
-    V --> F["失败：遵循恢复指导并迭代"]
-    F --> E
-```
+一个 research agent 通常遵循以下模式：
 
-DisCo Researcher 原生遵循这一模式。任务从具体研究目标开始，router 选择相关操作知识，Agent 在执行过程中使用 skill 提供的 procedures、scripts、checks 和 recovery guidance。最终产物不只是一个答案，而是一个可以检查和复现的实验或实现。
+1. **从具体研究目标开始。**
+2. **将请求路由到相关的 skill graph。**
+3. **只加载所需的 `SKILL.md` 分支**，并根据需要继续加载关联的 skills。
+4. **运行推荐的 procedures 和 scripts**，在执行过程中使用 skill 提供的 checks 和 recovery guidance。
+5. **根据相关检查项和目标指标验证结果。** 如果执行失败，则遵循恢复指导进行迭代并重新验证。
+
+最终产物不只是一个答案，而是一个可以检查和复现的实验或实现。
 
 ## 📊 技能库概览 <a id="library-at-a-glance"></a>
 
@@ -104,6 +98,18 @@ Library 的 repository-skill router 会在 Agent 加载具体 graph 分支前先
 
 我们固定 Agent setup、harness 和 execution budget，只改变 Agent 是否拥有 AREX 蒸馏的 skills。
 
+<p align="center">
+  <img
+    src="assets/results.png"
+    width="82%"
+    alt="Codex 与 Codex + AREX-Skill 在 MLE-bench、PaperBench、FrontierCS 和 PassNet 上的 Benchmark 结果对比"
+  >
+</p>
+
+<p align="center">
+  <em>Codex + AREX-Skill 在涵盖四类自主研究场景的 Benchmark 中取得了更好的结果。</em>
+</p>
+
 | Benchmark | 场景 | 指标 | Codex | Codex + AREX-Skill | 提升 |
 | --- | --- | --- | ---: | ---: | ---: |
 | **MLE-bench** | ML engineering（75 个 Kaggle competitions） | Any Medal rate (%) | 31.11 | **72.89** | **+134.3%** |
@@ -121,24 +127,15 @@ Library 的 repository-skill router 会在 Agent 加载具体 graph 分支前先
 
 ## ⚗️ AREX-Skill 如何构建 <a id="how-arex-skill-is-built"></a>
 
-AREX-Skill Library 由 DisCo Creator 构建：它会探索 source evidence，蒸馏实际的操作知识，并在 skill graph 发布前完成验证。
+AREX-Skill Library 由 DisCo Creator 通过四阶段的 skill distillation workflow 构建：从 anchor 界定 capabilities，基于 admissible evidence 进行 grounding，构建 candidate skill graph，并在发布前完成 verify 和 refine。Anchor 可以是 task-agnostic distillation 的 source，也可以是 task-oriented distillation 的 problem；支持性证据、validation checks 和 unresolved gaps 会保留在 construction record 中。
 
-```mermaid
-flowchart LR
-    S["Repository · paper · blog"] --> D["DisCo Creator Agent"]
-    D --> A["Discover capabilities"]
-    A --> B["Distill operating workflows"]
-    B --> V["Execute validation checks"]
-    V --> P["Publish verified skill graph"]
-    V --> F["Repair and refine"]
-    F --> B
-```
-
-这个构建循环有三个关键特征：
-
-- **先有证据，再做抽象。** Creator 会检查源代码、文档、examples 和 package behavior，确认 source 中实际存在的能力。
-- **产出操作知识，而不只是描述。** 结果记录 procedures、expected behavior、checks 和 recovery paths，而不是只生成一份 prose summary。
-- **验证通过后才发布。** Native examples、generated checks 或 usability cases 会被执行；失败后修复并重新验证，只有通过检验的 graph 才会进入 library。
+<p align="center">
+  <img
+    src="assets/method.png"
+    width="100%"
+    alt="四阶段的 skill distillation 流程：界定能力、构建证据、构建 skill graph，以及验证和完善"
+  >
+</p>
 
 构建生命周期见 [DisCo Workflows](docs/disco-workflows.zh.md)；Creator workflow 和 portable installation 见 [DisCo Meta Skills](docs/disco-meta-skills.zh.md)。
 
@@ -202,7 +199,8 @@ AREX-Skill Library 可以支持许多 ML workflow。下面是两个具有代表�
 [vLLM](skills/repositories/repo-skills/vllm/) 和 [SGLang](skills/repositories/repo-skills/sglang/) skills 可以指导一个受控的 serving 对比：
 
 ```text
-在相同模型和工作负载下比较 vLLM 与 SGLang。在相同硬件和显存约束下分别调优，报告经过验证的吞吐量，并保留复现实验所需的命令和测量结果。
+在相同模型和工作负载下比较 vLLM 与 SGLang。在相同硬件和显存约束下
+分别调优，报告经过验证的吞吐量，并保留复现实验所需的命令和测量结果。
 ```
 
 ### 蛋白质结构建模
@@ -210,7 +208,10 @@ AREX-Skill Library 可以支持许多 ML workflow。下面是两个具有代表�
 [AlphaFold2](skills/repositories/repo-skills/alphafold2/) skills 可以为蛋白质结构建模工作流提供操作指导：
 
 ```text
-使用已安装的 AlphaFold2 skills 设置并验证这个蛋白质结构建模工作流。先从一个很小的 synthetic input 开始，检查 sequence/MSA 的形状和依赖，运行相关的模型路径，并报告复现结果所需的命令和检查项。不要把未经训练的输出当作科学预测。
+使用已安装的 AlphaFold2 skills 设置并验证这个蛋白质结构建模工作流。
+先从一个很小的 synthetic input 开始，检查 sequence/MSA 的形状和依赖，
+运行相关的模型路径，并报告复现结果所需的命令和检查项。不要把未经训练
+的输出当作科学预测。
 ```
 
 完整的端到端 session 导出见 [examples 目录](examples/README.md)。

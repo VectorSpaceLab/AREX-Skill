@@ -1,0 +1,1 @@
+.venvs/vllm/bin/vllm serve model/Qwen3.5-4B --host 127.0.0.1 --port 8000 --served-model-name qwen3.5-4b --tensor-parallel-size 2 --dtype bfloat16 --max-model-len 32768 --gpu-memory-utilization 0.80 --max-num-seqs 256 --max-num-batched-tokens 8192 --no-enable-prefix-caching --disable-log-stats

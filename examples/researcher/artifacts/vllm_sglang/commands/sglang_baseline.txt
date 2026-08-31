@@ -1,0 +1,1 @@
+.venvs/sglang/bin/python -m sglang.launch_server --model-path model/Qwen3.5-4B --host 127.0.0.1 --port 8000 --served-model-name qwen3.5-4b --tp-size 2 --dtype bfloat16 --context-length 32768 --mem-fraction-static 0.80 --max-running-requests 256 --disable-radix-cache --enable-metrics

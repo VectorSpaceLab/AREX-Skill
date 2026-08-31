@@ -1,0 +1,25 @@
+Benchmark date: 2026-08-31
+Hardware: 2 x NVIDIA A100-SXM4-40GB (physical GPUs 0 and 1)
+Driver: 580.126.20
+
+vLLM environment
+- Python: 3.12.3
+- vLLM: 0.28.1rc1.dev119+g56058fd57
+- Source: nightly wheel; source revision observed at install time e79961c946e5b12da44ba0556567b418cd50fe20
+- PyTorch: 2.13.0+cu132
+- CUDA reported by PyTorch: 13.2
+- Transformers: 5.16.1
+- FlashInfer: 0.6.17
+
+SGLang environment
+- Python: 3.12.3
+- SGLang: 0.5.6.post3.dev9748+g6a9366f03
+- Source commit: 6a9366f036df9a5275b21a95cb994f3b1cd174c0
+- PyTorch: 2.13.0+cu130
+- CUDA reported by PyTorch: 13.0
+- Transformers: 5.12.1
+- FlashInfer: 0.6.17
+
+Shared benchmark client
+- aiohttp: 3.13.3
+- Transformers/tokenizer environment: 5.16.1

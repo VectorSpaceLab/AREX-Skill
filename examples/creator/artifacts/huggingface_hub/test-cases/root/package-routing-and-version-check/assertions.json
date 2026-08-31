@@ -1,0 +1,15 @@
+{
+  "schema": "disco.usability-case.v1",
+  "target_skill_area": "huggingface-hub",
+  "target_capability": "installation and progressive route discovery",
+  "difficulty": "basic",
+  "evidence_basis": ["README.md", "setup.py", "docs/source/en/quick-start.md", "docs/source/en/installation.md"],
+  "expected_skill_files": ["SKILL.md", "references/troubleshooting.md", "sub-skills/downloads-and-storage/SKILL.md", "sub-skills/inference-and-endpoints/SKILL.md", "sub-skills/hub-operations/SKILL.md"],
+  "assertions": [
+    "The response provides public installation plus package and CLI version/import checks.",
+    "The response routes dataset downloads, hosted inference, and repository creation to distinct focused sub-skills.",
+    "The response distinguishes token, network, upload, and remote mutation requirements.",
+    "The response does not mention or require a temporary inspection environment.",
+    "The response does not perform a remote Hub operation."
+  ]
+}

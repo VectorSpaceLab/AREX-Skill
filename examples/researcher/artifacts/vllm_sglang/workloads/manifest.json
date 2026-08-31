@@ -1,0 +1,37 @@
+{
+  "files": {
+    "correctness.jsonl": {
+      "input_tokens_each": 64,
+      "requests": 8,
+      "seed": 23,
+      "sha256": "eb6e527aab35b92a850b381ee411bdfd93e55fb938e83c0b5a69a9856b97b1d1"
+    },
+    "latency_1024x20.jsonl": {
+      "input_tokens_each": 1024,
+      "requests": 20,
+      "seed": 41,
+      "sha256": "c35a00b7643aa2c30cb8a2f0d6afa6bc2dc52ea864ceaf0101655cf1f7827672"
+    },
+    "throughput_1024x128.jsonl": {
+      "input_tokens_each": 1024,
+      "requests": 128,
+      "seed": 43,
+      "sha256": "6b0e0780617d535f9992c800d635538c74e53e189b4562e118b30c9ca3d3ae2b"
+    },
+    "tuning_1024x64.jsonl": {
+      "input_tokens_each": 1024,
+      "requests": 64,
+      "seed": 37,
+      "sha256": "f5e804e0af6b56666b7989398873d2b4d650ecdcc46df3cf115d4f3ac055294d"
+    },
+    "warmup_256x8.jsonl": {
+      "input_tokens_each": 256,
+      "requests": 8,
+      "seed": 11,
+      "sha256": "aca8843ba3cdce2518b868fe71dabd315658af0c237b6b59bf1401f0e40f8baa"
+    }
+  },
+  "tokenizer": "model/Qwen3.5-4B",
+  "tokenizer_class": "Qwen2Tokenizer",
+  "vocab_size": 248044
+}

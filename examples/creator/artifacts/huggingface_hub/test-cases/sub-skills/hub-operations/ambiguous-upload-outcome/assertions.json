@@ -1,0 +1,15 @@
+{
+  "schema": "disco.usability-case.v1",
+  "target_skill_area": "hub-operations",
+  "target_capability": "ambiguous upload outcome recovery",
+  "difficulty": "troubleshooting",
+  "evidence_basis": ["docs/source/en/guides/upload.md", "tests/test_hf_api.py", "tests/test_commit_api.py"],
+  "expected_skill_files": ["sub-skills/hub-operations/SKILL.md", "sub-skills/hub-operations/references/workflows.md", "sub-skills/hub-operations/references/troubleshooting.md"],
+  "assertions": [
+    "The response treats timeout after mutation as ambiguous rather than failed.",
+    "The response re-reads SHA, PRs, refs, and target paths before retrying.",
+    "The response prevents duplicate PRs and bounds any retry.",
+    "The response verifies final state and redacts credentials.",
+    "The response uses mocks and does not mutate a real repository."
+  ]
+}

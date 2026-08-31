@@ -1,0 +1,155 @@
+{
+  "correctness": {
+    "exact_text_matches": 7,
+    "requests": 8,
+    "successful_in_both": 8
+  },
+  "latency_profile": {
+    "sglang": {
+      "latency_mean_ms": 686.1204378462086,
+      "latency_p99_ms": 701.334785108144,
+      "output_token_throughput_tps": 186.5443376346385,
+      "peak_gpu_mib": {
+        "0": {
+          "memory_total_mib": 40960,
+          "name": "NVIDIA A100-SXM4-40GB",
+          "peak_memory_used_mib": 35164,
+          "peak_memory_used_mib_each_run": [
+            35164,
+            35164,
+            35164
+          ]
+        },
+        "1": {
+          "memory_total_mib": 40960,
+          "name": "NVIDIA A100-SXM4-40GB",
+          "peak_memory_used_mib": 34664,
+          "peak_memory_used_mib_each_run": [
+            34664,
+            34664,
+            34664
+          ]
+        }
+      },
+      "request_throughput_rps": 1.4573776377706134,
+      "tpot_mean_ms": 5.0652208812583694,
+      "tpot_p99_ms": 5.146313771908599,
+      "ttft_mean_ms": 42.837385926395655,
+      "ttft_p99_ms": 57.360475171978266
+    },
+    "vllm": {
+      "latency_mean_ms": 757.3493080368886,
+      "latency_p99_ms": 774.7944531217217,
+      "output_token_throughput_tps": 168.99519022582166,
+      "peak_gpu_mib": {
+        "0": {
+          "memory_total_mib": 40960,
+          "name": "NVIDIA A100-SXM4-40GB",
+          "peak_memory_used_mib": 33437,
+          "peak_memory_used_mib_each_run": [
+            33437,
+            33437,
+            33437
+          ]
+        },
+        "1": {
+          "memory_total_mib": 40960,
+          "name": "NVIDIA A100-SXM4-40GB",
+          "peak_memory_used_mib": 33437,
+          "peak_memory_used_mib_each_run": [
+            33437,
+            33437,
+            33437
+          ]
+        }
+      },
+      "request_throughput_rps": 1.3202749236392317,
+      "tpot_mean_ms": 5.458180784685366,
+      "tpot_p99_ms": 5.509021410136788,
+      "ttft_mean_ms": 64.16034838184714,
+      "ttft_p99_ms": 76.42018204244474
+    },
+    "vllm_vs_sglang_percent": {
+      "latency_mean": 10.381394615539152,
+      "output_token_throughput": -9.407494020637719,
+      "request_throughput": -9.407494020637719,
+      "tpot_mean": 7.7580013318071295,
+      "ttft_mean": 49.776525794755955
+    }
+  },
+  "throughput_profile": {
+    "sglang": {
+      "latency_mean_ms": 1713.427563336154,
+      "latency_p99_ms": 1740.4605349929384,
+      "output_token_throughput_tps": 2384.740425916456,
+      "peak_gpu_mib": {
+        "0": {
+          "memory_total_mib": 40960,
+          "name": "NVIDIA A100-SXM4-40GB",
+          "peak_memory_used_mib": 35312,
+          "peak_memory_used_mib_each_run": [
+            35312,
+            35312,
+            35312
+          ]
+        },
+        "1": {
+          "memory_total_mib": 40960,
+          "name": "NVIDIA A100-SXM4-40GB",
+          "peak_memory_used_mib": 34812,
+          "peak_memory_used_mib_each_run": [
+            34812,
+            34812,
+            34812
+          ]
+        }
+      },
+      "request_throughput_rps": 18.630784577472312,
+      "total_token_throughput_tps": 21462.663833248105,
+      "tpot_mean_ms": 9.59136934103881,
+      "tpot_p99_ms": 12.530683779018366,
+      "ttft_mean_ms": 495.32365702422493,
+      "ttft_p99_ms": 805.1884399944296
+    },
+    "vllm": {
+      "latency_mean_ms": 1764.1911398338077,
+      "latency_p99_ms": 1845.5924250092357,
+      "output_token_throughput_tps": 2314.2667751568597,
+      "peak_gpu_mib": {
+        "0": {
+          "memory_total_mib": 40960,
+          "name": "NVIDIA A100-SXM4-40GB",
+          "peak_memory_used_mib": 33437,
+          "peak_memory_used_mib_each_run": [
+            33437,
+            33437,
+            33437
+          ]
+        },
+        "1": {
+          "memory_total_mib": 40960,
+          "name": "NVIDIA A100-SXM4-40GB",
+          "peak_memory_used_mib": 33437,
+          "peak_memory_used_mib_each_run": [
+            33437,
+            33437,
+            33437
+          ]
+        }
+      },
+      "request_throughput_rps": 18.080209180912966,
+      "total_token_throughput_tps": 20828.400976411736,
+      "tpot_mean_ms": 9.904378281922748,
+      "tpot_p99_ms": 13.197089793219224,
+      "ttft_mean_ms": 506.33509802961873,
+      "ttft_p99_ms": 824.3536452203989
+    },
+    "vllm_vs_sglang_percent": {
+      "latency_mean": 2.9626917171108103,
+      "output_token_throughput": -2.9551916843324033,
+      "request_throughput": -2.9551916843324033,
+      "tpot_mean": 3.263443724814752,
+      "ttft_mean": 2.2230799698822468
+    }
+  }
+}

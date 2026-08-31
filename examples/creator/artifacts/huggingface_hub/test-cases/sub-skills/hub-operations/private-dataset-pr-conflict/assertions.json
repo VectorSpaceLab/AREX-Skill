@@ -1,0 +1,16 @@
+{
+  "schema": "disco.usability-case.v1",
+  "target_skill_area": "hub-operations",
+  "target_capability": "private dataset PR conflict recovery",
+  "difficulty": "troubleshooting",
+  "evidence_basis": ["README.md", "setup.py", "docs/source/en/guides/repository.md", "tests/test_hf_api.py", "tests/test_commit_api.py"],
+  "expected_skill_files": ["sub-skills/hub-operations/SKILL.md", "sub-skills/hub-operations/references/api-reference.md", "sub-skills/hub-operations/references/workflows.md", "sub-skills/hub-operations/references/troubleshooting.md"],
+  "assertions": [
+    "The response routes the request to hub-operations.",
+    "The response uses dataset as the Python repo_type and inspects the current revision before mutation.",
+    "The response preserves parent_commit and bounds stale-parent recovery after re-reading state.",
+    "The response verifies the PR revision and avoids duplicate PR creation.",
+    "The response explicitly prevents the sentinel token from appearing in logs or reports.",
+    "The response does not depend on original repository tests or checkout paths."
+  ]
+}

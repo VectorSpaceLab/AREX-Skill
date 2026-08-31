@@ -1,0 +1,15 @@
+{
+  "schema": "disco.usability-case.v1",
+  "target_skill_area": "inference-and-endpoints",
+  "target_capability": "Inference Endpoint lifecycle and paid-operation safety",
+  "difficulty": "troubleshooting",
+  "evidence_basis": ["docs/source/en/guides/inference_endpoints.md", "docs/source/en/package_reference/inference_endpoints.md", "tests/test_inference_endpoints.py", "tests/test_cli.py"],
+  "expected_skill_files": ["sub-skills/inference-and-endpoints/SKILL.md", "sub-skills/inference-and-endpoints/references/api-reference.md", "sub-skills/inference-and-endpoints/references/workflows.md", "sub-skills/inference-and-endpoints/references/troubleshooting.md"],
+  "assertions": [
+    "The response resolves available hardware and quota before creating an endpoint.",
+    "The response classifies endpoint creation and lifecycle changes as paid remote mutations.",
+    "The response waits for a healthy running state and inspects failures before retrying.",
+    "The response treats pause, resume, scale-to-zero, and delete as explicit stateful operations with fresh delete confirmation.",
+    "The response does not expose custom-image credentials, tokens, or call the real service."
+  ]
+}

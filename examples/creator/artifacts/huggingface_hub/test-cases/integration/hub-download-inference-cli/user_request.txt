@@ -1,0 +1,1 @@
+I want one no-network rehearsal that searches for a model, previews a filtered snapshot download, builds a hosted inference chat request with a mocked provider, and emits machine-readable results from the hf CLI while keeping warnings on stderr. Route the pieces to the right guidance, do not use a real token, and do not upload, download, or call inference for real.

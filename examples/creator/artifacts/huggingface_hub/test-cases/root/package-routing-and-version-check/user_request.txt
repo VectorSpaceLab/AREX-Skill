@@ -1,0 +1,1 @@
+I am new to huggingface_hub. I need to install the package, verify the Python and hf CLI versions, and decide which guidance to use for downloading a dataset, calling a hosted model, or creating a repository. Give me a minimal safe check first and explain what requires a token or remote mutation. Do not perform any Hub operation.

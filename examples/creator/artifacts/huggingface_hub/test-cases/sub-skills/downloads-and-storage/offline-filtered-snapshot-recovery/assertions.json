@@ -1,0 +1,16 @@
+{
+  "schema": "disco.usability-case.v1",
+  "target_skill_area": "downloads-and-storage",
+  "target_capability": "offline filtered snapshot recovery",
+  "difficulty": "troubleshooting",
+  "evidence_basis": ["docs/source/en/guides/download.md", "docs/source/en/guides/manage-cache.md", "tests/test_snapshot_download.py", "tests/test_file_download.py", "tests/test_utils_cache.py"],
+  "expected_skill_files": ["sub-skills/downloads-and-storage/SKILL.md", "sub-skills/downloads-and-storage/references/workflows.md", "sub-skills/downloads-and-storage/references/configuration-cache-and-storage.md", "sub-skills/downloads-and-storage/references/troubleshooting.md"],
+  "assertions": [
+    "The response selects snapshot_download with an explicit dataset repo type, revision, and pattern filters.",
+    "The response uses a dry run before transfer and explains whether metadata access is required.",
+    "The response distinguishes cache metadata from materialized payload files.",
+    "The response distinguishes wrong revision, cache miss, and incomplete snapshot recovery.",
+    "The response explicitly rejects force_download together with local_files_only or offline mode.",
+    "The response does not propose contacting the Hub for the offline test."
+  ]
+}

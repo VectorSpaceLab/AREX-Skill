@@ -7,41 +7,53 @@ required to read an export.
 
 ## Creator
 
-### FlagEmbedding Repository Skill
+### huggingface_hub Repository Skill
 
-- [FlagOpen/FlagEmbedding repository](https://github.com/FlagOpen/FlagEmbedding)
-- [Open the sanitized session](creator/disco-creator-FlagEmbedding.html)
-- [Browse the resulting skill](../skills/repositories/repo-skills/flag-embedding/SKILL.md)
+- [huggingface/huggingface_hub repository](https://github.com/huggingface/huggingface_hub)
+- [Open the sanitized session](creator/disco-creator-huggingface_hub.html)
+- [Browse the resulting skill](creator/artifacts/huggingface_hub/huggingface-hub/SKILL.md)
+- [Read the artifact bundle](creator/artifacts/huggingface_hub/README.md)
+- [Read the final skill report](creator/artifacts/huggingface_hub/review/final-skill-report.md)
+- [Read the verification report](creator/artifacts/huggingface_hub/review/verification-report.json)
 
-This session follows Creator as it inspects FlagOpen/FlagEmbedding, prepares
-the working environment, scopes and writes the operating skill graph, verifies
-its references and helper scripts, and reviews the result. Near the middle of
-the run, the session reaches a context boundary and the user sends `continue`;
-the following entries resume the same creation workflow.
+This session follows Creator as it scopes the `huggingface_hub` 1.29.0
+repository, prepares and verifies an isolated inspection environment, uses a
+first workflow plus missing-only recovery to draft five sub-skills, integrates
+the verified graph, and records final review and native-test boundaries.
+
+The accompanying artifact bundle contains the generated runtime skill,
+sanitized routing and review summaries, machine-readable verification results,
+and usability test cases. Private environment reports, raw native logs, source
+checkouts, and temporary runtime state are intentionally excluded.
 
 ## Researcher
 
-### Gymnasium and Stable-Baselines3 Battery Dispatch
+### vLLM vs SGLang: Qwen3.5-4B Serving Benchmark
 
-- [Farama-Foundation/Gymnasium repository](https://github.com/Farama-Foundation/Gymnasium)
-- [DLR-RM/stable-baselines3 repository](https://github.com/DLR-RM/stable-baselines3)
-- [Open the sanitized session](researcher/disco-researcher-Gymnasium-Stable-Baselines3.html)
-- [Browse the Gymnasium skill](../skills/repositories/repo-skills/gymnasium/SKILL.md)
-- [Browse the Stable-Baselines3 skill](../skills/repositories/repo-skills/stable-baselines3/SKILL.md)
+- [vLLM repository](https://github.com/vllm-project/vllm)
+- [SGLang repository](https://github.com/sgl-project/sglang)
+- [Qwen3.5-4B model](https://huggingface.co/Qwen/Qwen3.5-4B)
+- [Open the sanitized session](researcher/disco-researcher-vllm_sglang.html)
+- [Read the curated benchmark report](researcher/artifacts/vllm_sglang/REPORT.md)
+- [Browse the vLLM skill](../skills/repositories/repo-skills/vllm/SKILL.md)
+- [Browse the SGLang skill](../skills/repositories/repo-skills/sglang/SKILL.md)
 
-This session follows Researcher as it routes a battery-dispatch task through
-`repo-skills-router`, progressively loads the relevant Gymnasium and
-Stable-Baselines3 guidance, implements a custom environment, and trains and
-reloads a PPO controller. It also verifies the environment, preserves
-train-only preprocessing and baseline construction, evaluates every held-out
-test day, and writes reproducible audit artifacts. The reported result is kept
-intact: PPO improves on the no-battery baseline but not the train-derived rule
-baseline.
+This session shows how Researcher uses repository skills to run an auditable
+serving benchmark. `repo-skills-router` narrows the task to model deployment
+and inference serving, then selects only the relevant vLLM and SGLang skills.
+
+The vLLM skill guides server configuration, metrics, and bounded runtime tuning;
+the SGLang skill guides startup, cache and scheduler settings, workload control,
+GPU measurement, and framework-specific troubleshooting. Together, they keep
+the model, workload, client, and hardware limits consistent across both
+frameworks, while separating correctness checks from performance measurement.
+
+The report records the resulting commands, versions, and evidence. Its runtime
+comparison is an observation of this environment—not a performance claim about
+the skills themselves.
 
 ## Sanitization
 
-Runtime provider and agent-model identifiers, workstation-specific home paths,
-session identifiers, provider signatures, response identifiers, system
-prompts, and personal contact details are sanitized in the public exports.
-Task inputs, tool activity, generated code, measurements, and reported outcomes
-are preserved.
+Some sensitive and environment-specific information has been sanitized from
+the public exports while preserving the task, skill usage, execution flow, and
+results needed to understand the examples.

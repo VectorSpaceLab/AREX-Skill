@@ -1,0 +1,15 @@
+{
+  "schema": "disco.usability-case.v1",
+  "target_skill_area": "huggingface-hub",
+  "target_capability": "integrated local artifact validation and reviewable Hub release",
+  "difficulty": "advanced",
+  "evidence_basis": ["README.md", "docs/source/en/guides/integrations.md", "docs/source/en/guides/model-cards.md", "docs/source/en/guides/repository.md", "docs/source/en/guides/cli.md", "tests/test_serialization.py", "tests/test_dduf.py", "tests/test_hf_api.py"],
+  "expected_skill_files": ["SKILL.md", "sub-skills/hosted-compute-and-integrations/references/model-integration-and-cards.md", "sub-skills/hosted-compute-and-integrations/references/serialization.md", "sub-skills/hub-operations/references/workflows.md", "sub-skills/cli-and-automation/references/automation-workflows.md"],
+  "assertions": [
+    "The response validates card metadata, safetensors shards/index, DDUF structure, and local round trips before remote planning.",
+    "The response separates local validation from Hub API and hf CLI release planning.",
+    "The response proposes a reviewable PR with explicit parent SHA and placeholder credentials but does not apply it.",
+    "The response verifies the PR ref rather than assuming main changed and gives bounded stale-parent recovery.",
+    "The response rejects unsafe pickle loading and keeps secrets out of logs."
+  ]
+}

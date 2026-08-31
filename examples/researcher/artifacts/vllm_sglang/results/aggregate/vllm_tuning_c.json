@@ -1,0 +1,125 @@
+{
+  "aggregate": {
+    "gpu_memory": {
+      "peak_aggregate_memory_used_mib": 68590,
+      "peak_aggregate_memory_used_mib_each_run": [
+        68590
+      ],
+      "per_gpu": {
+        "0": {
+          "memory_total_mib": 40960,
+          "name": "NVIDIA A100-SXM4-40GB",
+          "peak_memory_used_mib": 34295,
+          "peak_memory_used_mib_each_run": [
+            34295
+          ]
+        },
+        "1": {
+          "memory_total_mib": 40960,
+          "name": "NVIDIA A100-SXM4-40GB",
+          "peak_memory_used_mib": 34295,
+          "peak_memory_used_mib_each_run": [
+            34295
+          ]
+        }
+      }
+    },
+    "input_token_throughput_tps": {
+      "mean_across_repetitions": 18498.43623770341,
+      "repetitions": [
+        18498.43623770341
+      ],
+      "stdev_across_repetitions": 0
+    },
+    "latency_mean_s": {
+      "mean_across_repetitions": 1.763465433352394,
+      "repetitions": [
+        1.763465433352394
+      ],
+      "stdev_across_repetitions": 0
+    },
+    "latency_p50_s": {
+      "mean_across_repetitions": 1.7569605293683708,
+      "repetitions": [
+        1.7569605293683708
+      ],
+      "stdev_across_repetitions": 0
+    },
+    "latency_p99_s": {
+      "mean_across_repetitions": 1.8442455971520395,
+      "repetitions": [
+        1.8442455971520395
+      ],
+      "stdev_across_repetitions": 0
+    },
+    "output_token_throughput_tps": {
+      "mean_across_repetitions": 2312.304529712926,
+      "repetitions": [
+        2312.304529712926
+      ],
+      "stdev_across_repetitions": 0
+    },
+    "request_throughput_rps": {
+      "mean_across_repetitions": 18.064879138382235,
+      "repetitions": [
+        18.064879138382235
+      ],
+      "stdev_across_repetitions": 0
+    },
+    "total_token_throughput_tps": {
+      "mean_across_repetitions": 20810.740767416337,
+      "repetitions": [
+        20810.740767416337
+      ],
+      "stdev_across_repetitions": 0
+    },
+    "tpot_mean_s": {
+      "mean_across_repetitions": 0.009336460807762204,
+      "repetitions": [
+        0.009336460807762204
+      ],
+      "stdev_across_repetitions": 0
+    },
+    "tpot_p50_s": {
+      "mean_across_repetitions": 0.010153384153239839,
+      "repetitions": [
+        0.010153384153239839
+      ],
+      "stdev_across_repetitions": 0
+    },
+    "tpot_p99_s": {
+      "mean_across_repetitions": 0.013112007771347333,
+      "repetitions": [
+        0.013112007771347333
+      ],
+      "stdev_across_repetitions": 0
+    },
+    "ttft_mean_s": {
+      "mean_across_repetitions": 0.5777349107665941,
+      "repetitions": [
+        0.5777349107665941
+      ],
+      "stdev_across_repetitions": 0
+    },
+    "ttft_p50_s": {
+      "mean_across_repetitions": 0.4779651453718543,
+      "repetitions": [
+        0.4779651453718543
+      ],
+      "stdev_across_repetitions": 0
+    },
+    "ttft_p99_s": {
+      "mean_across_repetitions": 0.8176006601192056,
+      "repetitions": [
+        0.8176006601192056
+      ],
+      "stdev_across_repetitions": 0
+    }
+  },
+  "framework": "vllm-tuning-c",
+  "repetition_count": 1,
+  "result_files": [
+    "results/vllm/tuning_c/profile/result.json"
+  ],
+  "schema": "disco.benchmark-aggregate.v1"
+}

@@ -1,0 +1,96 @@
+{
+  "exact_text_matches": 7,
+  "requests": 8,
+  "rows": [
+    {
+      "exact_text_match": true,
+      "id": "fixed-0000",
+      "matching_prefix_characters": 131,
+      "sglang_output_tokens": 32,
+      "sglang_success": true,
+      "sglang_text": " lazy dog.\nThe quick brown fox jumps over the lazy dog.\nThe quick brown fox jumps over the lazy dog.\nThe quick brown fox jumps over",
+      "vllm_output_tokens": 32,
+      "vllm_success": true,
+      "vllm_text": " lazy dog.\nThe quick brown fox jumps over the lazy dog.\nThe quick brown fox jumps over the lazy dog.\nThe quick brown fox jumps over"
+    },
+    {
+      "exact_text_match": true,
+      "id": "fixed-0001",
+      "matching_prefix_characters": 117,
+      "sglang_output_tokens": 32,
+      "sglang_success": true,
+      "sglang_text": " blue, I have a question for you.\nThe question is: What is the best way to get to the top of the world?\nThe answer is",
+      "vllm_output_tokens": 32,
+      "vllm_success": true,
+      "vllm_text": " blue, I have a question for you.\nThe question is: What is the best way to get to the top of the world?\nThe answer is"
+    },
+    {
+      "exact_text_match": true,
+      "id": "fixed-0002",
+      "matching_prefix_characters": 89,
+      "sglang_output_tokens": 32,
+      "sglang_success": true,
+      "sglang_text": " 4.\nThe sum of two numbers is 10.\nThe sum of two numbers is 10.\nThe sum of two numbers is",
+      "vllm_output_tokens": 32,
+      "vllm_success": true,
+      "vllm_text": " 4.\nThe sum of two numbers is 10.\nThe sum of two numbers is 10.\nThe sum of two numbers is"
+    },
+    {
+      "exact_text_match": true,
+      "id": "fixed-0003",
+      "matching_prefix_characters": 85,
+      "sglang_output_tokens": 32,
+      "sglang_success": true,
+      "sglang_text": " 2, 3, and 5. The next prime number after 5 is 7. The next prime number after 7 is 11",
+      "vllm_output_tokens": 32,
+      "vllm_success": true,
+      "vllm_text": " 2, 3, and 5. The next prime number after 5 is 7. The next prime number after 7 is 11"
+    },
+    {
+      "exact_text_match": false,
+      "id": "fixed-0004",
+      "matching_prefix_characters": 120,
+      "sglang_output_tokens": 32,
+      "sglang_success": true,
+      "sglang_text": " create web applications. It is a high-level, interpreted language that is easy to read and write. Python is used for a variety of purposes, including web development",
+      "vllm_output_tokens": 32,
+      "vllm_success": true,
+      "vllm_text": " create web applications. It is a high-level, interpreted language that is easy to read and write. Python is used for a wide range of applications, including web"
+    },
+    {
+      "exact_text_match": true,
+      "id": "fixed-0005",
+      "matching_prefix_characters": 138,
+      "sglang_output_tokens": 32,
+      "sglang_success": true,
+      "sglang_text": " 100 degrees Celsius. What is the temperature difference between these two points on the Celsius scale?\n\n<think>\nThinking Process:\n\n1.  **",
+      "vllm_output_tokens": 32,
+      "vllm_success": true,
+      "vllm_text": " 100 degrees Celsius. What is the temperature difference between these two points on the Celsius scale?\n\n<think>\nThinking Process:\n\n1.  **"
+    },
+    {
+      "exact_text_match": true,
+      "id": "fixed-0006",
+      "matching_prefix_characters": 125,
+      "sglang_output_tokens": 32,
+      "sglang_success": true,
+      "sglang_text": ":\nA. The time it takes for a signal to travel from the source to the destination.\nB. The time it takes for a signal to travel",
+      "vllm_output_tokens": 32,
+      "vllm_success": true,
+      "vllm_text": ":\nA. The time it takes for a signal to travel from the source to the destination.\nB. The time it takes for a signal to travel"
+    },
+    {
+      "exact_text_match": true,
+      "id": "fixed-0007",
+      "matching_prefix_characters": 118,
+      "sglang_output_tokens": 32,
+      "sglang_success": true,
+      "sglang_text": " probabilistic.\nA. True\nB. False\nAnswer:\nA\n\nWhich of the following is NOT a characteristic of a normal distribution?\nA",
+      "vllm_output_tokens": 32,
+      "vllm_success": true,
+      "vllm_text": " probabilistic.\nA. True\nB. False\nAnswer:\nA\n\nWhich of the following is NOT a characteristic of a normal distribution?\nA"
+    }
+  ],
+  "schema": "disco.correctness-comparison.v1",
+  "successful_in_both": 8
+}

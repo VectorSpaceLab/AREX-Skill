@@ -1,0 +1,9 @@
+authoritative configuration and result audit
+sglang latency PASS
+sglang throughput PASS
+vllm latency PASS
+vllm throughput PASS
+correctness PASS 8 7
+port 8000 listeners:
+State Recv-Q Send-Q Local Address:Port Peer Address:PortProcess
+GPU compute processes:

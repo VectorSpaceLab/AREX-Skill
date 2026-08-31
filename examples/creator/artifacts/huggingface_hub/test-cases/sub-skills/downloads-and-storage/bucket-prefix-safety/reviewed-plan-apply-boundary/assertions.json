@@ -1,0 +1,14 @@
+{
+  "schema": "disco.usability-case.v1",
+  "target_skill_area": "downloads-and-storage",
+  "target_capability": "bucket plan integrity and delete gate",
+  "difficulty": "troubleshooting",
+  "evidence_basis": ["docs/source/en/guides/buckets.md", "docs/source/en/guides/cli.md", "tests/test_buckets_cli.py"],
+  "expected_skill_files": ["sub-skills/downloads-and-storage/references/workflows.md", "sub-skills/downloads-and-storage/references/troubleshooting.md", "sub-skills/cli-and-automation/SKILL.md"],
+  "assertions": [
+    "The response reviews every JSONL action and validates source/destination types.",
+    "The response uses component-aware prefix checks and excludes logs-old from logs.",
+    "The response rejects a changed plan before execution.",
+    "The response keeps delete actions behind explicit approval and does not apply the fixture."
+  ]
+}

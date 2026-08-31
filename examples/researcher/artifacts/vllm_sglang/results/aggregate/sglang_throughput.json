@@ -1,0 +1,159 @@
+{
+  "aggregate": {
+    "gpu_memory": {
+      "peak_aggregate_memory_used_mib": 70124,
+      "peak_aggregate_memory_used_mib_each_run": [
+        70124,
+        70124,
+        70124
+      ],
+      "per_gpu": {
+        "0": {
+          "memory_total_mib": 40960,
+          "name": "NVIDIA A100-SXM4-40GB",
+          "peak_memory_used_mib": 35312,
+          "peak_memory_used_mib_each_run": [
+            35312,
+            35312,
+            35312
+          ]
+        },
+        "1": {
+          "memory_total_mib": 40960,
+          "name": "NVIDIA A100-SXM4-40GB",
+          "peak_memory_used_mib": 34812,
+          "peak_memory_used_mib_each_run": [
+            34812,
+            34812,
+            34812
+          ]
+        }
+      }
+    },
+    "input_token_throughput_tps": {
+      "mean_across_repetitions": 19077.923407331647,
+      "repetitions": [
+        19042.524403695792,
+        19060.055814184532,
+        19131.190004114615
+      ],
+      "stdev_across_repetitions": 46.9556741838585
+    },
+    "latency_mean_s": {
+      "mean_across_repetitions": 1.713427563336154,
+      "repetitions": [
+        1.7165359921418712,
+        1.7146953367409878,
+        1.7090513611256029
+      ],
+      "stdev_across_repetitions": 0.0039000464634315253
+    },
+    "latency_p50_s": {
+      "mean_across_repetitions": 1.7081353754426043,
+      "repetitions": [
+        1.7068928880617023,
+        1.7108093928545713,
+        1.706703845411539
+      ],
+      "stdev_across_repetitions": 0.002317695217349053
+    },
+    "latency_p99_s": {
+      "mean_across_repetitions": 1.7404605349929383,
+      "repetitions": [
+        1.7608643132075668,
+        1.738674034513533,
+        1.721843257257715
+      ],
+      "stdev_across_repetitions": 0.019571775336758624
+    },
+    "output_token_throughput_tps": {
+      "mean_across_repetitions": 2384.740425916456,
+      "repetitions": [
+        2380.315550461974,
+        2382.5069767730665,
+        2391.398750514327
+      ],
+      "stdev_across_repetitions": 5.869459272982312
+    },
+    "request_throughput_rps": {
+      "mean_across_repetitions": 18.630784577472312,
+      "repetitions": [
+        18.596215237984172,
+        18.613335756039582,
+        18.68280273839318
+      ],
+      "stdev_across_repetitions": 0.045855150570174315
+    },
+    "total_token_throughput_tps": {
+      "mean_across_repetitions": 21462.663833248105,
+      "repetitions": [
+        21422.839954157767,
+        21442.5627909576,
+        21522.58875462894
+      ],
+      "stdev_across_repetitions": 52.82513345684012
+    },
+    "tpot_mean_s": {
+      "mean_across_repetitions": 0.00959136934103881,
+      "repetitions": [
+        0.00959889481738338,
+        0.009590514858668546,
+        0.009584698347064508
+      ],
+      "stdev_across_repetitions": 0.0000071367042442203196
+    },
+    "tpot_p50_s": {
+      "mean_across_repetitions": 0.009696170655898066,
+      "repetitions": [
+        0.00968563619003756,
+        0.009690429333333424,
+        0.009712446444323213
+      ],
+      "stdev_across_repetitions": 0.000014297535532699372
+    },
+    "tpot_p99_s": {
+      "mean_across_repetitions": 0.012530683779018366,
+      "repetitions": [
+        0.012560799229728777,
+        0.012479562732926388,
+        0.012551689374399936
+      ],
+      "stdev_across_repetitions": 0.00004450582412653204
+    },
+    "ttft_mean_s": {
+      "mean_across_repetitions": 0.49532365702422493,
+      "repetitions": [
+        0.4974763503341819,
+        0.4966999496900826,
+        0.49179467104841024
+      ],
+      "stdev_across_repetitions": 0.0030807476370455834
+    },
+    "ttft_p50_s": {
+      "mean_across_repetitions": 0.4901291091615955,
+      "repetitions": [
+        0.4980690865777433,
+        0.49287794437259436,
+        0.47944029653444886
+      ],
+      "stdev_across_repetitions": 0.009613793521924981
+    },
+    "ttft_p99_s": {
+      "mean_across_repetitions": 0.8051884399944296,
+      "repetitions": [
+        0.8242786612734199,
+        0.7998937842901797,
+        0.7913928744196892
+      ],
+      "stdev_across_repetitions": 0.01707026006003309
+    }
+  },
+  "framework": "sglang",
+  "repetition_count": 3,
+  "result_files": [
+    "results/sglang/baseline/throughput_01/result.json",
+    "results/sglang/baseline/throughput_02/result.json",
+    "results/sglang/baseline/throughput_03/result.json"
+  ],
+  "schema": "disco.benchmark-aggregate.v1"
+}
