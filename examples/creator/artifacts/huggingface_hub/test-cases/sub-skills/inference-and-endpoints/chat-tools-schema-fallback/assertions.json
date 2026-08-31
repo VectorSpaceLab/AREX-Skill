@@ -1,0 +1,16 @@
+{
+  "schema": "disco.usability-case.v1",
+  "target_skill_area": "inference-and-endpoints",
+  "target_capability": "chat tools schema streaming and provider fallback",
+  "difficulty": "advanced",
+  "evidence_basis": ["docs/source/en/guides/inference.md", "docs/source/en/package_reference/inference_client.md", "tests/test_inference_client.py", "tests/test_inference_async_client.py", "tests/test_inference_providers.py"],
+  "expected_skill_files": ["sub-skills/inference-and-endpoints/SKILL.md", "sub-skills/inference-and-endpoints/references/task-types.md", "sub-skills/inference-and-endpoints/references/providers-and-tasks.md", "sub-skills/inference-and-endpoints/references/workflows.md", "sub-skills/inference-and-endpoints/scripts/mock_chat_recovery.py"],
+  "assertions": [
+    "The response routes to inference-and-endpoints and selects a model/provider before calling.",
+    "The response validates tool arguments and JSON schema rather than trusting model output.",
+    "The response handles sync and async stream chunks without assuming content is present and closes a cancelled stream.",
+    "The response uses one bounded provider fallback and does not claim universal provider support.",
+    "The response says MCP requires the mcp extra and a narrow allowlist.",
+    "The response keeps tokens out of logs and does not invoke live network inference."
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "model_path": "model/Qwen3.5-4B",
+  "served_model_name": "qwen3.5-4b",
+  "physical_gpus": [
+    0,
+    1
+  ],
+  "dtype": "bfloat16",
+  "quantization": null,
+  "tensor_parallel_size": 2,
+  "max_context_length": 32768,
+  "gpu_memory_fraction": 0.8,
+  "endpoint": "/v1/completions",
+  "sampling": {
+    "temperature": 0,
+    "seed": 42,
+    "ignore_eos": true
+  },
+  "warmup": {
+    "requests": 8,
+    "input_tokens": 256,
+    "output_tokens": 32,
+    "concurrency": 4
+  },
+  "tuning": {
+    "requests": 64,
+    "input_tokens": 1024,
+    "output_tokens": 128,
+    "concurrency": 32,
+    "repetitions": 1
+  },
+  "profiles": {
+    "latency": {
+      "requests": 20,
+      "input_tokens": 1024,
+      "output_tokens": 128,
+      "concurrency": 1,
+      "repetitions": 3
+    },
+    "throughput": {
+      "requests": 128,
+      "input_tokens": 1024,
+      "output_tokens": 128,
+      "concurrency": 32,
+      "repetitions": 3
+    }
+  },
+  "gpu_monitor_interval_seconds": 0.1
+}

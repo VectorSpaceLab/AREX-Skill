@@ -1,0 +1,159 @@
+{
+  "aggregate": {
+    "gpu_memory": {
+      "peak_aggregate_memory_used_mib": 66874,
+      "peak_aggregate_memory_used_mib_each_run": [
+        66874,
+        66874,
+        66874
+      ],
+      "per_gpu": {
+        "0": {
+          "memory_total_mib": 40960,
+          "name": "NVIDIA A100-SXM4-40GB",
+          "peak_memory_used_mib": 33437,
+          "peak_memory_used_mib_each_run": [
+            33437,
+            33437,
+            33437
+          ]
+        },
+        "1": {
+          "memory_total_mib": 40960,
+          "name": "NVIDIA A100-SXM4-40GB",
+          "peak_memory_used_mib": 33437,
+          "peak_memory_used_mib_each_run": [
+            33437,
+            33437,
+            33437
+          ]
+        }
+      }
+    },
+    "input_token_throughput_tps": {
+      "mean_across_repetitions": 1351.9615218065733,
+      "repetitions": [
+        1356.593295264278,
+        1350.2314490799733,
+        1349.0598210754686
+      ],
+      "stdev_across_repetitions": 4.053784906461844
+    },
+    "latency_mean_s": {
+      "mean_across_repetitions": 0.7573493080368886,
+      "repetitions": [
+        0.7547567338682711,
+        0.7583061022218317,
+        0.7589850880205631
+      ],
+      "stdev_across_repetitions": 0.0022707567116617275
+    },
+    "latency_p50_s": {
+      "mean_across_repetitions": 0.7553716427646577,
+      "repetitions": [
+        0.7541238507255912,
+        0.7567380079999566,
+        0.7552530695684254
+      ],
+      "stdev_across_repetitions": 0.001311106123060974
+    },
+    "latency_p99_s": {
+      "mean_across_repetitions": 0.7747944531217218,
+      "repetitions": [
+        0.7610864521656184,
+        0.7709190403576941,
+        0.7923778668418526
+      ],
+      "stdev_across_repetitions": 0.01600163354719456
+    },
+    "output_token_throughput_tps": {
+      "mean_across_repetitions": 168.99519022582166,
+      "repetitions": [
+        169.57416190803474,
+        168.77893113499667,
+        168.63247763443357
+      ],
+      "stdev_across_repetitions": 0.5067231133077305
+    },
+    "request_throughput_rps": {
+      "mean_across_repetitions": 1.3202749236392317,
+      "repetitions": [
+        1.3247981399065214,
+        1.3185853994921615,
+        1.3174412315190123
+      ],
+      "stdev_across_repetitions": 0.003958774322716644
+    },
+    "total_token_throughput_tps": {
+      "mean_across_repetitions": 1520.9567120323948,
+      "repetitions": [
+        1526.1674571723127,
+        1519.0103802149702,
+        1517.6922987099022
+      ],
+      "stdev_across_repetitions": 4.560508019769533
+    },
+    "tpot_mean_s": {
+      "mean_across_repetitions": 0.005458180784685366,
+      "repetitions": [
+        0.005457250910305132,
+        0.005457162803156287,
+        0.00546012864059468
+      ],
+      "stdev_across_repetitions": 0.0000016874678367319751
+    },
+    "tpot_p50_s": {
+      "mean_across_repetitions": 0.0054536970892036215,
+      "repetitions": [
+        0.0054540374374941105,
+        0.00545341562201071,
+        0.005453638208106043
+      ],
+      "stdev_across_repetitions": 3.1506167902201134e-7
+    },
+    "tpot_p99_s": {
+      "mean_across_repetitions": 0.0055090214101367885,
+      "repetitions": [
+        0.005490406745106098,
+        0.0055112764324376905,
+        0.0055253810528665785
+      ],
+      "stdev_across_repetitions": 0.00001759586300851346
+    },
+    "ttft_mean_s": {
+      "mean_across_repetitions": 0.06416034838184714,
+      "repetitions": [
+        0.06168586825951934,
+        0.06524642622098327,
+        0.06554875066503882
+      ],
+      "stdev_across_repetitions": 0.002148287439849457
+    },
+    "ttft_p50_s": {
+      "mean_across_repetitions": 0.06276467240725954,
+      "repetitions": [
+        0.061168900690972805,
+        0.06386290304362774,
+        0.06326221348717809
+      ],
+      "stdev_across_repetitions": 0.001414239199599015
+    },
+    "ttft_p99_s": {
+      "mean_across_repetitions": 0.07642018204244473,
+      "repetitions": [
+        0.06584915128536523,
+        0.07197309704497457,
+        0.09143829779699443
+      ],
+      "stdev_across_repetitions": 0.013361643930649009
+    }
+  },
+  "framework": "vllm",
+  "repetition_count": 3,
+  "result_files": [
+    "results/vllm/final_compliant/latency_01/result.json",
+    "results/vllm/final_compliant/latency_02/result.json",
+    "results/vllm/final_compliant/latency_03/result.json"
+  ],
+  "schema": "disco.benchmark-aggregate.v1"
+}

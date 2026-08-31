@@ -1,0 +1,11 @@
+{
+  "repository": "huggingface/huggingface_hub",
+  "source_commit": "4237d95c603db491cb1070898c74c97e4d7c2582",
+  "source": "GitHub CLI (gh api)",
+  "oldLicense": "Apache-2.0",
+  "newLicense": "Apache-2.0",
+  "value": "Apache-2.0",
+  "status": "resolved",
+  "reason": null,
+  "runtimeFilesUpdated": 6
+}

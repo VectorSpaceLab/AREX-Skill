@@ -1,0 +1,15 @@
+{
+  "schema": "disco.usability-case.v1",
+  "target_skill_area": "huggingface-hub",
+  "target_capability": "integrated Hub, storage, inference, and CLI routing",
+  "difficulty": "advanced",
+  "evidence_basis": ["README.md", "docs/source/en/guides/search.md", "docs/source/en/guides/download.md", "docs/source/en/guides/inference.md", "docs/source/en/guides/cli.md", "tests/test_cli.py", "tests/test_inference_client.py"],
+  "expected_skill_files": ["SKILL.md", "sub-skills/hub-operations/SKILL.md", "sub-skills/downloads-and-storage/SKILL.md", "sub-skills/inference-and-endpoints/SKILL.md", "sub-skills/cli-and-automation/SKILL.md"],
+  "assertions": [
+    "The response routes model discovery, storage planning, mocked inference, and CLI parsing to distinct owners.",
+    "The response keeps all stages no-network and no-token as requested.",
+    "The response uses dry-run/filtering for storage and a mocked transport for inference.",
+    "The response keeps CLI JSON on stdout and warnings on stderr.",
+    "The response does not apply a transfer, perform paid inference, or invent a single monolithic workflow."
+  ]
+}

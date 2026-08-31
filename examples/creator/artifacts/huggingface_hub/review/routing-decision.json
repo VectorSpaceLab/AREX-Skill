@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "repo_id": "huggingface/huggingface_hub",
+  "repo_name": "huggingface_hub",
+  "source_url": "https://github.com/huggingface/huggingface_hub",
+  "source_commit": "4237d95c603db491cb1070898c74c97e4d7c2582",
+  "skill_id": "huggingface-hub",
+  "skill_root": "repo-skills/huggingface-hub",
+  "skill_content_sha256": "sha256:df4a87b7472a120689c081f3f17e1f8540bf2c452406fd808b08b64bb01014df",
+  "taxonomy_sha256": "f8c306386015711634ddbb43a5eb95d1f58909c3513ce2063ba42efdd583a431",
+  "status": "classified",
+  "assignments": [
+    {
+      "area": "MLOps",
+      "family": "Model Hubs and Registries",
+      "confidence": "high",
+      "rationale": "The repository is the official Python client and CLI for model/dataset/Space Hub discovery, versioned repository access, caching, upload/commit operations, and registry-style metadata APIs. These are its primary public capabilities, not merely an optional integration.",
+      "evidence": [
+        {
+          "path": "README.md",
+          "description": "The project identifies itself as the official CLI and Python client for the Hugging Face Hub and lists downloading, uploading, repository management, search, inference, cards, and CLI workflows.",
+          "line_start": 20,
+          "line_end": 87
+        },
+        {
+          "path": "setup.py",
+          "description": "Package metadata describes a client for downloading and publishing models, datasets, and other Hub repositories and exposes the hf CLI entry point.",
+          "line_start": 103,
+          "line_end": 127
+        },
+        {
+          "path": "docs/source/en/guides/repository.md",
+          "description": "The primary repository guide covers listing, creating, deleting, duplicating, uploading/downloading, copying, branches/tags, settings, and search for Hub repositories.",
+          "line_start": 1,
+          "line_end": 35
+        },
+        {
+          "path": "src/huggingface_hub/hf_api.py",
+          "description": "The HfApi implementation provides model/dataset/Space info types and repository, file, commit, revision, collection, and Hub API operations.",
+          "line_start": 2238,
+          "line_end": 2285
+        }
+      ]
+    }
+  ],
+  "public_bundle_note": "The original checkout path is intentionally omitted from this public example bundle."
+}

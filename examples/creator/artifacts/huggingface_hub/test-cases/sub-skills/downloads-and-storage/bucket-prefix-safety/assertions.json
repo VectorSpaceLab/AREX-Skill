@@ -1,0 +1,15 @@
+{
+  "schema": "disco.usability-case.v1",
+  "target_skill_area": "downloads-and-storage",
+  "target_capability": "bucket path and plan safety",
+  "difficulty": "advanced",
+  "evidence_basis": ["docs/source/en/guides/buckets.md", "docs/source/en/guides/upload.md", "tests/test_buckets_cli.py", "tests/test_copy_files.py", "tests/test_utils_hf_uris.py"],
+  "expected_skill_files": ["sub-skills/downloads-and-storage/SKILL.md", "sub-skills/downloads-and-storage/references/workflows.md", "sub-skills/downloads-and-storage/references/troubleshooting.md"],
+  "assertions": [
+    "The response classifies the operation as a remote bucket movement and keeps it read-only.",
+    "The response explains trailing-slash contents semantics and distinguishes logs from logs-old by path components.",
+    "The response rejects ../secrets.txt before any plan application or destination mutation.",
+    "The response recommends a reviewed dry-run or plan and identifies when CLI syntax belongs to cli-and-automation.",
+    "The response does not claim that URI parsing alone authorizes a transfer."
+  ]
+}

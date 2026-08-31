@@ -1,0 +1,8 @@
+{"id": "fixed-0000", "prompt": "The quick brown fox jumps over the", "prompt_sha256": "acbe47d52e08dc6ae67b0bc249c6fe92c2fea7cb5d168d089bdb4e5f012a70dd", "prompt_tokens": 7}
+{"id": "fixed-0001", "prompt": "Roses are red, violets are", "prompt_sha256": "d485372731fc1c2ee647e033df6213f56bc6efd36aba6717f21d3f2c3cbf01c9", "prompt_tokens": 8}
+{"id": "fixed-0002", "prompt": "2 + 2 =", "prompt_sha256": "154e0c9c6176389176dd7a541d8f5a34cdeffc97ddf6360af63543ac155888cf", "prompt_tokens": 5}
+{"id": "fixed-0003", "prompt": "The first three prime numbers are", "prompt_sha256": "66890c583f92dbdd64bb8bd7c94b1f1e0f3d16521c5182ac5e14b581c4cc5369", "prompt_tokens": 6}
+{"id": "fixed-0004", "prompt": "Python is a programming language used to", "prompt_sha256": "a91842adcf3b2fbec272ca37c263ec150e4d4aab2446c863de7ce63930c3bad2", "prompt_tokens": 7}
+{"id": "fixed-0005", "prompt": "Water freezes at 0 degrees Celsius and boils at", "prompt_sha256": "5f84c7dc90c998150248500b6671180dce2ab7e3e16ebb0fa96f03c32b73a135", "prompt_tokens": 10}
+{"id": "fixed-0006", "prompt": "A concise definition of latency is", "prompt_sha256": "a437cc9574fb5402906fb0d489d037afb9d4f7f3ec3b08e2dae7e09298716898", "prompt_tokens": 6}
+{"id": "fixed-0007", "prompt": "The opposite of deterministic is", "prompt_sha256": "b5706a1b967e7b6159feb02b00be7f9a0293395ca027131b9d071b004fc9f9ef", "prompt_tokens": 5}

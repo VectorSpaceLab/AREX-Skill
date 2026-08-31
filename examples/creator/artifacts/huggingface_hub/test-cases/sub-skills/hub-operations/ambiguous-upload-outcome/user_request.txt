@@ -1,0 +1,1 @@
+An upload request timed out after I sent a commit to a model repository, so I do not know whether it succeeded. Using a mocked API, show how to inspect the current main SHA, open PRs, refs, and target paths before deciding whether to reuse the existing PR or retry once. Do not create duplicates, do not print a token, and do not mutate a real repository.

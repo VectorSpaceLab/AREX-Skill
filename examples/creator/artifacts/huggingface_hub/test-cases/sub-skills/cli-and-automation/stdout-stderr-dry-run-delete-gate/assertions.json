@@ -1,0 +1,15 @@
+{
+  "schema": "disco.usability-case.v1",
+  "target_skill_area": "cli-and-automation",
+  "target_capability": "CLI output streams and destructive confirmation",
+  "difficulty": "intermediate",
+  "evidence_basis": ["docs/source/en/guides/cli.md", "tests/test_cli.py", "tests/test_cli_output.py", "tests/test_cli_errors.py"],
+  "expected_skill_files": ["sub-skills/cli-and-automation/SKILL.md", "sub-skills/cli-and-automation/references/cli-reference.md", "sub-skills/cli-and-automation/references/automation-workflows.md"],
+  "assertions": [
+    "The response verifies hf version and command help before relying on flags.",
+    "The response parses stdout separately from stderr and preserves warnings.",
+    "The response uses a dry-run before transfer and a fake fixture with placeholders.",
+    "The response demonstrates delete refusal without --yes and zero API calls.",
+    "The response does not print or require a real token or remote mutation."
+  ]
+}

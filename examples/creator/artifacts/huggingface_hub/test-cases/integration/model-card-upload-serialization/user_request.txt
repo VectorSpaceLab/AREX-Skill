@@ -1,0 +1,1 @@
+Prepare a no-network release plan for a tiny model: create and validate its card, save and shard safetensors, check a DDUF artifact, then show the Hub API and hf CLI commands that would upload it as a reviewable PR. The plan must not apply the upload, must verify the local artifact before proposing it, and must explain how to recover from a stale parent SHA.

@@ -1,0 +1,1 @@
+My machine has an older `hf` executable and a newer Python package. Diagnose the mismatch using only `command -v`, `hf version`, and `--help`, then explain how to inspect an extension without installing or executing third-party code. Do not run `hf update`, use a token, or mutate the host. If `hf skills check` is unavailable, report that rather than inventing a command.

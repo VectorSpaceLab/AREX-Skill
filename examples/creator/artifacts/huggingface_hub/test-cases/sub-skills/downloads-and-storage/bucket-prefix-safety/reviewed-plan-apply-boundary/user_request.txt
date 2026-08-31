@@ -1,0 +1,1 @@
+I have a JSONL sync plan for a bucket and want to review it without applying it. Check that every action has the expected source and destination type, that `logs/` does not select `logs-old/`, that delete actions are absent unless explicitly approved, and that a changed plan is rejected before execution. Use a local fixture only.

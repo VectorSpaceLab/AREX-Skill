@@ -1,0 +1,15 @@
+{
+  "schema": "disco.usability-case.v1",
+  "target_skill_area": "hosted-compute-and-integrations",
+  "target_capability": "Jobs and Space configuration recovery",
+  "difficulty": "troubleshooting",
+  "evidence_basis": ["docs/source/en/guides/jobs.md", "docs/source/en/guides/manage-spaces.md", "docs/source/en/guides/webhooks.md", "tests/test_jobs_api.py", "tests/test_sandbox.py"],
+  "expected_skill_files": ["sub-skills/hosted-compute-and-integrations/SKILL.md", "sub-skills/hosted-compute-and-integrations/references/jobs-and-sandboxes.md", "sub-skills/hosted-compute-and-integrations/references/spaces-and-server-integrations.md", "sub-skills/hosted-compute-and-integrations/references/troubleshooting.md"],
+  "assertions": [
+    "The response keeps Job and Space operations mocked and does not launch or mutate remote resources.",
+    "The response validates image, command, accelerator, volume, secrets, variables, and webhook route before a client call.",
+    "The response distinguishes a client timeout from a failed terminal Job or Space state and recommends state inspection.",
+    "The response protects secret values and includes billing-aware pause/stop/termination guidance.",
+    "The response describes a corrected recovery bounded by explicit authorization."
+  ]
+}

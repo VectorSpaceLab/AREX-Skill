@@ -1,0 +1,176 @@
+{
+  "schema": "disco.native-verification.v1",
+  "repository": "huggingface/huggingface_hub",
+  "sourceCommit": "4237d95c603db491cb1070898c74c97e4d7c2582",
+  "environment": {
+    "manager": "venv",
+    "python": "3.11.14",
+    "package": "huggingface_hub==1.29.0",
+    "requiredBackends": [],
+    "optionalCudaSmoke": "PASS: torch 2.13.0+cu130, 8 A100 devices, tiny allocation"
+  },
+  "results": [
+    {
+      "id": "native-core-route-tests",
+      "status": "PASS",
+      "command": "python -m pytest -q tests/test_utils_hf_uris.py tests/test_utils_parsing.py tests/test_cli_framework.py tests/test_cli_output.py tests/test_cli_errors.py",
+      "summary": "268 passed in 0.65s",
+      "owner": [
+        "downloads-and-storage",
+        "cli-and-automation"
+      ]
+    },
+    {
+      "id": "native-dduf",
+      "status": "PASS",
+      "command": "python -m pytest -q tests/test_dduf.py",
+      "summary": "26 passed in 0.23s",
+      "owner": [
+        "hosted-compute-and-integrations"
+      ]
+    },
+    {
+      "id": "native-serialization",
+      "status": "PASS",
+      "command": "python -m pytest -q tests/test_serialization.py -k 'not dtensor and not wrapper_tensor_subclass and not tensor_subclass'",
+      "summary": "51 passed, 4 deselected in 3.16s; optional tensor-subclass/dtensor cases deselected",
+      "owner": [
+        "hosted-compute-and-integrations"
+      ]
+    },
+    {
+      "id": "native-inference-types-endpoints",
+      "status": "PASS",
+      "command": "python -m pytest -q tests/test_inference_types.py tests/test_inference_endpoints.py -k 'not production'",
+      "summary": "28 passed in 0.53s",
+      "owner": [
+        "inference-and-endpoints"
+      ]
+    },
+    {
+      "id": "native-provider-mappings",
+      "status": "PASS",
+      "command": "python -m pytest -q tests/test_inference_providers.py",
+      "summary": "176 passed in 4.33s",
+      "owner": [
+        "inference-and-endpoints"
+      ]
+    },
+    {
+      "id": "native-cli-selected",
+      "status": "PASS",
+      "command": "python -m pytest -q tests/test_cli.py::TestGlobalFormattingFlags tests/test_cli.py::TestJsonShorthand tests/test_cli.py::TestRepoTypePrefix tests/test_cli.py::TestParseVolumes tests/test_cli.py::TestParseAndSyncJobVolumes tests/test_cli.py::TestDeriveJobVolumeName tests/test_cli.py::TestVolume tests/test_cli.py::TestSkillGeneration",
+      "summary": "67 passed in 4.48s",
+      "owner": [
+        "cli-and-automation"
+      ]
+    },
+    {
+      "id": "native-auth-runtime",
+      "status": "PASS",
+      "command": "python -m pytest -q tests/test_auth.py tests/test_login_utils.py tests/test_offline_utils.py tests/test_utils_runtime.py",
+      "summary": "45 passed in 0.40s",
+      "owner": [
+        "hub-operations",
+        "cli-and-automation"
+      ]
+    },
+    {
+      "id": "native-hosted-models",
+      "status": "PASS",
+      "command": "python -m pytest -q tests/test_jobs_api.py tests/test_sandbox.py -k 'not production'",
+      "summary": "59 passed in 20.74s; unit/mocked lifecycle coverage",
+      "owner": [
+        "hosted-compute-and-integrations"
+      ]
+    },
+    {
+      "id": "native-webhooks-local",
+      "status": "PASS",
+      "command": "python -m pytest -q tests/test_repocard_data.py tests/test_webhooks_server.py",
+      "summary": "25 passed in 5.52s; local test server and metadata paths, with telemetry/update setup warnings",
+      "owner": [
+        "hosted-compute-and-integrations"
+      ]
+    },
+    {
+      "id": "bundled-runtime-scripts",
+      "status": "PASS",
+      "command": "diagnostic --help/empty-cache; CLI help checker with prepared hf; mock_chat_recovery.py; local_integration_smoke.py",
+      "summary": "All four bundled helper checks passed; CLI checker passed 8/8; mock scripts reported zero network/remote mutations",
+      "owner": [
+        "downloads-and-storage",
+        "cli-and-automation",
+        "inference-and-endpoints",
+        "hosted-compute-and-integrations"
+      ]
+    },
+    {
+      "id": "native-downloads-safe-subset",
+      "status": "NATIVE_FAIL",
+      "command": "selected file-download/tree-cache/cache tests",
+      "summary": "32 passed, 1 failed, 14 deselected in 15.96s; permission test expected protected-folder preservation but root execution deleted it",
+      "owner": [
+        "downloads-and-storage"
+      ],
+      "classification": "environment/privilege-specific native failure; does not contradict runtime guidance"
+    },
+    {
+      "id": "native-downloads-broad-selection",
+      "status": "SKIP_UNSAFE",
+      "command": "pytest tests/test_file_download.py tests/test_snapshot_download.py tests/test_tree_cache.py -m 'not production'",
+      "summary": "Aborted after 500s because unmarked staging fixtures performed network transfers and Hub CI operations; no result counted as pass",
+      "owner": [
+        "downloads-and-storage"
+      ],
+      "reason": "The marker does not guarantee offline behavior; selected tests were not safe for this no-credential verification plan"
+    },
+    {
+      "id": "native-cards-webhooks-broad-selection",
+      "status": "SKIP_UNSAFE",
+      "command": "pytest tests/test_repocard.py tests/test_webhooks_server.py -m 'not production'",
+      "summary": "Selection entered staging/remote card mutations; one SSL ConnectError and remote setup/teardown were observed, so the broad run is excluded from acceptance",
+      "owner": [
+        "hub-operations",
+        "hosted-compute-and-integrations"
+      ],
+      "reason": "Unmarked staging fixtures were not safe for the intended local-only gate"
+    },
+    {
+      "id": "native-inference-client-network-selection",
+      "status": "SKIP_UNSAFE",
+      "command": "selected test_inference_client.py chat/mime/openai cases",
+      "summary": "1 passed, 36 skipped, 93 deselected; the pass downloaded public fixture media, so it is not counted as a safe no-network pass",
+      "owner": [
+        "inference-and-endpoints"
+      ],
+      "reason": "Fixture helper contacted the Hub; mock bundled script and provider mappings are the accepted hermetic checks"
+    },
+    {
+      "id": "native-cards-webhooks-failure",
+      "status": "NATIVE_FAIL",
+      "command": "selected local-looking RepoCard/WebhooksServer tests",
+      "summary": "44 passed and one RepoCard validation test failed with SSL ConnectError because the test calls a remote Hub validation endpoint",
+      "owner": [
+        "hub-operations",
+        "hosted-compute-and-integrations"
+      ],
+      "classification": "network/staging failure; generated guidance already requires local validation or explicit authorization"
+    }
+  ],
+  "summary": {
+    "pass": 10,
+    "skillGap": 0,
+    "nativeFail": 2,
+    "blockedRequiredBackend": 0,
+    "skipUnsafe": 3,
+    "safePassingNativeTests": 720,
+    "requiredBackendBlocks": [],
+    "notes": [
+      "Some native repository tests use staging fixtures even without the production marker; those runs are reported but not treated as safe acceptance.",
+      "No native case required CUDA/ROCm/MPS/vendor runtime. Optional CUDA smoke passed and no local GPU capability is claimed by the skill.",
+      "No SKILL_GAP was found; failures and skips are attributable to privilege or external service behavior and are covered by explicit runtime safety guidance."
+    ]
+  },
+  "public_bundle_note": "Raw native verification logs are intentionally omitted from this public example bundle."
+}

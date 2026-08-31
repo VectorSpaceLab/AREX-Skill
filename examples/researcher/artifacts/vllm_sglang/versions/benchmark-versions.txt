@@ -1,0 +1,3 @@
+python 3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]
+aiohttp 3.13.3
+transformers 5.16.1

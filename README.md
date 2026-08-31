@@ -1,3 +1,9 @@
+<p align="center">
+  <img src="assets/hero.png" alt="AREX-Skill turns repository and paper knowledge into executable skills for coding agents and autonomous ML research">
+</p>
+
+
+
 <h1 align="center">AREX-Skill</h1>
 
 <p align="center">
@@ -5,13 +11,8 @@
 </p>
 
 <p align="center">
-  An open library of <b>5,000+ verified, executable skills</b> distilled from
-  <b>1,000 ML repositories</b> — plus the DisCo agent that builds and uses them.
-</p>
-
-<p align="center">
   <a href="skills/README.md"><img src="https://img.shields.io/badge/AREX--Skill_Library-5000%2B_skills-0E9B9B?style=for-the-badge" alt="AREX-Skill Library: 5000+ skills"></a>
-  <a href="skills/repositories/repo-skills/"><img src="https://img.shields.io/badge/ML_Repositories-1000-5865F2?style=for-the-badge" alt="1000 ML repositories"></a>
+  <a href="docs/repository-catalog.md"><img src="https://img.shields.io/badge/ML_Repositories-1000-5865F2?style=for-the-badge" alt="1000 ML repositories"></a>
   <a href="https://www.npmjs.com/package/@auto-ml-skills/disco"><img src="https://img.shields.io/badge/CLI-disco%20v0.2.0-D22128?style=for-the-badge&logo=npm&logoColor=white" alt="DisCo CLI v0.2.0"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-lightgrey?style=for-the-badge&logo=apache&logoColor=white" alt="License: Apache 2.0"></a>
   <a href="#documentation"><img src="https://img.shields.io/badge/Documentation-README-0E9B9B?style=for-the-badge" alt="Documentation"></a>
@@ -23,14 +24,11 @@
 </p>
 
 <p align="center">
-  <img src="assets/hero.png" alt="AREX-Skill turns repository and paper knowledge into executable skills for coding agents and autonomous ML research">
-</p>
-
-<p align="center">
-  <strong>1,000 GitHub repositories distilled into reusable skills</strong><br>
+  <strong>An open library of 5,000+ verified, executable skills distilled from 1,000 ML repositories</strong><br>
   <strong>Seamless integration with Codex, Claude Code, Pi, and other coding agents</strong><br>
   <strong>Frontier autonomous research across ML engineering, paper replication, and more</strong>
 </p>
+
 
 ## 🧭 Table of Contents <a id="table-of-contents"></a>
 
@@ -92,22 +90,18 @@ runtime model and routing details.
 
 ### How skills enter an autonomous research task
 
-```mermaid
-flowchart LR
-    T["Research task"] --> R["Route to the relevant skill graph"]
-    R --> L["Load only the needed SKILL.md branch"]
-    L --> E["Run the recommended workflow and scripts"]
-    E --> V["Validate against checks and target metric"]
-    V --> P["Pass: report a reproducible result"]
-    V --> F["Fail: follow recovery guidance and iterate"]
-    F --> E
-```
+A research agent typically follows this pattern:
 
-DisCo Researcher follows this pattern natively. A task starts with a concrete
-research goal, the router selects relevant operating knowledge, and the agent
-uses the skill's procedures, scripts, checks, and recovery guidance while it
-works. The result is not just an answer: it is an experiment or implementation
-that can be inspected and reproduced.
+1. **Start with a concrete research goal.**
+2. **Route the request** to the relevant skill graph.
+3. **Load only the needed `SKILL.md` branch** and follow linked skills as needed.
+4. **Run the recommended procedures and scripts**, using the skill's checks and
+   recovery guidance during execution.
+5. **Validate the result** against the relevant checks and target metric. If the
+   run fails, follow the recovery guidance, iterate, and validate again.
+
+The result is not just an answer: it is an experiment or implementation that
+can be inspected and reproduced.
 
 ## 📊 Library at a Glance <a id="library-at-a-glance"></a>
 
@@ -136,6 +130,18 @@ documented in [Refreshing Repo Skills](docs/refreshing-repo-skills.md).
 We keep the agent setup, harness, and execution budget fixed, and change only
 whether the agent has AREX-distilled skills.
 
+<p align="center">
+  <img
+    src="assets/results.png"
+    width="82%"
+    alt="Benchmark results comparing Codex with and without AREX-Skill across MLE-bench, PaperBench, FrontierCS, and PassNet"
+  >
+</p>
+
+<p align="center">
+  <em>Codex with AREX-Skill improves results across four autonomous research benchmarks.</em>
+</p>
+
 | Benchmark | Scenario | Metric | Codex | Codex + AREX-Skill | Gain |
 | --- | --- | --- | ---: | ---: | ---: |
 | **MLE-bench** | ML engineering (75 Kaggle competitions) | Any Medal rate (%) | 31.11 | **72.89** | **+134.3%** |
@@ -158,31 +164,20 @@ table above is the concise summary of the current evaluation results.
 
 ## ⚗️ How AREX-Skill Is Built <a id="how-arex-skill-is-built"></a>
 
-The library is produced by DisCo Creator: a workflow that explores source
-evidence, distills practical operating knowledge, and verifies the resulting
-skill graph before publication.
+The library is produced by DisCo Creator through a four-stage skill-distillation
+workflow: scope capabilities from an anchor, ground them in admissible evidence,
+construct a candidate skill graph, and verify and refine it before publication.
+The anchor can be a source for task-agnostic distillation or a problem for
+task-oriented distillation. Supporting evidence, validation checks, and
+unresolved gaps are retained in the construction record.
 
-```mermaid
-flowchart LR
-    S["Repository · paper · blog"] --> D["DisCo Creator Agent"]
-    D --> A["Discover capabilities"]
-    A --> B["Distill operating workflows"]
-    B --> V["Execute validation checks"]
-    V --> P["Publish verified skill graph"]
-    V --> F["Repair and refine"]
-    F --> B
-```
-
-The construction loop has three important properties:
-
-- **Evidence before abstraction.** Creator inspects source code, documentation,
-  examples, and package behavior to identify capabilities that actually exist.
-- **Operational rather than descriptive output.** The result records procedures,
-  expected behavior, checks, and recovery paths instead of producing a prose
-  summary alone.
-- **Verification before publication.** Native examples, generated checks, or
-  usability cases are executed; failures are repaired and verified again before
-  the graph is treated as ready for the library.
+<p align="center">
+  <img
+    src="assets/method.png"
+    width="100%"
+    alt="The four-stage skill-distillation process: scope capability, ground evidence, construct a skill graph, and verify and refine"
+  >
+</p>
 
 See [DisCo Workflows](docs/disco-workflows.md) for the construction lifecycle,
 and [DisCo Meta Skills](docs/disco-meta-skills.md) for the bundled Creator
@@ -261,7 +256,9 @@ scenarios from the repository-skill collection.
 serving comparison:
 
 ```text
-Compare vLLM and SGLang on this model and workload. Tune both under identical hardware and memory constraints, report verified throughput, and preserve the commands and measurements needed to reproduce the comparison.
+Compare vLLM and SGLang on this model and workload. Tune both under identical
+hardware and memory constraints, report verified throughput, and preserve the
+commands and measurements needed to reproduce the comparison.
 ```
 
 ### Protein structure modeling
@@ -270,7 +267,11 @@ Compare vLLM and SGLang on this model and workload. Tune both under identical ha
 operational guidance for a protein-structure modeling workflow:
 
 ```text
-Use the installed AlphaFold2 skills to set up and verify this protein-structure modeling workflow. Start with a tiny synthetic input, check the sequence/MSA shapes and dependencies, run the relevant model path, and report the commands and checks needed to reproduce the result. Do not treat untrained outputs as scientific predictions.
+Use the installed AlphaFold2 skills to set up and verify this protein-structure
+modeling workflow. Start with a tiny synthetic input, check the sequence/MSA
+shapes and dependencies, run the relevant model path, and report the commands
+and checks needed to reproduce the result. Do not treat untrained outputs as
+scientific predictions.
 ```
 
 For complete end-to-end session exports, see the [examples directory](examples/README.md).
