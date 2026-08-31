@@ -34,6 +34,7 @@
 
 - [News](#news)
 - [Why AREX-Skill](#why-arex-skill)
+- [Demo](#demo)
 - [Library at a Glance](#library-at-a-glance)
 - [Auto-Research Benchmark Results](#auto-research-benchmark-results)
 - [How AREX-Skill Is Built](#how-arex-skill-is-built)
@@ -102,6 +103,14 @@ A research agent typically follows this pattern:
 
 The result is not just an answer: it is an experiment or implementation that
 can be inspected and reproduced.
+
+## 🎬 Demo <a id="demo"></a>
+
+A one-minute tour of AREX-Skill: DisCo distills a repository into verified,
+executable skills, the router narrows 5,000+ skills to the one branch a task
+needs, and a skill-equipped agent clears a task that stalls without it.
+
+https://github.com/user-attachments/assets/1984b09a-437c-4c52-8448-2d63e6c300d5
 
 ## 📊 Library at a Glance <a id="library-at-a-glance"></a>
 
