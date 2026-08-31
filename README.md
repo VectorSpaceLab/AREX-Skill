@@ -110,7 +110,7 @@ A one-minute tour of AREX-Skill: DisCo distills a repository into verified,
 executable skills, the router narrows 5,000+ skills to the one branch a task
 needs, and a skill-equipped agent clears a task that stalls without it.
 
-https://github.com/user-attachments/assets/1984b09a-437c-4c52-8448-2d63e6c300d5
+https://github.com/user-attachments/assets/9fa59284-4625-44ef-8b43-01c7b6a05cea
 
 ## 📊 Library at a Glance <a id="library-at-a-glance"></a>
 
