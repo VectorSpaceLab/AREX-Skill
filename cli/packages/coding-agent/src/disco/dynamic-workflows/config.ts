@@ -14,6 +14,15 @@ export const MAX_CONCURRENCY = 16;
 /** Maximum automatic retry attempts after a recoverable agent failure. */
 export const MAX_AGENT_RETRIES = 3;
 
+/** Default automatic retry attempts; timeout failures get one retry by default. */
+export const DEFAULT_AGENT_RETRIES = 1;
+
+/** Default number of recovery rounds for an incomplete coverage ledger. */
+export const DEFAULT_MAX_RECOVERY_ROUNDS = 50;
+
+/** Hard ceiling for recovery rounds, even when a caller requests more. */
+export const MAX_RECOVERY_ROUNDS = 1_000;
+
 /** Default token budget if none specified. */
 export const DEFAULT_TOKEN_BUDGET = null;
 

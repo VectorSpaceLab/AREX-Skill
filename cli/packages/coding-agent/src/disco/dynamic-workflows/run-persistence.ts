@@ -5,19 +5,45 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, unlinkSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import type { AgentHistoryEntry } from "./agent-history.ts";
+import type { AgentUsageRecord } from "./agent-usage.ts";
 import type { WorkflowErrorCode } from "./errors.ts";
 import { workflowProjectPaths } from "./workflow-paths.ts";
 
 export type RunStatus = "pending" | "running" | "paused" | "completed" | "failed" | "aborted";
 
+export interface PersistedAgentAttempt {
+	attempt: number;
+	status: "done" | "error";
+	tokens: number;
+	usage?: AgentUsageRecord;
+	error?: string;
+	errorCode?: WorkflowErrorCode;
+	recoverable?: boolean;
+	startedAt?: string;
+	endedAt?: string;
+}
+
+export interface PersistedRunLimits {
+	maxAgents: number;
+	concurrency: number;
+	agentTimeoutMs: number | null;
+	agentRetries: number;
+	tokenBudget: number | null;
+	maxRecoveryRounds: number;
+}
+
 export interface PersistedAgentState {
 	id: number;
+	/** Stable workflow identity (subSkill/job id, or deterministic agent-N). */
+	stableId?: string;
+	callIndex?: number;
 	label: string;
 	subSkill?: string;
 	phase?: string;
 	prompt: string;
 	status: "queued" | "running" | "done" | "error" | "skipped";
 	result?: unknown;
+	resultPreview?: string;
 	error?: string;
 	errorCode?: WorkflowErrorCode;
 	recoverable?: boolean;
@@ -26,6 +52,9 @@ export interface PersistedAgentState {
 	endedAt?: string;
 	/** The model this agent ran on (provider/id), when known. */
 	model?: string;
+	/** Finalized tokens accumulated across this agent's attempts. */
+	tokens?: number;
+	attempts?: PersistedAgentAttempt[];
 }
 
 export interface PersistedRunState {
@@ -37,16 +66,42 @@ export interface PersistedRunState {
 	 * but the navigator shows only the current session's runs when this is set. */
 	sessionId?: string;
 	status: RunStatus;
+	/** Execution semantics captured at run creation and reused on resume. */
+	maxAgents?: number;
+	concurrency?: number;
+	agentTimeoutMs?: number | null;
+	agentRetries?: number;
+	tokenBudget?: number | null;
+	/** Recovery lineage for an incomplete run. */
+	recoveryOfRunId?: string;
+	recoveryRound?: number;
+	maxRecoveryRounds?: number;
 	phases: string[];
 	currentPhase?: string;
 	agents: PersistedAgentState[];
 	logs: string[];
 	result?: unknown;
+	complete?: boolean;
+	missing?: string[];
+	errors?: Array<{ id: string; error?: string }>;
+	/** Root cause for failed/incomplete/aborted runs. */
+	error?: string;
+	errorCode?: WorkflowErrorCode;
+	recoverable?: boolean;
 	startedAt: string;
 	updatedAt: string;
 	completedAt?: string;
 	durationMs?: number;
 	tokenUsage?: {
+		input: number;
+		output: number;
+		total: number;
+		cost?: number;
+		cacheRead?: number;
+		cacheWrite?: number;
+		estimated?: boolean;
+	};
+	liveTokenUsage?: {
 		input: number;
 		output: number;
 		total: number;

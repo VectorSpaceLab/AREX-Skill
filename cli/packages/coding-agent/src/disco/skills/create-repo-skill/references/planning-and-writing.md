@@ -81,6 +81,23 @@ outside its assigned subtree without main-agent approval.
 When running inside DisCo, use the built-in `workflow` tool to coordinate
 sub-skill extraction and review:
 
+Before the first `workflow` call, read the parent skill's
+`../workflow-authoring/SKILL.md` completely. Build `args.environment` from the
+prepare-env handoff's canonical `workflowEnvironment` object:
+
+```json
+{
+  "executable": "/absolute/path/to/env/bin/python",
+  "cwd": "/absolute/path/to/repository",
+  "package": "distribution-name",
+  "version": "1.2.3"
+}
+```
+
+Pass that same object as `environment: args.environment` in every `agent()`
+lane. The private report names `pythonExecutable`, `expectedDistribution`, and
+`expectedVersion` are not the authored workflow contract.
+
 1. Create one workflow phase or branch per planned sub-skill. Pass the planned
    sub-skill id in every relevant `agent()` call's `subSkill` option,
    such as `agent(prompt, { label: "draft workflow", subSkill: "training" })`,

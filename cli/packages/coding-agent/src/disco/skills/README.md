@@ -21,11 +21,20 @@ metadata:
   disco-role: operating # Researcher only
 ```
 
-Creator owns all construction workflows in this directory. Researcher owns the
-bundled/live `repo-skills-router` and the repo or task skills produced by those
-workflows. Mode filtering removes an ineligible skill from both the system
-prompt and `/skill:*` commands; `disable-model-invocation` only controls prompt
-visibility after that filter.
+or:
+
+```yaml
+metadata:
+  disco-role: shared # Creator and Researcher
+```
+
+Creator owns the construction meta skills in this directory. Researcher owns
+the bundled/live `repo-skills-router` and the repo or task skills produced by
+those workflows. Shared skills provide contracts needed in both modes;
+`workflow-authoring` is the shared contract for deterministic scripts,
+structured environment handoffs, coverage, and recovery. Mode filtering
+removes an ineligible skill from both the system prompt and `/skill:*` commands;
+`disable-model-invocation` only controls prompt visibility after that filter.
 
 `distill-ml-knowledge` is the Creator bootstrap workflow and owner of the
 paper-aligned distillation vocabulary. It identifies anchor `z`, distinguishes
@@ -224,6 +233,15 @@ Main-agent planning owns the sub-skill structure and canonical ids, while each
 subagent receives a complete brief with evidence, target files, required
 references/scripts, boundaries, and quality rubrics for its assigned sub-skill.
 Every workflow subagent inherits the parent session mode and its skill boundary.
+
+Before the first coordinated `workflow` call, read
+[`workflow-authoring`](workflow-authoring/SKILL.md) completely. Keep long briefs
+in structured args, pass the canonical prepared environment to every dependent
+lane, and preserve stable IDs in the returned `complete` / `missing` / `errors`
+ledger. An incomplete batch is a recovery gate: run only the missing IDs again
+and do not integrate the successful subset as a complete result. The public
+[dynamic workflow guide](https://github.com/VectorSpaceLab/AREX-Skill/blob/main/cli/docs/dynamic-workflows.md) documents
+the runtime, timeout, usage, persistence, and run-control semantics.
 
 When these workflow skills are copied into another agent such as Claude Code or
 Codex, do not assume those DisCo-managed extensions exist. Follow the same

@@ -39,6 +39,12 @@ Type `/` in the editor to open command completion. Extensions can register custo
 | `/model` | Switch models |
 | `/scoped-models` | Enable/disable models for Ctrl+P cycling |
 | `/settings` | Thinking level, theme, message delivery, transport |
+| [`/workflows`](dynamic-workflows.md#run-controls) | Inspect and control active, persisted, and recovery workflow runs |
+| `/workflows-models` | View and edit the small, medium, and big model tiers used by workflows |
+| `/deep-research <question>` | Research a question across the web with cross-checked sources |
+| `/adversarial-review <task or question>` | Investigate a task and challenge findings with independent reviewers |
+| `/effort off|high|ultra` | Set standing workflow effort for substantive requests |
+| `/ultracode [off]` | Enable or disable standing maximal workflow effort |
 | `/resume` | Pick from previous sessions |
 | `/new` | Start a new session |
 | `/name <name>` | Set session display name |
@@ -69,6 +75,12 @@ You can submit messages while the agent is still working:
 On Windows Terminal, Alt+Enter is fullscreen by default. Remap it as described in [Terminal setup](terminal-setup.md) if you want disco to receive the shortcut.
 
 Configure delivery in [Settings](settings.md) with `steeringMode` and `followUpMode`.
+
+Background workflow execution has its own completion path: the workflow tool
+returns a run ID and ends the current turn, then delivers the result back as a
+follow-up when the run finishes. If another turn is active, the result waits
+rather than interrupting it. See [Dynamic workflows](dynamic-workflows.md) for
+run controls and recovery behavior.
 
 ## Sessions
 
@@ -302,8 +314,14 @@ disco --exclude-tools ask_question
 
 ## Design Principles
 
-DisCo keeps the core small and pushes workflow-specific behavior into extensions, skills, prompt templates, and packages.
+DisCo keeps the core small and pushes most task-specific behavior into
+extensions, skills, prompt templates, and packages.
 
-It intentionally does not include built-in MCP, sub-agents, permission popups, plan mode, to-dos, or background bash. You can build or install those workflows as extensions or packages, or use external tools such as containers and tmux.
+It intentionally does not include built-in MCP, permission popups, plan mode,
+to-dos, or background bash. The minimal coding-tool set also does not expose a
+general manual subagent command; coordinated subagents are managed by the
+built-in [dynamic workflow runtime](dynamic-workflows.md). Other workflows can
+be built or installed as extensions or packages, or run through external tools
+such as containers and tmux.
 
 For the full rationale, read the [blog post](https://mariozechner.at/posts/2025-11-30-disco-coding-agent/).

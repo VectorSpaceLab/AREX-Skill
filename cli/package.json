@@ -36,12 +36,13 @@
     "clean": "shx rm -rf dist",
     "build": "npm run clean && tsc -p tsconfig.build.json && node scripts/copy-assets.mjs && shx chmod +x dist/cli.js dist/rpc-entry.js",
     "typecheck": "tsc --noEmit -p tsconfig.build.json",
-    "test": "vitest --run --config vitest.config.ts",
+    "test": "vitest --run --config vitest.config.ts && node --test scripts/upstream-provenance.test.mjs",
     "test:examples": "tsc --noEmit -p tsconfig.examples.json",
     "verify:provenance": "node scripts/upstream-provenance.mjs --check",
+    "refresh:provenance": "node scripts/upstream-provenance.mjs --refresh-local",
     "verify:rpiv-todo-contract": "node scripts/verify-rpiv-todo-contract.mjs",
     "verify:package": "node scripts/verify-package.mjs",
-    "prepublishOnly": "npm run typecheck && npm test && npm run test:examples && npm run verify:provenance && npm run verify:rpiv-todo-contract && npm run build && npm run verify:package"
+    "prepublishOnly": "npm run verify:provenance && npm run typecheck && npm test && npm run test:examples && npm run verify:rpiv-todo-contract && npm run build && npm run verify:package"
   },
   "dependencies": {
     "@earendil-works/pi-agent-core": "0.83.0",

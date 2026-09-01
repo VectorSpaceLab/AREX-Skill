@@ -1,7 +1,8 @@
 export type { AdversarialReviewConfig } from "./adversarial-review.ts";
 export { generateAdversarialReviewWorkflow, generateMultiPerspectiveWorkflow } from "./adversarial-review.ts";
-export type { AgentRunOptions, AgentRunResult, WorkflowAgentOptions } from "./agent.ts";
-export { listAvailableModelSpecs, WorkflowAgent } from "./agent.ts";
+export type { AgentEnvironmentSpec, AgentRunOptions, AgentRunResult, WorkflowAgentOptions } from "./agent.ts";
+export { assertAgentEnvironment, listAvailableModelSpecs, WorkflowAgent } from "./agent.ts";
+export type { AgentUsage, AgentUsageRecord, TokenUsageTotals, UsageSource } from "./agent-usage.ts";
 export type { AgentHistoryEntry, AgentHistoryKind, AgentHistoryRole } from "./agent-history.ts";
 export { compactAgentHistory } from "./agent-history.ts";
 export type { AgentDefinition, AgentRegistry } from "./agent-registry.ts";
@@ -55,7 +56,14 @@ export {
 	saveModelTierConfig,
 	sortedTierNames,
 } from "./model-tier-config.ts";
-export type { PersistedRunState, RunPersistence, RunStatus } from "./run-persistence.ts";
+export type {
+	PersistedAgentAttempt,
+	PersistedAgentState,
+	PersistedRunLimits,
+	PersistedRunState,
+	RunPersistence,
+	RunStatus,
+} from "./run-persistence.ts";
 export { createRunPersistence, generateRunId } from "./run-persistence.ts";
 export {
 	parseCommandArgs,
@@ -75,7 +83,7 @@ export type {
 	WorkflowRunOptions,
 	WorkflowRunResult,
 } from "./workflow.ts";
-export { parseWorkflowScript, runWorkflow } from "./workflow.ts";
+export { extractWorkflowCoverage, parseWorkflowScript, runWorkflow } from "./workflow.ts";
 export { registerWorkflowCommands } from "./workflow-commands.ts";
 export {
 	buildForcedWorkflowPrompt,

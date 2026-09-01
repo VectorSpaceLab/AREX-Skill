@@ -39,6 +39,18 @@ inventory check without requiring a separate Pi checkout. Supplying the
 upstream root additionally verifies the exact Git commit/tag, tracked-tree
 cleanliness, upstream hashes, and every migration decision.
 
+When the pinned upstream baseline is unchanged and only local DisCo files have
+changed, use the local-only refresh workflow instead:
+
+```bash
+npm run refresh:provenance -- --add-local <relative-path>
+```
+
+This updates local hashes and explicitly approved `disco_owned` additions while
+preserving the recorded upstream identity, upstream hashes, and mappings. The
+external `--upstream-root` workflow is reserved for upstream migration and full
+upstream audits; it is not required by a normal npm release.
+
 No source file from Pi's `packages/agent` or `packages/tui` has been copied.
 Apart from the six explicitly listed OAuth support files, no source file from
 `packages/ai` has been copied. Those packages remain external dependencies as

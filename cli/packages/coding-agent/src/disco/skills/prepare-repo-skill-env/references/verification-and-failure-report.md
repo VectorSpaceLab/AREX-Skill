@@ -124,6 +124,12 @@ shape:
     "pythonExecutable": "/absolute/path/to/prefix/bin/python",
     "backends": ["cpu", "cuda"]
   },
+  "workflowEnvironment": {
+    "executable": "/absolute/path/to/prefix/bin/python",
+    "cwd": "/absolute/path/to/repo",
+    "package": "distribution-name",
+    "version": "1.2.3"
+  },
   "additionalEnvironments": [],
   "backendPlan": {
     "required": [
@@ -174,6 +180,14 @@ pass, or store credentials, tokens, or secret environment-variable values. Use
 enough to remove a secret; preserve the executable, operation, and non-secret
 arguments needed to diagnose it.
 
+The `environment` object is private setup evidence. In particular,
+`environment.pythonExecutable` is not the object to pass directly to workflow
+`agent()`. `create-repo-skill` must use `workflowEnvironment`, whose canonical
+runtime fields are `executable`, optional `cwd`, distribution `package`, and
+exact `version`. Older private reports may call the latter two
+`expectedDistribution` and `expectedVersion`; those names are report evidence,
+not the authored workflow contract.
+
 ## Handoff Template
 
 Use this shape for every `ok`, `partial`, or `failed` handoff:
@@ -188,6 +202,7 @@ Environment manager: <conda|micromamba|venv|uv>
 Environment prefix: <environment_prefix>
 Additional environment(s): <prefix/backend or none>
 Temporary inspection Python: <python_executable>
+Workflow environment: {"executable":"<python_executable>","cwd":"<repo_path>","package":"<distribution_name>","version":"<verified_version>"}
 Installed package name(s): <distribution names>
 Verified import(s): <modules>
 Verification report: <repo_env_report.json>

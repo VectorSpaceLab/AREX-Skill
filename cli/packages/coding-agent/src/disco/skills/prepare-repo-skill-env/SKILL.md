@@ -348,6 +348,12 @@ missing output or mark skipped gates as passed. Include at least:
     "pythonExecutable": "/absolute/path/to/inspection-env/bin/python",
     "backends": ["cpu", "cuda"]
   },
+  "workflowEnvironment": {
+    "executable": "/absolute/path/to/inspection-env/bin/python",
+    "cwd": "/absolute/path/to/repo",
+    "package": "distribution-name",
+    "version": "1.2.3"
+  },
   "additionalEnvironments": [],
   "backendPlan": {
     "required": [
@@ -378,6 +384,11 @@ missing output or mark skipped gates as passed. Include at least:
 }
 ```
 
+`environment.pythonExecutable` remains private report evidence. It is not the
+object to pass directly to workflow `agent()`. The caller must use the canonical
+`workflowEnvironment` object with `executable`, optional `cwd`, distribution
+`package`, and exact `version`.
+
 Use `status: "ok"` only when every required preparation/backend gate passes.
 Use `status: "partial"` only after explicit user acceptance, with
 `skillDrafting: true`, `fullBackendVerification: false`, and
@@ -399,6 +410,7 @@ Environment manager: <conda|micromamba|venv|uv>
 Environment prefix: <environment_prefix>
 Additional environment(s): <prefix/backend or none>
 Temporary inspection Python: <python_executable>
+Workflow environment: {"executable":"<python_executable>","cwd":"<repo_path>","package":"<distribution_name>","version":"<verified_version>"}
 Installed package name(s): <distribution names>
 Verified import(s): <modules>
 Verification report: <repo_env_report.json>

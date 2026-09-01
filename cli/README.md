@@ -131,6 +131,19 @@ Workflow runs support structured results, model routing, bounded concurrency,
 cancellation, saved workflows, persisted run state, and optional git
 worktrees.
 
+Runs are backgrounded by default: the tool returns a run ID, the current turn
+ends normally, and the completed or incomplete result is delivered back into
+the conversation. A configured agent timeout gets one retry by default unless
+the run overrides it; DisCo aborts and drains the timed-out attempt before the
+retry starts. Runs that return explicit missing IDs are marked as requiring
+recovery instead of silently treating the successful subset as complete.
+
+Prepared package workflows pass an absolute executable plus the expected
+package version to each dependent subagent, and DisCo asserts that environment
+before the subagent session starts. See [Dynamic workflows](docs/dynamic-workflows.md)
+for the execution, environment, coverage, recovery, usage, and persistence
+contracts.
+
 ## CLI examples
 
 ```bash

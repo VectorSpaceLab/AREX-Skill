@@ -11,6 +11,9 @@ describe("DisCo mode prompts", () => {
 		expect(prompt).toContain("source or task anchor");
 		expect(prompt).toContain("scope, ground, construct, and verify");
 		expect(prompt).toContain("Only visible meta and shared skills are eligible");
+		expect(prompt).toContain("Explicit `import-repo-skills-to-agent` export is a Creator meta operation");
+		expect(prompt).toContain("selected operating repo-skill artifacts");
+		expect(prompt).toContain("ask to switch to Researcher");
 		expect(prompt).toContain("distill-ml-knowledge");
 		expect(prompt).toContain("anchor `z`");
 		expect(prompt).toContain("scoped capabilities `Q`");
@@ -18,7 +21,8 @@ describe("DisCo mode prompts", () => {
 		expect(prompt).toContain("Detailed construction-strategy");
 		expect(prompt).toContain("A source anchor may start task-agnostic distillation");
 		expect(prompt).toContain("construction record");
-		expect(prompt).toContain("If asked to perform the downstream task, state the mode mismatch");
+		expect(prompt).toContain("Only a true downstream research/software task is a mode mismatch");
+		expect(prompt).toContain("Creator construction, maintenance, validation, and explicit cross-agent export stay here");
 		expect(prompt).toContain("restart with --researcher");
 		expect(prompt).not.toContain("path preference: direct | reusable | auto");
 		expect(prompt).not.toContain("repo-to-skills output as a high-reuse managed special case");

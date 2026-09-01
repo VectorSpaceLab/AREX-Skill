@@ -27,8 +27,11 @@ function summarizeRun(run: PersistedRunState): string {
 	const icon = STATUS_ICON[run.status] ?? "?";
 	const done = run.agents.filter((a) => a.status === "done").length;
 	const total = run.agents.length;
-	const tokens = run.tokenUsage ? ` · ${run.tokenUsage.total.toLocaleString()} tok` : "";
-	return `${icon} ${run.runId}  ${run.workflowName} [${run.status}] ${done}/${total} agents${tokens}`;
+	const tokens = run.tokenUsage
+		? ` · ${run.tokenUsage.total.toLocaleString()} tok${run.tokenUsage.estimated ? " est" : ""}`
+		: "";
+	const recovery = run.complete === false ? ` · recovery required (${run.missing?.length ?? 0} missing)` : "";
+	return `${icon} ${run.runId}  ${run.workflowName} [${run.status}] ${done}/${total} agents${tokens}${recovery}`;
 }
 
 function oneLineProgress(snapshot: WorkflowSnapshot): string {
@@ -61,8 +64,8 @@ function watchRun(manager: WorkflowManager, pi: ExtensionAPI, ctx: ExtensionComm
 		if (!e || e.runId === id) update();
 	};
 	let settled = false;
-	const progressEvents = ["agentStart", "agentEnd", "phase", "log"];
-	const finalEvents = ["complete", "error", "stopped", "paused"];
+	const progressEvents = ["agentStart", "agentAttemptEnd", "agentEnd", "phase", "log", "tokenUsage"];
+	const finalEvents = ["complete", "incomplete", "error", "stopped", "paused"];
 	const finish = (e: { runId?: string }) => {
 		if (e && e.runId !== id) return;
 		if (settled) return;
@@ -88,12 +91,29 @@ function watchRun(manager: WorkflowManager, pi: ExtensionAPI, ctx: ExtensionComm
 function renderPersistedStatus(run: PersistedRunState): string {
 	const lines = [`${STATUS_ICON[run.status] ?? "?"} ${run.workflowName} (${run.runId}) — ${run.status}`];
 	if (run.currentPhase) lines.push(`  phase: ${run.currentPhase}`);
+	if (run.complete === false) {
+		lines.push("  coverage: incomplete — recovery required");
+		lines.push(`  missing: ${run.missing?.join(", ") || "not declared"}`);
+	}
+	if (run.recoveryOfRunId) {
+		lines.push(`  recovery: round ${run.recoveryRound ?? "?"} of ${run.recoveryOfRunId}`);
+	}
+	if (run.error || run.errorCode) {
+		const code = run.errorCode ? `[${run.errorCode}] ` : "";
+		lines.push(`  root error: ${code}${run.error ?? "unknown"}${run.recoverable ? " (recoverable)" : ""}`);
+	}
 	for (const agent of run.agents) {
 		const icon =
 			agent.status === "done" ? "✓" : agent.status === "error" ? "✗" : agent.status === "running" ? "◆" : "·";
-		lines.push(`  ${icon} ${agent.label}`);
+		const identity = agent.stableId
+			? ` [${agent.stableId}${agent.callIndex !== undefined ? `#${agent.callIndex}` : ""}]`
+			: "";
+		const attempts = agent.attempts?.length ? ` · ${agent.attempts.length} attempt(s)` : "";
+		lines.push(`  ${icon} ${agent.label}${identity}${attempts}`);
 	}
-	if (run.tokenUsage) lines.push(`  tokens: ${run.tokenUsage.total.toLocaleString()}`);
+	if (run.tokenUsage) {
+		lines.push(`  tokens: ${run.tokenUsage.total.toLocaleString()}${run.tokenUsage.estimated ? " (includes estimate)" : ""}`);
+	}
 	if (run.durationMs) lines.push(`  duration: ${(run.durationMs / 1000).toFixed(1)}s`);
 	return lines.join("\n");
 }

@@ -3,8 +3,21 @@ import vm from "node:vm";
 import type { Node } from "acorn";
 import { parse } from "acorn";
 import type { TSchema } from "typebox";
-import type { AgentUsage } from "./agent.ts";
-import { WorkflowAgent, type WorkflowAgentOptions } from "./agent.ts";
+import {
+	type AgentEnvironmentInput,
+	normalizeAgentEnvironment,
+	WorkflowAgent,
+	type WorkflowAgentOptions,
+} from "./agent.ts";
+import {
+	addAgentUsage,
+	cloneTokenUsage,
+	emptyTokenUsage,
+	hasReportedUsage,
+	type AgentUsage,
+	type AgentUsageRecord,
+	type TokenUsageTotals,
+} from "./agent-usage.ts";
 import type { AgentHistoryEntry } from "./agent-history.ts";
 import {
 	type AgentDefinition,
@@ -13,7 +26,15 @@ import {
 	loadAgentRegistry,
 	resolveAgentType,
 } from "./agent-registry.ts";
-import { DEFAULT_AGENT_TIMEOUT_MS, MAX_AGENT_RETRIES, MAX_AGENTS_PER_RUN, MAX_CONCURRENCY } from "./config.ts";
+import {
+	DEFAULT_AGENT_RETRIES,
+	DEFAULT_AGENT_TIMEOUT_MS,
+	DEFAULT_MAX_RECOVERY_ROUNDS,
+	MAX_AGENT_RETRIES,
+	MAX_AGENTS_PER_RUN,
+	MAX_CONCURRENCY,
+	MAX_RECOVERY_ROUNDS,
+} from "./config.ts";
 import { WorkflowError, WorkflowErrorCode, wrapError } from "./errors.ts";
 import { createWorkflowLogger } from "./logger.ts";
 import { parseModelRoutingFromMeta, resolveModelForPhase } from "./model-routing.ts";
@@ -50,12 +71,15 @@ export interface SharedRuntime {
 	limiter: <T>(fn: () => Promise<T>) => Promise<T>;
 	agentCount: number;
 	spent: number;
-	tokenUsage: { input: number; output: number; total: number; cost: number; cacheRead: number; cacheWrite: number };
+	tokenUsage: TokenUsageTotals;
+	liveUsage: Map<string, AgentUsage>;
 	depth: number;
 }
 
 export interface WorkflowRunOptions extends WorkflowAgentOptions {
 	args?: unknown;
+	/** Preflight diagnostics emitted before the script starts. */
+	initialLogs?: string[];
 	agent?: Pick<WorkflowAgent, "run">;
 	/** The session's main model (provider/id), shown in /workflows for default agents. */
 	mainModel?: string;
@@ -66,8 +90,16 @@ export interface WorkflowRunOptions extends WorkflowAgentOptions {
 	 */
 	agentRegistry?: AgentRegistry;
 	concurrency?: number;
-	/** Retry attempts after a recoverable agent failure. Default 0. */
+	/** Retry attempts after a recoverable agent failure. Defaults to 1 with a timeout, otherwise 0. */
 	agentRetries?: number;
+	/** Maximum recovery rounds for recoverMissing(). */
+	maxRecoveryRounds?: number;
+	/** Stable parent run ID when this run is recovering an incomplete run. */
+	recoveryOfRunId?: string;
+	/** Recovery round number for persistence and operator diagnostics. */
+	recoveryRound?: number;
+	/** Seed finalized usage when resuming a persisted run. */
+	initialTokenUsage?: TokenUsageTotals;
 	tokenBudget?: number | null;
 	signal?: AbortSignal;
 	/** Maximum number of agents allowed in this run. Default: 1000 */
@@ -96,8 +128,31 @@ export interface WorkflowRunOptions extends WorkflowAgentOptions {
 	confirm?: (promptText: string, options: CheckpointOptions) => Promise<unknown>;
 	onLog?: (message: string) => void;
 	onPhase?: (title: string) => void;
-	onAgentStart?: (event: { label: string; phase?: string; prompt: string; model?: string; subSkill?: string }) => void;
+	onAgentStart?: (event: {
+		stableId: string;
+		callIndex: number;
+		label: string;
+		phase?: string;
+		prompt: string;
+		model?: string;
+		subSkill?: string;
+	}) => void;
+	onAgentAttemptEnd?: (event: {
+		stableId: string;
+		callIndex: number;
+		label: string;
+		phase?: string;
+		attempt: number;
+		result: unknown;
+		tokens: number;
+		usage?: AgentUsageRecord;
+		error?: string;
+		errorCode?: WorkflowErrorCode;
+		recoverable?: boolean;
+	}) => void;
 	onAgentEnd?: (event: {
+		stableId: string;
+		callIndex: number;
 		label: string;
 		phase?: string;
 		result: unknown;
@@ -107,8 +162,16 @@ export interface WorkflowRunOptions extends WorkflowAgentOptions {
 		error?: string;
 		errorCode?: WorkflowErrorCode;
 		recoverable?: boolean;
+		attempts?: AgentUsageRecord[];
+		usage?: AgentUsageRecord;
 	}) => void;
-	onAgentHistory?: (event: { label: string; phase?: string; history: AgentHistoryEntry[] }) => void;
+	onAgentHistory?: (event: {
+		stableId: string;
+		callIndex: number;
+		label: string;
+		phase?: string;
+		history: AgentHistoryEntry[];
+	}) => void;
 	onTokenUsage?: (usage: {
 		input: number;
 		output: number;
@@ -116,7 +179,8 @@ export interface WorkflowRunOptions extends WorkflowAgentOptions {
 		cost: number;
 		cacheRead?: number;
 		cacheWrite?: number;
-	}) => void;
+		estimated?: boolean;
+	}, info?: { source: "live" | "final"; finalized: boolean; stableId?: string; attempt?: number }) => void;
 }
 
 export interface WorkflowRunResult<T = unknown> {
@@ -134,7 +198,13 @@ export interface WorkflowRunResult<T = unknown> {
 		cost: number;
 		cacheRead?: number;
 		cacheWrite?: number;
+		estimated?: boolean;
 	};
+	liveTokenUsage?: TokenUsageTotals;
+	complete?: boolean;
+	missing?: string[];
+	errors?: Array<{ id: string; error?: string }>;
+	coverage?: WorkflowCoverage;
 }
 
 export interface AgentOptions<TSchemaDef extends TSchema | undefined = TSchema | undefined> {
@@ -170,6 +240,14 @@ export interface AgentOptions<TSchemaDef extends TSchema | undefined = TSchema |
 	timeoutMs?: number | null;
 	/** Retry attempts after a recoverable failure for this specific agent. */
 	retries?: number;
+	/** Prepared environment entry and exact package/version assertion. */
+	environment?: AgentEnvironmentInput;
+}
+
+export interface WorkflowCoverage {
+	complete: boolean;
+	missing: string[];
+	errors: Array<{ id: string; error?: string }>;
 }
 
 /** Options for a human checkpoint() — a deterministic, journaled, replayable gate. */
@@ -253,8 +331,12 @@ export async function runWorkflow<T = unknown>(
 	const { meta, body } = parseWorkflowScript(script);
 	// Per-phase model routing from meta.phases[].model, with meta.model as the default.
 	const routingConfig = parseModelRoutingFromMeta(meta.phases, meta.model);
-	const maxAgents = options.maxAgents ?? MAX_AGENTS_PER_RUN;
+	const maxAgents = normalizeMaxAgents(options.maxAgents ?? MAX_AGENTS_PER_RUN);
 	const agentTimeoutMs = options.agentTimeoutMs !== undefined ? options.agentTimeoutMs : DEFAULT_AGENT_TIMEOUT_MS;
+	const fatalController = new AbortController();
+	const runSignal = options.signal
+		? AbortSignal.any([options.signal, fatalController.signal])
+		: fatalController.signal;
 	const runId = options.runId ?? `run-${started.toString(36)}`;
 	const baseCwd = options.cwd ?? process.cwd();
 	// Snapshot the agentType registry ONCE per run so two agent() calls can't
@@ -290,8 +372,9 @@ export async function runWorkflow<T = unknown>(
 	const shared: SharedRuntime = options.sharedRuntime ?? {
 		limiter: createLimiter(concurrency),
 		agentCount: 0,
-		spent: 0,
-		tokenUsage: { input: 0, output: 0, total: 0, cost: 0, cacheRead: 0, cacheWrite: 0 },
+		spent: options.initialTokenUsage?.total ?? 0,
+		tokenUsage: cloneTokenUsage(options.initialTokenUsage ?? emptyTokenUsage()),
+		liveUsage: new Map(),
 		depth: 0,
 	};
 	const limiter = shared.limiter;
@@ -301,6 +384,8 @@ export async function runWorkflow<T = unknown>(
 		state.logs.push(text);
 		logger.log(text);
 	};
+	const emittedEnvironmentWarnings = new Set<string>();
+	for (const message of options.initialLogs ?? []) log(message);
 
 	const phase = (title: string, phaseOptions?: { budget?: number }) => {
 		state.currentPhase = title;
@@ -321,13 +406,22 @@ export async function runWorkflow<T = unknown>(
 	});
 
 	const throwIfAborted = () => {
-		if (options.signal?.aborted) {
+		if (runSignal.aborted) {
 			throw new WorkflowError("workflow aborted", WorkflowErrorCode.WORKFLOW_ABORTED, { recoverable: true });
 		}
 	};
 
 	const agent = async (prompt: string, agentOptions: AgentOptions = {}) => {
 		throwIfAborted();
+		if (agentOptions.environment !== undefined) {
+			const normalized = normalizeAgentEnvironment(agentOptions.environment);
+			agentOptions = { ...agentOptions, environment: normalized.environment };
+			for (const warning of normalized.warnings) {
+				if (emittedEnvironmentWarnings.has(warning)) continue;
+				emittedEnvironmentWarnings.add(warning);
+				log(`[warn] ${warning}`);
+			}
+		}
 
 		// Check agent limit
 		if (shared.agentCount >= maxAgents) {
@@ -403,6 +497,7 @@ export async function runWorkflow<T = unknown>(
 		shared.agentCount++;
 		const subSkill = normalizeLabel(agentOptions.subSkill);
 		const label = requestedLabel || defaultAgentLabel(assignedPhase, shared.agentCount, subSkill);
+		const stableId = subSkill ?? `agent-${callIndex}`;
 
 		// Longest-unchanged-prefix resume: replay a cached result only while the
 		// prefix is still intact — this call's index is before the first changed/new
@@ -413,8 +508,24 @@ export async function runWorkflow<T = unknown>(
 		const hashMatches = cached != null && cached.hash === callHash;
 		const cachedEmptyOutput = hashMatches && isEmptyTextAgentResult(cached.result, agentOptions.schema);
 		if (hashMatches && !cachedEmptyOutput && callIndex < state.firstMiss) {
-			options.onAgentStart?.({ label, phase: assignedPhase, prompt, model: displayModel, subSkill });
-			options.onAgentEnd?.({ label, phase: assignedPhase, result: cached.result, tokens: 0, model: displayModel });
+			options.onAgentStart?.({
+				stableId,
+				callIndex,
+				label,
+				phase: assignedPhase,
+				prompt,
+				model: displayModel,
+				subSkill,
+			});
+			options.onAgentEnd?.({
+				stableId,
+				callIndex,
+				label,
+				phase: assignedPhase,
+				result: cached.result,
+				tokens: 0,
+				model: displayModel,
+			});
 			return cached.result;
 		}
 		// A genuine miss (no journal entry, or the hash changed) marks where the
@@ -423,10 +534,12 @@ export async function runWorkflow<T = unknown>(
 
 		return limiter(async () => {
 			const timeout = agentOptions.timeoutMs !== undefined ? agentOptions.timeoutMs : agentTimeoutMs;
-			const retryAttempts = normalizeAgentRetries(agentOptions.retries ?? options.agentRetries ?? 0);
+			const retryAttempts = normalizeAgentRetries(
+				agentOptions.retries ?? options.agentRetries ?? (timeout !== null ? DEFAULT_AGENT_RETRIES : 0),
+			);
 			const maxAttempts = retryAttempts + 1;
 
-			options.onAgentStart?.({ label, phase: assignedPhase, prompt, model: displayModel, subSkill });
+			options.onAgentStart?.({ stableId, callIndex, label, phase: assignedPhase, prompt, model: displayModel, subSkill });
 
 			// Optional per-agent worktree isolation (deterministic name -> stable resume keys).
 			let worktree: Worktree | undefined;
@@ -440,18 +553,45 @@ export async function runWorkflow<T = unknown>(
 			// estimate when the provider reports no usage (total === 0). Usage is reset
 			// per retry attempt so a failed attempt does not double-count the next one.
 			let usage: AgentUsage | undefined;
-			const recordTokens = (result: unknown): number => {
-				const tokens = usage && usage.total > 0 ? usage.total : estimateTokens(result) + estimateTokens(prompt);
-				if (usage) {
-					shared.tokenUsage.input += usage.input;
-					shared.tokenUsage.output += usage.output;
-					shared.tokenUsage.cost += usage.cost;
-					shared.tokenUsage.cacheRead += usage.cacheRead;
-					shared.tokenUsage.cacheWrite += usage.cacheWrite;
+			const attempts: AgentUsageRecord[] = [];
+			const finalizedUsage = (): AgentUsage | undefined => (hasReportedUsage(usage) ? usage : undefined);
+			const recordTokens = (result: unknown, attempt: number): { tokens: number; record: AgentUsageRecord } => {
+				const reportedUsage = finalizedUsage();
+				const tokens = reportedUsage ? reportedUsage.total : estimateTokens(result) + estimateTokens(prompt);
+				const record: AgentUsageRecord = {
+					input: reportedUsage?.input ?? 0,
+					output: reportedUsage?.output ?? 0,
+					cacheRead: reportedUsage?.cacheRead ?? 0,
+					cacheWrite: reportedUsage?.cacheWrite ?? 0,
+					total: tokens,
+					cost: reportedUsage?.cost ?? 0,
+					source: reportedUsage ? "terminal" : "estimated",
+					attempt,
+				};
+				if (reportedUsage) {
+					addAgentUsage(shared.tokenUsage, reportedUsage);
+				} else {
+					shared.tokenUsage.estimated = true;
 				}
-				shared.tokenUsage.total += tokens;
+				shared.tokenUsage.total += reportedUsage ? 0 : tokens;
 				shared.spent += tokens;
-				return tokens;
+				attempts.push(record);
+				return { tokens, record };
+			};
+
+			const reportLiveUsage = (attempt: number, live: AgentUsage) => {
+				shared.liveUsage.set(`${stableId}:${attempt}`, live);
+				const liveTotals = sumLiveUsage(shared.liveUsage.values());
+				options.onTokenUsage?.(liveTotals, {
+					source: "live",
+					finalized: false,
+					stableId,
+					attempt,
+				});
+			};
+
+			const clearLiveUsage = (attempt: number) => {
+				shared.liveUsage.delete(`${stableId}:${attempt}`);
 			};
 
 			try {
@@ -462,37 +602,41 @@ export async function runWorkflow<T = unknown>(
 
 						// Run agent with timeout
 						const result = await withTimeout(
-							agentRunner.run(prompt, {
-								label,
-								subSkill,
-								schema: agentOptions.schema,
-								signal: options.signal,
-								instructions: buildAgentInstructions(assignedPhase, agentOptions, agentDef),
-								model: modelSpec,
-								tier: agentOptions.tier,
-								toolNames: agentDef?.tools,
-								disallowedToolNames: agentDef?.disallowedTools,
-								cwd: runCwd,
-								onModelResolved: (id: string) => {
-									displayModel = id;
-								},
-								onModelFallback: (spec: string) => {
-									// Make the silent degrade visible in /workflows, not just console.
-									log(`${label}: model "${spec}" unavailable — using the session default`);
-								},
-								onUsage: (u: AgentUsage) => {
-									usage = u;
-								},
-								onHistory: (history: AgentHistoryEntry[]) => {
-									options.onAgentHistory?.({ label, phase: assignedPhase, history });
-								},
-							} as any),
+							(attemptSignal) =>
+								agentRunner.run(prompt, {
+									label,
+									subSkill,
+									schema: agentOptions.schema,
+									signal: attemptSignal,
+									instructions: buildAgentInstructions(assignedPhase, agentOptions, agentDef),
+									model: modelSpec,
+									tier: agentOptions.tier,
+									toolNames: agentDef?.tools,
+									disallowedToolNames: agentDef?.disallowedTools,
+									environment: agentOptions.environment,
+									cwd: runCwd,
+									onModelResolved: (id: string) => {
+										displayModel = id;
+									},
+									onModelFallback: (spec: string) => {
+										// Make the silent degrade visible in /workflows, not just console.
+										log(`${label}: model "${spec}" unavailable — using the session default`);
+									},
+									onUsage: (u: AgentUsage) => {
+										usage = u;
+									},
+									onLiveUsage: (u: AgentUsage) => reportLiveUsage(attempt, u),
+									onHistory: (history: AgentHistoryEntry[]) => {
+										options.onAgentHistory?.({ stableId, callIndex, label, phase: assignedPhase, history });
+									},
+								} as any),
 							timeout,
 							label,
+							runSignal,
 						);
 
 						throwIfAborted();
-						if (isEmptyTextAgentResult(result, agentOptions.schema)) {
+						if (result === null || result === undefined || isEmptyTextAgentResult(result, agentOptions.schema)) {
 							throw new WorkflowError(
 								"Subagent produced no assistant output",
 								WorkflowErrorCode.AGENT_EMPTY_OUTPUT,
@@ -503,23 +647,100 @@ export async function runWorkflow<T = unknown>(
 							);
 						}
 
-						const tokens = recordTokens(result);
+						const { tokens, record } = recordTokens(result, attempt);
+						clearLiveUsage(attempt);
+						options.onAgentAttemptEnd?.({
+							stableId,
+							callIndex,
+							label,
+							phase: assignedPhase,
+							attempt,
+							result,
+							tokens,
+							usage: record,
+						});
 						options.onAgentJournal?.({ index: callIndex, hash: callHash, result });
 						options.onAgentEnd?.({
+							stableId,
+							callIndex,
 							label,
 							phase: assignedPhase,
 							result,
 							tokens,
 							worktree: runCwd,
 							model: displayModel,
+							attempts: [...attempts],
+							usage: record,
 						});
 						return result;
 					} catch (error) {
-						if (options.signal?.aborted) throw error;
+						if (runSignal.aborted) {
+							const workflowError = new WorkflowError(
+								`Agent "${label}" was aborted because the workflow stopped`,
+								WorkflowErrorCode.WORKFLOW_ABORTED,
+								{ recoverable: true, agentLabel: label },
+							);
+							const reportedUsage = finalizedUsage();
+							let record: AgentUsageRecord | undefined;
+							if (reportedUsage) {
+								record = {
+									...reportedUsage,
+									source: "terminal",
+									attempt,
+								};
+								addAgentUsage(shared.tokenUsage, reportedUsage);
+								shared.spent += reportedUsage.total;
+								attempts.push(record);
+							}
+							clearLiveUsage(attempt);
+							options.onAgentAttemptEnd?.({
+								stableId,
+								callIndex,
+								label,
+								phase: assignedPhase,
+								attempt,
+								result: null,
+								tokens: reportedUsage?.total ?? 0,
+								usage: record,
+								error: workflowError.message,
+								errorCode: workflowError.code,
+								recoverable: workflowError.recoverable,
+							});
+							options.onAgentEnd?.({
+								stableId,
+								callIndex,
+								label,
+								phase: assignedPhase,
+								result: null,
+								tokens: reportedUsage?.total ?? 0,
+								worktree: runCwd,
+								model: displayModel,
+								error: workflowError.message,
+								errorCode: workflowError.code,
+								recoverable: workflowError.recoverable,
+								attempts: [...attempts],
+								usage: record,
+							});
+							throw workflowError;
+						}
 
 						const workflowError = wrapError(error, { agentLabel: label });
 						logger.error(`agent ${label} attempt ${attempt}/${maxAttempts} failed: ${workflowError.message}`);
-						const tokens = recordTokens(null);
+						const { tokens, record } = recordTokens(null, attempt);
+						clearLiveUsage(attempt);
+						options.onAgentAttemptEnd?.({
+							stableId,
+							callIndex,
+							label,
+							phase: assignedPhase,
+							attempt,
+							result: null,
+							tokens,
+							usage: record,
+							error: workflowError.message,
+							errorCode: workflowError.code,
+							recoverable: workflowError.recoverable,
+						});
 
 						if (workflowError.recoverable && attempt < maxAttempts) {
 							log(
@@ -529,6 +750,8 @@ export async function runWorkflow<T = unknown>(
 						}
 
 						options.onAgentEnd?.({
+							stableId,
+							callIndex,
 							label,
 							phase: assignedPhase,
 							result: null,
@@ -538,6 +761,8 @@ export async function runWorkflow<T = unknown>(
 							error: workflowError.message,
 							errorCode: workflowError.code,
 							recoverable: workflowError.recoverable,
+							attempts: [...attempts],
+							usage: record,
 						});
 
 						if (workflowError.recoverable) {
@@ -565,22 +790,29 @@ export async function runWorkflow<T = unknown>(
 				"parallel() expects an array of functions, not promises. Wrap each call: () => agent(...)",
 			);
 		}
-		return Promise.all(
+		const results = Array<unknown>(thunks.length).fill(null);
+		let fatalError: WorkflowError | undefined;
+		await Promise.all(
 			thunks.map(async (thunk, index) => {
 				try {
-					return await thunk();
+					results[index] = await thunk();
 				} catch (error) {
-					if (options.signal?.aborted) throw error;
+					if (fatalError || runSignal.aborted) return;
 					const workflowError = wrapError(error);
-					// Non-recoverable failures (token budget / agent limit exhausted) must
-					// halt the whole run, exactly like a directly-awaited agent() — not be
-					// swallowed into a null in the result array.
-					if (!workflowError.recoverable) throw workflowError;
+					// A run-fatal failure aborts siblings immediately, but the parent waits
+					// for every started thunk to settle before surfacing the original cause.
+					if (!workflowError.recoverable) {
+						fatalError = workflowError;
+						fatalController.abort();
+						return;
+					}
 					log(`parallel[${index}] failed: ${workflowError.message}`);
-					return null;
 				}
 			}),
 		);
+		if (fatalError) throw fatalError;
+		throwIfAborted();
+		return results;
 	};
 
 	const pipeline = async (
@@ -592,8 +824,8 @@ export async function runWorkflow<T = unknown>(
 		if (stages.some((stage) => typeof stage !== "function")) {
 			throw new TypeError("pipeline() stages must be functions: pipeline(items, item => ..., result => ...)");
 		}
-		return Promise.all(
-			items.map(async (item, index) => {
+		return parallel(
+			items.map((item, index) => async () => {
 				let value: unknown = item;
 				for (const stage of stages) {
 					try {
@@ -601,7 +833,7 @@ export async function runWorkflow<T = unknown>(
 						value = await stage(value, item, index);
 						throwIfAborted();
 					} catch (error) {
-						if (options.signal?.aborted) throw error;
+						if (runSignal.aborted) throw error;
 						const workflowError = wrapError(error);
 						// Non-recoverable failures halt the whole run (see parallel()).
 						if (!workflowError.recoverable) throw workflowError;
@@ -630,6 +862,7 @@ export async function runWorkflow<T = unknown>(
 			const child = await runWorkflow(childScript, {
 				...options,
 				args: childArgs,
+				signal: runSignal,
 				sharedRuntime: shared,
 				// A nested run is its own script; never reuse the parent's resume journal.
 				resumeJournal: undefined,
@@ -840,6 +1073,13 @@ export async function runWorkflow<T = unknown>(
 		return reply;
 	};
 
+	const recover = (jobs: unknown[], worker: (job: unknown, round: number) => Promise<unknown> | unknown, recoveryOptions?: RecoveryOptions) =>
+		recoverMissing(jobs, worker, {
+			maxRounds: recoveryOptions?.maxRounds ?? options.maxRecoveryRounds ?? DEFAULT_MAX_RECOVERY_ROUNDS,
+			noProgressRounds: recoveryOptions?.noProgressRounds,
+			id: recoveryOptions?.id,
+		}, parallel);
+
 	const context = vm.createContext({
 		agent,
 		parallel,
@@ -852,6 +1092,7 @@ export async function runWorkflow<T = unknown>(
 		retry,
 		gate,
 		checkpoint,
+		recoverMissing: recover,
 		log,
 		phase,
 		args: options.args,
@@ -879,8 +1120,10 @@ export async function runWorkflow<T = unknown>(
 		log(`Logs persisted to ${logFile}`);
 	}
 
-	// Emit final token usage
-	options.onTokenUsage?.(shared.tokenUsage);
+	const coverage = extractWorkflowCoverage(result);
+	// Emit final token usage only after every attempt has settled. Live estimates
+	// are emitted separately and never enter this finalized accounting object.
+	options.onTokenUsage?.(shared.tokenUsage, { source: "final", finalized: true });
 
 	return {
 		meta,
@@ -891,6 +1134,15 @@ export async function runWorkflow<T = unknown>(
 		durationMs: Date.now() - started,
 		runId,
 		tokenUsage: shared.tokenUsage,
+		liveTokenUsage: sumLiveUsage(shared.liveUsage.values()),
+		...(coverage
+			? {
+				complete: coverage.complete,
+				missing: coverage.missing,
+				errors: coverage.errors,
+				coverage,
+			}
+			: {}),
 	};
 }
 
@@ -903,13 +1155,18 @@ export function parseWorkflowScript(script: string): { meta: WorkflowMeta; body:
 		);
 	}
 
-	const ast = parse(script, {
-		ecmaVersion: "latest",
-		sourceType: "module",
-		allowAwaitOutsideFunction: true,
-		allowReturnOutsideFunction: true,
-		ranges: false,
-	}) as AnyNode;
+	let ast: AnyNode;
+	try {
+		ast = parse(script, {
+			ecmaVersion: "latest",
+			sourceType: "module",
+			allowAwaitOutsideFunction: true,
+			allowReturnOutsideFunction: true,
+			ranges: false,
+		}) as AnyNode;
+	} catch (error) {
+		throw formatWorkflowParseError(script, error);
+	}
 
 	const first = ast.body?.[0] as AnyNode | undefined;
 	if (first?.type !== "ExportNamedDeclaration") {
@@ -1070,6 +1327,7 @@ function hashAgentCall(
 		phase: phase ?? null,
 		subSkill: options.subSkill ?? null,
 		agentType: options.agentType ?? null,
+		environment: options.environment ?? null,
 		// Resolved definition (tools/model/prompt) so editing an agent .md invalidates
 		// this call's cached result on a later resume.
 		agentDef: agentDefKey,
@@ -1113,29 +1371,212 @@ function normalizeAgentRetries(value: unknown): number {
 	return Math.min(MAX_AGENT_RETRIES, Math.floor(value));
 }
 
+function normalizeMaxAgents(value: unknown): number {
+	if (typeof value !== "number" || !Number.isFinite(value) || value < 1) return 1;
+	return Math.min(MAX_AGENTS_PER_RUN, Math.floor(value));
+}
+
+function normalizeRecoveryRounds(value: unknown): number {
+	if (typeof value !== "number" || !Number.isFinite(value) || value < 1) return DEFAULT_MAX_RECOVERY_ROUNDS;
+	return Math.min(MAX_RECOVERY_ROUNDS, Math.floor(value));
+}
+
+function sumLiveUsage(usages: Iterable<AgentUsage>): TokenUsageTotals {
+	const total = emptyTokenUsage();
+	for (const usage of usages) addAgentUsage(total, usage);
+	return total;
+}
+
+function formatWorkflowParseError(script: string, error: unknown): WorkflowError {
+	const syntaxError = error as { message?: string; loc?: { line?: number; column?: number } };
+	const line = Number.isInteger(syntaxError.loc?.line) ? syntaxError.loc?.line ?? 1 : 1;
+	const column = Number.isInteger(syntaxError.loc?.column) ? syntaxError.loc?.column ?? 0 : 0;
+	const sourceLine = script.split(/\r?\n/)[line - 1] ?? "";
+	const caret = `${" ".repeat(Math.max(0, column))}^`;
+	const hasBacktick = sourceLine.includes("`");
+	const hint = hasBacktick
+		? " Detected Markdown backtick(s) in the failing source line; move the prompt payload to args or escape the backticks instead of embedding Markdown-rich text in a template literal."
+		: "";
+	return new WorkflowError(
+		`Workflow script parse error at line ${line}, column ${column}: ${syntaxError.message ?? String(error)}\n${sourceLine}\n${caret}${hint}`,
+		WorkflowErrorCode.SCRIPT_VALIDATION_ERROR,
+		{
+			recoverable: false,
+			details: { line, column, sourceLine, caret, hint },
+		},
+	);
+}
+
+/**
+ * Read the optional structured coverage contract returned by a workflow script.
+ * A workflow that does not return `complete` is left untouched for backwards
+ * compatibility; once it opts in, missing IDs are explicit and actionable.
+ */
+export function extractWorkflowCoverage(result: unknown): WorkflowCoverage | undefined {
+	if (!result || typeof result !== "object" || Array.isArray(result)) return undefined;
+	const value = result as Record<string, unknown>;
+	if (typeof value.complete !== "boolean") return undefined;
+	const missing = Array.isArray(value.missing)
+		? value.missing.filter((id): id is string => typeof id === "string")
+		: [];
+	const errors = Array.isArray(value.errors)
+		? value.errors.flatMap((entry) => {
+				if (!entry || typeof entry !== "object") return [];
+				const row = entry as Record<string, unknown>;
+				if (typeof row.id !== "string") return [];
+				return [{ id: row.id, error: typeof row.error === "string" ? row.error : undefined }];
+		  })
+		: [];
+	return { complete: value.complete && missing.length === 0, missing, errors };
+}
+
+export interface RecoveryOptions {
+	maxRounds?: number;
+	noProgressRounds?: number;
+	id?: (job: unknown, index: number) => string;
+}
+
+export interface RecoveryResult {
+	complete: boolean;
+	rows: Array<{ id: string; ok: boolean; result?: unknown; error?: string }>;
+	missing: string[];
+	errors: Array<{ id: string; error?: string }>;
+	rounds: number;
+	stoppedReason?: "max-rounds" | "no-progress";
+}
+
+/**
+ * Run only the currently missing jobs on each recovery round.  The helper is
+ * intentionally bounded and deterministic: successful IDs are never rerun,
+ * and repeated rounds with no reduction in the missing set stop explicitly.
+ */
+async function recoverMissing(
+	jobs: unknown[],
+	worker: (job: unknown, round: number) => Promise<unknown> | unknown,
+	options: RecoveryOptions = {},
+	parallel: (thunks: Array<() => Promise<unknown>>) => Promise<unknown[]>,
+): Promise<RecoveryResult> {
+	if (!Array.isArray(jobs)) throw new TypeError("recoverMissing() expects an array of jobs");
+	if (typeof worker !== "function") throw new TypeError("recoverMissing() expects a worker function");
+	const key = options.id ?? ((job: unknown, index: number) => {
+		if (job && typeof job === "object") {
+			const value = job as Record<string, unknown>;
+			if (typeof value.id === "string") return value.id;
+			if (typeof value.subSkill === "string") return value.subSkill;
+		}
+		return `job-${index}`;
+	});
+	const maxRounds = normalizeRecoveryRounds(options.maxRounds);
+	const noProgressLimit = Math.max(1, Math.floor(options.noProgressRounds ?? 2));
+	const pending = new Map(jobs.map((job, index) => [key(job, index), job]));
+	const latest = new Map<string, { id: string; ok: boolean; result?: unknown; error?: string }>();
+	let noProgress = 0;
+	let rounds = 0;
+	let stoppedReason: RecoveryResult["stoppedReason"];
+
+	while (pending.size > 0 && rounds < maxRounds) {
+		const before = pending.size;
+		const current = [...pending.entries()];
+		const results = await parallel(
+			current.map(([id, job]) => async () => {
+				try {
+					const result = await worker(job, rounds);
+					return { id, ok: result !== null && result !== undefined, result };
+				} catch (error) {
+					return { id, ok: false, error: error instanceof Error ? error.message : String(error) };
+				}
+			}),
+		);
+		rounds++;
+		for (const raw of results) {
+			if (!raw || typeof raw !== "object") continue;
+			const row = raw as { id?: unknown; ok?: unknown; result?: unknown; error?: unknown };
+			if (typeof row.id !== "string") continue;
+			const normalized = {
+				id: row.id,
+				ok: row.ok === true,
+				...(row.result !== undefined ? { result: row.result } : {}),
+				...(typeof row.error === "string" ? { error: row.error } : {}),
+			};
+			latest.set(row.id, normalized);
+			if (normalized.ok) pending.delete(row.id);
+		}
+		if (pending.size === before) noProgress++;
+		else noProgress = 0;
+		if (noProgress >= noProgressLimit) {
+			stoppedReason = "no-progress";
+			break;
+		}
+	}
+	if (pending.size > 0 && !stoppedReason && rounds >= maxRounds) stoppedReason = "max-rounds";
+	const rows = [...latest.values()];
+	const missing = [...pending.keys()];
+	return {
+		complete: missing.length === 0,
+		rows,
+		missing,
+		errors: rows.filter((row) => !row.ok).map((row) => ({ id: row.id, error: row.error })),
+		rounds,
+		...(stoppedReason ? { stoppedReason } : {}),
+	};
+}
+
 /**
  * Run a promise with a timeout.
  */
-async function withTimeout<T>(promise: Promise<T>, ms: number | null, label: string): Promise<T> {
-	if (ms === null) return promise;
+async function withTimeout<T>(
+	run: (signal: AbortSignal) => Promise<T>,
+	ms: number | null,
+	label: string,
+	parentSignal?: AbortSignal,
+): Promise<T> {
+	const controller = new AbortController();
+	let removeParentListener: (() => void) | undefined;
+	if (parentSignal) {
+		if (parentSignal.aborted) controller.abort();
+		else {
+			const onParentAbort = () => controller.abort();
+			parentSignal.addEventListener("abort", onParentAbort, { once: true });
+			removeParentListener = () => parentSignal.removeEventListener("abort", onParentAbort);
+		}
+	}
 
+	const promise = Promise.resolve().then(() => run(controller.signal));
 	let timeoutId: NodeJS.Timeout | undefined;
-
-	const timeoutPromise = new Promise<never>((_, reject) => {
-		timeoutId = setTimeout(() => {
-			reject(
-				new WorkflowError(
-					`Agent "${label}" timed out after ${ms}ms; raise or omit timeoutMs/agentTimeoutMs to allow longer runs`,
-					WorkflowErrorCode.AGENT_TIMEOUT,
-					{ recoverable: true },
-				),
-			);
-		}, ms);
-	});
+	let timedOut = false;
+	const timeoutPromise =
+		ms === null
+			? undefined
+			: new Promise<never>((_, reject) => {
+					timeoutId = setTimeout(() => {
+						timedOut = true;
+						controller.abort();
+						reject(
+							new WorkflowError(
+									`Agent "${label}" timed out after ${ms}ms; raise or omit timeoutMs/agentTimeoutMs to allow longer runs`,
+									WorkflowErrorCode.AGENT_TIMEOUT,
+									{ recoverable: true },
+								),
+							);
+					}, ms);
+			  });
 
 	try {
+		if (!timeoutPromise) return await promise;
 		return await Promise.race([promise, timeoutPromise]);
+	} catch (error) {
+		if (timedOut) {
+			// The timeout is only observable after the underlying attempt has settled.
+			// This is what prevents a retry from overlapping a late writer.
+			try {
+				await promise;
+			} catch {
+				// The aborted attempt's error is represented by the timeout above.
+			}
+		}
+		throw error;
 	} finally {
 		if (timeoutId) clearTimeout(timeoutId);
+		removeParentListener?.();
 	}
 }

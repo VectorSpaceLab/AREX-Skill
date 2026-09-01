@@ -26,6 +26,7 @@ describe("DefaultResourceLoader", () => {
 	let tempDir: string;
 	let agentDir: string;
 	let cwd: string;
+	let previousHome: string | undefined;
 
 	beforeEach(() => {
 		tempDir = join(tmpdir(), `rl-test-${Date.now()}-${Math.random().toString(36).slice(2)}`);
@@ -33,9 +34,13 @@ describe("DefaultResourceLoader", () => {
 		cwd = join(tempDir, "project");
 		mkdirSync(agentDir, { recursive: true });
 		mkdirSync(cwd, { recursive: true });
+		previousHome = process.env.HOME;
+		process.env.HOME = tempDir;
 	});
 
 	afterEach(() => {
+		if (previousHome === undefined) delete process.env.HOME;
+		else process.env.HOME = previousHome;
 		rmSync(tempDir, { recursive: true, force: true });
 	});
 

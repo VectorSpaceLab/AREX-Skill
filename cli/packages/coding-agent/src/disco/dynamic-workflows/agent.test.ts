@@ -8,7 +8,7 @@ import type { SettingsManager } from "../../core/settings-manager.ts";
 import { formatSkillsForPrompt, getModelVisibleSkills, loadSkills } from "../../core/skills.ts";
 import { buildSystemPrompt } from "../../core/system-prompt.ts";
 import { getDiscoModePrompt } from "../modes/prompts.ts";
-import { WorkflowAgent } from "./agent.ts";
+import { extractLiveAgentUsage, WorkflowAgent } from "./agent.ts";
 import { createWorkflowTool } from "./workflow-tool.ts";
 
 function createSettingsManagerStub(
@@ -25,6 +25,32 @@ function createSettingsManagerStub(
 }
 
 describe("WorkflowAgent sub-skill prompting", () => {
+	it("extracts live usage from partial and completed assistant events", () => {
+		const usage = {
+			input: 2,
+			output: 3,
+			cacheRead: 4,
+			cacheWrite: 5,
+			totalTokens: 14,
+			cost: { total: 0.25 },
+		};
+		expect(
+			extractLiveAgentUsage({
+				type: "message_update",
+				assistantMessageEvent: { partial: { role: "assistant", usage } },
+			}),
+		).toEqual({ input: 2, output: 3, cacheRead: 4, cacheWrite: 5, total: 14, cost: 0.25 });
+		expect(extractLiveAgentUsage({ message: { role: "assistant", usage } })).toEqual({
+			input: 2,
+			output: 3,
+			cacheRead: 4,
+			cacheWrite: 5,
+			total: 14,
+			cost: 0.25,
+		});
+		expect(extractLiveAgentUsage({ type: "message_update", assistantMessageEvent: { partial: {} } })).toBeUndefined();
+	});
+
 	it("tells sub-skill agents to write files directly instead of returning draft bodies", () => {
 		const agent = new WorkflowAgent({ cwd: process.cwd(), discoMode: "creator", tools: [] });
 		const prompt = (
@@ -74,6 +100,40 @@ describe("WorkflowAgent sub-skill prompting", () => {
 });
 
 describe("workflow tool prompt boundaries", () => {
+	it("publishes the canonical prepared-environment contract without closing custom workflow args", () => {
+		const tool = createWorkflowTool({ cwd: process.cwd() });
+		const parameters = tool.parameters as unknown as {
+			properties: {
+				args: {
+					anyOf: Array<{
+						type?: string;
+						additionalProperties?: boolean;
+						properties?: Record<string, any>;
+					}>;
+				};
+			};
+		};
+		const objectArgs = parameters.properties.args.anyOf.find((entry) => entry.type === "object");
+		const environment = objectArgs?.properties?.environment;
+
+		expect(objectArgs?.additionalProperties).toBe(true);
+		expect(objectArgs?.properties).toHaveProperty("jobs");
+		expect(objectArgs?.properties).toHaveProperty("briefs");
+		expect(environment?.properties).toEqual(
+			expect.objectContaining({
+				executable: expect.any(Object),
+				cwd: expect.any(Object),
+				package: expect.any(Object),
+				version: expect.any(Object),
+				args: expect.any(Object),
+				versionArgs: expect.any(Object),
+			}),
+		);
+		expect(environment?.description).toContain("pythonExecutable");
+		expect(environment?.description).toContain("expectedDistribution");
+		expect(environment?.description).toContain("expectedVersion");
+	});
+
 	it("keeps generic orchestration guidance out of the global system prompt", () => {
 		const tool = createWorkflowTool({ cwd: process.cwd() });
 		const guidelines = tool.promptGuidelines?.join("\n") ?? "";
@@ -81,6 +141,8 @@ describe("workflow tool prompt boundaries", () => {
 		expect(guidelines).toContain("coordinated subagents materially help");
 		expect(guidelines).toContain("workflow tool schema");
 		expect(guidelines).toContain("focused task and a concise label");
+		expect(guidelines).toContain("environment: { executable, package, version }");
+		expect(guidelines).toContain("pythonExecutable");
 		expect(guidelines).not.toContain("repo-skill generation");
 		expect(guidelines).not.toContain("Paper2Skills");
 		expect(guidelines).not.toContain("source-script import/adaptation plan");
@@ -473,9 +535,9 @@ describe("repo skills router and export workflow-skill constraints", () => {
 	it("defines import-repo-skills-to-agent overwrite prompts and router merge behavior", () => {
 		const skill = readImportSkill("SKILL.md");
 
-		expect(skill).toContain("Export DisCo's managed repository-skill collection to another agent");
-		expect(skill).toContain("DisCo already uses");
-		expect(skill).toContain("explicit `/skill:<name>`");
+		expect(skill).toMatch(/Export DisCo's managed repository-skill\s+collection to another agent/);
+		expect(skill).toMatch(/DisCo\s+already uses/);
+		expect(skill).toMatch(/explicit\s+`\/skill:<name>`/);
 		expect(skill).toContain("scripts/export_repo_skills_to_agent.mjs");
 		expect(skill).toContain("Do not manually copy skills");
 		expect(skill).toContain("--target-skills-root <dir>");

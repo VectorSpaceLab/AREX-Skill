@@ -1,6 +1,8 @@
 import type { ExtensionContext } from "../../core/extensions/types.ts";
 import type { Theme } from "../../modes/interactive/theme/theme.ts";
 import type { AgentHistoryEntry } from "./agent-history.ts";
+import type { TokenUsageTotals } from "./agent-usage.ts";
+import type { PersistedAgentAttempt } from "./run-persistence.ts";
 import type { WorkflowErrorCode } from "./errors.ts";
 import type { WorkflowMeta } from "./workflow.ts";
 
@@ -8,6 +10,8 @@ export type WorkflowAgentStatus = "queued" | "running" | "done" | "error" | "ski
 
 export interface WorkflowAgentSnapshot {
 	id: number;
+	stableId?: string;
+	callIndex?: number;
 	label: string;
 	subSkill?: string;
 	phase?: string;
@@ -22,6 +26,7 @@ export interface WorkflowAgentSnapshot {
 	tokens?: number;
 	/** The model this agent ran on (provider/id), when known. */
 	model?: string;
+	attempts?: PersistedAgentAttempt[];
 }
 
 export interface WorkflowSnapshot {
@@ -44,7 +49,18 @@ export interface WorkflowSnapshot {
 		cost?: number;
 		cacheRead?: number;
 		cacheWrite?: number;
+		estimated?: boolean;
 	};
+	liveTokenUsage?: TokenUsageTotals;
+	complete?: boolean;
+	missing?: string[];
+	errors?: Array<{ id: string; error?: string }>;
+	error?: string;
+	errorCode?: WorkflowErrorCode;
+	recoverable?: boolean;
+	recoveryOfRunId?: string;
+	recoveryRound?: number;
+	maxRecoveryRounds?: number;
 	runId?: string;
 }
 
@@ -185,10 +201,21 @@ export function renderWorkflowLines(
 	// Build header with token info (and cost when the provider reports it)
 	const usage = snapshot.tokenUsage;
 	const costInfo = usage?.cost ? ` · $${usage.cost.toFixed(4)}` : "";
-	const tokenInfo = usage ? ` · ${usage.total.toLocaleString()} tokens${costInfo}` : "";
+	const tokenInfo = usage
+		? ` · ${usage.total.toLocaleString()} tokens${usage.estimated ? " (includes estimate)" : ""}${costInfo}`
+		: "";
+	const liveInfo = snapshot.liveTokenUsage ? ` · live ${snapshot.liveTokenUsage.total.toLocaleString()}` : "";
 	const lines = [
-		`${theme.bold(`DisCo workflow: ${snapshot.name}`)} (${snapshot.doneCount}/${snapshot.agentCount} done${state}${tokenInfo})`,
+		`${theme.bold(`DisCo workflow: ${snapshot.name}`)} (${snapshot.doneCount}/${snapshot.agentCount} done${state}${tokenInfo}${liveInfo})`,
 	];
+	if (snapshot.complete === false) {
+		const missing = snapshot.missing?.length ? snapshot.missing.join(", ") : "not declared";
+		lines.push(theme.fg("warning", `  Recovery required · missing: ${missing}`));
+	}
+	if (snapshot.error) {
+		const code = snapshot.errorCode ? `${snapshot.errorCode}: ` : "";
+		lines.push(theme.fg("warning", `  ${code}${shorten(snapshot.error, 120)}`));
+	}
 
 	const phaseNames = snapshot.phases.length
 		? snapshot.phases
@@ -216,7 +243,9 @@ export function renderWorkflowLines(
 		for (const agent of visibleAgents) {
 			const order = `[${agent.id}]`;
 			const result = showResultPreviews && agent.resultPreview ? ` — ${agent.resultPreview}` : "";
-			const agentTokens = agent.tokens ? theme.fg("dim", ` [${agent.tokens.toLocaleString()} tok]`) : "";
+			const agentTokens = agent.tokens
+				? theme.fg("dim", ` [${agent.tokens.toLocaleString()} tok${agent.attempts?.some((a) => a.usage?.source === "estimated") ? " est" : ""}]`)
+				: "";
 			const subSkill = agent.subSkill ? theme.fg("accent", ` ${agent.subSkill}`) : "";
 			const agentModel = agent.model ? theme.fg("dim", ` (${shortModel(agent.model)})`) : "";
 			const agentError = agent.error ? theme.fg("warning", ` — ${shorten(agent.error, 72)}`) : "";
@@ -233,7 +262,9 @@ export function renderWorkflowLines(
 		lines.push(theme.fg("accent", "  Unphased"));
 		for (const agent of unphased.slice(-maxAgents)) {
 			const result = showResultPreviews && agent.resultPreview ? ` — ${agent.resultPreview}` : "";
-			const agentTokens = agent.tokens ? theme.fg("dim", ` [${agent.tokens.toLocaleString()} tok]`) : "";
+			const agentTokens = agent.tokens
+				? theme.fg("dim", ` [${agent.tokens.toLocaleString()} tok${agent.attempts?.some((a) => a.usage?.source === "estimated") ? " est" : ""}]`)
+				: "";
 			const subSkill = agent.subSkill ? theme.fg("accent", ` ${agent.subSkill}`) : "";
 			const agentModel = agent.model ? theme.fg("dim", ` (${shortModel(agent.model)})`) : "";
 			const agentError = agent.error ? theme.fg("warning", ` — ${shorten(agent.error, 72)}`) : "";
@@ -247,7 +278,7 @@ export function renderWorkflowLines(
 }
 
 export function renderWorkflowText(snapshot: WorkflowSnapshot, completed = false): string {
-	const header = completed ? "DisCo workflow completed" : "DisCo workflow running";
+	const header = snapshot.complete === false ? "DisCo workflow requires recovery" : completed ? "DisCo workflow completed" : "DisCo workflow running";
 	return [header, ...renderWorkflowLines(snapshot)].join("\n");
 }
 

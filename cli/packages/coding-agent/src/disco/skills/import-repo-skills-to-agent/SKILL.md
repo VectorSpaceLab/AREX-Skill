@@ -7,10 +7,14 @@ metadata:
 
 # Import Repo Skills To Agent
 
-Export DisCo's managed repository-skill collection to another agent only when
-the user explicitly requests a cross-agent export. DisCo already uses its live
-collection through `repo-skills-router` and explicit `/skill:<name>`
-invocation; it does not need this workflow for its own runtime.
+This is a Creator-mode meta workflow. Export DisCo's managed repository-skill
+collection to another agent only when the user explicitly requests a
+cross-agent export. Cross-agent export is an artifact-management operation,
+not downstream research: the selected repository skills normally carry the
+`operating` role, but Creator may inspect them as export inputs without using
+them as operating context or asking the user to switch to Researcher. DisCo
+already uses its live collection through `repo-skills-router` and explicit
+`/skill:<name>` invocation; it does not need this workflow for its own runtime.
 
 Use the bundled helper for every filesystem mutation:
 
@@ -69,7 +73,10 @@ target explicitly requires Codex policy metadata.
 The helper accepts exact repository skill IDs. Before invoking it:
 
 1. Read the source `repo-skills/repository-index.jsonl` and direct
-   `repo-skills/<skill-id>/SKILL.md` files.
+   `repo-skills/<skill-id>/SKILL.md` files as export input artifacts. In
+   Creator, this is an explicit exception to the operating-context visibility
+   boundary: inspect them only to resolve and validate the export, never to
+   invoke their instructions or perform their downstream workflows.
 2. Resolve user terms, repository names, aliases, or wildcards to exact
    `skill_id` values.
 3. Show the matched IDs when the request is ambiguous or a wildcard expands to

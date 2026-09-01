@@ -25,6 +25,7 @@ const metaSkillIds = [
 	"verify-repo-skill",
 ] as const;
 const operatingSkillIds = ["repo-skills-router"] as const;
+const sharedSkillIds = ["workflow-authoring"] as const;
 
 function collectSkillFiles(root: string): string[] {
 	const files: string[] = [];
@@ -70,7 +71,7 @@ function runPython(scriptPath: string, args: string[]) {
 
 describe("DisCo-owned skill role contracts", () => {
 	it("classifies every bundled SKILL.md explicitly and consistently", () => {
-		const expectedTopLevelIds = [...metaSkillIds, ...operatingSkillIds].sort();
+		const expectedTopLevelIds = [...metaSkillIds, ...operatingSkillIds, ...sharedSkillIds].sort();
 		const actualTopLevelIds = readdirSync(skillsRoot, { withFileTypes: true })
 			.filter((entry) => entry.isDirectory() && !entry.isSymbolicLink())
 			.map((entry) => entry.name)
@@ -80,13 +81,20 @@ describe("DisCo-owned skill role contracts", () => {
 
 		const metaIds = new Set<string>(metaSkillIds);
 		const operatingIds = new Set<string>(operatingSkillIds);
+		const sharedIds = new Set<string>(sharedSkillIds);
 		const files = collectSkillFiles(skillsRoot);
 		expect(files.length).toBeGreaterThan(0);
 
 		for (const filePath of files) {
 			const relativePath = relative(skillsRoot, filePath);
 			const topLevelId = relativePath.split(sep)[0];
-			const expectedRole = metaIds.has(topLevelId) ? "meta" : operatingIds.has(topLevelId) ? "operating" : undefined;
+			const expectedRole = metaIds.has(topLevelId)
+				? "meta"
+				: operatingIds.has(topLevelId)
+					? "operating"
+					: sharedIds.has(topLevelId)
+						? "shared"
+						: undefined;
 			expect(expectedRole, `${relativePath} belongs to an unclassified bundled skill`).toBeDefined();
 			expect(readDiscoRole(filePath), relativePath).toBe(expectedRole);
 		}
@@ -177,6 +185,22 @@ describe("DisCo-owned skill role contracts", () => {
 		expect(agentsDirectories).toEqual([]);
 	});
 
+	it("keeps repository-skill export explicitly available as a Creator meta operation", () => {
+		const importSkill = readFileSync(
+			join(skillsRoot, "import-repo-skills-to-agent", "SKILL.md"),
+			"utf8",
+		);
+
+		expect(importSkill).toContain("This is a Creator-mode meta workflow");
+		expect(importSkill).toContain("not downstream research");
+		expect(importSkill).toContain("Creator may inspect them as export inputs without using");
+		expect(importSkill).toContain("them as operating context or asking the user to switch to Researcher");
+		expect(importSkill).toContain("explicit exception to the operating-context visibility");
+		expect(importSkill).toContain("boundary: inspect them only to resolve and validate the export");
+		expect(importSkill).toContain("never to");
+		expect(importSkill).toContain("invoke their instructions or perform their downstream workflows");
+	});
+
 	it("keeps prepare-repo-skill-env transparent and command-driven", () => {
 		const skillDir = join(skillsRoot, "prepare-repo-skill-env");
 		const skill = readFileSync(join(skillDir, "SKILL.md"), "utf8");
@@ -203,6 +227,30 @@ describe("DisCo-owned skill role contracts", () => {
 		expect(environmentDocs).not.toContain("setup_repo_conda_env.py");
 		expect(environmentDocs).not.toContain("bootstrap_python.mjs");
 		expect(environmentDocs).not.toContain("bootstrap a private host Python");
+	});
+
+	it("keeps the Creator workflow authoring and prepared-environment handoff contracts aligned", () => {
+		const creatorDir = join(skillsRoot, "create-repo-skill");
+		const creator = readFileSync(join(creatorDir, "SKILL.md"), "utf8");
+		const planning = readFileSync(join(creatorDir, "references", "planning-and-writing.md"), "utf8");
+		const authoring = readFileSync(join(skillsRoot, "workflow-authoring", "SKILL.md"), "utf8");
+		const prepareReport = readFileSync(
+			join(skillsRoot, "prepare-repo-skill-env", "references", "verification-and-failure-report.md"),
+			"utf8",
+		);
+
+		expect(creator).toContain("../workflow-authoring/SKILL.md");
+		expect(creator).toMatch(/before the first `workflow` call[\s\S]*workflow-authoring\/SKILL\.md/i);
+		expect(planning).toMatch(/before the first `workflow` call[\s\S]*workflow-authoring\/SKILL\.md/i);
+		for (const content of [creator, planning, authoring, prepareReport]) {
+			expect(content).toContain("executable");
+			expect(content).toContain("package");
+			expect(content).toContain("version");
+		}
+		expect(prepareReport).toContain('"workflowEnvironment"');
+		expect(prepareReport).toContain('"pythonExecutable"');
+		expect(prepareReport).toMatch(/pythonExecutable[\s\S]*not[\s\S]*directly[\s\S]*agent\(\)/i);
+		expect(authoring).toContain("metadata:\n  disco-role: shared");
 	});
 
 	it("requires backend-aware repo-skill environments, native verification, and import gates", () => {

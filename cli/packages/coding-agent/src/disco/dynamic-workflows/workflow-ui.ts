@@ -61,6 +61,12 @@ interface RunRow {
 	total: number;
 	tokens: number;
 	cost: number;
+	estimated: boolean;
+	requiresRecovery: boolean;
+	missing: number;
+	errorCode?: string;
+	recoveryOfRunId?: string;
+	recoveryRound?: number;
 }
 interface PhaseRow {
 	title: string;
@@ -109,14 +115,22 @@ export class NavigatorModel {
 		return this.manager.listRuns().map((p) => {
 			const live = this.manager.getRun(p.runId);
 			const agents = (live?.snapshot.agents ?? p.agents) as WorkflowAgentSnapshot[];
+			const snapshot = live?.snapshot;
+			const usage = snapshot?.tokenUsage ?? p.tokenUsage;
 			return {
 				runId: p.runId,
 				name: live?.snapshot.name ?? p.workflowName,
 				status: live?.status ?? p.status,
 				done: agents.filter((a) => a.status === "done").length,
 				total: agents.length,
-				tokens: (live?.snapshot.tokenUsage ?? p.tokenUsage)?.total ?? 0,
-				cost: (live?.snapshot.tokenUsage ?? p.tokenUsage)?.cost ?? 0,
+				tokens: usage?.total ?? 0,
+				cost: usage?.cost ?? 0,
+				estimated: usage?.estimated === true,
+				requiresRecovery: (snapshot?.complete ?? p.complete) === false,
+				missing: (snapshot?.missing ?? p.missing)?.length ?? 0,
+				errorCode: snapshot?.errorCode ?? p.errorCode,
+				recoveryOfRunId: p.recoveryOfRunId,
+				recoveryRound: p.recoveryRound,
 			};
 		});
 	}
@@ -138,7 +152,12 @@ export class NavigatorModel {
 	}
 
 	runStatus(runId: string): string {
-		return this.snapshot(runId)?.status ?? "unknown";
+		const entry = this.snapshot(runId);
+		if (!entry) return "unknown";
+		const missing = entry.snapshot.missing?.length ?? 0;
+		return entry.snapshot.complete === false
+			? `${entry.status} · recovery required${missing ? ` · ${missing} missing` : ""}`
+			: entry.status;
 	}
 
 	phases(runId: string): PhaseRow[] {
@@ -200,23 +219,50 @@ function persistedToSnapshot(p: PersistedRunState): WorkflowSnapshot {
 		logs: p.logs,
 		agents: p.agents.map((a) => ({
 			id: a.id,
+			stableId: a.stableId,
+			callIndex: a.callIndex,
 			label: a.label,
+			subSkill: a.subSkill,
 			phase: a.phase,
 			prompt: a.prompt,
 			status: a.status,
 			resultPreview:
-				a.result == null ? undefined : String(typeof a.result === "string" ? a.result : JSON.stringify(a.result)),
+				a.resultPreview ??
+				(a.result == null ? undefined : String(typeof a.result === "string" ? a.result : JSON.stringify(a.result))),
 			error: a.error,
 			errorCode: a.errorCode,
 			recoverable: a.recoverable,
 			history: a.history,
+			tokens: a.tokens,
 			model: a.model,
+			attempts: a.attempts,
 		})),
 		agentCount: p.agents.length,
 		runningCount: p.agents.filter((a) => a.status === "running").length,
 		doneCount: p.agents.filter((a) => a.status === "done").length,
 		errorCount: p.agents.filter((a) => a.status === "error").length,
 		tokenUsage: p.tokenUsage ? { ...p.tokenUsage } : undefined,
+		liveTokenUsage: p.liveTokenUsage
+			? {
+					input: p.liveTokenUsage.input,
+					output: p.liveTokenUsage.output,
+					cacheRead: p.liveTokenUsage.cacheRead ?? 0,
+					cacheWrite: p.liveTokenUsage.cacheWrite ?? 0,
+					total: p.liveTokenUsage.total,
+					cost: p.liveTokenUsage.cost ?? 0,
+			  }
+			: undefined,
+		result: p.result,
+		durationMs: p.durationMs,
+		complete: p.complete,
+		missing: p.missing,
+		errors: p.errors,
+		error: p.error,
+		errorCode: p.errorCode,
+		recoverable: p.recoverable,
+		recoveryOfRunId: p.recoveryOfRunId,
+		recoveryRound: p.recoveryRound,
+		maxRecoveryRounds: p.maxRecoveryRounds,
 		runId: p.runId,
 	};
 }
@@ -384,7 +430,18 @@ export function renderNavigator(
 		// Render runs
 		runs.forEach((r, i) => {
 			const icon = STATUS_ICON[r.status] ?? "?";
-			const meta = [`${r.done}/${r.total}`, fmtTokens(r.tokens), r.cost > 0 ? `$${r.cost.toFixed(4)}` : ""]
+			const recovery = r.requiresRecovery ? `recovery required${r.missing ? ` · ${r.missing} missing` : ""}` : "";
+			const lineage = r.recoveryOfRunId
+				? `recovery #${r.recoveryRound ?? "?"} of ${r.recoveryOfRunId}`
+				: "";
+			const meta = [
+				`${r.done}/${r.total}`,
+				fmtTokens(r.tokens) ? `${fmtTokens(r.tokens)}${r.estimated ? " est" : ""}` : "",
+				r.cost > 0 ? `$${r.cost.toFixed(4)}` : "",
+				recovery,
+				lineage,
+				r.errorCode ?? "",
+			]
 				.filter(Boolean)
 				.join(" · ");
 			lines.push(sel(i, `${icon} ${r.name}  ${dim(`${r.runId} · ${r.status} · ${meta}`)}`));
@@ -423,9 +480,21 @@ export function renderNavigator(
 		if (a) {
 			const body: string[] = [];
 			body.push(dim("Status: ") + (a.status ?? ""));
+			if (a.stableId) body.push(dim("Stable ID: ") + a.stableId);
+			if (a.callIndex !== undefined) body.push(dim("Call index: ") + String(a.callIndex));
 			if (a.model) body.push(dim("Model: ") + (shortModel(a.model) ?? ""));
 			if (a.error) body.push(dim("Error: ") + a.error);
 			if (a.errorCode) body.push(`${dim("Error code: ")}${a.errorCode}${a.recoverable ? " (recoverable)" : ""}`);
+			if (a.attempts?.length) {
+				body.push("", dim("Attempts:"));
+				for (const attempt of a.attempts) {
+					const source = attempt.usage?.source ? ` · ${attempt.usage.source}` : "";
+					const error = attempt.errorCode ?? attempt.error;
+					body.push(
+						`#${attempt.attempt} ${attempt.status} · ${attempt.tokens.toLocaleString()} tok${source}${error ? ` · ${error}` : ""}`,
+					);
+				}
+			}
 			body.push("", dim("Prompt:"));
 			body.push(...wrap(a.prompt ?? "", width));
 			body.push("", dim("Result:"));
@@ -579,7 +648,20 @@ export function openWorkflowNavigator(
 	return ui.custom<void>(
 		(tui: TUI, theme: Theme, _keybindings, done: (r: undefined) => void) => {
 			const rerender = () => tui.requestRender();
-			const events = ["agentStart", "agentEnd", "phase", "log", "complete", "error", "stopped", "paused", "resumed"];
+			const events = [
+				"agentStart",
+				"agentAttemptEnd",
+				"agentEnd",
+				"phase",
+				"log",
+				"tokenUsage",
+				"complete",
+				"incomplete",
+				"error",
+				"stopped",
+				"paused",
+				"resumed",
+			];
 			const onEvent = () => rerender();
 			for (const ev of events) manager.on(ev, onEvent);
 			const cleanup = () => {
