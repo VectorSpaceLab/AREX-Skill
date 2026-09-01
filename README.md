@@ -48,6 +48,7 @@ https://github.com/user-attachments/assets/9fa59284-4625-44ef-8b43-01c7b6a05cea
 - [Usage Examples](#usage-examples)
 - [Documentation](#documentation)
 - [Contributing](#contributing)
+- [Acknowledgement](#acknowledgement)
 - [License](#license)
 - [Citation](#citation)
 
@@ -318,6 +319,18 @@ provider, reasoning level where relevant, production workflow, verification
 commands, known gaps, and any router or catalog updates. See the
 [Contribution Guide](CONTRIBUTING.md) for the full checklist and
 [CONTRIBUTING_CN.md](CONTRIBUTING_CN.md) for the Chinese version.
+
+## 🙏 Acknowledgement <a id="acknowledgement"></a>
+
+DisCo's CLI and agent runtime are built on the foundation of
+[earendil-works/pi](https://github.com/earendil-works/pi), an open-source AI
+agent toolkit with a unified LLM API, agent loop, terminal UI, and coding-agent
+CLI.
+
+AREX-Skill is also made possible by the GitHub open-source community. The
+repo skills in this library exist because many researchers and engineers have
+released high-quality ML, agent, data, bio/chem, vision, and infrastructure
+projects for the community to build on.
 
 ## 📄 License <a id="license"></a>
 

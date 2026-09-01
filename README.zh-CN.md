@@ -48,6 +48,7 @@ https://github.com/user-attachments/assets/9fa59284-4625-44ef-8b43-01c7b6a05cea
 - [使用示例](#usage-examples)
 - [文档](#documentation)
 - [参与贡献](#contributing)
+- [致谢](#acknowledgement)
 - [许可证](#license)
 - [引用](#citation)
 
@@ -254,6 +255,16 @@ AREX-Skill Library 可以支持许多 ML workflow。下面是两个具有代表�
 3. **改进 DisCo 及其 workflows。** 在 cli/ 及相关项目文档中贡献 CLI、runtime、bundled skill 和文档修改。
 
 Skill pull request 应说明上游 source commit、使用的 model 和 provider、相关 reasoning level、生产 workflow、验证命令、已知缺口，以及 router 或 catalog 是否需要更新。完整要求见[贡献指南](CONTRIBUTING_CN.md)，英文版本见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+
+## 🙏 致谢 <a id="acknowledgement"></a>
+
+DisCo 的 CLI 和 Agent runtime 构建在
+[earendil-works/pi](https://github.com/earendil-works/pi) 的基础之上。Pi 是一个开源
+AI Agent 工具包，提供统一的 LLM API、Agent loop、终端 UI 和 coding-agent CLI。
+
+AREX-Skill 同样离不开 GitHub 开源社区的支持。技能库中的 repository skills
+得以建立，是因为众多研究者和工程师向社区开源了高质量的 ML、Agent、数据、
+生物/化学、视觉和基础设施项目。
 
 ## 📄 许可证 <a id="license"></a>
 
