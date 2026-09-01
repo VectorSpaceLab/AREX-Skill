@@ -50,6 +50,106 @@ The sibling `repo-skills-router` is an `operating` skill for Researcher-mode
 progressive routing, so it is not part of this meta-skill list and should not
 be copied as part of a portable Creator installation.
 
+## Use Meta Skills in DisCo <a id="use-meta-skills-in-disco"></a>
+
+Start a new Creator session with `disco --creator`, or use `--creator -p` for a
+one-shot request. When the entry point is known, invoke it explicitly with
+`/skill:<name>`. Creator can also select an entry skill from a natural-language
+request, but explicit invocation makes reusable commands easier to audit.
+
+Most users call only the entry skills below. Supporting skills are loaded by
+the selected workflow; they are not a checklist that must be invoked manually.
+For example, `create-repo-skill`, `refresh-repo-skill`, and
+`extend-repo-skill` use environment preparation and verification as needed,
+while `create-paper-skills` delegates the complete paper pipeline to
+`paper-skills-distiller`.
+
+### Distill ML knowledge
+
+Use the canonical entry point when the source type or construction strategy
+still needs to be selected:
+
+```bash
+disco --creator -p "/skill:distill-ml-knowledge identify <source or task anchor>; scope, ground, construct, and verify the operating skill graph."
+```
+
+The workflow reuses an existing repository or paper construction path when one
+fits. It routes to `design-meta-skill` only when the evidence shows a recurring
+construction capability gap.
+
+### Create a repository skill
+
+Create and verify an operating skill graph from a local repository:
+
+```bash
+disco --creator -p "/skill:create-repo-skill Create and verify a repository skill for /absolute/path/to/repo."
+```
+
+Add `with auto decide and auto import` only when Creator may select the
+extraction scope and import the graph after successful verification without
+asking again. Otherwise, scope and deployment remain approval boundaries.
+
+### Create paper-replication skills
+
+From an AREX-Skill checkout, copy the generic starter configuration and edit at
+least `workspace_root`, `paper_slug`, and `paper_source`. The optional
+`original_repo_source` accepts a local path, Git URL, `none`, or `unknown`:
+
+```bash
+cp examples/creator/paper-to-skills/distiller-run-config.toml \
+  /absolute/path/to/distiller-run-config.toml
+
+disco --creator -p "/skill:create-paper-skills Use Distiller to generate and verify paper-replication skills for each run in this config. config_path: /absolute/path/to/distiller-run-config.toml"
+```
+
+`paper_source` can be a local PDF or text file, a direct PDF URL, an arXiv URL
+or identifier, or a paper title. `create-paper-skills` delegates to
+`paper-skills-distiller`, which orchestrates source resolution, module planning,
+module-skill generation, bounded runtime preparation, recovery, analysis, and
+refinement. Do not manually invoke each supporting paper skill for an ordinary
+run.
+
+With the starter's default output paths, generated skills are written under
+`<workspace_root>/<paper_slug>/skills/` and final reports under
+`<workspace_root>/<paper_slug>/distillation/reports/final/`. Expensive recovery
+and final deployment still require the approvals defined by the configuration
+and workflow. See the [Paper-to-Skills example](../examples/README.md#paper-to-skills)
+and [complete workflow](disco-workflows.md#construct-paper-replication-skills)
+for the input contract and lifecycle.
+
+### Refresh or extend a repository skill
+
+Use `refresh-repo-skill` when upstream code, APIs, documentation,
+configuration, dependencies, or behavior changed and the existing skill may be
+stale:
+
+```bash
+disco --creator -p "/skill:refresh-repo-skill Refresh /absolute/path/to/existing-skill against the current repository at /absolute/path/to/repo."
+```
+
+Use `extend-repo-skill` when the existing skill is still correct but needs a
+new capability or deeper coverage:
+
+```bash
+disco --creator -p "/skill:extend-repo-skill Add streaming inference coverage to /absolute/path/to/existing-skill using /absolute/path/to/repo as evidence."
+```
+
+Both workflows preserve correct existing guidance, run verification, and keep
+deployment or overwrite as an explicit approval boundary.
+
+### Export repository skills to another agent
+
+Export selected skills from DisCo's managed collection with their scoped
+router. For Codex's recommended user-level skill directory:
+
+```bash
+disco --creator -p "/skill:import-repo-skills-to-agent import vllm and sglang to ~/.agents"
+```
+
+Use `~/.claude` for Claude Code. The workflow resolves exact skill IDs, asks
+before replacing existing target content, stages and validates the merged
+collection, and restores the previous target if the transaction fails.
+
 ## When To Install Them Outside DisCo
 
 DisCo already bundles these workflows. Install the portable meta skills into

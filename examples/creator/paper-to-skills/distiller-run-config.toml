@@ -1,0 +1,82 @@
+# Paper2Skills Distiller run config.
+# Copy this file, fill one or more [[runs]], then give its absolute path to DisCo Creator.
+# This is a curated starter; the canonical template lives under
+# cli/packages/coding-agent/src/disco/skills/create-paper-skills/assets/.
+
+schema_version = 1
+
+[defaults]
+# Where Distiller writes source evidence, generated skills, recovery artifacts,
+# and final reports. Replace this path before running the example.
+workspace_root = "/path/to/paper2skills-workspace"
+
+# Use "none" when there is no implementation repository, or "unknown" to let
+# repo_discovery_mode control whether DisCo searches for one.
+original_repo_source = "unknown"
+
+# Source acquisition policy for URLs, arXiv identifiers, paper titles, Git
+# repositories, and optional repository discovery.
+source_acquisition = "If paper_source or original_repo_source are not local paths, resolve and download/clone them first with bounded network commands. If a paper title or repo discovery search is ambiguous, ask me to choose from candidates before proceeding."
+
+# ask: stop and ask before searching for an unknown implementation repository.
+# auto: run bounded GitHub discovery and clone the top candidate.
+# disabled: never search for an implementation repository automatically.
+repo_discovery_mode = "ask"
+network_timeout_seconds = 120
+command_timeout_seconds = 20
+allow_title_top_hit = false
+
+# Recovery policy.
+recovery_target = "Choose the fastest faithful target and ask me before expensive recovery."
+ask_before_expensive_recovery = true
+
+# hard: reduced, proxy, toy, or fallback runs are diagnostics, not successful recovery.
+# soft: a validated reduced or proxy recovery may be accepted when full runtime is unavailable.
+recovery_mode = "hard"
+
+# Runtime policy.
+runtime_constraints = "Do not mutate shared conda envs; use isolated env only. Create/reuse private recovery envs under $DISCO_CODING_AGENT_DIR/envs/ or ~/.disco/agent/envs/. Missing packages, model caches, datasets, or credentials are setup work to attempt before marking blocked. Reduced recovery is allowed if full model stack is unavailable."
+
+# Maximum number of refine cycles after the first recovery.
+iteration_budget = 10
+language_preference = "English summary"
+
+# Leave these blank to use workspace-derived defaults.
+test_root = ""
+skills_root = ""
+generated_skills_root = ""
+distiller_skills_root = ""
+attempt_dir = ""
+
+[[runs]]
+paper_slug = "my_paper_slug"
+
+# Accepted forms: local PDF/text path, direct PDF URL, arXiv URL or identifier,
+# or a paper title.
+paper_source = "/path/to/paper.pdf"
+
+# Accepted forms: local repository path, Git/GitHub URL, "none", or "unknown".
+original_repo_source = "unknown"
+
+# Optional per-paper overrides. Leave blank to inherit [defaults].
+source_acquisition = ""
+repo_discovery_mode = ""
+recovery_target = ""
+recovery_mode = ""
+runtime_constraints = ""
+language_preference = ""
+notes = ""
+
+# Optional numeric and boolean per-paper overrides. Uncomment when needed.
+# iteration_budget = 10
+# network_timeout_seconds = 120
+# command_timeout_seconds = 20
+# allow_title_top_hit = false
+# ask_before_expensive_recovery = true
+
+# Add more papers by repeating [[runs]].
+#
+# [[runs]]
+# paper_slug = "second_paper_slug"
+# paper_source = "https://arxiv.org/abs/0000.00000"
+# original_repo_source = "none"

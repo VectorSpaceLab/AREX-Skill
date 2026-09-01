@@ -49,6 +49,100 @@ operating skills；本文介绍的 skills 用来创建和维护它们。
 `operating` skill，因此不属于这份 meta skills 清单，也不应作为 portable
 Creator 安装的一部分复制。
 
+## 在 DisCo 中使用 Meta Skills <a id="use-meta-skills-in-disco"></a>
+
+使用 `disco --creator` 启动新的 Creator session，也可以通过 `--creator -p`
+执行一次性请求。已经知道入口 skill 时，可以使用 `/skill:<name>` 显式调用。
+Creator 也能根据自然语言请求自动选择入口，但显式调用更适合形成可复用、可审计
+的命令。
+
+大多数用户只需要直接调用下面这些 entry skills。Supporting skills 会由所选
+workflow 自动加载，并不是需要用户手工逐项执行的 checklist。例如，
+`create-repo-skill`、`refresh-repo-skill` 和 `extend-repo-skill` 会按需使用环境
+准备和验证流程；`create-paper-skills` 则会把完整论文流程交给
+`paper-skills-distiller` 编排。
+
+### 蒸馏 ML 知识
+
+当 source 类型或 construction strategy 还需要选择时，使用通用入口：
+
+```bash
+disco --creator -p "/skill:distill-ml-knowledge 识别 <source 或 task anchor>；完成 scope、ground、construct、verify。"
+```
+
+如果已有 repository 或 paper construction workflow 适用，该入口会优先复用；
+只有证据表明存在反复出现的构建能力缺口时，才会转向 `design-meta-skill`。
+
+### 创建 Repository Skill
+
+从本地仓库创建并验证 operating skill graph：
+
+```bash
+disco --creator -p "/skill:create-repo-skill 为 /absolute/path/to/repo 创建并验证 repository skill。"
+```
+
+只有当 Creator 可以自行决定 extraction scope，并在验证成功后无需再次询问即可
+导入时，才在请求中加入 `自动决定并自动导入`。否则 scope 和 deployment 仍然需要
+用户确认。
+
+### 创建论文复现 Skills
+
+在 AREX-Skill checkout 中复制通用 starter config，并至少填写
+`workspace_root`、`paper_slug` 和 `paper_source`。可选的
+`original_repo_source` 可以是本地路径、Git URL、`none` 或 `unknown`：
+
+```bash
+cp examples/creator/paper-to-skills/distiller-run-config.toml \
+  /absolute/path/to/distiller-run-config.toml
+
+disco --creator -p "/skill:create-paper-skills 使用 Distiller 为该配置中的每项运行生成并验证用于论文复现的 skills。config_path: /absolute/path/to/distiller-run-config.toml"
+```
+
+`paper_source` 可以是本地 PDF 或文本文件、PDF 直链、arXiv 链接或编号，也可以
+是论文标题。`create-paper-skills` 会委托 `paper-skills-distiller` 编排 source
+resolution、module planning、module-skill generation、有边界的 runtime
+preparation、recovery、analysis 和 refinement。普通运行不需要手工逐个调用这些
+supporting paper skills。
+
+使用 starter 的默认输出路径时，生成的 skills 位于
+`<workspace_root>/<paper_slug>/skills/`，最终报告位于
+`<workspace_root>/<paper_slug>/distillation/reports/final/`。昂贵的 recovery 和
+最终 deployment 仍然遵循配置与 workflow 中定义的 approval boundary。输入契约
+和完整 lifecycle 见 [Paper-to-Skills 示例](../examples/README.md#paper-to-skills)
+与 [DisCo 工作流指南](disco-workflows.zh.md#构造论文复现技能)。
+
+### 刷新或扩展 Repository Skill
+
+当上游代码、API、文档、配置、依赖或行为已经变化，现有 skill 可能过期时，使用
+`refresh-repo-skill`：
+
+```bash
+disco --creator -p "/skill:refresh-repo-skill 根据 /absolute/path/to/repo 的当前内容刷新 /absolute/path/to/existing-skill。"
+```
+
+当现有 skill 仍然正确，但需要增加新能力或更深覆盖时，使用
+`extend-repo-skill`：
+
+```bash
+disco --creator -p "/skill:extend-repo-skill 以 /absolute/path/to/repo 为证据，为 /absolute/path/to/existing-skill 增加 streaming inference 覆盖。"
+```
+
+两个 workflow 都会保留仍然正确的既有指导、重新运行验证，并把 deployment 或
+overwrite 保持为明确的 approval boundary。
+
+### 将 Repository Skills 导出到其他 Agent
+
+把 DisCo managed collection 中选定的 skills 连同 scoped router 导出到 Codex
+推荐的用户级 skill 目录：
+
+```bash
+disco --creator -p "/skill:import-repo-skills-to-agent import vllm and sglang to ~/.agents"
+```
+
+Claude Code 使用 `~/.claude`。该 workflow 会解析准确的 skill IDs，在替换目标
+已有内容前请求确认，对合并后的 collection 进行 staging 和验证，并在 transaction
+失败时恢复原目标。
+
 ## 什么时候在 DisCo 之外安装
 
 DisCo 已经内置这些 workflow。当其他兼容 agent 需要创建、验证、刷新、扩展或
