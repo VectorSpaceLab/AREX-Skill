@@ -29,6 +29,14 @@
   <strong>推进覆盖 ML engineering、paper replication 等场景的 frontier autonomous research</strong>
 </p>
 
+## 🎬 Demo <a id="demo"></a>
+
+通过一分钟了解 AREX-Skill：DisCo 将一个仓库蒸馏为经过验证、可执行的 skills；
+router 从 5,000+ 个 skills 中将范围缩小到任务所需的一个分支；配备相关 skill 的
+Agent 则可以完成没有 skill 时会陷入停滞的任务。
+
+https://github.com/user-attachments/assets/9fa59284-4625-44ef-8b43-01c7b6a05cea
+
 ## 🧭 目录 <a id="table-of-contents"></a>
 
 - [动态](#news)

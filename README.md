@@ -29,12 +29,18 @@
   <strong>Frontier autonomous research across ML engineering, paper replication, and more</strong>
 </p>
 
+## 🎬 Demo <a id="demo"></a>
+
+A one-minute tour of AREX-Skill: DisCo distills a repository into verified,
+executable skills, the router narrows 5,000+ skills to the one branch a task
+needs, and a skill-equipped agent clears a task that stalls without it.
+
+https://github.com/user-attachments/assets/9fa59284-4625-44ef-8b43-01c7b6a05cea
 
 ## 🧭 Table of Contents <a id="table-of-contents"></a>
 
 - [News](#news)
 - [Why AREX-Skill](#why-arex-skill)
-- [Demo](#demo)
 - [Library at a Glance](#library-at-a-glance)
 - [Auto-Research Benchmark Results](#auto-research-benchmark-results)
 - [How AREX-Skill Is Built](#how-arex-skill-is-built)
@@ -103,14 +109,6 @@ A research agent typically follows this pattern:
 
 The result is not just an answer: it is an experiment or implementation that
 can be inspected and reproduced.
-
-## 🎬 Demo <a id="demo"></a>
-
-A one-minute tour of AREX-Skill: DisCo distills a repository into verified,
-executable skills, the router narrows 5,000+ skills to the one branch a task
-needs, and a skill-equipped agent clears a task that stalls without it.
-
-https://github.com/user-attachments/assets/9fa59284-4625-44ef-8b43-01c7b6a05cea
 
 ## 📊 Library at a Glance <a id="library-at-a-glance"></a>
 
