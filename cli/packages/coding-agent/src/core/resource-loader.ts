@@ -21,7 +21,12 @@ import {
 } from "./extensions/loader.ts";
 import type { Extension, ExtensionRuntime, InlineExtension, LoadExtensionsResult } from "./extensions/types.ts";
 import { findGitPaths } from "./footer-data-provider.ts";
-import { DefaultPackageManager, type PathMetadata, type ResolvedResource } from "./package-manager.ts";
+import {
+	DefaultPackageManager,
+	type MissingSourceAction,
+	type PathMetadata,
+	type ResolvedResource,
+} from "./package-manager.ts";
 import type { PromptTemplate } from "./prompt-templates.ts";
 import { loadPromptTemplates } from "./prompt-templates.ts";
 import { SettingsManager } from "./settings-manager.ts";
@@ -252,6 +257,7 @@ export class DefaultResourceLoader implements ResourceLoader {
 	constructor(options: DefaultResourceLoaderOptions) {
 		this.cwd = resolvePath(options.cwd);
 		this.agentDir = resolvePath(options.agentDir);
+		this.discoMode = options.discoMode ?? DEFAULT_DISCO_AGENT_MODE;
 		this.settingsManager = options.settingsManager ?? SettingsManager.create(this.cwd, this.agentDir);
 		this.eventBus = options.eventBus ?? createEventBus();
 		this.packageManager = new DefaultPackageManager({
@@ -260,13 +266,13 @@ export class DefaultResourceLoader implements ResourceLoader {
 			settingsManager: this.settingsManager,
 			includeDisCoDefaults: options.includeDisCoDefaults,
 			includeDisCoBuiltinSkills: options.includeDisCoBuiltinSkills,
+			discoMode: this.discoMode,
 		});
 		this.additionalExtensionPaths = options.additionalExtensionPaths ?? [];
 		this.additionalSkillPaths = options.additionalSkillPaths ?? [];
 		this.additionalPromptTemplatePaths = options.additionalPromptTemplatePaths ?? [];
 		this.additionalThemePaths = options.additionalThemePaths ?? [];
 		this.includeDisCoDefaults = options.includeDisCoDefaults ?? true;
-		this.discoMode = options.discoMode ?? DEFAULT_DISCO_AGENT_MODE;
 		this.extensionFactories = [
 			...(this.includeDisCoDefaults ? [createDisCoDynamicWorkflowExtension(this.cwd, this.discoMode)] : []),
 			...(options.extensionFactories ?? []),
@@ -391,7 +397,10 @@ export class DefaultResourceLoader implements ResourceLoader {
 		// extensions/packages out while still loading user/global and temporary CLI extensions.
 		this.settingsManager.setProjectTrusted(false);
 		await this.settingsManager.reload();
-		return this.loadCurrentExtensionSet({ includeInlineFactories: true });
+		// Resolving trust must not install missing packages before the trust decision. A missing
+		// global package cannot provide a trust handler in this pass; it will be installed during
+		// the normal reload after trust has been resolved.
+		return this.loadCurrentExtensionSet({ includeInlineFactories: true, onMissing: async () => "skip" });
 	}
 
 	async reload(options?: ResourceLoaderReloadOptions): Promise<void> {
@@ -558,8 +567,11 @@ export class DefaultResourceLoader implements ResourceLoader {
 		this.loaded = true;
 	}
 
-	private async loadCurrentExtensionSet(options: { includeInlineFactories: boolean }): Promise<LoadExtensionsResult> {
-		const resolvedPaths = await this.packageManager.resolve();
+	private async loadCurrentExtensionSet(options: {
+		includeInlineFactories: boolean;
+		onMissing?: (source: string) => Promise<MissingSourceAction>;
+	}): Promise<LoadExtensionsResult> {
+		const resolvedPaths = await this.packageManager.resolve(options.onMissing);
 		const cliExtensionPaths = await this.packageManager.resolveExtensionSources(this.additionalExtensionPaths, {
 			temporary: true,
 		});

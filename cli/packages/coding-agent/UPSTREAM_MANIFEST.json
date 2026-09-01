@@ -400,7 +400,7 @@
           "upstreamSha256": "120cad06e65f62eda0445c8206a0f47b7c86d29129570554ab586b11e80e6579",
           "disposition": "retained_modified",
           "localPath": "packages/coding-agent/src/core/package-manager.ts",
-          "localSha256": "fe038bb65269c7da0fcfb100ecce70b42dc806cf1e3c1829da5ff715a8383934"
+          "localSha256": "6ad384c84dd983fee0a00dc2273d1e310d0702b7f13eece03e83f4e37e5c5027"
         },
         {
           "upstreamPath": "packages/coding-agent/src/core/project-trust.ts",
@@ -456,7 +456,7 @@
           "upstreamSha256": "449ed18c2d5084e25a8150ba7e3abf1440d58f3fd885538b71f51a7e9182adce",
           "disposition": "retained_modified",
           "localPath": "packages/coding-agent/src/core/resource-loader.ts",
-          "localSha256": "df218b418ffbbe55c742b25bf3d13ef904dda10127cc657c619b4349009bb759"
+          "localSha256": "fba66b7103fc2d165732c83c2163388c1276f73581e504bd2d8697e8f26e3199"
         },
         {
           "upstreamPath": "packages/coding-agent/src/core/runtime-credentials.ts",
@@ -1129,9 +1129,9 @@
         {
           "upstreamPath": "packages/coding-agent/src/utils/child-process.ts",
           "upstreamSha256": "cd324f5b9a1abadd85ab5a331750d475c8bd51ec65cae091ad9b416245ec85d4",
-          "disposition": "retained_unchanged",
+          "disposition": "retained_modified",
           "localPath": "packages/coding-agent/src/utils/child-process.ts",
-          "localSha256": "cd324f5b9a1abadd85ab5a331750d475c8bd51ec65cae091ad9b416245ec85d4"
+          "localSha256": "26b8e16b71223f420fafe2375569fd1d46cedd254180b907b50725314ebd277e"
         },
         {
           "upstreamPath": "packages/coding-agent/src/utils/clipboard-image.ts",
@@ -2116,7 +2116,7 @@
           "upstreamSha256": "4833786e865dc9c41d2e5b7c8d39da4284a39cb2ae7c366059dd878335a4cdb8",
           "disposition": "retained_modified",
           "localPath": "packages/coding-agent/test/resource-loader.test.ts",
-          "localSha256": "2ae7229aeb176fa2e5040091401307e29049b419eb00e3477f6305bf6af0d360"
+          "localSha256": "6bb12af471a004c0cfeffa1ed3b99210a30b728a3cb7f21dbddb9fc72a73ca10"
         },
         {
           "upstreamPath": "packages/coding-agent/test/restore-sandbox-env.test.ts",
@@ -2891,7 +2891,7 @@
           "upstreamSha256": "c8f216425e1fb084fb4323c2d9c68b60e0f1111e37575922a139c64158cc0e5d",
           "disposition": "retained_modified",
           "localPath": "docs/development.md",
-          "localSha256": "04ab74add09a78c8ac0fbab94c6d33577b23001c2422d8f290a1b3c56c2e1547"
+          "localSha256": "417f7d92b6809af49ae2e0270d85e63facb610889204150f6600eaff9c4ad717"
         },
         {
           "upstreamPath": "packages/coding-agent/docs/docs.json",
@@ -2937,7 +2937,7 @@
           "upstreamSha256": "107d95d5dfba1da71ebd3c0b390199463261f78fe9f438c506a205f33b69f7fe",
           "disposition": "retained_modified",
           "localPath": "docs/index.md",
-          "localSha256": "1306d3af62fd13a9add10ab8701487b4e0375732b440efa2146ba4a4c2a5b55e"
+          "localSha256": "907f3c33a482261a07499db4e13bace20bb2f18426bdd18927604bd031cee9e1"
         },
         {
           "upstreamPath": "packages/coding-agent/docs/json.md",
@@ -3091,7 +3091,7 @@
           "upstreamSha256": "ca1093f341cd5cb84aa6d239af7d7c82c89e4bcc53074ad117d24749b515d174",
           "disposition": "retained_modified",
           "localPath": "docs/usage.md",
-          "localSha256": "a163f5b2191ec467388c44c882ee9be4912ba2498f3263ad249e641804d761a1"
+          "localSha256": "1876e8e5371bb66cd482c1d43f3b20916619333ecd6586c56ca49d9970c573bc"
         },
         {
           "upstreamPath": "packages/coding-agent/docs/windows.md",
@@ -4062,7 +4062,7 @@
       "upstreamSha256": "d5e5278f644e6a7654687b4ea0d737f517742c2eeaf18e2e93fbf7aa542983d2",
       "disposition": "retained_modified",
       "localPath": "README.md",
-      "localSha256": "6361cbbed9774c8641a50c6ab3a88e58a705719addc70f5effc97c5cf5effe19"
+      "localSha256": "de562e92cd10304cd1a50935492994ad51d2d1272ee621249a6cd67bb06af79d"
     },
     {
       "upstreamPath": "packages/coding-agent/install-lock/package-lock.json",
@@ -4110,7 +4110,7 @@
       "upstreamSha256": "91761b9fab28aebccead2781256823c60a768e7aff0011c1dfcf27396d865f19",
       "disposition": "retained_modified",
       "localPath": "vitest.config.ts",
-      "localSha256": "81bbd179d76f54a06e2f72d2cfc76b24a2da359960c9b63691d95c53b36d3470"
+      "localSha256": "21f21964024d0ff260ee4bb563b87998a4654efe00c9d1510cbeda60ec1abd77"
     }
   ],
   "piAiOAuthEntries": [
@@ -4184,6 +4184,11 @@
   ],
   "localAdditions": [
     {
+      "localPath": "docs/dynamic-workflows.md",
+      "localSha256": "3545d0791e95aa417abc89c766252d26cd3b92a5e493df049a6fc9871f615c91",
+      "origin": "disco_owned"
+    },
+    {
       "localPath": "packages/coding-agent/src/cli/pi-environment-isolation.ts",
       "localSha256": "890cee7410e547a2a616c2a7a094a350bcc7f996a3887108d34a1cd5de756031",
       "origin": "disco_owned"
@@ -4209,13 +4214,18 @@
       "origin": "disco_owned"
     },
     {
+      "localPath": "packages/coding-agent/src/core/package-manager.test.ts",
+      "localSha256": "720a57dfe3f67dc00ca41e585dc183645e2e1ab7c79cccdcf5bcf4a07f6e9ce9",
+      "origin": "disco_owned"
+    },
+    {
       "localPath": "packages/coding-agent/src/core/repo-skills-library-manager.test.ts",
       "localSha256": "3206a5e0f8008234e6619cd5dd4036511101c7ff61f0133c3b4494c94478c90c",
       "origin": "disco_owned"
     },
     {
       "localPath": "packages/coding-agent/src/core/repo-skills-library-manager.ts",
-      "localSha256": "0a5e50c12af63e4aba30e6c5fadd86b04230307b2db49bf0fc7c77c50fdae38e",
+      "localSha256": "fc0414c8186f710dfdc3596ba7d6bbd2df96a9a1595e7056f437264fc1f33af9",
       "origin": "disco_owned"
     },
     {
@@ -4244,13 +4254,18 @@
       "origin": "disco_owned"
     },
     {
+      "localPath": "packages/coding-agent/src/disco/dynamic-workflows/agent-usage.ts",
+      "localSha256": "fa61ce7a6954d5015800ed60dd7d633015592a56d6e1cd16c0de24a9f215ddd3",
+      "origin": "disco_owned"
+    },
+    {
       "localPath": "packages/coding-agent/src/disco/dynamic-workflows/agent.test.ts",
-      "localSha256": "d41b91faeea475b7d0c17f50f6d4409b54206d9d3484f9a10dab325eff6e9767",
+      "localSha256": "0c085f34dd511584edc098feec9a27bb412f1eb7443f8d714efd0fb21a05eb06",
       "origin": "disco_owned"
     },
     {
       "localPath": "packages/coding-agent/src/disco/dynamic-workflows/agent.ts",
-      "localSha256": "64ccd8cf8c4bcedac85d5ca1b6dfa60eead1765e57569d51db59c4316bbeeee9",
+      "localSha256": "e9b858994e96732eb9ff1335fcdec4d54c8c09e2908bf2fa527311047d7220c7",
       "origin": "disco_owned"
     },
     {
@@ -4260,7 +4275,7 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/dynamic-workflows/config.ts",
-      "localSha256": "edf648f5ae7f629d588c1956896af23ee180bc2fdb9e3ae52c10a3eb69da39d0",
+      "localSha256": "14a5e60d516aa26e456feea00fdf74917edf3aeaa97bdbdc6b8fd393c678c3e8",
       "origin": "disco_owned"
     },
     {
@@ -4270,7 +4285,7 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/dynamic-workflows/display.ts",
-      "localSha256": "604dc854a7044f8bf770f9cb706966d5034b7abc6a092ca4251e03436d92087a",
+      "localSha256": "3395e8b074bedb48727508974a914ddba5e61ca3ccf2e4d5336a0c87b4a18b06",
       "origin": "disco_owned"
     },
     {
@@ -4280,7 +4295,7 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/dynamic-workflows/errors.ts",
-      "localSha256": "2415471657ded78075b36a27a35ef32eaf35f0d23917d37822837539e0bfe9d8",
+      "localSha256": "16819f8d47d27e250cc0694f9ff0c577dd91dc72729b027efa47b2a9bf98e50b",
       "origin": "disco_owned"
     },
     {
@@ -4290,7 +4305,7 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/dynamic-workflows/index.ts",
-      "localSha256": "c335955d0b5f56b835cbb6930ba27017b8982bb593692fdecf49e8653e0ab079",
+      "localSha256": "d56ffdc7a9b1175ee9e4f7a4282112370224f4bf90dafe01eb267c8cb7065459",
       "origin": "disco_owned"
     },
     {
@@ -4315,7 +4330,7 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/dynamic-workflows/run-persistence.ts",
-      "localSha256": "030fbd6fe2a3e7a5c75086a23b7926a5d50b41f1603e9e51ce1ac15a0389261c",
+      "localSha256": "14cf05e3157989e8f6c5cae654a44385b6b6c40753a09bd2c2743246628a3491",
       "origin": "disco_owned"
     },
     {
@@ -4330,7 +4345,12 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/dynamic-workflows/task-panel.ts",
-      "localSha256": "73abadabcc57ff7a1da334852ce52ec1616839a1ca83a0780c8ed1da21a41f7c",
+      "localSha256": "38a4d15cc897750d21f260df7b3a1f7b1c1612d30e5541704bddfb1a5bcd1daf",
+      "origin": "disco_owned"
+    },
+    {
+      "localPath": "packages/coding-agent/src/disco/dynamic-workflows/UPSTREAM_SOURCE.md",
+      "localSha256": "a73fa2bbd1ec6b501e97bc0c6433d0f954180729f1a1f6ea930304287c5be513",
       "origin": "disco_owned"
     },
     {
@@ -4340,7 +4360,7 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/dynamic-workflows/workflow-commands.ts",
-      "localSha256": "c1889996b6cb926218e665df7a06098ddbf076f7a9214b61c67f1ab8233a31a1",
+      "localSha256": "f3a396cf9f2dce648e5670ed3a89d07dd9d2125692cbdd420bd4b512e781645b",
       "origin": "disco_owned"
     },
     {
@@ -4350,7 +4370,7 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/dynamic-workflows/workflow-manager.ts",
-      "localSha256": "3969ca10eabb123e032bacf9a58455b6b8a2314b10c1d7e06e55a3df07e7a5af",
+      "localSha256": "e77b63ad5375464fe2d021c731864a969325de7d753ab471dff954448060dc46",
       "origin": "disco_owned"
     },
     {
@@ -4370,17 +4390,22 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/dynamic-workflows/workflow-tool.ts",
-      "localSha256": "de371003646dfc5989e97775b32c24433566fe655eb0bd61f6ef016cd8513c7f",
+      "localSha256": "78991a82207340c8b7e23cc4a33a1b3ad5e67b6700e6a5f60629052b0b8e4af6",
       "origin": "disco_owned"
     },
     {
       "localPath": "packages/coding-agent/src/disco/dynamic-workflows/workflow-ui.ts",
-      "localSha256": "e9b15b4d1334827950de823ca11996d2e5406a9cb56c09347f0f1f9e295bfe05",
+      "localSha256": "7cd3c9631215d48733f71d2e1f8290a2cdb08fa5e041f7fdda0f812c93e7e251",
+      "origin": "disco_owned"
+    },
+    {
+      "localPath": "packages/coding-agent/src/disco/dynamic-workflows/workflow.test.ts",
+      "localSha256": "00c78e8245c0857e84eb261d9b2d8ceefdfcf564b40738d9ddaebcf89fea7da9",
       "origin": "disco_owned"
     },
     {
       "localPath": "packages/coding-agent/src/disco/dynamic-workflows/workflow.ts",
-      "localSha256": "9ec1ce264f08e89d9990d6422a2107ea5b4778ef905ee764073697a73b601000",
+      "localSha256": "8ca4344ee887a31ba4020068cae31a726395d0a37fdb8137a276d252a0e63048",
       "origin": "disco_owned"
     },
     {
@@ -4415,12 +4440,12 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/modes/prompts.test.ts",
-      "localSha256": "b7202a7a9e34b2b32c395d079b8336137b1bd56cbfc065abc91ca830069dff44",
+      "localSha256": "129cf9634b60c3383581a93a0c637a8ddf3022db15cdbafbcc0c6013c7fb20e0",
       "origin": "disco_owned"
     },
     {
       "localPath": "packages/coding-agent/src/disco/modes/prompts.ts",
-      "localSha256": "17cea5acdaf3fd585b7a3a17b24cec3e1e74d3331fb3c4f61fffd3fbc601c5c2",
+      "localSha256": "6eefe47c14fb565e113b9ac1a53b64eb90a8efac0ff29fa281f6f115094a4c93",
       "origin": "disco_owned"
     },
     {
@@ -4445,7 +4470,7 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/skill-role-contracts.test.ts",
-      "localSha256": "13afb67bcbf252b8dbe0d9243bc4d6e4ab75cc9dff6c18584aba318a0a199cab",
+      "localSha256": "410944217ffeb145fe31b4581fc29e05d11128dd7c44a774591fe5c5e9f22e27",
       "origin": "disco_owned"
     },
     {
@@ -4505,7 +4530,7 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/skills/create-repo-skill/references/planning-and-writing.md",
-      "localSha256": "67b9ef73c01f69e72009594a21078dd8151bf374004a3b51318b5ae223aadaad",
+      "localSha256": "35a1b4de99b62291c74b9cfaa8c06930836f5720d1c5d555bfe1a5ff3abaa15c",
       "origin": "disco_owned"
     },
     {
@@ -4515,7 +4540,7 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/skills/create-repo-skill/SKILL.md",
-      "localSha256": "e6d3320a35c7454008ec024a4faee23c94675795196193935c79368275ff9077",
+      "localSha256": "aa0b8d6c9ceb1d5a65e412a08640c7a236aceb8fcfd03517b0679d23a47f2da4",
       "origin": "disco_owned"
     },
     {
@@ -4600,7 +4625,7 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/skills/import-repo-skills-to-agent/SKILL.md",
-      "localSha256": "e1a612b11dbaac77a65083fb3845455a26e38c63977bf2412140541cde0ce377",
+      "localSha256": "a87b3c19e950d33b105fd400f2549338a428231a56bc8e5931ebaa509a7e64d7",
       "origin": "disco_owned"
     },
     {
@@ -4700,17 +4725,17 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/skills/prepare-repo-skill-env/references/verification-and-failure-report.md",
-      "localSha256": "27769140972cc54798e9bdd1dec90fb12cc01166c2e57f150e3c02dcc4da2364",
+      "localSha256": "3f24548aafbbf7d525ee3e06b64b58a8938bf1bbf975ce6efe7e72ba817aebb6",
       "origin": "disco_owned"
     },
     {
       "localPath": "packages/coding-agent/src/disco/skills/prepare-repo-skill-env/SKILL.md",
-      "localSha256": "4428d2b8e96c99f70be484acd286f510cbd7dcfeaa3d45c4169ab1f896105915",
+      "localSha256": "d98fa8a503e37e85283b8d9603de4c1b5ca616304738383d235cf6df94110a6b",
       "origin": "disco_owned"
     },
     {
       "localPath": "packages/coding-agent/src/disco/skills/README.md",
-      "localSha256": "aa7e001f08aef8d30f1e55214916f4e28c5a8223dc35d087f281571ca504da1f",
+      "localSha256": "910c78835bd7926cdb9073d483fc7784e68be3d83857cf9b301eca043d90945d",
       "origin": "disco_owned"
     },
     {
@@ -4846,6 +4871,11 @@
     {
       "localPath": "packages/coding-agent/src/disco/skills/verify-repo-skill/SKILL.md",
       "localSha256": "3146b0a967ea53efbd3aa5e463af3be05fdfff1015da9e0a473e4a54889f3d19",
+      "origin": "disco_owned"
+    },
+    {
+      "localPath": "packages/coding-agent/src/disco/skills/workflow-authoring/SKILL.md",
+      "localSha256": "b34b31dde6e585fbbe1deb15801ace211f00e709cc30cda161c311d4caad1c58",
       "origin": "disco_owned"
     },
     {

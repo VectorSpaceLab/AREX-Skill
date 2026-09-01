@@ -20,18 +20,20 @@ import { shortModel } from "./workflow-ui.ts";
 // it redraws identical content.
 const RUN_EVENTS = [
 	"agentStart",
+	"agentAttemptEnd",
 	"agentEnd",
 	"phase",
 	"log",
 	"tokenUsage",
 	"complete",
+	"incomplete",
 	"error",
 	"stopped",
 	"paused",
 	"resumed",
 ];
 /** Events after which a run is gone and its token-rate samples can be dropped. */
-const RUN_END_EVENTS = ["complete", "error", "stopped"] as const;
+const RUN_END_EVENTS = ["complete", "incomplete", "error", "stopped"] as const;
 
 export interface TaskPanelOptions {
 	storage?: WorkflowStorage;
@@ -75,8 +77,37 @@ export function deliverText(run: ManagedRun): string {
 	const tokens = run.result?.tokenUsage ? ` · ${run.result.tokenUsage.total.toLocaleString()} tokens` : "";
 	const agents = run.result?.agentCount ?? run.snapshot.agentCount;
 	const duration = run.result?.durationMs ? ` · ${(run.result.durationMs / 1000).toFixed(1)}s` : "";
+	const environmentWarnings = [
+		...new Set(
+			(run.result?.logs ?? run.snapshot.logs ?? []).filter((line) =>
+				line.startsWith("[warn] Prepared environment used legacy"),
+			),
+		),
+	].map((line) => `Warning: ${line.slice("[warn] ".length)}`);
+	if (run.result?.complete === false || run.snapshot.complete === false) {
+		const missing = run.result?.missing ?? run.snapshot.missing ?? [];
+		const errors = run.result?.errors ?? run.snapshot.errors ?? [];
+		const recoveryRoot = run.recoveryOfRunId ?? run.runId;
+		const recoveryRound = (run.recoveryRound ?? 0) + 1;
+		return [
+			`⚠ Background workflow "${run.snapshot.name}" requires recovery (${agents} agents${tokens}${duration}).`,
+			`Run ID: ${run.runId}`,
+			`Missing IDs: ${missing.join(", ") || "not declared"}`,
+			...(errors.length
+				? [`Errors: ${errors.map((entry) => `${entry.id}${entry.error ? ` (${entry.error})` : ""}`).join(", ")}`]
+				: []),
+			...environmentWarnings,
+			"",
+			"Do not silently integrate or repair the partial result in the main agent.",
+			`Call the workflow tool again for only the missing IDs, with recoveryOfRunId: "${recoveryRoot}" and recoveryRound: ${recoveryRound}. Reuse the prepared environment and preserve already completed IDs.`,
+			"",
+			"Partial result:",
+			summary,
+		].join("\n");
+	}
 	return [
 		`✓ Background workflow "${run.snapshot.name}" finished (${agents} agents${tokens}${duration}).`,
+		...environmentWarnings,
 		"",
 		summary,
 	].join("\n");
@@ -126,8 +157,13 @@ export function installResultDelivery(pi: ExtensionAPI, manager: WorkflowManager
 		// returns its result inline as the tool result, so re-delivering would dup it.
 		if (run?.background) deliver(deliverText(run));
 	});
+	manager.on("incomplete", ({ runId }: { runId: string }) => {
+		const run = manager.getRun(runId);
+		if (run?.background) deliver(deliverText(run));
+	});
 	manager.on("error", ({ runId, error }: { runId: string; error?: { message?: string } }) => {
-		if (!manager.getRun(runId)?.background) return;
+		const run = manager.getRun(runId);
+		if (!run?.background || run.status === "paused" || run.status === "aborted") return;
 		deliver(`✗ Background workflow ${runId} failed: ${error?.message ?? "unknown error"}`);
 	});
 }

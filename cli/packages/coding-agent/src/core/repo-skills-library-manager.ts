@@ -16,7 +16,7 @@ import { hostname } from "node:os";
 import { basename, dirname, isAbsolute, join, relative, resolve, sep } from "node:path";
 import { parse, parseDocument } from "yaml";
 import { getAgentDir, getBundledSkillsDir } from "../config.ts";
-import { spawnProcess, waitForChildProcess } from "../utils/child-process.ts";
+import { getGitProcessEnv, spawnProcess, waitForChildProcess } from "../utils/child-process.ts";
 
 const STATE_SCHEMA_VERSION = 2;
 const OFFICIAL_REPOSITORY = "https://github.com/VectorSpaceLab/AREX-Skill.git";
@@ -1064,7 +1064,7 @@ export class RepoSkillsLibraryManager {
 	}
 
 	private async git(args: string[]): Promise<ProcessResult> {
-		return runProcess(this.gitCommand, args, { env: this.env });
+		return runProcess(this.gitCommand, args, { env: getGitProcessEnv(this.env) });
 	}
 
 	private async cloneSource(destination: string): Promise<void> {

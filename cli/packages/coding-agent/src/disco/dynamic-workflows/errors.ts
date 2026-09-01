@@ -19,6 +19,10 @@ export const WorkflowErrorCode = {
 	AGENT_EMPTY_OUTPUT: "AGENT_EMPTY_OUTPUT",
 	/** Agent execution failed. */
 	AGENT_EXECUTION_ERROR: "AGENT_EXECUTION_ERROR",
+	/** The structured prepared environment was missing or did not match. */
+	ENVIRONMENT_ASSERTION_FAILED: "ENVIRONMENT_ASSERTION_FAILED",
+	/** The script returned an explicit incomplete coverage ledger. */
+	WORKFLOW_INCOMPLETE: "WORKFLOW_INCOMPLETE",
 	/** Run state persistence failed. */
 	PERSISTENCE_ERROR: "PERSISTENCE_ERROR",
 	/** Unknown error. */

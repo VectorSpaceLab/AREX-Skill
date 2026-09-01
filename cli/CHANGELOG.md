@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.0 - 2026-08-27
+## 0.2.0 - 2026-08-31
 
 - Replace the legacy scenario-oriented repository router with a taxonomy-driven
   `area -> family -> repository skill -> relevant sub-skill` router. The
@@ -42,6 +42,24 @@
   form. Conflicting selectors, selector values, and incompatible resume/fork
   combinations now fail with explicit diagnostics, and the CLI help, prompts,
   and bundled documentation use the shorter forms.
+- Harden the inline dynamic workflow runtime around timeout and failure
+  boundaries. Timed-out attempts are aborted and drained before the default one
+  retry starts, non-recoverable run failures cancel and drain sibling lanes, and
+  persisted runs retain stable agent IDs, per-attempt errors and usage, execution
+  limits, and recovery lineage across resume.
+- Treat explicit `{ complete, rows, missing, errors }` workflow results as a
+  coverage contract. Incomplete background runs now return actionable missing
+  IDs to the main agent, remain visibly recoverable in `/workflows`, and support
+  missing-only recovery with a 50-round default cap, a 1,000-round hard cap, and
+  early no-progress termination.
+- Add a shared `workflow-authoring` contract and structured prepared-environment
+  assertions so Creator can use the verified executable, package, and version on
+  its first workflow call without reading runtime source. Known legacy report
+  fields are normalized with visible deprecation warnings, parser diagnostics
+  point to fragile Markdown-rich script payloads, and finalized usage now
+  distinguishes terminal totals, live observations, estimated fallback, cache
+  reads, and cache writes. The implementation remains an inline DisCo adaptation
+  and adds no workflow npm runtime dependency.
 - Rework `import-repo-skills-to-agent` around a bundled transactional export
   helper for Codex, Claude Code, and agent-neutral skill roots. Full and
   selected exports now regenerate the target `repository-index.jsonl` and

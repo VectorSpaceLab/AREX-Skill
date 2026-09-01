@@ -29,7 +29,8 @@ import ignore from "ignore";
 import { minimatch } from "minimatch";
 import { maxSatisfying, rcompare, satisfies, valid, validRange } from "semver";
 import { CONFIG_DIR_NAME, getBundledSkillsDir } from "../config.ts";
-import { spawnProcess, spawnProcessSync } from "../utils/child-process.ts";
+import { DEFAULT_DISCO_AGENT_MODE, type DiscoAgentMode } from "../disco/modes/types.ts";
+import { getGitProcessEnv, spawnProcess, spawnProcessSync } from "../utils/child-process.ts";
 import { type GitSource, parseGitUrl } from "../utils/git.ts";
 import { canonicalizePath, isLocalPath, markPathIgnoredByCloudSync, resolvePath } from "../utils/paths.ts";
 import { isStdoutTakenOver } from "./output-guard.ts";
@@ -122,6 +123,7 @@ interface PackageManagerOptions {
 	settingsManager: SettingsManager;
 	includeDisCoDefaults?: boolean;
 	includeDisCoBuiltinSkills?: boolean;
+	discoMode?: DiscoAgentMode;
 }
 
 type SourceScope = "user" | "project" | "temporary";
@@ -362,13 +364,62 @@ function collectFiles(
 
 type SkillDiscoveryMode = "disco" | "agents";
 
-const USER_MANAGED_BUILTIN_SKILLS = new Set(["repo-skills-router"]);
+const REPOSITORY_SKILL_ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-function isUserManagedBuiltinSkillEntry(path: string): boolean {
-	if (basename(path) === "SKILL.md") {
-		return USER_MANAGED_BUILTIN_SKILLS.has(basename(dirname(path)));
+function isPathWithin(path: string, root: string): boolean {
+	const resolvedPath = resolve(path);
+	const resolvedRoot = resolve(root);
+	return resolvedPath === resolvedRoot || resolvedPath.startsWith(`${resolvedRoot}${sep}`);
+}
+
+function isRouterSkillEntry(filePath: string): boolean {
+	return basename(filePath) === "repo-skills-router" ||
+		(basename(filePath) === "SKILL.md" && basename(dirname(filePath)) === "repo-skills-router");
+}
+
+function getRepositoryExportKey(filePath: string, skillsRoot: string): string | undefined {
+	if (!isPathWithin(filePath, skillsRoot)) return undefined;
+
+	const relativePath = relative(resolve(skillsRoot), resolve(filePath));
+	const segments = relativePath.split(sep);
+	if (
+		segments.length === 4 &&
+		segments[0] === "repositories" &&
+		segments[1] === "repo-skills" &&
+		REPOSITORY_SKILL_ID_PATTERN.test(segments[2] ?? "") &&
+		segments[3] === "SKILL.md"
+	) {
+		return `repo-skills/${segments[2]}`;
 	}
-	return USER_MANAGED_BUILTIN_SKILLS.has(basename(path));
+
+	if (
+		segments.length === 3 &&
+		segments[0] === "repositories" &&
+		segments[1] === "repo-skills-router" &&
+		segments[2] === "SKILL.md"
+	) {
+		return "repo-skills-router";
+	}
+
+	return undefined;
+}
+
+function isManagedRouterEntry(filePath: string, managedSkillsDir: string): boolean {
+	if (!isPathWithin(filePath, managedSkillsDir)) return false;
+
+	const relativePath = relative(resolve(managedSkillsDir), resolve(filePath));
+	return (
+		relativePath === join("repo-skills-router", "SKILL.md") ||
+		relativePath === join("repositories", "repo-skills-router", "SKILL.md")
+	);
+}
+
+function isForceIncludedByOverrides(filePath: string, overrides: string[], baseDir: string): boolean {
+	return overrides.some(
+		(pattern) =>
+			pattern.startsWith("+") &&
+			matchesAnyExactPattern(filePath, [pattern.slice(1)], baseDir),
+	);
 }
 
 function collectSkillEntries(
@@ -823,6 +874,7 @@ export class DefaultPackageManager implements PackageManager {
 	private settingsManager: SettingsManager;
 	private includeDisCoDefaults: boolean;
 	private includeDisCoBuiltinSkills: boolean;
+	private discoMode: DiscoAgentMode;
 	private globalNpmRoot: string | undefined;
 	private globalNpmRootCommandKey: string | undefined;
 	private progressCallback: ProgressCallback | undefined;
@@ -833,6 +885,7 @@ export class DefaultPackageManager implements PackageManager {
 		this.settingsManager = options.settingsManager;
 		this.includeDisCoDefaults = options.includeDisCoDefaults ?? true;
 		this.includeDisCoBuiltinSkills = options.includeDisCoBuiltinSkills ?? this.includeDisCoDefaults;
+		this.discoMode = options.discoMode ?? DEFAULT_DISCO_AGENT_MODE;
 	}
 
 	setProgressCallback(callback: ProgressCallback | undefined): void {
@@ -2469,14 +2522,42 @@ export class DefaultPackageManager implements PackageManager {
 			globalBaseDir,
 		);
 
+		const managedRepositorySkillKeys = new Set<string>();
+		for (const [path, resource] of accumulator.skills.entries()) {
+			if (!resource.enabled) continue;
+
+			const repositoryKey = getRepositoryExportKey(path, userDirs.skills);
+			if (repositoryKey) {
+				managedRepositorySkillKeys.add(repositoryKey);
+			}
+			if (isManagedRouterEntry(path, userDirs.skills)) {
+				managedRepositorySkillKeys.add("repo-skills-router");
+			}
+		}
+
+		const builtinSkillEntries = builtinSkillsDir ? collectAutoSkillEntries(builtinSkillsDir, "agents") : [];
+		if (
+			this.discoMode === "researcher" &&
+			!managedRepositorySkillKeys.has("repo-skills-router") &&
+			builtinSkillEntries.some((path) => isManagedRouterEntry(path, builtinSkillsDir!))
+		) {
+			managedRepositorySkillKeys.add("repo-skills-router");
+		}
+
 		const userAgentsBaseDir = dirname(userAgentsSkillsDir);
 		const userAgentsMetadata: PathMetadata = {
 			...userMetadata,
 			baseDir: userAgentsBaseDir,
 		};
+		const externalAgentSkillEntries = collectAutoSkillEntries(userAgentsSkillsDir, "agents").filter((path) => {
+			if (this.discoMode !== "researcher") return true;
+			if (isForceIncludedByOverrides(path, userOverrides.skills, userAgentsBaseDir)) return true;
+			const repositoryKey = getRepositoryExportKey(path, userAgentsSkillsDir);
+			return !repositoryKey || !managedRepositorySkillKeys.has(repositoryKey);
+		});
 		addResources(
 			"skills",
-			collectAutoSkillEntries(userAgentsSkillsDir, "agents"),
+			externalAgentSkillEntries,
 			userAgentsMetadata,
 			userOverrides.skills,
 			userAgentsBaseDir,
@@ -2498,12 +2579,16 @@ export class DefaultPackageManager implements PackageManager {
 		);
 		if (builtinSkillsDir) {
 			const hasEnabledManagedRouter = Array.from(accumulator.skills.entries()).some(
-				([path, resource]) => resource.enabled && isUserManagedBuiltinSkillEntry(path),
+				([path, resource]) =>
+					resource.enabled &&
+					(this.discoMode === "researcher"
+						? isManagedRouterEntry(path, userDirs.skills)
+						: isRouterSkillEntry(path)),
 			);
 			addResources(
 				"skills",
-				collectAutoSkillEntries(builtinSkillsDir, "agents").filter(
-					(path) => !hasEnabledManagedRouter || !isUserManagedBuiltinSkillEntry(path),
+				builtinSkillEntries.filter(
+					(path) => !hasEnabledManagedRouter || !isManagedRouterEntry(path, builtinSkillsDir),
 				),
 				builtinSkillsMetadata,
 				[],
@@ -2599,7 +2684,8 @@ export class DefaultPackageManager implements PackageManager {
 	}
 
 	private spawnCommand(command: string, args: string[], options?: { cwd?: string }): ChildProcess {
-		const env = getEnv();
+		const baseEnv = getEnv();
+		const env = command === "git" ? getGitProcessEnv(baseEnv) : baseEnv;
 		return spawnProcess(command, args, {
 			cwd: options?.cwd,
 			stdio: isStdoutTakenOver() ? ["ignore", 2, 2] : "inherit",
@@ -2613,7 +2699,8 @@ export class DefaultPackageManager implements PackageManager {
 		options?: { cwd?: string; env?: Record<string, string> },
 	): ChildProcessByStdio<null, Readable, Readable> {
 		const baseEnv = getEnv();
-		const env = options?.env ? { ...baseEnv, ...options.env } : baseEnv;
+		const mergedEnv = options?.env ? { ...baseEnv, ...options.env } : baseEnv;
+		const env = command === "git" ? getGitProcessEnv(mergedEnv) : mergedEnv;
 		return spawnProcess(command, args, {
 			cwd: options?.cwd,
 			stdio: ["ignore", "pipe", "pipe"],
@@ -2680,7 +2767,8 @@ export class DefaultPackageManager implements PackageManager {
 	}
 
 	private runCommandSync(command: string, args: string[]): string {
-		const env = getEnv();
+		const baseEnv = getEnv();
+		const env = command === "git" ? getGitProcessEnv(baseEnv) : baseEnv;
 		const result = spawnProcessSync(command, args, {
 			stdio: ["ignore", "pipe", "pipe"],
 			encoding: "utf-8",

@@ -1,7 +1,7 @@
 import { Text } from "@earendil-works/pi-tui";
-import { Type } from "typebox";
+import { type Static, Type } from "typebox";
 import { defineTool, type ToolDefinition } from "../../core/extensions/types.ts";
-import { listAvailableModelSpecs } from "./agent.ts";
+import { listAvailableModelSpecs, normalizeAgentEnvironment } from "./agent.ts";
 import { listAgentTypes, loadAgentRegistry } from "./agent-registry.ts";
 import {
 	createToolUpdateWorkflowDisplay,
@@ -42,6 +42,47 @@ export function agentTypeGuideline(cwd: string = process.cwd()): string | undefi
 	return `For workflow, opts.agentType routes an agent to a named definition that binds its tools, model, and role prompt. Available agentTypes: ${list}. An explicit opts.model still overrides the definition's model.`;
 }
 
+const preparedEnvironmentSchema = Type.Object(
+	{
+		executable: Type.String({ description: "Absolute executable path from the prepared environment." }),
+		cwd: Type.Optional(Type.String({ description: "Optional working directory for the environment assertion." })),
+		package: Type.Optional(Type.String({ description: "Installed distribution name whose version must be checked." })),
+		version: Type.Optional(Type.String({ description: "Exact expected installed distribution version." })),
+		args: Type.Optional(
+			Type.Array(Type.String(), { description: "Optional executable arguments before inspection arguments." }),
+		),
+		versionArgs: Type.Optional(
+			Type.Array(Type.String(), { description: "Optional explicit arguments used to inspect the runtime version." }),
+		),
+	},
+	{
+		additionalProperties: true,
+		description:
+			"Prepared runtime assertion passed to agent() as environment. Canonical fields are executable/package/version. Legacy prepare-env report fields pythonExecutable/expectedDistribution/expectedVersion are accepted only as a deprecated migration safety net and are normalized before execution.",
+	},
+);
+
+const workflowArgsObjectSchema = Type.Object(
+	{
+		environment: Type.Optional(preparedEnvironmentSchema),
+		jobs: Type.Optional(Type.Any({ description: "Optional structured jobs payload; use for Markdown-rich agent briefs." })),
+		briefs: Type.Optional(Type.Any({ description: "Optional structured briefs payload kept outside the JavaScript script." })),
+	},
+	{
+		additionalProperties: true,
+		description: "Workflow args object with documented common fields; additional custom JSON fields remain supported.",
+	},
+);
+
+const workflowArgsSchema = Type.Union([
+	workflowArgsObjectSchema,
+	Type.Array(Type.Any()),
+	Type.String(),
+	Type.Number(),
+	Type.Boolean(),
+	Type.Null(),
+]);
+
 const workflowToolSchema = Type.Object({
 	script: Type.String({
 		description: [
@@ -49,11 +90,11 @@ const workflowToolSchema = Type.Object({
 			"First statement: export const meta = { name: 'short_snake_case', description: 'non-empty description', phases: [{ title: 'Phase' }] }",
 			"Use phase('Name'), agent(prompt, opts), parallel(arrayOfFunctions), pipeline(items, ...stages), log(message), args, and budget. DisCo also supports agent(prompt, { subSkill: 'planned-sub-skill-id' }) for progress display. The workflow must call agent() at least once.",
 			"parallel() requires functions, not promises: await parallel(items.map(item => () => agent(...))).",
+			"For long Markdown-rich briefs, pass them through args.jobs/args.briefs and keep the script short; do not embed unescaped Markdown backticks in template literals.",
+			"When a batch is incomplete, return { complete, rows, missing, errors } with stable IDs; never use results.length as the success count.",
 		].join(" "),
 	}),
-	args: Type.Optional(
-		Type.Any({ description: "Optional JSON value exposed to the workflow script as global `args`." }),
-	),
+	args: Type.Optional(workflowArgsSchema),
 	background: Type.Optional(
 		Type.Boolean({
 			description:
@@ -65,6 +106,13 @@ const workflowToolSchema = Type.Object({
 			description: "Maximum number of agents allowed in this run. Default: 1000.",
 		}),
 	),
+	recoveryOfRunId: Type.Optional(
+		Type.String({ description: "Original run ID when this workflow handles only a previous run's missing IDs." }),
+	),
+	recoveryRound: Type.Optional(Type.Number({ description: "Recovery round number for the persisted run lineage." })),
+	maxRecoveryRounds: Type.Optional(
+		Type.Number({ description: "Safety cap for recoverMissing() rounds. Defaults to 50; no-progress stops earlier." }),
+	),
 	concurrency: Type.Optional(
 		Type.Number({
 			description:
@@ -74,7 +122,7 @@ const workflowToolSchema = Type.Object({
 	agentRetries: Type.Optional(
 		Type.Number({
 			description:
-				"Retry attempts for recoverable agent failures such as timeout, connection failure, or empty assistant output. Default 0 unless configured.",
+				"Retry attempts for recoverable agent failures such as timeout, connection failure, or empty assistant output. When a timeout is active, the default is 1; otherwise the default is 0. Set 0 explicitly to disable retries.",
 		}),
 	),
 	agentTimeoutMs: Type.Optional(
@@ -91,16 +139,7 @@ const workflowToolSchema = Type.Object({
 	),
 });
 
-export type WorkflowToolInput = {
-	script: string;
-	args?: unknown;
-	background?: boolean;
-	maxAgents?: number;
-	concurrency?: number;
-	agentRetries?: number;
-	agentTimeoutMs?: number;
-	tokenBudget?: number;
-};
+export type WorkflowToolInput = Static<typeof workflowToolSchema>;
 
 export interface WorkflowToolOptions {
 	cwd?: string;
@@ -145,6 +184,7 @@ export function createWorkflowTool(options: WorkflowToolOptions = {}): ToolDefin
 			"Use workflow only when coordinated subagents materially help or the user explicitly requests parallel or dynamic workflow execution; use ordinary tools for simple sequential work.",
 			"Follow the workflow tool schema for script syntax, execution options, and result handling.",
 			"Give every agent a focused task and a concise label; choose a tier that fits its role when using tiered routing.",
+			"For a prepared runtime, pass environment: { executable, package, version } to agent(); pythonExecutable/expectedDistribution/expectedVersion are deprecated report fields and must not be the authored contract.",
 			modelRoutingGuideline(),
 			agentTypeGuideline(),
 			"For workflow, runs are background by default: the tool returns immediately with a run ID, the turn ends so the user isn't blocked, and the result is delivered back into the conversation when the run finishes. Pass background: false only when you must use the result inline in this same turn (it will block).",
@@ -155,6 +195,14 @@ export function createWorkflowTool(options: WorkflowToolOptions = {}): ToolDefin
 			return normalizeWorkflowToolArgs(args);
 		},
 		async execute(_toolCallId, params, signal, onUpdate, ctx) {
+			// pi-agent-core validates tool arguments with structuredClone() after
+			// prepareArguments(). Keep the legacy fields in the prepared object so
+			// this second normalization remains observable even after that clone.
+			// The manager receives the canonical-only object returned below.
+			const normalizedExecution = normalizeWorkflowExecutionArgs(params.args);
+			const preflightWarnings = normalizedExecution.warnings;
+			const workflowArgs = normalizedExecution.args;
+			const initialLogs = preflightWarnings.map((warning) => `[warn] ${warning}`);
 			const script = normalizeWorkflowScript(params.script);
 			const parsed = parseWorkflowScript(script);
 
@@ -174,15 +222,19 @@ export function createWorkflowTool(options: WorkflowToolOptions = {}): ToolDefin
 			// conversation when the run finishes (see installResultDelivery). Only an
 			// explicit `background: false` blocks for the result inline.
 			if (params.background ?? true) {
-				const { runId } = manager.startInBackground(script, params.args, {
+				const { runId } = manager.startInBackground(script, workflowArgs, {
 					maxAgents: params.maxAgents,
+					initialLogs,
+					recoveryOfRunId: params.recoveryOfRunId,
+					recoveryRound: params.recoveryRound,
+					maxRecoveryRounds: params.maxRecoveryRounds,
 					concurrency: params.concurrency,
 					agentRetries: params.agentRetries,
 					agentTimeoutMs: params.agentTimeoutMs,
 					tokenBudget: params.tokenBudget,
 				});
 				return {
-					content: [{ type: "text", text: backgroundStartedText(parsed.meta.name, runId) }],
+					content: [{ type: "text", text: backgroundStartedText(parsed.meta.name, runId, preflightWarnings) }],
 					details: { runId, background: true },
 				};
 			}
@@ -201,8 +253,12 @@ export function createWorkflowTool(options: WorkflowToolOptions = {}): ToolDefin
 
 			let result: WorkflowRunResult;
 			try {
-				result = await manager.runSync(script, params.args, {
+				result = await manager.runSync(script, workflowArgs, {
 					maxAgents: params.maxAgents,
+					initialLogs,
+					recoveryOfRunId: params.recoveryOfRunId,
+					recoveryRound: params.recoveryRound,
+					maxRecoveryRounds: params.maxRecoveryRounds,
 					concurrency: params.concurrency,
 					agentRetries: params.agentRetries,
 					agentTimeoutMs: params.agentTimeoutMs,
@@ -239,16 +295,24 @@ export function createWorkflowTool(options: WorkflowToolOptions = {}): ToolDefin
 			}
 
 			snapshot.result = result.result;
+			snapshot.complete = result.complete;
+			snapshot.missing = result.missing;
+			snapshot.errors = result.errors;
+			snapshot.liveTokenUsage = result.liveTokenUsage;
 			snapshot.durationMs = result.durationMs;
 			snapshot = recomputeWorkflowSnapshot(snapshot);
 			display.complete(snapshot);
 
 			// Format token usage (include cost when the provider reports it)
 			const tokenInfo = result.tokenUsage
-				? `\n\nToken usage: ${result.tokenUsage.total.toLocaleString()} tokens${
+				? `\n\nToken usage: ${result.tokenUsage.total.toLocaleString()} tokens${result.tokenUsage.estimated ? " (includes estimated fallback)" : ""}${
 						result.tokenUsage.cost ? ` ($${result.tokenUsage.cost.toFixed(4)})` : ""
 					}`
 				: "";
+			const completionInfo = result.complete === false
+				? `\n\nThis workflow is incomplete. Missing IDs: ${(result.missing ?? []).join(", ") || "not declared"}. Start a recovery workflow with only those IDs before integrating results.`
+				: "";
+			const warningInfo = workflowWarningsText(result.logs);
 
 			const formattedResult =
 				result.result !== undefined ? `\n\`\`\`json\n${JSON.stringify(result.result, null, 2)}\n\`\`\`` : "";
@@ -257,7 +321,7 @@ export function createWorkflowTool(options: WorkflowToolOptions = {}): ToolDefin
 				content: [
 					{
 						type: "text",
-						text: `Workflow **${result.meta.name}** completed with **${result.agentCount}** agent(s).${tokenInfo}\n\n## Result${formattedResult}`,
+						text: `Workflow **${result.meta.name}** ${result.complete === false ? "requires recovery" : "completed"} with **${result.agentCount}** agent(s).${tokenInfo}${completionInfo}${warningInfo}\n\n## Result${formattedResult}`,
 					},
 				],
 				details: {
@@ -299,7 +363,7 @@ export function createWorkflowTool(options: WorkflowToolOptions = {}): ToolDefin
 function resolveWorkflowToolDefaults(
 	options: WorkflowToolOptions,
 	cwd: string,
-): { agentTimeoutMs: number | null; concurrency?: number; agentRetries: number } {
+): { agentTimeoutMs: number | null; concurrency?: number; agentRetries?: number } {
 	const settings = loadWorkflowSettings({ cwd });
 	return {
 		agentTimeoutMs:
@@ -307,7 +371,7 @@ function resolveWorkflowToolDefaults(
 				? options.defaultAgentTimeoutMs
 				: (settings.defaultAgentTimeoutMs ?? null),
 		concurrency: options.defaultConcurrency ?? options.concurrency ?? settings.defaultConcurrency,
-		agentRetries: options.defaultAgentRetries ?? settings.defaultAgentRetries ?? 0,
+		agentRetries: options.defaultAgentRetries ?? settings.defaultAgentRetries,
 	};
 }
 
@@ -317,10 +381,11 @@ function resolveWorkflowToolDefaults(
  * own and the conversation will resume automatically when it finishes, so the
  * user can just wait here (or go do something else).
  */
-export function backgroundStartedText(name: string, runId: string): string {
+export function backgroundStartedText(name: string, runId: string, warnings: string[] = []): string {
 	return [
 		`Workflow "${name}" started in the background.`,
 		`Run ID: ${runId}`,
+		...(warnings.length ? ["", ...warnings.map((warning) => `Warning: ${warning}`)] : []),
 		"It keeps running on its own. When it finishes, the result is delivered back",
 		"here and the conversation continues automatically — the user does not need to",
 		"do anything. Tell the user they can simply wait here for it to finish (it will",
@@ -334,7 +399,53 @@ function normalizeWorkflowToolArgs(args: unknown): WorkflowToolInput {
 	if (!args || typeof args !== "object") throw new Error("workflow requires an object argument with a script string");
 	const value = args as Record<string, unknown>;
 	if (typeof value.script !== "string") throw new Error("workflow requires `script` to be a string");
-	return { ...value, script: normalizeWorkflowScript(value.script) } as WorkflowToolInput;
+	const normalizedArgs = normalizeWorkflowArguments(value.args as WorkflowToolInput["args"], true);
+	return {
+		...value,
+		args: normalizedArgs.args,
+		script: normalizeWorkflowScript(value.script),
+	} as WorkflowToolInput;
+}
+
+/**
+ * Normalize a workflow's top-level environment at the execution boundary.
+ * `preserveLegacy` is used only before provider/schema validation; it keeps
+ * known migration fields alive through pi-agent-core's structuredClone().
+ */
+function normalizeWorkflowArguments(
+	workflowArgs: WorkflowToolInput["args"],
+	preserveLegacy: boolean,
+): { args: WorkflowToolInput["args"]; warnings: string[] } {
+	if (!workflowArgs || typeof workflowArgs !== "object" || Array.isArray(workflowArgs)) {
+		return { args: workflowArgs, warnings: [] };
+	}
+
+	const argsObject = workflowArgs as Record<string, unknown>;
+	if (argsObject.environment === undefined) return { args: workflowArgs, warnings: [] };
+
+	const normalizedEnvironment = normalizeAgentEnvironment(argsObject.environment);
+	const environment = preserveLegacy
+		? { ...((argsObject.environment as Record<string, unknown>) ?? {}), ...normalizedEnvironment.environment }
+		: normalizedEnvironment.environment;
+
+	return {
+		args: { ...argsObject, environment },
+		warnings: normalizedEnvironment.warnings,
+	};
+}
+
+function normalizeWorkflowExecutionArgs(args: WorkflowToolInput["args"]): {
+	args: WorkflowToolInput["args"];
+	warnings: string[];
+} {
+	return normalizeWorkflowArguments(args, false);
+}
+
+function workflowWarningsText(logs: string[]): string {
+	const warnings = [...new Set(logs.filter((line) => line.startsWith("[warn] Prepared environment used legacy")))];
+	return warnings.length
+		? `\n\n${warnings.map((warning) => `Warning: ${warning.slice("[warn] ".length)}`).join("\n")}`
+		: "";
 }
 
 function normalizeWorkflowScript(script: string): string {

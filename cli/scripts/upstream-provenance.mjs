@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { execFileSync } from "node:child_process";
 import { readFile, readdir, stat, writeFile } from "node:fs/promises";
-import { dirname, join, relative, resolve } from "node:path";
+import { dirname, isAbsolute, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const packageRoot = dirname(dirname(fileURLToPath(import.meta.url)));
@@ -11,21 +11,51 @@ const expectedUpstream = {
 	tag: "v0.83.0",
 	commit: "845d6ff1f6643aba440341cce877ce1c43ebbc39",
 };
+const inventoriedLocalRoots = [
+	"packages/coding-agent/src",
+	"packages/coding-agent/test",
+	"docs",
+	"examples",
+];
 
 function parseArguments(argv) {
-	let mode = "check";
+	let requestedMode;
 	let upstreamRoot;
+	const addLocalPaths = [];
 	for (let index = 0; index < argv.length; index += 1) {
 		const argument = argv[index];
-		if (argument === "--check") mode = "check";
-		else if (argument === "--write") mode = "write";
+		if (["--check", "--write", "--refresh-local"].includes(argument)) {
+			const mode = argument.slice(2);
+			if (requestedMode && requestedMode !== mode) {
+				throw new Error(`Cannot combine --${requestedMode} with --${mode}`);
+			}
+			requestedMode = mode;
+		}
 		else if (argument === "--upstream-root") upstreamRoot = argv[++index];
+		else if (argument === "--add-local") {
+			const path = argv[++index];
+			if (!path || path.startsWith("--")) {
+				throw new Error("--add-local requires a relative path");
+			}
+			addLocalPaths.push(path);
+		}
 		else throw new Error(`Unknown argument: ${argument}`);
 	}
+	const mode = requestedMode ?? "check";
 	if (mode === "write" && !upstreamRoot) {
 		throw new Error("--write requires --upstream-root <pi repository>");
 	}
-	return { mode, upstreamRoot: upstreamRoot ? resolve(upstreamRoot) : undefined };
+	if (mode === "refresh-local" && upstreamRoot) {
+		throw new Error("--refresh-local cannot be combined with --upstream-root");
+	}
+	if (mode !== "refresh-local" && addLocalPaths.length > 0) {
+		throw new Error("--add-local can only be used with --refresh-local");
+	}
+	return {
+		mode,
+		upstreamRoot: upstreamRoot ? resolve(upstreamRoot) : undefined,
+		addLocalPaths,
+	};
 }
 
 function git(upstreamRoot, args) {
@@ -222,12 +252,6 @@ async function buildManifest(upstreamRoot) {
 		oauthEntries.push(entry);
 	}
 
-	const inventoriedLocalRoots = [
-		"packages/coding-agent/src",
-		"packages/coding-agent/test",
-		"docs",
-		"examples",
-	];
 	const localAdditions = [];
 	for (const root of inventoriedLocalRoots) {
 		for (const localPath of await walkFiles(join(packageRoot, root))) {
@@ -267,6 +291,89 @@ function collectEntries(manifest) {
 	];
 }
 
+function assertManifestIdentity(manifest) {
+	if (JSON.stringify(manifest.upstream) !== JSON.stringify(expectedUpstream)) {
+		throw new Error("Manifest upstream identity does not match the pinned Pi baseline");
+	}
+}
+
+function normalizeLocalPath(path) {
+	const candidate = toPosix(path);
+	if (!candidate || isAbsolute(path) || candidate.startsWith("/") || /^[A-Za-z]:\//u.test(candidate)) {
+		throw new Error(`--add-local requires a relative path inside the package: ${path}`);
+	}
+	const absolute = resolve(packageRoot, candidate);
+	const localPath = toPosix(relative(packageRoot, absolute));
+	if (!localPath || localPath === ".." || localPath.startsWith("../")) {
+		throw new Error(`--add-local path escapes the package root: ${path}`);
+	}
+	if (!inventoriedLocalRoots.some((root) => localPath === root || localPath.startsWith(`${root}/`))) {
+		throw new Error(`--add-local path is outside the inventoried roots: ${localPath}`);
+	}
+	return localPath;
+}
+
+async function refreshLocalManifest(manifest, addLocalPaths) {
+	assertManifestIdentity(manifest);
+	const refreshed = structuredClone(manifest);
+	const localEntries = collectEntries(refreshed).filter((entry) => entry.localPath);
+	const declaredLocalPaths = new Set([
+		...localEntries.map((entry) => entry.localPath),
+		...refreshed.localAdditions.map((entry) => entry.localPath),
+	]);
+
+	for (const entry of [...localEntries, ...refreshed.localAdditions]) {
+		const absolute = join(packageRoot, entry.localPath);
+		if (!(await pathExists(absolute))) {
+			throw new Error(`Cannot refresh missing local file: ${entry.localPath}`);
+		}
+		entry.localSha256 = await sha256(absolute);
+		if (entry.upstreamPath && ["retained_unchanged", "retained_modified"].includes(entry.disposition)) {
+			entry.disposition = entry.upstreamSha256 === entry.localSha256 ? "retained_unchanged" : "retained_modified";
+		}
+	}
+
+	const requestedAdditions = addLocalPaths.map(normalizeLocalPath);
+	const requestedAdditionSet = new Set(requestedAdditions);
+	if (requestedAdditionSet.size !== requestedAdditions.length) {
+		throw new Error("--add-local paths must be unique");
+	}
+	for (const localPath of requestedAdditions) {
+		if (declaredLocalPaths.has(localPath)) {
+			throw new Error(`--add-local file is already declared: ${localPath}`);
+		}
+		const absolute = join(packageRoot, localPath);
+		if (!(await pathExists(absolute))) {
+			throw new Error(`--add-local file does not exist: ${localPath}`);
+		}
+		const fileStat = await stat(absolute);
+		if (!fileStat.isFile()) {
+			throw new Error(`--add-local path is not a regular file: ${localPath}`);
+		}
+		refreshed.localAdditions.push({
+			localPath,
+			localSha256: await sha256(absolute),
+			origin: "disco_owned",
+		});
+		declaredLocalPaths.add(localPath);
+	}
+
+	const unclassified = [];
+	for (const root of inventoriedLocalRoots) {
+		for (const localPath of await walkFiles(join(packageRoot, root))) {
+			if (!declaredLocalPaths.has(localPath)) unclassified.push(localPath);
+		}
+	}
+	if (unclassified.length > 0) {
+		throw new Error(
+			`Local refresh found unclassified files; approve each with --add-local:\n- ${unclassified.join("\n- ")}`,
+		);
+	}
+
+	refreshed.localAdditions.sort((a, b) => a.localPath.localeCompare(b.localPath));
+	return refreshed;
+}
+
 async function verifyLocalManifest(manifest) {
 	const failures = [];
 	const localEntries = collectEntries(manifest).filter((entry) => entry.localPath);
@@ -296,16 +403,19 @@ async function verifyLocalManifest(manifest) {
 	}
 }
 
-const { mode, upstreamRoot } = parseArguments(process.argv.slice(2));
+const { mode, upstreamRoot, addLocalPaths } = parseArguments(process.argv.slice(2));
 if (mode === "write") {
 	const manifest = await buildManifest(upstreamRoot);
 	await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
 	console.log(`Wrote ${toPosix(relative(packageRoot, manifestPath))}.`);
+} else if (mode === "refresh-local") {
+	const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
+	const refreshed = await refreshLocalManifest(manifest, addLocalPaths);
+	await writeFile(manifestPath, `${JSON.stringify(refreshed, null, 2)}\n`);
+	console.log(`Refreshed local provenance in ${toPosix(relative(packageRoot, manifestPath))}.`);
 } else {
 	const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
-	if (JSON.stringify(manifest.upstream) !== JSON.stringify(expectedUpstream)) {
-		throw new Error("Manifest upstream identity does not match the pinned Pi baseline");
-	}
+	assertManifestIdentity(manifest);
 	await verifyLocalManifest(manifest);
 	if (upstreamRoot) {
 		const regenerated = await buildManifest(upstreamRoot);

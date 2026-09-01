@@ -14,6 +14,20 @@ import type { Readable } from "node:stream";
 import crossSpawn from "cross-spawn";
 
 const EXIT_STDIO_GRACE_MS = 100;
+const DEFAULT_GIT_COMMITTER_NAME = "DisCo";
+const DEFAULT_GIT_COMMITTER_EMAIL = "disco@localhost";
+
+/**
+ * Git records reflogs during clone/fetch. Supplying a local fallback identity
+ * avoids a hostname DNS lookup when the caller has not configured one.
+ */
+export function getGitProcessEnv(env: NodeJS.ProcessEnv): NodeJS.ProcessEnv {
+	return {
+		...env,
+		GIT_COMMITTER_NAME: env.GIT_COMMITTER_NAME ?? DEFAULT_GIT_COMMITTER_NAME,
+		GIT_COMMITTER_EMAIL: env.GIT_COMMITTER_EMAIL ?? DEFAULT_GIT_COMMITTER_EMAIL,
+	};
+}
 
 export function spawnProcess(
 	command: string,

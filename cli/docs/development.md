@@ -10,10 +10,10 @@ From the package root, which contains this file's parent `docs/` directory:
 
 ```bash
 npm ci
+npm run verify:provenance
 npm run typecheck
 npm test
 npm run test:examples
-npm run verify:provenance
 npm run build
 ```
 
@@ -61,6 +61,20 @@ packed file contract. Release testing also installs the generated tarball into
 a temporary npm prefix; it must not use a globally installed Pi package or a
 source-tree symlink.
 
+When the pinned Pi baseline has not changed and a local DisCo source, test, docs,
+or example file has intentionally changed, refresh only the local provenance:
+
+```bash
+npm run refresh:provenance -- --add-local docs/dynamic-workflows.md
+```
+
+`--add-local` may be repeated for intentional new files. The refresh command
+updates local SHA-256 values and explicitly approved `disco_owned` additions; it
+does not read an external Pi checkout or change upstream hashes and mappings.
+Review the manifest diff before running the release gate. Unapproved files,
+missing declared files, paths outside the inventoried roots, and path traversal
+are errors.
+
 ## Running focused tests
 
 Vitest paths are relative to the package root:
@@ -92,6 +106,11 @@ it as potentially sensitive data.
 
 ## Upstream synchronization
 
+For ordinary local DisCo work, do not use an external Pi checkout. Run
+`npm run refresh:provenance -- --add-local <path>` after the local source change
+is complete, then review `UPSTREAM_MANIFEST.json` and run
+`npm run verify:provenance`.
+
 When importing a later Pi coding-agent version:
 
 1. Record the exact tag and commit in `packages/coding-agent/UPSTREAM_SOURCE.md`.
@@ -103,6 +122,10 @@ When importing a later Pi coding-agent version:
    package discovery, Creator/Researcher filtering, SDK exports, and branding.
 4. Run the complete deterministic, packed-install, coexistence, proxy, splash,
    and real-model regression gates before release.
+
+The `--write --upstream-root <pi>` workflow is only for upstream migration or a
+full upstream provenance audit. It is not a dependency of `npm run
+verify:provenance`, `npm run prepublishOnly`, or the release script.
 
 Do not copy upstream `node_modules`, `dist`, install locks, monorepo links, or
 the Pi executable into the DisCo package.

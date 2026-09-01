@@ -1,3 +1,6 @@
+import { execFile } from "node:child_process";
+import { isAbsolute } from "node:path";
+import { promisify } from "node:util";
 import type { AssistantMessage, Model, TextContent } from "@earendil-works/pi-ai";
 import type { Static, TSchema } from "typebox";
 import { Check, Convert } from "typebox/value";
@@ -18,6 +21,36 @@ import { applyToolPolicy } from "./agent-registry.ts";
 import { WorkflowError, WorkflowErrorCode } from "./errors.ts";
 import { loadModelTierConfig, type ModelTierConfig, resolveTierModel } from "./model-tier-config.ts";
 import { createStructuredOutputTool, type StructuredOutputCapture } from "./structured-output.ts";
+import type { AgentUsage } from "./agent-usage.ts";
+
+const execFileAsync = promisify(execFile);
+
+export type { AgentUsage } from "./agent-usage.ts";
+
+/** Extract a best-effort live usage snapshot from a session stream event. */
+export function extractLiveAgentUsage(event: unknown): AgentUsage | undefined {
+	if (!event || typeof event !== "object") return undefined;
+	const value = event as {
+		type?: string;
+		message?: Partial<AssistantMessage>;
+		assistantMessageEvent?: { partial?: Partial<AssistantMessage> };
+	};
+	const candidate =
+		value.message?.role === "assistant"
+			? value.message.usage
+			: value.type === "message_update"
+				? value.assistantMessageEvent?.partial?.usage
+				: undefined;
+	if (!candidate || candidate.totalTokens <= 0) return undefined;
+	return {
+		input: candidate.input,
+		output: candidate.output,
+		cacheRead: candidate.cacheRead,
+		cacheWrite: candidate.cacheWrite,
+		total: candidate.totalTokens,
+		cost: candidate.cost.total,
+	};
+}
 
 /**
  * Find a JSON object/array in free-form text: a fenced ```json block if present,
@@ -184,14 +217,200 @@ export function listAvailableModelSpecs(registry?: ModelRegistry): string[] {
 	}
 }
 
-/** Real token/cost usage for a single subagent run, read from the SDK session. */
-export interface AgentUsage {
-	input: number;
-	output: number;
-	cacheRead: number;
-	cacheWrite: number;
-	total: number;
-	cost: number;
+export interface AgentEnvironmentSpec {
+	/** The prepared environment's executable, e.g. a venv's `python` binary. */
+	executable: string;
+	/** Arguments that select the executable/runtime before the inspection command. */
+	args?: string[];
+	/** Directory in which the assertion should run. Defaults to the agent cwd. */
+	cwd?: string;
+	/** Package/module whose installed version must be checked. */
+	package?: string;
+	/** Exact expected package version. */
+	version?: string;
+	/** Explicit version/inspection argv. Defaults to Python package metadata inspection. */
+	versionArgs?: string[];
+}
+
+/** Known prepare-env report fields accepted only as a migration safety net. */
+export interface LegacyAgentEnvironmentSpec {
+	pythonExecutable?: string;
+	expectedDistribution?: string;
+	expectedVersion?: string;
+	assertBeforeStartup?: boolean;
+}
+
+/** Untrusted environment input received from a workflow script. */
+export type AgentEnvironmentInput = Partial<AgentEnvironmentSpec> & LegacyAgentEnvironmentSpec;
+
+export interface NormalizedAgentEnvironment {
+	environment: AgentEnvironmentSpec;
+	warnings: string[];
+}
+
+const ENVIRONMENT_SHAPE = "{ executable, cwd?, package?, version?, args?, versionArgs? }";
+const LEGACY_ENVIRONMENT_FIELDS = [
+	["pythonExecutable", "executable"],
+	["expectedDistribution", "package"],
+	["expectedVersion", "version"],
+] as const;
+
+function environmentContractError(message: string): never {
+	throw new WorkflowError(message, WorkflowErrorCode.ENVIRONMENT_ASSERTION_FAILED, { recoverable: false });
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+	return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function optionalString(source: Record<string, unknown>, key: keyof AgentEnvironmentSpec): string | undefined {
+	const value = source[key];
+	if (value === undefined) return undefined;
+	if (typeof value !== "string" || !value.trim()) {
+		environmentContractError(
+			`Subagent environment contract error: environment.${key} must be a non-empty string. Use ${ENVIRONMENT_SHAPE}.`,
+		);
+	}
+	return value;
+}
+
+function optionalStringArray(source: Record<string, unknown>, key: "args" | "versionArgs"): string[] | undefined {
+	const value = source[key];
+	if (value === undefined) return undefined;
+	if (!Array.isArray(value) || value.some((entry) => typeof entry !== "string")) {
+		environmentContractError(
+			`Subagent environment contract error: environment.${key} must be an array of strings. Use ${ENVIRONMENT_SHAPE}.`,
+		);
+	}
+	return [...value] as string[];
+}
+
+/**
+ * Convert only the prepare-repo-skill-env report fields observed in the Creator
+ * trajectory. Unknown guesses and ambient executable fallbacks are deliberately
+ * unsupported.
+ */
+export function normalizeAgentEnvironment(input: unknown): NormalizedAgentEnvironment {
+	if (!isRecord(input)) {
+		environmentContractError(
+			`Subagent environment contract error: expected an object shaped as ${ENVIRONMENT_SHAPE}.`,
+		);
+	}
+
+	const source: Record<string, unknown> = { ...input };
+	const legacyMappings: string[] = [];
+	for (const [legacyKey, canonicalKey] of LEGACY_ENVIRONMENT_FIELDS) {
+		const legacyValue = source[legacyKey];
+		if (legacyValue === undefined) continue;
+		legacyMappings.push(`${legacyKey} -> ${canonicalKey}`);
+		const canonicalValue = source[canonicalKey];
+		if (canonicalValue !== undefined && canonicalValue !== legacyValue) {
+			environmentContractError(
+				`Subagent environment contract conflict: canonical \`${canonicalKey}\` and legacy \`${legacyKey}\` disagree. Use only canonical fields ${ENVIRONMENT_SHAPE}.`,
+			);
+		}
+		if (canonicalValue === undefined) source[canonicalKey] = legacyValue;
+	}
+
+	if (Object.prototype.hasOwnProperty.call(source, "assertBeforeStartup")) {
+		legacyMappings.push("assertBeforeStartup (ignored; assertion is always required)");
+	}
+
+	const executable = optionalString(source, "executable");
+	if (!executable) {
+		environmentContractError(
+			`Subagent environment contract error: Missing environment.executable for subagent startup. The prepare-env report maps pythonExecutable -> executable, expectedDistribution -> package, and expectedVersion -> version. Use ${ENVIRONMENT_SHAPE}; ambient Python fallback is disabled.`,
+		);
+	}
+	if (!isAbsolute(executable)) {
+		environmentContractError(
+			`Subagent environment contract error: environment.executable must be an absolute path; ambient PATH lookup is disabled. Use ${ENVIRONMENT_SHAPE}.`,
+		);
+	}
+
+	const environment: AgentEnvironmentSpec = { executable };
+	const args = optionalStringArray(source, "args");
+	const cwd = optionalString(source, "cwd");
+	const packageName = optionalString(source, "package");
+	const version = optionalString(source, "version");
+	const versionArgs = optionalStringArray(source, "versionArgs");
+	if (args) environment.args = args;
+	if (cwd) environment.cwd = cwd;
+	if (packageName) environment.package = packageName;
+	if (version) environment.version = version;
+	if (versionArgs) environment.versionArgs = versionArgs;
+
+	return {
+		environment,
+		warnings:
+			legacyMappings.length > 0
+				? [
+						`Prepared environment used legacy prepared-environment fields (${legacyMappings.join(", ")}). Use environment: ${ENVIRONMENT_SHAPE}.`,
+				  ]
+				: [],
+	};
+}
+
+function redactEnvironmentPaths(message: string, environment: AgentEnvironmentSpec, defaultCwd: string): string {
+	let redacted = message;
+	for (const path of [environment.executable, environment.cwd, defaultCwd]) {
+		if (path && path.length > 1) {
+			redacted = redacted.split(path).join(path === environment.executable ? "<prepared executable>" : "<prepared cwd>");
+		}
+	}
+	return redacted;
+}
+
+/**
+ * Assert the structured environment handoff before a subagent session starts.
+ * This intentionally runs without a shell so a missing entry cannot silently
+ * fall back to ambient Python or another ambient executable.
+ */
+export async function assertAgentEnvironment(
+	input: AgentEnvironmentInput,
+	defaultCwd = process.cwd(),
+	options: { onWarning?: (message: string) => void } = {},
+): Promise<{ output: string; version?: string }> {
+	const normalized = normalizeAgentEnvironment(input);
+	const environment = normalized.environment;
+	for (const warning of normalized.warnings) {
+		if (options.onWarning) options.onWarning(warning);
+		else console.warn(`[workflow] ${warning}`);
+	}
+
+	const args = [...(environment.args ?? [])];
+	const inspectArgs =
+		environment.versionArgs ??
+		(environment.package
+			? [
+					"-c",
+					`import importlib.metadata as _m; print(_m.version(${JSON.stringify(environment.package)}))`,
+			  ]
+			: ["--version"]);
+
+	try {
+		const result = await execFileAsync(environment.executable, [...args, ...inspectArgs], {
+			cwd: environment.cwd ?? defaultCwd,
+			timeout: 15_000,
+			maxBuffer: 64 * 1024,
+		});
+		const output = `${result.stdout ?? ""}\n${result.stderr ?? ""}`.trim();
+		const lines = output.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+		const detectedVersion = environment.package || environment.versionArgs || environment.version ? lines.at(-1) : undefined;
+		if (environment.version && detectedVersion !== environment.version) {
+			throw new Error(
+				`expected ${environment.package ?? "runtime"} version ${environment.version}, got ${detectedVersion ?? "no version output"}`,
+			);
+		}
+		return { output, version: detectedVersion };
+	} catch (error) {
+		const message = redactEnvironmentPaths(error instanceof Error ? error.message : String(error), environment, defaultCwd);
+		throw new WorkflowError(
+			`Subagent environment assertion failed while executing the prepared environment: ${message}`,
+			WorkflowErrorCode.ENVIRONMENT_ASSERTION_FAILED,
+			{ recoverable: false, details: error },
+		);
+	}
 }
 
 export interface AgentRunOptions<TSchemaDef extends TSchema | undefined = undefined> {
@@ -206,6 +425,8 @@ export interface AgentRunOptions<TSchemaDef extends TSchema | undefined = undefi
 	 * usage is never lost. `total === 0` means the provider reported no usage.
 	 */
 	onUsage?: (usage: AgentUsage) => void;
+	/** Called with a best-effort live usage snapshot while the session streams. */
+	onLiveUsage?: (usage: AgentUsage) => void;
 	/**
 	 * Model spec for this subagent: either `provider/modelId` (unambiguous) or a
 	 * bare `modelId`. When it can't be resolved, the session default is used and
@@ -245,6 +466,8 @@ export interface AgentRunOptions<TSchemaDef extends TSchema | undefined = undefi
 	toolNames?: string[];
 	/** Remove these coding-tool names after the allowlist (an agentType `disallowedTools` denylist). */
 	disallowedToolNames?: string[];
+	/** Prepared environment assertion; failure is a hard subagent failure. */
+	environment?: AgentEnvironmentInput;
 	/**
 	 * With `schema`: how many extra repair turns to allow if the model finishes
 	 * without calling structured_output. Each retry re-prompts (tools restricted to
@@ -329,6 +552,7 @@ export class WorkflowAgent {
 		// composes with phase-based routing in workflow.ts, which only supplies
 		// options.model when a phase pattern matches — so an explicit model wins.
 		const modelSpec = resolveAgentModelSpec(options, this.mainModel);
+		if (options.environment) await assertAgentEnvironment(options.environment, runCwd);
 
 		// Resolve a requested model spec to a Model object. A given-but-unresolved
 		// spec falls back to the session default (with a warning) rather than failing.
@@ -366,6 +590,11 @@ export class WorkflowAgent {
 
 		let removeAbortListener: (() => void) | undefined;
 		let removeHistoryListener: (() => void) | undefined;
+		let abortPromise: Promise<void> | undefined;
+		const abortSession = (): Promise<void> => {
+			abortPromise ??= Promise.resolve(session.abort()).catch(() => {});
+			return abortPromise;
+		};
 		let lastHistoryEmit = 0;
 		const emitHistory = () => options.onHistory?.(compactAgentHistory(session.messages));
 		const maybeEmitHistory = () => {
@@ -378,12 +607,18 @@ export class WorkflowAgent {
 		try {
 			if (options.signal?.aborted) throw new Error("Subagent was aborted");
 			if (options.signal) {
-				const onAbort = () => void session.abort();
+				const onAbort = () => void abortSession();
 				options.signal.addEventListener("abort", onAbort, { once: true });
 				removeAbortListener = () => options.signal?.removeEventListener("abort", onAbort);
 			}
-			if (options.onHistory) {
-				removeHistoryListener = session.subscribe(() => maybeEmitHistory());
+			if (options.onHistory || options.onLiveUsage) {
+				removeHistoryListener = session.subscribe((event) => {
+					if (options.onLiveUsage) {
+						const liveUsage = extractLiveAgentUsage(event);
+						if (liveUsage) options.onLiveUsage(liveUsage);
+					}
+					maybeEmitHistory();
+				});
 			}
 
 			await session.prompt(this.buildPrompt(prompt, options as AgentRunOptions<any>, Boolean(options.schema)));
@@ -404,6 +639,7 @@ export class WorkflowAgent {
 			}
 			return text as AgentRunResult<TSchemaDef>;
 		} finally {
+			if (options.signal?.aborted) await abortSession();
 			removeAbortListener?.();
 			removeHistoryListener?.();
 			try {

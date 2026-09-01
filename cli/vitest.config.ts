@@ -8,10 +8,13 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "node",
+    fileParallelism: false,
     testTimeout: 30000,
     env: {
       DISCO_OFFLINE: "1",
       PI_OFFLINE: "1",
+      GIT_COMMITTER_NAME: "DisCo test fixture",
+      GIT_COMMITTER_EMAIL: "disco-tests@localhost",
     },
     unstubEnvs: true,
     reporters: process.env.GITHUB_ACTIONS ? ["dot", "github-actions"] : ["dot"],

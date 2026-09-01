@@ -34,6 +34,7 @@ For the full first-run flow, see [Quickstart](quickstart.md).
 
 - [Quickstart](quickstart.md) - install, authenticate, and run a first session.
 - [Using DisCo](usage.md) - interactive mode, slash commands, context files, and CLI reference.
+- [Dynamic workflows](dynamic-workflows.md) - run, monitor, author, recover, and inspect coordinated subagent workflows.
 - [Providers](providers.md) - subscription and API-key setup for built-in providers.
 - [llama.cpp](llama-cpp.md) - run a local router and manage models with `/llama`.
 - [Security](security.md) - project trust, sandbox boundaries, and vulnerability reporting.
