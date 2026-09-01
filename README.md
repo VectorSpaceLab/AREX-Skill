@@ -23,11 +23,10 @@
   <b>English</b> · <a href="README.zh-CN.md">简体中文</a>
 </p>
 
-<p align="center"> 🧠 
-  <strong>5,000+ verified, executable skills</strong> distilled from 
-  <strong>1,000+ ML repositories</strong><br> ⚡ <strong>Seamless integration</strong> with <code>Codex</code>, <code>Claude Code</code>, <code>Pi</code>, and other coding agents<br> 🔬 
-  <strong>Frontier autonomous research</strong> across ML engineering, paper replication, and more 
-</p>
+<p align="center"> 
+  🧠 <strong>5,000+ verified, executable skills</strong> distilled from <strong>1,000+ popular repositories</strong><br> 
+  ⚡ <strong>Seamless integration</strong> with <code>Codex</code>, <code>Claude Code</code>, <code>Pi</code>, and other coding agents<br> 
+  🔬 <strong>Advancing frontier auto-research</strong> across across multidisciplinary machine learning studies </p>
 
 ## 🎬 Demo <a id="demo"></a>
 
