@@ -1,0 +1,5 @@
+[
+{"model":"m1","original_accuracy":0.70,"new_accuracy":0.56},
+{"model":"m2","original_accuracy":0.80,"new_accuracy":0.68},
+{"model":"m3","original_accuracy":0.90,"new_accuracy":0.81}
+]
