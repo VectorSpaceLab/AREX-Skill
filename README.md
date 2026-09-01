@@ -4,8 +4,11 @@
 
 
 
-<div align="center"> # AREX-Skill ✨ **Advancing Autonomous Research with Skills Distilled from GitHub Repositories** 🚀 </div>
-
+<h1 align="center">
+  AREX-Skill
+  <br>
+  <sub>✨ Advancing Autonomous Research with Skills Distilled from GitHub Repos 🚀</sub>
+</h1>
 
 <p align="center">
   <a href="skills/README.md"><img src="https://img.shields.io/badge/AREX--Skill_Library-5000%2B_skills-0E9B9B?style=for-the-badge" alt="AREX-Skill Library: 5000+ skills"></a>
