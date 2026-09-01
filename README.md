@@ -7,7 +7,7 @@
 <h1 align="center">
   AREX-Skill
   <br>
-  <sub>✨ Advancing Autonomous Research with Skills Distilled from GitHub Repos 🚀</sub>
+  <sub>✨ Advancing Auto-Research with Skills Distilled from GitHub Repos 🚀</sub>
 </h1>
 
 <p align="center">
