@@ -6,9 +6,7 @@
 
 <h1 align="center">AREX-Skill</h1>
 
-<p align="center">
-  <strong>Turn ML knowledge into executable skills for autonomous research</strong>
-</p>
+<p align="center"> ✨ <strong>Advancing Autonomous Research with Skills Distilled from GitHub Repositories</strong> 🚀 </p>
 
 <p align="center">
   <a href="skills/README.md"><img src="https://img.shields.io/badge/AREX--Skill_Library-5000%2B_skills-0E9B9B?style=for-the-badge" alt="AREX-Skill Library: 5000+ skills"></a>
