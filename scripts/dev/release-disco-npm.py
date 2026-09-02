@@ -207,6 +207,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--skip-install", action="store_true", help="Skip npm ci --ignore-scripts in cli/.")
     parser.add_argument("--skip-verify", action="store_true", help="Skip npm run prepublishOnly in cli/ and use existing dist artifacts.")
     parser.add_argument(
+        "--skip-assets",
+        action="store_true",
+        help="Skip preparing GitHub Release installer assets.",
+    )
+    parser.add_argument(
         "--fail-if-exists",
         action="store_true",
         help="Fail instead of skipping when this package version already exists on npm.",
@@ -243,6 +248,13 @@ def main(argv: list[str] | None = None) -> int:
             run(["npm", "run", "prepublishOnly"], cwd=package_dir, env=env)
 
         validate_publish_artifacts(package_dir)
+
+        if not args.skip_assets:
+            run(
+                [sys.executable, str(root / "scripts" / "prepare-disco-release-assets.py")],
+                cwd=root,
+                env=env,
+            )
 
         if args.publish:
             name = str(package["name"])

@@ -46,7 +46,7 @@ const changelog = await readFile(join(packageRoot, "CHANGELOG.md"), "utf8");
 
 check(packageJson.private === undefined, "package.json must not contain a private field");
 check(packageJson.name === "@arex-skill/disco", "package name must be @arex-skill/disco");
-check(packageJson.version === "0.2.0", "package version must be 0.2.0");
+check(packageJson.version === "0.2.1", "package version must be 0.2.1");
 const escapedPackageVersion = packageJson.version.replaceAll(".", "\\.");
 check(
 	new RegExp(`^## \\[?${escapedPackageVersion}\\]? - \\d{4}-\\d{2}-\\d{2}$`, "mu").test(changelog),
@@ -172,6 +172,9 @@ for (const path of sourceFiles.filter((entry) => entry.endsWith(".ts"))) {
 const packageManagerCli = await readFile(join(runtimeSourceRoot, "package-manager-cli.ts"), "utf8");
 check(!packageManagerCli.includes("@earendil-works/pi-coding-agent"), "self-update code still targets pi-coding-agent");
 check(packageManagerCli.includes("installSpec: `${PACKAGE_NAME}@latest`"), "self-update must derive its target from DisCo PACKAGE_NAME");
+check(packageManagerCli.includes('installMethod !== "managed"'), "self-update code must allow managed installations on Windows");
+const managedInstallSource = await readFile(join(runtimeSourceRoot, "utils", "managed-install.ts"), "utf8");
+check(managedInstallSource.includes("MANAGED_INSTALL_SCHEMA_VERSION = 1"), "managed install marker protocol is missing");
 
 const packageManagerSource = await readFile(join(runtimeSourceRoot, "core", "package-manager.ts"), "utf8");
 for (const name of ["@juicesharp/rpiv-ask-user-question", "@juicesharp/rpiv-todo", "pi-subagents"]) {

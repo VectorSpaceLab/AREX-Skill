@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.1 - 2026-09-02
+
+- Fix the default npm registry endpoint used by startup version checks and
+  `disco update` to point to `@arex-skill/disco` after the package rename.
+
 ## 0.2.0 - 2026-08-31
 
 - Replace the legacy scenario-oriented repository router with a taxonomy-driven

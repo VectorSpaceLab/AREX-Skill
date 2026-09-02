@@ -58,6 +58,7 @@ import { runMigrations, showDeprecationWarnings } from "./migrations.ts";
 import { InteractiveMode, runPrintMode, runRpcMode } from "./modes/index.ts";
 import { initTheme, stopThemeWatcher } from "./modes/interactive/theme/theme.ts";
 import { handleConfigCommand, handlePackageCommand } from "./package-manager-cli.ts";
+import { isManagedInstallMarkerUsable, readManagedInstallMarker } from "./utils/managed-install.ts";
 import { isLocalPath, normalizePath, resolvePath } from "./utils/paths.ts";
 import { cleanupWindowsSelfUpdateQuarantine } from "./utils/windows-self-update.ts";
 
@@ -545,6 +546,15 @@ export interface MainOptions {
 export async function main(args: string[], options?: MainOptions) {
 	resetTimings();
 	const extensionFactories = [...builtInExtensions, ...(options?.extensionFactories ?? [])];
+	if (process.env.DISCO_MANAGED_INSTALL === "1" && !isManagedInstallMarkerUsable(readManagedInstallMarker())) {
+		console.error(
+			chalk.red(
+				"Error: the DisCo managed installation marker, active release, or updater is missing or invalid. Re-run the DisCo installer to repair this installation.",
+			),
+		);
+		process.exitCode = 1;
+		return;
+	}
 	const offlineMode = args.includes("--offline") || isTruthyEnvFlag(process.env.DISCO_OFFLINE);
 	if (offlineMode) {
 		process.env.DISCO_OFFLINE = "1";
@@ -744,6 +754,10 @@ export async function main(args: string[], options?: MainOptions) {
 					}
 				: undefined,
 			resourceLoaderOptions: {
+				// Help is a runtime metadata command. Do not install bundled default
+				// packages just to render it; explicit user/project packages still
+				// follow the normal trust and loading rules.
+				includeDisCoDefaults: !parsed.help,
 				additionalExtensionPaths: resolvedExtensionPaths,
 				additionalSkillPaths: resolvedSkillPaths,
 				additionalPromptTemplatePaths: resolvedPromptTemplatePaths,

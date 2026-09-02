@@ -20,15 +20,19 @@ resources from `.pi` or `~/.pi`.
 ## Install
 
 ```bash
-npm install -g @arex-skill/disco
+npm install -g --ignore-scripts @arex-skill/disco
 disco
 ```
+
+For the managed curl and PowerShell installers, plus pnpm and Bun commands,
+see the [installation guide](https://github.com/VectorSpaceLab/AREX-Skill/blob/main/docs/installation.md).
 
 Use `/login` to configure a subscription or API-key provider. API keys can also
 be supplied through provider environment variables such as
 `ANTHROPIC_API_KEY` or `OPENAI_API_KEY`.
 
-Update a global npm installation with:
+Update a package-manager installation, or a managed installation created by the
+curl/PowerShell installer, with:
 
 ```bash
 disco update

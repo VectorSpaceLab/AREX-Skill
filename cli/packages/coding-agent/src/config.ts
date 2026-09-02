@@ -3,6 +3,7 @@ import { homedir } from "os";
 import { basename, dirname, join, resolve, sep, win32 } from "path";
 import { fileURLToPath } from "url";
 import { spawnProcessSync } from "./utils/child-process.ts";
+import { isManagedInstallMarkerUsable, readManagedInstallMarker } from "./utils/managed-install.ts";
 import { normalizePath } from "./utils/paths.ts";
 
 // =============================================================================
@@ -26,7 +27,7 @@ export const isBunRuntime = !!process.versions.bun;
 // Install Method Detection
 // =============================================================================
 
-export type InstallMethod = "bun-binary" | "npm" | "pnpm" | "yarn" | "bun" | "unknown";
+export type InstallMethod = "managed" | "bun-binary" | "npm" | "pnpm" | "yarn" | "bun" | "unknown";
 
 interface SelfUpdateCommandStep {
 	command: string;
@@ -71,6 +72,9 @@ function makeSelfUpdateCommandStep(command: string, args: string[]): SelfUpdateC
 }
 
 export function detectInstallMethod(): InstallMethod {
+	if (process.env.DISCO_MANAGED_INSTALL === "1") {
+		return "managed";
+	}
 	if (isBunBinary) {
 		return "bun-binary";
 	}
@@ -120,6 +124,26 @@ function getSelfUpdateCommandForMethod(
 ): SelfUpdateCommand | undefined {
 	const target = normalizeSelfUpdatePackageTarget(updatePackageTarget);
 	switch (method) {
+		case "managed": {
+			const marker = readManagedInstallMarker();
+			if (
+				!isManagedInstallMarkerUsable(marker) ||
+				target.packageName !== installedPackageName ||
+				target.packageName !== "@arex-skill/disco"
+			) {
+				return undefined;
+			}
+			const versionSuffix = target.installSpec.startsWith(`${target.packageName}@`)
+				? target.installSpec.slice(target.packageName.length + 1)
+				: "";
+			const args = process.platform === "win32"
+				? ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", marker.installerPath, "-Update", "-Yes"]
+				: ["--update", "--yes"];
+			if (versionSuffix) args.push(process.platform === "win32" ? "-Version" : "--version", versionSuffix);
+			return process.platform === "win32"
+				? makeSelfUpdateCommandStep("powershell.exe", args)
+				: makeSelfUpdateCommandStep(marker.installerPath, args);
+		}
 		case "bun-binary":
 			return undefined;
 		case "pnpm": {
@@ -244,6 +268,7 @@ function getGlobalPackageRoots(method: InstallMethod, _packageName: string, npmC
 		}
 		case "bun-binary":
 		case "unknown":
+		case "managed":
 			return [];
 	}
 }
@@ -319,6 +344,9 @@ export function getSelfUpdateCommand(
 ): SelfUpdateCommand | undefined {
 	const method = detectInstallMethod();
 	const command = getSelfUpdateCommandForMethod(method, packageName, updatePackageTarget, npmCommand);
+	if (method === "managed") {
+		return command;
+	}
 	if (!command || !isManagedByGlobalPackageManager(method, packageName, npmCommand) || !isSelfUpdatePathWritable()) {
 		return undefined;
 	}
@@ -334,6 +362,9 @@ export function getSelfUpdateUnavailableInstruction(
 	const target = normalizeSelfUpdatePackageTarget(updatePackageTarget);
 	if (method === "bun-binary") {
 		return "Replace the local DisCo binary with a newer release artifact.";
+	}
+	if (method === "managed") {
+		return "The managed installer marker or updater is missing or invalid. Re-run the DisCo installer to repair this installation.";
 	}
 	const command = getSelfUpdateCommandForMethod(method, packageName, target, npmCommand);
 	if (command) {

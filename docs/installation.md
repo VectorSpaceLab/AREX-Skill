@@ -12,10 +12,98 @@ already bundles them.
 
 ## Install DisCo
 
-Install the DisCo CLI from npm:
+Choose one of the following installation methods. The curl and PowerShell
+installers create a user-level managed installation with a private release
+directory and a stable `disco` launcher. They can prepare a compatible Node.js
+runtime when Node.js is missing or older than `22.19.0`.
+
+### Recommended managed installers
+
+On macOS, Linux, WSL, or Git Bash:
 
 ```bash
-npm install -g @arex-skill/disco
+curl -fsSL https://github.com/VectorSpaceLab/AREX-Skill/releases/latest/download/install-disco.sh | sh
+```
+
+On Windows PowerShell:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -Command "& { irm https://github.com/VectorSpaceLab/AREX-Skill/releases/latest/download/install-disco.ps1 | iex }"
+```
+
+The PowerShell installer checks for Git Bash, Cygwin, MSYS2, and WSL. If no
+usable `bash.exe` is available, it attempts to prepare Git for Windows in the
+user environment. Existing valid `shellPath` settings are preserved.
+
+The managed installer stores its release state below
+`~/.disco/agent/install/` on Unix and the equivalent user profile directory on
+Windows. It does not replace an unrelated `disco` command or delete user
+settings, credentials, sessions, skills, or package state.
+
+After installation, open a new shell if the installer asks you to refresh
+`PATH`, then verify:
+
+```bash
+disco --version
+```
+
+Update a managed installation with either `disco update` or the persisted
+installer's update operation. To remove only managed installer files:
+
+```bash
+~/.disco/agent/install/install-disco.sh --uninstall
+```
+
+On Windows, run
+`& "$env:USERPROFILE\.disco\agent\install\install-disco.ps1" -Uninstall`.
+
+### Package-manager installations
+
+All package-manager commands install the same published package and executable:
+
+```bash
+# npm
+npm install -g --ignore-scripts @arex-skill/disco
+
+# pnpm
+pnpm add -g --ignore-scripts @arex-skill/disco
+
+# Bun
+bun add -g --ignore-scripts @arex-skill/disco
+```
+
+Yarn global installations remain compatible, but are not a primary documented
+entry point:
+
+```bash
+yarn global add --ignore-scripts @arex-skill/disco
+```
+
+For a package-manager installation, update and uninstall with the same manager:
+
+```bash
+npm update -g @arex-skill/disco
+npm uninstall -g @arex-skill/disco
+
+pnpm update -g @arex-skill/disco
+pnpm remove -g @arex-skill/disco
+
+bun update -g @arex-skill/disco
+bun uninstall -g @arex-skill/disco
+```
+
+`disco update` can also update a package-manager installation when the runtime
+can identify its global package root and write to it. If it reports that the
+installation is not writable or cannot be identified, use the manager-specific
+command above. Package-manager installs require Node.js `>=22.19.0` and, on
+Windows, a usable bash shell.
+
+### Manual npm installation
+
+If a managed installer cannot be used, install the DisCo CLI directly from npm:
+
+```bash
+npm install -g --ignore-scripts @arex-skill/disco
 disco
 ```
 

@@ -1,6 +1,6 @@
 import { chmodSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from "fs";
 import { tmpdir } from "os";
-import { delimiter, join } from "path";
+import { delimiter, dirname, join } from "path";
 import { afterEach, describe, expect, test } from "vitest";
 import {
 	detectInstallMethod,
@@ -13,6 +13,9 @@ import {
 const execPathDescriptor = Object.getOwnPropertyDescriptor(process, "execPath");
 const originalPath = process.env.PATH;
 const originalDiscoPackageDir = process.env.DISCO_PACKAGE_DIR;
+const originalManagedInstall = process.env.DISCO_MANAGED_INSTALL;
+const originalManagedInstallDir = process.env.DISCO_MANAGED_INSTALL_DIR;
+const originalManagedInstallMarker = process.env.DISCO_MANAGED_INSTALL_MARKER;
 const originalShareViewerUrl = process.env.DISCO_SHARE_VIEWER_URL;
 const originalArgv1 = process.argv[1];
 let tempDir: string | undefined;
@@ -37,6 +40,21 @@ afterEach(() => {
 		delete process.env.DISCO_PACKAGE_DIR;
 	} else {
 		process.env.DISCO_PACKAGE_DIR = originalDiscoPackageDir;
+	}
+	if (originalManagedInstall === undefined) {
+		delete process.env.DISCO_MANAGED_INSTALL;
+	} else {
+		process.env.DISCO_MANAGED_INSTALL = originalManagedInstall;
+	}
+	if (originalManagedInstallDir === undefined) {
+		delete process.env.DISCO_MANAGED_INSTALL_DIR;
+	} else {
+		process.env.DISCO_MANAGED_INSTALL_DIR = originalManagedInstallDir;
+	}
+	if (originalManagedInstallMarker === undefined) {
+		delete process.env.DISCO_MANAGED_INSTALL_MARKER;
+	} else {
+		process.env.DISCO_MANAGED_INSTALL_MARKER = originalManagedInstallMarker;
 	}
 	if (originalShareViewerUrl === undefined) {
 		delete process.env.DISCO_SHARE_VIEWER_URL;
@@ -140,6 +158,45 @@ function createBunGlobalInstall(): { packageDir: string } {
 	return { packageDir };
 }
 
+function createManagedInstall(): { installDir: string; installerPath: string } {
+	const temp = mkdtempSync(join(tmpdir(), "disco-managed-"));
+	const installDir = join(temp, "install");
+	const version = "0.2.1";
+	const releaseDir = join(installDir, "releases", version);
+	const entrypoint = join(releaseDir, "node_modules", "@arex-skill", "disco", "dist", "cli.js");
+	const installerPath = join(installDir, "install-disco.sh");
+	const nodePath = join(temp, "node");
+	mkdirSync(dirname(entrypoint), { recursive: true });
+	mkdirSync(installDir, { recursive: true });
+	writeFileSync(entrypoint, "#!/usr/bin/env sh\n");
+	writeFileSync(installerPath, "#!/usr/bin/env sh\n");
+	writeFileSync(nodePath, "#!/usr/bin/env sh\n");
+	chmodSync(entrypoint, 0o755);
+	chmodSync(installerPath, 0o755);
+	chmodSync(nodePath, 0o755);
+	writeFileSync(join(installDir, "current-version"), `${version}\n`);
+	writeFileSync(
+		join(installDir, "managed-install.json"),
+		JSON.stringify({
+			schemaVersion: 1,
+			packageName: "@arex-skill/disco",
+			activeVersion: version,
+			installDir,
+			entrypoint,
+			nodeSource: "system",
+			nodeVersion: "24.16.0",
+			nodePath,
+			installerPath,
+			platform: "linux-x64",
+		}),
+	);
+	tempDir = temp;
+	process.env.DISCO_MANAGED_INSTALL = "1";
+	process.env.DISCO_MANAGED_INSTALL_DIR = installDir;
+	delete process.env.DISCO_MANAGED_INSTALL_MARKER;
+	return { installDir, installerPath };
+}
+
 function createFakePnpmScript(root: string): string {
 	if (process.platform === "win32") {
 		return `@echo off\r\nif "%1"=="root" if "%2"=="-g" echo ${root}\r\n`;
@@ -165,6 +222,43 @@ function createFakeBunScript(bunBin: string): string {
 }
 
 describe("detectInstallMethod", () => {
+	test("detects a valid managed install and updates through its installer", () => {
+		const { installerPath } = createManagedInstall();
+
+		expect(detectInstallMethod()).toBe("managed");
+		expect(getSelfUpdateCommand("@arex-skill/disco")).toEqual({
+			command: installerPath,
+			args: ["--update", "--yes"],
+			display: `${installerPath} --update --yes`,
+		});
+	});
+
+	test("passes an exact managed release version to the installer", () => {
+		const { installerPath } = createManagedInstall();
+
+		expect(getSelfUpdateCommand("@arex-skill/disco", undefined, {
+			packageName: "@arex-skill/disco",
+			installSpec: "@arex-skill/disco@0.2.2",
+		})).toEqual({
+			command: installerPath,
+			args: ["--update", "--yes", "--version", "0.2.2"],
+			display: `${installerPath} --update --yes --version 0.2.2`,
+		});
+	});
+
+	test("does not fall back to a package manager when a managed marker is invalid", () => {
+		const temp = mkdtempSync(join(tmpdir(), "disco-invalid-managed-"));
+		tempDir = temp;
+		process.env.DISCO_MANAGED_INSTALL = "1";
+		process.env.DISCO_MANAGED_INSTALL_DIR = join(temp, "install");
+		writeFileSync(join(temp, "marker.json"), "{}\n");
+		process.env.DISCO_MANAGED_INSTALL_MARKER = join(temp, "marker.json");
+
+		expect(detectInstallMethod()).toBe("managed");
+		expect(getSelfUpdateCommand("@arex-skill/disco")).toBeUndefined();
+		expect(getSelfUpdateUnavailableInstruction("@arex-skill/disco")).toContain("managed installer marker");
+	});
+
 	test("detects pnpm from Windows .pnpm install paths", () => {
 		setExecPath(
 			"C:\\Users\\Admin\\Documents\\pnpm-repository\\global\\5\\.pnpm\\@arex-skill+disco@0.67.68\\node_modules\\@arex-skill\\disco\\dist\\cli.js",
