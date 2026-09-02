@@ -13,7 +13,7 @@
 <p align="center">
   <a href="skills/README.md"><img src="https://img.shields.io/badge/AREX--Skill_Library-5000%2B_skills-0E9B9B?style=for-the-badge" alt="AREX-Skill Library：5000+ skills"></a>
   <a href="docs/repository-catalog.md"><img src="https://img.shields.io/badge/ML_Repositories-1000-5865F2?style=for-the-badge" alt="1,000 个 ML 仓库"></a>
-  <a href="https://www.npmjs.com/package/@arex-skill/disco"><img src="https://img.shields.io/badge/CLI-disco%20v0.2.0-D22128?style=for-the-badge&logo=npm&logoColor=white" alt="DisCo CLI v0.2.0"></a>
+  <a href="https://www.npmjs.com/package/@arex-skill/disco"><img src="https://img.shields.io/badge/CLI-disco%20v0.2.1-D22128?style=for-the-badge&logo=npm&logoColor=white" alt="DisCo CLI v0.2.1"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-lightgrey?style=for-the-badge&logo=apache&logoColor=white" alt="License: Apache 2.0"></a>
   <a href="#documentation"><img src="https://img.shields.io/badge/Documentation-README-0E9B9B?style=for-the-badge" alt="文档"></a>
   <a href="#contributing"><img src="https://img.shields.io/badge/Contributing-guide-5865F2?style=for-the-badge" alt="参与贡献指南"></a>
@@ -152,13 +152,22 @@ AREX-Skill Library 由 DisCo Creator 通过四阶段的 skill distillation workf
 
 ### 1. 安装 DisCo
 
-DisCo 要求 Node.js >=22.19.0：
+DisCo 要求 Node.js >=22.19.0。需要时，managed installer 可以准备一个兼容的
+用户级 Node.js runtime。
+
+在 macOS、Linux、WSL 或 Git Bash 中，可以使用 managed curl installer 安装：
 
 ```bash
-npm install -g @arex-skill/disco
+curl -fsSL https://github.com/VectorSpaceLab/AREX-Skill/releases/latest/download/install-disco.sh | sh
 ```
 
-首次运行时通过 /login 配置模型提供商，也可以使用 OPENAI_API_KEY、ANTHROPIC_API_KEY 或 GEMINI_API_KEY 等环境变量。提供商配置和源码构建方式见[安装指南](docs/installation.zh.md)。
+也可以直接通过 npm 安装 package：
+
+```bash
+npm install -g --ignore-scripts @arex-skill/disco
+```
+
+首次运行时通过 /login 配置模型提供商，也可以使用 OPENAI_API_KEY、ANTHROPIC_API_KEY 或 GEMINI_API_KEY 等环境变量。managed curl/PowerShell installer、pnpm 和 Bun 入口、提供商配置及源码构建方式见[安装指南](docs/installation.zh.md)。
 
 ### 2. 安装技能库并启动 Researcher 模式
 

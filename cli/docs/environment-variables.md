@@ -116,7 +116,7 @@ and integration tests. Normal npm users do not need them.
 | `DISCO_MODEL_CATALOG_URL` | Enable a remote model-catalog overlay service |
 
 By default, version checks read
-`https://registry.npmjs.org/%40auto-ml-skills%2Fdisco/latest`. DisCo has no
+`https://registry.npmjs.org/%40arex-skill%2Fdisco/latest`. DisCo has no
 default remote model-catalog or changelog service.
 
 ## Development diagnostics

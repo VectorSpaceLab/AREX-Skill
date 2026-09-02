@@ -12,9 +12,16 @@ npm install -g --ignore-scripts @arex-skill/disco
 
 `--ignore-scripts` disables dependency lifecycle scripts during install. DisCo does not require install scripts for normal npm installs.
 
+For the user-level managed installers, use the repository's [Installation
+Guide](https://github.com/VectorSpaceLab/AREX-Skill/blob/main/docs/installation.md).
+It also documents pnpm, Bun, Yarn compatibility, managed updates, and managed
+uninstall.
+
 ### Uninstall
 
-Use the package manager that installed DisCo:
+Use the package manager that installed DisCo. For a managed curl/PowerShell
+installation, use the persisted installer described in the repository's
+[Installation Guide](https://github.com/VectorSpaceLab/AREX-Skill/blob/main/docs/installation.md).
 
 ```bash
 # npm install -g

@@ -13,7 +13,7 @@
 <p align="center">
   <a href="skills/README.md"><img src="https://img.shields.io/badge/AREX--Skill_Library-5000%2B_skills-0E9B9B?style=for-the-badge" alt="AREX-Skill Library: 5000+ skills"></a>
   <a href="docs/repository-catalog.md"><img src="https://img.shields.io/badge/ML_Repositories-1000-5865F2?style=for-the-badge" alt="1000 ML repositories"></a>
-  <a href="https://www.npmjs.com/package/@arex-skill/disco"><img src="https://img.shields.io/badge/CLI-disco%20v0.2.0-D22128?style=for-the-badge&logo=npm&logoColor=white" alt="DisCo CLI v0.2.0"></a>
+  <a href="https://www.npmjs.com/package/@arex-skill/disco"><img src="https://img.shields.io/badge/CLI-disco%20v0.2.1-D22128?style=for-the-badge&logo=npm&logoColor=white" alt="DisCo CLI v0.2.1"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-lightgrey?style=for-the-badge&logo=apache&logoColor=white" alt="License: Apache 2.0"></a>
   <a href="#documentation"><img src="https://img.shields.io/badge/Documentation-README-0E9B9B?style=for-the-badge" alt="Documentation"></a>
   <a href="#contributing"><img src="https://img.shields.io/badge/Contributing-guide-5865F2?style=for-the-badge" alt="Contributing guide"></a>
@@ -194,16 +194,25 @@ workflows and portable installation guidance.
 
 ### 1. Install DisCo
 
-DisCo requires Node.js >=22.19.0:
+DisCo requires Node.js >=22.19.0. The managed installer can prepare a compatible
+user-level Node.js runtime when needed.
+
+On macOS, Linux, WSL, or Git Bash, install with the managed curl installer:
 
 ```bash
-npm install -g @arex-skill/disco
+curl -fsSL https://github.com/VectorSpaceLab/AREX-Skill/releases/latest/download/install-disco.sh | sh
+```
+
+Alternatively, install the package directly with npm:
+
+```bash
+npm install -g --ignore-scripts @arex-skill/disco
 ```
 
 Configure a model provider on first run with /login, or use an environment
 variable such as OPENAI_API_KEY, ANTHROPIC_API_KEY, or GEMINI_API_KEY. See the
-[Installation Guide](docs/installation.md) for provider setup and source
-builds.
+[Installation Guide](docs/installation.md) for managed curl/PowerShell
+installers, pnpm and Bun entry points, provider setup, and source builds.
 
 ### 2. Install the library and start Researcher mode
 

@@ -1,7 +1,7 @@
 import { compare, valid } from "semver";
 import { getDiscoUserAgent } from "./disco-user-agent.ts";
 
-const DEFAULT_LATEST_VERSION_URL = "https://registry.npmjs.org/%40auto-ml-skills%2Fdisco/latest";
+const DEFAULT_LATEST_VERSION_URL = "https://registry.npmjs.org/%40arex-skill%2Fdisco/latest";
 const DEFAULT_VERSION_CHECK_TIMEOUT_MS = 10000;
 
 export interface LatestDiscoRelease {

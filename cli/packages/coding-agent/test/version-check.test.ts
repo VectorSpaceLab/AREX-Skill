@@ -47,7 +47,7 @@ describe("version checks", () => {
 
 		await expect(getLatestDiscoVersion("1.2.3")).resolves.toBe("1.2.4");
 		expect(fetchMock).toHaveBeenCalledWith(
-			"https://registry.npmjs.org/%40auto-ml-skills%2Fdisco/latest",
+			"https://registry.npmjs.org/%40arex-skill%2Fdisco/latest",
 			expect.objectContaining({
 				headers: expect.objectContaining({
 					"User-Agent": expect.stringMatching(/^disco\/1\.2\.3 /),

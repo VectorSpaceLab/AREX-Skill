@@ -59,7 +59,9 @@ npm publish --dry-run
 manifest. `verify:package` audits source, build output, documentation, and the
 packed file contract. Release testing also installs the generated tarball into
 a temporary npm prefix; it must not use a globally installed Pi package or a
-source-tree symlink.
+source-tree symlink. The managed curl and PowerShell installers live at the
+repository root and are attached to GitHub Releases separately from the npm
+tarball.
 
 When the pinned Pi baseline has not changed and a local DisCo source, test, docs,
 or example file has intentionally changed, refresh only the local provenance:

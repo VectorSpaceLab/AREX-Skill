@@ -1,12 +1,12 @@
 {
   "name": "@arex-skill/disco",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
       "name": "@arex-skill/disco",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "license": "MIT",
       "dependencies": {
         "@earendil-works/pi-agent-core": "0.83.0",

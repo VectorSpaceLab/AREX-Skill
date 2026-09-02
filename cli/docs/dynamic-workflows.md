@@ -308,4 +308,3 @@ shown.
 - [Workflow authoring skill](../packages/coding-agent/src/disco/skills/workflow-authoring/SKILL.md)
 - [Inline adaptation provenance](../packages/coding-agent/src/disco/dynamic-workflows/UPSTREAM_SOURCE.md)
 - [Workflow regression tests](../packages/coding-agent/src/disco/dynamic-workflows/workflow.test.ts)
-

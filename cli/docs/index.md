@@ -12,13 +12,38 @@ npm install -g --ignore-scripts @arex-skill/disco
 
 `--ignore-scripts` disables dependency lifecycle scripts during install. DisCo does not require install scripts for normal npm installs.
 
+Other supported entry points are:
+
+```bash
+# macOS / Linux / WSL / Git Bash
+curl -fsSL https://github.com/VectorSpaceLab/AREX-Skill/releases/latest/download/install-disco.sh | sh
+
+# pnpm
+pnpm add -g --ignore-scripts @arex-skill/disco
+
+# Bun
+bun add -g --ignore-scripts @arex-skill/disco
+```
+
+On Windows PowerShell, use:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -Command "& { irm https://github.com/VectorSpaceLab/AREX-Skill/releases/latest/download/install-disco.ps1 | iex }"
+```
+
+The curl and PowerShell commands use the DisCo managed installer. It keeps
+releases and optional managed runtimes under the user-level DisCo directory and
+refuses to overwrite an unrelated `disco` command. See the repository's
+[Installation Guide](https://github.com/VectorSpaceLab/AREX-Skill/blob/main/docs/installation.md)
+for managed update, uninstall, and Windows shell details.
+
 To uninstall DisCo after an npm installation:
 
 ```bash
 npm uninstall -g @arex-skill/disco
 ```
 
-For pnpm, Yarn, or Bun installs, use the matching global remove command: `pnpm remove -g @arex-skill/disco`, `yarn global remove @arex-skill/disco`, or `bun uninstall -g @arex-skill/disco`.
+For pnpm, Yarn, or Bun installs, use the matching global remove command: `pnpm remove -g @arex-skill/disco`, `yarn global remove @arex-skill/disco`, or `bun uninstall -g @arex-skill/disco`. For a managed curl/PowerShell installation, use the persisted installer with its uninstall option; do not remove the user-level `~/.disco/agent` directory.
 
 Then run it in a project directory:
 

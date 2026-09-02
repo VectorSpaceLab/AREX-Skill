@@ -207,6 +207,23 @@ npm publish --dry-run --ignore-scripts
 Do not hand-edit generated `dist/` files or standalone binary runtime assets as
 source changes.
 
+## Installer Release Assets
+
+The repository-root managed installers are published as GitHub Release assets,
+not as files inside the npm tarball. From the repository root, prepare the
+auditable assets with:
+
+```bash
+python3 scripts/prepare-disco-release-assets.py
+```
+
+The command writes `install-disco.sh`, `install-disco.ps1`, `SHA256SUMS`, and
+`release-metadata.json` to `dist/disco-release-assets/`. Attach the two
+installer files and `SHA256SUMS` to the matching GitHub Release, then verify the
+stable `releases/latest/download` URLs before updating public documentation.
+The npm release helper prepares these files by default but never uploads them
+or publishes a GitHub Release on its own.
+
 ## Final Checklist
 
 Before handing off a change:

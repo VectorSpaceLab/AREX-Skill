@@ -1,6 +1,6 @@
 {
   "name": "@arex-skill/disco",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Skill-powered research agent with Creator and Researcher modes",
   "type": "module",
   "discoConfig": {
