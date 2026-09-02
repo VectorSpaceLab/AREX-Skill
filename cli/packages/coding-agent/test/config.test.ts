@@ -70,7 +70,7 @@ describe("getShareViewerUrl", () => {
 function createNpmPrefixInstall(template = "disco-prefix-"): { prefix: string; packageDir: string } {
 	const prefix = mkdtempSync(join(tmpdir(), template));
 	const root = join(prefix, "lib", "node_modules");
-	const scopeDir = join(root, "@auto-ml-skills");
+	const scopeDir = join(root, "@arex-skill");
 	const packageDir = join(scopeDir, "disco");
 	mkdirSync(packageDir, { recursive: true });
 	tempDir = prefix;
@@ -83,7 +83,7 @@ function createPnpmGlobalInstall(): { root: string; packageDir: string } {
 	const temp = mkdtempSync(join(tmpdir(), "disco-pnpm-"));
 	const binDir = join(temp, "bin");
 	const root = join(temp, "pnpm", "global", "5", "node_modules");
-	const packageDir = join(root, "@auto-ml-skills", "disco");
+	const packageDir = join(root, "@arex-skill", "disco");
 	mkdirSync(packageDir, { recursive: true });
 	mkdirSync(binDir, { recursive: true });
 	writeFileSync(join(binDir, process.platform === "win32" ? "pnpm.cmd" : "pnpm"), createFakePnpmScript(root));
@@ -95,9 +95,9 @@ function createPnpmGlobalInstall(): { root: string; packageDir: string } {
 		join(
 			root,
 			".pnpm",
-			"@auto-ml-skills+disco@0.0.0",
+			"@arex-skill+disco@0.0.0",
 			"node_modules",
-			"@auto-ml-skills",
+			"@arex-skill",
 			"disco",
 			"dist",
 			"cli.js",
@@ -110,7 +110,7 @@ function createYarnGlobalInstall(): { globalDir: string; packageDir: string } {
 	const temp = mkdtempSync(join(tmpdir(), "disco-yarn-"));
 	const binDir = join(temp, "bin");
 	const globalDir = join(temp, "yarn", "global");
-	const packageDir = join(globalDir, "node_modules", "@auto-ml-skills", "disco");
+	const packageDir = join(globalDir, "node_modules", "@arex-skill", "disco");
 	mkdirSync(packageDir, { recursive: true });
 	mkdirSync(binDir, { recursive: true });
 	writeFileSync(join(binDir, process.platform === "win32" ? "yarn.cmd" : "yarn"), createFakeYarnScript(globalDir));
@@ -118,7 +118,7 @@ function createYarnGlobalInstall(): { globalDir: string; packageDir: string } {
 	tempDir = temp;
 	process.env.PATH = `${binDir}${delimiter}${originalPath ?? ""}`;
 	process.env.DISCO_PACKAGE_DIR = packageDir;
-	setExecPath(join(globalDir, ".yarn", "@auto-ml-skills", "disco", "dist", "cli.js"));
+	setExecPath(join(globalDir, ".yarn", "@arex-skill", "disco", "dist", "cli.js"));
 	return { globalDir, packageDir };
 }
 
@@ -127,7 +127,7 @@ function createBunGlobalInstall(): { packageDir: string } {
 	const prefix = join(temp, ".bun");
 	const bunBin = join(prefix, "bin");
 	const root = join(prefix, "install", "global", "node_modules");
-	const scopeDir = join(root, "@auto-ml-skills");
+	const scopeDir = join(root, "@arex-skill");
 	const packageDir = join(scopeDir, "disco");
 	mkdirSync(packageDir, { recursive: true });
 	mkdirSync(bunBin, { recursive: true });
@@ -167,12 +167,12 @@ function createFakeBunScript(bunBin: string): string {
 describe("detectInstallMethod", () => {
 	test("detects pnpm from Windows .pnpm install paths", () => {
 		setExecPath(
-			"C:\\Users\\Admin\\Documents\\pnpm-repository\\global\\5\\.pnpm\\@auto-ml-skills+disco@0.67.68\\node_modules\\@auto-ml-skills\\disco\\dist\\cli.js",
+			"C:\\Users\\Admin\\Documents\\pnpm-repository\\global\\5\\.pnpm\\@arex-skill+disco@0.67.68\\node_modules\\@arex-skill\\disco\\dist\\cli.js",
 		);
 
 		expect(detectInstallMethod()).toBe("pnpm");
-		expect(getUpdateInstruction("@auto-ml-skills/disco")).toBe(
-			"Run: pnpm install -g --ignore-scripts --config.minimumReleaseAge=0 @auto-ml-skills/disco",
+		expect(getUpdateInstruction("@arex-skill/disco")).toBe(
+			"Run: pnpm install -g --ignore-scripts --config.minimumReleaseAge=0 @arex-skill/disco",
 		);
 	});
 
@@ -180,16 +180,16 @@ describe("detectInstallMethod", () => {
 		setExecPath("/usr/local/bin/node");
 
 		expect(detectInstallMethod()).toBe("unknown");
-		expect(getSelfUpdateCommand("@auto-ml-skills/disco")).toBeUndefined();
-		expect(getUpdateInstruction("@auto-ml-skills/disco")).toBe(
-			"Update @auto-ml-skills/disco using the package manager, wrapper, or source checkout that provides this installation.",
+		expect(getSelfUpdateCommand("@arex-skill/disco")).toBeUndefined();
+		expect(getUpdateInstruction("@arex-skill/disco")).toBe(
+			"Update @arex-skill/disco using the package manager, wrapper, or source checkout that provides this installation.",
 		);
 	});
 
 	test("self-updates npm installs from custom prefixes", () => {
 		const { prefix } = createNpmPrefixInstall();
 
-		const command = getSelfUpdateCommand("@auto-ml-skills/disco");
+		const command = getSelfUpdateCommand("@arex-skill/disco");
 
 		expect(detectInstallMethod()).toBe("npm");
 		expect(command).toEqual({
@@ -201,18 +201,18 @@ describe("detectInstallMethod", () => {
 				"-g",
 				"--ignore-scripts",
 				"--min-release-age=0",
-				"@auto-ml-skills/disco",
+				"@arex-skill/disco",
 			],
-			display: `npm --prefix ${prefix} install -g --ignore-scripts --min-release-age=0 @auto-ml-skills/disco`,
+			display: `npm --prefix ${prefix} install -g --ignore-scripts --min-release-age=0 @arex-skill/disco`,
 		});
 	});
 
 	test("self-updates exact npm versions without uninstalling the current package", () => {
 		const { prefix } = createNpmPrefixInstall();
 
-		const command = getSelfUpdateCommand("@auto-ml-skills/disco", undefined, {
-			packageName: "@auto-ml-skills/disco",
-			installSpec: "@auto-ml-skills/disco@1.2.3",
+		const command = getSelfUpdateCommand("@arex-skill/disco", undefined, {
+			packageName: "@arex-skill/disco",
+			installSpec: "@arex-skill/disco@1.2.3",
 		});
 
 		expect(command).toEqual({
@@ -224,26 +224,26 @@ describe("detectInstallMethod", () => {
 				"-g",
 				"--ignore-scripts",
 				"--min-release-age=0",
-				"@auto-ml-skills/disco@1.2.3",
+				"@arex-skill/disco@1.2.3",
 			],
-			display: `npm --prefix ${prefix} install -g --ignore-scripts --min-release-age=0 @auto-ml-skills/disco@1.2.3`,
+			display: `npm --prefix ${prefix} install -g --ignore-scripts --min-release-age=0 @arex-skill/disco@1.2.3`,
 		});
 	});
 
 	test("self-updates renamed packages from the current install prefix", () => {
 		const { prefix } = createNpmPrefixInstall();
 
-		const command = getSelfUpdateCommand("@auto-ml-skills/disco", undefined, "@example/disco-next");
+		const command = getSelfUpdateCommand("@arex-skill/disco", undefined, "@example/disco-next");
 
 		expect(command).toEqual({
 			command: "npm",
 			args: ["--prefix", prefix, "install", "-g", "--ignore-scripts", "--min-release-age=0", "@example/disco-next"],
-			display: `npm --prefix ${prefix} uninstall -g @auto-ml-skills/disco && npm --prefix ${prefix} install -g --ignore-scripts --min-release-age=0 @example/disco-next`,
+			display: `npm --prefix ${prefix} uninstall -g @arex-skill/disco && npm --prefix ${prefix} install -g --ignore-scripts --min-release-age=0 @example/disco-next`,
 			steps: [
 				{
 					command: "npm",
-					args: ["--prefix", prefix, "uninstall", "-g", "@auto-ml-skills/disco"],
-					display: `npm --prefix ${prefix} uninstall -g @auto-ml-skills/disco`,
+					args: ["--prefix", prefix, "uninstall", "-g", "@arex-skill/disco"],
+					display: `npm --prefix ${prefix} uninstall -g @arex-skill/disco`,
 				},
 				{
 					command: "npm",
@@ -257,7 +257,7 @@ describe("detectInstallMethod", () => {
 	test("self-update respects configured npmCommand", () => {
 		const { prefix } = createNpmPrefixInstall();
 
-		const command = getSelfUpdateCommand("@auto-ml-skills/disco", ["npm", "--prefix", prefix]);
+		const command = getSelfUpdateCommand("@arex-skill/disco", ["npm", "--prefix", prefix]);
 
 		expect(command).toEqual({
 			command: "npm",
@@ -268,16 +268,16 @@ describe("detectInstallMethod", () => {
 				"-g",
 				"--ignore-scripts",
 				"--min-release-age=0",
-				"@auto-ml-skills/disco",
+				"@arex-skill/disco",
 			],
-			display: `npm --prefix ${prefix} install -g --ignore-scripts --min-release-age=0 @auto-ml-skills/disco`,
+			display: `npm --prefix ${prefix} install -g --ignore-scripts --min-release-age=0 @arex-skill/disco`,
 		});
 	});
 
 	test("self-update treats empty npmCommand as unset", () => {
 		const { prefix } = createNpmPrefixInstall();
 
-		const command = getSelfUpdateCommand("@auto-ml-skills/disco", []);
+		const command = getSelfUpdateCommand("@arex-skill/disco", []);
 
 		expect(command?.args).toEqual([
 			"--prefix",
@@ -286,60 +286,60 @@ describe("detectInstallMethod", () => {
 			"-g",
 			"--ignore-scripts",
 			"--min-release-age=0",
-			"@auto-ml-skills/disco",
+			"@arex-skill/disco",
 		]);
 	});
 
 	test("quotes npm self-update display paths", () => {
 		const { prefix } = createNpmPrefixInstall("disco prefix ");
 
-		const command = getSelfUpdateCommand("@auto-ml-skills/disco");
+		const command = getSelfUpdateCommand("@arex-skill/disco");
 
 		expect(command?.display).toBe(
-			`npm --prefix "${prefix}" install -g --ignore-scripts --min-release-age=0 @auto-ml-skills/disco`,
+			`npm --prefix "${prefix}" install -g --ignore-scripts --min-release-age=0 @arex-skill/disco`,
 		);
 	});
 
 	test("does not infer Windows npm custom prefixes from package paths", () => {
-		const packageDir = "C:\\Users\\Admin\\npm prefix\\node_modules\\@auto-ml-skills\\disco";
+		const packageDir = "C:\\Users\\Admin\\npm prefix\\node_modules\\@arex-skill\\disco";
 		process.env.DISCO_PACKAGE_DIR = packageDir;
 		setExecPath(`${packageDir}\\dist\\cli.js`);
 
 		expect(detectInstallMethod()).toBe("npm");
-		expect(getUpdateInstruction("@auto-ml-skills/disco")).toBe(
-			"Run: npm install -g --ignore-scripts --min-release-age=0 @auto-ml-skills/disco",
+		expect(getUpdateInstruction("@arex-skill/disco")).toBe(
+			"Run: npm install -g --ignore-scripts --min-release-age=0 @arex-skill/disco",
 		);
 	});
 
 	test("self-updates bun global installs from bun pm bin", () => {
 		createBunGlobalInstall();
 
-		const command = getSelfUpdateCommand("@auto-ml-skills/disco");
+		const command = getSelfUpdateCommand("@arex-skill/disco");
 
 		expect(detectInstallMethod()).toBe("bun");
 		expect(command).toEqual({
 			command: "bun",
-			args: ["install", "-g", "--ignore-scripts", "--minimum-release-age=0", "@auto-ml-skills/disco"],
-			display: "bun install -g --ignore-scripts --minimum-release-age=0 @auto-ml-skills/disco",
+			args: ["install", "-g", "--ignore-scripts", "--minimum-release-age=0", "@arex-skill/disco"],
+			display: "bun install -g --ignore-scripts --minimum-release-age=0 @arex-skill/disco",
 		});
 	});
 
 	test("self-updates renamed pnpm global installs by removing the old package first", () => {
 		createPnpmGlobalInstall();
 
-		const command = getSelfUpdateCommand("@auto-ml-skills/disco", undefined, "@example/disco-next");
+		const command = getSelfUpdateCommand("@arex-skill/disco", undefined, "@example/disco-next");
 
 		expect(detectInstallMethod()).toBe("pnpm");
 		expect(command).toEqual({
 			command: "pnpm",
 			args: ["install", "-g", "--ignore-scripts", "--config.minimumReleaseAge=0", "@example/disco-next"],
 			display:
-				"pnpm remove -g @auto-ml-skills/disco && pnpm install -g --ignore-scripts --config.minimumReleaseAge=0 @example/disco-next",
+				"pnpm remove -g @arex-skill/disco && pnpm install -g --ignore-scripts --config.minimumReleaseAge=0 @example/disco-next",
 			steps: [
 				{
 					command: "pnpm",
-					args: ["remove", "-g", "@auto-ml-skills/disco"],
-					display: "pnpm remove -g @auto-ml-skills/disco",
+					args: ["remove", "-g", "@arex-skill/disco"],
+					display: "pnpm remove -g @arex-skill/disco",
 				},
 				{
 					command: "pnpm",
@@ -354,8 +354,8 @@ describe("detectInstallMethod", () => {
 		const temp = mkdtempSync(join(tmpdir(), "disco-pnpm11-"));
 		const binDir = join(temp, "bin");
 		const root = join(temp, "Library", "pnpm", "global", "v11");
-		const packageName = "@auto-ml-skills/disco";
-		const globalPackageDir = join(root, "11e9a", "node_modules", "@auto-ml-skills", "disco");
+		const packageName = "@arex-skill/disco";
+		const globalPackageDir = join(root, "11e9a", "node_modules", "@arex-skill", "disco");
 		const storePackageDir = join(
 			temp,
 			"Library",
@@ -363,12 +363,12 @@ describe("detectInstallMethod", () => {
 			"store",
 			"v11",
 			"links",
-			"@auto-ml-skills",
+			"@arex-skill",
 			"disco",
 			"0.75.0",
 			"hash",
 			"node_modules",
-			"@auto-ml-skills",
+			"@arex-skill",
 			"disco",
 		);
 		mkdirSync(globalPackageDir, { recursive: true });
@@ -396,18 +396,18 @@ describe("detectInstallMethod", () => {
 	test("self-updates renamed yarn global installs by removing the old package first", () => {
 		createYarnGlobalInstall();
 
-		const command = getSelfUpdateCommand("@auto-ml-skills/disco", undefined, "@example/disco-next");
+		const command = getSelfUpdateCommand("@arex-skill/disco", undefined, "@example/disco-next");
 
 		expect(detectInstallMethod()).toBe("yarn");
 		expect(command).toEqual({
 			command: "yarn",
 			args: ["global", "add", "--ignore-scripts", "@example/disco-next"],
-			display: "yarn global remove @auto-ml-skills/disco && yarn global add --ignore-scripts @example/disco-next",
+			display: "yarn global remove @arex-skill/disco && yarn global add --ignore-scripts @example/disco-next",
 			steps: [
 				{
 					command: "yarn",
-					args: ["global", "remove", "@auto-ml-skills/disco"],
-					display: "yarn global remove @auto-ml-skills/disco",
+					args: ["global", "remove", "@arex-skill/disco"],
+					display: "yarn global remove @arex-skill/disco",
 				},
 				{
 					command: "yarn",
@@ -421,19 +421,19 @@ describe("detectInstallMethod", () => {
 	test("self-updates renamed bun global installs by removing the old package first", () => {
 		createBunGlobalInstall();
 
-		const command = getSelfUpdateCommand("@auto-ml-skills/disco", undefined, "@example/disco-next");
+		const command = getSelfUpdateCommand("@arex-skill/disco", undefined, "@example/disco-next");
 
 		expect(detectInstallMethod()).toBe("bun");
 		expect(command).toEqual({
 			command: "bun",
 			args: ["install", "-g", "--ignore-scripts", "--minimum-release-age=0", "@example/disco-next"],
 			display:
-				"bun uninstall -g @auto-ml-skills/disco && bun install -g --ignore-scripts --minimum-release-age=0 @example/disco-next",
+				"bun uninstall -g @arex-skill/disco && bun install -g --ignore-scripts --minimum-release-age=0 @example/disco-next",
 			steps: [
 				{
 					command: "bun",
-					args: ["uninstall", "-g", "@auto-ml-skills/disco"],
-					display: "bun uninstall -g @auto-ml-skills/disco",
+					args: ["uninstall", "-g", "@arex-skill/disco"],
+					display: "bun uninstall -g @arex-skill/disco",
 				},
 				{
 					command: "bun",
@@ -448,8 +448,8 @@ describe("detectInstallMethod", () => {
 		const { packageDir } = createNpmPrefixInstall();
 		chmodSync(packageDir, 0o500);
 
-		expect(getSelfUpdateCommand("@auto-ml-skills/disco")).toBeUndefined();
-		expect(getSelfUpdateUnavailableInstruction("@auto-ml-skills/disco")).toContain(
+		expect(getSelfUpdateCommand("@arex-skill/disco")).toBeUndefined();
+		expect(getSelfUpdateUnavailableInstruction("@arex-skill/disco")).toContain(
 			"the install path is not writable",
 		);
 	});

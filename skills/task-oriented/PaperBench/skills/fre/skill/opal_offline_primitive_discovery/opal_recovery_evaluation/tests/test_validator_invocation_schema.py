@@ -1,0 +1,26 @@
+from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
+from evaluate_opal_recovery import evaluate_recovery
+
+
+def test_accepts_validator_module_evidence_keys():
+    plan = {'fast_recovery_target': {'dataset': 'synthetic', 'metric': 'proxy_success_rate', 'paper_value': 0.8}}
+    checks = {
+        'offline_segments_constructed': True,
+        'primitive_autoencoding_loss_computed': True,
+        'prior_matching_penalty_computed': True,
+        'optimizer_step_executed': True,
+        'latent_relabeling_executed': True,
+        'high_level_latent_control_executed': True,
+        'temporal_abstraction_verified': True,
+    }
+    result = {'is_proxy': True, 'paper_target': {'dataset': 'synthetic', 'metric': 'proxy_success_rate', 'paper_value': 0.8}, 'metrics': {'proxy_success_rate': 1.0}, 'mechanism_checks': checks}
+    manifest = {'sources': [{'role': 'paper', 'path': 'paper.pdf'}]}
+    invocations = {'invocations': [{'module': 'offline_segment_protocol', 'evidence': 'called script', 'artifact': 'paper.pdf'}]}
+    assert evaluate_recovery(plan, result, manifest, invocations)['ok'] is True
+
+
+if __name__ == '__main__':
+    test_accepts_validator_module_evidence_keys()

@@ -16,7 +16,7 @@
  *   /working-indicator reset     Restore disco's default spinner
  */
 
-import type { ExtensionAPI, ExtensionContext, WorkingIndicatorOptions } from "@auto-ml-skills/disco";
+import type { ExtensionAPI, ExtensionContext, WorkingIndicatorOptions } from "@arex-skill/disco";
 
 type WorkingIndicatorMode = "dot" | "none" | "pulse" | "spinner" | "default";
 

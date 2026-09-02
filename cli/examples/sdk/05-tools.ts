@@ -10,7 +10,7 @@
  * extensions system using disco.registerTool().
  */
 
-import { createAgentSession, SessionManager } from "@auto-ml-skills/disco";
+import { createAgentSession, SessionManager } from "@arex-skill/disco";
 
 // Read-only mode (no edit/write)
 const { session: readOnlySession } = await createAgentSession({

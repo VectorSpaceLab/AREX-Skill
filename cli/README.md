@@ -6,7 +6,7 @@ roles separate reusable skill authoring from research and implementation work:
 - **Creator** builds, imports, extends, and verifies skills.
 - **Researcher** uses operating skills and dynamic workflows to complete tasks.
 
-DisCo is published as `@auto-ml-skills/disco` and installs one executable,
+DisCo is published as `@arex-skill/disco` and installs one executable,
 `disco`. The package contains its own fork of Pi coding-agent v0.83.0; it does
 not depend on `@earendil-works/pi-coding-agent`, and it does not discover
 resources from `.pi` or `~/.pi`.
@@ -20,7 +20,7 @@ resources from `.pi` or `~/.pi`.
 ## Install
 
 ```bash
-npm install -g @auto-ml-skills/disco
+npm install -g @arex-skill/disco
 disco
 ```
 
@@ -63,7 +63,7 @@ Disabling the router does not remove it: explicit
 `/skill:repo-skills-router` invocation remains available in a new Researcher
 session.
 
-`disco update` updates `@auto-ml-skills/disco`, not Pi. Use
+`disco update` updates `@arex-skill/disco`, not Pi. Use
 `disco update --models`, `disco update --extensions`, or `disco update --all`
 for the other documented update targets.
 
@@ -186,7 +186,7 @@ the bundled [examples](examples/README.md).
 The same package exposes a low-level, headless SDK for Node.js applications:
 
 ```typescript
-import { createAgentSession, SessionManager } from "@auto-ml-skills/disco";
+import { createAgentSession, SessionManager } from "@arex-skill/disco";
 
 const { session } = await createAgentSession({
   cwd: process.cwd(),

@@ -41,8 +41,8 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import type { Api, Model } from "@earendil-works/pi-ai";
-import type { ExtensionAPI, ExtensionContext } from "@auto-ml-skills/disco";
-import { CONFIG_DIR_NAME, DynamicBorder, getAgentDir } from "@auto-ml-skills/disco";
+import type { ExtensionAPI, ExtensionContext } from "@arex-skill/disco";
+import { CONFIG_DIR_NAME, DynamicBorder, getAgentDir } from "@arex-skill/disco";
 import { Container, Key, type SelectItem, SelectList, Text } from "@earendil-works/pi-tui";
 
 // Preset configuration

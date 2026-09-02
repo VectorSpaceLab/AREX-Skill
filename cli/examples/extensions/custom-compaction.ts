@@ -15,8 +15,8 @@
 
 import { uuidv7 } from "@earendil-works/pi-ai";
 import { complete } from "@earendil-works/pi-ai/compat";
-import type { ExtensionAPI } from "@auto-ml-skills/disco";
-import { convertToLlm, serializeConversation } from "@auto-ml-skills/disco";
+import type { ExtensionAPI } from "@arex-skill/disco";
+import { convertToLlm, serializeConversation } from "@arex-skill/disco";
 
 export default function (disco: ExtensionAPI) {
 	disco.on("session_before_compact", async (event, ctx) => {

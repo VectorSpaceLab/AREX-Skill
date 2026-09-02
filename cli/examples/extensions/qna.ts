@@ -8,8 +8,8 @@
  */
 
 import { complete, type UserMessage } from "@earendil-works/pi-ai/compat";
-import type { ExtensionAPI } from "@auto-ml-skills/disco";
-import { BorderedLoader } from "@auto-ml-skills/disco";
+import type { ExtensionAPI } from "@arex-skill/disco";
+import { BorderedLoader } from "@arex-skill/disco";
 
 const SYSTEM_PROMPT = `You are a question extractor. Given text from a conversation, extract any questions that need answering and format them for the user to fill in.
 

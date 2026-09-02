@@ -51,7 +51,7 @@ cli/
 
 | 路径 | 职责 |
 | --- | --- |
-| `cli/package.json` | 唯一可发布的 npm package `@auto-ml-skills/disco`，暴露 `disco` CLI 和 SDK。 |
+| `cli/package.json` | 唯一可发布的 npm package `@arex-skill/disco`，暴露 `disco` CLI 和 SDK。 |
 | `cli/packages/coding-agent/src` | DisCo copy 并修改的 Pi coding-agent runtime，包含 interactive/print modes、project trust、sessions、tools、skill discovery、workflow skills 和 dynamic orchestration。 |
 | `cli/packages/coding-agent/test` | 从 upstream 保留的测试和 DisCo regression contracts。 |
 | `cli/docs` 与 `cli/examples` | 随 npm package 发布的文档和示例。 |

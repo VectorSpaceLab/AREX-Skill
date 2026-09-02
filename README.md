@@ -4,16 +4,16 @@
 
 
 
-<h1 align="center">AREX-Skill</h1>
-
-<p align="center">
-  <strong>Turn ML knowledge into executable skills for autonomous research</strong>
-</p>
+<h1 align="center">
+  AREX-Skill
+  <br>
+  <sub>✨ Advancing Auto-Research with Skills Distilled from GitHub Repos 🚀</sub>
+</h1>
 
 <p align="center">
   <a href="skills/README.md"><img src="https://img.shields.io/badge/AREX--Skill_Library-5000%2B_skills-0E9B9B?style=for-the-badge" alt="AREX-Skill Library: 5000+ skills"></a>
   <a href="docs/repository-catalog.md"><img src="https://img.shields.io/badge/ML_Repositories-1000-5865F2?style=for-the-badge" alt="1000 ML repositories"></a>
-  <a href="https://www.npmjs.com/package/@auto-ml-skills/disco"><img src="https://img.shields.io/badge/CLI-disco%20v0.2.0-D22128?style=for-the-badge&logo=npm&logoColor=white" alt="DisCo CLI v0.2.0"></a>
+  <a href="https://www.npmjs.com/package/@arex-skill/disco"><img src="https://img.shields.io/badge/CLI-disco%20v0.2.0-D22128?style=for-the-badge&logo=npm&logoColor=white" alt="DisCo CLI v0.2.0"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-lightgrey?style=for-the-badge&logo=apache&logoColor=white" alt="License: Apache 2.0"></a>
   <a href="#documentation"><img src="https://img.shields.io/badge/Documentation-README-0E9B9B?style=for-the-badge" alt="Documentation"></a>
   <a href="#contributing"><img src="https://img.shields.io/badge/Contributing-guide-5865F2?style=for-the-badge" alt="Contributing guide"></a>
@@ -23,12 +23,18 @@
   <b>English</b> · <a href="README.zh-CN.md">简体中文</a>
 </p>
 
-<p align="center">
-  <strong>An open library of 5,000+ verified, executable skills distilled from 1,000 ML repositories</strong><br>
-  <strong>Seamless integration with Codex, Claude Code, Pi, and other coding agents</strong><br>
-  <strong>Frontier autonomous research across ML engineering, paper replication, and more</strong>
-</p>
+<p align="center"> 
+  🧠 <strong>5,000+ verified, executable skills</strong> distilled from <strong>1,000+ popular repositories</strong><br> 
+  ⚡ <strong>Seamless integration</strong> with <code>Codex</code>, <code>Claude Code</code>, <code>Pi</code>, and other coding agents<br> 
+  🔬 <strong>Advancing frontier auto-research</strong> across across multidisciplinary machine learning studies </p>
 
+## 🎬 Demo <a id="demo"></a>
+
+A one-minute tour of AREX-Skill: DisCo distills a repository into verified,
+executable skills, the router narrows 5,000+ skills to the one branch a task
+needs, and a skill-equipped agent clears a task that stalls without it.
+
+https://github.com/user-attachments/assets/9fa59284-4625-44ef-8b43-01c7b6a05cea
 
 ## 🧭 Table of Contents <a id="table-of-contents"></a>
 
@@ -41,6 +47,7 @@
 - [Usage Examples](#usage-examples)
 - [Documentation](#documentation)
 - [Contributing](#contributing)
+- [Acknowledgement](#acknowledgement)
 - [License](#license)
 - [Citation](#citation)
 
@@ -190,7 +197,7 @@ workflows and portable installation guidance.
 DisCo requires Node.js >=22.19.0:
 
 ```bash
-npm install -g @auto-ml-skills/disco
+npm install -g @arex-skill/disco
 ```
 
 Configure a model provider on first run with /login, or use an environment
@@ -311,6 +318,18 @@ provider, reasoning level where relevant, production workflow, verification
 commands, known gaps, and any router or catalog updates. See the
 [Contribution Guide](CONTRIBUTING.md) for the full checklist and
 [CONTRIBUTING_CN.md](CONTRIBUTING_CN.md) for the Chinese version.
+
+## 🙏 Acknowledgement <a id="acknowledgement"></a>
+
+DisCo's CLI and agent runtime are built on the foundation of
+[earendil-works/pi](https://github.com/earendil-works/pi), an open-source AI
+agent toolkit with a unified LLM API, agent loop, terminal UI, and coding-agent
+CLI.
+
+AREX-Skill is also made possible by the GitHub open-source community. The
+repo skills in this library exist because many researchers and engineers have
+released high-quality ML, agent, data, bio/chem, vision, and infrastructure
+projects for the community to build on.
 
 ## 📄 License <a id="license"></a>
 

@@ -4,7 +4,7 @@
 
 import * as fs from "node:fs";
 import * as path from "node:path";
-import { CONFIG_DIR_NAME, getAgentDir, parseFrontmatter } from "@auto-ml-skills/disco";
+import { CONFIG_DIR_NAME, getAgentDir, parseFrontmatter } from "@arex-skill/disco";
 
 export type AgentScope = "user" | "project" | "both";
 

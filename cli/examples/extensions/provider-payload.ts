@@ -1,6 +1,6 @@
 import { appendFileSync } from "node:fs";
 import { join } from "node:path";
-import { CONFIG_DIR_NAME, type ExtensionAPI } from "@auto-ml-skills/disco";
+import { CONFIG_DIR_NAME, type ExtensionAPI } from "@arex-skill/disco";
 
 export default function (disco: ExtensionAPI) {
 	disco.on("before_provider_request", (event, ctx) => {

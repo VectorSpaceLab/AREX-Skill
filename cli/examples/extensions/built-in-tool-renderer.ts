@@ -25,8 +25,8 @@
  *   disco -e ./built-in-tool-renderer.ts
  */
 
-import type { BashToolDetails, EditToolDetails, ExtensionAPI, ReadToolDetails } from "@auto-ml-skills/disco";
-import { createBashTool, createEditTool, createReadTool, createWriteTool } from "@auto-ml-skills/disco";
+import type { BashToolDetails, EditToolDetails, ExtensionAPI, ReadToolDetails } from "@arex-skill/disco";
+import { createBashTool, createEditTool, createReadTool, createWriteTool } from "@arex-skill/disco";
 import { Text } from "@earendil-works/pi-tui";
 
 export default function (disco: ExtensionAPI) {

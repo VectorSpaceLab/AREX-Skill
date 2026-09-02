@@ -106,14 +106,14 @@
           "upstreamSha256": "4d8350fe6e3a22a9383ee26e37b9969b7d300539962097146b403a9dd2dbf8a6",
           "disposition": "retained_modified",
           "localPath": "packages/coding-agent/src/cli/startup-ui.ts",
-          "localSha256": "99e1005bcc76ad19ea471eb303f173e2ca854edbf8d0fe464001fe647c34e390"
+          "localSha256": "91e71dc2cb19e9e7edab1167ad5326b17ffa86a34d872a5ce866f1e8219590b9"
         },
         {
           "upstreamPath": "packages/coding-agent/src/config.ts",
           "upstreamSha256": "d9dce190990ce48a273ad04d06a51baba5c47904f39363521451225dbd3501b2",
           "disposition": "retained_modified",
           "localPath": "packages/coding-agent/src/config.ts",
-          "localSha256": "d672776c6393c0f5d8a83cb5addce932c6f7344f058b2a921a21882e7b61508d"
+          "localSha256": "689ce9bf6cdbea8a7856d3b4fe6d2d59ec39e88a887828055079bba0debd088a"
         },
         {
           "upstreamPath": "packages/coding-agent/src/core/agent-session-runtime.ts",
@@ -295,7 +295,7 @@
           "upstreamSha256": "2498fc18f7484485b34b1c23c2338b023d8bd3759bcd34782a3b80776306ecf8",
           "disposition": "retained_modified",
           "localPath": "packages/coding-agent/src/core/extensions/loader.ts",
-          "localSha256": "10dd25badac7ae30591e0d25a862971e5cc87ffa0dbccc6dbdf31d9f6969960b"
+          "localSha256": "c5ae93169fc8931665c5ca9cb053cb535538befb1275d34427684eb255cefbf7"
         },
         {
           "upstreamPath": "packages/coding-agent/src/core/extensions/runner.ts",
@@ -309,7 +309,7 @@
           "upstreamSha256": "eefea1d4ff2e317f56f8da8c9866fd6cbd33c0cf4a034cd1ad28ff88296e1013",
           "disposition": "retained_modified",
           "localPath": "packages/coding-agent/src/core/extensions/types.ts",
-          "localSha256": "62cf932fc8d927652774cb4319f65cdb11a50d8216b6972872f89cc68c65a657"
+          "localSha256": "d1922a7abe75d73ea2e8cb4bcf039fe9ee3bb017967793ffbaaf2d56199ea3e1"
         },
         {
           "upstreamPath": "packages/coding-agent/src/core/extensions/wrapper.ts",
@@ -1061,7 +1061,7 @@
           "upstreamSha256": "71190161329ddb87547304a61b8df7bf8db0051d827f20918035f690aff89f66",
           "disposition": "retained_modified",
           "localPath": "packages/coding-agent/src/modes/interactive/theme/theme.ts",
-          "localSha256": "83d25220aac01a7a9c5116130274da25f0cf341cc02531a009a2503b2414280e"
+          "localSha256": "2640d8872ca113544064b9158cfbd9b417c1bb804e20b8e3a3cb0c0e9655b28f"
         },
         {
           "upstreamPath": "packages/coding-agent/src/modes/print-mode.ts",
@@ -1542,7 +1542,7 @@
           "upstreamSha256": "a5e0f53e01dc8eec880ea842d6fce8737ba07d8e5ee0843cc992609c3cabaf0c",
           "disposition": "retained_modified",
           "localPath": "packages/coding-agent/test/config.test.ts",
-          "localSha256": "47e63baadf57f83675410b09a46a5c9f6c41da8d17a9194e49dc0ef64aca351b"
+          "localSha256": "4b26f288c934ad8d27a823e6ae575c7727ede53ade9e6af94d93ab9188114948"
         },
         {
           "upstreamPath": "packages/coding-agent/test/credential-print.test.ts",
@@ -1605,7 +1605,7 @@
           "upstreamSha256": "842911f6c68c4db5711529f7e3a7df7bdaa9704a5450e8fc38bc1b123c14cec0",
           "disposition": "retained_modified",
           "localPath": "packages/coding-agent/test/extensions-discovery.test.ts",
-          "localSha256": "e98bb3ea91f788351cf6ac92b6685d39f3d59c2541278e9e1556bf230cb09bd3"
+          "localSha256": "a5d5c660e45710c73395c7dafffff961f640de000541a2f6dc9b2ab8e95db971"
         },
         {
           "upstreamPath": "packages/coding-agent/test/extensions-input-event.test.ts",
@@ -2025,7 +2025,7 @@
           "upstreamSha256": "2f85736135e0f712254475d842cc47568f78deb7cd5d9690feffd7174683fbe9",
           "disposition": "retained_modified",
           "localPath": "packages/coding-agent/test/package-command-paths.test.ts",
-          "localSha256": "460d8f3bce08aaae40ad0a95e99c49cb5ac5777f639e72b5804b9f9311569856"
+          "localSha256": "7e4406caa10add9b247eefb15ad7ff33bd57e945a618b795291638bfc02f1006"
         },
         {
           "upstreamPath": "packages/coding-agent/test/package-manager-ssh.test.ts",
@@ -2116,7 +2116,7 @@
           "upstreamSha256": "4833786e865dc9c41d2e5b7c8d39da4284a39cb2ae7c366059dd878335a4cdb8",
           "disposition": "retained_modified",
           "localPath": "packages/coding-agent/test/resource-loader.test.ts",
-          "localSha256": "6bb12af471a004c0cfeffa1ed3b99210a30b728a3cb7f21dbddb9fc72a73ca10"
+          "localSha256": "859f9312c636d0638dd1ec8a00854d6c80a067934c50ee70e459cf7285bb4ac5"
         },
         {
           "upstreamPath": "packages/coding-agent/test/restore-sandbox-env.test.ts",
@@ -2870,28 +2870,28 @@
           "upstreamSha256": "70b93bbae068b11213ce84d36b8189e2909141622f198d7b888559c64fcaa01a",
           "disposition": "retained_modified",
           "localPath": "docs/compaction.md",
-          "localSha256": "03a65c3477e9974ae4fccc98b016c70e740e9ce28f4db358765721cc63cc2261"
+          "localSha256": "f416f7a75f741c822e46b6bdb3871a692a61dda9582d2a35275f68ee56dbb8df"
         },
         {
           "upstreamPath": "packages/coding-agent/docs/containerization.md",
           "upstreamSha256": "29ac379f744052adf301e744559cb43d0e6e84d1b04f4757f1710680991be10b",
           "disposition": "retained_modified",
           "localPath": "docs/containerization.md",
-          "localSha256": "37a6c00b9f6609254fdaae9885798ba8c6f966db6540fda8327af9b778e7270f"
+          "localSha256": "5bc65f88238e7ebf755557b772a20a628ef6496a93a4483e9b202eb0b38f609d"
         },
         {
           "upstreamPath": "packages/coding-agent/docs/custom-provider.md",
           "upstreamSha256": "1b5e253d7500ff6ab6b890d39a297443db02e5edf8583e7bc99e2ce4a42298fb",
           "disposition": "retained_modified",
           "localPath": "docs/custom-provider.md",
-          "localSha256": "6b04f224a9119b2a858cb4dad20fe3aae2ec72ed37b15bf4c49fa34a86fd77b1"
+          "localSha256": "b2708c8fe05b20cc563c8ed5b68afd9cace4a74e2e01b8dc21bf2a38a49ecb74"
         },
         {
           "upstreamPath": "packages/coding-agent/docs/development.md",
           "upstreamSha256": "c8f216425e1fb084fb4323c2d9c68b60e0f1111e37575922a139c64158cc0e5d",
           "disposition": "retained_modified",
           "localPath": "docs/development.md",
-          "localSha256": "417f7d92b6809af49ae2e0270d85e63facb610889204150f6600eaff9c4ad717"
+          "localSha256": "9ca1c29e58113b1f0dd3a2887cb378f87ba2b18a8b130117f1bf962c997b41b8"
         },
         {
           "upstreamPath": "packages/coding-agent/docs/docs.json",
@@ -2910,7 +2910,7 @@
           "upstreamSha256": "be52e4176e4f2acdf96fc9edfcb644ba55a3731b89cbcbf366b4a16425e0555c",
           "disposition": "retained_modified",
           "localPath": "docs/extensions.md",
-          "localSha256": "a446e4def59161505ef5ae7be9b0514e021327e0e996b9c6119970d646744f3d"
+          "localSha256": "1f073ded94eadd7fa772c9b119d9b478dd56d5f777b1fe029589df075c2d8d43"
         },
         {
           "upstreamPath": "packages/coding-agent/docs/images/doom-extension.png",
@@ -2937,7 +2937,7 @@
           "upstreamSha256": "107d95d5dfba1da71ebd3c0b390199463261f78fe9f438c506a205f33b69f7fe",
           "disposition": "retained_modified",
           "localPath": "docs/index.md",
-          "localSha256": "907f3c33a482261a07499db4e13bace20bb2f18426bdd18927604bd031cee9e1"
+          "localSha256": "4f8b0f426de2847c2a8af779980f81ee82b3f75c1e8aafe947a7848a0ba610fd"
         },
         {
           "upstreamPath": "packages/coding-agent/docs/json.md",
@@ -2972,7 +2972,7 @@
           "upstreamSha256": "f0780d116586c15800685d8ef96c59e89d22db4a80c3c349763989e3f48151f9",
           "disposition": "retained_modified",
           "localPath": "docs/packages.md",
-          "localSha256": "e801b195b06050da86c9d2bdaef685dc1af88c150d1a5ea1543e32e44b6f0462"
+          "localSha256": "03a4387cbdc30956da531c7a9dba73bbf31720707ce4dbbf79563791eb2c1126"
         },
         {
           "upstreamPath": "packages/coding-agent/docs/prompt-templates.md",
@@ -2993,21 +2993,21 @@
           "upstreamSha256": "2f1babcbcf36f18e8534d7feb0306a1eaf59330eca7d6ff405e87b3c8f82d942",
           "disposition": "retained_modified",
           "localPath": "docs/quickstart.md",
-          "localSha256": "0387ba6f75fa0ba21d25c0535bf167233659da7b354edeb7a2394659d2866e82"
+          "localSha256": "327dfde378a2d48ee90a0486e79d0849aee79de8e1d82485e676f8965ffd6fb4"
         },
         {
           "upstreamPath": "packages/coding-agent/docs/rpc.md",
           "upstreamSha256": "89b0d9c93838870e8401e75ab634c28cdeab2716f15010bf66bd776c27af24ec",
           "disposition": "retained_modified",
           "localPath": "docs/rpc.md",
-          "localSha256": "a141f270fa44190ae794575234e50529ebebccc629cceb74ca6bfdf642d4cc0d"
+          "localSha256": "3dc32a3f78807174644d15790c777886c716d43dc6310c45087396601940a7e4"
         },
         {
           "upstreamPath": "packages/coding-agent/docs/sdk.md",
           "upstreamSha256": "c34060ea771ebd782067539cd40d7020a5781761b6179759b1a537a46413af21",
           "disposition": "retained_modified",
           "localPath": "docs/sdk.md",
-          "localSha256": "1db79a37acdb836ed669291313528fcdbd4a7365ec759d507f53e342ec5c5788"
+          "localSha256": "a022dfdb218b3e5a0eafd158afc6892a26c35e7bb6dd98abe9a7ba666c7312f5"
         },
         {
           "upstreamPath": "packages/coding-agent/docs/security.md",
@@ -3021,7 +3021,7 @@
           "upstreamSha256": "c0f25475ab08fb96e244e6bf433aeaa41b69bfb5a52de5c7b01b81c900a84a54",
           "disposition": "retained_modified",
           "localPath": "docs/session-format.md",
-          "localSha256": "f53f224aa05c27ec9bf960ba9e2aa68ef9324163b96dd43f86a7a67314107c50"
+          "localSha256": "08d259053d807283859f31c3b1f20be0fd01672673259adb85365f9f67da19a5"
         },
         {
           "upstreamPath": "packages/coding-agent/docs/sessions.md",
@@ -3035,7 +3035,7 @@
           "upstreamSha256": "6daafb1e7bcb9537cb3c3fe14ff26c6375b60fb3dd472c4d22f1e38bf079e093",
           "disposition": "retained_modified",
           "localPath": "docs/settings.md",
-          "localSha256": "999ccb314dd5c2c089fec4e4482e66d14de5fb145a37f84fcf9c60a5a067f6d7"
+          "localSha256": "254c96db817ac8dfd3a6e7de7693e6f6ab5778a226c0f2572e38d98bc984dc11"
         },
         {
           "upstreamPath": "packages/coding-agent/docs/shell-aliases.md",
@@ -3063,7 +3063,7 @@
           "upstreamSha256": "471c4aff3e2004e7de5387737f728ede4c4c6ac1ccf51575ff4ef2fdbd52c3ce",
           "disposition": "retained_modified",
           "localPath": "docs/termux.md",
-          "localSha256": "36a7b8fd8905f63a243ec9cf3f85d843e2775cc0d7d4abf4dce53422fc2c0361"
+          "localSha256": "5efe490b2304cb6642ecfc6a4019f74b600c7b55d5c87c5ef7808e5d5ed70b00"
         },
         {
           "upstreamPath": "packages/coding-agent/docs/themes.md",
@@ -3084,7 +3084,7 @@
           "upstreamSha256": "0d73727b3c1870d92bee8a90a8c2d5c957e3a4316dcaf4adc170f2cbcd82013e",
           "disposition": "retained_modified",
           "localPath": "docs/tui.md",
-          "localSha256": "22b5ff74202881e267604a5f88f32c04df0535a5a75cf0fda800789444473d77"
+          "localSha256": "3b9d2fec57b5c00e56bb34b5ea6a45c921f808426f728f8e3828538a986b2a17"
         },
         {
           "upstreamPath": "packages/coding-agent/docs/usage.md",
@@ -3117,84 +3117,84 @@
           "upstreamSha256": "81e2e6e0a51e4b904979dcbc62fbe1a55613cdf6e10346af71c86be68bcde54a",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/README.md",
-          "localSha256": "bd62f6a83627bbf62f7f3bf41f173a5b7248529fecc3328b15d84728a16fd9c7"
+          "localSha256": "fff87c965f907d3ecbac68eb7d8b6450fb9020b3059a7bf79c9ee4a256cb4648"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/auto-commit-on-exit.ts",
           "upstreamSha256": "b89b5cb4c6f1f07b0b4291ab85a3c5f025d7d31ebb285821716502452b46af62",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/auto-commit-on-exit.ts",
-          "localSha256": "3e2582635f5e5208995e7a166ef17a9d9d141b561058fca8c998ffc4df0092c0"
+          "localSha256": "5b48a937eafe250c81e36cc7536947b4abaa76c713fadaa375ae99bc4b5c601f"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/bash-spawn-hook.ts",
           "upstreamSha256": "c79c87653e20ac6bd9f4813aa4bb01a483b3637700fa2edda220703958532662",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/bash-spawn-hook.ts",
-          "localSha256": "0f1039b9f468f8683526e7b4a251a76949913141ffa2bf71dbc9e1967612a845"
+          "localSha256": "28553c4c77ea6564f93c2b4d861a75ce6450a3716b3c5af233b8ec69f9075f6e"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/bookmark.ts",
           "upstreamSha256": "a71d9449d415ad75c9f3d0d13afde129b9bea2d695b889566db17ecfca256d79",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/bookmark.ts",
-          "localSha256": "7ef29efec7cb26ef5afe3c1fe38dafae82ece2fa5bc4e1d8a9d904dbf50ee7ea"
+          "localSha256": "931183250b9f1443b333d000ac59dec505e6209e108effdcaeba511b4da0e6ea"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/border-status-editor.ts",
           "upstreamSha256": "52f62fc2efd94a2f89464ec95b2e46445b61f5df6632b2767fceb9148ab3264a",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/border-status-editor.ts",
-          "localSha256": "1808ecedce12260e3f0d315cd9ab5f245be915eb13eace19eb6541e087928d80"
+          "localSha256": "af01139d48210c2d594f75e05383ae1d7f6667a7d913dd78e76ccc6253ca3630"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/built-in-tool-renderer.ts",
           "upstreamSha256": "cfbe8f9b0904f9d4de295ea136ce45fc71f207ca98583807efd8ccb0d1d6b940",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/built-in-tool-renderer.ts",
-          "localSha256": "4c00d51d097d9912489c6f3256c7f18630333acdb0469f7a577e56b1670d502f"
+          "localSha256": "786528996fbcd25147fce7f03ae12533edd5669f24866a2727f5300c57cfb8d1"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/claude-rules.ts",
           "upstreamSha256": "8a935f14f62c1c1a3e937f5c912c2215e25aa5fa591716e23c86224ce1dc34cd",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/claude-rules.ts",
-          "localSha256": "e8ec1d39fd3fdd6353782a670e5d5844d0fa8a32f7ae3ed78334146c9ed0611e"
+          "localSha256": "461b5416629e0e45f43f0c04511c59fe99b10ddc464ef5064bb0d26d64056956"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/commands.ts",
           "upstreamSha256": "36716b53da169936c7e1360a4fde1e2fc0c3356a6505f177235f09c5538c6e4f",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/commands.ts",
-          "localSha256": "532374a78f9f024b1714bf0f66cc8c1af3ffe99512f6c4776783f2a2bea6bc11"
+          "localSha256": "21faf735a8acb93a38336aca20e78d2d497a12fd8c1b46cae3db57821d0f20c2"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/confirm-destructive.ts",
           "upstreamSha256": "55502f82109df07e922ef3ec41af1b1a5ed33d4d6d56076654ab2bc88e2e0888",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/confirm-destructive.ts",
-          "localSha256": "83a2d104908e8c6874cc1d9f04c957c451734b4b09e8db820a5a2cb442c72b9d"
+          "localSha256": "fc7b7ae2c0562b4d698902df239ff65170e6dfa3c7ebdeceea7b8bca4f1bcc16"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/custom-compaction.ts",
           "upstreamSha256": "e2d5b652ae45913fa5d78bf516d93fdfeb3c055d3a7f4f006523d6781862011f",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/custom-compaction.ts",
-          "localSha256": "6adee706dd08eb60120e8af1b90287575337343ac1387e2c555593ae27c81267"
+          "localSha256": "624ae1cc04e88efbae558b01e6d4a9c29695ad438fcd48a87a1243f3f40f237d"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/custom-footer.ts",
           "upstreamSha256": "1e5f17bec95a48d407fbcc092faf7e1f6021c30cee4a66ec09bc120412292cb2",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/custom-footer.ts",
-          "localSha256": "3c97488fd826455c0c29b3be8aa63aee65a50ae62616c6a4fa20d5ee60776fb3"
+          "localSha256": "c53bdf3549f7ab72f5fbb0a29752bc82cd0d19aee7eba3be000e094c8d9cfd24"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/custom-header.ts",
           "upstreamSha256": "5de09cf861d3965201991d6e837d6b68e8a2e80cb89279ee9177cc05d31f723d",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/custom-header.ts",
-          "localSha256": "9d5f4da8d9856daa1a72aa782456774910627fd034489ab774e3a443c1f95a0e"
+          "localSha256": "ead59bea05d02565b9e85cd6f72e52cd07fc7e0a255180f84ed1471cfec11648"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/custom-provider-anthropic/.gitignore",
@@ -3208,7 +3208,7 @@
           "upstreamSha256": "a178bee1a69569d75ceae84894539e87b04923fd791da8b351b902f2a788f80d",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/custom-provider-anthropic/index.ts",
-          "localSha256": "4aad708610bf3a8e12cfe1724121f5fe994ed9d4b9eadb630b571c6731666e74"
+          "localSha256": "d7339e79d18a84c646ab46a1275b43d3f051bc527b68c13283ae7cd3860b05e1"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/custom-provider-anthropic/package-lock.json",
@@ -3236,7 +3236,7 @@
           "upstreamSha256": "df32d3ba4b16b6b3f5fb615cc747037821009343eef53fca299adb0cc898bef9",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/custom-provider-gitlab-duo/index.ts",
-          "localSha256": "17d807eb6cb78275bb772ca1081f6b8eaeca09ef01d3c7aa92513d88549ebdbb"
+          "localSha256": "e77cb9e1828548ece77b7e47a43ce22b1174d0b5c97d1cf0c30f2cf946513e09"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/custom-provider-gitlab-duo/package.json",
@@ -3250,14 +3250,14 @@
           "upstreamSha256": "bd5509992092f298d2e08de6028f3570648324cc315da62907f909365a9e77e0",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/custom-provider-gitlab-duo/test.ts",
-          "localSha256": "056a8a5bbdddab4f9cc6cda8ff4e56d5954ab70f926bf50b1fe6eab25665705b"
+          "localSha256": "ef76f8c1d06d349be31d7c1a0020152f36da36bf900bc4ce54d3531befcaea3f"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/dirty-repo-guard.ts",
           "upstreamSha256": "0037a69abdf4cf98181db799bef5bdee8981861315eb82ddab78126c2b0f13c4",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/dirty-repo-guard.ts",
-          "localSha256": "1915d5ba2aeec6555b9f9b2938cc65583dc6cbea2f829f2ae5068c42fb9367a4"
+          "localSha256": "4b5bc3290c81ff23d65199054fae09cf57d2cd682cbe27ebda5fe2c0ed9a7afb"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/doom-overlay/.gitignore",
@@ -3323,7 +3323,7 @@
           "upstreamSha256": "f89818dd75c7d8970458b1dbb9c5e85fea9b86534fd740c898c1f6f9c9f9ceba",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/doom-overlay/index.ts",
-          "localSha256": "243a8ead91f824364c0edc41e88efdee70eb5db34dcf866ba7f4b4655a48ff8c"
+          "localSha256": "0756937f045daeb36828791b0df7e5c166b5d763345261981a7a0650b40cf456"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/doom-overlay/wad-finder.ts",
@@ -3358,56 +3358,56 @@
           "upstreamSha256": "dfbc49418fe46ebc9696fa335709df2ed0d4c4703da8c1ad0eb317d11fce8433",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/dynamic-resources/index.ts",
-          "localSha256": "00ebebabca97ebc67dc31e413f8c3fbbbea37c7b3590591cb97b24bacee4c34d"
+          "localSha256": "79fa0fd5b51d5d6594281ae937c94849e5d3d0842f0dac2ad8614d60cf053e53"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/dynamic-tools.ts",
           "upstreamSha256": "4394098c11f98ffc26e2487acda2e09b9467ef9ff5867def7273cb0c82a2b6c0",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/dynamic-tools.ts",
-          "localSha256": "ea9bf2892c0b91543877ecff8a2ebf68d7471e8b3055add1bc1b074032512535"
+          "localSha256": "7faabc4bcef203869900639e28bf1002e4f3284f28c8da868f2ee70ae3e01073"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/entry-renderer.ts",
           "upstreamSha256": "e4c01fcf382972d570ebf37d044e32065eae062fe70987b1b885d75d46aa0b11",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/entry-renderer.ts",
-          "localSha256": "c7366c591496992f20ab4f2ac0fe55d839973cdd7084a40a559222b77fe295dc"
+          "localSha256": "c840fee16fa086a650a7f1807672af7134ae1513455b0f93ba8e474598df2515"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/event-bus.ts",
           "upstreamSha256": "1185942b7afd83692d9e8da029e8594d702157398c693ec8b3ddb02b0780828a",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/event-bus.ts",
-          "localSha256": "9a833b7f0c9dd3e0f7ec288045e2363ee9dfdcb49d326bbd35a5bea0c2c23c08"
+          "localSha256": "981119183f58256a2fd4a4c29ce5e3648fc0fb18ebd293e897f3673bb0d45c28"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/file-trigger.ts",
           "upstreamSha256": "6f5fc3dc8fa387d8ca6973786c521feb94da58838b0e171a881fb6b3a5243ac0",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/file-trigger.ts",
-          "localSha256": "3f276217f6d6020597f3af122fe301ad00656485c8cdf94ff986bd4e885f3413"
+          "localSha256": "80e1874aac3eaf43171530ed62241e5b6ef95a32760c3cb602c407e580545e00"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/git-checkpoint.ts",
           "upstreamSha256": "cd8741c95ef41d9d267687820ada97f402f962cca8b92200f4a202e4bf68e188",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/git-checkpoint.ts",
-          "localSha256": "f048f9bea6f6d69457664b9ee281e335448b0f44b4606a407e22c26a0a4a7d61"
+          "localSha256": "73f5b68ba1ebc00e2468b95ee976cc94d0e505a930eb2d68932b1030299e3d17"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/git-merge-and-resolve.ts",
           "upstreamSha256": "a3c077c87544122abe83b275f3d527f60c80c87f460ea2499d66bde9b4880133",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/git-merge-and-resolve.ts",
-          "localSha256": "a6bbd59d53b1d514c798154cafed0bb1f1cce3b98669219d7dacc224d20cf735"
+          "localSha256": "b67dfb56385d32b94e5dbcdb95f04caa222c8723cc843850ff31376d191dda2d"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/github-issue-autocomplete.ts",
           "upstreamSha256": "4646ef360e57aa98c787ba21ca2f2e8acb3db30c4db0503e64cdbea4a4c2ac65",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/github-issue-autocomplete.ts",
-          "localSha256": "acd3d0d8fa6493a370507380271e4984a0f913bf809148c434392c8a6bb2ff19"
+          "localSha256": "b3eb37724737b530001b7c951cfe04ff597d237ad28a441e6e78447d9a1d218f"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/gondolin/.gitignore",
@@ -3421,7 +3421,7 @@
           "upstreamSha256": "9a9897639de8127a2abe6bb0d00f0005cd9e9cf9d51fd15893a827e67326bf62",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/gondolin/index.ts",
-          "localSha256": "c76469a1fbfed24a0dde48b649fd44880f58b774ba92bb6978b0b947dc84e22c"
+          "localSha256": "a2874369f15c3a96b35ccfda97c92f1b2aca5464364859d89877dc590e7c5b86"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/gondolin/package-lock.json",
@@ -3442,126 +3442,126 @@
           "upstreamSha256": "65f567dbba74de598549e925ac2cfbac8066e23218347d3cb27d88e149cd5908",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/handoff.ts",
-          "localSha256": "3141f03c907cf0c3f2f09ee5f6a8fbcdc0f98415954614d9358947da8489e0d7"
+          "localSha256": "8e566b57ea94d9fdf32f2c13bf1868e43870ce255ffeea601e5918ed1a92abf1"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/hello.ts",
           "upstreamSha256": "0aa4e9800c2526914d4c1edb00b2cfa9bd9dd6da5218289994cccd5f5bfa4934",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/hello.ts",
-          "localSha256": "0be32dd333baea7e621d7e271ef23b1ec133520377494e9128c6f9620c2cb148"
+          "localSha256": "a0084f5c4fe37caaddf7339b243b756800cf2ae1a50191c2909a3f804104a107"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/hidden-thinking-label.ts",
           "upstreamSha256": "179dc3704b5c563b49a7f4577222bf9bbaa5becf98b85c75e56ab26c001c5b22",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/hidden-thinking-label.ts",
-          "localSha256": "8c28920e01e7b475a03bc7b6013352033731f4dea41fa435e464f3544120163b"
+          "localSha256": "a2061bd948adbd89275c0d201989047c439cdfa3b4d6432bd2b23fe1e493ec5f"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/inline-bash.ts",
           "upstreamSha256": "69b9dfc34e7b1ada9afe10cda3384b0b1a6f3c3a47da5fb7d16f914399b023d4",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/inline-bash.ts",
-          "localSha256": "412af485372d7d006000777e52b3ba73954c4502b41f1349f5d0981e748404a8"
+          "localSha256": "221cfb1e21489e226d6e383ed8f422cefb61e3a9302af26bec18bccaf6d2583a"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/input-transform-streaming.ts",
           "upstreamSha256": "5c251ebda6163c8279e3c6d5f0aee56421ed150255dbb954f08ca7d2280b3ad2",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/input-transform-streaming.ts",
-          "localSha256": "ae75dad4209c8686929deef38ed52045696f8a3aa063a9bf8268d937ae1abbd4"
+          "localSha256": "6321391db1bcb5e77a46f35e315a596f35751d5ce26f1e94738e45ed261766fc"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/input-transform.ts",
           "upstreamSha256": "cf0f65d610631ca75d18aae1c8f1408139702f674cb2835f8c009b943776474b",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/input-transform.ts",
-          "localSha256": "83bc77d98f5e364f62020a0e9c0d4750ef88cc7bed3bf1640caa3fafe6011b7b"
+          "localSha256": "b24f96f879df0695f996af3205afd1dedec5ceb6a5e5e0fb1f16f68f2af5e0a2"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/interactive-shell.ts",
           "upstreamSha256": "36a7efb5b132e666c643129ce09c3f83f56aed9924563e6b7269e0e126611ecc",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/interactive-shell.ts",
-          "localSha256": "3da86095b4f5d5e5326aac4fdd92e11001021de8cdeb9c59a782baf81b1fa540"
+          "localSha256": "cdda11a8b70597e647e6b2566aaa352962a8950fd954827373c51c8bf41970b7"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/kimi-deferred-tools.ts",
           "upstreamSha256": "3ed3203385bcd621b4e3071ce815cf6a841aa5857bd7a5c83f7aff16be9ea7cf",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/kimi-deferred-tools.ts",
-          "localSha256": "9555488962c4df4d9e59ba8a05244a246cf51260191410a07fc2975fdc70bdfa"
+          "localSha256": "8a371a2a4ad1f667ef6109552c7e3edf388063a595ea3de42a58c6c8fba7e8f3"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/mac-system-theme.ts",
           "upstreamSha256": "d7349bae999a798c71b283165e06d0142d41b0264bfdad11ddcb1ec8b62f8710",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/mac-system-theme.ts",
-          "localSha256": "a15a73ce97dbb0c2bf810cdd207e139533e3376a45414abf37aec931e2a13045"
+          "localSha256": "05ebf8ce76e53ec164f5585871fd145fd3807a07bc704adff6a0debc028cbd9e"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/message-renderer.ts",
           "upstreamSha256": "bedc198df5215c0a758e0743224599003630741a4ff72d4327837ce309e5ec8c",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/message-renderer.ts",
-          "localSha256": "edf321d63f793d28650880a507e7d8d7538834e816bc8569adb0e436a4bfae4f"
+          "localSha256": "51f9ef22f401be2dbaeaf5dd0d22f9d0152dfbe300f0c668c1fc737b7db23aa9"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/minimal-mode.ts",
           "upstreamSha256": "8f57e0b28ff8d8b9ac9a755dd8a60c0fbdacba9040f4fd04e37b5f285d4c5d11",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/minimal-mode.ts",
-          "localSha256": "6f4e1c41b5e7a87264ce51366be5c6f175ca13617ed4392afd2121b995d9dbbe"
+          "localSha256": "073c44b93096a08cf84ec1e38b74ed0078f0f9fd810deb97aa635fc1521b2bfa"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/modal-editor.ts",
           "upstreamSha256": "4742283930949fad1920359540aa9d42c833d2d24eaa49564bfc08f90e328b0d",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/modal-editor.ts",
-          "localSha256": "b5fd305d909631ea4d19340e8d3961dc790a7cc232ccee4eebfce774df12c379"
+          "localSha256": "ae76c3301cf501e9142c33e16d80c2b7fc776f6f22f0edeb3d2019310908e523"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/model-status.ts",
           "upstreamSha256": "b6c073c0bdf26ac17e2fed01d02b6447fd4e2763b7b6ca2f2b493574ced25247",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/model-status.ts",
-          "localSha256": "c7725c022015d78d300440f42a4169aac6a915f083e55378f7dc6909f59fc78d"
+          "localSha256": "cdebf0d442c0b3e035156b181714c088d2461d7601eabc2ab5ce5d6f905e1c47"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/notify.ts",
           "upstreamSha256": "1a0f642402bec7777b2dedefd592627006b2877c0a081efeca472a6165b1e271",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/notify.ts",
-          "localSha256": "d0661cffc62fce255a0f2dc2715c75b013f0b3af39f3414fb8bb504b681b0136"
+          "localSha256": "3295f33f3b2ac5acf9ad143c87f04b8440b5bf06e14d17a50c83f94e10d1e4b4"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/overlay-qa-tests.ts",
           "upstreamSha256": "4b1778e9e247c9eb24fe48e13fff0272f6f78b8102b4ed085d03598c3b98773f",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/overlay-qa-tests.ts",
-          "localSha256": "d77b696737fe5a064045f971b6b87ae32c05a22e505cb74804cefa49eb462428"
+          "localSha256": "d75176ba1083530deb54599b9510f50559dd8bdeaaf697f53faea303453de8da"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/overlay-test.ts",
           "upstreamSha256": "c930001ec09fee9a94f1229697e1cce223176e7e44c0b8b40dac544f46e446d0",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/overlay-test.ts",
-          "localSha256": "25abfb8e5a2497991d09a9bad894ef5fcc76e0ac347b0cf8a64ae03aef8d5293"
+          "localSha256": "38908dce81c74d4933513d3be7bea23df51d81c2d439b51d3d0d436a66af7150"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/permission-gate.ts",
           "upstreamSha256": "e32086ba9dd9b4ba0fd308b65241d9affa0b5ecd3f90ef7ea1b9f2b30cab8cc1",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/permission-gate.ts",
-          "localSha256": "3fef4fdb190552d06871de126cc9e0a2e040f166af3722b7991c8c220f8e6d2d"
+          "localSha256": "002b0bfd63bf28bdf6eb8533ea4d01b41b5197eb9883ff1ff29f615522ad4156"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/pirate.ts",
           "upstreamSha256": "dd6ce684bbe7630e4a749fe133ef8b8b875adbc7e31284b17fe0b8157d51e013",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/pirate.ts",
-          "localSha256": "f134a943ec2bb49f62e759e0e28bd9882bc01d273b0589a43c1a241c8e531312"
+          "localSha256": "a2733457100806f8c3b3ef9fff101830f75a8c36b700a6f36550aaae99eee83c"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/plan-mode/README.md",
@@ -3575,7 +3575,7 @@
           "upstreamSha256": "90fae53e2fada97165f7488520bd54f3cbfe5d2c7e4cfd3bd2aa07ee796e61e8",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/plan-mode/index.ts",
-          "localSha256": "00d5eb797d37a30578035e5e0950e5465a48ba101cf4921836b98cb6178342ae"
+          "localSha256": "f6c289edfb2d0dd6c49961ca60e000608b285808f444ed55d63e47129c44e057"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/plan-mode/utils.ts",
@@ -3589,77 +3589,77 @@
           "upstreamSha256": "7942b7f933f97bcc29024a87f8526969413ba6f87b0bec537648a2926a0a4e29",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/preset.ts",
-          "localSha256": "b3ce4c053a5778dc951a4f3addd6059af46b5e87706720408d0a65e2edf1adda"
+          "localSha256": "cbfb7acbfc91516a29978d69614555242db2a63f67adb2c60831a9f873fd2f75"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/project-trust.ts",
           "upstreamSha256": "78781c1f2a1613cf31c02a29ff6a6abd86b60bdf34343465e46cd85c01491578",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/project-trust.ts",
-          "localSha256": "ea8d197e841f60d296009103cc8ddc818115be8e56a71d6bbb69f5966cfa586d"
+          "localSha256": "be6f388abd962cfa95444375963218b58937119c4c3d55f1feb58be5900f3271"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/prompt-customizer.ts",
           "upstreamSha256": "68ff1b2b7aca10a5ad4473a26e9453083fe2f9a7547eb9422302c6f1ef66719f",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/prompt-customizer.ts",
-          "localSha256": "7bd48c629b9d9b082ec17b9cc2588273c46a8194e37263cbf5ebabd8e710dc8f"
+          "localSha256": "1b87d25849f18c65d2059e68bf306d9872bb5ec19a8e7b9560ec4706ba21f5ea"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/protected-paths.ts",
           "upstreamSha256": "9ca66b1f3b1b9a61cc5ddc660f92cca2ea66c4264a1bdb6b00e0da5844399fe2",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/protected-paths.ts",
-          "localSha256": "3db9a4aca11c8e623a5304b601108b0ee7050cd7bfdbeaaf8c6475d7f80e8170"
+          "localSha256": "0e1a05174e59306295aa91fe8b4523813420dca228e81ece9b3e144211b2f271"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/provider-payload.ts",
           "upstreamSha256": "e0016077798098f528b1129954c30a28809a1513924d9c2e0efda9328d503a49",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/provider-payload.ts",
-          "localSha256": "7d54dc5dd10dd38e3d84a11da80863ccc9618a8eeb46922d4c481fcbb1940e14"
+          "localSha256": "6117c7293d1a2877942af802aa8e2c24ef6951ad505fd8a24d610ff76c4cda6f"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/qna.ts",
           "upstreamSha256": "7a0a1a5225b3e3a28ad6782445c4c99455132226b902322ae0246a0a41e3202c",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/qna.ts",
-          "localSha256": "9504cfbc3707d85fe9f611ed7b1d87fd6e3eb711722bd1c14dd77af9e65ec611"
+          "localSha256": "51e44998c93b9c1aeb7cdd2852531c688cd78b6b9b9c852cc051a8cfb114217d"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/question.ts",
           "upstreamSha256": "a1625d2c72a65d859154a7e66bef222d48ca9e3654a8bb910829ad350378a4c4",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/question.ts",
-          "localSha256": "b580badf3d4ee6a3a286fe253e612eb624ffb377bfeaba6ec66134c542266947"
+          "localSha256": "0e89a18ec1d257e523b7ad8b2919dabe5011abd37751c077f0ec2064e4907b7a"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/questionnaire.ts",
           "upstreamSha256": "3f1f719d81152ff013f5d36a97cc3976388d43f2d89bff0f19827d3443d903e6",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/questionnaire.ts",
-          "localSha256": "86b52785d513ec066d2243e9f86978d600a6a6c0a038f3170b13a0a7a8f813ff"
+          "localSha256": "08f562ce7b8558c17e266c1fbb8dc64e26a788a15fbb88f20759bddc52acf85f"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/rainbow-editor.ts",
           "upstreamSha256": "f95f17ba8a0376180bd23510c20151e83aadc74142e989f14227bf5c4196883f",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/rainbow-editor.ts",
-          "localSha256": "24d7b021b3e4c0fd89e5ff6871731e348bb63d502e450534f542621688ea6405"
+          "localSha256": "e5096f63914e95a9968d30ad95e3bc4f4d2fac757eb7f8f2a379efbd84fa1263"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/reload-runtime.ts",
           "upstreamSha256": "911f26b872860a551572fa1d94d251ddd476d4ea9483b6052e9658d2784b38fc",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/reload-runtime.ts",
-          "localSha256": "6b91723d181ae8543010c2134fbf34488d30c837b512dbff1cb3c01a534f8a70"
+          "localSha256": "0960e6aae04ea2bd8dfc0c5ebc8c261b8d0bfb506b273f79ac78e1505709260b"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/rpc-demo.ts",
           "upstreamSha256": "3d54a396eee12eb04ea12d0ea03716a6edd3e8743502b6a529e3b8d429ae640d",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/rpc-demo.ts",
-          "localSha256": "2bbc0ccba6e86980267f04bdf5a4946107adbae49437f0feadbfade6cb183ab4"
+          "localSha256": "318928239b970639d88c66bf81312dedc6723ee824ab21fb68697b7f3b6dd9a2"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/sandbox/.gitignore",
@@ -3673,7 +3673,7 @@
           "upstreamSha256": "b5e527aac27254002f27b8bb9de7bc62e242e39eeb7c963683096039e0aa173e",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/sandbox/index.ts",
-          "localSha256": "559527130273c67951981105a86f248f673d907ac9c69fb7542d8c5b6f2d7a11"
+          "localSha256": "dc1fb964e808ed7195dc8ac9eb5c19946571a0598941536feb7971c4344cbf81"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/sandbox/package-lock.json",
@@ -3694,56 +3694,56 @@
           "upstreamSha256": "9261e433c782f354530105e1c9723a19798868f72fd1f5d68af3a4624ad7e446",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/send-user-message.ts",
-          "localSha256": "0c29b78eb8eb438611ca18e22d09b8149adedc5d239579786ce2a74104be56de"
+          "localSha256": "34a65422228be6b538fd91dc1e3bb46c6248a3e5a18d14aa8a7dd8b31e471395"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/session-name.ts",
           "upstreamSha256": "a0b9fd94e2cc827931150cc409238b473da635ab1a1cddce633cae5937a3ae24",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/session-name.ts",
-          "localSha256": "baeb66ce1b2f2e71a8382f0f00299fd6e8cc24c5e2956af70cf5427733630725"
+          "localSha256": "75089b036a3050b4118bc7fe77eb0affe550d5274642fcf81c0760526a93d594"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/shutdown-command.ts",
           "upstreamSha256": "68dc7f9561aa9b1c0f39cae19c0f41d56171a99875972e5998de3caa75f96e09",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/shutdown-command.ts",
-          "localSha256": "09a1b5af450f060a2b174f8f792cdefe0779f1fb838153fe5bc5de4cb547d13a"
+          "localSha256": "47a8c8d729eaa33f77176ac88f979c9097bff7e7f14faf429363649899df2c58"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/snake.ts",
           "upstreamSha256": "3ef506ab52927e866fad096f83b7cbfd0eb50e1504dcabf1b1eb28a06745c937",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/snake.ts",
-          "localSha256": "a14837fd0060a74be1319aa1e70db1f3aa539cea022022b78a5049bf6837eebc"
+          "localSha256": "544c7494d29e7f87941aab9e28dc58eaaac55b4430e643852f646ccfc6606a36"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/space-invaders.ts",
           "upstreamSha256": "43281ae25bea645d44db01234f24df80e2f866771d02de0b416ab32fb3883a1f",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/space-invaders.ts",
-          "localSha256": "6bd40204489992715abc8b5ccb73a70faa6261d449af3c3ba2233df3981eca80"
+          "localSha256": "25e0ec5a08bc5ccd900b0c99a7e47023c67e62fde0f84f0fa592a4529261dcf0"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/ssh.ts",
           "upstreamSha256": "c03bdef919457013e3798d10250f34255742fd3dc79885ac3d321b34f6a1149d",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/ssh.ts",
-          "localSha256": "6edc4644bf8f26ab0869c9b6ce20ac25335a9144c557280df985c04e2b60312a"
+          "localSha256": "3f58d906edd983578c857ccc14625049035a429f2f3b9b03574fc403c14dfac9"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/status-line.ts",
           "upstreamSha256": "26e27b1158e980551f63f46e55dad055ac613779c2b8c39df4cddc11be26103d",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/status-line.ts",
-          "localSha256": "e1d13df726f80bbb370f44013cd44700dc7c5e62bd0dc7a0a752f80f46c6a03c"
+          "localSha256": "cdc1e9ad6d04523a058f244230a2e783edfb0c8292c8d99bc2a8932aad95b1e0"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/structured-output.ts",
           "upstreamSha256": "72a3a665ce3de1419c837db6eb8a0e7a890310c6e02e4d59c454e5c9514c15ec",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/structured-output.ts",
-          "localSha256": "15825a399f5b8c8f39c19c6cb6af5318a2b5f0befe23e9e0b1a01ef3177b5723"
+          "localSha256": "92bead299d192972651ff10e0d215efee0c4aed0365a094b9103bc844f42bc7e"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/subagent/README.md",
@@ -3757,7 +3757,7 @@
           "upstreamSha256": "e1ab7addbd4c0dcd11a2acd11ad21e1aef8b91d61c0a2216f8b6c29a0bfde904",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/subagent/agents.ts",
-          "localSha256": "96e6771a90357267f0179ca8504a0dce2c5b2d7b811193938decdb7b5fdb48d2"
+          "localSha256": "3280a46a9b73955b277c7d81aab2ed745c0c246870a39bf5b06341a385103bc6"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/subagent/agents/planner.md",
@@ -3792,7 +3792,7 @@
           "upstreamSha256": "d7f717bcdc6d335363ea3719dcb3fcfc0b5ee791eae81e3f803af2ff0d0d22a4",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/subagent/index.ts",
-          "localSha256": "2f35b1a2725450b9ba5346a3b5270b34774be7b40f3d43b4b6287ee5f4b980ce"
+          "localSha256": "1697ebe91c3ff909b50768a1035328e1ccc95eeb5fedfaeadb0b9d71e4a66f1c"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/subagent/prompts/implement-and-review.md",
@@ -3820,77 +3820,77 @@
           "upstreamSha256": "d92a56f3d109e5dc55caed40fd676f1b3a81814db41c265b156fb29e0113d421",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/summarize.ts",
-          "localSha256": "ca1b4611931c7b78e4b455bb81f538d25f008e4fcdb367d9aab2e0e7ecf8fde0"
+          "localSha256": "68bf64334c2362c5b143e0d0a8dd3444bfbe88f62d8f221471584bbec23514a4"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/system-prompt-header.ts",
           "upstreamSha256": "aa97f1add4fe347b3fc37cd3709950a105b0db5d6cdaf19325b58a9fbfd05223",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/system-prompt-header.ts",
-          "localSha256": "a820ee474a17cbdeffd085c917866f29eeb1b7e510fa989a19390143b4d766db"
+          "localSha256": "85a07ef8d736aca329ad11f7ef27a16a00d78011aab9fe6d20303e663b337c81"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/tic-tac-toe.ts",
           "upstreamSha256": "479597f4e76ef1eae3dae71ec9d5c26978c5b9221f950e3e134078c5b532314b",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/tic-tac-toe.ts",
-          "localSha256": "0e8345d369ab2ab42ee550089640581254e893907390c9adac337b600d6a9f90"
+          "localSha256": "fec88ddd2f6edcb48a0ac9dfa6542d7e97a0c0db45db350852ecd8fe1c17434b"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/timed-confirm.ts",
           "upstreamSha256": "c35304599e6f07238ef5472efe9c3f2fef2a022f801750ed792ef9061c7de10f",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/timed-confirm.ts",
-          "localSha256": "b2c3ee7ebbe4a50d9375e5d3b93ff1a7659ec530dceb7b247c5a4f7e4e6f4727"
+          "localSha256": "754b465080bbf7bd2a9ed5d49fd0d95ff88a26a960623b7742224560bf27c34e"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/titlebar-spinner.ts",
           "upstreamSha256": "a25ec8287c0b330d803d647108adefb88d262ed1496529e9cab10368f655cd66",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/titlebar-spinner.ts",
-          "localSha256": "12edea24d677a662da6a90a089f6d5d07596b705299d7c60ce262753533f684e"
+          "localSha256": "a7fc0a2254751b146bc6eb5a237b3d1b5105be6cd67c6c8140f9969405f9ae8d"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/todo.ts",
           "upstreamSha256": "e46824d00217e25242c186d41837cc84ca81b23f978500323448502a9a424ee2",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/todo.ts",
-          "localSha256": "695f62c6a8f278ae2e80e9c64f409266e32eca5e6a8ec24d4ddef6c96fefab95"
+          "localSha256": "e5b377c18ba88c47ff25d94d0ad0d625d653ac5f5a51a08e3928aff1f9b72368"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/tool-override.ts",
           "upstreamSha256": "5d3cc796311a16132db810fcd9e437c16abd46978b723b9120734e57cc545726",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/tool-override.ts",
-          "localSha256": "3aed381ddb5a0fbbf8488dcf99657921d8e634d0fda58f0c84530a45c9256cd1"
+          "localSha256": "2213cbde7541c993cf8088f52e4b774f0f67fbd07d43a8cf9a17e8663343ded9"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/tools.ts",
           "upstreamSha256": "5eaebc40cffe885fee25c95e3d8aec79cfbd595b6eac8ac5a6de6c4afec3d5d8",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/tools.ts",
-          "localSha256": "039ef2900086d048f690db012a49e9ed206b748021620265ba2e139fbdf37177"
+          "localSha256": "28dd669e4e731b007bd50c8cc89517658edf62add0ff95b890a812ff19db71e5"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/trigger-compact.ts",
           "upstreamSha256": "92c3b831f9f7bf01a3e0a2df11f4e404f5ac5843000b94e8340a5d78f3cb3add",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/trigger-compact.ts",
-          "localSha256": "8e4eda5afb5aae1d2c351eba0d7cbfd1f1aa1b9519ef107c187c845aefcd9892"
+          "localSha256": "367f2801acf836eeb0de41c4253cf817750bafb635e61305e8f89fbed27e6ca8"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/truncated-tool.ts",
           "upstreamSha256": "4ed5fbeb6da53eab8d1e04721d77961b8d1b3bf5e11d1512a17fc5a3f58f9955",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/truncated-tool.ts",
-          "localSha256": "5f302cef905af1d85bd0cca71d07462c7821da5710ab2f00dea33da57042e4b2"
+          "localSha256": "10336be37a39da5be0d538c3eee178f94e956478165198e7c9512afd80f8df54"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/widget-placement.ts",
           "upstreamSha256": "ffabd33cf58efb908de2025aac4cb41daf13dbeee24b5ad8dcd0361b43eff6d7",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/widget-placement.ts",
-          "localSha256": "12147fe417f860f64e8493b2b077f23a7e0162f0c686c2a1437673ae4b3ed0fc"
+          "localSha256": "90c5482046284ddc649f3f4799b09215ed9f90e03e81870d96be45182f0b583c"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/with-deps/.gitignore",
@@ -3904,7 +3904,7 @@
           "upstreamSha256": "8d4dbc7028c891eac7f0386d25eecea3e9ac0de7fd841b5bb08137e2ec5ab443",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/with-deps/index.ts",
-          "localSha256": "581bbba910a51fd2c27c71ea579e7502321c958aeebbdc48b9850c5c1e4280ff"
+          "localSha256": "74459001971530f2b4b091807ca971b6cb4b13fdc68ccc9544da798325ad4ed9"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/with-deps/package-lock.json",
@@ -3925,14 +3925,14 @@
           "upstreamSha256": "e88295d765b78fd6aac0e93db92b183ee9b7103dc21577e3c5a42665dfad032c",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/working-indicator.ts",
-          "localSha256": "efef291d51db5e81be2b3e0d5fe37da5176d85d47db262513f7d80e9d982b064"
+          "localSha256": "b8003ae7f799dd6710c0a914d009c2193a06706c5b0f05451ac87bdcd46569a5"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/extensions/working-message-test.ts",
           "upstreamSha256": "91ee09378f13cce142a4314bec1bfe9784e10484c33463c4fe3139c391c117a0",
           "disposition": "retained_modified",
           "localPath": "examples/extensions/working-message-test.ts",
-          "localSha256": "06bb1de032a1230b42e8f8eb8b35a45c597ea95fd1b543c24327a9b68855ad94"
+          "localSha256": "8d6500af4497ddbb12701862a5b13a6a37902c87ecf15389edd769ca9869a7c5"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/rpc-extension-ui.ts",
@@ -3946,98 +3946,98 @@
           "upstreamSha256": "ffe5215e36f750f5ca7146cc7dfa5be36461292036d55b8db652b4d26331f351",
           "disposition": "retained_modified",
           "localPath": "examples/sdk/01-minimal.ts",
-          "localSha256": "3a6976da4868791a64447baa57d64208b70f6c34a55732eef4f21e194021484e"
+          "localSha256": "6429eb5fc6760ae80cfb7f05000f917454ea43cd4d9cdce6a94d3bd30379ec4a"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/sdk/02-custom-model.ts",
           "upstreamSha256": "b1fbdc0fadb9b4d41596fbdab7547f08229ff64eaeb5fed424b898c764f45bf7",
           "disposition": "retained_modified",
           "localPath": "examples/sdk/02-custom-model.ts",
-          "localSha256": "3aa36a8eed157ca0a7ccd531e808b5cd1cdaafd84d3c7649562b1a4ed501b5c5"
+          "localSha256": "c603b767e463ac51868388d00cfd123a333f57ab195fbf7f754381415cb1f410"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/sdk/03-custom-prompt.ts",
           "upstreamSha256": "d6db1f36a8e04466d9cbcc24ffb6fe0697858aa6c0e5013d5d90f12798314ef5",
           "disposition": "retained_modified",
           "localPath": "examples/sdk/03-custom-prompt.ts",
-          "localSha256": "f62b44df1f73f571049f943b1fb9fe77bb875af05e1137dc00de59a6dbbedbd6"
+          "localSha256": "747d9836f8ea597f72b5ae146e0e403c9b06e77adff8efa9a5976ab4825ba9de"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/sdk/04-skills.ts",
           "upstreamSha256": "4cbf189bf88d14155281349d4d39cc236066d98095aae2d184d4ba7267ab5e42",
           "disposition": "retained_modified",
           "localPath": "examples/sdk/04-skills.ts",
-          "localSha256": "50a5532b8319a5a5756f4aacf8d1553905dc18224acb625fe94efac105ca9135"
+          "localSha256": "488e76ea39333d73420dfc5586d0c31d2dbfe45da32845721113e7df511fb9e4"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/sdk/05-tools.ts",
           "upstreamSha256": "5df5f9577b343d22d072d839341916536299c8191dc66c6c801a8bbddda23544",
           "disposition": "retained_modified",
           "localPath": "examples/sdk/05-tools.ts",
-          "localSha256": "7446f6e90f6849da3dddf3faf5ebbf9d0c5f88ab9aac4bd0829b69c2c3b0c966"
+          "localSha256": "a0f0508bf58d05310c94fc702aa09b451b1cd19fffbee870ea9b5198514189ff"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/sdk/06-extensions.ts",
           "upstreamSha256": "1bc4a4def55b4f740b08beb1432e9b18bc0f776542e7baf3602df1b921ed8ec3",
           "disposition": "retained_modified",
           "localPath": "examples/sdk/06-extensions.ts",
-          "localSha256": "6ee68f1c0b9a582d9e88fc1f019343cae192940648dd6934983e009eb39fee31"
+          "localSha256": "beafb825fb672836f3ca3037bffc05a7ec4306c0a8feb830571b947c8dccfe31"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/sdk/07-context-files.ts",
           "upstreamSha256": "37bd18a284e961903d646e0cd1abdeda72cd968dbe4f40892e8d345a66916b36",
           "disposition": "retained_modified",
           "localPath": "examples/sdk/07-context-files.ts",
-          "localSha256": "b146cc49ccc32ab649e0944d9766541c3463d9b305ea504c53a576c68ec9fcd3"
+          "localSha256": "b9aded1081e576474d1db1dcccebee1e18d34815bb7e16397bbace326478348f"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/sdk/08-prompt-templates.ts",
           "upstreamSha256": "a1b314988f1f5b2e61c80c19c79b68630a2f3c443008a200376286710a2744ed",
           "disposition": "retained_modified",
           "localPath": "examples/sdk/08-prompt-templates.ts",
-          "localSha256": "1f0618790896090654819d9bcde3698d7ed3bc079e87c2f3619f2a82fe17baf8"
+          "localSha256": "95c5df6ae6cd110b69ddcc2a53668fe897439918ace8af5a028ec6e7a93dce5d"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/sdk/09-api-keys-and-oauth.ts",
           "upstreamSha256": "4a26c2d23e48008d00b06f11ce030bca18da5a5b942dcb1193e38523842d148d",
           "disposition": "retained_modified",
           "localPath": "examples/sdk/09-api-keys-and-oauth.ts",
-          "localSha256": "d30252a2669189a525c70cb8d03cc9f017b31817fc399ab142b7c0dba00f0452"
+          "localSha256": "b25ba14e36371f8150a6953142d4667fd56de2ddbc805d1da655e895ab394d34"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/sdk/10-settings.ts",
           "upstreamSha256": "558f82b9d0655935e6a28ec09f6c35f0f9593f8b034f25d45400c02bc77a778a",
           "disposition": "retained_modified",
           "localPath": "examples/sdk/10-settings.ts",
-          "localSha256": "9b5a0673c52fb0b7a10706f57e013f5e33387d8e41ed2f495bae07cbc35b6b82"
+          "localSha256": "b2103cd384b4836f81d11a012198ea63970bb90bfbd05cfad4ddece027277181"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/sdk/11-sessions.ts",
           "upstreamSha256": "538c7028bf6823c84be930eb6745731f2c87ba05a45df2d86d93e66f01674576",
           "disposition": "retained_modified",
           "localPath": "examples/sdk/11-sessions.ts",
-          "localSha256": "fb86d75121ae14e73a20580cd22002aaab9aac3ad0bec755dd6e21783c63e9ba"
+          "localSha256": "dd7621117010b4b210a8b2254ce99c484dad7d3f35e8b252012f2e5f7f8607dd"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/sdk/12-full-control.ts",
           "upstreamSha256": "f13d061325dc7b6ed6ca1409ba886a06f3945b3790e2de7557cbd00cf750521c",
           "disposition": "retained_modified",
           "localPath": "examples/sdk/12-full-control.ts",
-          "localSha256": "dfcd46ab6b541ab4e447a8083cecebb5acb062fd765899d34023c7d6156df467"
+          "localSha256": "62101494489f5ff63cd86d4b762fc4f1274ce65c6fe10ca45356f4dbbaaf8362"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/sdk/13-session-runtime.ts",
           "upstreamSha256": "0e9f408720a561a62b2630eccb18ece49f9dba567dc65494757da0a91608827a",
           "disposition": "retained_modified",
           "localPath": "examples/sdk/13-session-runtime.ts",
-          "localSha256": "f1204e9a07d29c3ab18bcaa7121a678892db5e4cb5da82ccb792df5810310bc0"
+          "localSha256": "ab9af4132f5ceb27aca5bdaa2c4d7ae7b60a8f17c016b321ffcb52baf58bd510"
         },
         {
           "upstreamPath": "packages/coding-agent/examples/sdk/README.md",
           "upstreamSha256": "5af1e3827fa13a05d25e147659fdcf5af1a3d23e586177e336d39c5acd0c5f37",
           "disposition": "retained_modified",
           "localPath": "examples/sdk/README.md",
-          "localSha256": "12f1c3d02cc091311b1c5c03b9a4d4c16e0ecf161af6b28a126d27915e3114de"
+          "localSha256": "83dbeb4c7894f0801900f264a05fbe446f3292d68ffb6932bca6cecd33255351"
         }
       ]
     }
@@ -4062,7 +4062,7 @@
       "upstreamSha256": "d5e5278f644e6a7654687b4ea0d737f517742c2eeaf18e2e93fbf7aa542983d2",
       "disposition": "retained_modified",
       "localPath": "README.md",
-      "localSha256": "de562e92cd10304cd1a50935492994ad51d2d1272ee621249a6cd67bb06af79d"
+      "localSha256": "8c5b7226f55d14c2d9fdade506029583fed051694e9b57fe89dc5c15193ee13e"
     },
     {
       "upstreamPath": "packages/coding-agent/install-lock/package-lock.json",
@@ -4103,7 +4103,7 @@
       "upstreamSha256": "ac72980ecaa181923376d18299ead81f315de05752c932a4a05d428dd6c6ee80",
       "disposition": "retained_modified",
       "localPath": "tsconfig.examples.json",
-      "localSha256": "9c01299db35d5d822848f7a34a27b93755ce4f4201d15cfda51b3c32672a812e"
+      "localSha256": "dd07c7bcaa5c6cde8dba0c425cadfd2d8a6a32c4fcd1bc16d2dd48daa17559da"
     },
     {
       "upstreamPath": "packages/coding-agent/vitest.config.ts",
@@ -4935,7 +4935,7 @@
     },
     {
       "localPath": "packages/coding-agent/test/theme-environment-isolation.test.ts",
-      "localSha256": "8d2bc77a09aca06bb4218da2515d0b5a348e71050fb8c53580bc8cb23d56bdce",
+      "localSha256": "fbc6ea39e9f0d729719629b672560e0cb81765adff9a8ff80849315cc3c2960f",
       "origin": "disco_owned"
     }
   ]

@@ -11,7 +11,7 @@ import {
 	getAgentDir,
 	type PromptTemplate,
 	SessionManager,
-} from "@auto-ml-skills/disco";
+} from "@arex-skill/disco";
 
 // Define custom templates
 const deployTemplate: PromptTemplate = {

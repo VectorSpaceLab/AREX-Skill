@@ -5,7 +5,7 @@
  * from cwd and ~/.disco/agent. Model chosen from settings or first available.
  */
 
-import { createAgentSession } from "@auto-ml-skills/disco";
+import { createAgentSession } from "@arex-skill/disco";
 
 const { session } = await createAgentSession();
 

@@ -1,0 +1,4 @@
+{"sampled":[
+{"candidate_id":"a","label":"cat","predictions":["cat","dog"]},
+{"candidate_id":"b","label":"dog","predictions":["cat","dog"]}
+]}

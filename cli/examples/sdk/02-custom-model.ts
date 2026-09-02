@@ -5,7 +5,7 @@
  */
 
 import { getModel } from "@earendil-works/pi-ai/compat";
-import { createAgentSession, ModelRuntime } from "@auto-ml-skills/disco";
+import { createAgentSession, ModelRuntime } from "@arex-skill/disco";
 
 const modelRuntime = await ModelRuntime.create();
 

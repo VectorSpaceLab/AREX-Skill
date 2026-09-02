@@ -1,0 +1,6 @@
+{"records":[
+{"candidate_id":"a1","class_id":"a","label":"a","selection_frequency":0.4,"predictions":["b","a"]},
+{"candidate_id":"a2","class_id":"a","label":"a","selection_frequency":0.9,"predictions":["a","b"]},
+{"candidate_id":"b1","class_id":"b","label":"b","selection_frequency":0.6,"predictions":["a","b"]},
+{"candidate_id":"b2","class_id":"b","label":"b","selection_frequency":0.8,"predictions":["b","a"]}
+]}

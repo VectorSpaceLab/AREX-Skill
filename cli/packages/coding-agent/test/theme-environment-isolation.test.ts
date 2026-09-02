@@ -4,7 +4,7 @@ import { initTheme } from "../src/modes/interactive/theme/theme.ts";
 describe("theme global isolation", () => {
 	it("initializes only the DisCo global symbol", () => {
 		const globals = globalThis as Record<symbol, unknown>;
-		const discoKey = Symbol.for("@auto-ml-skills/disco:theme");
+		const discoKey = Symbol.for("@arex-skill/disco:theme");
 		const piKey = Symbol.for("@earendil-works/pi-coding-agent:theme");
 		const legacyPiKey = Symbol.for("@mariozechner/pi-coding-agent:theme");
 		const previousDisco = globals[discoKey];

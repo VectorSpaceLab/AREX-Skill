@@ -7,8 +7,8 @@
  *   disco -e ./bash-spawn-hook.ts
  */
 
-import type { ExtensionAPI } from "@auto-ml-skills/disco";
-import { createBashTool } from "@auto-ml-skills/disco";
+import type { ExtensionAPI } from "@arex-skill/disco";
+import { createBashTool } from "@arex-skill/disco";
 
 export default function (disco: ExtensionAPI) {
 	const cwd = process.cwd();

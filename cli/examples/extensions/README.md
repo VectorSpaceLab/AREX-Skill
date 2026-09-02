@@ -142,7 +142,7 @@ cp permission-gate.ts ~/.disco/agent/extensions/
 See [docs/extensions.md](../../docs/extensions.md) for full documentation.
 
 ```typescript
-import type { ExtensionAPI } from "@auto-ml-skills/disco";
+import type { ExtensionAPI } from "@arex-skill/disco";
 import { Type } from "typebox";
 
 export default function (disco: ExtensionAPI) {

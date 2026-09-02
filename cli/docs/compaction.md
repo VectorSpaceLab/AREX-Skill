@@ -4,7 +4,7 @@ LLMs have limited context windows. When conversations grow too long, disco uses 
 
 > **Upstream source reference:** The links below show the Pi v0.83.0 baseline
 > from which DisCo's internal coding-agent implementation was forked. The
-> installed `@auto-ml-skills/disco` types and behavior are authoritative.
+> installed `@arex-skill/disco` types and behavior are authoritative.
 
 **Upstream source files** ([pi](https://github.com/earendil-works/pi)):
 - [`packages/coding-agent/src/core/compaction/compaction.ts`](https://github.com/earendil-works/pi/blob/v0.83.0/packages/coding-agent/src/core/compaction/compaction.ts) - Auto-compaction logic
@@ -13,7 +13,7 @@ LLMs have limited context windows. When conversations grow too long, disco uses 
 - [`packages/coding-agent/src/core/session-manager.ts`](https://github.com/earendil-works/pi/blob/v0.83.0/packages/coding-agent/src/core/session-manager.ts) - Entry types (`CompactionEntry`, `BranchSummaryEntry`)
 - [`packages/coding-agent/src/core/extensions/types.ts`](https://github.com/earendil-works/pi/blob/v0.83.0/packages/coding-agent/src/core/extensions/types.ts) - Extension event types
 
-For TypeScript definitions in your project, inspect `node_modules/@auto-ml-skills/disco/dist/`.
+For TypeScript definitions in your project, inspect `node_modules/@arex-skill/disco/dist/`.
 
 ## Overview
 
@@ -318,7 +318,7 @@ disco.on("session_before_compact", async (event, ctx) => {
 To generate a summary with your own model, convert messages to text using `serializeConversation`:
 
 ```typescript
-import { convertToLlm, serializeConversation } from "@auto-ml-skills/disco";
+import { convertToLlm, serializeConversation } from "@arex-skill/disco";
 
 disco.on("session_before_compact", async (event, ctx) => {
   const { preparation } = event;

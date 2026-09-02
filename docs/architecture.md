@@ -52,7 +52,7 @@ Source-tree roles:
 
 | Path | Role |
 | --- | --- |
-| `cli/package.json` | The only publishable npm package, `@auto-ml-skills/disco`, exposing the `disco` CLI and SDK. |
+| `cli/package.json` | The only publishable npm package, `@arex-skill/disco`, exposing the `disco` CLI and SDK. |
 | `cli/packages/coding-agent/src` | DisCo's copied and modified Pi coding-agent runtime, including interactive/print modes, project trust, sessions, tools, skill discovery, workflow skills, and dynamic orchestration. |
 | `cli/packages/coding-agent/test` | Upstream-derived tests and DisCo regression contracts. |
 | `cli/docs` and `cli/examples` | Documentation and examples shipped in the npm package. |

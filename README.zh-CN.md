@@ -13,7 +13,7 @@
 <p align="center">
   <a href="skills/README.md"><img src="https://img.shields.io/badge/AREX--Skill_Library-5000%2B_skills-0E9B9B?style=for-the-badge" alt="AREX-Skill Library：5000+ skills"></a>
   <a href="docs/repository-catalog.md"><img src="https://img.shields.io/badge/ML_Repositories-1000-5865F2?style=for-the-badge" alt="1,000 个 ML 仓库"></a>
-  <a href="https://www.npmjs.com/package/@auto-ml-skills/disco"><img src="https://img.shields.io/badge/CLI-disco%20v0.2.0-D22128?style=for-the-badge&logo=npm&logoColor=white" alt="DisCo CLI v0.2.0"></a>
+  <a href="https://www.npmjs.com/package/@arex-skill/disco"><img src="https://img.shields.io/badge/CLI-disco%20v0.2.0-D22128?style=for-the-badge&logo=npm&logoColor=white" alt="DisCo CLI v0.2.0"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-lightgrey?style=for-the-badge&logo=apache&logoColor=white" alt="License: Apache 2.0"></a>
   <a href="#documentation"><img src="https://img.shields.io/badge/Documentation-README-0E9B9B?style=for-the-badge" alt="文档"></a>
   <a href="#contributing"><img src="https://img.shields.io/badge/Contributing-guide-5865F2?style=for-the-badge" alt="参与贡献指南"></a>
@@ -29,6 +29,14 @@
   <strong>推进覆盖 ML engineering、paper replication 等场景的 frontier autonomous research</strong>
 </p>
 
+## 🎬 Demo <a id="demo"></a>
+
+通过一分钟了解 AREX-Skill：DisCo 将一个仓库蒸馏为经过验证、可执行的 skills；
+router 从 5,000+ 个 skills 中将范围缩小到任务所需的一个分支；配备相关 skill 的
+Agent 则可以完成没有 skill 时会陷入停滞的任务。
+
+https://github.com/user-attachments/assets/9fa59284-4625-44ef-8b43-01c7b6a05cea
+
 ## 🧭 目录 <a id="table-of-contents"></a>
 
 - [动态](#news)
@@ -40,6 +48,7 @@
 - [使用示例](#usage-examples)
 - [文档](#documentation)
 - [参与贡献](#contributing)
+- [致谢](#acknowledgement)
 - [许可证](#license)
 - [引用](#citation)
 
@@ -146,7 +155,7 @@ AREX-Skill Library 由 DisCo Creator 通过四阶段的 skill distillation workf
 DisCo 要求 Node.js >=22.19.0：
 
 ```bash
-npm install -g @auto-ml-skills/disco
+npm install -g @arex-skill/disco
 ```
 
 首次运行时通过 /login 配置模型提供商，也可以使用 OPENAI_API_KEY、ANTHROPIC_API_KEY 或 GEMINI_API_KEY 等环境变量。提供商配置和源码构建方式见[安装指南](docs/installation.zh.md)。
@@ -246,6 +255,16 @@ AREX-Skill Library 可以支持许多 ML workflow。下面是两个具有代表�
 3. **改进 DisCo 及其 workflows。** 在 cli/ 及相关项目文档中贡献 CLI、runtime、bundled skill 和文档修改。
 
 Skill pull request 应说明上游 source commit、使用的 model 和 provider、相关 reasoning level、生产 workflow、验证命令、已知缺口，以及 router 或 catalog 是否需要更新。完整要求见[贡献指南](CONTRIBUTING_CN.md)，英文版本见 [CONTRIBUTING.md](CONTRIBUTING.md)。
+
+## 🙏 致谢 <a id="acknowledgement"></a>
+
+DisCo 的 CLI 和 Agent runtime 构建在
+[earendil-works/pi](https://github.com/earendil-works/pi) 的基础之上。Pi 是一个开源
+AI Agent 工具包，提供统一的 LLM API、Agent loop、终端 UI 和 coding-agent CLI。
+
+AREX-Skill 同样离不开 GitHub 开源社区的支持。技能库中的 repository skills
+得以建立，是因为众多研究者和工程师向社区开源了高质量的 ML、Agent、数据、
+生物/化学、视觉和基础设施项目。
 
 ## 📄 许可证 <a id="license"></a>
 

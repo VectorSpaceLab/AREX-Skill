@@ -798,7 +798,7 @@ export function getDefaultTheme(): string {
 
 // Use a DisCo-owned key to share the theme across module loaders (tsx + jiti)
 // without sharing state with Pi loaded in the same process.
-const THEME_KEY = Symbol.for("@auto-ml-skills/disco:theme");
+const THEME_KEY = Symbol.for("@arex-skill/disco:theme");
 
 // Export theme as a getter that reads from globalThis
 // This ensures all module instances (tsx, jiti) see the same theme

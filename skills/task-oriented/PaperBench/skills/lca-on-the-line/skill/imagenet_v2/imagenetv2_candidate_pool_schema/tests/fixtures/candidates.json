@@ -1,0 +1,4 @@
+[
+{"candidate_id":"c2","class_id":"dog","label":"dog","selection_frequency":0.9,"predictions":["dog","cat"]},
+{"candidate_id":"c1","class_id":"cat","label":"cat","selection_frequency":0.7,"predictions":["dog","cat"]}
+]

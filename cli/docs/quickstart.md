@@ -7,7 +7,7 @@ This page gets you from install to a useful first disco session.
 DisCo is distributed as an npm package:
 
 ```bash
-npm install -g --ignore-scripts @auto-ml-skills/disco
+npm install -g --ignore-scripts @arex-skill/disco
 ```
 
 `--ignore-scripts` disables dependency lifecycle scripts during install. DisCo does not require install scripts for normal npm installs.
@@ -18,16 +18,16 @@ Use the package manager that installed DisCo:
 
 ```bash
 # npm install -g
-npm uninstall -g @auto-ml-skills/disco
+npm uninstall -g @arex-skill/disco
 
 # pnpm
-pnpm remove -g @auto-ml-skills/disco
+pnpm remove -g @arex-skill/disco
 
 # Yarn
-yarn global remove @auto-ml-skills/disco
+yarn global remove @arex-skill/disco
 
 # Bun
-bun uninstall -g @auto-ml-skills/disco
+bun uninstall -g @arex-skill/disco
 ```
 
 Uninstalling disco leaves settings, credentials, sessions, and installed disco packages in `~/.disco/agent/`.

@@ -9,7 +9,7 @@
  */
 
 import { type Api, type Context, type Model, registerApiProvider, streamSimple } from "@earendil-works/pi-ai/compat";
-import { getAgentDir } from "@auto-ml-skills/disco";
+import { getAgentDir } from "@arex-skill/disco";
 import { readFileSync } from "fs";
 import { join } from "path";
 import { MODELS, streamGitLabDuo } from "./index.ts";

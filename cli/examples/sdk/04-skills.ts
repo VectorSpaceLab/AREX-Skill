@@ -12,7 +12,7 @@ import {
 	getAgentDir,
 	SessionManager,
 	type Skill,
-} from "@auto-ml-skills/disco";
+} from "@arex-skill/disco";
 
 // Or define custom skills inline
 const customSkill: Skill = {

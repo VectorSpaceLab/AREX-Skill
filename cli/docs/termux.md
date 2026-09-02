@@ -17,7 +17,7 @@ pkg update && pkg upgrade
 pkg install nodejs termux-api git
 
 # Install disco
-npm install -g --ignore-scripts @auto-ml-skills/disco
+npm install -g --ignore-scripts @arex-skill/disco
 
 # Create config directory
 mkdir -p ~/.disco/agent

@@ -1,4 +1,4 @@
-import type { ExtensionAPI } from "@auto-ml-skills/disco";
+import type { ExtensionAPI } from "@arex-skill/disco";
 
 export default function widgetPlacementExtension(disco: ExtensionAPI) {
 	disco.on("session_start", (_event, ctx) => {

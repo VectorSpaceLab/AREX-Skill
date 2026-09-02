@@ -14,7 +14,7 @@
 通过 npm 安装 DisCo CLI：
 
 ```bash
-npm install -g @auto-ml-skills/disco
+npm install -g @arex-skill/disco
 disco
 ```
 

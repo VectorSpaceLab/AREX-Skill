@@ -2,7 +2,7 @@
 
 RPC mode enables headless operation of the coding agent via a JSON protocol over stdin/stdout. This is useful for embedding the agent in other applications, IDEs, or custom UIs.
 
-**Note for Node.js/TypeScript users**: `@auto-ml-skills/disco` exports both
+**Note for Node.js/TypeScript users**: `@arex-skill/disco` exports both
 `AgentSession` for direct headless embedding and `RpcClient` for a typed
 subprocess integration. See [SDK](sdk.md) for the direct API and the bundled
 [RPC extension UI example](../examples/rpc-extension-ui.ts) for a complete
@@ -1362,7 +1362,7 @@ Parse errors:
 
 ## Types
 
-The root `@auto-ml-skills/disco` export provides `RpcCommand`, `RpcResponse`,
+The root `@arex-skill/disco` export provides `RpcCommand`, `RpcResponse`,
 `RpcSessionState`, extension UI request/response types, and DisCo message/event
 types. Base model and provider message types come from the pinned
 `@earendil-works/pi-ai` dependency; agent-loop event types come from
