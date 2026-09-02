@@ -21,7 +21,7 @@
  */
 
 import type { TextContent } from "@earendil-works/pi-ai";
-import { type ExtensionAPI, getAgentDir, withFileMutationQueue } from "@auto-ml-skills/disco";
+import { type ExtensionAPI, getAgentDir, withFileMutationQueue } from "@arex-skill/disco";
 import { constants, readFileSync } from "fs";
 import { access, appendFile, readFile } from "fs/promises";
 import { join, resolve } from "path";

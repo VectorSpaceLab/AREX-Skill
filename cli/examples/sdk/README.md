@@ -39,7 +39,7 @@ import {
   ModelRuntime,
   SessionManager,
   SettingsManager,
-} from "@auto-ml-skills/disco";
+} from "@arex-skill/disco";
 
 const modelRuntime = await ModelRuntime.create();
 

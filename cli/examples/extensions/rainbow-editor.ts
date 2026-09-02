@@ -4,7 +4,7 @@
  * Usage: disco --extension ./examples/extensions/rainbow-editor.ts
  */
 
-import { CustomEditor, type ExtensionAPI } from "@auto-ml-skills/disco";
+import { CustomEditor, type ExtensionAPI } from "@arex-skill/disco";
 
 // Base colors (coral → yellow → green → teal → blue → purple → pink)
 const COLORS: [number, number, number][] = [

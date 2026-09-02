@@ -7,7 +7,7 @@
  * Usage: /session-name [name] - set or show session name
  */
 
-import type { ExtensionAPI } from "@auto-ml-skills/disco";
+import type { ExtensionAPI } from "@arex-skill/disco";
 
 export default function (disco: ExtensionAPI) {
 	disco.registerCommand("session-name", {

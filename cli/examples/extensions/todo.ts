@@ -11,7 +11,7 @@
  */
 
 import { StringEnum } from "@earendil-works/pi-ai";
-import type { ExtensionAPI, ExtensionContext, Theme } from "@auto-ml-skills/disco";
+import type { ExtensionAPI, ExtensionContext, Theme } from "@arex-skill/disco";
 import { matchesKey, Text, truncateToWidth } from "@earendil-works/pi-tui";
 import { Type } from "typebox";
 

@@ -8,7 +8,7 @@
  * - Edge case tests (wide chars, styled text, emoji)
  */
 
-import type { ExtensionAPI, ExtensionCommandContext, Theme } from "@auto-ml-skills/disco";
+import type { ExtensionAPI, ExtensionCommandContext, Theme } from "@arex-skill/disco";
 import { CURSOR_MARKER, type Focusable, matchesKey, visibleWidth } from "@earendil-works/pi-tui";
 
 export default function (disco: ExtensionAPI) {

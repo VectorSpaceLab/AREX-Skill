@@ -5,7 +5,7 @@
  * Requires: npm install in this directory
  */
 
-import type { ExtensionAPI } from "@auto-ml-skills/disco";
+import type { ExtensionAPI } from "@arex-skill/disco";
 import ms from "ms";
 import { Type } from "typebox";
 

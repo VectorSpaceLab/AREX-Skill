@@ -10,7 +10,7 @@
  * 3. Use /commands extensions to filter by source
  */
 
-import type { ExtensionAPI, SlashCommandInfo } from "@auto-ml-skills/disco";
+import type { ExtensionAPI, SlashCommandInfo } from "@arex-skill/disco";
 
 export default function commandsExtension(disco: ExtensionAPI) {
 	disco.registerCommand("commands", {

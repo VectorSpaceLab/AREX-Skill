@@ -5,7 +5,7 @@
  * When forking, offers to restore code to that point in history.
  */
 
-import type { ExtensionAPI } from "@auto-ml-skills/disco";
+import type { ExtensionAPI } from "@arex-skill/disco";
 
 export default function (disco: ExtensionAPI) {
 	const checkpoints = new Map<string, string>();

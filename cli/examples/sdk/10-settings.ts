@@ -4,7 +4,7 @@
  * Override settings using SettingsManager.
  */
 
-import { createAgentSession, SessionManager, SettingsManager } from "@auto-ml-skills/disco";
+import { createAgentSession, SessionManager, SettingsManager } from "@arex-skill/disco";
 
 const cwd = process.cwd();
 

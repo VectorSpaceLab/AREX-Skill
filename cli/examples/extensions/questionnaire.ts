@@ -5,7 +5,7 @@
  * Multiple questions: tab bar navigation between questions
  */
 
-import type { ExtensionAPI } from "@auto-ml-skills/disco";
+import type { ExtensionAPI } from "@arex-skill/disco";
 import {
 	Editor,
 	type EditorTheme,

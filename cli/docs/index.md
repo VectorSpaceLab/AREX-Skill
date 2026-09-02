@@ -7,7 +7,7 @@ DisCo is a skill-powered research agent with separate Creator and Researcher mod
 Install DisCo with npm:
 
 ```bash
-npm install -g --ignore-scripts @auto-ml-skills/disco
+npm install -g --ignore-scripts @arex-skill/disco
 ```
 
 `--ignore-scripts` disables dependency lifecycle scripts during install. DisCo does not require install scripts for normal npm installs.
@@ -15,10 +15,10 @@ npm install -g --ignore-scripts @auto-ml-skills/disco
 To uninstall DisCo after an npm installation:
 
 ```bash
-npm uninstall -g @auto-ml-skills/disco
+npm uninstall -g @arex-skill/disco
 ```
 
-For pnpm, Yarn, or Bun installs, use the matching global remove command: `pnpm remove -g @auto-ml-skills/disco`, `yarn global remove @auto-ml-skills/disco`, or `bun uninstall -g @auto-ml-skills/disco`.
+For pnpm, Yarn, or Bun installs, use the matching global remove command: `pnpm remove -g @arex-skill/disco`, `yarn global remove @arex-skill/disco`, or `bun uninstall -g @arex-skill/disco`.
 
 Then run it in a project directory:
 

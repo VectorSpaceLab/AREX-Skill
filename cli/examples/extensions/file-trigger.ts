@@ -9,7 +9,7 @@
  */
 
 import * as fs from "node:fs";
-import type { ExtensionAPI } from "@auto-ml-skills/disco";
+import type { ExtensionAPI } from "@arex-skill/disco";
 
 export default function (disco: ExtensionAPI) {
 	disco.on("session_start", async (_event, ctx) => {

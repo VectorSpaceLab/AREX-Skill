@@ -15,7 +15,7 @@ already bundles them.
 Install the DisCo CLI from npm:
 
 ```bash
-npm install -g @auto-ml-skills/disco
+npm install -g @arex-skill/disco
 disco
 ```
 

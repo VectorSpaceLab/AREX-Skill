@@ -503,7 +503,7 @@ try {
 }
 
 const discoConfigName: string | undefined = pkg.discoConfig?.name;
-export const PACKAGE_NAME: string = pkg.name || "@auto-ml-skills/disco";
+export const PACKAGE_NAME: string = pkg.name || "@arex-skill/disco";
 export const APP_NAME: string = discoConfigName || "disco";
 export const APP_TITLE: string = APP_NAME;
 export const CONFIG_DIR_NAME: string = pkg.discoConfig?.configDir || ".disco";

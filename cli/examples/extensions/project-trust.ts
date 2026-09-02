@@ -13,7 +13,7 @@
  * Try it in a project containing .disco, AGENTS.md/CLAUDE.md, or .agents/skills.
  */
 
-import type { ExtensionAPI, ProjectTrustEventResult } from "@auto-ml-skills/disco";
+import type { ExtensionAPI, ProjectTrustEventResult } from "@arex-skill/disco";
 
 export default function (disco: ExtensionAPI) {
 	let loadCount = 0;

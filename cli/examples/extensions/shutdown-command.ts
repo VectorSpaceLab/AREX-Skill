@@ -5,7 +5,7 @@
  * Demonstrates how extensions can use ctx.shutdown() to exit disco cleanly.
  */
 
-import type { ExtensionAPI } from "@auto-ml-skills/disco";
+import type { ExtensionAPI } from "@arex-skill/disco";
 import { Type } from "typebox";
 
 export default function (disco: ExtensionAPI) {

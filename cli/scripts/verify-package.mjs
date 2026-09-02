@@ -45,7 +45,7 @@ const packageJson = await readJson(packageJsonPath);
 const changelog = await readFile(join(packageRoot, "CHANGELOG.md"), "utf8");
 
 check(packageJson.private === undefined, "package.json must not contain a private field");
-check(packageJson.name === "@auto-ml-skills/disco", "package name must be @auto-ml-skills/disco");
+check(packageJson.name === "@arex-skill/disco", "package name must be @arex-skill/disco");
 check(packageJson.version === "0.2.0", "package version must be 0.2.0");
 const escapedPackageVersion = packageJson.version.replaceAll(".", "\\.");
 check(

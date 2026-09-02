@@ -9,8 +9,8 @@
  * 2. Use /tools to open the tool selector
  */
 
-import type { ExtensionAPI, ExtensionContext, ToolInfo } from "@auto-ml-skills/disco";
-import { getSettingsListTheme } from "@auto-ml-skills/disco";
+import type { ExtensionAPI, ExtensionContext, ToolInfo } from "@arex-skill/disco";
+import { getSettingsListTheme } from "@arex-skill/disco";
 import { Container, type SettingItem, SettingsList } from "@earendil-works/pi-tui";
 
 // State persisted to session

@@ -1,6 +1,6 @@
 # Development
 
-This document describes the standalone `@auto-ml-skills/disco` package. The
+This document describes the standalone `@arex-skill/disco` package. The
 runtime source lives in `packages/coding-agent/src`; there is no second wrapper
 implementation and no runtime dependency on `@earendil-works/pi-coding-agent`.
 

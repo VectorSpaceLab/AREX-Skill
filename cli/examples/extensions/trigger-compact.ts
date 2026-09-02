@@ -1,4 +1,4 @@
-import type { ExtensionAPI, ExtensionContext } from "@auto-ml-skills/disco";
+import type { ExtensionAPI, ExtensionContext } from "@arex-skill/disco";
 
 const COMPACT_THRESHOLD_TOKENS = 100_000;
 

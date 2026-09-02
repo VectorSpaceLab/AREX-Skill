@@ -9,7 +9,7 @@ import {
 	DefaultResourceLoader,
 	getAgentDir,
 	SessionManager,
-} from "@auto-ml-skills/disco";
+} from "@arex-skill/disco";
 
 const cwd = process.cwd();
 const agentDir = getAgentDir();

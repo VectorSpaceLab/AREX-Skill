@@ -2,7 +2,7 @@
 """Build, verify, and release the standalone DisCo npm package.
 
 The publishable package is rooted at cli/ and is named
-@auto-ml-skills/disco. Its Pi agent, AI, and TUI dependencies are normal npm
+@arex-skill/disco. Its Pi agent, AI, and TUI dependencies are normal npm
 dependencies rather than sibling packages published by this repository.
 
 The script reads environment variables from scripts/dev/.env by default
@@ -24,7 +24,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 
-EXPECTED_PACKAGE_NAME = "@auto-ml-skills/disco"
+EXPECTED_PACKAGE_NAME = "@arex-skill/disco"
 
 
 def fail(message: str) -> None:

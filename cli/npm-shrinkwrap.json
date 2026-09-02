@@ -1,11 +1,11 @@
 {
-  "name": "@auto-ml-skills/disco",
+  "name": "@arex-skill/disco",
   "version": "0.2.0",
   "lockfileVersion": 3,
   "requires": true,
   "packages": {
     "": {
-      "name": "@auto-ml-skills/disco",
+      "name": "@arex-skill/disco",
       "version": "0.2.0",
       "license": "MIT",
       "dependencies": {

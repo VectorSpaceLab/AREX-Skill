@@ -1,5 +1,5 @@
 {
-  "name": "@auto-ml-skills/disco",
+  "name": "@arex-skill/disco",
   "version": "0.2.0",
   "description": "Skill-powered research agent with Creator and Researcher modes",
   "type": "module",

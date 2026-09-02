@@ -5,7 +5,7 @@
  * Demonstrates how to cancel session events using the before_* events.
  */
 
-import type { ExtensionAPI, SessionBeforeSwitchEvent, SessionMessageEntry } from "@auto-ml-skills/disco";
+import type { ExtensionAPI, SessionBeforeSwitchEvent, SessionMessageEntry } from "@arex-skill/disco";
 
 export default function (disco: ExtensionAPI) {
 	disco.on("session_before_switch", async (event: SessionBeforeSwitchEvent, ctx) => {

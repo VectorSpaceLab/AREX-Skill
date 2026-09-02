@@ -11,7 +11,7 @@
  * Start disco with this extension:
  *   disco -e ./examples/extensions/input-transform-streaming.ts
  */
-import type { ExtensionAPI } from "@auto-ml-skills/disco";
+import type { ExtensionAPI } from "@arex-skill/disco";
 
 const TRIGGER = /\b(changes?|diff|modified)\b/i;
 

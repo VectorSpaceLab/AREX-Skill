@@ -76,7 +76,7 @@ For VS Code, include `--wait` so disco resumes after the editor exits:
 
 ### Telemetry and update checks
 
-DisCo has no built-in telemetry endpoint. `enableInstallTelemetry` only permits an anonymous version ping when the distributor explicitly supplies `DISCO_INSTALL_TELEMETRY_URL`; without that variable, no install/update telemetry request is sent. Opting out of telemetry does not disable update checks. By default, the version check reads the published `@auto-ml-skills/disco` metadata from the npm registry.
+DisCo has no built-in telemetry endpoint. `enableInstallTelemetry` only permits an anonymous version ping when the distributor explicitly supplies `DISCO_INSTALL_TELEMETRY_URL`; without that variable, no install/update telemetry request is sent. Opting out of telemetry does not disable update checks. By default, the version check reads the published `@arex-skill/disco` metadata from the npm registry.
 
 Set `DISCO_SKIP_VERSION_CHECK=1` to disable the DisCo version update check. Use `--offline` or `DISCO_OFFLINE=1` to disable all startup network operations described here, including update checks, package update checks, and install/update telemetry.
 

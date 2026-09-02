@@ -5,8 +5,8 @@
  * (logo + keybinding hints) with a custom component showing the disco mascot.
  */
 
-import type { ExtensionAPI, Theme } from "@auto-ml-skills/disco";
-import { VERSION } from "@auto-ml-skills/disco";
+import type { ExtensionAPI, Theme } from "@arex-skill/disco";
+import { VERSION } from "@arex-skill/disco";
 
 // --- PI MASCOT ---
 // Based on pi_mascot.ts - the disco agent character

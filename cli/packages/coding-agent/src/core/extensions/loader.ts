@@ -23,7 +23,7 @@ import * as _bundledTypeboxCompile from "typebox/compile";
 import * as _bundledTypeboxValue from "typebox/value";
 import { CONFIG_DIR_NAME, getAgentDir, isBunBinary } from "../../config.ts";
 // NOTE: This import works because loader.ts exports are NOT re-exported from index.ts,
-// avoiding a circular dependency. Extensions can import from @auto-ml-skills/disco.
+// avoiding a circular dependency. Extensions can import from @arex-skill/disco.
 import * as _bundledPiCodingAgent from "../../index.ts";
 import { resolvePath } from "../../utils/paths.ts";
 import { createEventBus, type EventBus } from "../event-bus.ts";
@@ -61,8 +61,9 @@ const VIRTUAL_MODULES: Record<string, unknown> = {
 	"@earendil-works/pi-ai/compat": _bundledPiAiCompat,
 	"@earendil-works/pi-ai/oauth": _bundledPiAiOauth,
 	"@earendil-works/pi-ai/providers/all": _bundledPiAiProviders,
+	"@arex-skill/disco": _bundledPiCodingAgent,
+	// Keep the old package name as a compatibility alias; it is not an npm dependency.
 	"@auto-ml-skills/disco": _bundledPiCodingAgent,
-	// Legacy extension imports remain virtual aliases; they are not npm dependencies.
 	"@earendil-works/pi-coding-agent": _bundledPiCodingAgent,
 	"@mariozechner/pi-agent-core": _bundledPiAgentCore,
 	"@mariozechner/pi-tui": _bundledPiTui,
@@ -114,8 +115,9 @@ function getAliases(): Record<string, string> {
 	);
 
 	_aliases = {
+		"@arex-skill/disco": piCodingAgentEntry,
+		// Keep the old package name as a compatibility alias to this package's internal SDK entry.
 		"@auto-ml-skills/disco": piCodingAgentEntry,
-		// Legacy extension imports remain aliases to this package's internal SDK entry.
 		"@earendil-works/pi-coding-agent": piCodingAgentEntry,
 		"@earendil-works/pi-agent-core": piAgentCoreEntry,
 		"@earendil-works/pi-tui": piTuiEntry,

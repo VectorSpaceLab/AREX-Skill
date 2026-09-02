@@ -9,7 +9,7 @@
  */
 
 import type { AssistantMessage } from "@earendil-works/pi-ai";
-import type { ExtensionAPI } from "@auto-ml-skills/disco";
+import type { ExtensionAPI } from "@arex-skill/disco";
 import { truncateToWidth, visibleWidth } from "@earendil-works/pi-tui";
 
 export default function (disco: ExtensionAPI) {

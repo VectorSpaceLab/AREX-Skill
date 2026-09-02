@@ -39,7 +39,7 @@ Upstream source on GitHub ([pi](https://github.com/earendil-works/pi)):
 - [`packages/ai/src/types.ts`](https://github.com/earendil-works/pi/blob/v0.83.0/packages/ai/src/types.ts) - Base message types (UserMessage, AssistantMessage, ToolResultMessage)
 - [`packages/agent/src/types.ts`](https://github.com/earendil-works/pi/blob/v0.83.0/packages/agent/src/types.ts) - AgentMessage union type
 
-For TypeScript definitions in your project, inspect `node_modules/@auto-ml-skills/disco/dist/` and `node_modules/@earendil-works/pi-ai/dist/`.
+For TypeScript definitions in your project, inspect `node_modules/@arex-skill/disco/dist/` and `node_modules/@earendil-works/pi-ai/dist/`.
 
 ## Message Types
 

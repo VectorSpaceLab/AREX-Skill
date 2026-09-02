@@ -15,8 +15,8 @@
 import type { AgentMessage } from "@earendil-works/pi-agent-core";
 import { uuidv7 } from "@earendil-works/pi-ai";
 import { complete, type Message } from "@earendil-works/pi-ai/compat";
-import type { ExtensionAPI, SessionEntry } from "@auto-ml-skills/disco";
-import { BorderedLoader, convertToLlm, serializeConversation } from "@auto-ml-skills/disco";
+import type { ExtensionAPI, SessionEntry } from "@arex-skill/disco";
+import { BorderedLoader, convertToLlm, serializeConversation } from "@arex-skill/disco";
 
 const SYSTEM_PROMPT = `You are a context transfer assistant. Given a conversation history and the user's goal for a new thread, generate a focused prompt that:
 

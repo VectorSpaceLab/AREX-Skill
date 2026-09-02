@@ -5,7 +5,7 @@
  * without paying for an extra follow-up LLM turn.
  */
 
-import { defineTool, type ExtensionAPI } from "@auto-ml-skills/disco";
+import { defineTool, type ExtensionAPI } from "@arex-skill/disco";
 import { Text } from "@earendil-works/pi-tui";
 import { Type } from "typebox";
 

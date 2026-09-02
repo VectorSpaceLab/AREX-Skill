@@ -4,7 +4,7 @@
 
 > **Upstream source reference:** GitHub source links on this page point to the
 > Pi v0.83.0 baseline from which DisCo's internal coding-agent implementation
-> was forked. The installed `@auto-ml-skills/disco` types and behavior are
+> was forked. The installed `@arex-skill/disco` types and behavior are
 > authoritative.
 
 Extensions are TypeScript modules that extend disco's behavior. They can subscribe to lifecycle events, register custom tools callable by the LLM, add commands, and more.
@@ -63,7 +63,7 @@ See [examples/extensions/](../examples/extensions/) for working implementations.
 Create `~/.disco/agent/extensions/my-extension.ts`:
 
 ```typescript
-import type { ExtensionAPI } from "@auto-ml-skills/disco";
+import type { ExtensionAPI } from "@arex-skill/disco";
 import { Type } from "typebox";
 
 export default function (disco: ExtensionAPI) {
@@ -145,7 +145,7 @@ To share extensions via npm or git as disco packages, see [packages.md](packages
 
 | Package | Purpose |
 |---------|---------|
-| `@auto-ml-skills/disco` | Extension types (`ExtensionAPI`, `ExtensionContext`, events) |
+| `@arex-skill/disco` | Extension types (`ExtensionAPI`, `ExtensionContext`, events) |
 | `typebox` | Schema definitions for tool parameters |
 | `@earendil-works/pi-ai` | AI utilities (`StringEnum` for Google-compatible enums) |
 | `@earendil-works/pi-tui` | TUI components for custom rendering |
@@ -161,7 +161,7 @@ Node.js built-ins (`node:fs`, `node:path`, etc.) are also available.
 An extension exports a default factory function that receives `ExtensionAPI`. The factory can be synchronous or asynchronous:
 
 ```typescript
-import type { ExtensionAPI } from "@auto-ml-skills/disco";
+import type { ExtensionAPI } from "@arex-skill/disco";
 
 export default function (disco: ExtensionAPI) {
   // Subscribe to events
@@ -190,7 +190,7 @@ If the factory returns a `Promise`, disco awaits it before continuing startup. T
 Use an async factory for one-time startup work such as fetching remote configuration or dynamically discovering available models.
 
 ```typescript
-import type { ExtensionAPI } from "@auto-ml-skills/disco";
+import type { ExtensionAPI } from "@arex-skill/disco";
 
 export default async function (disco: ExtensionAPI) {
   const response = await fetch("http://localhost:1234/v1/models");
@@ -770,7 +770,7 @@ Behavior guarantees:
 - Return values from `tool_call` only control blocking via `{ block: true, reason?: string }`
 
 ```typescript
-import { isToolCallEventType } from "@auto-ml-skills/disco";
+import { isToolCallEventType } from "@arex-skill/disco";
 
 disco.on("tool_call", async (event, ctx) => {
   // event.toolName - "bash", "read", "write", "edit", etc.
@@ -806,7 +806,7 @@ export type MyToolInput = Static<typeof myToolSchema>;
 Use `isToolCallEventType` with explicit type parameters:
 
 ```typescript
-import { isToolCallEventType } from "@auto-ml-skills/disco";
+import { isToolCallEventType } from "@arex-skill/disco";
 import type { MyToolInput } from "my-extension";
 
 disco.on("tool_call", (event) => {
@@ -830,7 +830,7 @@ In parallel tool mode, `tool_result` and `tool_execution_end` may interleave in 
 Use `ctx.signal` for nested async work inside the handler. This lets Esc cancel model calls, `fetch()`, and other abort-aware operations started by the extension.
 
 ```typescript
-import { isBashToolResult } from "@auto-ml-skills/disco";
+import { isBashToolResult } from "@arex-skill/disco";
 
 disco.on("tool_result", async (event, ctx) => {
   // event.toolName, event.toolCallId, event.input
@@ -858,7 +858,7 @@ disco.on("tool_result", async (event, ctx) => {
 Fired when user executes `!` or `!!` commands. **Can intercept.**
 
 ```typescript
-import { createLocalBashOperations } from "@auto-ml-skills/disco";
+import { createLocalBashOperations } from "@arex-skill/disco";
 
 disco.on("user_bash", (event, ctx) => {
   // event.command - the bash command
@@ -957,7 +957,7 @@ Current working directory.
 Use `CONFIG_DIR_NAME` instead of hardcoding `.disco` when constructing project-local config paths. Rebranded distributions can use a different config directory name.
 
 ```typescript
-import { CONFIG_DIR_NAME, type ExtensionAPI } from "@auto-ml-skills/disco";
+import { CONFIG_DIR_NAME, type ExtensionAPI } from "@arex-skill/disco";
 import { join } from "node:path";
 
 export default function (disco: ExtensionAPI) {
@@ -1212,7 +1212,7 @@ Options:
 To discover available sessions, use the static `SessionManager.list()` or `SessionManager.listAll()` methods:
 
 ```typescript
-import { SessionManager } from "@auto-ml-skills/disco";
+import { SessionManager } from "@arex-skill/disco";
 
 disco.registerCommand("switch", {
   description: "Switch to another session",
@@ -1306,7 +1306,7 @@ Tools run with `ExtensionContext`, so they cannot call `ctx.reload()` directly. 
 Example tool the LLM can call to trigger reload:
 
 ```typescript
-import type { ExtensionAPI } from "@auto-ml-skills/disco";
+import type { ExtensionAPI } from "@arex-skill/disco";
 import { Type } from "typebox";
 
 export default function (disco: ExtensionAPI) {
@@ -1878,7 +1878,7 @@ Pass the real target file path to `withFileMutationQueue()`, not the raw user ar
 Queue the entire mutation window on that target path. That includes read-modify-write logic, not just the final write.
 
 ```typescript
-import { withFileMutationQueue } from "@auto-ml-skills/disco";
+import { withFileMutationQueue } from "@arex-skill/disco";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 
@@ -2061,7 +2061,7 @@ Built-in tool implementations:
 Built-in tools support pluggable operations for delegating to remote systems (SSH, containers, etc.):
 
 ```typescript
-import { createReadTool, createBashTool, type ReadOperations } from "@auto-ml-skills/disco";
+import { createReadTool, createBashTool, type ReadOperations } from "@arex-skill/disco";
 
 // Create tool with custom operations
 const remoteRead = createReadTool(cwd, {
@@ -2092,7 +2092,7 @@ For `user_bash`, extensions can reuse disco's local shell backend via `createLoc
 The bash tool also supports a spawn hook to adjust the command, cwd, or env before execution:
 
 ```typescript
-import { createBashTool } from "@auto-ml-skills/disco";
+import { createBashTool } from "@arex-skill/disco";
 
 const bashTool = createBashTool(cwd, {
   spawnHook: ({ command, cwd, env }) => ({
@@ -2130,7 +2130,7 @@ import {
   formatSize,        // Human-readable size (e.g., "50KB", "1.5MB")
   DEFAULT_MAX_BYTES, // 50KB
   DEFAULT_MAX_LINES, // 2000
-} from "@auto-ml-skills/disco";
+} from "@arex-skill/disco";
 
 async execute(toolCallId, params, signal, onUpdate, ctx) {
   const output = await runCommand();
@@ -2266,7 +2266,7 @@ If a slot intentionally has no visible content, return an empty `Component` such
 Use `keyHint()` to display keybinding hints that respect the active keybinding configuration:
 
 ```typescript
-import { keyHint } from "@auto-ml-skills/disco";
+import { keyHint } from "@arex-skill/disco";
 
 renderResult(result, { expanded }, theme, context) {
   let text = theme.fg("success", "✓ Done");
@@ -2348,7 +2348,7 @@ For the best cache behavior, keep the loader tool active for the whole session a
 The following extension registers two searchable tools, removes them from the initial active set, and keeps only `search_tools` as their loader. The example uses simple keyword matching, but the search implementation could use BM25, embeddings, a remote catalog, or project-specific routing.
 
 ```typescript
-import type { ExtensionAPI } from "@auto-ml-skills/disco";
+import type { ExtensionAPI } from "@arex-skill/disco";
 import { Type } from "typebox";
 
 const SEARCHABLE_TOOL_NAMES = new Set(["lookup_weather", "search_issues"]);
@@ -2744,7 +2744,7 @@ See [tui.md](tui.md) for the full `OverlayOptions` and `OverlayHandle` API and [
 Replace the main input editor with a custom implementation (vim mode, emacs mode, etc.):
 
 ```typescript
-import { CustomEditor, type ExtensionAPI } from "@auto-ml-skills/disco";
+import { CustomEditor, type ExtensionAPI } from "@arex-skill/disco";
 import { matchesKey } from "@earendil-works/pi-tui";
 
 class VimEditor extends CustomEditor {
@@ -2854,7 +2854,7 @@ theme.strikethrough(text)
 For syntax highlighting in custom tool renderers:
 
 ```typescript
-import { highlightCode, getLanguageFromPath } from "@auto-ml-skills/disco";
+import { highlightCode, getLanguageFromPath } from "@arex-skill/disco";
 
 // Highlight code with explicit language
 const highlighted = highlightCode("const x = 1;", "typescript", theme);

@@ -5,7 +5,7 @@
  * Useful to ensure work is committed before switching context.
  */
 
-import type { ExtensionAPI, ExtensionContext } from "@auto-ml-skills/disco";
+import type { ExtensionAPI, ExtensionContext } from "@arex-skill/disco";
 
 async function checkDirtyRepo(
 	disco: ExtensionAPI,
