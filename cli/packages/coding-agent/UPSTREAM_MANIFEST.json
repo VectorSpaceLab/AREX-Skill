@@ -4425,7 +4425,7 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/import_meta_skill.test.ts",
-      "localSha256": "000cb787bd4d3a934291cf4532ee48307c4931a2680e7fb3c135f129c949c56e",
+      "localSha256": "1e70b42c8f94a0f7f4b00f70a792382051a75589740a35ce7b930450d664509b",
       "origin": "disco_owned"
     },
     {
@@ -4435,7 +4435,7 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/import_repo_skill.test.ts",
-      "localSha256": "5363f1446f31301b1691d6dbb6f190c48821916e721e8bcb2288eb60e22f5470",
+      "localSha256": "cd4ba56f6f417c74497d503b83568feda3fafa8996e7f1e310888cae6ee3a1de",
       "origin": "disco_owned"
     },
     {
@@ -4560,7 +4560,7 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/skills/design-meta-skill/scripts/validate_meta_skill.mjs",
-      "localSha256": "4bcbc1db75a7b512456454d46224c6005f45f5e0b114c8ba49c19cadeda10726",
+      "localSha256": "3a1b7f4f158dc6cf3b3122241b53e4eba55df34ce823a486aecff850683c2edd",
       "origin": "disco_owned"
     },
     {
@@ -4700,7 +4700,7 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/skills/prepare-paper-recovery-env/scripts/probe_runtime.py",
-      "localSha256": "86f05abe88479693d750d7f7af5f95dcd7d50258536f04269064095f7874c0f5",
+      "localSha256": "d1543bbd45b6b830709c9284c22edaeea040ae3f766b44bea55c1152fcfbebf9",
       "origin": "disco_owned"
     },
     {
@@ -4710,7 +4710,7 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/skills/prepare-paper-recovery-env/tests/test_probe_runtime.py",
-      "localSha256": "d2c98c39332760a453b1993e18265e426eb0d222d18ed67f466afbab871165d6",
+      "localSha256": "7fef285cf920a3fc05615ab552087f7bc9f598d1d721ba69fef333c586f0f23b",
       "origin": "disco_owned"
     },
     {
@@ -4835,7 +4835,7 @@
     },
     {
       "localPath": "packages/coding-agent/src/disco/skills/verify-repo-skill/scripts/import_repo_skill.mjs",
-      "localSha256": "154b03e936dafe0c7ae5f51ef17e7ec129b0a0c8570fbfeae2eb13fa7e2b5b1f",
+      "localSha256": "03813db99c155227e24c6e9ddd8af8a25f54c32eb56733a8db0596cb5604f8c4",
       "origin": "disco_owned"
     },
     {

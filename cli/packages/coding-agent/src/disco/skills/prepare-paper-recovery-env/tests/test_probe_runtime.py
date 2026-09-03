@@ -212,3 +212,27 @@ def test_probe_runtime_attempts_isolated_env_when_mutation_allowed():
         assert setup["strategy"] == "isolated_environment_repair"
         assert "create_isolated_venv" in labels
         assert "pip_install_definitely_missing_distiller_probe_pkg" in labels
+
+
+def test_benchmark_probe_sanitizes_snapshot_dir():
+    with tempfile.TemporaryDirectory() as tmp:
+        root = Path(tmp)
+        repo = root / "repo"
+        repo.mkdir()
+        (repo / "README.md").write_text("benchmark", encoding="utf-8")
+
+        class Args:
+            attempt_dir = str(root / "attempt")
+            benchmark_name = "../../evil"
+            benchmark_url = ""
+            fresh_clone_dir = ""
+            attempt_fresh_clone = False
+            reuse_benchmark_path = str(repo)
+            resource_file = ["README.md"]
+            network_timeout = 1
+            command_timeout = 1
+
+        result = benchmark_probe(Args(), root / "attempt/environment/logs", command_log=[])
+        expected_parent = (root / "attempt").resolve() / "environment" / "benchmark_sources"
+        assert Path(result["snapshot_dir"]).resolve().parent == expected_parent.resolve()
+        assert ".." not in Path(result["snapshot_dir"]).parts

@@ -261,4 +261,9 @@ describe("import_repo_skill.mjs", () => {
 		const result = runImporter(path.join(root, "agent"), candidate);
 		expect(result.status, result.stderr).toBe(0);
 	});
+
+	it("uses Windows-compatible home expansion", async () => {
+		const content = await readFile(scriptPath, "utf8");
+		expect(content).toContain("[\\\\/]");
+	});
 });
