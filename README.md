@@ -11,6 +11,7 @@
 </h1>
 
 <p align="center">
+  <a href="https://arxiv.org/abs/2609.02749"><img src="https://img.shields.io/badge/arXiv-2609.02749-B31B1B?style=for-the-badge&logo=arxiv&logoColor=white" alt="arXiv:2609.02749"></a>
   <a href="skills/README.md"><img src="https://img.shields.io/badge/AREX--Skill_Library-5000%2B_skills-0E9B9B?style=for-the-badge" alt="AREX-Skill Library: 5000+ skills"></a>
   <a href="docs/repository-catalog.md"><img src="https://img.shields.io/badge/ML_Repositories-1000-5865F2?style=for-the-badge" alt="1000 ML repositories"></a>
   <a href="https://www.npmjs.com/package/@arex-skill/disco"><img src="https://img.shields.io/badge/CLI-disco%20v0.2.1-D22128?style=for-the-badge&logo=npm&logoColor=white" alt="DisCo CLI v0.2.1"></a>
@@ -357,4 +358,13 @@ The standalone DisCo npm package under cli/ is distributed under its own
 
 ## 📝 Citation <a id="citation"></a>
 
-TBA
+If you find this repository useful, please consider giving a star ⭐ and citation:
+
+```
+@article{chen2026arexskill,
+  title={{Repo-To-Skill}: Distilling {GitHub} Repositories Into {AI4AI} Skills},
+  author={Chen, Jianlyu and Hu, Yuyang and Qian, Hongjin and Liu, Jiawei and Wei, Wenqing and Chen, Xiaolong and Lian, Defu and Dou, Zhicheng and Li, Chaozhuo and Ye, Qiwei and Liu, Zheng},
+  journal={arXiv preprint arXiv:2609.02749},
+  year={2026}
+}
+```
