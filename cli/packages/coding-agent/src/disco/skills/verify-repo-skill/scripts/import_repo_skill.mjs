@@ -28,7 +28,7 @@ function defaultAgentDir() {
 }
 
 function expandHome(value) {
-	return value.replace(/^~(?=$|[\/])/, os.homedir());
+	return value.replace(/^~(?=$|[\\/])/, os.homedir());
 }
 
 function pathExists(filePath) {

@@ -36,7 +36,14 @@ function validateLinks(root, filePath, body, errors) {
 	for (const match of body.matchAll(linkPattern)) {
 		const target = match[1]?.split("#", 1)[0];
 		if (!target || /^(?:https?:|mailto:)/.test(target)) continue;
-		const resolvedTarget = resolve(dirname(filePath), decodeURIComponent(target));
+		let decoded;
+		try {
+			decoded = decodeURIComponent(target);
+		} catch {
+			errors.push(`${filePath}: invalid encoded Markdown link: ${target}`);
+			continue;
+		}
+		const resolvedTarget = resolve(dirname(filePath), decoded);
 		const relativeTarget = relative(root, resolvedTarget);
 		if (relativeTarget === ".." || relativeTarget.startsWith(`..${sep}`) || isAbsolute(relativeTarget)) {
 			errors.push(`${filePath}: relative link escapes the meta skill directory: ${target}`);

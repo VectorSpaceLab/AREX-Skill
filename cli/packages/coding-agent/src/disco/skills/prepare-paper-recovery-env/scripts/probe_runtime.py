@@ -732,7 +732,7 @@ def benchmark_probe(args: argparse.Namespace, logs_dir: Path, command_log: list[
             result["blockers"].append("snapshot resource files are missing: " + ", ".join(missing))
         if not resource_relpaths:
             result["blockers"].append("no benchmark resource files were requested for snapshot")
-        snapshot_dir = Path(args.attempt_dir).expanduser().resolve() / "environment" / "benchmark_sources" / f"{args.benchmark_name}_snapshot"
+        snapshot_dir = Path(args.attempt_dir).expanduser().resolve() / "environment" / "benchmark_sources" / f"{safe_name(args.benchmark_name, 'benchmark')}_snapshot"
         result["snapshot_dir"] = str(snapshot_dir.resolve())
         result["resource_files"] = snapshot_files(resources, snapshot_dir)
     return result

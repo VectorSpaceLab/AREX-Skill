@@ -222,4 +222,24 @@ describe("import_meta_skill.mjs", () => {
 		expect(result.stderr).toContain("--already-locked requires DISCO_IMPORT_LOCK_PATH");
 		expect(existsSync(path.join(agentDir, "skills", "source-constructor"))).toBe(false);
 	});
+
+	it("reports an invalid encoded link instead of throwing", async () => {
+		const root = await mkdtemp(path.join(tmpdir(), "disco-meta-validate-"));
+		cleanupPaths.push(root);
+		const candidate = await writeCandidate(path.join(root, "draft"), "source-constructor", "v1");
+		const skillFile = path.join(candidate, "SKILL.md");
+		const content = await readFile(skillFile, "utf8");
+		await writeFile(skillFile, `${content}\nSee [x](foo%ZZbar.md).\n`, "utf8");
+
+		const validator = path.join(
+			process.cwd(),
+			"packages/coding-agent/src/disco/skills/design-meta-skill/scripts/validate_meta_skill.mjs",
+		);
+		const result = spawnSync(process.execPath, [validator, candidate, "--json"], { encoding: "utf8" });
+
+		expect(result.status).toBe(1);
+		const report = JSON.parse(result.stdout) as { valid: boolean; errors: string[] };
+		expect(report.valid).toBe(false);
+		expect(report.errors.join("\n")).toContain("invalid encoded Markdown link");
+	});
 });
